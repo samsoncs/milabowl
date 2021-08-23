@@ -1,0 +1,42 @@
+﻿version: '3.6'
+services:
+    db:
+        image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+        environment:
+            ACCEPT_EULA: Y
+            SA_PASSWORD: Mila5up3rP4ssword!
+        ports: 
+         - 1433:1433
+    db-migrations:
+        build:
+            context: ./
+            dockerfile: ./Migrations/Dockerfile
+        depends_on:
+         - db
+        environment:
+            WAIT_HOSTS: db:1433
+            TASK: Migrate
+        volumes:
+         - ./opt/vsts/work/_temp:/var/temp
+    data-import:
+        build:
+            context: ./
+            dockerfile: ./Migrations/Dockerfile
+        depends_on:
+         - db
+        environment:
+            WAIT_HOSTS: db:1433
+            TASK: Import
+        volumes:
+         - ./opt/vsts/work/_temp:/var/temp
+    testing:
+        build:
+            context: ./
+            dockerfile: ./Milabowl.Test/Dockerfile
+        depends_on:
+         - db
+        environment:
+            WAIT_HOSTS: db:1433
+            TASK: Migrate
+        volumes:
+         - ./opt/vsts/work/_temp:/var/temp
