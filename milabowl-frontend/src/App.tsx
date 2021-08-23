@@ -19,13 +19,6 @@ interface PrivateRouteProps {
 function App() {
   const isXsScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
-  // useEffect(() => {
-  //   const init = async (): Promise<void> => {
-  //   };
-
-  //   init();
-  // }, []);
-
   return (
     <Router>
       <div className="App" style={{ background: theme.palette.background.default }}>
