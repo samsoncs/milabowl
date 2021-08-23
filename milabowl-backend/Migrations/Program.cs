@@ -11,6 +11,7 @@ using Milabowl.Business.Import;
 using Milabowl.Business.Mappers;
 using Milabowl.Infrastructure.Contexts;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Migrations
 {
@@ -65,7 +66,7 @@ namespace Migrations
             await dataImportService.ImportData();
             await milaPointsProcessorService.UpdateMilaPoints();
             var milaResults = await milaResultsService.GetMilaResults();
-            var json = JsonConvert.SerializeObject(milaResults);
+            var json = JsonConvert.SerializeObject(milaResults, new JsonSerializerSettings{ ContractResolver = new DefaultContractResolver{ NamingStrategy = new CamelCaseNamingStrategy() }  });
             await File.WriteAllTextAsync("C:\\Programming\\Other\\milabowl\\game_state.json", json);
             Console.WriteLine("Finished importing data");
         }

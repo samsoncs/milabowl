@@ -176,6 +176,9 @@ const DashboardPage = () => {
     useEffect(() => {
         async function getMilaResults() {
             const results = await GetMilaResults();
+
+            console.log(results.resultsByWeek);
+
             setMilaResults(results);
         }
 

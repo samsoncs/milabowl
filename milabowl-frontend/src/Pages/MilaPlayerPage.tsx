@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GetMilaResults } from '../Api/api';
-import { GameWeekResult, MilaResultsDTO } from '../Api/Dtos/ApiDtos';
+import { GameWeekResult } from '../Api/Dtos/ApiDtos';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Card, CardContent, CardHeader, Grid, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@material-ui/core';
 import { Line as LineChart } from 'react-chartjs-2';
