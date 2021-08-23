@@ -29,7 +29,7 @@ namespace Milabowl.Business.Import
 
         public async Task<LeagueRootDTO> GetLeagueRoot()
         {
-            return await this._httpClient.GetDeserializedAsync<LeagueRootDTO>("https://fantasy.premierleague.com/api/leagues-classic/302050/standings/?page_new_entries=1&page_standings=1&phase=1");
+            return await this._httpClient.GetDeserializedAsync<LeagueRootDTO>("https://fantasy.premierleague.com/api/leagues-classic/1342357/standings/?page_new_entries=1&page_standings=1&phase=1");
         }
 
         public async Task<EventRootDTO> GetEventRoot(int eventID)

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Milabowl", "Milabowl\Milabo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Milabowl.Test", "Milabowl.Test\Milabowl.Test.csproj", "{0183C244-17B8-472D-A126-3E1CA7FC3AE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{63F46F83-C2A6-4831-A7BA-0AB41800B3CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrations", "Migrations\Migrations.csproj", "{63F46F83-C2A6-4831-A7BA-0AB41800B3CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
