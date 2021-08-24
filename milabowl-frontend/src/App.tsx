@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Switch, Route, RouteComponentProps
+  HashRouter as Router, Switch, Route, RouteComponentProps
 } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import DashboardPage from './Pages/DashboardPage';
@@ -26,6 +26,7 @@ function App() {
         <Container maxWidth="xl" disableGutters={isXsScreen} style={{ marginTop: '20px' }}>
           <Switch>
             <Route exact path="/" component={DashboardPage} />
+            <Route path="/milabowl" component={DashboardPage} />
             <Route path="/standings" component={StandingsPage} />
             <Route path="/mila-player/:teamname" component={MilaPlayerPage} />
           </Switch>
