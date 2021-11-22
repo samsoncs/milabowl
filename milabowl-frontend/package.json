@@ -34,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && copy CNAME build/CNAME",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
