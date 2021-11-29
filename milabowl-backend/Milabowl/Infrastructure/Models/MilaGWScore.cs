@@ -28,5 +28,7 @@ namespace Milabowl.Infrastructure.Models
         public int GameWeek { get; set; }
         public string UserName { get; set; }
         public decimal MilaPoints { get; set; }
+
+        public decimal TrendyBitch { get; set; }
    }
 }

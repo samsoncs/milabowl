@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Milabowl.Infrastructure.Contexts;
+using Milabowl.Infrastructure.Models;
 
 namespace Milabowl.Business.Import
 {
@@ -43,6 +45,11 @@ namespace Milabowl.Business.Import
                     .Include(pe => pe.Player)
                     .ToListAsync();
 
+            var playerHeadToHeadEventsFromDB = await this._db.PlayerHeadToHeadEvents.AsNoTracking()
+                .Include(e => e.Event)
+                //.Include(pe => pe.Player)
+                .ToListAsync();
+
             var playerEventLineupsFromDb = await this._db.PlayerEventLineups
                 .Include(pel => pel.PlayerEvent)
                 .Include(pel => pel.Lineup)
@@ -72,6 +79,9 @@ namespace Milabowl.Business.Import
 
                 var eventRootDto = await this._dataImportProvider.GetEventRoot(finishedEvent.FantasyEventId);
                 var playerEvents = await this._dataImportBusiness.ImportPlayerEvents(this._db, eventRootDto, finishedEvent, players, playerEventsFromDb);
+
+                var headToHeadEventRootDto = await this._dataImportProvider.GetHead2HeadEventRoot(finishedEvent.FantasyEventId);
+                await this._dataImportBusiness.ImportHeadToHeadPlayerEvents(this._db, headToHeadEventRootDto, finishedEvent, players, playerHeadToHeadEventsFromDB);
 
                 foreach (var user in users)
                 {

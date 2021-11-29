@@ -14,6 +14,7 @@ namespace Milabowl.Infrastructure.Contexts
         public DbSet<League> Leagues { get; set; }
         public DbSet<UserLeague> UserLeagues { get; set; }
         public DbSet<PlayerEvent> PlayerEvents { get; set; }
+        public DbSet<PlayerHeadToHeadEvent> PlayerHeadToHeadEvents { get; set; }
         public DbSet<Lineup> Lineups { get; set; }
         public DbSet<PlayerEventLineup> PlayerEventLineups { get; set; }
         public DbSet<MilaGWScore> MilaGWScores { get; set; }
@@ -67,7 +68,12 @@ namespace Milabowl.Infrastructure.Contexts
                 .WithOne(pel => pel.PlayerEvent)
                 .HasForeignKey(pel => pel.FkPlayerEventId)
                 .OnDelete(DeleteBehavior.NoAction);
-        
+
+            modelBuilder.Entity<PlayerHeadToHeadEvent>();
+            //.HasMany(pe => pe.PlayerEventLineups)
+            //.WithOne(pel => pel.PlayerEvent)
+            //.HasForeignKey(pel => pel.FkPlayerEventId)
+            //.OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

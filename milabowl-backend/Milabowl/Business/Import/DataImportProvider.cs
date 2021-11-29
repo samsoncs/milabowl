@@ -10,6 +10,7 @@ namespace Milabowl.Business.Import
         Task<BootstrapRootDTO> GetBootstrapRoot();
         Task<LeagueRootDTO> GetLeagueRoot();
         Task<EventRootDTO> GetEventRoot(int eventID);
+        Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID);
         Task<PicksRootDTO> GetPicksRoot(int eventID, int userID);
     }
 
@@ -40,6 +41,11 @@ namespace Milabowl.Business.Import
         public async Task<PicksRootDTO> GetPicksRoot(int eventID, int userID)
         {
             return await this._httpClient.GetDeserializedAsync<PicksRootDTO>($@"https://fantasy.premierleague.com/api/entry/{userID}/event/{eventID}/picks/");
+        }
+
+        public async Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID)
+        {
+            return await this._httpClient.GetDeserializedAsync<HeadToHeadEventRootDTO>($"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1345045/?page=1&event={eventID}");
         }
     }
 }

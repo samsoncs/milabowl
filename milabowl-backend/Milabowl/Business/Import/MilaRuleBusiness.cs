@@ -2,6 +2,7 @@
 using Milabowl.Infrastructure.Models;
 using Milabowl.Business.DTOs;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Milabowl.Business.Import
 {
@@ -80,7 +81,5 @@ namespace Milabowl.Business.Import
         {
             return playerEvents.Sum(pe => pe.TotalPoints*pe.Multiplier);
         }
-
-
     }
 }

@@ -14,6 +14,11 @@ namespace Milabowl.Infrastructure.Models
         public bool DataChecked { get; set; }
         public string Name { get; set; }
         public int GameWeek { get; set; }
+        public int MostSelectedPlayerID { get; set; }
+        public int MostTransferredInPlayerID { get; set; }
+        public int MostCaptainedPlayerID { get; set; }
+        public int MostViceCaptainedPlayerID { get; set; }
+
         public IList<PlayerEvent> PlayerEvents { get; set; }
         public IList<Lineup> Lineups { get; set; }
     }

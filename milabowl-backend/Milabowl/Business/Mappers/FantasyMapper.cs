@@ -18,6 +18,7 @@ namespace Milabowl.Business.Mappers
         PlayerEvent GetPlayerEvent(ElementDTO e, Event evt, IList<Player> players);
         Lineup GetLineup(Event evt, User user);
         PlayerEventLineup GetPlayerEventLineup(PickDTO p, Lineup lineup, IList<PlayerEvent> playerEvents, Event evt);
+        PlayerHeadToHeadEvent GetPlayerHeadToHeadEvent(HeadToHeadResultDTO headToHeadResult, Event evt, IList<Player> players);
     }
 
     public class FantasyMapper: IFantasyMapper
@@ -161,6 +162,34 @@ namespace Milabowl.Business.Mappers
                 Threat = e.stats.threat,
                 Influence = e.stats.influence,
                 FantasyPlayerEventId = e.id
+            };
+        }
+
+        public PlayerHeadToHeadEvent GetPlayerHeadToHeadEvent(HeadToHeadResultDTO headToHeadResult, Event evt, IList<Player> players)
+        {
+            return new PlayerHeadToHeadEvent
+            {
+                PlayerHeadToHeadEventID = Guid.NewGuid(),
+                FantasyPlayerHeadToHeadEventID = headToHeadResult.id,
+                Event = evt,
+
+                Entry1_Player = players.FirstOrDefault(P => P.FantasyPlayerId == headToHeadResult.entry_1_entry),
+                Entry1Draw = headToHeadResult.entry_1_entry,
+                Entry1Loss = headToHeadResult.entry_1_loss,
+                Entry1Win = headToHeadResult.entry_1_win,
+                Entry1Points = headToHeadResult.entry_1_points,
+                Entry1Total = headToHeadResult.entry_1_total,
+                
+                Entry2_Player = players.FirstOrDefault(P => P.FantasyPlayerId == headToHeadResult.entry_1_entry),
+                Entry2Draw = headToHeadResult.entry_2_draw,
+                Entry2Loss = headToHeadResult.entry_2_loss,
+                Entry2Win = headToHeadResult.entry_2_win,
+                Entry2Points = headToHeadResult.entry_2_points,
+                Entry2Total = headToHeadResult.entry_2_total,
+
+                IsKnockout = headToHeadResult.is_knockout,
+                LeagueID = headToHeadResult.league,
+                IsBye = headToHeadResult.is_bye,
             };
         }
 

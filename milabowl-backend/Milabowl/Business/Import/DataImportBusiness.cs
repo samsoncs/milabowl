@@ -17,6 +17,7 @@ namespace Milabowl.Business.Import
         Task<IList<User>> ImportUsers(FantasyContext db, LeagueRootDTO leagueRoot, IList<User> usersFromDb);
         Task<IList<UserLeague>> ImportUserLeagues(FantasyContext db, IList<User> users, League league, IList<UserLeague> userLeaguesFromDb);
         Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, EventRootDTO eventRootDto, Event finishedEvent, IList<Player> players, IList<PlayerEvent> playerEventsFromDb);
+        Task<IList<PlayerHeadToHeadEvent>> ImportHeadToHeadPlayerEvents(FantasyContext db, HeadToHeadEventRootDTO headToHeadEventRootDto, Event finishedEvent, IList<Player> players, IList<PlayerHeadToHeadEvent> playerEventsFromDb);
         Task<Lineup> ImportLineup(FantasyContext db, Event finishedEvent, User user, IList<Lineup> lineupsFromDb);
         Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(FantasyContext db, PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb);
     }
@@ -163,7 +164,11 @@ namespace Milabowl.Business.Import
             return userLeagues;
         }
 
-        public async Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, EventRootDTO eventRootDto, Event finishedEvent, IList<Player> players, IList<PlayerEvent> playerEventsFromDb)
+        public async Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, 
+            EventRootDTO eventRootDto, 
+            Event finishedEvent, 
+            IList<Player> players, 
+            IList<PlayerEvent> playerEventsFromDb)
         {
             var playerEventsFromDbForEvent = playerEventsFromDb
                     .Where(pe => pe.Event.FantasyEventId == finishedEvent.FantasyEventId)
@@ -192,6 +197,44 @@ namespace Milabowl.Business.Import
             }
 
             return playerEvents;
+        }
+
+        public async Task<IList<PlayerHeadToHeadEvent>> ImportHeadToHeadPlayerEvents(
+            FantasyContext db, 
+            HeadToHeadEventRootDTO headToHeadEventDto,
+            Event finishedEvent,
+            IList<Player> players,
+            IList<PlayerHeadToHeadEvent> playerHeadToHeadEventsFromDb
+        )
+        {
+            var playerHeadToHeadEventsFromDbForEvent = playerHeadToHeadEventsFromDb
+                .Where(pe => pe.Event.FantasyEventId == finishedEvent.FantasyEventId)
+                .ToList();
+
+            var playerHeadToHeadEvents = headToHeadEventDto.results.Select(r =>
+                this._fantasyMapper.GetPlayerHeadToHeadEvent(r, finishedEvent, players)
+            ).ToList();
+
+            foreach (var playerHeadToHeadEvent in playerHeadToHeadEvents)
+            {
+                var playerEventFromDb = playerHeadToHeadEventsFromDbForEvent.FirstOrDefault(
+                    pe => pe.Event.FantasyEventId == playerHeadToHeadEvent.Event.FantasyEventId
+                          && (pe.Entry1_Player.FantasyPlayerId == playerHeadToHeadEvent.Entry1_Player.FantasyPlayerId
+                            || pe.Entry2_Player.FantasyPlayerId == playerHeadToHeadEvent.Entry2_Player.FantasyPlayerId)
+                );
+
+                if (playerEventFromDb == null)
+                {
+                    await db.AddAsync(playerHeadToHeadEvent);
+                }
+                else
+                {
+                    playerHeadToHeadEvent.PlayerHeadToHeadEventID = playerEventFromDb.PlayerHeadToHeadEventID;
+                    db.Update(playerHeadToHeadEvent);
+                }
+            }
+
+            return playerHeadToHeadEvents;
         }
 
         public async Task<Lineup> ImportLineup(FantasyContext db, Event finishedEvent, User user, IList<Lineup> lineupsFromDb)
