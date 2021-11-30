@@ -3,7 +3,7 @@
     public class HeadToHeadResultDTO
     {
         public int id { get; set; }
-        public int entry_1_entry { get; set; }
+        public int? entry_1_entry { get; set; }
         public string entry_1_name { get; set; }
         public string entry_1_player_name { get; set; }
         public int entry_1_points { get; set; }

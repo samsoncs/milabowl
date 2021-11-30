@@ -17,7 +17,13 @@ namespace Milabowl.Business.Import
         Task<IList<User>> ImportUsers(FantasyContext db, LeagueRootDTO leagueRoot, IList<User> usersFromDb);
         Task<IList<UserLeague>> ImportUserLeagues(FantasyContext db, IList<User> users, League league, IList<UserLeague> userLeaguesFromDb);
         Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, EventRootDTO eventRootDto, Event finishedEvent, IList<Player> players, IList<PlayerEvent> playerEventsFromDb);
-        Task<IList<PlayerHeadToHeadEvent>> ImportHeadToHeadPlayerEvents(FantasyContext db, HeadToHeadEventRootDTO headToHeadEventRootDto, Event finishedEvent, IList<Player> players, IList<PlayerHeadToHeadEvent> playerEventsFromDb);
+        Task<IList<UserHeadToHeadEvent>> ImportUserHeadToHeadEvents(
+            FantasyContext db,
+            HeadToHeadEventRootDTO headToHeadEventDto,
+            Event finishedEvent,
+            IList<User> users,
+            IList<UserHeadToHeadEvent> playerHeadToHeadEventsFromDb
+        );
         Task<Lineup> ImportLineup(FantasyContext db, Event finishedEvent, User user, IList<Lineup> lineupsFromDb);
         Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(FantasyContext db, PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb);
     }
@@ -199,28 +205,27 @@ namespace Milabowl.Business.Import
             return playerEvents;
         }
 
-        public async Task<IList<PlayerHeadToHeadEvent>> ImportHeadToHeadPlayerEvents(
+        public async Task<IList<UserHeadToHeadEvent>> ImportUserHeadToHeadEvents(
             FantasyContext db, 
             HeadToHeadEventRootDTO headToHeadEventDto,
             Event finishedEvent,
-            IList<Player> players,
-            IList<PlayerHeadToHeadEvent> playerHeadToHeadEventsFromDb
+            IList<User> users,
+            IList<UserHeadToHeadEvent> playerHeadToHeadEventsFromDb
         )
         {
             var playerHeadToHeadEventsFromDbForEvent = playerHeadToHeadEventsFromDb
                 .Where(pe => pe.Event.FantasyEventId == finishedEvent.FantasyEventId)
                 .ToList();
 
-            var playerHeadToHeadEvents = headToHeadEventDto.results.Select(r =>
-                this._fantasyMapper.GetPlayerHeadToHeadEvent(r, finishedEvent, players)
+            var playerHeadToHeadEvents = headToHeadEventDto.results.SelectMany(r =>
+                this._fantasyMapper.GetUserHeadToHeadEvents(r, finishedEvent, users)
             ).ToList();
 
             foreach (var playerHeadToHeadEvent in playerHeadToHeadEvents)
             {
                 var playerEventFromDb = playerHeadToHeadEventsFromDbForEvent.FirstOrDefault(
                     pe => pe.Event.FantasyEventId == playerHeadToHeadEvent.Event.FantasyEventId
-                          && (pe.Entry1_Player.FantasyPlayerId == playerHeadToHeadEvent.Entry1_Player.FantasyPlayerId
-                            || pe.Entry2_Player.FantasyPlayerId == playerHeadToHeadEvent.Entry2_Player.FantasyPlayerId)
+                          && pe.User.FantasyEntryId == playerHeadToHeadEvent.User.FantasyEntryId
                 );
 
                 if (playerEventFromDb == null)
@@ -229,7 +234,7 @@ namespace Milabowl.Business.Import
                 }
                 else
                 {
-                    playerHeadToHeadEvent.PlayerHeadToHeadEventID = playerEventFromDb.PlayerHeadToHeadEventID;
+                    playerHeadToHeadEvent.UserHeadToHeadEventID = playerEventFromDb.UserHeadToHeadEventID;
                     db.Update(playerHeadToHeadEvent);
                 }
             }

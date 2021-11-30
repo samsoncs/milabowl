@@ -20,6 +20,7 @@ namespace Milabowl.Infrastructure.Models
         public int MostViceCaptainedPlayerID { get; set; }
 
         public IList<PlayerEvent> PlayerEvents { get; set; }
+        public IList<UserHeadToHeadEvent> PlayerHeadToHeadEvents { get; set; }
         public IList<Lineup> Lineups { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace Milabowl.Infrastructure.Models
         public int EventTotal { get; set; }
         public IList<UserLeague> UserLeagues { get; set; }
         public IList<Lineup> Lineups { get; set; }
+        public IList<UserHeadToHeadEvent> HeadToHeadEvents { get; set; }
 
     }
 }

@@ -14,7 +14,7 @@ namespace Milabowl.Infrastructure.Contexts
         public DbSet<League> Leagues { get; set; }
         public DbSet<UserLeague> UserLeagues { get; set; }
         public DbSet<PlayerEvent> PlayerEvents { get; set; }
-        public DbSet<PlayerHeadToHeadEvent> PlayerHeadToHeadEvents { get; set; }
+        public DbSet<UserHeadToHeadEvent> UserHeadToHeadEvents { get; set; }
         public DbSet<Lineup> Lineups { get; set; }
         public DbSet<PlayerEventLineup> PlayerEventLineups { get; set; }
         public DbSet<MilaGWScore> MilaGWScores { get; set; }
@@ -37,6 +37,16 @@ namespace Milabowl.Infrastructure.Contexts
                 .WithOne(pe => pe.Event)
                 .HasForeignKey(pe => pe.FkEventId);
 
+            modelBuilder.Entity<Event>()
+                .HasMany(p => p.PlayerHeadToHeadEvents)
+                .WithOne(pe => pe.Event)
+                .HasForeignKey(pe => pe.FkEventId);
+
+            modelBuilder.Entity<Event>()
+                .HasMany(e => e.Lineups)
+                .WithOne(l => l.Event)
+                .HasForeignKey(l => l.FkEventId);
+
             modelBuilder.Entity<League>()
                 .HasMany(l => l.UserLeagues)
                 .WithOne(ul => ul.League)
@@ -47,10 +57,10 @@ namespace Milabowl.Infrastructure.Contexts
                 .WithOne(ul => ul.User)
                 .HasForeignKey(ul => ul.FkUserId);
 
-            modelBuilder.Entity<Event>()
-                .HasMany(e => e.Lineups)
-                .WithOne(l => l.Event)
-                .HasForeignKey(l => l.FkEventId);
+            modelBuilder.Entity<User>()
+                .HasMany(p => p.HeadToHeadEvents)
+                .WithOne(pe => pe.User)
+                .HasForeignKey(pe => pe.FkUserId);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Lineups)
@@ -69,11 +79,7 @@ namespace Milabowl.Infrastructure.Contexts
                 .HasForeignKey(pel => pel.FkPlayerEventId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<PlayerHeadToHeadEvent>();
-            //.HasMany(pe => pe.PlayerEventLineups)
-            //.WithOne(pel => pel.PlayerEvent)
-            //.HasForeignKey(pel => pel.FkPlayerEventId)
-            //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<UserHeadToHeadEvent>();
         }
     }
 }

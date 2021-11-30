@@ -18,7 +18,7 @@ namespace Milabowl.Business.Mappers
         PlayerEvent GetPlayerEvent(ElementDTO e, Event evt, IList<Player> players);
         Lineup GetLineup(Event evt, User user);
         PlayerEventLineup GetPlayerEventLineup(PickDTO p, Lineup lineup, IList<PlayerEvent> playerEvents, Event evt);
-        PlayerHeadToHeadEvent GetPlayerHeadToHeadEvent(HeadToHeadResultDTO headToHeadResult, Event evt, IList<Player> players);
+        IList<UserHeadToHeadEvent> GetUserHeadToHeadEvents(HeadToHeadResultDTO headToHeadResult, Event evt, IList<User> users);
     }
 
     public class FantasyMapper: IFantasyMapper
@@ -165,32 +165,55 @@ namespace Milabowl.Business.Mappers
             };
         }
 
-        public PlayerHeadToHeadEvent GetPlayerHeadToHeadEvent(HeadToHeadResultDTO headToHeadResult, Event evt, IList<Player> players)
+        public IList<UserHeadToHeadEvent> GetUserHeadToHeadEvents(HeadToHeadResultDTO headToHeadResult, Event evt, IList<User> users)
         {
-            return new PlayerHeadToHeadEvent
+            var headToHeadEvents = new List<UserHeadToHeadEvent>();
+
+            if (headToHeadResult.entry_1_entry.HasValue)
             {
-                PlayerHeadToHeadEventID = Guid.NewGuid(),
-                FantasyPlayerHeadToHeadEventID = headToHeadResult.id,
-                Event = evt,
+                headToHeadEvents.Add(
+                new UserHeadToHeadEvent
+                {
+                    UserHeadToHeadEventID = Guid.NewGuid(),
+                    FantasyUserHeadToHeadEventID = headToHeadResult.id,
+                    Event = evt,
 
-                Entry1_Player = players.FirstOrDefault(P => P.FantasyPlayerId == headToHeadResult.entry_1_entry),
-                Entry1Draw = headToHeadResult.entry_1_entry,
-                Entry1Loss = headToHeadResult.entry_1_loss,
-                Entry1Win = headToHeadResult.entry_1_win,
-                Entry1Points = headToHeadResult.entry_1_points,
-                Entry1Total = headToHeadResult.entry_1_total,
-                
-                Entry2_Player = players.FirstOrDefault(P => P.FantasyPlayerId == headToHeadResult.entry_1_entry),
-                Entry2Draw = headToHeadResult.entry_2_draw,
-                Entry2Loss = headToHeadResult.entry_2_loss,
-                Entry2Win = headToHeadResult.entry_2_win,
-                Entry2Points = headToHeadResult.entry_2_points,
-                Entry2Total = headToHeadResult.entry_2_total,
+                    User = users.FirstOrDefault(u => u.FantasyEntryId == headToHeadResult.entry_1_entry),
+                    Draw = headToHeadResult.entry_1_entry.Value,
+                    Loss = headToHeadResult.entry_1_loss,
+                    Win = headToHeadResult.entry_1_win,
+                    Points = headToHeadResult.entry_1_points,
+                    Total = headToHeadResult.entry_1_total,
 
-                IsKnockout = headToHeadResult.is_knockout,
-                LeagueID = headToHeadResult.league,
-                IsBye = headToHeadResult.is_bye,
-            };
+                    IsKnockout = headToHeadResult.is_knockout,
+                    LeagueID = headToHeadResult.league,
+                    IsBye = headToHeadResult.is_bye,
+                });
+            }
+
+            if (headToHeadResult.entry_2_entry.HasValue)
+            {
+                headToHeadEvents.Add(
+                new UserHeadToHeadEvent
+                {
+                    UserHeadToHeadEventID = Guid.NewGuid(),
+                    FantasyUserHeadToHeadEventID = headToHeadResult.id,
+                    Event = evt,
+
+                    User = users.FirstOrDefault(u => u.FantasyEntryId == headToHeadResult.entry_2_entry),
+                    Draw = headToHeadResult.entry_2_draw,
+                    Loss = headToHeadResult.entry_2_loss,
+                    Win = headToHeadResult.entry_2_win,
+                    Points = headToHeadResult.entry_2_points,
+                    Total = headToHeadResult.entry_2_total,
+
+                    IsKnockout = headToHeadResult.is_knockout,
+                    LeagueID = headToHeadResult.league,
+                    IsBye = headToHeadResult.is_bye,
+                });
+            }
+
+            return headToHeadEvents;
         }
 
         public Lineup GetLineup(Event evt, User user)
