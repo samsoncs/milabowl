@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Milabowl.Infrastructure.Models;
 using Milabowl.Business.DTOs;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+using Milabowl.Business.DTOs.Rules;
+using Milabowl.Infrastructure.Models;
 
 namespace Milabowl.Business.Import
 {
@@ -16,7 +16,12 @@ namespace Milabowl.Business.Import
         decimal GetRedCardScore(IList<MilaRuleDTO> playerEvents);
         decimal GetYellowCardScore(IList<MilaRuleDTO> playerEvents);
         decimal GetMinusIsPlusScore(IList<MilaRuleDTO> playerEvents);
+        decimal GetSixtyNineSub(IList<MilaRuleDTO> playerEvents);
         decimal GetIncreaseStreakScore(IList<int> playerEvents, int gw);
+        decimal GetHeadToHeadMetaScore(UserHeadToHeadDTO userHeadToHeadDto);
+        decimal GetHeadToHeadStrongerOpponentScore(UserHeadToHeadDTO userHeadToHeadDto);
+        decimal GetUniqueCaptainScore(Player currentUserCaptain, IList<Lineup> lineupsThisWeek);
+
         decimal GetGWScore(IList<MilaRuleDTO> playerEvents);
     }
 
@@ -62,6 +67,19 @@ namespace Milabowl.Business.Import
             return playerEvents.Where(pe => pe.TotalPoints<0).Sum(pe => pe.TotalPoints*(-1)*pe.Multiplier); 
         }
 
+        public decimal GetSixtyNineSub(IList<MilaRuleDTO> playerEvents)
+        {
+            var cap = playerEvents.FirstOrDefault(pe => pe.IsCaptain);
+
+            if (cap is { Minutes: 69 })
+            {
+                return 2.69m * cap.Multiplier;
+
+            }
+
+            return playerEvents.Any(pe => pe.Minutes == 69) ? 2.69m : 0;
+        }
+
         public decimal GetIncreaseStreakScore(IList<int> pointsPerGameweek, int gw)
         {
             
@@ -75,6 +93,28 @@ namespace Milabowl.Business.Import
                 }
             }
             return increaseStreakCount > 1 ? 1 : 0;
+        }
+
+        public decimal GetHeadToHeadMetaScore(UserHeadToHeadDTO userHeadToHeadDto)
+        {
+            var scoreDiff = userHeadToHeadDto.UserPoints - userHeadToHeadDto.OpponentPoints;
+
+            return userHeadToHeadDto.DidWin 
+                   && scoreDiff is > 0 and <= 2 
+                ? 2 : 0;
+        }
+
+        public decimal GetHeadToHeadStrongerOpponentScore(UserHeadToHeadDTO userHeadToHeadDto)
+        {
+            return userHeadToHeadDto.DidWin ? 1 : 0;
+        }
+
+        public decimal GetUniqueCaptainScore(Player currentUserCaptain, IList<Lineup> lineupsThisWeek)
+        {
+            return currentUserCaptain != null && lineupsThisWeek.SelectMany(l => l.PlayerEventLineups)
+                .Where(pel => pel.IsCaptain)
+                .Count(pel => pel.PlayerEvent.FkPlayerId == currentUserCaptain?.PlayerId)
+                == 1 ? 2 : 0;
         }
 
         public decimal GetGWScore(IList<MilaRuleDTO> playerEvents)

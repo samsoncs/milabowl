@@ -179,7 +179,7 @@ namespace Milabowl.Business.Mappers
                     Event = evt,
 
                     User = users.FirstOrDefault(u => u.FantasyEntryId == headToHeadResult.entry_1_entry),
-                    Draw = headToHeadResult.entry_1_entry.Value,
+                    Draw = headToHeadResult.entry_1_draw,
                     Loss = headToHeadResult.entry_1_loss,
                     Win = headToHeadResult.entry_1_win,
                     Points = headToHeadResult.entry_1_points,

@@ -191,6 +191,24 @@ namespace Milabowl.Test.Business.Mappers
         }
 
         [Test]
+        public void ShouldMapUserHeadToHeadEvents()
+        {
+            var headToHeadResultDto = this.GetFakedDto<HeadToHeadResultDTO>();
+            var evt = new Event { EventId = Guid.NewGuid() };
+            var users = new List<User>
+            {
+                new (){ UserId = Guid.NewGuid(), FantasyEntryId = headToHeadResultDto.entry_1_entry.Value },
+                new (){ UserId = Guid.NewGuid(), FantasyEntryId = headToHeadResultDto.entry_2_entry.Value },
+            };
+
+            var userHeadToHeadEvents = this._fantasyMapper.GetUserHeadToHeadEvents(headToHeadResultDto, evt, users);
+
+            userHeadToHeadEvents.Count.Should().Be(2);
+            AssertUserHeadToHeadEvent(userHeadToHeadEvents[0], users[0], evt, headToHeadResultDto);
+            AssertUserHeadToHeadEvent(userHeadToHeadEvents[1], users[1], evt, headToHeadResultDto, false);
+        }
+
+        [Test]
         public void ShouldMapLineup()
         {
             var evt = new Event { EventId = Guid.NewGuid() };
@@ -229,11 +247,28 @@ namespace Milabowl.Test.Business.Mappers
             playerEventLineup.IsViceCaptain.Should().Be(pickDto.is_vice_captain);
         }
 
+        private void AssertUserHeadToHeadEvent(UserHeadToHeadEvent userHeadToHeadEvent, User user, Event evt, HeadToHeadResultDTO headToHeadResultDto, bool checkEntry1 = true)
+        {
+            userHeadToHeadEvent.User.Should().Be(user);
+            userHeadToHeadEvent.Event.Should().Be(evt);
+            userHeadToHeadEvent.Draw.Should().Be(checkEntry1 ? headToHeadResultDto.entry_1_draw : headToHeadResultDto.entry_2_draw);
+            userHeadToHeadEvent.Win.Should().Be(checkEntry1 ? headToHeadResultDto.entry_1_win : headToHeadResultDto.entry_2_win);
+            userHeadToHeadEvent.Loss.Should().Be(checkEntry1 ? headToHeadResultDto.entry_1_loss : headToHeadResultDto.entry_2_loss);
+            userHeadToHeadEvent.Total.Should().Be(checkEntry1 ? headToHeadResultDto.entry_1_total : headToHeadResultDto.entry_2_total);
+            userHeadToHeadEvent.Points.Should().Be(checkEntry1 ? headToHeadResultDto.entry_1_points : headToHeadResultDto.entry_2_points);
+            userHeadToHeadEvent.FantasyUserHeadToHeadEventID.Should().Be(headToHeadResultDto.id);
+            userHeadToHeadEvent.UserHeadToHeadEventID.Should().NotBeEmpty();
+            userHeadToHeadEvent.IsKnockout.Should().Be(headToHeadResultDto.is_knockout);
+            userHeadToHeadEvent.IsBye.Should().Be(headToHeadResultDto.is_bye);
+            userHeadToHeadEvent.LeagueID.Should().Be(headToHeadResultDto.league);
+        }
+
         private T GetFakedDto<T>() where T: class
         {
             var faker = new Faker<T>();
 
             faker.RuleForType(typeof(int), r => r.Random.Int());
+            faker.RuleForType(typeof(int?), r => (int?)r.Random.Int());
             faker.RuleForType(typeof(string), r => r.Company.CompanyName());
             faker.RuleForType(typeof(bool), r => r.Random.Bool());
             faker.RuleForType(typeof(DateTime?), r => r.Date.Soon().OrNull(r, 0));

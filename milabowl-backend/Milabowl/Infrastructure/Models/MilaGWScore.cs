@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Milabowl.Infrastructure.Models
 {
@@ -28,5 +26,9 @@ namespace Milabowl.Infrastructure.Models
         public int GameWeek { get; set; }
         public string UserName { get; set; }
         public decimal MilaPoints { get; set; }
+        public decimal HeadToHeadMeta { get; set; }
+        //public decimal HeadToHeadStrongOpponentWin { get; set; }
+        public decimal UniqueCap { get; set; }
+        public decimal SixtyNineSub { get; set; }
     }
 }

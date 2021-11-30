@@ -45,6 +45,9 @@ namespace Milabowl.Business.Api
                                     IncreaseStreak = s.Sum(a => a.MilaPoints.IncreaseStreak),
                                     EqualStreak = s.Sum(a => a.MilaPoints.EqualStreak),
                                     GW69 = s.Sum(a => a.MilaPoints.GW69),
+                                    HeadToHeadMeta = s.Sum(a => a.MilaPoints.HeadToHeadMeta),
+                                    SixtyNineSub = s.Sum(a => a.MilaPoints.SixtyNineSub),
+                                    UniqueCap = s.Sum(a => a.MilaPoints.UniqueCap),
                                     Total = lastResult?.MilaPoints.Total,
                                 },
                                 GWPosition = s.Sum(a => a.GWPosition),
@@ -115,6 +118,9 @@ namespace Milabowl.Business.Api
                     MinusIsPlus = m.MinusIsPlus,
                     IncreaseStreak = m.IncreaseStreak,
                     GWPositionScore = m.GWPositionScore,
+                    HeadToHeadMeta = m.HeadToHeadMeta,
+                    SixtyNineSub = m.SixtyNineSub,
+                    UniqueCap = m.UniqueCap,
                     Total = m.MilaPoints
                 },
 

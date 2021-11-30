@@ -14,6 +14,5 @@
         public decimal TotalCumulativeAverageMilaPoints { get; set; }
         public int? MilaRank { get; set; }
         public int? MilaRankLastWeek { get; set; }
-
     }
 }

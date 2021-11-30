@@ -6,6 +6,7 @@ using Milabowl.Infrastructure.Contexts;
 using Milabowl.Infrastructure.Models;
 using Milabowl.Business.DTOs;
 using System.Collections.Generic;
+using Milabowl.Business.DTOs.Rules;
 
 namespace Milabowl.Business.Import
 {
@@ -40,6 +41,8 @@ namespace Milabowl.Business.Import
                     .Include(u => u.Lineups)
                         .ThenInclude(l => l.PlayerEventLineups)
                     .Include(u => u.Lineups)
+                    .Include(u => u.HeadToHeadEvents)
+                        .ThenInclude(hu => hu.Event)
                     .Where(u => u.Lineups.Any(l => l.Event.EventId == evt.EventId))
                     .ToListAsync();
 
@@ -65,16 +68,6 @@ namespace Milabowl.Business.Import
                         .Select(l => l.PlayerEventLineups.Sum(pel => pel.PlayerEvent.TotalPoints*pel.Multiplier))
                         .ToList();
 
-                    /*int increaseStreakCount = 0;
-                    for(var i = 0; i < pointsPerGameweek.Count - 1; i++){
-                        if(pointsPerGameweek[i] > pointsPerGameweek[i+1]){
-                            increaseStreakCount++;
-                        }
-                        else{
-                            break;
-                        }
-                    }*/
-               
                     var playerEventsForUserOnEvent = user.Lineups
                         ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
                         ?.PlayerEventLineups
@@ -114,6 +107,34 @@ namespace Milabowl.Business.Import
                         IncreaseStreak = this._milaRuleBusiness.GetIncreaseStreakScore(pointsPerGameweekAsc, evt.GameWeek),
                         EqualStreak = pointsPerGameweekDsc.Count > 1 && pointsPerGameweekDsc[0] == pointsPerGameweekDsc[1] ? 6.9m : 0,
                     };
+
+                    if (evt.Deadline > new DateTime(2021, 12, 31))
+                    {
+                        var userHeadToHead = user.HeadToHeadEvents
+                            ?.FirstOrDefault(l => l.Event.EventId == evt.EventId);
+
+                        var userCaptain = user.Lineups
+                            ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
+                            ?.PlayerEventLineups.FirstOrDefault(pel => pel.IsCaptain)
+                            ?.PlayerEvent.Player;
+
+                        var opponentHeadToHead = await this._db.UserHeadToHeadEvents.FirstOrDefaultAsync(h =>
+                            h.FantasyUserHeadToHeadEventID == userHeadToHead.FantasyUserHeadToHeadEventID
+                            && h.FkUserId != user.UserId);
+
+                        var headToHeadDto = new UserHeadToHeadDTO
+                        {
+                            DidWin = userHeadToHead?.Win == 1,
+                            UserPoints = userHeadToHead?.Points,
+                            OpponentPoints = opponentHeadToHead?.Points
+                        };
+
+                        milaPoints.HeadToHeadMeta = this._milaRuleBusiness.GetHeadToHeadMetaScore(headToHeadDto);
+                        //milaPoints.HeadToHeadStrongOpponentWin = this._milaRuleBusiness.GetHeadToHeadStrongerOpponentScore(headToHeadDto);
+                        milaPoints.UniqueCap = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups);
+                        milaPoints.SixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent);
+                    }
+
                     milaGameweekScores.Add(milaPoints);
                 }           
 
@@ -135,7 +156,22 @@ namespace Milabowl.Business.Import
 
                 foreach (var mgs in milaGameweekScores)
                 {
-                    mgs.MilaPoints = mgs.CapFail + mgs.CapKeep + mgs.BenchFail + mgs.GWPositionScore + mgs.GW69 + mgs.RedCard + mgs.YellowCard +mgs.MinusIsPlus + mgs.IncreaseStreak + mgs.EqualStreak + mgs.Hit;
+                    mgs.MilaPoints = 
+                        mgs.CapFail 
+                        + mgs.CapKeep 
+                        + mgs.BenchFail 
+                        + mgs.GWPositionScore 
+                        + mgs.GW69 
+                        + mgs.RedCard 
+                        + mgs.YellowCard 
+                        + mgs.MinusIsPlus 
+                        + mgs.IncreaseStreak 
+                        + mgs.EqualStreak 
+                        + mgs.Hit
+                        //+ mgs.HeadToHeadStrongOpponentWin
+                        + mgs.HeadToHeadMeta
+                        + mgs.UniqueCap
+                        + mgs.SixtyNineSub;
                 }
 
                 await this._db.MilaGWScores.AddRangeAsync(milaGameweekScores);

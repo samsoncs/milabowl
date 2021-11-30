@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Milabowl.Business.DTOs;
+using Milabowl.Business.DTOs.Rules;
 using Milabowl.Business.Import;
+using Milabowl.Infrastructure.Models;
 using NUnit.Framework;
 
 namespace Milabowl.Test.Business.Import
@@ -123,6 +126,132 @@ namespace Milabowl.Test.Business.Import
             var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDTOs);
 
             capKeepScore.Should().Be(0);
+        }
+
+        [Test]
+        public void ShouldGetUniqueCaptainScoreIfUniqueCaptain()
+        {
+            var userCaptain = new Player{ PlayerId = Guid.NewGuid() };
+
+            var lineups = new List<Lineup>
+            {
+                GetLineup(userCaptain),
+                GetLineup()
+            };
+
+            var uniqueCaptainScore = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, lineups);
+            uniqueCaptainScore.Should().Be(2);
+        }
+
+        [Test]
+        public void ShouldGetZeroIfCaptainNotUnique()
+        {
+            var userCaptain = new Player { PlayerId = Guid.NewGuid() };
+
+            var lineups = new List<Lineup>
+            {
+                GetLineup(userCaptain),
+                GetLineup(userCaptain),
+                GetLineup()
+            };
+
+            var uniqueCaptainScore = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, lineups);
+            uniqueCaptainScore.Should().Be(0);
+        }
+
+        [Test]
+        public void ShouldGetSixtyNineSubScoreIfAnyPlayersWith69Mins()
+        {
+            var milaRuleDTOs = new List<MilaRuleDTO>
+            {
+                new (){ Minutes = 60, IsCaptain = true },
+                new (){ Minutes = 69, IsCaptain = false, },
+            };
+
+            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDTOs);
+
+            sixtyNineSub.Should().Be(2.69m);
+        }
+
+        [Test]
+        public void ShouldGetSixtyNineSubScoreMultipliedIfCapWith69Mins()
+        {
+            var milaRuleDTOs = new List<MilaRuleDTO>
+            {
+                new (){ Minutes = 60, IsCaptain = false },
+                new (){ Minutes = 69, IsCaptain = true, Multiplier = 2 },
+            };
+
+            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDTOs);
+
+            sixtyNineSub.Should().Be(2.69m * 2);
+        }
+
+        [Test]
+        public void ShouldNotGetSixtyNineSubScoreIfNoPlayersWith69Mins()
+        {
+            var milaRuleDTOs = new List<MilaRuleDTO>
+            {
+                new (){ Minutes = 68, IsCaptain = true },
+                new (){ Minutes = 70, IsCaptain = false, },
+            };
+
+            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDTOs);
+
+            sixtyNineSub.Should().Be(0);
+        }
+
+        [TestCase(true, 45, 44, 2)]
+        [TestCase(true, 45, 43, 2)]
+        [TestCase(true, 45, 42, 0)]
+        [TestCase(false, 45, 45, 0)]
+        [TestCase(false, 45, 46, 0)]
+        [TestCase(true, 45, 46, 0)]
+
+        public void ShouldGetHeadToHeadMetaScoreIfWinWithLessThan2(bool didWin, int myPoints, int opponentPoints, int expected)
+        {
+            var userHeadToHead = new UserHeadToHeadDTO
+            {
+                DidWin = didWin,
+                UserPoints = myPoints,
+                OpponentPoints = opponentPoints
+            };
+
+            var sixtyNineSub = this._milaRuleBusiness.GetHeadToHeadMetaScore(userHeadToHead);
+
+            sixtyNineSub.Should().Be(expected);
+        }
+
+        public void ShouldGetHeadToHeadScore()
+        {
+
+        }
+
+        private Lineup GetLineup(Player captain = null)
+        {
+            return new()
+            {
+                PlayerEventLineups = new List<PlayerEventLineup>
+                {
+                    new()
+                    {
+                        IsCaptain = true,
+                        PlayerEvent = new PlayerEvent
+                        {
+                            Player = captain ?? new Player(),
+                            FkPlayerId = captain?.PlayerId ?? Guid.NewGuid()
+                        }
+                    },
+                    new()
+                    {
+                        IsCaptain = false,
+                        PlayerEvent = new PlayerEvent
+                        {
+                            Player = new Player()
+                        }
+                    }
+                }
+            };
         }
 
     }
