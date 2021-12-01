@@ -16,6 +16,7 @@ namespace Milabowl.Business.Import
         decimal GetRedCardScore(IList<MilaRuleDTO> playerEvents);
         decimal GetYellowCardScore(IList<MilaRuleDTO> playerEvents);
         decimal GetMinusIsPlusScore(IList<MilaRuleDTO> playerEvents);
+        decimal GetTrendyBitchScore(IList<Player> subsIn, IList<Player> subsOut, Player mostTransferredInPlayer, Player mostTransferredOutPlayer);
         decimal GetSixtyNineSub(IList<MilaRuleDTO> playerEvents);
         decimal GetIncreaseStreakScore(IList<int> playerEvents, int gw);
         decimal GetHeadToHeadMetaScore(UserHeadToHeadDTO userHeadToHeadDto);
@@ -65,6 +66,13 @@ namespace Milabowl.Business.Import
         public decimal GetMinusIsPlusScore(IList<MilaRuleDTO> playerEvents)
         {
             return playerEvents.Where(pe => pe.TotalPoints<0).Sum(pe => pe.TotalPoints*(-1)*pe.Multiplier); 
+        }
+
+        public decimal GetTrendyBitchScore(IList<Player> subsIn, IList<Player> subsOut, Player mostTransferredInPlayer,
+            Player mostTransferredOutPlayer)
+        {
+            return (mostTransferredInPlayer != null && subsIn.Any(p => p.PlayerId == mostTransferredInPlayer?.PlayerId) ? -1 :0)
+                   + (mostTransferredOutPlayer != null && subsOut.Any(p => p.PlayerId == mostTransferredOutPlayer?.PlayerId) ? -1 : 0);
         }
 
         public decimal GetSixtyNineSub(IList<MilaRuleDTO> playerEvents)

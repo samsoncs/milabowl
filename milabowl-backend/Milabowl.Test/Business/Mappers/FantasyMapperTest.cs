@@ -163,7 +163,7 @@ namespace Milabowl.Test.Business.Mappers
             var evt = new Event{ EventId = Guid.NewGuid() };
             var players = new List<Player>{ new Player{ PlayerId = Guid.NewGuid(), FantasyPlayerId = elementDto.id } };
 
-            var playerEvent = this._fantasyMapper.GetPlayerEvent(elementDto, evt, players);
+            var playerEvent = this._fantasyMapper.GetPlayerEvent(elementDto, evt, players, new List<ElementHistoryRootDTO>(), new List<FixtureDTO>());
 
             playerEvent.AssertAllPropertiesNotNull();
             playerEvent.Event.EventId.Should().Be(evt.EventId);

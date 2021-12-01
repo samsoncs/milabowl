@@ -63,6 +63,12 @@ namespace Milabowl.Business.Import
             var events = await this._dataImportBusiness.ImportEvents(this._db, bootstrapRoot, eventsFromDb);
             var teams = await this._dataImportBusiness.ImportTeams(this._db, bootstrapRoot, teamsFromDb);
             var players = await this._dataImportBusiness.ImportPlayers(this._db, bootstrapRoot, teams, playersFromDb);
+            var fixtures = await this._dataImportProvider.GetFixtures();
+
+            var playerHistoryRoots = players.Select(async p => await this._dataImportProvider.GetPlayerHistoryRoot(p.FantasyPlayerId))
+                .Select(t => t.Result)
+                .Where(t => t != null)
+                .ToList();
 
             var leagueRoot = await this._dataImportProvider.GetLeagueRoot();
             var league = await this._dataImportBusiness.ImportLeague(this._db, leagueRoot, leaguesFromDb);
@@ -78,7 +84,7 @@ namespace Milabowl.Business.Import
                 }
 
                 var eventRootDto = await this._dataImportProvider.GetEventRoot(finishedEvent.FantasyEventId);
-                var playerEvents = await this._dataImportBusiness.ImportPlayerEvents(this._db, eventRootDto, finishedEvent, players, playerEventsFromDb);
+                var playerEvents = await this._dataImportBusiness.ImportPlayerEvents(this._db, eventRootDto, finishedEvent, players, playerEventsFromDb, playerHistoryRoots, fixtures);
 
                 var headToHeadEventRootDto = await this._dataImportProvider.GetHead2HeadEventRoot(finishedEvent.FantasyEventId);
                 await this._dataImportBusiness.ImportUserHeadToHeadEvents(this._db, headToHeadEventRootDto, finishedEvent, users, userHeadToHeadEventsFromDb);

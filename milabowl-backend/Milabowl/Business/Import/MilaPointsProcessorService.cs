@@ -40,6 +40,8 @@ namespace Milabowl.Business.Import
                                 .ThenInclude (pel => pel.Player)
                     .Include(u => u.Lineups)
                         .ThenInclude(l => l.PlayerEventLineups)
+                            .ThenInclude(pel => pel.PlayerEvent)
+                                .ThenInclude(pe => pe.Player)
                     .Include(u => u.Lineups)
                     .Include(u => u.HeadToHeadEvents)
                         .ThenInclude(hu => hu.Event)
@@ -84,9 +86,37 @@ namespace Milabowl.Business.Import
                             RedCards =          pel.PlayerEvent.RedCards,
                             TotalPoints =       pel.PlayerEvent.TotalPoints,
                             PlayerPosition =    pel.PlayerEvent.Player.ElementType,
+                            Player =            pel.PlayerEvent.Player
                             }
                         )
                         .ToList();
+
+                    var mostTradedInPlayer = await this._db.PlayerEvents
+                        .Where(pe => pe.FkEventId == evt.EventId)
+                        .OrderByDescending(pe => pe.TransfersIn)
+                        .Select(pe => pe.Player)
+                        .FirstOrDefaultAsync();
+
+                    var mostTradedOutPlayer = await this._db.PlayerEvents
+                        .Where(pe => pe.FkEventId == evt.EventId)
+                        .OrderByDescending(pe => pe.TransfersOut)
+                        .Select(pe => pe.Player)
+                        .FirstOrDefaultAsync();
+
+                    var playersForUserLastWeek = user.Lineups
+                        ?.FirstOrDefault(l => l.Event.GameWeek == evt.GameWeek - 1)
+                        ?.PlayerEventLineups
+                        ?.Select(pel => pel.PlayerEvent.Player);
+
+                    var subsIn = playersForUserLastWeek != null ? 
+                        playerEventsForUserOnEvent?
+                            .Where(pe => playersForUserLastWeek.All(ip => ip.PlayerId != pe.Player.PlayerId))
+                            .Select(p => p.Player).ToList() : new List<Player>();
+
+                    var subsOut = playerEventsForUserOnEvent != null && playersForUserLastWeek != null ? 
+                        playersForUserLastWeek
+                        .Where(p => playerEventsForUserOnEvent.All(pe => pe.Player.PlayerId != p.PlayerId)).ToList() 
+                        : new List<Player>();
 
                     var milaPoints = new MilaGWScore
                     {
@@ -102,13 +132,13 @@ namespace Milabowl.Business.Import
                         CapDef = this._milaRuleBusiness.GetCapDefScore(playerEventsForUserOnEvent),
                         GW69 = this._milaRuleBusiness.GetSixtyNine(playerEventsForUserOnEvent),
                         RedCard = this._milaRuleBusiness.GetRedCardScore(playerEventsForUserOnEvent), 
-                        YellowCard = this._milaRuleBusiness.GetYellowCardScore(playerEventsForUserOnEvent), 
+                        YellowCard = this._milaRuleBusiness.GetYellowCardScore(playerEventsForUserOnEvent),
                         MinusIsPlus = this._milaRuleBusiness.GetMinusIsPlusScore(playerEventsForUserOnEvent), //TODO: Change to MinusIsPlus
                         IncreaseStreak = this._milaRuleBusiness.GetIncreaseStreakScore(pointsPerGameweekAsc, evt.GameWeek),
                         EqualStreak = pointsPerGameweekDsc.Count > 1 && pointsPerGameweekDsc[0] == pointsPerGameweekDsc[1] ? 6.9m : 0,
                     };
 
-                    if (evt.Deadline > new DateTime(2021, 12, 31))
+                    if (evt.Deadline > new DateTime(2020, 12, 31))
                     {
                         var userHeadToHead = user.HeadToHeadEvents
                             ?.FirstOrDefault(l => l.Event.EventId == evt.EventId);
@@ -133,6 +163,8 @@ namespace Milabowl.Business.Import
                         //milaPoints.HeadToHeadStrongOpponentWin = this._milaRuleBusiness.GetHeadToHeadStrongerOpponentScore(headToHeadDto);
                         milaPoints.UniqueCap = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups);
                         milaPoints.SixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent);
+                        milaPoints.TrendyBitch = this._milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer);
+
                     }
 
                     milaGameweekScores.Add(milaPoints);
@@ -171,7 +203,8 @@ namespace Milabowl.Business.Import
                         //+ mgs.HeadToHeadStrongOpponentWin
                         + mgs.HeadToHeadMeta
                         + mgs.UniqueCap
-                        + mgs.SixtyNineSub;
+                        + mgs.SixtyNineSub
+                        + mgs.TrendyBitch;
                 }
 
                 await this._db.MilaGWScores.AddRangeAsync(milaGameweekScores);

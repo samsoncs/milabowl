@@ -16,7 +16,14 @@ namespace Milabowl.Business.Import
         Task<League> ImportLeague(FantasyContext db, LeagueRootDTO leagueRoot, IList<League> leaguesFromDb);
         Task<IList<User>> ImportUsers(FantasyContext db, LeagueRootDTO leagueRoot, IList<User> usersFromDb);
         Task<IList<UserLeague>> ImportUserLeagues(FantasyContext db, IList<User> users, League league, IList<UserLeague> userLeaguesFromDb);
-        Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, EventRootDTO eventRootDto, Event finishedEvent, IList<Player> players, IList<PlayerEvent> playerEventsFromDb);
+        Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, 
+            EventRootDTO eventRootDto, 
+            Event finishedEvent, 
+            IList<Player> players,
+            IList<PlayerEvent> playerEventsFromDb,
+            IList<ElementHistoryRootDTO> historyRootDtos,
+            IList<FixtureDTO> fixtures
+        );
         Task<IList<UserHeadToHeadEvent>> ImportUserHeadToHeadEvents(
             FantasyContext db,
             HeadToHeadEventRootDTO headToHeadEventDto,
@@ -174,14 +181,16 @@ namespace Milabowl.Business.Import
             EventRootDTO eventRootDto, 
             Event finishedEvent, 
             IList<Player> players, 
-            IList<PlayerEvent> playerEventsFromDb)
+            IList<PlayerEvent> playerEventsFromDb,
+            IList<ElementHistoryRootDTO> historyRootDtos,
+            IList<FixtureDTO> fixtures)
         {
             var playerEventsFromDbForEvent = playerEventsFromDb
                     .Where(pe => pe.Event.FantasyEventId == finishedEvent.FantasyEventId)
                     .ToList();
 
             var playerEvents = eventRootDto.elements.Select(e =>
-                this._fantasyMapper.GetPlayerEvent(e, finishedEvent, players)
+                this._fantasyMapper.GetPlayerEvent(e, finishedEvent, players, historyRootDtos, fixtures)
             ).ToList();
 
             foreach (var playerEvent in playerEvents)

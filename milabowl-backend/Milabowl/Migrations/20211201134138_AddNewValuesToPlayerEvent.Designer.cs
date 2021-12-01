@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Milabowl.Infrastructure.Contexts;
 
@@ -11,9 +12,10 @@ using Milabowl.Infrastructure.Contexts;
 namespace Milabowl.Migrations
 {
     [DbContext(typeof(FantasyContext))]
-    partial class FantasyContextModelSnapshot : ModelSnapshot
+    [Migration("20211201134138_AddNewValuesToPlayerEvent")]
+    partial class AddNewValuesToPlayerEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,16 +45,16 @@ namespace Milabowl.Migrations
                     b.Property<int>("GameWeek")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MostCaptainedPlayerID")
+                    b.Property<int>("MostCaptainedPlayerID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MostSelectedPlayerID")
+                    b.Property<int>("MostSelectedPlayerID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MostTransferredInPlayerID")
+                    b.Property<int>("MostTransferredInPlayerID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MostViceCaptainedPlayerID")
+                    b.Property<int>("MostViceCaptainedPlayerID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -184,9 +186,6 @@ namespace Milabowl.Migrations
 
                     b.Property<string>("TeamName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("TrendyBitch")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("UniqueCap")
                         .HasColumnType("decimal(18,2)");

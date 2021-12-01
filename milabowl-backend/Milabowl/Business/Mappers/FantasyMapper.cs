@@ -15,7 +15,7 @@ namespace Milabowl.Business.Mappers
         League GetLeagueFromLeagueDTO(LeagueDTO leagueDto);
         User GetUserFromResultDTO(ResultDTO r);
         UserLeague GetUserLeagueFromUserAndLeague(User u, League league);
-        PlayerEvent GetPlayerEvent(ElementDTO e, Event evt, IList<Player> players);
+        PlayerEvent GetPlayerEvent(ElementDTO e, Event evt, IList<Player> players, IList<ElementHistoryRootDTO> playerHistory, IList<FixtureDTO> fixtures);
         Lineup GetLineup(Event evt, User user);
         PlayerEventLineup GetPlayerEventLineup(PickDTO p, Lineup lineup, IList<PlayerEvent> playerEvents, Event evt);
         IList<UserHeadToHeadEvent> GetUserHeadToHeadEvents(HeadToHeadResultDTO headToHeadResult, Event evt, IList<User> users);
@@ -33,7 +33,12 @@ namespace Milabowl.Business.Mappers
                 Finished = e.Finished,
                 DataChecked = e.DataChecked,
                 Name = e.Name,
-                GameWeek = int.Parse(Regex.Match(e.Name, @"\s[0-9]{1,2}\b").Value)
+                GameWeek = int.Parse(Regex.Match(e.Name, @"\s[0-9]{1,2}\b").Value),
+                MostCaptainedPlayerID = e.MostCaptained,
+                MostSelectedPlayerID = e.MostSelected,
+                MostTransferredInPlayerID = e.MostTransferredIn,
+                MostViceCaptainedPlayerID = e.MostViceCaptained
+
             };
         }
 
@@ -98,6 +103,7 @@ namespace Milabowl.Business.Mappers
             };
         }
 
+
         public League GetLeagueFromLeagueDTO(LeagueDTO leagueDto)
         {
             return new League
@@ -135,13 +141,19 @@ namespace Milabowl.Business.Mappers
             return new UserLeague {League = league, User = u};
         }
 
-        public PlayerEvent GetPlayerEvent(ElementDTO e, Event evt, IList<Player> players)
+        public PlayerEvent GetPlayerEvent(ElementDTO e, Event evt, IList<Player> players, IList<ElementHistoryRootDTO> playerHistoryRootDtos, IList<FixtureDTO> fixtures)
         {
+            var fixtureIdsForEvent = fixtures.Where(f => f.@event == evt.FantasyEventId).Select(f => f.id).ToHashSet();
+            var player = players.FirstOrDefault(p => p.FantasyPlayerId == e.id);
+            var playerHistory = playerHistoryRootDtos
+                .FirstOrDefault(p => p.FantasyElementId == player?.FantasyPlayerId)
+                ?.history.FirstOrDefault(h => fixtureIdsForEvent.Contains(h.fixture));
+
             return new PlayerEvent
             {
                 PlayerEventId = Guid.NewGuid(),
                 Event = evt,
-                Player = players.FirstOrDefault(p => p.FantasyPlayerId == e.id),
+                Player = player,
                 GoalsScored = e.stats.goals_scored,
                 Assists = e.stats.assists,
                 TotalPoints = e.stats.total_points,
@@ -161,7 +173,12 @@ namespace Milabowl.Business.Mappers
                 IctIndex = e.stats.ict_index,
                 Threat = e.stats.threat,
                 Influence = e.stats.influence,
-                FantasyPlayerEventId = e.id
+                FantasyPlayerEventId = e.id,
+                Value = playerHistory?.value,
+                TransferBalance = playerHistory?.transfers_balance,
+                TransfersIn = playerHistory?.transfers_in,
+                TransfersOut = playerHistory?.transfers_out,
+                Selected = playerHistory?.selected
             };
         }
 

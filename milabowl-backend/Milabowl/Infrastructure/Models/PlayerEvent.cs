@@ -32,6 +32,13 @@ namespace Milabowl.Infrastructure.Models
         public string IctIndex { get; set; }
         public int TotalPoints { get; set; }
         public bool InDreamteam { get; set; }
+
+        public int? TransfersIn { get; set; }
+        public int? TransfersOut { get; set; }
+        public int? TransferBalance { get; set; }
+        public int? Selected { get; set; }
+        public decimal? Value { get; set; }
+
         public IList<PlayerEventLineup> PlayerEventLineups { get; set; }
     }
 }

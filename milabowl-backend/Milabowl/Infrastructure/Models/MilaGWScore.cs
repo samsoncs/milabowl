@@ -30,5 +30,6 @@ namespace Milabowl.Infrastructure.Models
         //public decimal HeadToHeadStrongOpponentWin { get; set; }
         public decimal UniqueCap { get; set; }
         public decimal SixtyNineSub { get; set; }
+        public decimal TrendyBitch { get; set; }
     }
 }

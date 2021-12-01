@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Milabowl.Business.DTOs.Import;
 using Milabowl.Utils;
@@ -12,6 +13,8 @@ namespace Milabowl.Business.Import
         Task<EventRootDTO> GetEventRoot(int eventID);
         Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID);
         Task<PicksRootDTO> GetPicksRoot(int eventID, int userID);
+        Task<ElementHistoryRootDTO> GetPlayerHistoryRoot(int playerId);
+        Task<IList<FixtureDTO>> GetFixtures();
     }
 
     public class DataImportProvider: IDataImportProvider
@@ -46,6 +49,18 @@ namespace Milabowl.Business.Import
         public async Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID)
         {
             return await this._httpClient.GetDeserializedAsync<HeadToHeadEventRootDTO>($"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1345045/?page=1&event={eventID}");
+        }
+
+        public async Task<ElementHistoryRootDTO> GetPlayerHistoryRoot(int playerId)
+        {
+            var root = await this._httpClient.GetDeserializedAsync<ElementHistoryRootDTO>($"https://fantasy.premierleague.com/api/element-summary/{playerId}/");
+            root.FantasyElementId = playerId;
+            return root;
+        }
+
+        public async Task<IList<FixtureDTO>> GetFixtures()
+        {
+            return await this._httpClient.GetDeserializedAsync<IList<FixtureDTO>>($"https://fantasy.premierleague.com/api/fixtures/");
         }
     }
 }
