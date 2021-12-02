@@ -138,7 +138,7 @@ namespace Milabowl.Business.Import
                         EqualStreak = pointsPerGameweekDsc.Count > 1 && pointsPerGameweekDsc[0] == pointsPerGameweekDsc[1] ? 6.9m : 0,
                     };
 
-                    if (evt.Deadline > new DateTime(2020, 12, 31))
+                    if (evt.Deadline > new DateTime(2021, 12, 31))
                     {
                         var userHeadToHead = user.HeadToHeadEvents
                             ?.FirstOrDefault(l => l.Event.EventId == evt.EventId);
