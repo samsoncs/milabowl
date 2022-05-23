@@ -80,6 +80,10 @@ const StandingsPage = () => {
                                 <TableCell align="center"><LightToolTip title="Increase Streak: 1 pt if higher score than previous GW" placement="top"><div>IS</div></LightToolTip></TableCell>
                                 <TableCell align="center"><LightToolTip title="Equal Streak: 6.9 pts if same score as previous GW" placement="top"><div>ES</div></LightToolTip></TableCell>
                                 <TableCell align="center"><LightToolTip title="GW Position Score: 4 pts FPL GW winner, then decreasing with 0.5" placement="top"><div>GW PS</div></LightToolTip></TableCell>
+                                <TableCell align="center"><LightToolTip title="Head 2 Head Meta: 2 point for winning H2H with 2 or less points" placement="top"><div>H2H M</div></LightToolTip></TableCell>
+                                <TableCell align="center"><LightToolTip title="Sixty Nine Sub: 2.69 points if at least one player played 69 minutes " placement="top"><div>69 Sub</div></LightToolTip></TableCell>
+                                <TableCell align="center"><LightToolTip title="Unique Cap: 2 pts if you have a captain no one else had" placement="top"><div>Unq Cap</div></LightToolTip></TableCell>
+                                <TableCell align="center"><LightToolTip title="Trendy Bitch: -1 point if you bought most transferred in player and -1 point if you sold most transferred out player." placement="top"><div>Trnd</div></LightToolTip></TableCell>
                                 <TableCell align="center"><LightToolTip title="GW Mila Points" placement="top"><div>GW MP</div></LightToolTip></TableCell>
                                 <TableCell align="right"><LightToolTip title="Total Mila Points" placement="top"><div>Total MP</div></LightToolTip></TableCell>
                             </TableRow>
@@ -147,6 +151,18 @@ const StandingsPage = () => {
                                             </TableCell>
                                             <TableCell align="center">
                                                 {r.milaPoints.gwPositionScore}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {r.milaPoints.headToHeadMeta}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {r.milaPoints.sixtyNineSub}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {r.milaPoints.uniqueCap}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {r.milaPoints.trendyBitch}
                                             </TableCell>
                                             <TableCell align="center">
                                                 {r.milaPoints.total}

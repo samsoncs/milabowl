@@ -27,6 +27,10 @@ export interface MilaRulePoints {
   hit: number;
   gwPositionScore: number;
   total: number;
+  headToHeadMeta: number;
+  sixtyNineSub: number;
+  uniqueCap: number;
+  trendyBitch: number;
 }
 
 export interface ResultsByWeek {

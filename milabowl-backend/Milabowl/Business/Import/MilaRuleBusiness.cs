@@ -39,7 +39,7 @@ namespace Milabowl.Business.Import
         }
 
         public decimal GetCapKeepScore(IList<MilaRuleDTO> playerEvents){
-            return playerEvents.Any(pe => pe.Multiplier == 2 && pe.PlayerPosition == 1) ? 2 : 0; //if goalkeeper, return 2
+            return 0;//playerEvents.Any(pe => pe.Multiplier == 2 && pe.PlayerPosition == 1) ? 2 : 0; //if goalkeeper, return 2
         }
         public decimal GetCapDefScore(IList<MilaRuleDTO> playerEvents){
             return playerEvents.Any(pe => pe.Multiplier == 2 && pe.PlayerPosition == 2) ? 1 : 0; //if defender, return 1

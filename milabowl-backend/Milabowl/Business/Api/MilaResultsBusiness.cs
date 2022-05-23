@@ -48,6 +48,7 @@ namespace Milabowl.Business.Api
                                     HeadToHeadMeta = s.Sum(a => a.MilaPoints.HeadToHeadMeta),
                                     SixtyNineSub = s.Sum(a => a.MilaPoints.SixtyNineSub),
                                     UniqueCap = s.Sum(a => a.MilaPoints.UniqueCap),
+                                    TrendyBitch = s.Sum(a => a.MilaPoints.TrendyBitch),
                                     Total = lastResult?.MilaPoints.Total,
                                 },
                                 GWPosition = s.Sum(a => a.GWPosition),
@@ -121,6 +122,7 @@ namespace Milabowl.Business.Api
                     HeadToHeadMeta = m.HeadToHeadMeta,
                     SixtyNineSub = m.SixtyNineSub,
                     UniqueCap = m.UniqueCap,
+                    TrendyBitch = m.TrendyBitch,
                     Total = m.MilaPoints
                 },
 

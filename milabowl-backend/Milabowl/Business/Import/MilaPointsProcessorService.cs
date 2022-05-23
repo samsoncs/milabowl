@@ -208,6 +208,7 @@ namespace Milabowl.Business.Import
                 }
 
                 await this._db.MilaGWScores.AddRangeAsync(milaGameweekScores);
+                await this._db.SaveChangesAsync();
 
             }
             await this._db.SaveChangesAsync();
