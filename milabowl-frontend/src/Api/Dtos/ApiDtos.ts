@@ -24,7 +24,6 @@ export interface MilaRulePoints {
   minusIsPlus: number;
   increaseStreak: number;
   equalStreak: number;
-  hit: number;
   gwPositionScore: number;
   total: number;
   headToHeadMeta: number;
