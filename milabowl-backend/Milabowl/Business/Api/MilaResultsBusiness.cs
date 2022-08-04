@@ -113,7 +113,6 @@ namespace Milabowl.Business.Api
                     CapKeep = m.CapKeep,
                     EqualStreak = m.EqualStreak,
                     GW69 = m.GW69,
-                    Hit = m.Hit,
                     RedCard = m.RedCard,
                     YellowCard = m.YellowCard,
                     MinusIsPlus = m.MinusIsPlus,

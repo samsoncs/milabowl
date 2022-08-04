@@ -191,6 +191,7 @@ namespace Milabowl.Business.Import
                     mgs.MilaPoints = 
                         mgs.CapFail 
                         + mgs.CapKeep 
+                        + mgs.CapDef
                         + mgs.BenchFail 
                         + mgs.GWPositionScore 
                         + mgs.GW69 
@@ -199,7 +200,6 @@ namespace Milabowl.Business.Import
                         + mgs.MinusIsPlus 
                         + mgs.IncreaseStreak 
                         + mgs.EqualStreak 
-                        + mgs.Hit
                         //+ mgs.HeadToHeadStrongOpponentWin
                         + mgs.HeadToHeadMeta
                         + mgs.UniqueCap

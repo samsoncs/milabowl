@@ -9,7 +9,6 @@ namespace Milabowl.Infrastructure.Models
         public Guid MilaGWScoreId { get; set; }
         public string GW { get; set; }
         public string TeamName{ get; set; }
-        public decimal Hit { get; set; }
         public decimal CapFail { get; set; }
         public decimal BenchFail { get; set; }
         public decimal CapKeep { get; set; }

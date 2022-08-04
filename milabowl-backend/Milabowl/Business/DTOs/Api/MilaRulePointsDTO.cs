@@ -12,7 +12,6 @@
         public decimal MinusIsPlus { get; set; }
         public decimal IncreaseStreak { get; set; }
         public decimal EqualStreak { get; set; }
-        public decimal Hit { get; set; }
         public decimal GWPositionScore { get; set; }
         public decimal HeadToHeadMeta { get; set; }
         public decimal SixtyNineSub { get; set; }
