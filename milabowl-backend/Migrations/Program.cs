@@ -40,7 +40,7 @@ namespace Migrations
         {
             Console.WriteLine("Running migrations...");
             var dbContextBuilder = new DbContextOptionsBuilder<FantasyContext>(new DbContextOptions<FantasyContext>());
-            dbContextBuilder.UseSqlServer("");
+            dbContextBuilder.UseSqlServer("Persist Security Info=False;UID=SA;Pwd=yourStrong(!)Password;Database=fantasy;Server=localhost,1436; Connection Timeout=30");
             using var db = new FantasyContext(dbContextBuilder.Options);
             db.Database.Migrate();
             Console.WriteLine("Finished running migrations");
@@ -84,7 +84,7 @@ namespace Migrations
             services.AddScoped<IFantasyMapper, FantasyMapper>();
             services.AddDbContext<FantasyContext>(optionsBuilder =>
             {
-                var connectionString = "";
+                var connectionString = "Persist Security Info=False;UID=SA;Pwd=yourStrong(!)Password;Database=fantasy;Server=localhost,1436; Connection Timeout=30";
                 optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
             });
             services.AddHttpClient();

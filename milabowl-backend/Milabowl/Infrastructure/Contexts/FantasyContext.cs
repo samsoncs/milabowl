@@ -9,6 +9,7 @@ namespace Milabowl.Infrastructure.Contexts
 
         public DbSet<Player> Players { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Fixture> Fixtures { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<League> Leagues { get; set; }
@@ -27,6 +28,18 @@ namespace Milabowl.Infrastructure.Contexts
                 .WithOne(p => p.Team)
                 .HasForeignKey(t => t.FkTeamId);
 
+            modelBuilder.Entity<Team>()
+                .HasMany(t => t.AwayFixtures)
+                .WithOne(p => p.TeamAway)
+                .HasForeignKey(t => t.FkTeamAwayId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Team>()
+                .HasMany(t => t.HomeFixtures)
+                .WithOne(p => p.TeamHome)
+                .HasForeignKey(t => t.FkTeamHomeId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<Player>()
                 .HasMany(p => p.PlayerEvents)
                 .WithOne(pe => pe.Player)
@@ -44,6 +57,11 @@ namespace Milabowl.Infrastructure.Contexts
 
             modelBuilder.Entity<Event>()
                 .HasMany(e => e.Lineups)
+                .WithOne(l => l.Event)
+                .HasForeignKey(l => l.FkEventId);
+
+            modelBuilder.Entity<Event>()
+                .HasMany(e => e.Fixtures)
                 .WithOne(l => l.Event)
                 .HasForeignKey(l => l.FkEventId);
 
@@ -78,6 +96,7 @@ namespace Milabowl.Infrastructure.Contexts
                 .WithOne(pel => pel.PlayerEvent)
                 .HasForeignKey(pel => pel.FkPlayerEventId)
                 .OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<UserHeadToHeadEvent>();
         }

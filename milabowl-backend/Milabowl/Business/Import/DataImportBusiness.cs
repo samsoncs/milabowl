@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Milabowl.Business.DTOs.Import;
@@ -11,6 +12,7 @@ namespace Milabowl.Business.Import
     public interface IDataImportBusiness
     {
         Task<IList<Event>> ImportEvents(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Event> eventsFromDb);
+        Task<IList<Fixture>> ImportFixtures(FantasyContext db, IList<FixtureDTO> fixtureDtos, IList<Fixture> fixturesFromDb, IList<Event> events, IList<Team> teams);
         Task<IList<Team>> ImportTeams(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teamsFromDb);
         Task<IList<Player>> ImportPlayers(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teams, IList<Player> playersFromDb);
         Task<League> ImportLeague(FantasyContext db, LeagueRootDTO leagueRoot, IList<League> leaguesFromDb);
@@ -63,6 +65,34 @@ namespace Milabowl.Business.Import
             }
 
             return events;
+        }
+
+        public async Task<IList<Fixture>> ImportFixtures(FantasyContext db, IList<FixtureDTO> fixtureDtos, IList<Fixture> fixturesFromDb, IList<Event> events, IList<Team> teams)
+        {
+            var fixtures = new List<Fixture>();
+
+            foreach (var fixtureDto in fixtureDtos)
+            {
+                var evt = events.FirstOrDefault(e => e.FantasyEventId == fixtureDto.@event);
+                var homeTeam = teams.FirstOrDefault(t => t.FantasyTeamId == fixtureDto.team_h);
+                var awayTeam = teams.FirstOrDefault(t => t.FantasyTeamId == fixtureDto.team_a);
+                var fixture = this._fantasyMapper.GetFixtureFromFixtureDTO(fixtureDto, evt, homeTeam, awayTeam);
+
+                var fixtureFromDb = fixturesFromDb.FirstOrDefault(f => f.FantasyFixtureId == fixture.FantasyFixtureId);
+                if (fixtureFromDb == null)
+                {
+                    await db.Fixtures.AddAsync(fixture);
+                    fixtures.Add(fixture);
+                }
+                else
+                {
+                    fixture.FixtureId = fixtureFromDb.FixtureId;
+                    db.Fixtures.Update(fixture);
+                    fixtures.Add(fixture);
+                }
+            }
+
+            return fixtures;
         }
 
         public async Task<IList<Team>> ImportTeams(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teamsFromDb)

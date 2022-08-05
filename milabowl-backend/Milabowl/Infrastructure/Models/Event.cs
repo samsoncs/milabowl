@@ -22,5 +22,6 @@ namespace Milabowl.Infrastructure.Models
         public IList<PlayerEvent> PlayerEvents { get; set; }
         public IList<UserHeadToHeadEvent> PlayerHeadToHeadEvents { get; set; }
         public IList<Lineup> Lineups { get; set; }
+        public virtual IList<Fixture> Fixtures { get; set; }
     }
 }

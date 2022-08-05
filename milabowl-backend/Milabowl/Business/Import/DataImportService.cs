@@ -29,6 +29,7 @@ namespace Milabowl.Business.Import
         {
             var eventsFromDb = await this._db.Events.AsNoTracking().ToListAsync();
             var teamsFromDb = await this._db.Teams.AsNoTracking().ToListAsync();
+            var fixturesFromDb = await this._db.Fixtures.AsNoTracking().ToListAsync();
             var playersFromDb = await this._db.Players.AsNoTracking().ToListAsync();
             var leaguesFromDb = await this._db.Leagues.AsNoTracking().ToListAsync();
             var usersFromDb = await this._db.Users.AsNoTracking().ToListAsync();
@@ -63,7 +64,8 @@ namespace Milabowl.Business.Import
             var events = await this._dataImportBusiness.ImportEvents(this._db, bootstrapRoot, eventsFromDb);
             var teams = await this._dataImportBusiness.ImportTeams(this._db, bootstrapRoot, teamsFromDb);
             var players = await this._dataImportBusiness.ImportPlayers(this._db, bootstrapRoot, teams, playersFromDb);
-            var fixtures = await this._dataImportProvider.GetFixtures();
+            var fixtureDtos = await this._dataImportProvider.GetFixtures();
+            await this._dataImportBusiness.ImportFixtures(this._db, fixtureDtos, fixturesFromDb, events, teams);
 
             var playerHistoryRoots = players.Select(async p => await this._dataImportProvider.GetPlayerHistoryRoot(p.FantasyPlayerId))
                 .Select(t => t.Result)
@@ -84,7 +86,7 @@ namespace Milabowl.Business.Import
                 }
 
                 var eventRootDto = await this._dataImportProvider.GetEventRoot(finishedEvent.FantasyEventId);
-                var playerEvents = await this._dataImportBusiness.ImportPlayerEvents(this._db, eventRootDto, finishedEvent, players, playerEventsFromDb, playerHistoryRoots, fixtures);
+                var playerEvents = await this._dataImportBusiness.ImportPlayerEvents(this._db, eventRootDto, finishedEvent, players, playerEventsFromDb, playerHistoryRoots, fixtureDtos);
 
                 var headToHeadEventRootDto = await this._dataImportProvider.GetHead2HeadEventRoot(finishedEvent.FantasyEventId);
                 await this._dataImportBusiness.ImportUserHeadToHeadEvents(this._db, headToHeadEventRootDto, finishedEvent, users, userHeadToHeadEventsFromDb);

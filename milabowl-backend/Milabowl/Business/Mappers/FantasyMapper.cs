@@ -11,6 +11,7 @@ namespace Milabowl.Business.Mappers
     {
         Event GetEventFromEventDTO(EventDTO e);
         Team GetTeamFromTeamDTO(TeamDTO t);
+        Fixture GetFixtureFromFixtureDTO(FixtureDTO fixtureDto, Event evt, Team homeTeam, Team awayTeam);
         Player GetPlayerFromPlayerDTO(PlayerDTO p, IList<Team> teams);
         League GetLeagueFromLeagueDTO(LeagueDTO leagueDto);
         User GetUserFromResultDTO(ResultDTO r);
@@ -51,6 +52,26 @@ namespace Milabowl.Business.Mappers
                 TeamShortName = t.ShortName,
                 FantasyTeamId = t.Id,
                 FantasyTeamCode = t.Code
+            };
+        }
+
+        public Fixture GetFixtureFromFixtureDTO(FixtureDTO fixtureDto, Event evt, Team homeTeam, Team awayTeam)
+        {
+            return new Fixture
+            {
+                FixtureId = Guid.NewGuid(),
+                Event = evt, 
+                Finished = fixtureDto.finished,
+                FinishedProvisional = fixtureDto.finished_provisional,
+                KickoffTime = fixtureDto.kickoff_time,
+                ProvisionalStartTime = fixtureDto.provisional_start_time,
+                Started = fixtureDto.started,
+                TeamAway = awayTeam,
+                TeamAwayScore = fixtureDto.team_a_score,
+                TeamHome = homeTeam,
+                TeamHomeScore = fixtureDto.team_h_score,
+                TeamHomeDifficulty = fixtureDto.team_h_difficulty,
+                TeamAwayDifficulty = fixtureDto.team_a_difficulty
             };
         }
 
