@@ -30,5 +30,24 @@ namespace Milabowl.Infrastructure.Models
         public decimal UniqueCap { get; set; }
         public decimal SixtyNineSub { get; set; }
         public decimal TrendyBitch { get; set; }
+
+        public void CalculateMilaPoints()
+        {
+            this.MilaPoints = CapFail
+                         + CapKeep
+                         + CapDef
+                         + BenchFail
+                         + GWPositionScore
+                         + GW69
+                         + RedCard
+                         + YellowCard
+                         + MinusIsPlus
+                         + IncreaseStreak
+                         + EqualStreak
+                         + HeadToHeadMeta
+                         + UniqueCap
+                         + SixtyNineSub
+                         + TrendyBitch;
+        }
     }
 }

@@ -36,7 +36,6 @@ namespace Milabowl.Business.Api
                                     RedCard = s.Sum(a => a.MilaPoints.RedCard),
                                     GWPositionScore = s.Sum(a => a.MilaPoints.GWPositionScore),
                                     YellowCard = s.Sum(a => a.MilaPoints.YellowCard),
-                                    Hit = s.Sum(a => a.MilaPoints.Hit),
                                     CapFail = s.Sum(a => a.MilaPoints.CapFail),
                                     BenchFail = s.Sum(a => a.MilaPoints.BenchFail),
                                     CapKeep = s.Sum(a => a.MilaPoints.CapKeep),

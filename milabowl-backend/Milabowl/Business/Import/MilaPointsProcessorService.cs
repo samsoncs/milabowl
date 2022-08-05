@@ -188,23 +188,7 @@ namespace Milabowl.Business.Import
 
                 foreach (var mgs in milaGameweekScores)
                 {
-                    mgs.MilaPoints = 
-                        mgs.CapFail 
-                        + mgs.CapKeep 
-                        + mgs.CapDef
-                        + mgs.BenchFail 
-                        + mgs.GWPositionScore 
-                        + mgs.GW69 
-                        + mgs.RedCard 
-                        + mgs.YellowCard 
-                        + mgs.MinusIsPlus 
-                        + mgs.IncreaseStreak 
-                        + mgs.EqualStreak 
-                        //+ mgs.HeadToHeadStrongOpponentWin
-                        + mgs.HeadToHeadMeta
-                        + mgs.UniqueCap
-                        + mgs.SixtyNineSub
-                        + mgs.TrendyBitch;
+                    mgs.CalculateMilaPoints();
                 }
 
                 await this._db.MilaGWScores.AddRangeAsync(milaGameweekScores);
