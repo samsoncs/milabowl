@@ -61,11 +61,13 @@ namespace Milabowl.Business.Import
                     }
                    
                     var pointsPerGameweekDsc = user.Lineups
+                        .Where(l => l.Event.GameWeek <= evt.GameWeek)
                         .OrderByDescending(l => l.Event.GameWeek)
                         .Select(l => l.PlayerEventLineups.Sum(pel => pel.PlayerEvent.TotalPoints*pel.Multiplier))
                         .ToList();
 
                     var pointsPerGameweekAsc = user.Lineups
+                        .Where(l => l.Event.GameWeek <= evt.GameWeek)
                         .OrderBy(l => l.Event.GameWeek)
                         .Select(l => l.PlayerEventLineups.Sum(pel => pel.PlayerEvent.TotalPoints*pel.Multiplier))
                         .ToList();
