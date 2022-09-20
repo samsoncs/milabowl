@@ -64,7 +64,7 @@ namespace Milabowl.Business.Import
             var events = await this._dataImportBusiness.ImportEvents(this._db, bootstrapRoot, eventsFromDb);
             var teams = await this._dataImportBusiness.ImportTeams(this._db, bootstrapRoot, teamsFromDb);
             var players = await this._dataImportBusiness.ImportPlayers(this._db, bootstrapRoot, teams, playersFromDb);
-            var fixtureDtos = await this._dataImportProvider.GetFixtures();
+            var fixtureDtos = (await this._dataImportProvider.GetFixtures()).Where(e => e.@event != null).ToList();
             await this._dataImportBusiness.ImportFixtures(this._db, fixtureDtos, fixturesFromDb, events, teams);
 
             var playerHistoryRoots = players.Select(async p => await this._dataImportProvider.GetPlayerHistoryRoot(p.FantasyPlayerId))
