@@ -140,34 +140,32 @@ namespace Milabowl.Business.Import
                         EqualStreak = pointsPerGameweekDsc.Count > 1 && pointsPerGameweekDsc[0] == pointsPerGameweekDsc[1] ? 6.9m : 0,
                     };
 
-                    if (evt.Deadline > new DateTime(2021, 12, 31))
+              
+                    var userHeadToHead = user.HeadToHeadEvents
+                        ?.FirstOrDefault(l => l.Event.EventId == evt.EventId);
+
+                    var userCaptain = user.Lineups
+                        ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
+                        ?.PlayerEventLineups.FirstOrDefault(pel => pel.IsCaptain)
+                        ?.PlayerEvent.Player;
+
+                    var opponentHeadToHead = await this._db.UserHeadToHeadEvents.FirstOrDefaultAsync(h =>
+                        h.FantasyUserHeadToHeadEventID == userHeadToHead.FantasyUserHeadToHeadEventID
+                        && h.FkUserId != user.UserId);
+
+                    var headToHeadDto = new UserHeadToHeadDTO
                     {
-                        var userHeadToHead = user.HeadToHeadEvents
-                            ?.FirstOrDefault(l => l.Event.EventId == evt.EventId);
+                        DidWin = userHeadToHead?.Win == 1,
+                        UserPoints = userHeadToHead?.Points,
+                        OpponentPoints = opponentHeadToHead?.Points
+                    };
 
-                        var userCaptain = user.Lineups
-                            ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
-                            ?.PlayerEventLineups.FirstOrDefault(pel => pel.IsCaptain)
-                            ?.PlayerEvent.Player;
+                    milaPoints.HeadToHeadMeta = this._milaRuleBusiness.GetHeadToHeadMetaScore(headToHeadDto);
+                    //milaPoints.HeadToHeadStrongOpponentWin = this._milaRuleBusiness.GetHeadToHeadStrongerOpponentScore(headToHeadDto);
+                    milaPoints.UniqueCap = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups);
+                    milaPoints.SixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent);
+                    milaPoints.TrendyBitch = this._milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer);
 
-                        var opponentHeadToHead = await this._db.UserHeadToHeadEvents.FirstOrDefaultAsync(h =>
-                            h.FantasyUserHeadToHeadEventID == userHeadToHead.FantasyUserHeadToHeadEventID
-                            && h.FkUserId != user.UserId);
-
-                        var headToHeadDto = new UserHeadToHeadDTO
-                        {
-                            DidWin = userHeadToHead?.Win == 1,
-                            UserPoints = userHeadToHead?.Points,
-                            OpponentPoints = opponentHeadToHead?.Points
-                        };
-
-                        milaPoints.HeadToHeadMeta = this._milaRuleBusiness.GetHeadToHeadMetaScore(headToHeadDto);
-                        //milaPoints.HeadToHeadStrongOpponentWin = this._milaRuleBusiness.GetHeadToHeadStrongerOpponentScore(headToHeadDto);
-                        milaPoints.UniqueCap = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups);
-                        milaPoints.SixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent);
-                        milaPoints.TrendyBitch = this._milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer);
-
-                    }
 
                     milaGameweekScores.Add(milaPoints);
                 }           
