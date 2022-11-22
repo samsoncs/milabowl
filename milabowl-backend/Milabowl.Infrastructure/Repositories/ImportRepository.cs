@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Milabowl.Domain.Entities.Fantasy;
+using Milabowl.Domain.Import;
 using Milabowl.Infrastructure.Contexts;
-using Milabowl.Infrastructure.Models;
-using Milabowl.Repositories;
 
 namespace Milabowl.Infrastructure.Repositories
 {

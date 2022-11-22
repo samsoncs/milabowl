@@ -1,26 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Milabowl;
-using Milabowl.Business.Api;
-using Milabowl.Business.Import;
-using Milabowl.Business.Mappers;
+using Milabowl.Domain.Import;
+using Milabowl.Domain.Milabowl;
+using Milabowl.Domain.Processing;
 using Milabowl.Infrastructure.Contexts;
 using Milabowl.Infrastructure.Repositories;
-using Milabowl.Repositories;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using IMilaResultsService = Milabowl.Domain.Milabowl.IMilaResultsService;
 
 const string CONNECTION_STRING = "Persist Security Info=False;UID=SA;Pwd=!5omeSup3rF4ncyPwd!;Database=fantasy;Server=localhost,1431; Connection Timeout=30;TrustServerCertificate=True";
-
-var configurationBuilder = new ConfigurationBuilder()
-    .AddJsonFile("./dockerappsettings.json", optional: true, reloadOnChange: true);
-
-IConfigurationRoot configuration = configurationBuilder.Build();
-Startup.Configuration = configuration;
 
 if (args[0] == "Migrate")
 {
@@ -53,7 +44,9 @@ static async Task Import()
     await dataImportService.ImportData();
     await milaPointsProcessorService.UpdateMilaPoints();
     var milaResults = await milaResultsService.GetMilaResults();
-    var json = JsonConvert.SerializeObject(milaResults, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() } });
+
+    var json = JsonSerializer.Serialize(milaResults, new JsonSerializerOptions{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+    
     await File.WriteAllTextAsync("C:\\Programming\\Other\\milabowl\\game_state.json", json);
     Console.WriteLine("Finished importing data");
 }
@@ -79,9 +72,7 @@ public static class DI
             optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
         });
         services.AddHttpClient();
-
+        
         return services.BuildServiceProvider(); ;
     }
 }
-
-

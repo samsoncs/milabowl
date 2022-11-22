@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Milabowl.Business.DTOs.Import;
-using Milabowl.Business.Import;
+using Milabowl.Domain.Import;
+using Milabowl.Domain.Import.FantasyDTOs;
 using Moq;
 
 namespace Milabowl.Test.Helpers

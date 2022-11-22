@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Milabowl.Domain.Entities.Fantasy;
 using Milabowl.Infrastructure.Contexts;
-using Milabowl.Infrastructure.Models;
 
 namespace Milabowl.Test.Helpers
 {

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Milabowl.Business.DTOs;
-using Milabowl.Business.DTOs.Rules;
-using Milabowl.Business.Import;
-using Milabowl.Infrastructure.Models;
+using Milabowl.Domain.Entities.Fantasy;
+using Milabowl.Domain.Processing;
 using NUnit.Framework;
 
 namespace Milabowl.Test.Business.Import
@@ -22,13 +20,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetSixPointNineIfTotalPointsIsSixtyNine()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ TotalPoints = 67, Multiplier = 1 }, 
-                new MilaRuleDTO{ TotalPoints = 1, Multiplier = 2 }
+                new MilaRuleData{ TotalPoints = 67, Multiplier = 1 }, 
+                new MilaRuleData{ TotalPoints = 1, Multiplier = 2 }
             };
 
-            var sixtyNine = this._milaRuleBusiness.GetSixtyNine(milaRuleDTOs);
+            var sixtyNine = this._milaRuleBusiness.GetSixtyNine(milaRuleDatas);
 
             sixtyNine.Should().Be(6.9m);
         }
@@ -36,13 +34,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetZeroIfTotalPointsNotSixtyNine()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ TotalPoints = 68, Multiplier = 1 },
-                new MilaRuleDTO{ TotalPoints = 1, Multiplier = 2 }
+                new MilaRuleData{ TotalPoints = 68, Multiplier = 1 },
+                new MilaRuleData{ TotalPoints = 1, Multiplier = 2 }
             };
 
-            var sixtyNine = this._milaRuleBusiness.GetSixtyNine(milaRuleDTOs);
+            var sixtyNine = this._milaRuleBusiness.GetSixtyNine(milaRuleDatas);
 
             sixtyNine.Should().Be(0);
         }
@@ -50,13 +48,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetOnePointPerYellowCard()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ YellowCards = 1, Multiplier = 1 },
-                new MilaRuleDTO{ YellowCards = 1, Multiplier = 1 }
+                new MilaRuleData{ YellowCards = 1, Multiplier = 1 },
+                new MilaRuleData{ YellowCards = 1, Multiplier = 1 }
             };
 
-            var yellowCards = this._milaRuleBusiness.GetYellowCardScore(milaRuleDTOs);
+            var yellowCards = this._milaRuleBusiness.GetYellowCardScore(milaRuleDatas);
 
             yellowCards.Should().Be(2);
         }
@@ -64,12 +62,12 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldNotGetPointForYellowCardIfNotOnTeam()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ YellowCards = 1, Multiplier = 0 },
+                new MilaRuleData{ YellowCards = 1, Multiplier = 0 },
             };
 
-            var yellowCards = this._milaRuleBusiness.GetYellowCardScore(milaRuleDTOs);
+            var yellowCards = this._milaRuleBusiness.GetYellowCardScore(milaRuleDatas);
 
             yellowCards.Should().Be(0);
         }
@@ -77,12 +75,12 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetPointIfKeepCapped()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ PlayerPosition = 1, Multiplier = 2 },
+                new MilaRuleData{ PlayerPosition = 1, Multiplier = 2 },
             };
 
-            var capKeepScore = this._milaRuleBusiness.GetCapKeepScore(milaRuleDTOs);
+            var capKeepScore = this._milaRuleBusiness.GetCapKeepScore(milaRuleDatas);
 
             capKeepScore.Should().Be(2);
         }
@@ -90,13 +88,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldNotGetCapKeepPointsIfKeepNotCapped()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ PlayerPosition = 1, Multiplier = 1 },
-                new MilaRuleDTO{ PlayerPosition = 1, Multiplier = 0 },
+                new MilaRuleData{ PlayerPosition = 1, Multiplier = 1 },
+                new MilaRuleData{ PlayerPosition = 1, Multiplier = 0 },
             };
 
-            var capKeepScore = this._milaRuleBusiness.GetCapKeepScore(milaRuleDTOs);
+            var capKeepScore = this._milaRuleBusiness.GetCapKeepScore(milaRuleDatas);
 
             capKeepScore.Should().Be(0);
         }
@@ -104,12 +102,12 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetPointIfDefCapped()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ PlayerPosition = 2, Multiplier = 2 },
+                new MilaRuleData{ PlayerPosition = 2, Multiplier = 2 },
             };
 
-            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDTOs);
+            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDatas);
 
             capKeepScore.Should().Be(1);
         }
@@ -117,13 +115,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldNotGetCapDefPointsIfDefNotCapped()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleDTO{ PlayerPosition = 2, Multiplier = 1 },
-                new MilaRuleDTO{ PlayerPosition = 2, Multiplier = 0 },
+                new MilaRuleData{ PlayerPosition = 2, Multiplier = 1 },
+                new MilaRuleData{ PlayerPosition = 2, Multiplier = 0 },
             };
 
-            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDTOs);
+            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDatas);
 
             capKeepScore.Should().Be(0);
         }
@@ -162,13 +160,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetSixtyNineSubScoreIfAnyPlayersWith69Mins()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
                 new (){ Minutes = 60, IsCaptain = true },
                 new (){ Minutes = 69, IsCaptain = false, },
             };
 
-            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDTOs);
+            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDatas);
 
             sixtyNineSub.Should().Be(2.69m);
         }
@@ -176,13 +174,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetSixtyNineSubScoreMultipliedIfCapWith69Mins()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
                 new (){ Minutes = 60, IsCaptain = false },
                 new (){ Minutes = 69, IsCaptain = true, Multiplier = 2 },
             };
 
-            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDTOs);
+            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDatas);
 
             sixtyNineSub.Should().Be(2.69m * 2);
         }
@@ -190,13 +188,13 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldNotGetSixtyNineSubScoreIfNoPlayersWith69Mins()
         {
-            var milaRuleDTOs = new List<MilaRuleDTO>
+            var milaRuleDatas = new List<MilaRuleData>
             {
                 new (){ Minutes = 68, IsCaptain = true },
                 new (){ Minutes = 70, IsCaptain = false, },
             };
 
-            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDTOs);
+            var sixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(milaRuleDatas);
 
             sixtyNineSub.Should().Be(0);
         }
@@ -208,21 +206,21 @@ namespace Milabowl.Test.Business.Import
         [TestCase(false, 45, 46, 0)]
         [TestCase(true, 45, 46, 0)]
 
-        public void ShouldGetHeadToHeadMetaScoreIfWinWithLessThan2(bool didWin, int myPoints, int opponentPoints, int expected)
+        public void ShouldGetHeaDataHeadMetaScoreIfWinWithLessThan2(bool didWin, int myPoints, int opponentPoints, int expected)
         {
-            var userHeadToHead = new UserHeadToHeadDTO
+            var userHeaDataHead = new UserHeadToHead
             {
                 DidWin = didWin,
                 UserPoints = myPoints,
                 OpponentPoints = opponentPoints
             };
 
-            var sixtyNineSub = this._milaRuleBusiness.GetHeadToHeadMetaScore(userHeadToHead);
+            var sixtyNineSub = this._milaRuleBusiness.GetHeadToHeadMetaScore(userHeaDataHead);
 
             sixtyNineSub.Should().Be(expected);
         }
 
-        public void ShouldGetHeadToHeadScore()
+        public void ShouldGetHeaDataHeadScore()
         {
 
         }

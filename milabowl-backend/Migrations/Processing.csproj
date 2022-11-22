@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Milabowl.Domain\Milabowl.Domain.csproj" />
     <ProjectReference Include="..\Milabowl.Infrastructure\Milabowl.Infrastructure.csproj" />
-    <ProjectReference Include="..\Milabowl\Milabowl.csproj" />
   </ItemGroup>
 
   <ItemGroup>

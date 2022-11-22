@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Milabowl.Infrastructure.Models;
+using Milabowl.Domain.Entities.Fantasy;
+using Milabowl.Domain.Entities.Milabowl;
 
 namespace Milabowl.Infrastructure.Contexts
 {

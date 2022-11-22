@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Bogus;
-using Bogus.Extensions;
 using FluentAssertions;
-using Milabowl.Business.DTOs.Import;
-using Milabowl.Business.Mappers;
-using Milabowl.Infrastructure.Models;
+using Milabowl.Domain.Entities.Fantasy;
+using Milabowl.Domain.Import;
+using Milabowl.Domain.Import.FantasyDTOs;
 using Milabowl.Test.Helpers;
 using NUnit.Framework;
 

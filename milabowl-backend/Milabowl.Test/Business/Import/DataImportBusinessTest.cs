@@ -2,14 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Bogus;
-using Bogus.Extensions;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Milabowl.Business.DTOs.Import;
-using Milabowl.Business.Import;
-using Milabowl.Business.Mappers;
-using Milabowl.Infrastructure.Models;
-using Milabowl.Repositories;
+using Milabowl.Domain.Entities.Fantasy;
+using Milabowl.Domain.Import;
+using Milabowl.Domain.Import.FantasyDTOs;
 using Milabowl.Test.BaseTestClasses;
 using Moq;
 using NUnit.Framework;

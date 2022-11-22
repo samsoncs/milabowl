@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Milabowl.Infrastructure\Milabowl.Infrastructure.csproj" />
-    <ProjectReference Include="..\Milabowl\Milabowl.csproj" />
   </ItemGroup>
 
   <ItemGroup>
