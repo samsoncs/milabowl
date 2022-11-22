@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Milabowl.Infrastructure.Contexts;
-using Milabowl.Infrastructure.Models;
+using Milabowl.Repositories;
 
 namespace Milabowl.Business.Import
 {
@@ -16,56 +13,35 @@ namespace Milabowl.Business.Import
     {
         private readonly IDataImportBusiness _dataImportBusiness;
         private readonly IDataImportProvider _dataImportProvider;
-        private readonly FantasyContext _db;
+        private readonly IImportRepository _repository;
 
-        public DataImportService(IDataImportBusiness dataImportBusiness, IDataImportProvider dataImportProvider, FantasyContext db)
+        public DataImportService(IDataImportBusiness dataImportBusiness, IDataImportProvider dataImportProvider, IImportRepository repository)
         {
             this._dataImportBusiness = dataImportBusiness;
             this._dataImportProvider = dataImportProvider;
-            this._db = db;
+            _repository = repository;
         }
 
         public async Task ImportData()
         {
-            var eventsFromDb = await this._db.Events.AsNoTracking().ToListAsync();
-            var teamsFromDb = await this._db.Teams.AsNoTracking().ToListAsync();
-            var fixturesFromDb = await this._db.Fixtures.AsNoTracking().ToListAsync();
-            var playersFromDb = await this._db.Players.AsNoTracking().ToListAsync();
-            var leaguesFromDb = await this._db.Leagues.AsNoTracking().ToListAsync();
-            var usersFromDb = await this._db.Users.AsNoTracking().ToListAsync();
-            var lineupsFromDb = await this._db.Lineups.AsNoTracking().ToListAsync();
-
-            var userLeaguesFromDb = await this._db.UserLeagues
-                .Include(u => u.User)
-                .Include(u => u.League)
-                .AsNoTracking()
-                .ToListAsync();
-
-            var playerEventsFromDb = await this._db.PlayerEvents.AsNoTracking()
-                    .Include(e => e.Event)
-                    .Include(pe => pe.Player)
-                    .ToListAsync();
-
-            var userHeadToHeadEventsFromDb = await this._db.UserHeadToHeadEvents.AsNoTracking()
-                .Include(uh => uh.Event)
-                .Include(uh => uh.User)
-                .ToListAsync();
-
-            var playerEventLineupsFromDb = await this._db.PlayerEventLineups
-                .Include(pel => pel.PlayerEvent)
-                .Include(pel => pel.Lineup)
-                .ThenInclude(l => l.Event)
-                .Include(pel => pel.Lineup)
-                .ThenInclude(l => l.User)
-                .AsNoTracking()
-                .ToListAsync();
+            var eventsFromDb = await _repository.GetEvents();
+            var teamsFromDb = await _repository.GetTeams();
+            var fixturesFromDb = await _repository.GetFixtures();
+            var playersFromDb = await _repository.GetPlayers();
+            var leaguesFromDb = await _repository.GetLeagues();
+            var usersFromDb = await _repository.GetUsers();
+            var lineupsFromDb = await _repository.GetLineups();
+            var userLeaguesFromDb = await _repository.GetUserLeagues();
+            var playerEventsFromDb = await _repository.GetPlayerEvents();
+            var userHeadToHeadEventsFromDb = await _repository.GetUserHeadToHeadEvents();
+            var playerEventLineupsFromDb = await _repository.GetPlayerEventLineups();
 
             var bootstrapRoot = await this._dataImportProvider.GetBootstrapRoot();
-            var events = await this._dataImportBusiness.ImportEvents(this._db, bootstrapRoot, eventsFromDb);
-            var teams = await this._dataImportBusiness.ImportTeams(this._db, bootstrapRoot, teamsFromDb);
-            var players = await this._dataImportBusiness.ImportPlayers(this._db, bootstrapRoot, teams, playersFromDb);
+            var events = await this._dataImportBusiness.ImportEvents(bootstrapRoot, eventsFromDb);
+            var teams = await this._dataImportBusiness.ImportTeams(bootstrapRoot, teamsFromDb);
+            var players = await this._dataImportBusiness.ImportPlayers(bootstrapRoot, teams, playersFromDb);
             var fixtureDtos = (await this._dataImportProvider.GetFixtures()).Where(e => e.@event != null).ToList();
-            await this._dataImportBusiness.ImportFixtures(this._db, fixtureDtos, fixturesFromDb, events, teams);
+            await this._dataImportBusiness.ImportFixtures(fixtureDtos, fixturesFromDb, events, teams);
 
             var playerHistoryRoots = players.Select(async p => await this._dataImportProvider.GetPlayerHistoryRoot(p.FantasyPlayerId))
                 .Select(t => t.Result)
@@ -73,10 +49,10 @@ namespace Milabowl.Business.Import
                 .ToList();
 
             var leagueRoot = await this._dataImportProvider.GetLeagueRoot();
-            var league = await this._dataImportBusiness.ImportLeague(this._db, leagueRoot, leaguesFromDb);
-            var users = await this._dataImportBusiness.ImportUsers(this._db, leagueRoot, usersFromDb);
-            await this._dataImportBusiness.ImportUserLeagues(this._db, users, league, userLeaguesFromDb);
-            await this._db.SaveChangesAsync();
+            var league = await this._dataImportBusiness.ImportLeague(leagueRoot, leaguesFromDb);
+            var users = await this._dataImportBusiness.ImportUsers(leagueRoot, usersFromDb);
+            await this._dataImportBusiness.ImportUserLeagues(users, league, userLeaguesFromDb);
+            await _repository.SaveChangesAsync();
 
             foreach (var finishedEvent in events.Where(e => e.Finished && e.DataChecked))
             {
@@ -86,10 +62,10 @@ namespace Milabowl.Business.Import
                 }
 
                 var eventRootDto = await this._dataImportProvider.GetEventRoot(finishedEvent.FantasyEventId);
-                var playerEvents = await this._dataImportBusiness.ImportPlayerEvents(this._db, eventRootDto, finishedEvent, players, playerEventsFromDb, playerHistoryRoots, fixtureDtos);
+                var playerEvents = await this._dataImportBusiness.ImportPlayerEvents(eventRootDto, finishedEvent, players, playerEventsFromDb, playerHistoryRoots, fixtureDtos);
 
                 var headToHeadEventRootDto = await this._dataImportProvider.GetHead2HeadEventRoot(finishedEvent.FantasyEventId);
-                await this._dataImportBusiness.ImportUserHeadToHeadEvents(this._db, headToHeadEventRootDto, finishedEvent, users, userHeadToHeadEventsFromDb);
+                await this._dataImportBusiness.ImportUserHeadToHeadEvents(headToHeadEventRootDto, finishedEvent, users, userHeadToHeadEventsFromDb);
 
                 foreach (var user in users)
                 {
@@ -99,12 +75,14 @@ namespace Milabowl.Business.Import
                         continue;
                     }
 
-                    var lineup = await this._dataImportBusiness.ImportLineup(this._db, finishedEvent, user, lineupsFromDb);
-                    await this._dataImportBusiness.ImportPlayerEventLineup(this._db, picksRoot, finishedEvent, lineup, playerEvents, playerEventLineupsFromDb);
+                    var lineup = await this._dataImportBusiness.ImportLineup(finishedEvent, user, lineupsFromDb);
+                    await this._dataImportBusiness.ImportPlayerEventLineup(picksRoot, finishedEvent, lineup, playerEvents, playerEventLineupsFromDb);
                 }
 
-                await this._db.SaveChangesAsync();
+                await _repository.SaveChangesAsync();
             }
+
+            await _repository.SaveChangesAsync();
         }
     }
 }

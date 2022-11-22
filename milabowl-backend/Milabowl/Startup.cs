@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Milabowl.Business.Api;
 using Milabowl.Business.Import;
 using Milabowl.Business.Mappers;
-using Milabowl.Infrastructure.Contexts;
 
 namespace Milabowl
 {
@@ -34,16 +33,16 @@ namespace Milabowl
             services.AddScoped<IMilaResultsBusiness, MilaResultsBusiness>();
             services.AddScoped<IDataImportProvider, DataImportProvider>();
             services.AddScoped<IFantasyMapper, FantasyMapper>();
-            services.AddDbContext<FantasyContext>(optionsBuilder =>
-            {
-                var connectionString = Configuration.GetConnectionString("Milabowl");
-                optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
-            });
-            services.AddDbContext<FantasyContext>(optionsBuilder =>
-            {
-                var connectionString = Configuration.GetConnectionString("Milabowl");
-                optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
-            });
+            //services.AddDbContext<FantasyContext>(optionsBuilder =>
+            //{
+            //    var connectionString = Configuration.GetConnectionString("Milabowl");
+            //    optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
+            //});
+            //services.AddDbContext<FantasyContext>(optionsBuilder =>
+            //{
+            //    var connectionString = Configuration.GetConnectionString("Milabowl");
+            //    optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
+            //});
 
             services.AddMemoryCache();
 

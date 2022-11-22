@@ -1,81 +1,58 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Milabowl.Infrastructure.Contexts;
 using Milabowl.Infrastructure.Models;
 using Milabowl.Business.DTOs;
 using System.Collections.Generic;
 using Milabowl.Business.DTOs.Rules;
+using Milabowl.Repositories;
 
-namespace Milabowl.Business.Import
+namespace Milabowl.Business.Import;
+
+public interface IMilaPointsProcessorService
 {
-    public interface IMilaPointsProcessorService
+    Task UpdateMilaPoints();
+}
+
+public class MilaPointsProcessorService: IMilaPointsProcessorService
+{
+    private readonly IMilaRuleBusiness _milaRuleBusiness;
+    private readonly IProcessingRepository _repository;
+
+    public MilaPointsProcessorService(IMilaRuleBusiness milaRuleBusiness, IProcessingRepository repository)
     {
-        Task UpdateMilaPoints();
+        this._milaRuleBusiness = milaRuleBusiness;
+        this._repository = repository;
     }
 
-    public class MilaPointsProcessorService: IMilaPointsProcessorService
+    public async Task UpdateMilaPoints()
     {
-        private readonly IMilaRuleBusiness _milaRuleBusiness;
-        private readonly FantasyContext _db;
+        var events = await this._repository.GetEventsToProcess();
 
-        public MilaPointsProcessorService(IMilaRuleBusiness milaRuleBusiness, FantasyContext db)
+        foreach (var evt in events)
         {
-            this._milaRuleBusiness = milaRuleBusiness;
-            this._db = db;
-        }
+            var users = await _repository.GetUserToProcess(evt.EventId);
+            var (mostTradedInPlayer, mostTradedOutPlayer) = await _repository.GetMostTradedPlayers(evt.EventId);
 
-        public async Task UpdateMilaPoints()
-        {
-            //Get data needed to calc points from db
-            var events = await this._db.Events.Where(e => e.Finished && e.DataChecked).ToListAsync(); //All events that are finished, and have points calculated
+            var milaGameweekScores = new List<MilaGWScore>();    
 
-            foreach (var evt in events)
+            foreach (var user in users)
             {
-                var users = await this._db.Users
-                    .Include(u => u.Lineups)
-                        .ThenInclude(l => l.PlayerEventLineups)
-                            .ThenInclude(pel => pel.PlayerEvent)
-                                .ThenInclude (pel => pel.Player)
-                    .Include(u => u.Lineups)
-                        .ThenInclude(l => l.PlayerEventLineups)
-                            .ThenInclude(pel => pel.PlayerEvent)
-                                .ThenInclude(pe => pe.Player)
-                    .Include(u => u.Lineups)
-                    .Include(u => u.HeadToHeadEvents)
-                        .ThenInclude(hu => hu.Event)
-                    .Where(u => u.Lineups.Any(l => l.Event.EventId == evt.EventId))
-                    .ToListAsync();
-
-                var milaGameweekScores = new List<MilaGWScore>();    
-
-                foreach (var user in users)
+                if (await this._repository.IsEventAlreadyCalculated(evt.Name, user.EntryName))
                 {
-                    //Do not calculate if already calculated for the week
-                    if (await this._db.MilaGWScores.AnyAsync(m => 
-                        m.GW == evt.Name && 
-                        m.TeamName == user.EntryName))
-                    {
-                        continue;
-                    }
-                   
-                    var pointsPerGameweekDsc = user.Lineups
-                        .Where(l => l.Event.GameWeek <= evt.GameWeek)
-                        .OrderByDescending(l => l.Event.GameWeek)
-                        .Select(l => l.PlayerEventLineups.Sum(pel => pel.PlayerEvent.TotalPoints*pel.Multiplier))
-                        .ToList();
+                    continue;
+                }
 
-                    var pointsPerGameweekAsc = user.Lineups
-                        .Where(l => l.Event.GameWeek <= evt.GameWeek)
-                        .OrderBy(l => l.Event.GameWeek)
-                        .Select(l => l.PlayerEventLineups.Sum(pel => pel.PlayerEvent.TotalPoints*pel.Multiplier))
-                        .ToList();
+                var pointsPerGameweekAsc = user.Lineups
+                    .Where(l => l.Event.GameWeek <= evt.GameWeek)
+                    .OrderBy(l => l.Event.GameWeek)
+                    .Select(l => l.PlayerEventLineups.Sum(pel => pel.PlayerEvent.TotalPoints*pel.Multiplier))
+                    .ToList();
 
-                    var playerEventsForUserOnEvent = user.Lineups
-                        ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
-                        ?.PlayerEventLineups
-                        .Select(pel => new MilaRuleDTO  {
+                var playerEventsForUserOnEvent = user.Lineups
+                    ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
+                    ?.PlayerEventLineups
+                    .Select(pel => new MilaRuleDTO  {
                             Multiplier =        pel.Multiplier,
                             IsCaptain =         pel.IsCaptain,
                             Minutes =           pel.PlayerEvent.Minutes,
@@ -89,113 +66,96 @@ namespace Milabowl.Business.Import
                             TotalPoints =       pel.PlayerEvent.TotalPoints,
                             PlayerPosition =    pel.PlayerEvent.Player.ElementType,
                             Player =            pel.PlayerEvent.Player
-                            }
-                        )
-                        .ToList();
+                        }
+                    )
+                    .ToList();
 
-                    var mostTradedInPlayer = await this._db.PlayerEvents
-                        .Where(pe => pe.FkEventId == evt.EventId)
-                        .OrderByDescending(pe => pe.TransfersIn)
-                        .Select(pe => pe.Player)
-                        .FirstOrDefaultAsync();
+                 
+                var playersForUserLastWeek = user.Lineups
+                    ?.FirstOrDefault(l => l.Event.GameWeek == evt.GameWeek - 1)
+                    ?.PlayerEventLineups
+                    ?.Select(pel => pel.PlayerEvent.Player);
 
-                    var mostTradedOutPlayer = await this._db.PlayerEvents
-                        .Where(pe => pe.FkEventId == evt.EventId)
-                        .OrderByDescending(pe => pe.TransfersOut)
-                        .Select(pe => pe.Player)
-                        .FirstOrDefaultAsync();
+                var userHeadToHead = user.HeadToHeadEvents
+                    ?.FirstOrDefault(l => l.Event.EventId == evt.EventId);
 
-                    var playersForUserLastWeek = user.Lineups
-                        ?.FirstOrDefault(l => l.Event.GameWeek == evt.GameWeek - 1)
-                        ?.PlayerEventLineups
-                        ?.Select(pel => pel.PlayerEvent.Player);
+                var opponentHeadToHead = await _repository.GetOpponentHeadToHead(userHeadToHead.FantasyUserHeadToHeadEventID, user.UserId);
 
-                    var subsIn = playersForUserLastWeek != null ? 
-                        playerEventsForUserOnEvent?
-                            .Where(pe => playersForUserLastWeek.All(ip => ip.PlayerId != pe.Player.PlayerId))
-                            .Select(p => p.Player).ToList() : new List<Player>();
-
-                    var subsOut = playerEventsForUserOnEvent != null && playersForUserLastWeek != null ? 
-                        playersForUserLastWeek
-                        .Where(p => playerEventsForUserOnEvent.All(pe => pe.Player.PlayerId != p.PlayerId)).ToList() 
-                        : new List<Player>();
-
-                    var milaPoints = new MilaGWScore
-                    {
-                        MilaGWScoreId = Guid.NewGuid(),
-                        GW = evt.Name,
-                        GameWeek = evt.GameWeek,
-                        UserName = user.UserName,
-                        TeamName = user.EntryName, 
-                        GWScore = this._milaRuleBusiness.GetGWScore(playerEventsForUserOnEvent),                 
-                        CapFail = this._milaRuleBusiness.GetCapFailScore(playerEventsForUserOnEvent),
-                        BenchFail = this._milaRuleBusiness.GetBenchFailScore(playerEventsForUserOnEvent),
-                        CapKeep = this._milaRuleBusiness.GetCapKeepScore(playerEventsForUserOnEvent),
-                        CapDef = this._milaRuleBusiness.GetCapDefScore(playerEventsForUserOnEvent),
-                        GW69 = this._milaRuleBusiness.GetSixtyNine(playerEventsForUserOnEvent),
-                        RedCard = this._milaRuleBusiness.GetRedCardScore(playerEventsForUserOnEvent), 
-                        YellowCard = this._milaRuleBusiness.GetYellowCardScore(playerEventsForUserOnEvent),
-                        MinusIsPlus = this._milaRuleBusiness.GetMinusIsPlusScore(playerEventsForUserOnEvent), //TODO: Change to MinusIsPlus
-                        IncreaseStreak = this._milaRuleBusiness.GetIncreaseStreakScore(pointsPerGameweekAsc, evt.GameWeek),
-                        EqualStreak = pointsPerGameweekDsc.Count > 1 && pointsPerGameweekDsc[0] == pointsPerGameweekDsc[1] ? 6.9m : 0,
-                    };
-
-              
-                    var userHeadToHead = user.HeadToHeadEvents
-                        ?.FirstOrDefault(l => l.Event.EventId == evt.EventId);
-
-                    var userCaptain = user.Lineups
-                        ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
-                        ?.PlayerEventLineups.FirstOrDefault(pel => pel.IsCaptain)
-                        ?.PlayerEvent.Player;
-
-                    var opponentHeadToHead = await this._db.UserHeadToHeadEvents.FirstOrDefaultAsync(h =>
-                        h.FantasyUserHeadToHeadEventID == userHeadToHead.FantasyUserHeadToHeadEventID
-                        && h.FkUserId != user.UserId);
-
-                    var headToHeadDto = new UserHeadToHeadDTO
-                    {
-                        DidWin = userHeadToHead?.Win == 1,
-                        UserPoints = userHeadToHead?.Points,
-                        OpponentPoints = opponentHeadToHead?.Points
-                    };
-
-                    milaPoints.HeadToHeadMeta = this._milaRuleBusiness.GetHeadToHeadMetaScore(headToHeadDto);
-                    //milaPoints.HeadToHeadStrongOpponentWin = this._milaRuleBusiness.GetHeadToHeadStrongerOpponentScore(headToHeadDto);
-                    milaPoints.UniqueCap = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups);
-                    milaPoints.SixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent);
-                    milaPoints.TrendyBitch = this._milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer);
+                var userCaptain = user.Lineups
+                    ?.FirstOrDefault(l => l.Event.EventId == evt.EventId)
+                    ?.PlayerEventLineups.FirstOrDefault(pel => pel.IsCaptain)
+                    ?.PlayerEvent.Player;
 
 
-                    milaGameweekScores.Add(milaPoints);
-                }           
-
-                var points = 0.0;
-                foreach(var grp in milaGameweekScores.OrderBy(m => m.GWScore).GroupBy(g => g.GWScore)){
-                    foreach(var userWithScore in grp.ToList()){
-                        userWithScore.GWPositionScore = (decimal) points / 2;
-                    }
-                    points++;                   
-                }
-
-                var points2 = 0;
-                foreach(var grp in milaGameweekScores.OrderByDescending(m => m.GWScore).GroupBy(g => g.GWScore)){
-                    foreach(var userWithScore in grp.ToList()){
-                        userWithScore.GWPosition = points2;
-                    }
-                    points2++;                   
-                }
-
-                foreach (var mgs in milaGameweekScores)
+                var headToHeadDto = new UserHeadToHeadDTO
                 {
-                    mgs.CalculateMilaPoints();
+                    DidWin = userHeadToHead?.Win == 1,
+                    UserPoints = userHeadToHead?.Points,
+                    OpponentPoints = opponentHeadToHead?.Points
+                };
+
+                var subsIn = playersForUserLastWeek != null ? 
+                    playerEventsForUserOnEvent?
+                        .Where(pe => playersForUserLastWeek.All(ip => ip.PlayerId != pe.Player.PlayerId))
+                        .Select(p => p.Player).ToList() : new List<Player>();
+
+                var subsOut = playerEventsForUserOnEvent != null && playersForUserLastWeek != null ? 
+                    playersForUserLastWeek
+                        .Where(p => playerEventsForUserOnEvent.All(pe => pe.Player.PlayerId != p.PlayerId)).ToList() 
+                    : new List<Player>();
+
+                var milaPoints = new MilaGWScore
+                {
+                    MilaGWScoreId = Guid.NewGuid(),
+                    GW = evt.Name,
+                    GameWeek = evt.GameWeek,
+                    UserName = user.UserName,
+                    TeamName = user.EntryName, 
+                    GWScore = this._milaRuleBusiness.GetGWScore(playerEventsForUserOnEvent),                 
+                    CapFail = this._milaRuleBusiness.GetCapFailScore(playerEventsForUserOnEvent),
+                    BenchFail = this._milaRuleBusiness.GetBenchFailScore(playerEventsForUserOnEvent),
+                    CapKeep = this._milaRuleBusiness.GetCapKeepScore(playerEventsForUserOnEvent),
+                    CapDef = this._milaRuleBusiness.GetCapDefScore(playerEventsForUserOnEvent),
+                    GW69 = this._milaRuleBusiness.GetSixtyNine(playerEventsForUserOnEvent),
+                    RedCard = this._milaRuleBusiness.GetRedCardScore(playerEventsForUserOnEvent), 
+                    YellowCard = this._milaRuleBusiness.GetYellowCardScore(playerEventsForUserOnEvent),
+                    MinusIsPlus = this._milaRuleBusiness.GetMinusIsPlusScore(playerEventsForUserOnEvent), //TODO: Change to MinusIsPlus
+                    IncreaseStreak = this._milaRuleBusiness.GetIncreaseStreakScore(pointsPerGameweekAsc, evt.GameWeek),
+                    EqualStreak = pointsPerGameweekAsc.Count > 1 && pointsPerGameweekAsc[^1] == pointsPerGameweekAsc[^2] ? 6.9m : 0,
+                    HeadToHeadMeta = this._milaRuleBusiness.GetHeadToHeadMetaScore(headToHeadDto),
+                    UniqueCap = this._milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups),
+                    SixtyNineSub = this._milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent),
+                    TrendyBitch = this._milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer)
+                };
+
+                milaGameweekScores.Add(milaPoints);
+            }           
+
+            var points = 0.0;
+            foreach(var grp in milaGameweekScores.OrderBy(m => m.GWScore).GroupBy(g => g.GWScore)){
+                foreach(var userWithScore in grp.ToList()){
+                    userWithScore.GWPositionScore = (decimal) points / 2;
                 }
-
-                await this._db.MilaGWScores.AddRangeAsync(milaGameweekScores);
-                await this._db.SaveChangesAsync();
-
+                points++;                   
             }
-            await this._db.SaveChangesAsync();
+
+            var points2 = 0;
+            foreach(var grp in milaGameweekScores.OrderByDescending(m => m.GWScore).GroupBy(g => g.GWScore)){
+                foreach(var userWithScore in grp.ToList()){
+                    userWithScore.GWPosition = points2;
+                }
+                points2++;                   
+            }
+
+            foreach (var mgs in milaGameweekScores)
+            {
+                mgs.CalculateMilaPoints();
+            }
+
+            await _repository.AddMilaGwScores(milaGameweekScores);
+
         }
+            
+        //await this._db.SaveChangesAsync();
     }
 }

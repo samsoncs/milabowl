@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Milabowl.Business.DTOs.Import;
 using Milabowl.Business.Mappers;
-using Milabowl.Infrastructure.Contexts;
 using Milabowl.Infrastructure.Models;
+using Milabowl.Repositories;
 
 namespace Milabowl.Business.Import
 {
     public interface IDataImportBusiness
     {
-        Task<IList<Event>> ImportEvents(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Event> eventsFromDb);
-        Task<IList<Fixture>> ImportFixtures(FantasyContext db, IList<FixtureDTO> fixtureDtos, IList<Fixture> fixturesFromDb, IList<Event> events, IList<Team> teams);
-        Task<IList<Team>> ImportTeams(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teamsFromDb);
-        Task<IList<Player>> ImportPlayers(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teams, IList<Player> playersFromDb);
-        Task<League> ImportLeague(FantasyContext db, LeagueRootDTO leagueRoot, IList<League> leaguesFromDb);
-        Task<IList<User>> ImportUsers(FantasyContext db, LeagueRootDTO leagueRoot, IList<User> usersFromDb);
-        Task<IList<UserLeague>> ImportUserLeagues(FantasyContext db, IList<User> users, League league, IList<UserLeague> userLeaguesFromDb);
-        Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, 
+        Task<IList<Event>> ImportEvents(BootstrapRootDTO bootstrapBootstrapRoot, IList<Event> eventsFromDb);
+        Task<IList<Fixture>> ImportFixtures(IList<FixtureDTO> fixtureDtos, IList<Fixture> fixturesFromDb, IList<Event> events, IList<Team> teams);
+        Task<IList<Team>> ImportTeams(BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teamsFromDb);
+        Task<IList<Player>> ImportPlayers(BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teams, IList<Player> playersFromDb);
+        Task<League> ImportLeague(LeagueRootDTO leagueRoot, IList<League> leaguesFromDb);
+        Task<IList<User>> ImportUsers(LeagueRootDTO leagueRoot, IList<User> usersFromDb);
+        Task<IList<UserLeague>> ImportUserLeagues(IList<User> users, League league, IList<UserLeague> userLeaguesFromDb);
+        Task<IList<PlayerEvent>> ImportPlayerEvents(
             EventRootDTO eventRootDto, 
             Event finishedEvent, 
             IList<Player> players,
@@ -27,26 +26,27 @@ namespace Milabowl.Business.Import
             IList<FixtureDTO> fixtures
         );
         Task<IList<UserHeadToHeadEvent>> ImportUserHeadToHeadEvents(
-            FantasyContext db,
             HeadToHeadEventRootDTO headToHeadEventDto,
             Event finishedEvent,
             IList<User> users,
             IList<UserHeadToHeadEvent> playerHeadToHeadEventsFromDb
         );
-        Task<Lineup> ImportLineup(FantasyContext db, Event finishedEvent, User user, IList<Lineup> lineupsFromDb);
-        Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(FantasyContext db, PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb);
+        Task<Lineup> ImportLineup(Event finishedEvent, User user, IList<Lineup> lineupsFromDb);
+        Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb);
     }
 
     public class DataImportBusiness: IDataImportBusiness
     {
         private readonly IFantasyMapper _fantasyMapper;
+        private readonly IImportRepository _repository;
 
-        public DataImportBusiness(IFantasyMapper fantasyMapper)
+        public DataImportBusiness(IFantasyMapper fantasyMapper, IImportRepository repository)
         {
             this._fantasyMapper = fantasyMapper;
+            _repository = repository;
         }
 
-        public async Task<IList<Event>> ImportEvents(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Event> eventsFromDb)
+        public async Task<IList<Event>> ImportEvents(BootstrapRootDTO bootstrapBootstrapRoot, IList<Event> eventsFromDb)
         {
             var events = bootstrapBootstrapRoot.Events.Select(this._fantasyMapper.GetEventFromEventDTO).ToList();
 
@@ -55,19 +55,19 @@ namespace Milabowl.Business.Import
                 var eventFromDb = eventsFromDb.FirstOrDefault(e => e.FantasyEventId == evt.FantasyEventId);
                 if (eventFromDb == null)
                 {
-                    await db.Events.AddAsync(evt);
+                    await _repository.AddAsync(evt);
                 }
                 else
                 {
                     evt.EventId = eventFromDb.EventId;
-                    db.Events.Update(evt);
+                    _repository.Update(evt);
                 }
             }
 
             return events;
         }
 
-        public async Task<IList<Fixture>> ImportFixtures(FantasyContext db, IList<FixtureDTO> fixtureDtos, IList<Fixture> fixturesFromDb, IList<Event> events, IList<Team> teams)
+        public async Task<IList<Fixture>> ImportFixtures(IList<FixtureDTO> fixtureDtos, IList<Fixture> fixturesFromDb, IList<Event> events, IList<Team> teams)
         {
             var fixtures = new List<Fixture>();
 
@@ -81,13 +81,13 @@ namespace Milabowl.Business.Import
                 var fixtureFromDb = fixturesFromDb.FirstOrDefault(f => f.FantasyFixtureId == fixture.FantasyFixtureId);
                 if (fixtureFromDb == null)
                 {
-                    await db.Fixtures.AddAsync(fixture);
+                    await _repository.AddAsync(fixture);
                     fixtures.Add(fixture);
                 }
                 else
                 {
                     fixture.FixtureId = fixtureFromDb.FixtureId;
-                    db.Fixtures.Update(fixture);
+                    _repository.Update(fixture);
                     fixtures.Add(fixture);
                 }
             }
@@ -95,7 +95,7 @@ namespace Milabowl.Business.Import
             return fixtures;
         }
 
-        public async Task<IList<Team>> ImportTeams(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teamsFromDb)
+        public async Task<IList<Team>> ImportTeams(BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teamsFromDb)
         {
             var teams = bootstrapBootstrapRoot.Teams.Select(this._fantasyMapper.GetTeamFromTeamDTO).ToList();
 
@@ -105,19 +105,19 @@ namespace Milabowl.Business.Import
 
                 if (teamFromDb == null)
                 {
-                    await db.Teams.AddAsync(team);
+                    await _repository.AddAsync(team);
                 }
                 else
                 {
                     team.TeamId = teamFromDb.TeamId;
-                    db.Teams.Update(team);
+                    _repository.Update(team);
                 }
             }
 
             return teams;
         }
 
-        public async Task<IList<Player>> ImportPlayers(FantasyContext db, BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teams, IList<Player> playersFromDb)
+        public async Task<IList<Player>> ImportPlayers(BootstrapRootDTO bootstrapBootstrapRoot, IList<Team> teams, IList<Player> playersFromDb)
         {
             var players = bootstrapBootstrapRoot.Players.Select(p =>
                 this._fantasyMapper.GetPlayerFromPlayerDTO(p, teams)
@@ -129,19 +129,19 @@ namespace Milabowl.Business.Import
 
                 if (playerFromDb == null)
                 {
-                    await db.Players.AddAsync(player);
+                    await _repository.AddAsync(player);
                 }
                 else
                 {
                     player.PlayerId = playerFromDb.PlayerId;
-                    db.Players.Update(player);
+                    _repository.Update(player);
                 }
             }
 
             return players;
         }
 
-        public async Task<League> ImportLeague(FantasyContext db, LeagueRootDTO leagueRoot, IList<League> leaguesFromDb)
+        public async Task<League> ImportLeague(LeagueRootDTO leagueRoot, IList<League> leaguesFromDb)
         {
             var leagueDto = leagueRoot.league;
 
@@ -151,17 +151,17 @@ namespace Milabowl.Business.Import
 
             if (leagueFromDb == null)
             {
-                await db.AddAsync(league);
+                await _repository.AddAsync(league);
                 return league;
             }
 
             league.LeagueId = leagueFromDb.LeagueId;
-            db.Leagues.Update(league);
+            _repository.Update(league);
 
             return league;
         }
 
-        public async Task<IList<User>> ImportUsers(FantasyContext db, LeagueRootDTO leagueRoot, IList<User> usersFromDb)
+        public async Task<IList<User>> ImportUsers(LeagueRootDTO leagueRoot, IList<User> usersFromDb)
         {
             var users = leagueRoot.standings.results.Select(this._fantasyMapper.GetUserFromResultDTO).ToList();
 
@@ -170,19 +170,19 @@ namespace Milabowl.Business.Import
                 var userFromDb = usersFromDb.FirstOrDefault(u => u.FantasyEntryId == user.FantasyEntryId);
                 if (userFromDb == null)
                 {
-                    await db.AddAsync(user);
+                    await _repository.AddAsync(user);
                 }
                 else
                 {
                     user.UserId = userFromDb.UserId;
-                    db.Update(user);
+                    _repository.Update(user);
                 }
             }
 
             return users;
         }
 
-        public async Task<IList<UserLeague>> ImportUserLeagues(FantasyContext db, IList<User> users, League league, IList<UserLeague> userLeaguesFromDb)
+        public async Task<IList<UserLeague>> ImportUserLeagues(IList<User> users, League league, IList<UserLeague> userLeaguesFromDb)
         {
             var userLeagues = users.Select(u =>
                 this._fantasyMapper.GetUserLeagueFromUserAndLeague(u, league)
@@ -195,19 +195,19 @@ namespace Milabowl.Business.Import
 
                 if (userLeagueFromDb == null)
                 {
-                    await db.AddAsync(userLeague);
+                    await _repository.AddAsync(userLeague);
                 }
                 else
                 {
                     userLeague.UserLeagueId = userLeagueFromDb.UserLeagueId;
-                    db.Update(userLeague);
+                    _repository.Update(userLeague);
                 }
             }
 
             return userLeagues;
         }
 
-        public async Task<IList<PlayerEvent>> ImportPlayerEvents(FantasyContext db, 
+        public async Task<IList<PlayerEvent>> ImportPlayerEvents(
             EventRootDTO eventRootDto, 
             Event finishedEvent, 
             IList<Player> players, 
@@ -232,12 +232,12 @@ namespace Milabowl.Business.Import
 
                 if (playerEventFromDb == null)
                 {
-                    await db.AddAsync(playerEvent);
+                    await _repository.AddAsync(playerEvent);
                 }
                 else
                 {
                     playerEvent.PlayerEventId = playerEventFromDb.PlayerEventId;
-                    db.Update(playerEvent);
+                    _repository.Update(playerEvent);
                 }
             }
 
@@ -245,7 +245,7 @@ namespace Milabowl.Business.Import
         }
 
         public async Task<IList<UserHeadToHeadEvent>> ImportUserHeadToHeadEvents(
-            FantasyContext db, 
+            
             HeadToHeadEventRootDTO headToHeadEventDto,
             Event finishedEvent,
             IList<User> users,
@@ -269,19 +269,19 @@ namespace Milabowl.Business.Import
 
                 if (playerEventFromDb == null)
                 {
-                    await db.AddAsync(playerHeadToHeadEvent);
+                    await _repository.AddAsync(playerHeadToHeadEvent);
                 }
                 else
                 {
                     playerHeadToHeadEvent.UserHeadToHeadEventID = playerEventFromDb.UserHeadToHeadEventID;
-                    db.Update(playerHeadToHeadEvent);
+                    _repository.Update(playerHeadToHeadEvent);
                 }
             }
 
             return playerHeadToHeadEvents;
         }
 
-        public async Task<Lineup> ImportLineup(FantasyContext db, Event finishedEvent, User user, IList<Lineup> lineupsFromDb)
+        public async Task<Lineup> ImportLineup(Event finishedEvent, User user, IList<Lineup> lineupsFromDb)
         {
             var lineupFromDb = lineupsFromDb.FirstOrDefault(l => l.FkEventId == finishedEvent.EventId && l.FkUserId == user.UserId);
 
@@ -289,18 +289,18 @@ namespace Milabowl.Business.Import
 
             if (lineupFromDb == null)
             {
-                await db.AddAsync(lineup);
+                await _repository.AddAsync(lineup);
             }
             else
             {
                 lineup.LineupId = lineupFromDb.LineupId;
-                db.Update(lineup);
+                _repository.Update(lineup);
             }
 
             return lineup;
         }
 
-        public async Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(FantasyContext db, PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb)
+        public async Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb)
         {
             var playerEventLineups = picksRoot.picks.Select(p => 
                 this._fantasyMapper.GetPlayerEventLineup(p, lineup, playerEvents, finishedEvent)
@@ -315,12 +315,12 @@ namespace Milabowl.Business.Import
                 
                 if (playerLineupFromDb == null)
                 {
-                    await db.AddAsync(playerEventLineup);
+                    await _repository.AddAsync(playerEventLineup);
                 }
                 else
                 {
                     playerEventLineup.PlayerEventLineupId = playerLineupFromDb.PlayerEventLineupId;
-                    db.Update(playerEventLineup);
+                    _repository.Update(playerEventLineup);
                 }
             }
 

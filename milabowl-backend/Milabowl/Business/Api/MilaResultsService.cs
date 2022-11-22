@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Milabowl.Business.DTOs.Api;
-using Milabowl.Infrastructure.Contexts;
+using Milabowl.Repositories;
 
 namespace Milabowl.Business.Api
 {
@@ -15,19 +14,17 @@ namespace Milabowl.Business.Api
     public class MilaResultsService: IMilaResultsService
     {
         private readonly IMilaResultsBusiness _milaResultsBusiness;
-        private readonly FantasyContext _db;
+        private readonly IMilaRepository _milaRepository;
 
-        public MilaResultsService(IMilaResultsBusiness milaResultsBusiness, FantasyContext db)
+        public MilaResultsService(IMilaResultsBusiness milaResultsBusiness, IMilaRepository milaRepository)
         {
             this._milaResultsBusiness = milaResultsBusiness;
-            this._db = db;
+            _milaRepository = milaRepository;
         }
 
         public async Task<MilaResultsDTO> GetMilaResults()
         {
-            var gameWeekScores = await this._db.MilaGWScores
-                .OrderBy(m => m.GameWeek)
-                .ToListAsync();
+            var gameWeekScores = await _milaRepository.GetMilaGwScores();
 
             var milaResultDtos = gameWeekScores
                 .Select(m =>

@@ -9,6 +9,8 @@ using Milabowl.Business.Api;
 using Milabowl.Business.Import;
 using Milabowl.Business.Mappers;
 using Milabowl.Infrastructure.Contexts;
+using Milabowl.Infrastructure.Repositories;
+using Milabowl.Repositories;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -69,6 +71,9 @@ public static class DI
         services.AddScoped<IMilaResultsBusiness, MilaResultsBusiness>();
         services.AddScoped<IDataImportProvider, DataImportProvider>();
         services.AddScoped<IFantasyMapper, FantasyMapper>();
+        services.AddScoped<IImportRepository, ImportRepository>();
+        services.AddScoped<IProcessingRepository, ProcessingRepository>();
+        services.AddScoped<IMilaRepository, MilaRepository>();
         services.AddDbContext<FantasyContext>(optionsBuilder =>
         {
             optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());

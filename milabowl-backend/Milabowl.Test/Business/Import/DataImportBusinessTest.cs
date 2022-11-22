@@ -9,7 +9,9 @@ using Milabowl.Business.DTOs.Import;
 using Milabowl.Business.Import;
 using Milabowl.Business.Mappers;
 using Milabowl.Infrastructure.Models;
+using Milabowl.Repositories;
 using Milabowl.Test.BaseTestClasses;
+using Moq;
 using NUnit.Framework;
 
 namespace Milabowl.Test.Business.Import
@@ -21,7 +23,7 @@ namespace Milabowl.Test.Business.Import
 
         public DataImportBusinessTest()
         {
-            this._dataImportBusiness = new DataImportBusiness(new FantasyMapper());
+            this._dataImportBusiness = new DataImportBusiness(new FantasyMapper(), Mock.Of<IImportRepository>());
         }
 
         [Test]
@@ -33,7 +35,7 @@ namespace Milabowl.Test.Business.Import
             };
             var eventsFromDb = new List<Event>();
 
-            var events = await this._dataImportBusiness.ImportEvents(this.FantasyContext, bootstrapDTO, eventsFromDb);
+            var events = await this._dataImportBusiness.ImportEvents(bootstrapDTO, eventsFromDb);
             await this.FantasyContext.SaveChangesAsync();
 
             var eventFromDb = this.FantasyContext.Events.First(e => e.EventId == events[0].EventId);
@@ -53,7 +55,7 @@ namespace Milabowl.Test.Business.Import
             this.FantasyContext.Entry(eventInDb).State = EntityState.Detached;
             var eventsFromDb = new List<Event>{ eventInDb };
 
-            var events = await this._dataImportBusiness.ImportEvents(this.FantasyContext, bootstrapDTO, eventsFromDb);
+            var events = await this._dataImportBusiness.ImportEvents(bootstrapDTO, eventsFromDb);
             await this.FantasyContext.SaveChangesAsync();
 
             var eventFromDb = this.FantasyContext.Events.First(e => e.EventId == events[0].EventId);
