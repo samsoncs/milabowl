@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Typography, useMediaQuery } from "@mui/material";
+import theme from "./theme";
 
 const Header: React.FC<{}> = () => {
   const location = useLocation();
+  const matchesXs = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <AppBar
@@ -34,13 +36,32 @@ const Header: React.FC<{}> = () => {
               padding: "10px",
               borderRadius: "10px",
               background:
-                location.pathname === "/accolades" ? "rgba(0,0,0,0.05)" : "none"
+                location.pathname === "/blog" ? "rgba(0,0,0,0.05)" : "none"
             }}
             component={Link}
-            to="accolades"
+            to="blog"
           >
-            Accolades
+            Blog
           </Typography>
+          {!matchesXs && (
+            <Typography
+              color="textPrimary"
+              style={{
+                textDecoration: "none",
+                fontWeight: 700,
+                padding: "10px",
+                borderRadius: "10px",
+                background:
+                  location.pathname === "/accolades"
+                    ? "rgba(0,0,0,0.05)"
+                    : "none"
+              }}
+              component={Link}
+              to="accolades"
+            >
+              Accolades
+            </Typography>
+          )}
           <Typography
             color="textPrimary"
             style={{

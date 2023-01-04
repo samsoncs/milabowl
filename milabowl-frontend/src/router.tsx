@@ -8,6 +8,7 @@ import StandingsPage from "./Standings/StandingsPage";
 import MilaPlayerPage from "./Players/MilaPlayerPage";
 import { ThemeProvider } from "@mui/material";
 import AccoladesPage from "./Accolades/AccoladesPage";
+import BlogPage from "./Blog/BlogPage";
 import theme from "./theme";
 
 const Layout: React.FC<{}> = () => (
@@ -38,6 +39,10 @@ const router = createHashRouter([
       {
         path: "/accolades",
         element: <AccoladesPage />
+      },
+      {
+        path: "/blog",
+        element: <BlogPage />
       }
     ]
   }
