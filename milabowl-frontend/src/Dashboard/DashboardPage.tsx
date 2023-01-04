@@ -12,7 +12,8 @@ import {
   TableRow,
   Toolbar,
   Link,
-  Slider
+  Slider,
+  useMediaQuery
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { MilaResultsDTO } from "../GameState/DTOs/MilaResultDTOs";
@@ -27,6 +28,7 @@ import {
 } from "@nivo/bump";
 import { useSpring, animated } from "@react-spring/web";
 import { useMotionConfig } from "@nivo/core";
+import theme from "../theme";
 
 interface PlayerStandingsProps {
   results: MilaResultsDTO;
@@ -153,6 +155,10 @@ const CustomPoint: React.FC<{
   );
 };
 
+const GetFriendlyName = (name: string, isXs: boolean): string => {
+  return isXs ? `${name.substring(0, 10)}..` : name;
+};
+
 const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
   results
 }: PlayerStandingsChartProps) => {
@@ -161,8 +167,10 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     results.resultsByWeek.length
   ]);
 
+  const matchesXs = useMediaQuery(theme.breakpoints.down("sm"));
+
   const data = results.resultsByUser.map((r, i) => ({
-    id: r.teamName.toString(),
+    id: GetFriendlyName(r.teamName, matchesXs),
     data: r.results.slice(week[0], week[1]).map((rr) => ({
       x: `GW ${rr.gameWeek}`,
       y: rr.milaRank,
@@ -227,7 +235,12 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             legendOffset: 32
           }}
           axisLeft={null}
-          margin={{ top: 40, right: 150, bottom: 40, left: 10 }}
+          margin={{
+            top: 40,
+            right: matchesXs ? 90 : 150,
+            bottom: 40,
+            left: 10
+          }}
           axisRight={null}
         />
       </CardContent>
