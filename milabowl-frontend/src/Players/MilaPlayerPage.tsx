@@ -15,18 +15,6 @@ import {
 } from "@mui/material";
 import { ResponsiveLine, Serie } from "@nivo/line";
 
-// const chartColors: string[] = [
-//   "#003f5c",
-//   "#2f4b7c",
-//   "#665191",
-//   "#a05195",
-//   "#d45087",
-//   "#f95d6a",
-//   "#ff7c43",
-//   "#ffa600",
-//   "#488f31"
-// ];
-
 interface PlayerStandingsChartProps {
   results: GameWeekResult[] | undefined;
   teamname: string;
@@ -36,7 +24,6 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
   results,
   teamname
 }: PlayerStandingsChartProps) => {
-  // const weeks = results?.map((r, i) => r.gameWeek);
   const data: Serie[] = [
     {
       id: teamname,
@@ -56,13 +43,6 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     }
   ];
 
-  // const chartData = {
-  //   labels: weeks,
-  //   datasets
-  // };
-
-  // const options = {};
-
   return (
     <Card style={{ height: "100%" }}>
       <CardHeader title="Avg Points" />
@@ -76,7 +56,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             type: "linear",
             min: "auto",
             max: "auto",
-            stacked: true,
+            stacked: false,
             reverse: false
           }}
           axisTop={null}
@@ -98,7 +78,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             legendPosition: "middle"
           }}
           enableGridX={false}
-          colors={{ scheme: "category10" }}
+          colors={["rgba(31, 119, 180, 1)", "rgba(255, 127, 14, 0.3)"]}
           lineWidth={4}
           pointSize={8}
           pointColor={{ theme: "background" }}
