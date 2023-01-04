@@ -135,7 +135,7 @@ const MilaPlayerPage: React.FC<{}> = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item md={4}>
+      <Grid item md={4} xs={12}>
         <Card style={{ height: "100%" }}>
           <CardHeader title={teamname} />
           <CardContent>
@@ -172,7 +172,7 @@ const MilaPlayerPage: React.FC<{}> = () => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item md={8}>
+      <Grid item md={8} xs={12}>
         <PlayerStandingsChart results={results} teamname={teamname ?? ""} />
       </Grid>
     </Grid>
