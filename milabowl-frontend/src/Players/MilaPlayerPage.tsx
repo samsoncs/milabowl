@@ -13,19 +13,19 @@ import {
   TableHead,
   TableRow
 } from "@mui/material";
-import { Line as LineChart } from "react-chartjs-2";
+import { ResponsiveLine, Serie } from "@nivo/line";
 
-const chartColors: string[] = [
-  "#003f5c",
-  "#2f4b7c",
-  "#665191",
-  "#a05195",
-  "#d45087",
-  "#f95d6a",
-  "#ff7c43",
-  "#ffa600",
-  "#488f31"
-];
+// const chartColors: string[] = [
+//   "#003f5c",
+//   "#2f4b7c",
+//   "#665191",
+//   "#a05195",
+//   "#d45087",
+//   "#f95d6a",
+//   "#ff7c43",
+//   "#ffa600",
+//   "#488f31"
+// ];
 
 interface PlayerStandingsChartProps {
   results: GameWeekResult[] | undefined;
@@ -36,38 +36,103 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
   results,
   teamname
 }: PlayerStandingsChartProps) => {
-  const weeks = results?.map((r, i) => r.gameWeek);
-  const datasets = [
+  // const weeks = results?.map((r, i) => r.gameWeek);
+  const data: Serie[] = [
     {
-      label: teamname,
-      borderColor: chartColors[0],
-      backgroundColor: chartColors[0],
-      fill: false,
-      lineTension: 0,
-      data: results?.map((x) => x.cumulativeAverageMilaPoints)
+      id: teamname,
+      data:
+        results?.map((rr) => ({
+          x: rr.gameWeek,
+          y: rr.cumulativeAverageMilaPoints
+        })) ?? []
     },
     {
-      label: "Average",
-      borderColor: chartColors[7],
-      backgroundColor: chartColors[7],
-      fill: false,
-      lineTension: 0,
-      data: results?.map((x) => x.totalCumulativeAverageMilaPoints)
+      id: "Average",
+      data:
+        results?.map((rr) => ({
+          x: rr.gameWeek,
+          y: rr.totalCumulativeAverageMilaPoints
+        })) ?? []
     }
   ];
 
-  const chartData = {
-    labels: weeks,
-    datasets
-  };
+  // const chartData = {
+  //   labels: weeks,
+  //   datasets
+  // };
 
-  const options = {};
+  // const options = {};
 
   return (
     <Card style={{ height: "100%" }}>
       <CardHeader title="Avg Points" />
-      <CardContent>
-        <LineChart data={chartData} options={options} />
+      <CardContent style={{ height: "55vh" }}>
+        <ResponsiveLine
+          data={data}
+          margin={{ top: 50, right: 150, bottom: 50, left: 60 }}
+          xScale={{ type: "point" }}
+          xFormat=" >-"
+          yScale={{
+            type: "linear",
+            min: "auto",
+            max: "auto",
+            stacked: true,
+            reverse: false
+          }}
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Game Week",
+            legendOffset: 36,
+            legendPosition: "middle"
+          }}
+          axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Avg. Points",
+            legendOffset: -40,
+            legendPosition: "middle"
+          }}
+          enableGridX={false}
+          colors={{ scheme: "category10" }}
+          lineWidth={4}
+          pointSize={8}
+          pointColor={{ theme: "background" }}
+          pointBorderWidth={3}
+          pointBorderColor={{ from: "serieColor" }}
+          pointLabelYOffset={-12}
+          useMesh={true}
+          legends={[
+            {
+              anchor: "bottom-right",
+              direction: "column",
+              justify: false,
+              translateX: 100,
+              translateY: 0,
+              itemsSpacing: 0,
+              itemDirection: "left-to-right",
+              itemWidth: 80,
+              itemHeight: 20,
+              itemOpacity: 0.75,
+              symbolSize: 12,
+              symbolShape: "circle",
+              symbolBorderColor: "rgba(0, 0, 0, .5)",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemBackground: "rgba(0, 0, 0, .03)",
+                    itemOpacity: 1
+                  }
+                }
+              ]
+            }
+          ]}
+        />
       </CardContent>
     </Card>
   );
