@@ -10,6 +10,7 @@ import { ThemeProvider } from "@mui/material";
 import AccoladesPage from "./Accolades/AccoladesPage";
 import BlogPage from "./Blog/BlogPage";
 import theme from "./theme";
+import NominationsPage from "./Nominations/NominationsPage";
 
 const Layout: React.FC<{}> = () => (
   <ThemeProvider theme={theme}>
@@ -43,6 +44,10 @@ const router = createHashRouter([
       {
         path: "/blog",
         element: <BlogPage />
+      },
+      {
+        path: "/nominations",
+        element: <NominationsPage />
       }
     ]
   }
