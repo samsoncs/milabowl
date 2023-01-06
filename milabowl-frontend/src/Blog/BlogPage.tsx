@@ -4,7 +4,8 @@ import {
   CardContent,
   CardHeader,
   Typography,
-  Container
+  Container,
+  Box
 } from "@mui/material";
 import React from "react";
 import { blogEntries } from "./blogEntries";
@@ -20,7 +21,16 @@ const BlogPage: React.FC<{}> = () => (
         <Grid item xs={12} key={b.title}>
           <Card>
             <CardHeader
-              title={<Typography variant="h5">{b.title}</Typography>}
+              title={
+                <Box display="flex" alignItems="center">
+                  <Typography variant="h5" style={{ flexGrow: 1 }}>
+                    {b.title}
+                  </Typography>
+                  <Typography color="text.secondary" variant="body2">
+                    {b.date}
+                  </Typography>
+                </Box>
+              }
             />
             <CardContent>
               {b.paragraphs.map((p, i) => (
