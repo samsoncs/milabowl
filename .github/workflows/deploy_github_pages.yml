@@ -27,6 +27,6 @@ jobs:
       run: | 
         npm ci
         git remote set-url origin https://git:${GH_TOKEN}@github.com/samsoncs/milabowl.git
-        npm run deploy-lnx
+        npm run deploy-lnx -- -u "github-actions-bot <support+actions@github.com>"
       env:
         GH_TOKEN: ${{secrets.MILA_DEPLOY_SECRET_TOKEN}}
