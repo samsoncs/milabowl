@@ -25,8 +25,8 @@ jobs:
     - name: Deploy github pages
       working-directory: ./milabowl-frontend
       run: | 
+        git remote set-url origin https://git:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
         npm ci
-        git remote set-url origin https://${GH_TOKEN}:@github.com/samsoncs/milabowl.git
         npm run deploy-lnx -- -u "github-actions-bot <support+actions@github.com>"
       env:
         GH_TOKEN: ${{secrets.MILA_DEPLOY_SECRET_TOKEN}}
