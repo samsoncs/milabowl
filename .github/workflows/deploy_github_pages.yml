@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js  ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
@@ -25,6 +25,8 @@ jobs:
     - name: Deploy github pages
       working-directory: ./milabowl-frontend
       run: | 
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
         npm ci
-        npm run build
-        npm run deploy
+        npm run deploy-lnx -- -u "github-actions-bot <support+actions@github.com>"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
