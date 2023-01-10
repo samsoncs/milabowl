@@ -26,5 +26,4 @@ jobs:
       working-directory: ./milabowl-frontend
       run: | 
         npm ci
-        npm run build
-        npm run deploy
+        npm run deploy-lnx
