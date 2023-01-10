@@ -48,7 +48,7 @@ const GetChipColor = (
 const GetIcon = (category: string): string => {
   switch (category) {
     case "SKILL":
-       return "⭐";
+      return "⭐";
     case "SHAME":
       return "🤦";
     case "DERP":
@@ -138,7 +138,7 @@ const NominationsPage: React.FC<{}> = () => {
           paddingTop="20px"
           display="flex"
           flexWrap="wrap"
-          gap="10px"
+          gap="8px"
         >
           <Typography>Filter:</Typography>
           <FilterNominationChip
@@ -163,9 +163,13 @@ const NominationsPage: React.FC<{}> = () => {
           />
         </Box>
         {nominations
-          .filter((n) => filters.length === 0 || filters.includes(n.category))
+          .filter((f) => filters.length === 0 || filters.includes(f.category))
           .map((n) => (
-            <Grid item xs={12} key={`${n.personNominated} - GW ${n.gw}`}>
+            <Grid
+              item
+              xs={12}
+              key={`${n.personNominated} - GW ${n.gw} - ${n.category}`}
+            >
               <Card>
                 <CardHeader
                   title={
