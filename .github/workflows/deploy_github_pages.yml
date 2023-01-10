@@ -25,7 +25,5 @@ jobs:
     - name: Deploy github pages
       working-directory: ./milabowl-frontend
       run: | 
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
         npm ci
         npm run deploy-lnx
