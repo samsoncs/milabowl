@@ -46,7 +46,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "react-scripts build && xcopy CNAME build && gh-pages -d build",
-    "deploy-lnx": "react-scripts build && cp CNAME ./build/ && gh-pages -d build -r https://$GH_TOKEN@github.com/samsoncs/milabowl.git"
+    "deploy-lnx": "react-scripts build && cp CNAME ./build/ && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
