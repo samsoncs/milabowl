@@ -26,8 +26,7 @@ jobs:
       working-directory: ./milabowl-frontend
       run: | 
         npm ci
-        git config user.name "<user name>" 
-        git config user.email "user email"
+        git remote set-url origin https://git:${GH_TOKEN}@github.com/samsoncs/milabowl.git
         npm run deploy-lnx
       env:
         GH_TOKEN: ${{secrets.MILA_DEPLOY_SECRET_TOKEN}}
