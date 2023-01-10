@@ -26,4 +26,8 @@ jobs:
       working-directory: ./milabowl-frontend
       run: | 
         npm ci
-        npm run deploy-lnx
+        npm run build
+        cp CNAME ./build/
+        gh-pages -d build -r https://$GH_TOKEN@github.com/samsoncs/milabowl.git
+      env:
+        GH_TOKEN: ${{secrets.MILA_DEPLOY_SECRET_TOKEN}}
