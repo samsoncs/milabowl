@@ -32,7 +32,8 @@ const GetChipColor = (
   | "success"
   | "warning" => {
   switch (category) {
-    case "FAIL":
+    case "SKILL":
+      return "info";
     case "SHAME":
       return "error";
     case "DERP":
@@ -46,7 +47,8 @@ const GetChipColor = (
 
 const GetIcon = (category: string): string => {
   switch (category) {
-    case "FAIL":
+    case "SKILL":
+       return "⭐";
     case "SHAME":
       return "🤦";
     case "DERP":
@@ -142,7 +144,7 @@ const NominationsPage: React.FC<{}> = () => {
           <FilterNominationChip
             filters={filters}
             setFilter={setFilters}
-            category="FAIL"
+            category="SKILL"
           />
           <FilterNominationChip
             filters={filters}
