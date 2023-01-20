@@ -29,15 +29,17 @@ jobs:
           cache-dependency-path: 'milabowl-astro/package-lock.json'
           
       - name: Install dependencies
+        working-directory: ./milabowl-astro
         run: npm ci
         
       - name: Build Astro
+        working-directory: ./milabowl-astro
         run: npm run build
         
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./dist
+          path: ./milabowl-astro/dist
 
   deploy:
     environment:
