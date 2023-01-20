@@ -1,0 +1,107 @@
+[
+	{
+		"personNominated": "Markus",
+		"gw": 19,
+		"date": "05.01.2023",
+		"reason": "Har tydeligvis glemt adressen til milabowl.com. Ingen unnskyldninger oppgitt",
+		"category": "SHAME"
+	},
+	{
+		"personNominated": "Markus",
+		"gw": 19,
+		"date": "04.01.2023",
+		"reason": "Free hit reverseres aka Ødegaard -> Gross: Ødegaard blanker med 2 pts mens Gross scorer 8pts.",
+		"category": "LUCK"
+	},
+	{
+		"personNominated": "Markus",
+		"gw": 18,
+		"date": "01.01.2023",
+		"reason": "Gjør 1 bytte: Gross -> Ødegaard, men bruker ved et uhell free hit til dette. Går da også glipp av prisøkning på Ødegaard.",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Simen",
+		"gw": 18,
+		"date": "01.01.2023",
+		"reason": "Rotation-Cancelo ble erstattet av 3. reserve Ferguson som hadde spilt 7 minutter på 17 kamper. Utrolig nok klarer han å score hjemme mot Arsenal og skaffe 5 pts",
+		"category": "LUCK"
+	},
+	{
+		"personNominated": "Mikkel",
+		"gw": 17,
+		"date": "01.01.2023",
+		"reason": "Kjører strategisk wildcard for å score høyt i Milabowl, men har misforstått reglene: Cap Def gjelder KUN for den som ender opp som kaptein. Må passe seg for MilaLoser fremover!",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Simen",
+		"gw": 13,
+		"date": "22.10.2022",
+		"reason": "Wildcard og 31 poeng på benken -> 6 bench fail points",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Sam",
+		"gw": 12,
+		"date": "19.10.2022",
+		"reason": "2 free transfers, men glemte fristen :( #småbarnsforelder",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Eivind",
+		"gw": 9,
+		"date": "02.10.2022",
+		"reason": "Alle capper Haaland i storform, bortsett fra Eivind som capper Maddison. Haaland sikrer rolige 23 pts, men Maddison henter seg pent inn med 18 pts til Eivinds store lettelse",
+		"category": "SKILL"
+	},
+	{
+		"personNominated": "Eivind",
+		"gw": 7,
+		"date": "10.09.2022",
+		"reason": "Marginal interesse for engelsk kultur medfører at Eivind ikke predikerer dronning Elizabeths død. Gjør tidlige bytter for å sikre prisstigning, men for spank på baken av kongehuset når runden kanselleres",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Malte",
+		"gw": 5,
+		"date": "31.08.2022",
+		"reason": "Capper KDB i kjent stil, VC på Haaland. Haaland starter kampen, mens KDB er benket. Haaland starter friskt og ligger an til 17 pts. På dette tidspunktet truer Malte fpl gudene med å slutte dersom Pep bytter inn KDB. Trusler fungerer aldri og i det 69 minutt (trøstepoeng) bytter Pep inn KDB som sikrer seg 1 poeng, som gir 16 tapte fpl poeng for Malte",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Henrik",
+		"gw": 4,
+		"date": "29.08.2022",
+		"reason": "Eneste som capper Haaland hjemme mot Crystal Palace. Haaland sikrer 17 pts før kapteinsbonus! 7 stykker capper Salah med 3 pts og Malte capper selvfølgelig KDB med 2 pts",
+		"category": "SKILL"
+	},
+	{
+		"personNominated": "Mikkel, Markus, Sam, Martin, Anders, Eivind, Simen",
+		"gw": 4,
+		"date": "29.08.2022",
+		"reason": "Capper Salah når Liverpool vinner 9-0, men Salah imponerer ingen med stusselige 3 pts",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Henrik",
+		"gw": 3,
+		"date": "23.08.2022",
+		"reason": "Planla å bytte ut Perisic, men et uidentifisert kusehår gjør at han dropper det. Perisic sikrer 12 pts",
+		"category": "LUCK"
+	},
+	{
+		"personNominated": "Markus",
+		"gw": 3,
+		"date": "23.08.2022",
+		"reason": "Byttet ut rashford 10 poeng og inn med Cancelo 0 poeng",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Mikkel",
+		"gw": 1,
+		"date": "10.08.2022",
+		"reason": "Inspirert av araberes tilnærming til Premier League stiller Mikkel med lag som er kjøpt og betalt! På tide med Financial Mila Play?",
+		"category": "SHAME"
+	}
+]

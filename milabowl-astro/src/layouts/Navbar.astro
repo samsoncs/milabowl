@@ -1,0 +1,43 @@
+---
+import Link from "../components/core/Link.astro";
+
+export interface Props {
+    path: string;
+}
+
+const navLinks: { href: string, name: string }[] = [
+	{
+		href: "/blog",
+		name: "Blog"
+	},
+	{
+		href: "/nominations",
+		name: "Nominations"
+	},
+	{
+		href: "/standings",
+		name: "Standings"
+	},
+];
+
+const { path } = Astro.props;
+---
+
+<nav class="flex items-center px-1 2xl:px-0 py-3">
+    <div class="text-2xl font-bold grow">
+        <Link disableUnderline href="/">
+            Milabowl
+        </Link>
+    </div>
+    <div class="flex text-md font-bold space-x-0">
+    {
+        navLinks.map((n) => (
+            <div class:list={["rounded-md", "px-2", { "bg-gray-200": path.endsWith(n.href)}]}>
+                <Link href={n.href} disableUnderline>
+                    {n.name}
+                </Link>
+            </div>
+        ))
+    }
+    </div>
+</nav>

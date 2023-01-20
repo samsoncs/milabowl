@@ -1,0 +1,17 @@
+---
+import Card from "../../components/core/Card.astro";
+import Layout from "../../layouts/Layout.astro";
+import game_state from "../../../src/game_state/game_state.json";
+import type { MilaResultsDTO } from "../../../src/game_state/gameState";
+import StandingsTable from "./StandingsTable.astro";
+import Link from "../../components/core/Link.astro";
+const milaResults: MilaResultsDTO = game_state;
+---
+<Layout title="Milabowl - Overall standings">
+    <Card title="Standings - Overall">
+        <div slot="secondary">
+            <Link href={`/standings/${milaResults.resultsByWeek.length}`}>Latest Gameweek</Link>
+        </div>
+        <StandingsTable isOverallScore resultsForGameweek={milaResults.overallScore}/>
+    </Card>
+</Layout>

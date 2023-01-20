@@ -1,0 +1,37 @@
+---
+import Card from "../../components/core/Card.astro";
+import Col from "../../components/core/Grid/Col.astro";
+import Typography from "../../components/core/Typography.astro";
+import Layout from "../../layouts/Layout.astro";
+import { blogEntries } from "./blogEntries";
+---
+<Layout title="Mila blog">
+    <div class="blog-container"> 
+        {        
+            blogEntries.map(b => (
+                <Col col={12}>
+                    <Card title={b.title}>
+                        {b.paragraphs.map((p, i) => (
+                            <div class="blog-entry">
+                                <Typography variant="body1">
+                                    {p}
+                                </Typography>
+                            </div>                        
+                        ))}
+                    </Card>
+                </Col>           
+            ))
+        }
+    </div>
+</Layout>
+
+<style>
+    .blog-container {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .blog-entry:not(:first-child) {
+        margin-top: 1rem;
+    }
+</style>

@@ -1,0 +1,10 @@
+---
+export interface Props{
+    href: string;
+    disableUnderline?: boolean;
+}
+const { href, disableUnderline } = Astro.props;
+---
+<a class:list={["text-indigo-900", {underline: !disableUnderline} ]} href={href}>
+    <slot/>
+</a>

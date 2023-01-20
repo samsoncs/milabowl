@@ -1,0 +1,73 @@
+---
+export interface Props {
+    headers?: string[];
+}
+const {headers} = Astro.props;
+---
+
+<table>
+    <thead>
+        {
+            headers &&
+            <tr>
+                {
+                    headers.map(h => (
+                        <th>{h}</th>
+                    ))
+                }
+            </tr>
+        }
+        {
+            !headers && <slot name="header"/>
+        }
+       
+    </thead>
+    <tbody>
+        <slot/>
+    </tbody>
+</table>
+
+<style is:global>
+    table {
+        border-collapse: collapse;
+        box-sizing: border-box;
+        border-spacing: 0px;
+        width: 100%;
+    }
+    thead {
+        display: table-header-group;
+    }
+    tr {
+        color: inherit;
+        display: table-row;
+        vertical-align: middle;
+        outline: 0px;
+    }
+    th {
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        display: table-cell;
+        vertical-align: inherit;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        text-align: left;
+        padding: 16px;
+        font-weight: bold;
+    }
+    td {
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.43;
+        display: table-cell;
+        vertical-align: inherit;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        text-align: left;
+        padding: 16px;
+        flex-direction: row-reverse;
+    }
+    td.right-align, th.right-align{
+        text-align: right;
+    }
+    tbody {
+        display: table-row-group;
+    }
+</style>

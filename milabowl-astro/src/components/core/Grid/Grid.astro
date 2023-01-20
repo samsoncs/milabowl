@@ -1,0 +1,23 @@
+<div class="grid">
+    <slot/>
+</div>
+
+<style>
+    .grid {
+        box-sizing: border-box;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex: 0 1 auto;
+        -webkit-box-flex: 0;
+        flex: 0 1 auto;
+        -ms-flex-direction: row;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -1rem;
+        margin-left: -1rem;
+    }
+</style>
