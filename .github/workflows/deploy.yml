@@ -23,9 +23,8 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         with:
-            # path: . # The root location of your Astro project inside the repository. (optional)
+            path: ./milabowl-astro
             # node-version: 16 # The specific version of Node that should be used to build your site. Defaults to 16. (optional)
-          package-manager: npm
 
   deploy:
     needs: build
