@@ -24,6 +24,7 @@ jobs:
         uses: withastro/action@v0
         with:
             path: ./milabowl-astro
+            package-manager: npm
             # node-version: 16 # The specific version of Node that should be used to build your site. Defaults to 16. (optional)
 
   deploy:
