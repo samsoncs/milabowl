@@ -1,0 +1,20 @@
+---
+export interface Props {
+    delta: number;
+}
+
+const { delta } = Astro.props;
+---
+
+<div>
+    {delta < 0 && (
+        <div class="flex items-center justify-items-cente text-red-700">
+            <span class="font-bold">⛛</span>({delta})
+        </div>
+    )}
+    {delta > 0 && (
+        <div class="flex items-center justify-items-center text-green-700">
+            <span class="rotate-180 font-bold">⛛</span>({delta})
+        </div>
+    )}
+</div>

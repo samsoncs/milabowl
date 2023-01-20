@@ -6,6 +6,7 @@ import Trend from './Trend';
 import game_state from "../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../src/game_state/gameState";
 import Link from '../components/core/Link.astro';
+import PositionDelta from '../components/core/PositionDelta.astro';
 const milaResults: MilaResultsDTO = game_state;
 ---
 <Layout title="Milabowl - Dashboard">
@@ -28,9 +29,20 @@ const milaResults: MilaResultsDTO = game_state;
 						{
 							milaResults.resultsByWeek[
 								milaResults.resultsByWeek.length - 1
-							].results.map((r, i) => (
+							].results.map((r, i) => {
+								const deltaPosition =
+								r.milaRankLastWeek === null ||
+								r.milaRankLastWeek === undefined
+									? 0
+									: r.milaRankLastWeek - r.milaRank;
+								return(
 								<tr>
-									<td>{i + 1}</td>
+									<td>
+										<div class="flex space-x-2 flex-row items-center justify-items-center">
+											<div>{`${i + 1}.`}</div> 
+												<PositionDelta delta={deltaPosition}/>    
+											</div>
+										</td>									
 									<td>
 										<Link href={`/players/${r.teamName.replaceAll(" ", "-")}`}>{r.teamName}</Link>
 									</td>
@@ -38,7 +50,7 @@ const milaResults: MilaResultsDTO = game_state;
 									<td class="right-align">{r.cumulativeAverageMilaPoints}</td>
 									<td class="right-align">{r.cumulativeMilaPoints}</td>
 								</tr>
-							))
+							)})
 						}
 					</Table>
 				</Card>

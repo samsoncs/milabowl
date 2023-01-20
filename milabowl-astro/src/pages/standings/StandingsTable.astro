@@ -1,4 +1,5 @@
 ---
+import PositionDelta from "../../components/core/PositionDelta.astro";
 import Table from "../../components/core/Table/Table.astro";
 import type { GameWeekResult } from "../../game_state/gameState";
 
@@ -41,7 +42,10 @@ const { resultsForGameweek, isOverallScore } = Astro.props;
             return (
               <tr>
                 <td scope="row">
-                    {`${i + 1}.`}    
+                  <div class="flex space-x-2 flex-row items-center justify-items-center">
+                      <div>{`${i + 1}.`}</div> 
+                      <PositionDelta delta={deltaPosition}/>    
+                    </div>
                 </td>
                 <td>{r.teamName}</td>
                 <td class="right-align">{r.milaPoints.gW69}</td>
