@@ -34,7 +34,7 @@ const milaResults: MilaResultsDTO = game_state;
 								<tr>
 									<td>{i + 1}</td>
 									<td>
-										<Link href={`/players/${encodeURIComponent(r.teamName.replaceAll(" ", ""))}`}>{r.teamName}</Link>
+										<Link href={`/players/${r.teamName.replaceAll(" ", "-")}`}>{r.teamName}</Link>
 									</td>
 									<td class="right-align">{r.milaPoints.total}</td>
 									<td class="right-align">{r.cumulativeAverageMilaPoints}</td>

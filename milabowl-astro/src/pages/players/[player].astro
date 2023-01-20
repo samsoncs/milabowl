@@ -16,13 +16,12 @@ export function getStaticPaths() {
   const gameState: MilaResultsDTO = game_state;
   const paths = gameState.resultsByUser.map(r => (
     { 
-      params: { player: encodeURIComponent(r.teamName.replaceAll(" ", ""))},
+      params: { player: r.teamName.replaceAll(" ", "-")},
       props: { userResults: r }
     }));
   return paths;
 }
 
-const gameState: MilaResultsDTO = game_state;
 const { userResults } = Astro.props;
 ---
 <Layout title={`${userResults.teamName} - details`}>
