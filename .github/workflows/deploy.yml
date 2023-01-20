@@ -17,6 +17,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'milabowl-astro'
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
