@@ -6,7 +6,7 @@ const {headers} = Astro.props;
 ---
 
 <table>
-    <thead>
+    <thead class="text-indigo-900">
         {
             headers &&
             <tr>
@@ -52,6 +52,7 @@ const {headers} = Astro.props;
         text-align: left;
         padding: 16px;
         font-weight: bold;
+        white-space: nowrap;
     }
     td {
         font-weight: 400;
@@ -63,6 +64,7 @@ const {headers} = Astro.props;
         text-align: left;
         padding: 16px;
         flex-direction: row-reverse;
+        white-space: nowrap;
     }
     td.right-align, th.right-align{
         text-align: right;

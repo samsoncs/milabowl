@@ -5,7 +5,6 @@ import {
     BumpSerieExtraProps,
     ResponsiveBump
 } from "@nivo/bump";
-import { useMotionConfig } from "@nivo/core";
 import { useState } from "react";
 import game_state from "../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../src/game_state/gameState";
@@ -21,8 +20,6 @@ points: number;
 const CustomPoint: React.FC<{
 point: BumpPoint<CustomBumpDatum, BumpSerieExtraProps>;
 }> = ({ point }) => {
-const { animate, config: springConfig } = useMotionConfig();
-
 
 const animatedProps = useSpring<{
     x: number;
@@ -40,14 +37,13 @@ const animatedProps = useSpring<{
     color: point.color,
     borderColor: point.borderColor,
     borderWidth: point.borderWidth,
-    config: springConfig,
-    immediate: !animate
+    config: { mass: 1, tension: 170, friction: 26, clamp: true },
 });
 
 return (
     <animated.g
-    transform={`translate(${point.x}, ${point.y ?? 0})`}
-    style={{ pointerEvents: "none" }}
+        transform={`translate(${point.x}, ${point.y ?? 0})`}
+        style={{ pointerEvents: "none" }}
     >
     <animated.circle
         r={animatedProps.radius}
