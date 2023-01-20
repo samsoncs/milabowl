@@ -17,17 +17,13 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'milabowl-astro'
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         with:
-            path: ./milabowl-astro
-            package-manager: npm
+            path: './milabowl-astro'
             # node-version: 16 # The specific version of Node that should be used to build your site. Defaults to 16. (optional)
 
   deploy:
