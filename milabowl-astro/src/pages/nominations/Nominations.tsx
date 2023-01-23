@@ -72,7 +72,7 @@ const Nominations: React.FC<NominationsProps> = ({nominations}) => {
 
     return(
     <div className="max-w-screen-lg w-screen mx-auto flex flex-col space-y-4"> 
-        <div className="flex space-x-2">
+        <div className="flex items-center space-x-2">
             <div className="font-bold">
                 Filter:
             </div>

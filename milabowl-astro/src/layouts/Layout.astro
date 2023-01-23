@@ -1,7 +1,7 @@
 ---
 import '@fontsource/inter/400.css';
 import "@fontsource/inter/700.css";
-import Navbar from './Navbar.astro';
+import Navbar from './Navbar';
 
 export interface Props {
 	title: string;
@@ -20,8 +20,10 @@ const { pathname } = Astro.url;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="max-w-screen-2xl mx-auto bg-gray-50">
-		<Navbar path={pathname}/>
-		<slot />
+	<body class="bg-slate-100">
+		<Navbar path={pathname} client:load/>
+		<div class="max-w-screen-2xl mx-auto">
+			<slot/>
+		</div>
 	</body>
 </html>
