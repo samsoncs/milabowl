@@ -1,0 +1,17 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import Award from "./Award";
+---
+<Layout title="Milabowl - Awards - 2023">
+    <div class="max-w-screen-lg w-screen mx-auto flex flex-col space-y-4"> 
+        <div class="flex items-center space-x-2">
+            <Award 
+                title="Total FPL Points"
+                firstPlace="Sam"
+                seccondPlace="Eivind"
+                thirdPlace="Simen"  
+                client:idle
+            />
+        </div>
+    </div>
+</Layout>
