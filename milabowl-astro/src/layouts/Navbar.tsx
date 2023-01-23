@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({path}) => {
 
                 {
                   navLinks.map(m => {
-                    const isSelected = m.href.endsWith(path);
+                    const isSelected = path.includes(m.href);
                     const classes = isSelected ? "bg-indigo-900 text-white px-3 py-2 rounded-md text-sm font-medium" : 
                       "text-indigo-50 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium";
                     return(
@@ -74,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({path}) => {
             <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
               {
                 navLinks.map(m => {
-                  const isSelected = m.href.endsWith(path);
+                  const isSelected = path.includes(m.href);
                   const classes = isSelected ? "bg-indigo-900 text-white block px-3 py-2 rounded-md text-base font-medium" : 
                     "text-gray-200 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium";
                   return(
