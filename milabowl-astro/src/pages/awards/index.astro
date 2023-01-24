@@ -3,13 +3,23 @@ import Layout from "../../layouts/Layout.astro"
 import Award from "./Award";
 ---
 <Layout title="Milabowl - Awards - 2023">
-    <div class="max-w-screen-lg w-screen mx-auto flex flex-col space-y-4"> 
-        <div class="flex items-center space-x-2">
+    <div class="max-w-screen-lg mx-auto flex flex-col space-y-4"> 
+        <div class="flex flex-col items-center">
             <Award 
-                title="Total FPL Points"
-                firstPlace="Sam"
-                seccondPlace="Eivind"
-                thirdPlace="Simen"  
+                title="Winner of FPL"
+                firstPlace={{name: "Sam", points: 1802}}
+                seccondPlace={{name: "Eivind", points: 1721}}
+                thirdPlace={{name: "Simen", points: 1543}}
+                id="ts-p-1"
+                client:idle
+            />
+
+            <Award 
+                title="Winner of Milabowl"
+                firstPlace={{name: "Some guy", points: 231}}
+                seccondPlace={{name: "Second Guy", points: 123}}
+                thirdPlace={{name: "Third Guy", points: 42}}
+                id="ts-p-2"
                 client:idle
             />
         </div>

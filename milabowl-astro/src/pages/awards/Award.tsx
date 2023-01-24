@@ -1,25 +1,14 @@
 import { useState } from "react";
 import styles from "./Award.module.css";
-import Particles from "react-tsparticles";
-import type { Engine } from "tsparticles-engine";
-import { useCallback } from "react";
-import { loadConfettiPreset } from "tsparticles-preset-confetti";
+import party from "party-js";
 
 export interface AwardProps {
     title: string;
-    firstPlace: string;
-    seccondPlace: string;
-    thirdPlace: string;
+    firstPlace: { name: string, points: number };
+    seccondPlace: { name: string, points: number };
+    thirdPlace: { name: string, points: number };
+    id: string;
 }
-
-const particleOptions = {
-    preset: "confetti",
-    particles:{
-        color: {
-            value: ["#BD10E0", "#B8E986", "#50E3C2", "#FFD300", "#E86363"],
-        },
-    },
-};
 
 interface TrophyProps{
     fill: string;
@@ -34,56 +23,66 @@ const Trophy: React.FC<TrophyProps> = ({fill, stroke, h, w}) => (
     </svg>  
 );
 
-const Award: React.FC<AwardProps> = ({ title, firstPlace, seccondPlace, thirdPlace }) => {
+const Award: React.FC<AwardProps> = ({ title, firstPlace, seccondPlace, thirdPlace, id }) => {
     const [isClicked, setIsClicked] = useState(false);
-    const particlesInit = useCallback(async (engine: Engine) => {
-        await loadConfettiPreset(engine);
-    }, []);
-
+    const firstPlaceDiff = firstPlace.points - seccondPlace.points;
     return(
-        <div>
-            <div className="text-center text-xl font-bold mb-4">
+        <div className="mx-auto flex flex-col items-center mb-16">
+            <div className="text-center text-2xl font-bold mb-4 text-indigo-900">
                 {title}
             </div>
-            <div className={["h-64", "w-64", styles.flipCard, isClicked ? styles.flipped : ""].join(" ")} onClick={() => setIsClicked(!isClicked)}>
+            <div 
+                className={["h-48", "w-48", styles.flipCard, isClicked ? styles.flipped : ""].join(" ")} 
+                onClick={(e) => {
+                    if(!isClicked){
+                        // @ts-ignore
+                        party.confetti(e.target);
+                    }
+                    setIsClicked(true); 
+                }}
+            >
                 <div className={styles.flipCardInner}>
-                    <div className={["flex items-center justify-center text-white text-9xl bg-indigo-900", styles.flipCardFront].join(" ") }>
+                    <div className={["flex items-center justify-center text-white text-9xl rounded-md bg-indigo-900", styles.flipCardFront].join(" ") }>
                         ?
                     </div>
                     <div className={["flex", "items-center", "justify-center", "bg-slate-100", , styles.flipCardBack].join(" ")}>
-                        <div className="flex flex-col items-center w-full gap-5">
-                           <div className="text-xl">
-                                <div className="flex items-center gap-2">
-                                    <span className="font-bold">Winner:</span> {firstPlace}
-                                    <Trophy h="h-8" w="h-8" fill="fill-yellow-100" stroke="stroke-yellow-500"/>
-                                </div>                                    
-                           </div>
-                           <div className="space-y-1">
-                                <div className="flex gap-10">
-                                        <div className="flex items-center gap-2"> 
-                                            <span className="font-bold">1 runner up:</span> {seccondPlace}
-                                            <Trophy h="h-5" w="h-5" fill="fill-zinc-100" stroke="stroke-zinc-500"/>
-                                        </div>                               
-                                </div>
-                                <div className="flex gap-10">
-                                        <div className="flex items-center gap-2">
-                                            <span className="font-bold">2 runner up:</span> {thirdPlace}
-                                            <Trophy h="h-5" w="h-5" fill="fill-amber-100" stroke="stroke-amber-600"/>
-                                        </div>
-                                </div>
+                            <Trophy h="h-8" w="h-8" fill="fill-yellow-100" stroke="stroke-yellow-500"/>
+                            <div className="text-3xl font-bold text-yellow-500">
+                                {firstPlace.name}
                             </div>
-                        </div>                         
                     </div>
                 </div>
-                {
-                    isClicked && (
-                        <Particles 
-                            id="tsparticles" 
-                            init={particlesInit} 
-                            options={particleOptions}
-                        />
-                    )
-                }            
+            </div>           
+
+            <div className={["w-64 text-center mb-4", styles.explenation, isClicked ? styles.flipped : ""].join(" ")}>
+                <span className="font-bold text-yellow-500">{firstPlace.name}</span> won with a total score of {firstPlace.points} points, 
+                 {<span className="font-bold text-yellow-500"> {firstPlaceDiff}</span>} points more than seccond place! Congratulations!
+            </div>
+
+            <div className="mx-auto flex gap-4">
+                <div className={["font-bold", styles.runnerUps, isClicked ? styles.flipped : ""].join(" ")}>
+                    <div>
+                        Runner
+                    </div>
+                    <div>
+                        Ups
+                    </div>
+                </div>
+                <div className="col-span-3 flex flex-col">
+                    <div className={["flex", "items-center", styles.seccondPlace, isClicked ? styles.flipped : ""].join(" ")}>
+                        <Trophy h="h-5" w="h-5" fill="fill-zinc-100" stroke="stroke-zinc-500"/>
+                        <div className="ml-2 self-end">
+                            2. {seccondPlace.name} - <span className="font-bold text-zinc-500">{seccondPlace.points} pts</span>
+                        </div> 
+                    </div>
+                    <div className={["flex", "items-center", styles.thirdPlace, isClicked ? styles.flipped : ""].join(" ")}>
+                        <Trophy h="h-5" w="h-5" fill="fill-amber-100" stroke="stroke-amber-600"/>
+                        <div className="ml-2 self-end">
+                            3. {thirdPlace.name} - <span className="font-bold text-amber-600">{thirdPlace.points} pts</span>
+                        </div>  
+                    </div>
+                            
+                </div>
             </div>
         </div>
     )

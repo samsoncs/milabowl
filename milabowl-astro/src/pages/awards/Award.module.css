@@ -28,3 +28,53 @@
 .flipCardBack {
     transform: rotateY(-180deg);
 }
+
+.thirdPlace {
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.seccondPlace {
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.runnerUps {
+    opacity: 0;
+}
+
+.explenation {
+    opacity: 0;
+}
+
+.explenation.flipped {
+    transition: all 1.25s;
+    -webkit-transition: all 1s;
+    opacity: 1;
+}
+
+.runnerUps.flipped {
+    transition: all 1.25s;
+    -webkit-transition: all 1.25s;
+    -webkit-transition-delay: .25s;
+    transition-delay: .25s;
+    opacity: 1;
+}
+
+.thirdPlace.flipped {
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    -webkit-transition-delay: .5s;
+    transition-delay: .5s;
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.seccondPlace.flipped {
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    transition-delay: .1s;
+    -webkit-transition-delay: .1s;
+    opacity: 1;
+    transform: translateY(0%);
+}
