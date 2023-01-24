@@ -6,6 +6,20 @@ export interface BlogEntry {
 
 const blogEntries: BlogEntry[] = [
   {
+    title: "Game Week 21",
+    date: "24.01.2023",
+    paragraphs:[
+      `Da er det endelig på tide med en oppdatering av Milabowl. Siden sist har det
+      hendt et par ting på tech siden. Det vil komme et eget innlegg om dette💻.`,
+      `Denne uken ble det satt Mila-historie! Han kom, han så, han seiret med hele 
+      15.3 poeng! En prestasjon uten sidestykke med 69 i score to uker på rad. 
+      Dette trigget en dobbel 6.9 fra 69 points og equal streak! Herved nominert 
+      til årets Skill💥⭐!`,
+      `På andreplass kom eMILA med respektable 8.5 poeng, og klatert seg over en 
+      Boris i i fritt fall (-1 poeng).📉`
+    ]
+  },
+  {
     title: "Kunngjøring: Ny blog feature!💥",
     date: "04.01.2023",
     paragraphs: ["Milabowl har nå en egen blog! Rundesammendrag legges ut her."]
