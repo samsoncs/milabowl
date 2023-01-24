@@ -86,7 +86,7 @@ const Nominations: React.FC<NominationsProps> = ({nominations}) => {
             nominations.filter((f) => filters.length === 0 || filters.includes(f.category)).map(n => (
 
                 <Card
-                    key={`GW ${n.gw} - ${n.personNominated} - ${n.reason}`} 
+                    key={`GW ${n.gw} - ${n.personNominated} - ${n.reason} - ${n.category}`} 
                     title={`GW ${n.gw} - ${n.personNominated}`} 
                     secondary={
                         <div className="flex items-center space-x-4" slot="secondary">
