@@ -4,6 +4,8 @@ import Col from "../../components/core/Grid/Col.astro";
 import Typography from "../../components/core/Typography.astro";
 import Layout from "../../layouts/Layout.astro";
 import { blogEntries } from "./blogEntries";
+// import { getCollection } from "astro:content";
+// const blogEntries = await getCollection('blog');
 ---
 <Layout title="Mila blog">
     <div class="blog-container"> 
@@ -23,6 +25,20 @@ import { blogEntries } from "./blogEntries";
             ))
         }
     </div>
+    <!-- {
+        blogEntries.map(async post => {
+            const { Content } = await post.render();
+
+            return(
+                <>
+                    <h1>{post.data.title}</h1>
+                    <Content/>
+                </>
+                
+            )
+        })
+    } -->
+
 </Layout>
 
 <style>
@@ -33,5 +49,10 @@ import { blogEntries } from "./blogEntries";
     }
     .blog-entry:not(:first-child) {
         margin-top: 1rem;
+    }
+
+    h1 {
+        font-size: 4.5rem;
+        font-weight: 800;
     }
 </style>

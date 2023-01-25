@@ -36,7 +36,7 @@ const milaResults: MilaResultsDTO = game_state;
 									? 0
 									: r.milaRankLastWeek - r.milaRank;
 								return(
-								<tr>
+								<tr class="border-1 border-slate-200 dark:border-slate-700">
 									<td>
 										<div class="flex space-x-2 flex-row items-center justify-items-center">
 											<div>{`${i + 1}.`}</div> 
@@ -48,7 +48,7 @@ const milaResults: MilaResultsDTO = game_state;
 									</td>
 									<td class="right-align">{r.milaPoints.total}</td>
 									<td class="right-align">{r.cumulativeAverageMilaPoints}</td>
-									<td class="right-align">{r.cumulativeMilaPoints}</td>
+									<td class="right-align font-bold text-indigo-900 dark:text-orange-200">{r.cumulativeMilaPoints}</td>
 								</tr>
 							)})
 						}

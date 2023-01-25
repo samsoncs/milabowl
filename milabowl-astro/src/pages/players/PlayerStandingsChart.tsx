@@ -1,4 +1,5 @@
 import { ResponsiveLine, Serie } from "@nivo/line";
+import colors from "tailwindcss/colors";
 import type { GameWeekResult } from "../../../src/game_state/gameState";
 
 interface PlayerStandingsChartProps {
@@ -66,6 +67,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         lineWidth={4}
         pointSize={8}
         pointColor={{ theme: "background" }}
+        theme={{ textColor: colors.slate[500] }}
         pointBorderWidth={3}
         pointBorderColor={{ from: "serieColor" }}
         pointLabelYOffset={-12}

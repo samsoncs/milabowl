@@ -6,7 +6,7 @@ const {headers} = Astro.props;
 ---
 
 <table>
-    <thead class="text-indigo-900">
+    <thead class="text-indigo-900 dark:text-dark-text">
         {
             headers &&
             <tr>
@@ -20,7 +20,6 @@ const {headers} = Astro.props;
         {
             !headers && <slot name="header"/>
         }
-       
     </thead>
     <tbody>
         <slot/>
@@ -41,6 +40,7 @@ const {headers} = Astro.props;
         color: inherit;
         display: table-row;
         vertical-align: middle;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
         outline: 0px;
     }
     th {
@@ -48,7 +48,6 @@ const {headers} = Astro.props;
         line-height: 1.5rem;
         display: table-cell;
         vertical-align: inherit;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
         text-align: left;
         padding: 16px;
         font-weight: bold;
@@ -60,7 +59,6 @@ const {headers} = Astro.props;
         line-height: 1.43;
         display: table-cell;
         vertical-align: inherit;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
         text-align: left;
         padding: 16px;
         flex-direction: row-reverse;

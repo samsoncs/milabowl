@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import game_state from "../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../src/game_state/gameState";
+import colors from 'tailwindcss/colors';
 
 interface PlayerStandingsChartProps {
     results: MilaResultsDTO;
@@ -47,19 +48,19 @@ return (
     >
     <animated.circle
         r={animatedProps.radius}
-        fill={animatedProps.borderColor}
+        className={"fill-white dark:fill-slate-800"}
         stroke={animatedProps.borderColor}
         strokeWidth={animatedProps.borderWidth}
     />
-    <animated.circle r={animatedProps.backgroundRadius} fill="white" />
     {point.size !== 0 && (
         <animated.text
-        textAnchor="middle"
-        fontSize="10px"
-        fill={animatedProps.borderColor}
-        dy=".3em"
-        >
-        {point.data.points}
+            textAnchor="middle"
+            fontSize="10px"
+            fill={animatedProps.borderColor}
+            className={"dark:fill-slate-100"}
+            dy=".3em"
+            >
+            {point.data.points}
         </animated.text>
     )}
     </animated.g>
@@ -92,7 +93,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             <ResponsiveBump
                 data={data}
                 xOuterPadding={0.3}
-                theme={{ fontSize: 12 }}
+                theme={{ fontSize: 12, textColor: colors.slate[500] }}
                 colors={{ scheme: "category10" }}
                 lineWidth={5}
                 activeLineWidth={7}
@@ -103,8 +104,8 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
                 activePointSize={31}
                 inactivePointSize={0}
                 pointColor={{ theme: "background" }}
-                pointBorderWidth={3}
-                activePointBorderWidth={3}
+                pointBorderWidth={4}
+                activePointBorderWidth={4}
                 pointBorderColor={{ from: "serie.color" }}
                 pointComponent={CustomPoint}
                 enableGridY={false}
@@ -114,7 +115,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
                     tickRotation: 0,
                     legend: "",
                     legendPosition: "middle",
-                    legendOffset: -36
+                    legendOffset: -36,
                 }}
                 axisBottom={{
                     tickSize: 5,
