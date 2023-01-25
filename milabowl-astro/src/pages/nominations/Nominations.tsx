@@ -73,7 +73,7 @@ const Nominations: React.FC<NominationsProps> = ({nominations}) => {
     return(
     <div className="max-w-screen-lg w-screen mx-auto flex flex-col space-y-4"> 
         <div className="flex items-center space-x-2">
-            <div className="font-bold dark:text-slate-200 px-2 lg:px-0">
+            <div className="font-bold dark:text-dark-text px-2 lg:px-0">
                 Filter:
             </div>
             <NominationChip category="SKILL" filters={filters} setFilter={setFilters}/>
@@ -91,7 +91,7 @@ const Nominations: React.FC<NominationsProps> = ({nominations}) => {
                     secondary={
                         <div className="flex items-center space-x-4" slot="secondary">
                             <Pill title={`${GetIcon(n.category)}${n.category}`} color={GetChipColor(n.category)}/>
-                            <div className="text-sm text-neutral-500">
+                            <div className="text-sm text-neutral-500 dark:text-slate-400">
                                 {n.date}
                             </div>
                         </div>
