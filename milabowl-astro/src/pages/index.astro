@@ -35,11 +35,18 @@ const milaResults: MilaResultsDTO = game_state;
 								r.milaRankLastWeek === undefined
 									? 0
 									: r.milaRankLastWeek - r.milaRank;
+								
+								const isLastPlace = milaResults.resultsByWeek[
+									milaResults.resultsByWeek.length - 1
+								].results.length - 1 === i;
 								return(
 								<tr class="border-1 border-slate-200 dark:border-slate-700">
 									<td>
 										<div class="flex space-x-2 flex-row items-center justify-items-center">
-											<div>{`${i + 1}.`}</div> 
+											<div>										
+												{isLastPlace && <span class="text-md">💩</span>}
+												{!isLastPlace && `${i + 1}.`}
+											</div> 
 												<PositionDelta delta={deltaPosition}/>    
 											</div>
 										</td>									
