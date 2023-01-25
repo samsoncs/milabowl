@@ -25,8 +25,8 @@ export function getStaticPaths() {
 const { userResults } = Astro.props;
 ---
 <Layout title={`${userResults.teamName} - details`}>
-  <Grid>
-    <Col col={4}>
+  <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">	
+    <div class="lg:col-span-4">
       <Card title={userResults.teamName}>
         <Table>
           <tr slot="header">
@@ -48,11 +48,11 @@ const { userResults } = Astro.props;
           }
         </Table>
       </Card>
-    </Col>
-    <Col col={8}>
+    </div>
+    <div class="lg:col-span-8">
       <Card title="Avg. Points">
         <PlayerStandingsChart teamname={userResults.teamName} results={userResults.results} client:load/>
       </Card>
-    </Col>
-  </Grid>
+    </div>
+  </div>
 </Layout>
