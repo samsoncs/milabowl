@@ -1,44 +1,28 @@
 ---
-import Card from "../../components/core/Card.astro";
-import Col from "../../components/core/Grid/Col.astro";
-import Typography from "../../components/core/Typography.astro";
 import Layout from "../../layouts/Layout.astro";
-import { blogEntries } from "./blogEntries";
-// import { getCollection } from "astro:content";
-// const blogEntries = await getCollection('blog');
+import { getCollection } from "astro:content";
+import BlogPreview from "./BlogPreview.astro";
+
+const firstBlogEntries = (await getCollection('blog', ({ data }) => { 
+    return data.date <= new Date()
+})).sort((a, b) => 
+    a.data.date < b.data.date ? 1 : -1
+).slice(0, 10);
 ---
 <Layout title="Mila blog">
-    <div class="blog-container"> 
-        {        
-            blogEntries.map(b => (
-                <Col col={12}>
-                    <Card title={b.title}>
-                        {b.paragraphs.map((p, i) => (
-                            <div class="blog-entry">
-                                <Typography variant="body1">
-                                    {p}
-                                </Typography>
-                            </div>                        
-                        ))}
-                    </Card>
-                </Col>           
-            ))
+    <div class="mb-2 space-y-2 max-w-screen-lg  mx-auto">
+        {
+        firstBlogEntries.map(async post => 
+            <BlogPreview post={post}/>
+        )
         }
+        <a class="pl-2 md:pl-0" href="blog/archive">
+            <button class="mt-4 p-4 dark:bg-slate-700 dark:text-dark-text rounded-md">
+                See Archive
+            </button>
+        </a>
+        
     </div>
-    <!-- {
-        blogEntries.map(async post => {
-            const { Content } = await post.render();
-
-            return(
-                <>
-                    <h1>{post.data.title}</h1>
-                    <Content/>
-                </>
-                
-            )
-        })
-    } -->
-
 </Layout>
 
 <style>

@@ -5,14 +5,18 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<div class="bg-white dark:bg-slate-800 rounded-md p-4 shadow-sm dark:shadow-sm-dark space-y-2">
-    <div class="flex">
-        <div class="text-xl font-bold text-indigo-900 dark:text-dark-text mb-3 grow">
-            {title}
+<div class="bg-white dark:bg-slate-800 rounded-md p-4 shadow-sm dark:shadow-sm-dark space-y-2 h-full">
+    {
+        title && 
+        <div class="flex">
+            <div class="text-xl font-bold text-indigo-900 dark:text-dark-text mb-3 grow">
+                {title}
+            </div>
+            <div class="text-base dark:text-dark-text">
+                <slot name="secondary"/>
+            </div>
         </div>
-        <slot name="secondary"/>
-    </div>
-    
+    }   
     <div class="text-base dark:text-dark-text overflow-x-auto">
         <slot/>
     </div>

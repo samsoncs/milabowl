@@ -25,7 +25,7 @@ const { pathname } = Astro.url;
         <div class="flex h-14 items-center justify-between">
             <div class="flex items-center">
             <div class="flex-shrink-0">
-                <a href="/" class="text-indigo-900 dark:text-dark-text text-xl font-bold">
+                <a href="/" class="text-indigo-900 dark:text-dark-text text-xl font-bold no-underline">
                     Milabowl
                 </a>              
             </div>
@@ -35,8 +35,8 @@ const { pathname } = Astro.url;
                 {
                     navLinks.map(m => {
                     const isSelected = pathname.includes(m.href);
-                    const classes = isSelected ? "bg-slate-300 dark:bg-slate-800 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold" : 
-                        "text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold";
+                    const classes = isSelected ? "bg-slate-300 dark:bg-slate-800 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold no-underline" : 
+                        "text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold no-underline";
                     return(
                         <a href={m.href} class={classes}>{m.name}</a>
                     )})
@@ -69,8 +69,8 @@ const { pathname } = Astro.url;
                 {
                 navLinks.map(m => {
                     const isSelected = pathname.includes(m.href);
-                    const classes = isSelected ? "bg-slate-300 dark:bg-slate-800 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold" : 
-                        "text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold";
+                    const classes = isSelected ? "bg-slate-300 dark:bg-slate-800 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold no-underline" : 
+                        "text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold no-underline";
                     return(
                     <a href={m.href} class={classes}>{m.name}</a>
                 )})

@@ -1,0 +1,69 @@
+---
+import type { GetStaticPaths } from "astro";
+import { CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import readingTime from "reading-time"; 
+import { format } from "date-fns";
+import Card from "../../components/core/Card.astro";
+import "./blog.css";
+import AuthorIcon from "./AuthorIcon.astro";
+import Tags from "./Tags.astro";
+import BlogPreview from "./BlogPreview.astro";
+import BlogNavigation from "./BlogNavigation.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const posts = (await getCollection('blog'))
+        .sort((a, b) =>  a.data.date < b.data.date ? 1 : -1);
+
+    const paths = posts.map((post, i) => {
+        const prevPost = i + 1 < posts.length ? posts[i + 1] : undefined;
+        const nextPost = i - 1 < posts.length ? posts[i - 1] : undefined;
+        return(
+            {
+                params: { slug: post.slug }, 
+                props: { post, prevPost, nextPost },
+            }
+        )
+    });
+
+    return paths;
+}
+
+export interface Props {
+    post: CollectionEntry<"blog">;
+    prevPost: CollectionEntry<"blog"> | undefined;
+    nextPost: CollectionEntry<"blog"> | undefined;
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await post.render();
+const stats = readingTime(post.body);
+---
+
+<Layout title={`Blogpost - ${post.data.title}`}>
+    <div class="max-w-screen-lg mx-auto">
+        <Card>
+            <div class="flex items-center gap-4">
+                <AuthorIcon/>
+                <div class="grow">
+                    <div>{post.data.author} <span class="text-gray-400 dark:text-slate-400">- {stats.text}</span></div>
+                </div>
+                <time datetime={format(post.data.date, "yyyy-MM-dd")} class="text-gray-400 dark:text-slate-400">{format(post.data.date, "dd.MM.yyyy")}</time>
+            </div>
+        
+            <h1 class="text-4xl font-bold mt-4 mb-8 text-indigo-900 dark:text-dark-text">
+                {post.data.title}
+            </h1>
+
+            <Content/>
+
+            <Tags tags={post.data.tags}/>
+        </Card>
+
+        <div class="grid grid-cols-2 gap-2 mt-2">
+            {prevPost && <BlogNavigation navigationText="Previous Post" post={prevPost}/> }
+            {!prevPost && <div/> }
+            {nextPost && <BlogNavigation navigationText="Next Post" post={nextPost}/> }
+        </div>
+    </div>
+</Layout>

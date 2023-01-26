@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { format } from "date-fns";
+import readingTime from "reading-time";
+import Card from "../../components/core/Card.astro";
+import AuthorIcon from "./AuthorIcon.astro";
+import Tags from "./Tags.astro";
+
+export interface Props {
+    post: CollectionEntry<'blog'>;
+} 
+
+const { post } = Astro.props;
+---
+
+<Card>
+    <div class="flex items-center gap-4 mb-3">
+        <AuthorIcon/>
+        <div class="grow">
+            <div>
+                {post.data.author}
+                <span class="text-gray-400 dark:text-slate-400"> - {readingTime(post.body).text}</span>
+            </div>
+        </div>
+        <time datetime={format(post.data.date, "yyyy-MM-dd")} class="text-gray-400 dark:text-slate-400">{format(post.data.date, "dd.MM.yyyy")}</time>
+    </div>
+    <a href={`/blog/${post.slug}`}>
+        <h2 class="text-xl text-bold">
+            {post.data.title}
+        </h2>
+        <div style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box;" class="text-gray-500 dark:text-slate-300 mb-3 max-h-50 text-ellipsis overflow-hidden">
+            {post.body}
+        </div>
+    </a> 
+    {
+        <Tags tags={post.data.tags}/>
+    }        
+</Card>
