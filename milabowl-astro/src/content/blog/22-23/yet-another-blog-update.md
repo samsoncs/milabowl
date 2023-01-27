@@ -21,20 +21,20 @@ kan enkelt lage overskrifter i ulike størrelser:
 
 ### Overskrift 3
 
-This Markdown file creates a page at `your-domain.com/page-1/`
-
 Lage lister:
  - Første punkt
  - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis 
  laoreet turpis vel blandit. Cras quis arcu cursus, ultricies nisi in, 
  rhoncus ligula. Sed tortor risus, sagittis nec ornare nec
- - Man kan fremheve tekst med _italics_ eller **fet skrift**
- - Legge ved [linker](https://milabowl.com) til sider
  
  Lage numererte lister:
 1. En
 2. To
 2. Tre
+
+Man kan fremheve tekst med _italics_ eller **fet skrift**
+
+Man kan legge til [linker](https://milabowl.com)
 
 >Legge til sitater
 
@@ -53,6 +53,4 @@ const FunctionalClass: React.FC<{}> = () => (
 );
 ```
 
-Alt som er gyldig markdown er støttet (men det er ikke sikkert at man har 
-CSS for det enda). Dersom man finner noe som ikke er stylet riktig kan man
-fikse dette i `src/pages/blog/blog.css`
+Alt som er gyldig markdown er støttet!
