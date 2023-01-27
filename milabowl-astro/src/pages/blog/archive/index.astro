@@ -38,7 +38,7 @@ const blogsBySlug = groupBy(blogEntries, b => b.slug.split("/")[0]);
                                         <time datetime={format(post.data.date, "yyyy-MM-dd")}>{format(post.data.date, "dd.MM.yyyy")}</time>
                                     </td>
                                     <td>
-                                        <a class="underline col-span-2" href={`${post.slug}`}>
+                                        <a class="underline col-span-2" href={`/blog/${post.slug}`}>
                                             {post.data.title}    
                                         </a>
                                     </td>
