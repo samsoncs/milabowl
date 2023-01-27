@@ -10,7 +10,7 @@ const firstBlogEntries = (await getCollection('blog', ({ data }) => {
 ).slice(0, 10);
 ---
 <Layout title="Mila blog">
-    <div class="mb-2 space-y-2 max-w-screen-lg  mx-auto">
+    <div class="mb-2 space-y-2 max-w-screen-lg mx-auto">
         {
         firstBlogEntries.map(async post => 
             <BlogPreview post={post}/>

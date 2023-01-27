@@ -24,11 +24,11 @@ const { post } = Astro.props;
         </div>
         <time datetime={format(post.data.date, "yyyy-MM-dd")} class="text-gray-400 dark:text-slate-400">{format(post.data.date, "dd.MM.yyyy")}</time>
     </div>
-    <a href={`/blog/${post.slug}`}>
-        <h2 class="text-xl text-bold">
+    <a class="prose prose-lg prose-slate dark:prose-invert prose-headings:text-indigo-900 dark:prose-headings:text-dark-text" href={`/blog/${post.slug}`}>
+        <h2>
             {post.data.title}
         </h2>
-        <div style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box;" class="text-gray-500 dark:text-slate-300 mb-3 max-h-50 text-ellipsis overflow-hidden">
+        <div style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box;" class="mb-3 max-h-50 text-ellipsis overflow-hidden">
             {post.body}
         </div>
     </a> 
