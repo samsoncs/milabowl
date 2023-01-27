@@ -10,7 +10,7 @@ export interface Props {
 
 const { post, navigationText } = Astro.props;
 ---
-<a href={`/blog/${post?.slug} no-underline`}>
+<a href={`/blog/${post?.slug}`}>
     <Card>
         {
             navigationText === "Previous Post" && (
