@@ -2,8 +2,6 @@
 import game_state from "../../../src/game_state/game_state.json";
 import type { MilaResultsDTO, ResultsByUser } from "../../../src/game_state/gameState";
 import Layout from "../../layouts/Layout.astro";
-import Grid from "../../components/core/Grid/Grid.astro";
-import Col from "../../components/core/Grid/Col.astro";
 import Table from "../../components/core/Table/Table.astro";
 import Card from "../../components/core/Card.astro";
 import PlayerStandingsChart from "./PlayerStandingsChart";
@@ -51,7 +49,7 @@ const { userResults } = Astro.props;
     </div>
     <div class="lg:col-span-8">
       <Card title="Avg. Points">
-        <PlayerStandingsChart teamname={userResults.teamName} results={userResults.results} client:load/>
+        <PlayerStandingsChart teamname={userResults.teamName} results={userResults.results} client:only="react"/>
       </Card>
     </div>
   </div>

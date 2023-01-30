@@ -34,7 +34,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
   <div style={{height: "55vh"}} className="h-screen">
     <ResponsiveLine
         data={data}
-        margin={{ top: 50, right: 150, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 40, bottom: 80, left: 60 }}
         xScale={{ type: "point" }}
         xFormat=" >-"
         yScale={{
@@ -63,22 +63,31 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         legendPosition: "middle"
         }}
         enableGridX={false}
-        colors={["rgba(31, 119, 180, 1)", "rgba(255, 127, 14, 0.3)"]}
+        colors={[colors.indigo[500], colors.orange[400]]}
         lineWidth={4}
-        pointSize={8}
+        pointSize={5}
         pointColor={{ theme: "background" }}
         theme={{ textColor: colors.slate[500] }}
+        pointSymbol={(props) => (
+            <g>
+              <circle
+                r={props.size}
+                fill={props.borderColor}
+              >
+              </circle>
+            </g>
+        )}
         pointBorderWidth={3}
         pointBorderColor={{ from: "serieColor" }}
         pointLabelYOffset={-12}
         useMesh={true}
         legends={[
         {
-            anchor: "bottom-right",
-            direction: "column",
+            anchor: "bottom-left",
+            direction: "row",
             justify: false,
-            translateX: 100,
-            translateY: 0,
+            translateX: 0,
+            translateY: 70,
             itemsSpacing: 0,
             itemDirection: "left-to-right",
             itemWidth: 80,
