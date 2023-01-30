@@ -4,7 +4,6 @@ export interface Props {
 }
 const {headers} = Astro.props;
 ---
-
 <table>
     <thead class="text-indigo-900 dark:text-dark-text">
         {
@@ -63,6 +62,23 @@ const {headers} = Astro.props;
         padding: 16px;
         flex-direction: row-reverse;
         white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 120px;
+    }
+    @media only screen and (min-width: 700px) {
+        td {
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 1.43;
+            display: table-cell;
+            vertical-align: inherit;
+            text-align: left;
+            padding: 16px;
+            flex-direction: row-reverse;
+            white-space: nowrap;
+            max-width: none;
+        }
     }
     td.right-align, th.right-align{
         text-align: right;

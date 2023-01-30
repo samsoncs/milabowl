@@ -22,8 +22,9 @@ const milaResults: MilaResultsDTO = game_state;
 							<th>Rank</th>
 							<th>Team</th>
 							<th class="right-align">GW</th>
-							<th class="right-align">Avg</th>
-							<th class="right-align">Total Score</th>
+							<th class="right-align hidden md:table-cell">Avg</th>
+							<th class="right-align table-cell md:hidden">Total</th>
+							<th class="right-align hidden md:table-cell">Total Score</th>
 						</tr>							
 
 						{
@@ -41,7 +42,7 @@ const milaResults: MilaResultsDTO = game_state;
 								].results.length - 1 === i;
 								return(
 								<tr class="border-1 border-slate-200 dark:border-slate-700">
-									<td>
+									<td class="pr-0">
 										<div class="flex space-x-2 flex-row items-center justify-items-center">
 											<div>										
 												{isLastPlace && <span class="text-md">💩</span>}
@@ -54,7 +55,7 @@ const milaResults: MilaResultsDTO = game_state;
 										<Link href={`/players/${r.teamName.replaceAll(" ", "-")}`}>{r.teamName}</Link>
 									</td>
 									<td class="right-align">{r.milaPoints.total}</td>
-									<td class="right-align">{r.cumulativeAverageMilaPoints}</td>
+									<td class="right-align hidden md:table-cell">{r.cumulativeAverageMilaPoints}</td>
 									<td class="right-align font-bold text-indigo-900 dark:text-orange-200">{r.cumulativeMilaPoints}</td>
 								</tr>
 							)})
