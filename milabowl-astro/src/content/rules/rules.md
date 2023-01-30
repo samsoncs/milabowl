@@ -5,6 +5,8 @@ date: 2023-01-30
 ## Table of Contents
 1. [General Rules](#general-rules)
 2. [Specific Rules](#specific-rules)
+3. [Rule Revisions](#suggested-rule-revisions)
+4. [Future Rules](#future-rules)
     
 ## General Rules
 
@@ -90,4 +92,31 @@ Get **-1** point if you traded in the most traded in player in FPL overall
 for a given gameweek. Get **-1** point if you traded out the most traded out 
 player in FPL overall for a given gameweek.
 
+## Suggested Rule Revisions
+These are rules that have proposed revisions, that will be voted on during 
+next board meeting.
 
+#### GW PS 
+Gameweek Position rule should start at 4 points, and decrease with 0.5 per 
+grouping, instead of increasing from 0. Optionally it should skip X places
+per grouping of X players (depends on implementation difficulty). I.E: If
+two people share first place they should recieve 4 points, next grouping 
+would then be 3rd place, and should recive 3 points (not 3.5 points). The
+last grouping should always recive 0 points.
+
+#### Trendy Bitch
+Trendy bitch should be based on most traded player out/in within Milabowl 
+FPL league, and not overall FPL trades.
+
+## Future Rules
+Here are suggestions for new rules, that will be voted on during the next 
+board meeting of Milabowl. All the point values are provisional and should
+also be determined during said board meeting.
+
+#### Penalty (P)
+Get **3** points per player on your FPL team that missed a penalty. If player
+is captained recieve **6** points.
+
+#### Sellout (-$)
+Get **-2** if the players you traded out this round recieved more points than
+the players you traded in.
