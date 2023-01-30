@@ -66,13 +66,13 @@ Get **1** point if this weeks round score is more than last weeks.
 Get **6.9** points if your team has the same FPL score as last gameweek.
 
 #### Gameweek Position (GW PS)
-Recieve points based on your position in Milabowl FPL league this season.
+Recieve points based on your position in the Milabowl FPL league this gameweek.
 The current implementation goes like this:
 - Group players by FPL gameweek score
 - Order groupings by ascending points
 - All players in first grouping (last place) receives **0** points
 - For each grouping, the points assigned increases by **0.5** points
-
+ 
 At the time of writing the league consists of 9 players, leaving a maximum
 potential of **4** points, if no players had the same FPL score.
 
@@ -87,7 +87,7 @@ leaving a potential for **5.38** points!
 
 #### Trendy Bitch (Trnd)
 Get **-1** point if you traded in the most traded in player in FPL overall 
-for a given gameweek. Get **-1** point if you traded in the most traded out 
+for a given gameweek. Get **-1** point if you traded out the most traded out 
 player in FPL overall for a given gameweek.
 
 
