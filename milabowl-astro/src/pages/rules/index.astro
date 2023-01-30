@@ -8,7 +8,7 @@ const rulesPage = await getEntryBySlug("rules", "rules");
 const { Content } = await rulesPage.render();
 ---
 <MarkdownLayout title="Milabowl - Rules">
-    <div class="flex justify-end text-gray-400 dark:text-slate-400 mb-4">
+    <div class="flex justify-end text-gray-400 dark:text-slate-400 mb-4 text-sm md:text-base">
         Last Updated on {format(rulesPage.data.date, "dd.MM.yyyy")}
     </div>
     <Markdown>
