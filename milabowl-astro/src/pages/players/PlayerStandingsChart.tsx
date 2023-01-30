@@ -77,7 +77,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         lineWidth={4}
         pointSize={5}
         pointColor={{ theme: "background" }}
-        theme={{ textColor: isDarkTheme ? colors.slate[300] : colors.slate[700] }}
+        theme={{ textColor: isDarkTheme ? colors.slate[300] : colors.slate[700], grid: {line: { stroke: `${isDarkTheme ? colors.slate[700] : colors.slate[200]}`}} }}
         pointSymbol={(props) => (
             <g>
               <circle

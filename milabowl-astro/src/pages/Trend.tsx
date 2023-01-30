@@ -103,7 +103,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             <ResponsiveBump
                 data={data}
                 xOuterPadding={0.3}
-                theme={{ fontSize: 12, textColor: isDarkTheme ? colors.slate[300] : colors.slate[700] }}
+                theme={{ fontSize: 12, textColor: isDarkTheme ? colors.slate[300] : colors.slate[700], grid: {line: { stroke: `${isDarkTheme ? colors.slate[600] : colors.slate[300]}`, strokeWidth: 1.5}} }}
                 colors={{ scheme: "category10" }}
                 lineWidth={5}
                 activeLineWidth={7}
