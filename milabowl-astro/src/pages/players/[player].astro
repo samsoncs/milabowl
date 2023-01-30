@@ -48,7 +48,7 @@ const { userResults } = Astro.props;
       </Card>
     </div>
     <div class="lg:col-span-8">
-      <Card title="Avg. Points">
+      <Card title="Performance vs. Average">
         <PlayerStandingsChart teamname={userResults.teamName} results={userResults.results} client:only="react"/>
       </Card>
     </div>

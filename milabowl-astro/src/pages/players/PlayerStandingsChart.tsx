@@ -27,21 +27,18 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
       data:
         results?.map((rr) => ({
           x: rr.gameWeek,
-          y: rr.cumulativeAverageMilaPoints
-        })) ?? []
-    },
-    {
-      id: "Average",
-      data:
-        results?.map((rr) => ({
-          x: rr.gameWeek,
-          y: rr.totalCumulativeAverageMilaPoints
+          y: rr.cumulativeAverageMilaPoints - rr.totalCumulativeAverageMilaPoints
         })) ?? []
     }
   ];
 
+  const minValue = Math.min.apply(null, data[0].data.map(d => d.y as number));
+
   return (
   <div style={{height: "55vh"}} className="h-screen">
+    <div className="text-sm text-slate-400">
+      Line shows your performance vs avg. Above the line means above average.
+    </div>
     <ResponsiveLine
         data={data}
         margin={{ top: 50, right: 40, bottom: 80, left: 60 }}
@@ -49,13 +46,14 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         xFormat=" >-"
         yScale={{
           type: "linear",
-          min: "auto",
+          min: minValue > 0 ? 0 : minValue,
           max: "auto",
           stacked: false,
           reverse: false
         }}
         axisTop={null}
         axisRight={null}
+        enableArea
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
@@ -68,7 +66,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Avg. Points",
+          legend: "Your Avg points - Total Avg points",
           legendOffset: -40,
           legendPosition: "middle"
         }}
