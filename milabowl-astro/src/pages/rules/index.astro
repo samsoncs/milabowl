@@ -1,0 +1,25 @@
+---
+import { getEntryBySlug } from "astro:content";
+import { format } from "date-fns";
+import Markdown from "../../components/core/Typography/Markdown.astro";
+import MarkdownLayout from "../../layouts/MarkdownLayout.astro";
+
+const rulesPage = await getEntryBySlug("rules", "rules");
+const { Content } = await rulesPage.render();
+---
+<MarkdownLayout title="Milabowl - Rules">
+    <div class="flex justify-end text-gray-400 dark:text-slate-400 mb-4">
+        Last Updated on {format(rulesPage.data.date, "dd.MM.yyyy")}
+    </div>
+    <Markdown>
+
+        <h1>
+            {rulesPage.data.title}
+        </h1>
+
+        <Content/>
+    </Markdown>
+    <div slot="post-card" class="mb-2">
+
+    </div>
+</MarkdownLayout>

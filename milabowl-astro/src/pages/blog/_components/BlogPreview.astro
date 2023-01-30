@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { format } from "date-fns";
 import readingTime from "reading-time";
-import Card from "../../components/core/Card.astro";
+import Card from "../../../components/core/Card.astro";
 import AuthorIcon from "./AuthorIcon.astro";
 import Tags from "./Tags.astro";
 
@@ -18,21 +18,23 @@ const { post } = Astro.props;
         <AuthorIcon/>
         <div class="grow">
             <div>
-                {post?.data.author}
-                <span class="text-gray-400 dark:text-slate-400"> - {readingTime(post?.body ?? "Test").text}</span>
+                {post.data.author}
+                <span class="text-gray-400 dark:text-slate-400"> - {readingTime(post.body).text}</span>
             </div>
         </div>
-        <time datetime={format(post?.data.date ?? new Date(), "yyyy-MM-dd")} class="text-gray-400 dark:text-slate-400">{format(post?.data.date ?? new Date(), "dd.MM.yyyy")}</time>
+        <time datetime={format(post.data.date, "yyyy-MM-dd")} class="text-gray-400 dark:text-slate-400">{format(post.data.date, "dd.MM.yyyy")}</time>
     </div>
-    <a class="prose md:prose-lg prose-slate dark:prose-invert prose-headings:text-indigo-900 dark:prose-headings:text-dark-text" href={`/blog/${post?.slug}`}>
+    <a class="prose md:prose-lg prose-slate dark:prose-invert prose-headings:text-indigo-900 dark:prose-headings:text-dark-text" href={`/blog/${post.slug}`}>
         <h2>
-            {post?.data.title}
+            {post.data.title}
         </h2>
         <div style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box;" class="mb-3 max-h-50 text-ellipsis overflow-hidden">
-            {post?.body}
+            {post.body}
         </div>
     </a> 
     {
-        <Tags tags={post?.data.tags}/>
+        <div class="mt-4">
+            <Tags tags={post.data.tags}/>
+        </div>
     }        
 </Card>

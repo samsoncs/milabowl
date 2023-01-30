@@ -33,7 +33,7 @@ const { resultsForGameweek, isOverallScore } = Astro.props;
         { !isOverallScore && <th class="right-align">GW MP</th>}
         <th class="right-align">Total MP</th>
       </tr>
-        {resultsForGameweek?.map((r, i) => {
+        {resultsForGameweek.map((r, i) => {
             const deltaPosition =
               r.milaRankLastWeek === null ||
               r.milaRankLastWeek === undefined

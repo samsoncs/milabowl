@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Card from "../../components/core/Card.astro";
+import Card from "../../../components/core/Card.astro";
 
 export interface Props {
     post: CollectionEntry<'blog'>;
@@ -10,7 +10,7 @@ export interface Props {
 
 const { post, navigationText } = Astro.props;
 ---
-<a href={`/blog/${post?.slug}`}>
+<a href={`/blog/${post.slug}`}>
     <Card>
         {
             navigationText === "Previous Post" && (
@@ -39,7 +39,7 @@ const { post, navigationText } = Astro.props;
             )
         }
         <h2 class="text-base font-bold text-slate-500 dark:text-slate-400 no-underline">
-            {post?.data.title}
+            {post.data.title}
         </h2>
     </Card>
 </a> 

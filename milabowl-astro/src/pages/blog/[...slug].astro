@@ -5,9 +5,11 @@ import Layout from "../../layouts/Layout.astro";
 import readingTime from "reading-time"; 
 import { format } from "date-fns";
 import Card from "../../components/core/Card.astro";
-import AuthorIcon from "./AuthorIcon.astro";
-import Tags from "./Tags.astro";
-import BlogNavigation from "./BlogNavigation.astro";
+import AuthorIcon from "./_components/AuthorIcon.astro";
+import Tags from "./_components/Tags.astro";
+import BlogNavigation from "./_components/BlogNavigation.astro";
+import Markdown from "../../components/core/Typography/Markdown.astro";
+import MarkdownLayout from "../../layouts/MarkdownLayout.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const posts = (await getCollection('blog'))
@@ -38,34 +40,28 @@ const { Content } = await post.render();
 const stats = readingTime(post.body);
 ---
 
-<Layout title={`Blogpost - ${post.data.title}`}>
-    <div class="max-w-screen-lg mx-auto">
-        <Card>
-            <div class="p-0 md:px-4 md:py-2">
-                <div class="flex items-center gap-4">
-                    <AuthorIcon/>
-                    <div class="grow">
-                        <div>{post.data.author} <span class="text-gray-400 dark:text-slate-400">- {stats.text}</span></div>
-                    </div>
-                    <time datetime={format(post.data.date, "yyyy-MM-dd")} class="text-gray-400 dark:text-slate-400">{format(post.data.date, "dd.MM.yyyy")}</time>
-                </div>
-            
-                <h1 class="text-4xl font-bold mt-4 mb-8 text-indigo-900 dark:text-dark-text">
-                    {post.data.title}
-                </h1>
-
-                <div class="mb-4 prose prose-md md:prose-lg prose-slate dark:prose-invert prose-img:rounded-md prose-headings:text-indigo-900 dark:prose-headings:text-dark-text max-w-none">
-                    <Content/>
-                </div>
-
-                <Tags tags={post.data.tags}/>
-            </div>
-        </Card>
-
-        <div class="grid grid-cols-2 gap-2 my-2">
-            {prevPost && <BlogNavigation navigationText="Previous Post" post={prevPost}/> }
-            {!prevPost && <div/> }
-            {nextPost && <BlogNavigation navigationText="Next Post" post={nextPost}/> }
+<MarkdownLayout title={`Blogpost - ${post.data.title}`}>
+    <div class="flex items-center gap-4">
+        <AuthorIcon/>
+        <div class="grow">
+            <div>{post.data.author} <span class="text-gray-400 dark:text-slate-400">- {stats.text}</span></div>
         </div>
+        <time datetime={format(post.data.date, "yyyy-MM-dd")} class="text-gray-400 dark:text-slate-400">{format(post.data.date, "dd.MM.yyyy")}</time>
     </div>
-</Layout>
+
+    <h1 class="text-4xl font-bold mt-4 mb-8 text-indigo-900 dark:text-dark-text">
+        {post.data.title}
+    </h1>
+
+    <Markdown>
+        <Content/>
+    </Markdown>
+
+    <Tags tags={post.data.tags}/>
+
+    <div slot="post-card" class="grid grid-cols-2 gap-2 my-2">
+        {prevPost && <BlogNavigation navigationText="Previous Post" post={prevPost}/> }
+        {!prevPost && <div/> }
+        {nextPost && <BlogNavigation navigationText="Next Post" post={nextPost}/> }
+    </div>
+</MarkdownLayout>

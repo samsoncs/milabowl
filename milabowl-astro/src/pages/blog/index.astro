@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import BlogPreview from "./BlogPreview.astro";
+import BlogPreview from "./_components/BlogPreview.astro";
 
 const firstBlogEntries = await getCollection('blog', ({ data }) => { 
     return data.date <= new Date()
