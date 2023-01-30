@@ -20,8 +20,8 @@ correct interpretation of the rule. The only way to revert this is to
 call a vote and win by **majority**.
 
 For rules where it makes sense (typically a per player rule) the score 
-recieved from a player with be multiplied by two if he is captained by
-you.
+recieved from a player will be multiplied by two if he is captain and/or 
+captained by you.
 
 In the current state of Milabowl it is always the players that end up
 on your team that counts. For instance if you initially benched _Andreas_
