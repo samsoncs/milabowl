@@ -1,4 +1,5 @@
 import { ResponsiveLine, Serie } from "@nivo/line";
+import { useEffect, useState } from "react";
 import colors from "tailwindcss/colors";
 import type { GameWeekResult } from "../../../src/game_state/gameState";
 
@@ -11,6 +12,15 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
   results,
   teamname
 }: PlayerStandingsChartProps) => {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if(storedTheme === "dark"){
+      setIsDarkTheme(true);
+    }
+  }, []);
+
   const data: Serie[] = [
     {
       id: teamname,
@@ -38,36 +48,36 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         xScale={{ type: "point" }}
         xFormat=" >-"
         yScale={{
-        type: "linear",
-        min: "auto",
-        max: "auto",
-        stacked: false,
-        reverse: false
+          type: "linear",
+          min: "auto",
+          max: "auto",
+          stacked: false,
+          reverse: false
         }}
         axisTop={null}
         axisRight={null}
         axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "Game Week",
-        legendOffset: 36,
-        legendPosition: "middle"
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Game Week",
+          legendOffset: 36,
+          legendPosition: "middle"
         }}
         axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "Avg. Points",
-        legendOffset: -40,
-        legendPosition: "middle"
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Avg. Points",
+          legendOffset: -40,
+          legendPosition: "middle"
         }}
         enableGridX={false}
         colors={[colors.indigo[500], colors.orange[400]]}
         lineWidth={4}
         pointSize={5}
         pointColor={{ theme: "background" }}
-        theme={{ textColor: colors.slate[500] }}
+        theme={{ textColor: isDarkTheme ? colors.slate[300] : colors.slate[700] }}
         pointSymbol={(props) => (
             <g>
               <circle
@@ -92,6 +102,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             itemDirection: "left-to-right",
             itemWidth: 80,
             itemHeight: 20,
+            itemTextColor: isDarkTheme ? colors.slate[300] : colors.slate[700],
             itemOpacity: 0.75,
             symbolSize: 12,
             symbolShape: "circle",

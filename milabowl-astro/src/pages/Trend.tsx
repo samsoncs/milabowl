@@ -5,7 +5,7 @@ import {
     BumpSerieExtraProps,
     ResponsiveBump
 } from "@nivo/bump";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import game_state from "../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../src/game_state/gameState";
 import colors from 'tailwindcss/colors';
@@ -74,6 +74,16 @@ return isXs ? `${name.substring(0, 10)}..` : name;
 const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     results
   }: PlayerStandingsChartProps) => {
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
+    
+    useEffect(() => {
+        const storedTheme = localStorage.getItem("theme");
+        if(storedTheme === "dark"){
+            setIsDarkTheme(true);
+        }
+    }, []);
+    
+
     const [week, setWeek] = useState<number[]>([
       results.resultsByWeek.length - 5,
       results.resultsByWeek.length
@@ -93,7 +103,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             <ResponsiveBump
                 data={data}
                 xOuterPadding={0.3}
-                theme={{ fontSize: 12, textColor: colors.slate[500] }}
+                theme={{ fontSize: 12, textColor: isDarkTheme ? colors.slate[300] : colors.slate[700] }}
                 colors={{ scheme: "category10" }}
                 lineWidth={5}
                 activeLineWidth={7}
