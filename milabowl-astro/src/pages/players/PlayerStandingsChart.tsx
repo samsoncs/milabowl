@@ -44,7 +44,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         <ResponsiveLine
             data={data}
             margin={{ top: 20, right: 40, bottom: 50, left: 60 }}
-            xScale={{ type: "point" }}
+            xScale={{ type: "linear", min: 1 }}
             xFormat=" >-"
             yScale={{
               type: "linear",
@@ -60,6 +60,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
+              tickValues: 10,
               legend: "Game Week",
               legendOffset: 36,
               legendPosition: "middle"
@@ -87,6 +88,11 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
               },
               crosshair:{
                 line: { stroke: `${isDarkTheme ? colors.slate[500] : colors.slate[400]}`}
+              },
+              axis: {
+                ticks:{
+                  line: { stroke: `${isDarkTheme ? colors.slate[500] : colors.slate[400]}`}
+                }
               }
             }}
             pointSymbol={(props) => (
