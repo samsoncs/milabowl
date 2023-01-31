@@ -71,7 +71,7 @@ const Nominations: React.FC<NominationsProps> = ({nominations}) => {
     const [filters, setFilters] = useState<string[]>([]);
 
     return(
-    <div className="max-w-screen-lg w-screen mx-auto flex flex-col space-y-4"> 
+    <div className="max-w-screen-lg w-screen mx-auto flex flex-col space-y-2"> 
         <div className="flex items-center space-x-2">
             <div className="font-bold dark:text-dark-text px-2 lg:px-0">
                 Filter:
