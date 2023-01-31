@@ -38,7 +38,7 @@ const { userResults } = Astro.props;
           {
             userResults.results.sort((a,b) => b.gameWeek - a.gameWeek).map((r, i) => (
               <tr>
-                <td>{`Game Week ${r.gameWeek}`}</td>
+                <td>{`GW ${r.gameWeek}`}</td>
                 <td class="right-align">{r.milaPoints.total}</td>
                 <td class="right-align">{r.cumulativeAverageMilaPoints}</td>
                 <td class="right-align">{r.cumulativeMilaPoints}</td>
