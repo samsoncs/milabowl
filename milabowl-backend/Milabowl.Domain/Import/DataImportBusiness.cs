@@ -26,7 +26,7 @@ public interface IDataImportBusiness
         IList<User> users,
         IList<UserHeadToHeadEvent> playerHeadToHeadEventsFromDb
     );
-    Task<Lineup> ImportLineup(Event finishedEvent, User user, IList<Lineup> lineupsFromDb);
+    Task<Lineup> ImportLineup(PicksRootDTO picksRootDto, Event finishedEvent, User user, IList<Lineup> lineupsFromDb);
     Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb);
 }
 
@@ -276,11 +276,11 @@ public class DataImportBusiness: IDataImportBusiness
         return playerHeadToHeadEvents;
     }
 
-    public async Task<Lineup> ImportLineup(Event finishedEvent, User user, IList<Lineup> lineupsFromDb)
+    public async Task<Lineup> ImportLineup(PicksRootDTO picksRootDto, Event finishedEvent, User user, IList<Lineup> lineupsFromDb)
     {
         var lineupFromDb = lineupsFromDb.FirstOrDefault(l => l.FkEventId == finishedEvent.EventId && l.FkUserId == user.UserId);
 
-        var lineup = this._fantasyMapper.GetLineup(finishedEvent, user);
+        var lineup = this._fantasyMapper.GetLineup(picksRootDto, finishedEvent, user);
 
         if (lineupFromDb == null)
         {
@@ -300,7 +300,7 @@ public class DataImportBusiness: IDataImportBusiness
         var playerEventLineups = picksRoot.picks.Select(p => 
             this._fantasyMapper.GetPlayerEventLineup(p, lineup, playerEvents, finishedEvent)
         ).ToList();
-
+        
         foreach (var playerEventLineup in playerEventLineups)
         {
             var playerLineupFromDb = playerEventLineupsFromDb.FirstOrDefault(pel =>

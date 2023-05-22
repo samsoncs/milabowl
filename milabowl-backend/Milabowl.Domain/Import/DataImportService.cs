@@ -71,7 +71,7 @@ public class DataImportService: IDataImportService
                     continue;
                 }
 
-                var lineup = await this._dataImportBusiness.ImportLineup(finishedEvent, user, lineupsFromDb);
+                var lineup = await this._dataImportBusiness.ImportLineup(picksRoot, finishedEvent, user, lineupsFromDb);
                 await this._dataImportBusiness.ImportPlayerEventLineup(picksRoot, finishedEvent, lineup, playerEvents, playerEventLineupsFromDb);
             }
 

@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Milabowl.Domain.Import;
 using Milabowl.Domain.Milabowl;
 using Milabowl.Domain.Processing;
@@ -13,49 +14,9 @@ using IMilaResultsService = Milabowl.Domain.Milabowl.IMilaResultsService;
 
 const string CONNECTION_STRING = "Persist Security Info=False;UID=SA;Pwd=!5omeSup3rF4ncyPwd!;Database=fantasy;Server=localhost,1431; Connection Timeout=30;TrustServerCertificate=True";
 
-if (args[0] == "Migrate")
-{
-    await Migrate();
-}
-else if (args[0] == "Import")
-{
-    await Migrate();
-    await Import();
-}
-
-static async Task Migrate()
-{
-    Console.WriteLine("Running migrations...");
-    var dbContextBuilder = new DbContextOptionsBuilder<FantasyContext>(new DbContextOptions<FantasyContext>());
-    dbContextBuilder.UseSqlServer(CONNECTION_STRING);
-    await using var db = new FantasyContext(dbContextBuilder.Options);
-    await db.Database.MigrateAsync();
-    Console.WriteLine("Finished running migrations");
-}
-
-static async Task Import()
-{
-    Console.WriteLine("Importing data");
-    var serviceProvider = DI.GetServiceProvider(CONNECTION_STRING);
-    var dataImportService = serviceProvider.GetService<IDataImportService>()!;
-    var milaPointsProcessorService = serviceProvider.GetService<IMilaPointsProcessorService>()!;
-    var milaResultsService = serviceProvider.GetService<IMilaResultsService>()!;
-
-    await dataImportService.ImportData();
-    await milaPointsProcessorService.UpdateMilaPoints();
-    var milaResults = await milaResultsService.GetMilaResults();
-
-    var json = JsonSerializer.Serialize(milaResults, new JsonSerializerOptions{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-    
-    await File.WriteAllTextAsync("C:\\Programming\\Other\\milabowl\\game_state.json", json);
-    Console.WriteLine("Finished importing data");
-}
-
-public static class DI
-{
-    public static IServiceProvider GetServiceProvider(string connectionString)
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services =>
     {
-        var services = new ServiceCollection();
         services.AddScoped<IMilaResultsService, MilaResultsService>();
         services.AddScoped<IDataImportBusiness, DataImportBusiness>();
         services.AddScoped<IMilaPointsProcessorService, MilaPointsProcessorService>();
@@ -69,10 +30,45 @@ public static class DI
         services.AddScoped<IMilaRepository, MilaRepository>();
         services.AddDbContext<FantasyContext>(optionsBuilder =>
         {
-            optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
+            optionsBuilder.UseSqlServer(CONNECTION_STRING, options => options.EnableRetryOnFailure());
         });
         services.AddHttpClient();
-        
-        return services.BuildServiceProvider(); ;
-    }
+    }).Build();
+
+
+if (args[0] == "Migrate")
+{
+    await Migrate();
+}
+else if (args[0] == "Import")
+{
+    await Migrate();
+    await Import(host.Services);
+}
+
+static async Task Migrate()
+{
+    Console.WriteLine("Running migrations...");
+    var dbContextBuilder = new DbContextOptionsBuilder<FantasyContext>(new DbContextOptions<FantasyContext>());
+    dbContextBuilder.UseSqlServer(CONNECTION_STRING);
+    await using var db = new FantasyContext(dbContextBuilder.Options);
+    await db.Database.MigrateAsync();
+    Console.WriteLine("Finished running migrations");
+}
+
+static async Task Import(IServiceProvider services)
+{
+    Console.WriteLine("Importing data");
+    var dataImportService = services.GetRequiredService<IDataImportService>()!;
+    var milaPointsProcessorService = services.GetRequiredService<IMilaPointsProcessorService>()!;
+    var milaResultsService = services.GetRequiredService<IMilaResultsService>()!;
+
+    await dataImportService.ImportData();
+    await milaPointsProcessorService.UpdateMilaPoints();
+    var milaResults = await milaResultsService.GetMilaResults();
+
+    var json = JsonSerializer.Serialize(milaResults, new JsonSerializerOptions{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+    
+    await File.WriteAllTextAsync("C:\\Programming\\Other\\milabowl\\game_state.json", json);
+    Console.WriteLine("Finished importing data");
 }
