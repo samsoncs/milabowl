@@ -17,6 +17,7 @@ public interface IFantasyMapper
     Lineup GetLineup(PicksRootDTO picksRootDto, Event evt, User user);
     PlayerEventLineup GetPlayerEventLineup(PickDTO p, Lineup lineup, IList<PlayerEvent> playerEvents, Event evt);
     IList<UserHeadToHeadEvent> GetUserHeadToHeadEvents(HeadToHeadResultDTO headToHeadResult, Event evt, IList<User> users);
+    UserHistory GetUserHistory(EntryResultDTO entryResultDto, User user);
 }
 
 public class FantasyMapper: IFantasyMapper
@@ -157,6 +158,18 @@ public class FantasyMapper: IFantasyMapper
     public UserLeague GetUserLeagueFromUserAndLeague(User u, League league)
     {
         return new UserLeague {League = league, User = u};
+    }
+    
+    public UserHistory GetUserHistory(EntryResultDTO entryResultDto, User user)
+    {
+        return new UserHistory
+        {
+            UserHistoryId = Guid.NewGuid(),
+            SeasonName = entryResultDto.SeasonName,
+            TotalPoints = entryResultDto.TotalPoints,
+            Rank = entryResultDto.Rank,
+            User = user
+        };
     }
 
     public PlayerEvent GetPlayerEvent(ElementDTO e, Event evt, IList<Player> players, IList<ElementHistoryRootDTO> playerHistoryRootDtos, IList<FixtureDTO> fixtures)

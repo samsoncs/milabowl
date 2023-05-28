@@ -11,6 +11,7 @@ public class User
     public int LastRank { get; set; }
     public int EventTotal { get; set; }
     public IList<UserLeague> UserLeagues { get; set; }
+    public IList<UserHistory> UserHistories { get; set; }
     public IList<Lineup> Lineups { get; set; }
     public IList<UserHeadToHeadEvent> HeadToHeadEvents { get; set; }
 

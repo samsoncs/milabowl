@@ -50,6 +50,13 @@ public class DataImportService: IDataImportService
         await this._dataImportBusiness.ImportUserLeagues(users, league, userLeaguesFromDb);
         await _repository.SaveChangesAsync();
 
+        foreach (var user in users)
+        {
+            var entryRoot = await this._dataImportProvider.GetEntryRoot(user.FantasyEntryId);
+            await this._dataImportBusiness.ImportUserHistories(entryRoot, user);
+        }
+        await _repository.SaveChangesAsync();
+
         foreach (var finishedEvent in events.Where(e => e.Finished && e.DataChecked))
         {
             if (playerEventsFromDb.Any(pe => pe.Event.GameWeek == finishedEvent.GameWeek))

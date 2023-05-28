@@ -28,6 +28,7 @@ public interface IDataImportBusiness
     );
     Task<Lineup> ImportLineup(PicksRootDTO picksRootDto, Event finishedEvent, User user, IList<Lineup> lineupsFromDb);
     Task<IList<PlayerEventLineup>> ImportPlayerEventLineup(PicksRootDTO picksRoot, Event finishedEvent, Lineup lineup, IList<PlayerEvent> playerEvents, IList<PlayerEventLineup> playerEventLineupsFromDb);
+    Task<IList<UserHistory>> ImportUserHistories(EntryRootDTO entryRoot, User user);
 }
 
 public class DataImportBusiness: IDataImportBusiness
@@ -200,6 +201,16 @@ public class DataImportBusiness: IDataImportBusiness
         }
 
         return userLeagues;
+    }
+
+    public async Task<IList<UserHistory>> ImportUserHistories(EntryRootDTO entryRoot, User user)
+    {
+        var userHistories = entryRoot.Past.Select(e => this._fantasyMapper.GetUserHistory(e, user)).ToList();
+        foreach (var userHistory in userHistories)
+        {
+            await _repository.AddAsync(userHistory); 
+        }
+        return userHistories;
     }
 
     public async Task<IList<PlayerEvent>> ImportPlayerEvents(
