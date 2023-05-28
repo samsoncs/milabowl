@@ -1,27 +1,46 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import Award from "./Award";
+
+
+const winners = [
+    {
+        award: "Winner of FPL",
+        firstPlace: {name: "Sam", points: 1802},
+        seccondPlace: {name: "Eivind", points: 1721},
+        thirdPlace: {name: "Simen", points: 1543},
+        id: "ts-p-1"
+    },
+    {
+        award: "Winner of Milabowl",
+        firstPlace: {name: "Sam", points: 1802},
+        seccondPlace: {name: "Eivind", points: 1721},
+        thirdPlace: {name: "Simen", points: 1543},
+        id: "ts-p-2"
+    }
+];
 ---
 <Layout title="Milabowl - Awards - 2023">
     <div class="max-w-screen-lg mx-auto flex flex-col space-y-4"> 
         <div class="flex flex-col items-center">
-            <Award 
-                title="Winner of FPL"
-                firstPlace={{name: "Sam", points: 1802}}
-                seccondPlace={{name: "Eivind", points: 1721}}
-                thirdPlace={{name: "Simen", points: 1543}}
-                id="ts-p-1"
-                client:idle
-            />
-
-            <Award 
-                title="Winner of Milabowl"
-                firstPlace={{name: "Some guy", points: 231}}
-                seccondPlace={{name: "Second Guy", points: 123}}
-                thirdPlace={{name: "Third Guy", points: 42}}
-                id="ts-p-2"
-                client:idle
-            />
+            <div class="text-center text-2xl font-bold mb-8 dark:text-dark-text text-indigo-900">
+                MilaAwards - 2023
+            </div>
+            <div class="md:grid md:gap-8 md:grid-cols-2">
+                {
+                    winners.map(w => 
+                    (
+                        <Award 
+                            title={w.award}
+                            firstPlace={w.firstPlace}
+                            seccondPlace={w.seccondPlace}
+                            thirdPlace={w.thirdPlace}
+                            id={w.id}
+                            client:idle
+                        />
+                    ))
+                }
+            </div>
         </div>
     </div>
 </Layout>
