@@ -420,8 +420,8 @@ const milaData = historicResultsByPlayer.map((r, i) => ({
     id: r.name,
     data: r.seasons.filter(rr => rr.milaPoints !== undefined).map((rr) => ({
         x: rr.name,
-        y: rr.milaPos,
-        points: rr.milaPoints
+        y: rr.milaPos!,
+        points: rr.milaPoints!
     }))
 }));
 ---
