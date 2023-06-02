@@ -213,7 +213,7 @@ namespace Milabowl.Test.Business.Mappers
             var evt = new Event { EventId = Guid.NewGuid() };
             var user = new User { UserId = Guid.NewGuid() };
 
-            var lineup = this._fantasyMapper.GetLineup(evt, user);
+            var lineup = this._fantasyMapper.GetLineup(new PicksRootDTO(), evt, user);
 
             lineup.LineupId.Should().NotBeEmpty();
             lineup.Event.EventId.Should().Be(evt.EventId);

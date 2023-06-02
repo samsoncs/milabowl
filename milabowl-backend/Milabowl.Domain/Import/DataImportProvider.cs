@@ -11,6 +11,7 @@ public interface IDataImportProvider
     Task<PicksRootDTO> GetPicksRoot(int eventID, int userID);
     Task<ElementHistoryRootDTO> GetPlayerHistoryRoot(int playerId);
     Task<IList<FixtureDTO>> GetFixtures();
+    Task<EntryRootDTO> GetEntryRoot(int userID);
 }
 
 public class DataImportProvider: IDataImportProvider
@@ -57,5 +58,11 @@ public class DataImportProvider: IDataImportProvider
     public async Task<IList<FixtureDTO>> GetFixtures()
     {
         return await this._httpClient.GetDeserializedAsync<IList<FixtureDTO>>($"https://fantasy.premierleague.com/api/fixtures/");
+    }
+
+    public async Task<EntryRootDTO> GetEntryRoot(int userId)
+    {
+        return await this._httpClient.GetDeserializedAsync<EntryRootDTO>($"https://fantasy.premierleague.com/api/entry/{userId}/history/");
+
     }
 }

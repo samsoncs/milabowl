@@ -75,6 +75,11 @@ namespace Milabowl.Infrastructure.Contexts
                 .HasMany(u => u.UserLeagues)
                 .WithOne(ul => ul.User)
                 .HasForeignKey(ul => ul.FkUserId);
+            
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Lineups)
+                .WithOne(l => l.User)
+                .HasForeignKey(l => l.FkUserId);
 
             modelBuilder.Entity<User>()
                 .HasMany(p => p.HeadToHeadEvents)
@@ -82,10 +87,10 @@ namespace Milabowl.Infrastructure.Contexts
                 .HasForeignKey(pe => pe.FkUserId);
 
             modelBuilder.Entity<User>()
-                .HasMany(u => u.Lineups)
+                .HasMany(u => u.UserHistories)
                 .WithOne(l => l.User)
                 .HasForeignKey(l => l.FkUserId);
-
+            
             modelBuilder.Entity<Lineup>()
                 .HasMany(l => l.PlayerEventLineups)
                 .WithOne(pel => pel.Lineup)
@@ -97,8 +102,7 @@ namespace Milabowl.Infrastructure.Contexts
                 .WithOne(pel => pel.PlayerEvent)
                 .HasForeignKey(pel => pel.FkPlayerEventId)
                 .OnDelete(DeleteBehavior.NoAction);
-
-
+            
             modelBuilder.Entity<UserHeadToHeadEvent>();
         }
     }

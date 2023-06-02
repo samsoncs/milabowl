@@ -28,7 +28,7 @@ const Award: React.FC<AwardProps> = ({ title, firstPlace, seccondPlace, thirdPla
     const firstPlaceDiff = firstPlace.points - seccondPlace.points;
     return(
         <div className="mx-auto flex flex-col items-center mb-16">
-            <div className="text-center text-2xl font-bold mb-4 text-indigo-900">
+            <div className="text-center text-2xl font-bold mb-4 dark:text-dark-text text-indigo-900">
                 {title}
             </div>
             <div 
@@ -45,7 +45,7 @@ const Award: React.FC<AwardProps> = ({ title, firstPlace, seccondPlace, thirdPla
                     <div className={["flex items-center justify-center text-white text-9xl rounded-md bg-indigo-900", styles.flipCardFront].join(" ") }>
                         ?
                     </div>
-                    <div className={["flex", "items-center", "justify-center", "bg-slate-100", , styles.flipCardBack].join(" ")}>
+                    <div className={["flex", "items-center", "justify-center", "rounded-md", "dark:bg-slate-900", "bg-slate-100", , styles.flipCardBack].join(" ")}>
                             <Trophy h="h-8" w="h-8" fill="fill-yellow-100" stroke="stroke-yellow-500"/>
                             <div className="text-3xl font-bold text-yellow-500">
                                 {firstPlace.name}
@@ -54,12 +54,12 @@ const Award: React.FC<AwardProps> = ({ title, firstPlace, seccondPlace, thirdPla
                 </div>
             </div>           
 
-            <div className={["w-64 text-center mb-4", styles.explenation, isClicked ? styles.flipped : ""].join(" ")}>
+            <div className={["w-64 dark:text-dark-text text-center mb-4", styles.explenation, isClicked ? styles.flipped : ""].join(" ")}>
                 <span className="font-bold text-yellow-500">{firstPlace.name}</span> won with a total score of {firstPlace.points} points, 
                  {<span className="font-bold text-yellow-500"> {firstPlaceDiff}</span>} points more than seccond place! Congratulations!
             </div>
 
-            <div className="mx-auto flex gap-4">
+            <div className="mx-auto flex gap-4 dark:text-dark-text">
                 <div className={["font-bold", styles.runnerUps, isClicked ? styles.flipped : ""].join(" ")}>
                     <div>
                         Runner

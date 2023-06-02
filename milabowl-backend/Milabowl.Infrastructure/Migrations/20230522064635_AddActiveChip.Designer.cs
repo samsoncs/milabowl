@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Milabowl.Infrastructure.Contexts;
 
@@ -11,9 +12,11 @@ using Milabowl.Infrastructure.Contexts;
 namespace Milabowl.Migrations
 {
     [DbContext(typeof(FantasyContext))]
-    partial class FantasyContextModelSnapshot : ModelSnapshot
+    [Migration("20230522064635_AddActiveChip")]
+    partial class AddActiveChip
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -576,32 +579,6 @@ namespace Milabowl.Migrations
                     b.ToTable("UserHeadToHeadEvents");
                 });
 
-            modelBuilder.Entity("Milabowl.Domain.Entities.Fantasy.UserHistory", b =>
-                {
-                    b.Property<Guid>("UserHistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FkUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Rank")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SeasonName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalPoints")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserHistoryId");
-
-                    b.HasIndex("FkUserId");
-
-                    b.ToTable("UserHistory");
-                });
-
             modelBuilder.Entity("Milabowl.Domain.Entities.Fantasy.UserLeague", b =>
                 {
                     b.Property<Guid>("UserLeagueId")
@@ -851,17 +828,6 @@ namespace Milabowl.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Milabowl.Domain.Entities.Fantasy.UserHistory", b =>
-                {
-                    b.HasOne("Milabowl.Domain.Entities.Fantasy.User", "User")
-                        .WithMany("UserHistories")
-                        .HasForeignKey("FkUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Milabowl.Domain.Entities.Fantasy.UserLeague", b =>
                 {
                     b.HasOne("Milabowl.Domain.Entities.Fantasy.League", "League")
@@ -926,8 +892,6 @@ namespace Milabowl.Migrations
                     b.Navigation("HeadToHeadEvents");
 
                     b.Navigation("Lineups");
-
-                    b.Navigation("UserHistories");
 
                     b.Navigation("UserLeagues");
                 });

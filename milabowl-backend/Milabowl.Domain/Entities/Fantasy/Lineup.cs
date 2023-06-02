@@ -8,4 +8,5 @@ public class Lineup
     public User User { get; set; }
     public Guid FkUserId { get; set; }
     public IList<PlayerEventLineup> PlayerEventLineups { get; set; }
+    public string? ActiveChip { get; set; }
 }
