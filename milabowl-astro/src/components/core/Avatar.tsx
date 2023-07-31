@@ -105,7 +105,7 @@ const user_profiles: UserProfiles = {
         "avatar_src": ""
     },
     "Boris’ party boys": {
-        "info": "",
+        "info": "💩",
         "followers": 0,
         "following": 0,
         "name": "henrik",
