@@ -1,75 +1,96 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/core/Card.astro';
-import Table from '../components/core/Table/Table.astro';
-import Trend from './Trend';
+//import Avatar from "../components/core/Avatar.astro";
+import Avatar from "../components/core/Avatar";
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/core/Card.astro";
+import Table from "../components/core/Table/Table.astro";
+import Trend from "./Trend";
 import game_state from "../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../src/game_state/gameState";
-import Link from '../components/core/Link.astro';
-import PositionDelta from '../components/core/PositionDelta.astro';
+import Link from "../components/core/Link.astro";
+import PositionDelta from "../components/core/PositionDelta.astro";
+
 const milaResults: MilaResultsDTO = game_state;
 ---
+
 <Layout title="Milabowl - Dashboard">
-	<main>
-		<div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">	
-			<div class="lg:col-span-5">
-				<Card title="Standings">
-					<div slot="secondary">
-						<Link href="/standings">See More</Link>
-					</div>
-					<Table>
-						<tr slot="header">
-							<th>Rank</th>
-							<th>Team</th>
-							<th class="right-align">GW</th>
-							<th class="right-align hidden md:table-cell">Avg</th>
-							<th class="right-align table-cell md:hidden">Total</th>
-							<th class="right-align hidden md:table-cell">Total Score</th>
-						</tr>							
+  <main>
+    <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">
+      <div class="lg:col-span-5">
+        <Card title="Standings">
+          <div slot="secondary">
+            <Link href="/standings">See More</Link>
+          </div>
+          <Table>
+            <tr slot="header">
+              <th>Rank</th>
+              <th>Team</th>
+              <th class="right-align">GW</th>
+              <th class="right-align hidden md:table-cell">Avg</th>
+              <th class="right-align table-cell md:hidden">Total</th>
+              <th class="right-align hidden md:table-cell">Total Score</th>
+            </tr>
 
-						{
-							milaResults.resultsByWeek[
-								milaResults.resultsByWeek.length - 1
-							].results.map((r, i) => {
-								const deltaPosition =
-								r.milaRankLastWeek === null ||
-								r.milaRankLastWeek === undefined
-									? 0
-									: r.milaRankLastWeek - r.milaRank;
-								
-								const isLastPlace = milaResults.resultsByWeek[
-									milaResults.resultsByWeek.length - 1
-								].results.length - 1 === i;
-								return(
-								<tr class="border-1 border-slate-200 dark:border-slate-700">
-									<td class="pr-0">
-										<div class="flex space-x-2 flex-row items-center justify-items-center">
-											<div>										
-												{isLastPlace && <span class="text-md">💩</span>}
-												{!isLastPlace && `${i + 1}.`}
-											</div> 
-												<PositionDelta delta={deltaPosition}/>    
-											</div>
-										</td>									
-									<td>
-										<Link href={`/players/${r.teamName.replaceAll(" ", "-")}`}>{r.teamName}</Link>
-									</td>
-									<td class="right-align">{r.milaPoints.total}</td>
-									<td class="right-align hidden md:table-cell">{r.cumulativeAverageMilaPoints}</td>
-									<td class="right-align font-bold text-indigo-900 dark:text-orange-200">{r.cumulativeMilaPoints}</td>
-								</tr>
-							)})
-						}
-					</Table>
-				</Card>
-			</div>
+            {
+              milaResults.resultsByWeek[
+                milaResults.resultsByWeek.length - 1
+              ].results.map((r, i) => {
+                const deltaPosition =
+                  r.milaRankLastWeek === null ||
+                  r.milaRankLastWeek === undefined
+                    ? 0
+                    : r.milaRankLastWeek - r.milaRank;
 
-			<div class="lg:col-span-7">
-				<Card title="Trend">
-					<Trend client:load/>
-				</Card>
-			</div>			
-		</div>
-		
-	</main>
+                const isLastPlace =
+                  milaResults.resultsByWeek[
+                    milaResults.resultsByWeek.length - 1
+                  ].results.length -
+                    1 ===
+                  i;
+                return (
+                  <tr class="border-1 border-slate-200 dark:border-slate-700">
+                    <td class="pr-0">
+                      <div class="flex space-x-2 flex-row items-center justify-items-center">
+                        <div>
+                          {isLastPlace && <span class="text-md">💩</span>}
+                          {!isLastPlace && `${i + 1}.`}
+                        </div>
+                        <PositionDelta delta={deltaPosition} />
+                      </div>
+                    </td>
+                    <td>
+                      <Avatar
+                        team_name={r.teamName}
+                        avatar_size="20"
+                        client:idle
+                      />
+
+                      <Link
+                        href={`/players/${r.teamName.replaceAll(" ", "-")}`}
+                      >
+                        {r.teamName}
+                      </Link>
+                    </td>
+                    <td class="right-align">{r.milaPoints.total}</td>
+                    <td class="right-align hidden md:table-cell">
+                      {r.cumulativeAverageMilaPoints}
+                    </td>
+                    <td class="right-align font-bold text-indigo-900 dark:text-orange-200">
+                      {r.cumulativeMilaPoints}
+                    </td>
+                  </tr>
+                );
+              })
+            }
+          </Table>
+        </Card>
+      </div>
+
+      <div class="lg:col-span-7">
+        <Card title="Trend">
+          <Trend client:load />
+        </Card>
+      </div>
+    </div>
+  </main>
 </Layout>
