@@ -1,92 +1,76 @@
 ---
+import Avatar from "../../components/core/Avatar";
 import PositionDelta from "../../components/core/PositionDelta.astro";
 import Table from "../../components/core/Table/Table.astro";
 import type { GameWeekResult } from "../../game_state/gameState";
 
-export interface Props
-{
-    resultsForGameweek: GameWeekResult[];
-    isOverallScore?: boolean;
+export interface Props {
+  resultsForGameweek: GameWeekResult[];
+  isOverallScore?: boolean;
 }
 
 const { resultsForGameweek, isOverallScore } = Astro.props;
 ---
 
 <Table>
-      <tr slot="header">
-          <th>Rank</th>
-          <th>Team</th>
-          <th class="right-align">69</th>
-          <th class="right-align">YC</th>
-          <th class="right-align">RC</th>
-          <th class="right-align">BF</th>
-          <th class="right-align">CF</th>
-          <th class="right-align">CD</th>
-          <th class="right-align">MiP</th>
-          <th class="right-align">IS</th>
-          <th class="right-align">ES</th>
-          <th class="right-align">GW PS</th>
-          <th class="right-align">H2H M</th>
-          <th class="right-align">69 Sub</th>
-          <th class="right-align">Unq Cap</th>
-          <th class="right-align">Trnd</th>
-        { !isOverallScore && <th class="right-align">GW MP</th>}
-        <th class="right-align">Total MP</th>
-      </tr>
-        {resultsForGameweek.map((r, i) => {
-            const deltaPosition =
-              r.milaRankLastWeek === null ||
-              r.milaRankLastWeek === undefined
-                ? 0
-                : r.milaRankLastWeek - r.milaRank;
-            return (
-              <tr class="border-1 border-slate-200 dark:border-slate-700">
-                <td scope="row">
-                  <div class="flex space-x-2 flex-row items-center justify-items-center">
-                      <div>{`${i + 1}.`}</div> 
-                      <PositionDelta delta={deltaPosition}/>    
-                    </div>
-                </td>
-                <td>{r.teamName}</td>
-                <td class="right-align">{r.milaPoints.gW69}</td>
-                <td class="right-align">
-                  {r.milaPoints.yellowCard}
-                </td>
-                <td class="right-align">{r.milaPoints.redCard}</td>
-                <td class="right-align">
-                  {r.milaPoints.benchFail}
-                </td>
-                <td class="right-align">{r.milaPoints.capFail}</td>
-                <td class="right-align">{r.milaPoints.capDef}</td>
-                <td class="right-align">
-                  {r.milaPoints.minusIsPlus}
-                </td>
-                <td class="right-align">
-                  {r.milaPoints.increaseStreak}
-                </td>
-                <td class="right-align">
-                  {r.milaPoints.equalStreak}
-                </td>
-                <td class="right-align">
-                  {r.milaPoints.gwPositionScore}
-                </td>
-                <td class="right-align">
-                  {r.milaPoints.headToHeadMeta}
-                </td>
-                <td class="right-align">
-                  {r.milaPoints.sixtyNineSub}
-                </td>
-                <td class="right-align">
-                  {r.milaPoints.uniqueCap}
-                </td>
-                <td class="right-align">
-                  {r.milaPoints.trendyBitch}
-                </td>
-                { !isOverallScore && <td class="right-align">{r.milaPoints.total}</td> }
-                <td class="right-align font-bold text-indigo-900 dark:text-orange-200">
-                  {r.cumulativeMilaPoints}
-                </td>
-              </tr>
-            );
-          })}
+  <tr slot="header">
+    <th>Rank</th>
+    <th>Team</th>
+    <th class="right-align">69</th>
+    <th class="right-align">YC</th>
+    <th class="right-align">RC</th>
+    <th class="right-align">BF</th>
+    <th class="right-align">CF</th>
+    <th class="right-align">CD</th>
+    <th class="right-align">MiP</th>
+    <th class="right-align">IS</th>
+    <th class="right-align">ES</th>
+    <th class="right-align">GW PS</th>
+    <th class="right-align">H2H M</th>
+    <th class="right-align">69 Sub</th>
+    <th class="right-align">Unq Cap</th>
+    <th class="right-align">Trnd</th>
+    {!isOverallScore && <th class="right-align">GW MP</th>}
+    <th class="right-align">Total MP</th>
+  </tr>
+  {
+    resultsForGameweek.map((r, i) => {
+      const deltaPosition =
+        r.milaRankLastWeek === null || r.milaRankLastWeek === undefined
+          ? 0
+          : r.milaRankLastWeek - r.milaRank;
+      return (
+        <tr class="border-1 border-slate-200 dark:border-slate-700">
+          <td scope="row">
+            <div class="flex space-x-2 flex-row items-center justify-items-center">
+              <div>{`${i + 1}.`}</div>
+              <PositionDelta delta={deltaPosition} />
+            </div>
+          </td>
+          <td>
+            <Avatar team_name={r.teamName} avatar_size="20" client:idle />
+            {r.teamName}
+          </td>
+          <td class="right-align">{r.milaPoints.gW69}</td>
+          <td class="right-align">{r.milaPoints.yellowCard}</td>
+          <td class="right-align">{r.milaPoints.redCard}</td>
+          <td class="right-align">{r.milaPoints.benchFail}</td>
+          <td class="right-align">{r.milaPoints.capFail}</td>
+          <td class="right-align">{r.milaPoints.capDef}</td>
+          <td class="right-align">{r.milaPoints.minusIsPlus}</td>
+          <td class="right-align">{r.milaPoints.increaseStreak}</td>
+          <td class="right-align">{r.milaPoints.equalStreak}</td>
+          <td class="right-align">{r.milaPoints.gwPositionScore}</td>
+          <td class="right-align">{r.milaPoints.headToHeadMeta}</td>
+          <td class="right-align">{r.milaPoints.sixtyNineSub}</td>
+          <td class="right-align">{r.milaPoints.uniqueCap}</td>
+          <td class="right-align">{r.milaPoints.trendyBitch}</td>
+          {!isOverallScore && <td class="right-align">{r.milaPoints.total}</td>}
+          <td class="right-align font-bold text-indigo-900 dark:text-orange-200">
+            {r.cumulativeMilaPoints}
+          </td>
+        </tr>
+      );
+    })
+  }
 </Table>
