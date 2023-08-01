@@ -2,36 +2,8 @@ import styles from "./Avatar.module.css";
 import party from "party-js";
 
 export interface AvatarProps {
-    team_name: string;
-    avatar_size: string;
-}
-
-function avatar_mapping(team_name: string): string {
-    team_name = team_name.toLowerCase();
-    //.replaceAll(" ", "")
-    //.replaceAll("'", "")
-    //.replaceAll("’", "");
-    let path = "avatars_2022_23/";
-    if (team_name.includes("boris")) {
-        return path + "avatar_henrik2.png";
-    } else if (team_name.includes("dollar")) {
-        return path + "avatar_mikkel.png";
-    } else if (team_name.includes("veni")) {
-        return path + "avatar_anders.png";
-    } else if (team_name.includes("haalandaise")) {
-        return path + "avatar_eivind.png";
-    } else if (team_name.includes("maguire")) {
-        return path + "avatar_malte.png";
-    } else if (team_name.includes("premier")) {
-        return path + "avatar_markus.png";
-    } else if (team_name.includes("filip")) {
-        return path + "avatar_martin.png";
-    } else if (team_name.includes("haalandslaget")) {
-        return path + "avatar_sam2.png";
-    } else if (team_name.includes("emila")) {
-        return path + "avatar_simen.png";
-    }
-    return "https://www.nicepng.com/png/detail/186-1869910_ic-question-mark-roblox-question-mark-avatar.png";
+    teamName: string;
+    size: string; // currently not used
 }
 
 interface UserProfileInfo {
@@ -39,110 +11,106 @@ interface UserProfileInfo {
     followers: number | null;
     following: number | null;
     name: string;
-    avatar_src: string;
+    avatarSrc: string;
 }
 
 interface UserProfiles {
     [key: string]: UserProfileInfo
 }
 
-const image_root = "avatars_2022_23/";
-const user_profiles: UserProfiles = {
+const imageRoot = "avatars/";
+const userProfileDict: UserProfiles = {
     "Haalandslaget": {
         "info": "Mila-source founder and evangelist",
         "followers": 42,
         "following": 69,
         "name": "sam",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "sam.png"
     },
     "Milaion dollar squad": {
         "info": "Mila-source contributor",
         "followers": 0,
         "following": 0,
         "name": "mikkel",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "mikkel.png"
     },
     "Haalandaise Saus": {
         "info": "Mila try-hard",
         "followers": 0,
         "following": 0,
         "name": "eivind",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "eivind.png"
     },
     "WeDidn'tStartMaguire": {
         "info": "",
         "followers": 0,
         "following": 0,
         "name": "malte",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "malte.png"
     },
     "eMILA Smith Rowe": {
-        "info": "",
+        "info": "Mila-source founder",
         "followers": 0,
         "following": 0,
         "name": "simen",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "simen.png"
     },
     "Veni Vidi Vici Mila": {
-        "info": "",
+        "info": "He came",
         "followers": 0,
         "following": 0,
         "name": "anders",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "anders.png"
     },
     "Premier Lag": {
-        "info": "",
+        "info": "Legendary BieUgle",
         "followers": 0,
         "following": 0,
         "name": "markus",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "markus.png"
     },
     "Filip Coutinho": {
         "info": "",
         "followers": 0,
         "following": 0,
         "name": "martin",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "martin.png"
     },
     "Boris’ party boys": {
         "info": "💩",
         "followers": 0,
         "following": 0,
         "name": "henrik",
-        "avatar_src": ""
+        "avatarSrc": imageRoot + "henrik.png"
     }
 
 };
 
-const Avatar: React.FC<AvatarProps> = ({ team_name, avatar_size }) => {
+const Avatar: React.FC<AvatarProps> = ({ teamName, size }) => {
     let user: UserProfileInfo = {
         "info": "Nobody has no name",
         "name": "John Doe",
         "followers": -1,
         "following": -1,
-        "avatar_src": "https://www.nicepng.com/png/detail/186-1869910_ic-question-mark-roblox-question-mark-avatar.png"
+        "avatarSrc": "https://www.nicepng.com/png/detail/186-1869910_ic-question-mark-roblox-question-mark-avatar.png"
     };
-    if (team_name in user_profiles) {
-        user["info"] = user_profiles[team_name]["info"];
-        user["name"] = user_profiles[team_name]["name"];
-        user["followers"] = user_profiles[team_name]["followers"];
-        user["following"] = user_profiles[team_name]["following"];
-        user["avatar_src"] = image_root + "avatar_" + user_profiles[team_name]["name"] + ".png";
+    if (teamName in userProfileDict) {
+        user = userProfileDict[teamName];
     }
     return (
         <div className={styles.avatarDiv}>
             <img
-                className={styles.avatar}
-                src={user["avatar_src"]}
+                className={styles.avatar + " w-5 md:w-7 lg:w-9"}
+                src={user["avatarSrc"]}
                 //onMouseOver={(e) => console.log(e)}
-                width={avatar_size}
-                data-popover-target={"popover-user-profile" + team_name.replaceAll(" ", "")}
+                //width={size}
+                data-popover-target={"popover-user-profile" + teamName.replaceAll(" ", "")}
             />
-            <div data-popover id={"popover-user-profile" + team_name.replaceAll(" ", "")} role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+            <div data-popover id={"popover-user-profile" + teamName.replaceAll(" ", "")} role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                 <div className="p-3">
                     <div className="flex items-center justify-between mb-2">
                         <a href="#">
-                            <img className="w-20 h-20 rounded-full" src={user["avatar_src"]} alt="Jese Leos" />
+                            <img className="w-24 h-24 rounded-full" src={user["avatarSrc"]} alt="Avatar pic" />
                         </a>
                         <div>
                             <button
@@ -153,7 +121,7 @@ const Avatar: React.FC<AvatarProps> = ({ team_name, avatar_size }) => {
                         </div>
                     </div>
                     <p className="text-base font-semibold leading-none text-gray-900 dark:text-white">
-                        <a href="#">{team_name}</a>
+                        <a href="#">{teamName}</a>
                     </p>
                     <p className="mb-3 text-sm font-normal">
                         <a href="#" className="hover:underline">@{user.name}</a>

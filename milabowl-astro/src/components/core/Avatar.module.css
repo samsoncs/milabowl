@@ -1,7 +1,7 @@
 .avatar {
     display: inline-block;
     padding-right: 1px;
-    width: 20px;
+    /*width: 20px;*/
     height: auto;
     border-radius: 50%;
     transition: transform .25s ease;

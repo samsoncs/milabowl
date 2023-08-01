@@ -1,5 +1,4 @@
 ---
-//import Avatar from "../components/core/Avatar.astro";
 import Avatar from "../components/core/Avatar";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/core/Card.astro";
@@ -59,11 +58,7 @@ const milaResults: MilaResultsDTO = game_state;
                       </div>
                     </td>
                     <td>
-                      <Avatar
-                        team_name={r.teamName}
-                        avatar_size="20"
-                        client:idle
-                      />
+                      <Avatar teamName={r.teamName} size="20" client:idle />
 
                       <Link
                         href={`/players/${r.teamName.replaceAll(" ", "-")}`}
