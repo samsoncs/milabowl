@@ -7,19 +7,20 @@ module.exports = {
 	darkMode: 'class',
 	theme: {
 		extend: {
-			boxShadow:{
+			boxShadow: {
 				'sm': 'rgb(149 157 165 / 15%) 0px 8px 24px',
 				'sm-dark': 'rgb(0 0 0 / 5%) 0px 8px 24px'
 			},
 			fontFamily: {
 				sans: ["Inter", ...defaultTheme.fontFamily.sans],
 			},
-			colors:{
+			colors: {
 				'dark-text': colors.violet[100],
 			}
 		},
 	},
 	plugins: [
 		require('@tailwindcss/typography'),
+		require('flowbite/plugin')
 	],
 }
