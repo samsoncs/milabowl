@@ -18,7 +18,7 @@ interface UserProfiles {
     [key: string]: UserProfileInfo
 }
 
-const imageRoot = "avatars/";
+const imageRoot = "/avatars/";
 const userProfileDict: UserProfiles = {
     "Haalandslaget": {
         "info": "Mila-source founder and evangelist",
