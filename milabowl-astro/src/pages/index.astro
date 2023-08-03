@@ -1,5 +1,6 @@
 ---
 import Avatar from "../components/core/Avatar";
+import AvatarProvider from "../components/core/AvatarProvider.astro";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/core/Card.astro";
 import Table from "../components/core/Table/Table.astro";
@@ -8,8 +9,13 @@ import game_state from "../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../src/game_state/gameState";
 import Link from "../components/core/Link.astro";
 import PositionDelta from "../components/core/PositionDelta.astro";
-
 const milaResults: MilaResultsDTO = game_state;
+
+
+const images : ImageMetadata[] = await Astro.glob("../assets/*").then(files => {
+  return files.map(file => file.default);
+});
+
 ---
 
 <Layout title="Milabowl - Dashboard">
@@ -58,7 +64,9 @@ const milaResults: MilaResultsDTO = game_state;
                       </div>
                     </td>
                     <td>
-                      <Avatar teamName={r.teamName} size="20" client:idle />
+                      <Avatar teamName={r.teamName} client:idle >
+                        <AvatarProvider userName={r.userName}/>
+                      </Avatar>
 
                       <Link
                         href={`/players/${r.teamName.replaceAll(" ", "-")}`}

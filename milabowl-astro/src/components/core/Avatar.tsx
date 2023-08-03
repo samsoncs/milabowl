@@ -3,7 +3,7 @@ import party from "party-js";
 
 export interface AvatarProps {
     teamName: string;
-    size: string; // currently not used
+    children: any;
 }
 
 interface UserProfileInfo {
@@ -86,7 +86,7 @@ const userProfileDict: UserProfiles = {
 
 };
 
-const Avatar: React.FC<AvatarProps> = ({ teamName, size }) => {
+const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
     let user: UserProfileInfo = {
         "info": "Nobody has no name",
         "name": "John Doe",
@@ -99,19 +99,25 @@ const Avatar: React.FC<AvatarProps> = ({ teamName, size }) => {
     }
     return (
         <div className={styles.avatarDiv}>
-            <img
+            <div data-popover-target={"popover-user-profile" + teamName.replaceAll(" ", "")} className={styles.avatar + " w-6 md:w-7 lg:w-9"}> 
+                {children}
+            </div>
+            {/* <img
                 className={styles.avatar + " w-5 md:w-7 lg:w-9"}
                 src={user["avatarSrc"]}
                 //onMouseOver={(e) => console.log(e)}
                 //width={size}
                 data-popover-target={"popover-user-profile" + teamName.replaceAll(" ", "")}
-            />
+            /> */}
             <div data-popover id={"popover-user-profile" + teamName.replaceAll(" ", "")} role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                 <div className="p-3">
                     <div className="flex items-center justify-between mb-2">
-                        <a href="#">
+                        {/* <a href="#">
                             <img className="w-24 h-24 rounded-full" src={user["avatarSrc"]} alt="Avatar pic" />
-                        </a>
+                        </a> */}
+                         <div className={styles.avatar + " w-24 h-24 rounded-full"}> 
+                            {children}
+                        </div>
                         <div>
                             <button
                                 type="button"
