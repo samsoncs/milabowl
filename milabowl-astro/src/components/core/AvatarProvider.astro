@@ -12,4 +12,4 @@ const images : ImageMetadata[] = await Astro.glob("../../assets/*").then(files =
 });
 
 ---
-<Image style="border-radius: 999px" src={images.find(i => userName.toLowerCase().includes(i.src.toLowerCase().split('.')[0].split('/').pop()!.replace(".png", "")))!} alt={`Avatar for ${userName}`}> </Image>
+<Image style="border-radius: 999px" src={images.find(i => userName.toLowerCase().replaceAll(" ", "_").includes(i.src.toLowerCase().split('.')[0].split('/').pop()!.replace(".png", "")))!} alt={`Avatar for ${userName}`}> </Image>
