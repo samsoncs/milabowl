@@ -30,6 +30,8 @@ public class MilaGWScore
     public decimal Mushroom { get; set; }
     public decimal BlueShell { get; set; }
     public decimal GreenShell { get; set; }
+    public BombState? BombState { get; set; }
+    public decimal BombPoints { get; set; }
     
     public void CalculateMilaPoints()
     {
@@ -61,4 +63,13 @@ public class MilaGWScore
             MilaPoints += Mushroom;
         }
     }
+}
+
+public enum BombState
+{
+    Receiving,
+    HandingOver_Chip,
+    HandingOver_H2H,
+    Holding,
+    Exploded
 }
