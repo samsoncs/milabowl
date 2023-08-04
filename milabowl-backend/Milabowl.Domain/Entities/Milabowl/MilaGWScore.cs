@@ -26,7 +26,11 @@ public class MilaGWScore
     public decimal UniqueCap { get; set; }
     public decimal SixtyNineSub { get; set; }
     public decimal TrendyBitch { get; set; }
-
+    public string? ActiveChip { get; set; }
+    public decimal Mushroom { get; set; }
+    public decimal BlueShell { get; set; }
+    public decimal GreenShell { get; set; }
+    
     public void CalculateMilaPoints()
     {
         MilaPoints = CapFail
@@ -44,5 +48,17 @@ public class MilaGWScore
                      + UniqueCap
                      + SixtyNineSub
                      + TrendyBitch;
+    }
+
+    public void CalculateChipPoints()
+    {
+        MilaPoints += BlueShell;
+        MilaPoints += GreenShell;
+        
+        if (ActiveChip == "3xc")
+        {
+            Mushroom = MilaPoints;
+            MilaPoints += Mushroom;
+        }
     }
 }

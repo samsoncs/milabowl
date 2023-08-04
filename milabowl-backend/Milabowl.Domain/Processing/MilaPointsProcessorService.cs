@@ -120,7 +120,8 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     HeadToHeadMeta = _milaRuleBusiness.GetHeadToHeadMetaScore(headToHeadDto),
                     UniqueCap = _milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups),
                     SixtyNineSub = _milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent),
-                    TrendyBitch = _milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer)
+                    TrendyBitch = _milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer),
+                    ActiveChip = user.Lineups?.First(l => l.Event.EventId == evt.EventId)?.ActiveChip
                 };
 
                 milaGameweekScores.Add(milaPoints);
@@ -145,10 +146,37 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                 }
                 points2++;
             }
-
+            
             foreach (var mgs in milaGameweekScores)
             {
                 mgs.CalculateMilaPoints();
+            }
+            
+            // PowerUp / Chip calculation
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "wildcard"))
+            {
+                var currentGameweekScore =
+                    milaGameweekScores.FirstOrDefault(mgw => mgw.UserName == lineup.User.UserName);
+                var nextContender = milaGameweekScores.FirstOrDefault(m => m.GWPosition == currentGameweekScore?.GWPosition - 1);
+                if (nextContender is not null)
+                {
+                    nextContender.GreenShell = -3;
+                }
+                else if(currentGameweekScore is not null)
+                {
+                    currentGameweekScore.GreenShell = - 3;
+                }
+            }
+            
+            if (evt.Lineups.Any(l => l.ActiveChip == "bboost"))
+            {
+                var firstPlace = milaGameweekScores.MaxBy(m => m.MilaPoints)!;
+                firstPlace.BlueShell = -5;
+            }
+
+            foreach (var mgs in milaGameweekScores)
+            {
+                mgs.CalculateChipPoints();
             }
 
             await _repository.AddMilaGwScores(milaGameweekScores);

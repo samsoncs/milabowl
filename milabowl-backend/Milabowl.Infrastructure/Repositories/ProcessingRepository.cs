@@ -21,9 +21,12 @@ namespace Milabowl.Infrastructure.Repositories
                 .Include(e => e.Lineups)
                     .ThenInclude(l => l.PlayerEventLineups)
                         .ThenInclude(pel => pel.PlayerEvent)
+                .Include(e => e.Lineups)
+                    .ThenInclude(l => l.User)
                 .Where(e => e.Finished && e.DataChecked)
                 .OrderBy(g => g.GameWeek)
                 .AsNoTracking()
+                .AsSplitQuery()
                 .ToListAsync();
         }
 
@@ -40,6 +43,7 @@ namespace Milabowl.Infrastructure.Repositories
                     .ThenInclude(hu => hu.Event)
                 .Where(u => u.Lineups.Any(l => l.Event.EventId == evtId))
                 .AsNoTracking()
+                .AsSplitQuery()
                 .ToListAsync();
         }
 
