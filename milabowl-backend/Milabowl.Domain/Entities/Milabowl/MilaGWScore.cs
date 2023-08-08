@@ -20,6 +20,7 @@ public class MilaGWScore
     public decimal GWScore { get; set; }
     public int GameWeek { get; set; }
     public string UserName { get; set; }
+    public int UserId { get; set; }
     public decimal MilaPoints { get; set; }
     public decimal HeadToHeadMeta { get; set; }
     //public decimal HeadToHeadStrongOpponentWin { get; set; }
