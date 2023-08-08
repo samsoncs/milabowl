@@ -31,6 +31,12 @@ const { resultsForGameweek, isOverallScore } = Astro.props;
     <th class="right-align">69 Sub</th>
     <th class="right-align">Unq Cap</th>
     <th class="right-align">Trnd</th>
+    {!isOverallScore && <th class="right-align">Chip</th>}
+    <th class="right-align">GS</th>
+    <th class="right-align">RS</th>
+    <th class="right-align">Mshrm</th>
+    <th class="right-align">Bn</th>
+    <th class="right-align">Bmb</th>
     {!isOverallScore && <th class="right-align">GW MP</th>}
     <th class="right-align">Total MP</th>
   </tr>
@@ -68,6 +74,12 @@ const { resultsForGameweek, isOverallScore } = Astro.props;
           <td class="right-align">{r.milaPoints.sixtyNineSub}</td>
           <td class="right-align">{r.milaPoints.uniqueCap}</td>
           <td class="right-align">{r.milaPoints.trendyBitch}</td>
+          {!isOverallScore && <td class="right-align">{r.milaPoints.activeChip}</td>}
+          <td class="right-align">{r.milaPoints.greenShell}</td>
+          <td class="right-align">{r.milaPoints.redShell}</td>
+          <td class="right-align">{r.milaPoints.mushroom}</td>
+          <td class="right-align">{r.milaPoints.banana}</td>
+          <td class="right-align">{r.milaPoints.bombPoints}</td>
           {!isOverallScore && <td class="right-align">{r.milaPoints.total}</td>}
           <td class="right-align font-bold text-indigo-900 dark:text-orange-200">
             {r.cumulativeMilaPoints}

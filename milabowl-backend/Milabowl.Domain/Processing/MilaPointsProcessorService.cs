@@ -22,8 +22,20 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
 
     public async Task UpdateMilaPoints()
     {
-        var bombRounds = new[] { 2, 5, 6, 14 };
+        var random = new Random(42);
+        var bombRounds = new List<int>();
 
+        while (bombRounds.Count < 7)
+        {
+            var nextRandom = random.Next(2, 38);
+            if (bombRounds.Contains(nextRandom))
+            {
+                continue;
+            }
+            
+            bombRounds.Add(nextRandom);
+        }
+        
         var events = await _repository.GetEventsToProcess();
 
         foreach (var evt in events)

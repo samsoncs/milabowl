@@ -29,6 +29,13 @@ export interface GameWeekResult {
     sixtyNineSub: number;
     uniqueCap: number;
     trendyBitch: number;
+    activeChip: string | null;
+    greenShell: number;
+    redShell: number;
+    banana: number;
+    mushroom: number;
+    bombPoints: number;
+    bombState: string | null;
     total: number;
   }
   
