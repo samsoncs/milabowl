@@ -28,8 +28,9 @@ public class MilaGWScore
     public decimal TrendyBitch { get; set; }
     public string? ActiveChip { get; set; }
     public decimal Mushroom { get; set; }
-    public decimal BlueShell { get; set; }
+    public decimal RedShell { get; set; }
     public decimal GreenShell { get; set; }
+    public decimal Banana { get; set; }
     public BombState? BombState { get; set; }
     public decimal BombPoints { get; set; }
     
@@ -54,8 +55,9 @@ public class MilaGWScore
 
     public void CalculateChipPoints()
     {
-        MilaPoints += BlueShell;
+        MilaPoints += RedShell;
         MilaPoints += GreenShell;
+        MilaPoints += Banana;
         
         if (ActiveChip == "3xc")
         {

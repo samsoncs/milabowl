@@ -11,4 +11,5 @@ public interface IProcessingRepository
     Task<(Player? mostTradedIn, Player? mostTradedOut)> GetMostTradedPlayers(Guid eventId);
     Task<UserHeadToHeadEvent?> GetOpponentHeadToHead(int userHeadToHeadEventId, Guid userId);
     Task AddMilaGwScores(IList<MilaGWScore> milaGwScores);
+    Task<string> GetUsernameDirectlyInFront(int gameWeek, string userName);
 }

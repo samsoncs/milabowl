@@ -156,7 +156,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             }
             
             // PowerUp / Chip calculation
-            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "wildcard"))
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "bboost"))
             {
                 var currentGameweekScore =
                     milaGameweekScores.FirstOrDefault(mgw => mgw.UserName == lineup.User.UserName);
@@ -167,14 +167,31 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                 }
                 else if(currentGameweekScore is not null)
                 {
-                    currentGameweekScore.GreenShell = - 3;
+                    currentGameweekScore.GreenShell = -3;
                 }
             }
             
-            if (evt.Lineups.Any(l => l.ActiveChip == "bboost"))
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "wildcard"))
             {
-                var firstPlace = milaGameweekScores.MaxBy(m => m.MilaPoints)!;
-                firstPlace.BlueShell = -5;
+                var currentGameweekScore =
+                    milaGameweekScores.FirstOrDefault(mgw => mgw.UserName == lineup.User.UserName);
+                var prevContender = milaGameweekScores.FirstOrDefault(m => m.GWPosition == currentGameweekScore?.GWPosition + 1);
+                if (prevContender is not null)
+                {
+                    prevContender.Banana = -3;
+                }
+                else if(currentGameweekScore is not null)
+                {
+                    currentGameweekScore.Banana = -3;
+                }
+            }
+
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "freehit"))
+            {
+                var userInFront = await _repository.GetUsernameDirectlyInFront(evt.GameWeek, lineup.User.UserName);
+                var userInFrontGameWeek =
+                    milaGameweekScores.First(mgw => mgw.UserName == userInFront);
+                userInFrontGameWeek.RedShell = -3;
             }
 
             foreach (var mgs in milaGameweekScores)
@@ -183,7 +200,6 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             }
 
             // Bomb
-   
             var bombHolder = milaGameweekScores.First(b => b.UserName == _BombHolder);
             bombHolder.BombState = BombState.Holding;
 
@@ -201,8 +217,31 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             }
             else if (bombHolderH2H.Win == 1)
             {
-                var bombRecipient = milaGameweekScores.FirstOrDefault(m => m.GWPosition == bombHolder?.GWPosition - 1) 
-                                    ?? milaGameweekScores.OrderBy(m => m.GWPosition).Skip(1).First();
+                var recipientH2H = evt.PlayerHeadToHeadEvents.FirstOrDefault(p =>
+                    p.FantasyUserHeadToHeadEventID == bombHolderH2H.FantasyUserHeadToHeadEventID
+                    && p.User.UserName != bombHolderH2H.User.UserName
+                );
+
+                MilaGWScore bombRecipient;
+                if(recipientH2H is not null)
+                {
+                    bombRecipient =
+                        milaGameweekScores.First(m => m.UserName == recipientH2H.User.UserName);
+                }
+                else
+                {
+                    bombRecipient = milaGameweekScores
+                        .OrderByDescending(mgw => mgw.MilaPoints)
+                        .First();
+
+                    if (bombRecipient.UserName == bombHolder.UserName)
+                    {
+                        bombRecipient = milaGameweekScores
+                            .OrderByDescending(mgw => mgw.MilaPoints)
+                            .Skip(1)
+                            .First();
+                    }
+                }
 
                 bombHolder.BombState = BombState.HandingOver_H2H;
                 bombRecipient.BombState = BombState.Receiving;

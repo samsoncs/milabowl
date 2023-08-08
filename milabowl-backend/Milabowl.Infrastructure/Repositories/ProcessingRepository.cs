@@ -23,6 +23,8 @@ namespace Milabowl.Infrastructure.Repositories
                         .ThenInclude(pel => pel.PlayerEvent)
                 .Include(e => e.Lineups)
                     .ThenInclude(l => l.User)
+                .Include(e => e.PlayerHeadToHeadEvents)
+                    .ThenInclude(h2h => h2h.User)
                 .Where(e => e.Finished && e.DataChecked)
                 .OrderBy(g => g.GameWeek)
                 .AsNoTracking()
@@ -45,6 +47,29 @@ namespace Milabowl.Infrastructure.Repositories
                 .AsNoTracking()
                 .AsSplitQuery()
                 .ToListAsync();
+        }
+
+        public async Task<string> GetUsernameDirectlyInFront(int gameWeek, string userName)
+        {
+            var scores = await _context
+                .MilaGWScores
+                .Where(m => m.GameWeek < gameWeek)
+                .Select(m => new { m.UserName, Points = m.GWScore })
+                .ToListAsync();
+                
+            var scoresByUser = scores.GroupBy(s => s.UserName).Select(grp => new {
+                UserName = grp.Key,
+                Score = grp.ToList().Sum(s => s.Points)
+            }).OrderBy(s => s.Score).ToList();
+
+            var userScore = scoresByUser.First(s => s.UserName == userName);
+            var nextUser = scoresByUser.FirstOrDefault(s => s.Score > userScore.Score);
+            if (nextUser is null)
+            {
+                nextUser = scoresByUser[^2];
+            }
+
+            return nextUser.UserName;
         }
 
         public async Task<bool> IsEventAlreadyCalculated(string eventName, string userEntryName)
