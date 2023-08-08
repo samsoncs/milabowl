@@ -69,6 +69,6 @@ static async Task Import(IServiceProvider services)
 
     var json = JsonSerializer.Serialize(milaResults, new JsonSerializerOptions{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
     
-    await File.WriteAllTextAsync("C:\\Programming\\Other\\milabowl\\game_state.json", json);
+    await File.WriteAllTextAsync("C:\\Users\\SamsonSvendsen\\Garbage\\game_state.json", json);
     Console.WriteLine("Finished importing data");
 }

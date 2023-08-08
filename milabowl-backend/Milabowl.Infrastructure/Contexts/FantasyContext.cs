@@ -102,6 +102,11 @@ namespace Milabowl.Infrastructure.Contexts
                 .WithOne(pel => pel.PlayerEvent)
                 .HasForeignKey(pel => pel.FkPlayerEventId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<MilaGWScore>()
+                .Property(p => p.BombState)
+                .HasMaxLength(100)
+                .HasConversion<string>();
             
             modelBuilder.Entity<UserHeadToHeadEvent>();
         }

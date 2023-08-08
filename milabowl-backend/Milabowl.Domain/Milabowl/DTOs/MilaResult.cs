@@ -7,6 +7,7 @@ public class MilaResult
     public decimal GWScore { get; set; }
     public string TeamName { get; set; }
     public string UserName { get; set; }
+    public int UserId { get; set; }
     public decimal GWPosition { get; set; }
     public int GameWeek { get; set; }
     public decimal? CumulativeMilaPoints { get; set; }

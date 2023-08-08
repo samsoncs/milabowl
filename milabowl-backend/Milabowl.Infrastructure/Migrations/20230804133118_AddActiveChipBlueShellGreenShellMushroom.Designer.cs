@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Milabowl.Infrastructure.Contexts;
 
@@ -11,9 +12,11 @@ using Milabowl.Infrastructure.Contexts;
 namespace Milabowl.Migrations
 {
     [DbContext(typeof(FantasyContext))]
-    partial class FantasyContextModelSnapshot : ModelSnapshot
+    [Migration("20230804133118_AddActiveChipBlueShellGreenShellMushroom")]
+    partial class AddActiveChipBlueShellGreenShellMushroom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -632,18 +635,11 @@ namespace Milabowl.Migrations
                     b.Property<string>("ActiveChip")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Banana")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("BenchFail")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("BombPoints")
+                    b.Property<decimal>("BlueShell")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("BombState")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("CapDef")
                         .HasColumnType("decimal(18,2)");
@@ -697,9 +693,6 @@ namespace Milabowl.Migrations
                     b.Property<decimal>("RedCard")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("RedShell")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("SixtyNineSub")
                         .HasColumnType("decimal(18,2)");
 
@@ -712,9 +705,6 @@ namespace Milabowl.Migrations
 
                     b.Property<decimal>("UniqueCap")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()

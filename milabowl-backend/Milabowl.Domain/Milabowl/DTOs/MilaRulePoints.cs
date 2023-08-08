@@ -18,4 +18,11 @@ public class MilaRulePoints
     public decimal UniqueCap { get; set; }
     public decimal TrendyBitch { get; set; }
     public decimal? Total { get; set; }
+    public string? ActiveChip { get; set; }
+    public decimal Mushroom { get; set; }
+    public decimal RedShell { get; set; }
+    public decimal GreenShell { get; set; }
+    public decimal Banana { get; set; }
+    public string? BombState { get; set; }
+    public decimal BombPoints { get; set; }
 }

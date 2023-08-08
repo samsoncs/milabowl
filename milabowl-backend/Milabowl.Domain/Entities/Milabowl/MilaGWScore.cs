@@ -20,13 +20,21 @@ public class MilaGWScore
     public decimal GWScore { get; set; }
     public int GameWeek { get; set; }
     public string UserName { get; set; }
+    public int UserId { get; set; }
     public decimal MilaPoints { get; set; }
     public decimal HeadToHeadMeta { get; set; }
     //public decimal HeadToHeadStrongOpponentWin { get; set; }
     public decimal UniqueCap { get; set; }
     public decimal SixtyNineSub { get; set; }
     public decimal TrendyBitch { get; set; }
-
+    public string? ActiveChip { get; set; }
+    public decimal Mushroom { get; set; }
+    public decimal RedShell { get; set; }
+    public decimal GreenShell { get; set; }
+    public decimal Banana { get; set; }
+    public BombState? BombState { get; set; }
+    public decimal BombPoints { get; set; }
+    
     public void CalculateMilaPoints()
     {
         MilaPoints = CapFail
@@ -45,4 +53,26 @@ public class MilaGWScore
                      + SixtyNineSub
                      + TrendyBitch;
     }
+
+    public void CalculateChipPoints()
+    {
+        MilaPoints += RedShell;
+        MilaPoints += GreenShell;
+        MilaPoints += Banana;
+        
+        if (ActiveChip == "3xc")
+        {
+            Mushroom = MilaPoints;
+            MilaPoints += Mushroom;
+        }
+    }
+}
+
+public enum BombState
+{
+    Receiving,
+    HandingOver_Chip,
+    HandingOver_H2H,
+    Holding,
+    Exploded
 }
