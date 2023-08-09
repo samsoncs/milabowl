@@ -1,7 +1,7 @@
 ---
 title: "Team Name Scorecard"
 date: 2023-08-07
-author: MilaCorp / MilaysianBucketBoys
+author: Simen
 tags: [Awards]
 ---
 |                          | **Henriks Håndjagere** | **AC Mila** | **The KaneSaw Massacre** | **$jeik og betalt** | **Masturbinho** | **Skodad Octavia** | **SplitteMilaBramseil** | **Milayd's Cmilax** | **MilaysianBucketBoys** | **Score** | **Rank** (MilaPoints) |

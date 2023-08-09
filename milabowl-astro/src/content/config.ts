@@ -5,7 +5,7 @@ const blogCollection = defineCollection({
         title: z.string().max(60),
         date: z.date(),
         author: z.enum(["MilaCorp", "Sam", "Anders", "Simen", "Henrik", "Mikkel", "Malte", "Eivind", "Markus", "Martin"]),
-        tags: z.enum(["GW Summary", "Announcement", "Tech"]).array().optional().default([])
+        tags: z.enum(["GW Summary", "Announcement", "Tech", "Awards"]).array().optional().default([])
     })
 });
 

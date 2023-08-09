@@ -1,9 +1,9 @@
 ---
 title: Hyttetur og beste lagnavn
-date: 2023-08-06
+date: 2023-08-09
 author: "Anders"
 description: Historiens første kombinerte reveal og avstemning av beste lagnavn tok plass på Krokskogen!
-tags: [Announcement]
+tags: [Awards]
 ---
 
 I naturskjønne omgivelser i Krokskogen i Nordmarka var det duket for historiens første avstemning av beste lagnavn _før_ sesongen begynner! 
