@@ -1,5 +1,10 @@
 import styles from "./Avatar.module.css";
 import party from "party-js";
+import PowerUp from "./PowerUp"
+import game_state from "../../game_state/game_state.json";
+import type { ResultsByUser, GameWeekResult } from "../../game_state/gameState";
+
+const milaResultsByUser: ResultsByUser = game_state.resultsByUser;
 
 export interface AvatarProps {
     teamName: string;
@@ -97,9 +102,34 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
     if (teamName in userProfileDict) {
         user = userProfileDict[teamName];
     }
+
+    // List of existing power ups
+    let powerUpGWs = {
+        "3xc": "",
+        "wildcard": "",
+        "freehit": "",
+        "bboost": "",
+    };
+    // For each power up, determine if (and when) it has been used by the current player
+    const userResults: GameWeekResult[] = milaResultsByUser.find(e => e.teamName == teamName).results;
+
+    for (const [key, value] of Object.entries(powerUpGWs)) {
+        let gw = userResults.find(e => e.milaPoints.activeChip == key)?.gameWeek;
+        powerUpGWs[key] = gw;
+    }
+
+    if (teamName.includes("Start")) {
+        powerUpGWs = {
+            "3xc": "",
+            "wildcard": "",
+            "freehit": "",
+            "bboost": "",
+        };
+    }
+
     return (
         <div className={styles.avatarDiv}>
-            <div data-popover-target={"popover-user-profile" + teamName.replaceAll(" ", "")} className={styles.avatar + " w-6 md:w-7 lg:w-9"}> 
+            <div data-popover-target={"popover-user-profile" + teamName.replaceAll(" ", "")} className={styles.avatar + " w-6 md:w-7 lg:w-9"}>
                 {children}
             </div>
             {/* <img
@@ -109,13 +139,13 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
                 //width={size}
                 data-popover-target={"popover-user-profile" + teamName.replaceAll(" ", "")}
             /> */}
-            <div data-popover id={"popover-user-profile" + teamName.replaceAll(" ", "")} role="tooltip" className="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+            <div data-popover id={"popover-user-profile" + teamName.replaceAll(" ", "")} role="tooltip" className="absolute z-10 invisible inline-block w-81 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                 <div className="p-3">
                     <div className="flex items-center justify-between mb-2">
                         {/* <a href="#">
                             <img className="w-24 h-24 rounded-full" src={user["avatarSrc"]} alt="Avatar pic" />
                         </a> */}
-                         <div className={styles.avatar + " w-24 h-24 rounded-full"}> 
+                        <div className={styles.avatar + " w-24 h-24 rounded-full"}>
                             {children}
                         </div>
                         <div>
@@ -133,7 +163,26 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
                         <a href="#" className="hover:underline">@{user.name}</a>
                     </p>
                     <p className="mb-4 text-sm">{user.info}</p>
+
+                    <div className="text-white pb-1"> Power ups: (played in gw)
+                    </div>
                     <ul className="flex text-sm">
+                        <li>
+                            <PowerUp type="3xc" gwPlayed={powerUpGWs["3xc"]}></PowerUp>
+                        </li>
+                        <li>
+                            <PowerUp type="wildcard" gwPlayed={powerUpGWs["wildcard"]}></PowerUp>
+                        </li>
+                        <li>
+                            <PowerUp type="freehit" gwPlayed={powerUpGWs["freehit"]}></PowerUp>
+                        </li>
+                        <li>
+                            <PowerUp type="bboost" gwPlayed={powerUpGWs["bboost"]}></PowerUp>
+                        </li>
+                    </ul>
+
+
+                    <ul className="flex text-sm pt-2">
                         <li className="mr-2">
                             <a href="#" className="hover:underline">
                                 <span className="font-semibold text-gray-900 dark:text-white">{user.following} </span>
