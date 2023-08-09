@@ -44,7 +44,7 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type }) => {
         // If chip is used, set the GW label in a gray-tone
         color = "stone";
         classShadow = "";
-        classHover = " grayscale-[80%]";
+        classHover = " grayscale-[60%]";
         playedWeekIndicator = <div className={"relative inline-block text-end p-1 " + (gwPlayed == "-" ? "pr-3" : "pr-2") + " align-middle w-11 h-7 text-xs font-bold text-gray bg-" + color + "-800 hover:bg-" + color + "-900 border-2 border-white rounded-br-full rounded-tr-full right-3 z-1 dark:border-gray-900"}>{gwPlayed} </div>;
     }
     let powerUpIcon;
