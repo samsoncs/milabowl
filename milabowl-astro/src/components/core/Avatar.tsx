@@ -41,8 +41,8 @@ const userProfileDict: UserProfiles = {
     },
     "Haalandaise Saus": {
         "info": "Mila try-hard",
-        "followers": 0,
-        "following": 0,
+        "followers": 1,
+        "following": 1,
         "name": "eivind",
         "avatarSrc": imageRoot + "eivind.png"
     },
@@ -168,16 +168,16 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
                     </div>
                     <ul className="flex text-sm">
                         <li>
-                            <PowerUp type="3xc" gwPlayed={powerUpGWs["3xc"]}></PowerUp>
+                            <PowerUp type="3xc" playerName={user.name.replaceAll(" ", "")} gwPlayed={powerUpGWs["3xc"]} />
                         </li>
                         <li>
-                            <PowerUp type="wildcard" gwPlayed={powerUpGWs["wildcard"]}></PowerUp>
+                            <PowerUp type="wildcard" playerName={user.name.replaceAll(" ", "")} gwPlayed={powerUpGWs["wildcard"]} />
                         </li>
                         <li>
-                            <PowerUp type="freehit" gwPlayed={powerUpGWs["freehit"]}></PowerUp>
+                            <PowerUp type="freehit" playerName={user.name.replaceAll(" ", "")} gwPlayed={powerUpGWs["freehit"]} />
                         </li>
                         <li>
-                            <PowerUp type="bboost" gwPlayed={powerUpGWs["bboost"]}></PowerUp>
+                            <PowerUp type="bboost" playerName={user.name.replaceAll(" ", "")} gwPlayed={powerUpGWs["bboost"]} />
                         </li>
                     </ul>
 

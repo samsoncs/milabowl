@@ -1,9 +1,11 @@
 import iconBomb from "./../../assets/icon_bomb.svg";
+import PowerUpModal from "./PowerUpModal"
 import React, { useState } from "react";
 
 export interface PowerUpProps {
     type: string;  // One of 3xc, wildcard, freehit, bboost
     gwPlayed?: string | null; // Make this nullable?
+    playerName: string; // To know which user card to create modal on
 }
 
 interface iTypeToColor {
@@ -16,6 +18,45 @@ const typeToColor: iTypeToColor = {
     "freehit": "green",
     "bboost": "red"
 };
+interface PowerUpInfo {
+    color: string;
+    icon: string;
+    name: string;
+    explanation: string;
+};
+
+interface TypeDetails {
+    [key: string]: PowerUpInfo;
+};
+
+const num_points = "3";
+
+const powerUpDetails: TypeDetails = {
+    "3xc": {
+        "color": "purple",
+        "icon": "🥊",
+        "name": "Red Shell",
+        "explanation": "-" + num_points + " to the playah' in front of you (in MilaPts) overall. If you're in the lead, targets 2nd place",
+    },
+    "wildcard": {
+        "color": "yellow",
+        "icon": "🍌",
+        "name": "Banana",
+        "explanation": "-" + num_points + " to the playah behind you (in MilaPts) overall",
+    },
+    "freehit": {
+        "color": "green",
+        "icon": "🐢",
+        "name": "Green Shell",
+        "explanation": "-" + num_points + " to the playah' in front of you (in MilaPts) this GW. If you're in the lead, targets 2nd place",
+    },
+    "bboost": {
+        "color": "red",
+        "icon": "🍄",
+        "name": "Mushroom",
+        "explanation": "+50% MilaPts this GW, excluding effects from 💣 and other power ups",
+    }
+};
 
 const icon_envelope =
     <svg className="relative w-3 h-3 z-10" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
@@ -23,8 +64,10 @@ const icon_envelope =
         <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
     </svg>;
 
-const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type }) => {
-    let color = typeToColor[type];
+const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type, playerName }) => {
+    const powerUp: PowerUpInfo = powerUpDetails[type];
+    //let color = typeToColor[type];
+    let color = powerUp.color;
     let playedWeekIndicator;
 
     // Set chip shadow based on whether it is played or not
@@ -48,15 +91,7 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type }) => {
         playedWeekIndicator = <div className={"relative inline-block text-end p-1 " + (gwPlayed == "-" ? "pr-3" : "pr-2") + " align-middle w-11 h-7 text-xs font-bold text-gray bg-" + color + "-800 hover:bg-" + color + "-900 border-2 border-white rounded-br-full rounded-tr-full right-3 z-1 dark:border-gray-900"}>{gwPlayed} </div>;
     }
     let powerUpIcon;
-    if (type == "3xc") {
-        powerUpIcon = "🥊";
-    } else if (type == "wildcard") {
-        powerUpIcon = "🍌";
-    } else if (type == "freehit") {
-        powerUpIcon = "🐢";
-    } else if (type == "bboost") {
-        powerUpIcon = "🍄";
-    }
+    powerUpIcon = powerUp.icon;
 
     /* By including all dynamically used colors in a comment, Tailwind will pull the styling for that class. See: https://stackoverflow.com/a/74959709
     bg-blue-800 hover:bg-blue-900 dark:border-gray-900
@@ -69,14 +104,17 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type }) => {
 
     const [hover, setHover] = useState(false);
 
+    const modal_id = "popup-modal-" + type + playerName;
+
     return (
         <div>
             <div className="items-center justify-center align-middle" >
-                <button type="button" className={classShadow + " relative z-10 inline-flex p-2 text-sm font-medium text-center text-white bg-" + color + "-700 rounded-full " + classHover + " dark:bg-" + color + "-600 dark:border-" + color + "-900"}>
+                <button type="button" data-modal-target={modal_id} data-modal-toggle={modal_id} className={classShadow + " relative z-10 inline-flex p-2 text-sm font-medium text-center text-white bg-" + color + "-700 rounded-full " + classHover + " dark:bg-" + color + "-600 dark:border-" + color + "-900"}>
                     {powerUpIcon}
                 </button>
                 {playedWeekIndicator}
             </div>
+            <PowerUpModal modal_id={modal_id} icon={powerUp.icon} info={powerUp.explanation} name={powerUp.name} />
         </div >
     )
 };
