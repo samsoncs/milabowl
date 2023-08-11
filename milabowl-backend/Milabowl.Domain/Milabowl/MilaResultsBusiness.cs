@@ -52,6 +52,9 @@ public class MilaResultsBusiness: IMilaResultsBusiness
                                 BombPoints = s.Sum(a => a.MilaPoints.BombPoints),
                                 BombState = lastResult?.MilaPoints.BombState,
                                 ActiveChip = lastResult?.MilaPoints.ActiveChip,
+                                DarthMaulPoints = s.Sum(a => a.MilaPoints.DarthMaulPoints),
+                                IsDarthMaul = lastResult?.MilaPoints.IsDarthMaul,
+                                IsDarthMaulContender = lastResult?.MilaPoints.IsDarthMaulContender,
                                 Total = lastResult?.MilaPoints.Total,
                             },
                             GWPosition = s.Sum(a => a.GWPosition),
@@ -133,6 +136,9 @@ public class MilaResultsBusiness: IMilaResultsBusiness
                 BombPoints = m.BombPoints,
                 BombState = m.BombState?.ToString(),
                 ActiveChip = m.ActiveChip,
+                DarthMaulPoints = m.DarthMaulPoints,
+                IsDarthMaul = m.IsDarthMaul,
+                IsDarthMaulContender = m.IsDarthMaulContender,
                 Total = m.MilaPoints
             },
 

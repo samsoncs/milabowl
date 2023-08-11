@@ -40,7 +40,7 @@ namespace Milabowl.Domain.Processing
         }
         public decimal GetCapDefScore(IList<MilaRuleData> playerEvents, Player currentUserCaptain)
         {
-            return playerEvents.Any(pe => pe.PlayerPosition == 2 && currentUserCaptain.PlayerId == pe.Player.PlayerId) ? 1 : 0;
+            return playerEvents.Any(pe => pe.PlayerPosition == 2 && currentUserCaptain.PlayerId == pe.Player.PlayerId && pe.Minutes > 45) ? 1 : 0;
         }
 
         public decimal GetSixtyNine(IList<MilaRuleData> playerEvents)
@@ -122,10 +122,10 @@ namespace Milabowl.Domain.Processing
         public decimal GetUniqueCaptainScore(Player currentUserCaptain, IList<Lineup> lineupsThisWeek)
         {
             var isUnique = currentUserCaptain != null && lineupsThisWeek.SelectMany(l => l.PlayerEventLineups)
-                .Where(pel => pel.IsCaptain)
+                .Where(pel => pel.IsCaptain && pel.PlayerEvent.Minutes > 45)
                 .Count(pel => pel.PlayerEvent.FkPlayerId == currentUserCaptain?.PlayerId) == 1;
 
-            return isUnique && currentUserCaptain.Minutes > 45 ? 2 : 0;
+            return isUnique ? 2 : 0;
         }
 
         public decimal GetGWScore(IList<MilaRuleData> playerEvents)
