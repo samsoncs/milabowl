@@ -171,7 +171,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             }
             
             // PowerUp / Chip calculation
-            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "bboost"))
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "freehit"))
             {
                 var currentGameweekScore =
                     milaGameweekScores.FirstOrDefault(mgw => mgw.UserName == lineup.User.UserName);
@@ -201,7 +201,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                 }
             }
 
-            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "freehit"))
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "3xc"))
             {
                 var userInFront = await _repository.GetUsernameDirectlyInFront(evt.GameWeek, lineup.User.UserName);
                 var userInFrontGameWeek =

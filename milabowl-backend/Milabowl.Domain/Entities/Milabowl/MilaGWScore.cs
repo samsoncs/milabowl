@@ -63,7 +63,7 @@ public class MilaGWScore
         MilaPoints += GreenShell;
         MilaPoints += Banana;
         
-        if (ActiveChip == "3xc")
+        if (ActiveChip == "bboost")
         {
             Mushroom = MilaPoints;
             MilaPoints += Mushroom;
