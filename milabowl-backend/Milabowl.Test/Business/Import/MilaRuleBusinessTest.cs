@@ -102,12 +102,14 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldGetPointIfDefCapped()
         {
+            var player = new Player { PlayerId = Guid.NewGuid() };
+            
             var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleData{ PlayerPosition = 2, Multiplier = 2 },
+                new MilaRuleData{ PlayerPosition = 2, Multiplier = 2, Player = player },
             };
 
-            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDatas);
+            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDatas, player);
 
             capKeepScore.Should().Be(1);
         }
@@ -115,13 +117,15 @@ namespace Milabowl.Test.Business.Import
         [Test]
         public void ShouldNotGetCapDefPointsIfDefNotCapped()
         {
+            var player = new Player { PlayerId = Guid.NewGuid() };
+
             var milaRuleDatas = new List<MilaRuleData>
             {
-                new MilaRuleData{ PlayerPosition = 2, Multiplier = 1 },
-                new MilaRuleData{ PlayerPosition = 2, Multiplier = 0 },
+                new MilaRuleData{ PlayerPosition = 2, Multiplier = 1, Player = player },
+                new MilaRuleData{ PlayerPosition = 2, Multiplier = 0, Player = player  },
             };
 
-            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDatas);
+            var capKeepScore = this._milaRuleBusiness.GetCapDefScore(milaRuleDatas, player);
 
             capKeepScore.Should().Be(0);
         }

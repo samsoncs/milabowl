@@ -13,6 +13,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
     private readonly IMilaRuleBusiness _milaRuleBusiness;
     private readonly IProcessingRepository _repository;
     private string _BombHolder = "Henrik Granum";
+    private string _DarthMaul = "Henrik Granum";
 
     public MilaPointsProcessorService(IMilaRuleBusiness milaRuleBusiness, IProcessingRepository repository)
     {
@@ -22,6 +23,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
 
     public async Task UpdateMilaPoints()
     {
+        var numberOfGameWeeks = await _repository.GetNumGameWeeks();
         var random = new Random(42);
         var bombRounds = new List<int>();
 
@@ -125,7 +127,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     CapFail = _milaRuleBusiness.GetCapFailScore(playerEventsForUserOnEvent),
                     BenchFail = _milaRuleBusiness.GetBenchFailScore(playerEventsForUserOnEvent),
                     CapKeep = _milaRuleBusiness.GetCapKeepScore(playerEventsForUserOnEvent),
-                    CapDef = _milaRuleBusiness.GetCapDefScore(playerEventsForUserOnEvent),
+                    CapDef = _milaRuleBusiness.GetCapDefScore(playerEventsForUserOnEvent, userCaptain),
                     GW69 = _milaRuleBusiness.GetSixtyNine(playerEventsForUserOnEvent),
                     RedCard = _milaRuleBusiness.GetRedCardScore(playerEventsForUserOnEvent),
                     YellowCard = _milaRuleBusiness.GetYellowCardScore(playerEventsForUserOnEvent),
@@ -278,8 +280,26 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                 _BombHolder = newBombHolder.UserName;
             }
 
-            await _repository.AddMilaGwScores(milaGameweekScores);
+            // Darth Maul
+            var darthMaulCutoff = numberOfGameWeeks - (numberOfGameWeeks % users.Count);
+            if (evt.GameWeek <= darthMaulCutoff)
+            {
+                var darthMaul = milaGameweekScores.First(b => b.UserName == _DarthMaul);
+                var contender = milaGameweekScores.OrderBy(b => b.UserId).FirstOrDefault(b => b.UserId > darthMaul.UserId) 
+                                ?? milaGameweekScores.Where(b => b.UserId != darthMaul.UserId).OrderBy(b => b.UserId).First();
+                
+                darthMaul.IsDarthMaul = true;
+                contender.IsDarthMaulContender = true;
 
+                if (darthMaul.GWScore > contender.GWScore)
+                {
+                    contender.DarthMaulPoints = -1;
+                }
+
+                _DarthMaul = contender.UserName;
+            }
+            
+            await _repository.AddMilaGwScores(milaGameweekScores);
         }
 
         //await this._db.SaveChangesAsync();
