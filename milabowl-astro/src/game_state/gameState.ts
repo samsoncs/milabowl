@@ -36,6 +36,9 @@ export interface GameWeekResult {
     mushroom: number;
     bombPoints: number;
     bombState: string | null;
+    darthMaulPoints: number;
+    isDarthMaul: boolean | null;
+    isDarthMaulContender: boolean | null;
     total: number;
   }
   

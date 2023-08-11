@@ -37,6 +37,7 @@ const { resultsForGameweek, isOverallScore } = Astro.props;
     <th class="right-align">Mshrm</th>
     <th class="right-align">Bn</th>
     <th class="right-align">Bmb</th>
+    <th class="right-align">Drth</th>
     {!isOverallScore && <th class="right-align">GW MP</th>}
     <th class="right-align">Total MP</th>
   </tr>
@@ -80,6 +81,7 @@ const { resultsForGameweek, isOverallScore } = Astro.props;
           <td class="right-align">{r.milaPoints.mushroom}</td>
           <td class="right-align">{r.milaPoints.banana}</td>
           <td class="right-align">{r.milaPoints.bombPoints}</td>
+          <td class="right-align">{r.milaPoints.darthMaulPoints}</td>
           {!isOverallScore && <td class="right-align">{r.milaPoints.total}</td>}
           <td class="right-align font-bold text-indigo-900 dark:text-orange-200">
             {r.cumulativeMilaPoints}

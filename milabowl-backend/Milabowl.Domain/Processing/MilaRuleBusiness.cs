@@ -7,7 +7,7 @@ namespace Milabowl.Domain.Processing
         decimal GetCapFailScore(IList<MilaRuleData> playerEvents);
         decimal GetBenchFailScore(IList<MilaRuleData> playerEvents);
         decimal GetCapKeepScore(IList<MilaRuleData> playerEvents);
-        decimal GetCapDefScore(IList<MilaRuleData> playerEvents);
+        decimal GetCapDefScore(IList<MilaRuleData> playerEvents, Player currentUserCaptain);
         decimal GetSixtyNine(IList<MilaRuleData> playerEvents);
         decimal GetRedCardScore(IList<MilaRuleData> playerEvents);
         decimal GetYellowCardScore(IList<MilaRuleData> playerEvents);
@@ -38,9 +38,9 @@ namespace Milabowl.Domain.Processing
         {
             return 0;//playerEvents.Any(pe => pe.Multiplier == 2 && pe.PlayerPosition == 1) ? 2 : 0; //if goalkeeper, return 2
         }
-        public decimal GetCapDefScore(IList<MilaRuleData> playerEvents)
+        public decimal GetCapDefScore(IList<MilaRuleData> playerEvents, Player currentUserCaptain)
         {
-            return playerEvents.Any(pe => pe.Multiplier == 2 && pe.PlayerPosition == 2) ? 1 : 0; //if defender, return 1
+            return playerEvents.Any(pe => pe.PlayerPosition == 2 && currentUserCaptain.PlayerId == pe.Player.PlayerId && pe.Minutes > 45) ? 1 : 0;
         }
 
         public decimal GetSixtyNine(IList<MilaRuleData> playerEvents)
@@ -121,10 +121,11 @@ namespace Milabowl.Domain.Processing
 
         public decimal GetUniqueCaptainScore(Player currentUserCaptain, IList<Lineup> lineupsThisWeek)
         {
-            return currentUserCaptain != null && lineupsThisWeek.SelectMany(l => l.PlayerEventLineups)
-                .Where(pel => pel.IsCaptain)
-                .Count(pel => pel.PlayerEvent.FkPlayerId == currentUserCaptain?.PlayerId)
-                == 1 ? 2 : 0;
+            var isUnique = currentUserCaptain != null && lineupsThisWeek.SelectMany(l => l.PlayerEventLineups)
+                .Where(pel => pel.IsCaptain && pel.PlayerEvent.Minutes > 45)
+                .Count(pel => pel.PlayerEvent.FkPlayerId == currentUserCaptain?.PlayerId) == 1;
+
+            return isUnique ? 2 : 0;
         }
 
         public decimal GetGWScore(IList<MilaRuleData> playerEvents)

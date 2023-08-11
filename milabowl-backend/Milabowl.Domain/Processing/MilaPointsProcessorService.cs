@@ -13,6 +13,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
     private readonly IMilaRuleBusiness _milaRuleBusiness;
     private readonly IProcessingRepository _repository;
     private string _BombHolder = "Henrik Granum";
+    private string _DarthMaul = "Henrik Granum";
 
     public MilaPointsProcessorService(IMilaRuleBusiness milaRuleBusiness, IProcessingRepository repository)
     {
@@ -22,6 +23,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
 
     public async Task UpdateMilaPoints()
     {
+        var numberOfGameWeeks = await _repository.GetNumGameWeeks();
         var random = new Random(42);
         var bombRounds = new List<int>();
 
@@ -120,12 +122,13 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     GW = evt.Name,
                     GameWeek = evt.GameWeek,
                     UserName = user.UserName,
+                    UserId = user.FantasyEntryId,
                     TeamName = user.EntryName,
                     GWScore = _milaRuleBusiness.GetGWScore(playerEventsForUserOnEvent),
                     CapFail = _milaRuleBusiness.GetCapFailScore(playerEventsForUserOnEvent),
                     BenchFail = _milaRuleBusiness.GetBenchFailScore(playerEventsForUserOnEvent),
                     CapKeep = _milaRuleBusiness.GetCapKeepScore(playerEventsForUserOnEvent),
-                    CapDef = _milaRuleBusiness.GetCapDefScore(playerEventsForUserOnEvent),
+                    CapDef = _milaRuleBusiness.GetCapDefScore(playerEventsForUserOnEvent, userCaptain),
                     GW69 = _milaRuleBusiness.GetSixtyNine(playerEventsForUserOnEvent),
                     RedCard = _milaRuleBusiness.GetRedCardScore(playerEventsForUserOnEvent),
                     YellowCard = _milaRuleBusiness.GetYellowCardScore(playerEventsForUserOnEvent),
@@ -168,7 +171,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             }
             
             // PowerUp / Chip calculation
-            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "bboost"))
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "freehit"))
             {
                 var currentGameweekScore =
                     milaGameweekScores.FirstOrDefault(mgw => mgw.UserName == lineup.User.UserName);
@@ -198,7 +201,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                 }
             }
 
-            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "freehit"))
+            foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "3xc"))
             {
                 var userInFront = await _repository.GetUsernameDirectlyInFront(evt.GameWeek, lineup.User.UserName);
                 var userInFrontGameWeek =
@@ -278,8 +281,32 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                 _BombHolder = newBombHolder.UserName;
             }
 
-            await _repository.AddMilaGwScores(milaGameweekScores);
+            // Darth Maul
+            var darthMaulCutoff = numberOfGameWeeks - (numberOfGameWeeks % users.Count);
+            if (evt.GameWeek <= darthMaulCutoff)
+            {
+                var darthMaul = milaGameweekScores.First(b => b.UserName == _DarthMaul);
+                var contender = milaGameweekScores.OrderBy(b => b.UserId).FirstOrDefault(b => b.UserId > darthMaul.UserId) 
+                                ?? milaGameweekScores.Where(b => b.UserId != darthMaul.UserId).OrderBy(b => b.UserId).First();
+                
+                darthMaul.IsDarthMaul = true;
+                contender.IsDarthMaulContender = true;
 
+                if (darthMaul.GWScore > contender.GWScore)
+                {
+                    contender.DarthMaulPoints = -1;
+                }
+
+                _DarthMaul = contender.UserName;
+            }
+            
+            foreach (var mgs in milaGameweekScores)
+            {
+                mgs.CalculateBombPoints();
+                mgs.CalculateDarthMaulPoints();
+            }
+            
+            await _repository.AddMilaGwScores(milaGameweekScores);
         }
 
         //await this._db.SaveChangesAsync();

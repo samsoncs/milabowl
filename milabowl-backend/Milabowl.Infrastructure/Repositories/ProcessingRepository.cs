@@ -32,6 +32,11 @@ namespace Milabowl.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<int> GetNumGameWeeks()
+        {
+            return await _context.Events.CountAsync();
+        }
+
         public async Task<IList<User>> GetUserToProcess(Guid evtId)
         {
             return await this._context.Users

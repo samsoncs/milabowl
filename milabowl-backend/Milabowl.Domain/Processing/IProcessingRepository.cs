@@ -6,6 +6,8 @@ namespace Milabowl.Domain.Processing;
 public interface IProcessingRepository
 {
     Task<IList<Event>> GetEventsToProcess();
+    Task<int> GetNumGameWeeks();
+
     Task<IList<User>> GetUserToProcess(Guid evtId);
     Task<bool> IsEventAlreadyCalculated(string eventName, string userEntryName);
     Task<(Player? mostTradedIn, Player? mostTradedOut)> GetMostTradedPlayers(Guid eventId);

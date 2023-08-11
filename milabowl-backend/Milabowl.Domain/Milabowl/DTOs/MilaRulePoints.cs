@@ -25,4 +25,7 @@ public class MilaRulePoints
     public decimal Banana { get; set; }
     public string? BombState { get; set; }
     public decimal BombPoints { get; set; }
+    public decimal DarthMaulPoints { get; set; }
+    public bool? IsDarthMaul { get; set; }
+    public bool? IsDarthMaulContender { get; set; }
 }

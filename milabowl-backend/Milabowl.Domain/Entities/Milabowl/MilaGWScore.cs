@@ -34,6 +34,9 @@ public class MilaGWScore
     public decimal Banana { get; set; }
     public BombState? BombState { get; set; }
     public decimal BombPoints { get; set; }
+    public bool? IsDarthMaul { get; set; }
+    public bool? IsDarthMaulContender { get; set; }
+    public decimal DarthMaulPoints { get; set; }
     
     public void CalculateMilaPoints()
     {
@@ -60,11 +63,21 @@ public class MilaGWScore
         MilaPoints += GreenShell;
         MilaPoints += Banana;
         
-        if (ActiveChip == "3xc")
+        if (ActiveChip == "bboost")
         {
             Mushroom = MilaPoints;
             MilaPoints += Mushroom;
         }
+    }
+    
+    public void CalculateBombPoints()
+    {
+        MilaPoints += BombPoints;
+    }
+    
+    public void CalculateDarthMaulPoints()
+    {
+        MilaPoints += DarthMaulPoints;
     }
 }
 
