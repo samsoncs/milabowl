@@ -69,6 +69,16 @@ public class MilaGWScore
             MilaPoints += Mushroom;
         }
     }
+    
+    public void CalculateBombPoints()
+    {
+        MilaPoints += BombPoints;
+    }
+    
+    public void CalculateDarthMaulPoints()
+    {
+        MilaPoints += DarthMaulPoints;
+    }
 }
 
 public enum BombState

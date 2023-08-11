@@ -122,6 +122,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     GW = evt.Name,
                     GameWeek = evt.GameWeek,
                     UserName = user.UserName,
+                    UserId = user.FantasyEntryId,
                     TeamName = user.EntryName,
                     GWScore = _milaRuleBusiness.GetGWScore(playerEventsForUserOnEvent),
                     CapFail = _milaRuleBusiness.GetCapFailScore(playerEventsForUserOnEvent),
@@ -297,6 +298,12 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                 }
 
                 _DarthMaul = contender.UserName;
+            }
+            
+            foreach (var mgs in milaGameweekScores)
+            {
+                mgs.CalculateBombPoints();
+                mgs.CalculateDarthMaulPoints();
             }
             
             await _repository.AddMilaGwScores(milaGameweekScores);
