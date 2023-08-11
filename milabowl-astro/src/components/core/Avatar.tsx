@@ -118,15 +118,6 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
         powerUpGWs[key] = gw;
     }
 
-    if (teamName.includes("Start")) {
-        powerUpGWs = {
-            "3xc": "",
-            "wildcard": "",
-            "freehit": "",
-            "bboost": "",
-        };
-    }
-
     return (
         <div className={styles.avatarDiv}>
             <div data-popover-target={"popover-user-profile" + teamName.replaceAll(" ", "")} className={styles.avatar + " w-6 md:w-7 lg:w-9"}>
