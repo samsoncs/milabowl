@@ -30,7 +30,7 @@ public class DataImportProvider: IDataImportProvider
 
     public async Task<LeagueRootDTO> GetLeagueRoot()
     {
-        return await this._httpClient.GetDeserializedAsync<LeagueRootDTO>("https://fantasy.premierleague.com/api/leagues-classic/883637/standings/?page_new_entries=1&page_standings=1&phase=1");
+        return await this._httpClient.GetDeserializedAsync<LeagueRootDTO>("https://fantasy.premierleague.com/api/leagues-classic/957279/standings/?page_new_entries=1&page_standings=1&phase=1");
     }
 
     public async Task<EventRootDTO> GetEventRoot(int eventID)
@@ -45,7 +45,7 @@ public class DataImportProvider: IDataImportProvider
 
     public async Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID)
     {
-        return await this._httpClient.GetDeserializedAsync<HeadToHeadEventRootDTO>($"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/528112/?page=1&event={eventID}");
+        return await this._httpClient.GetDeserializedAsync<HeadToHeadEventRootDTO>($"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1392446/?page=1&event={eventID}");
     }
 
     public async Task<ElementHistoryRootDTO> GetPlayerHistoryRoot(int playerId)
