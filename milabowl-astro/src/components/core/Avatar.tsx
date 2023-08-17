@@ -25,63 +25,63 @@ interface UserProfiles {
 
 const imageRoot = "/avatars/";
 const userProfileDict: UserProfiles = {
-    "Haalandslaget": {
+    "$jeik og betalt": {
         "info": "Mila-source founder and evangelist",
         "followers": 42,
         "following": 69,
         "name": "sam",
         "avatarSrc": imageRoot + "sam.png"
     },
-    "Milaion dollar squad": {
+    "Milady’s Cmilax": {
         "info": "Mila-source contributor",
         "followers": 0,
         "following": 0,
         "name": "mikkel",
         "avatarSrc": imageRoot + "mikkel.png"
     },
-    "Haalandaise Saus": {
+    "Henriks Håndjagere": {
         "info": "Mila try-hard",
         "followers": 1,
         "following": 1,
         "name": "eivind",
         "avatarSrc": imageRoot + "eivind.png"
     },
-    "WeDidn'tStartMaguire": {
+    "The KaneSaw Massacre": {
         "info": "",
         "followers": 0,
         "following": 0,
         "name": "malte",
         "avatarSrc": imageRoot + "malte.png"
     },
-    "eMILA Smith Rowe": {
+    "MilaysianBucketBoys": {
         "info": "Mila-source founder",
         "followers": 0,
         "following": 0,
         "name": "simen",
         "avatarSrc": imageRoot + "simen.png"
     },
-    "Veni Vidi Vici Mila": {
+    "SplitteMilaBramseil": {
         "info": "He came",
         "followers": 0,
         "following": 0,
         "name": "anders",
         "avatarSrc": imageRoot + "anders.png"
     },
-    "Premier Lag": {
+    "Skodad Octavia": {
         "info": "Legendary BieUgle",
         "followers": 0,
         "following": 0,
         "name": "markus",
         "avatarSrc": imageRoot + "markus.png"
     },
-    "Filip Coutinho": {
+    "AC Mila": {
         "info": "",
         "followers": 0,
         "following": 0,
         "name": "martin",
         "avatarSrc": imageRoot + "martin.png"
     },
-    "Boris’ party boys": {
+    "Mast69urbinho": {
         "info": "💩",
         "followers": 0,
         "following": 0,
@@ -116,15 +116,6 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
     for (const [key, value] of Object.entries(powerUpGWs)) {
         let gw = userResults.find(e => e.milaPoints.activeChip == key)?.gameWeek;
         powerUpGWs[key] = gw;
-    }
-
-    if (teamName.includes("Start")) {
-        powerUpGWs = {
-            "3xc": "",
-            "wildcard": "",
-            "freehit": "",
-            "bboost": "",
-        };
     }
 
     return (
