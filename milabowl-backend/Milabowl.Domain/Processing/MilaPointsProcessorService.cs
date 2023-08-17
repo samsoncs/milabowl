@@ -177,35 +177,33 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             {
                 var currentGameweekScore =
                     milaGameweekScores.FirstOrDefault(mgw => mgw.UserName == lineup.User.UserName);
-                var nextContender = milaGameweekScores.FirstOrDefault(m => m.GWPosition == currentGameweekScore?.GWPosition - 1);
-                if (nextContender is not null)
+
+                var contendersDirectlyInFront = milaGameweekScores.Where(m => m.GWPosition == currentGameweekScore?.GWPosition - 1).ToList();
+                if (!contendersDirectlyInFront.Any())
                 {
-                    nextContender.GreenShell = -3;
+                    continue;
                 }
-                else if(currentGameweekScore is not null)
-                {
-                    currentGameweekScore.GreenShell = -3;
-                }
+                var nextContender = contendersDirectlyInFront[random.Next(0, contendersDirectlyInFront.Count - 1)];
+                nextContender.GreenShell = -3;
             }
             
             foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "wildcard"))
             {
                 var currentGameweekScore =
                     milaGameweekScores.FirstOrDefault(mgw => mgw.UserName == lineup.User.UserName);
-                var prevContender = milaGameweekScores.FirstOrDefault(m => m.GWPosition == currentGameweekScore?.GWPosition + 1);
-                if (prevContender is not null)
+                
+                var contendersDirectlyBehind = milaGameweekScores.Where(m => m.GWPosition == currentGameweekScore?.GWPosition + 1).ToList();
+                if (!contendersDirectlyBehind.Any())
                 {
-                    prevContender.Banana = -3;
+                    continue;
                 }
-                else if(currentGameweekScore is not null)
-                {
-                    currentGameweekScore.Banana = -3;
-                }
+                var nextContender = contendersDirectlyBehind[random.Next(0, contendersDirectlyBehind.Count - 1)];
+                nextContender.Banana = -3;
             }
 
             foreach (var lineup in evt.Lineups.Where(l => l.ActiveChip == "3xc"))
             {
-                var userInFront = await _repository.GetUsernameDirectlyInFront(evt.GameWeek, lineup.User.UserName);
+                var userInFront = await _repository.GetUsernameDirectlyInFront(random, evt.GameWeek, lineup.User.UserName);
                 var userInFrontGameWeek =
                     milaGameweekScores.First(mgw => mgw.UserName == userInFront);
                 userInFrontGameWeek.RedShell = -3;
