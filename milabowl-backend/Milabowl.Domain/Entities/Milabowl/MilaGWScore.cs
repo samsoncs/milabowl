@@ -27,6 +27,7 @@ public class MilaGWScore
     public decimal UniqueCap { get; set; }
     public decimal SixtyNineSub { get; set; }
     public decimal TrendyBitch { get; set; }
+    public decimal MissedPenalties { get; set; }
     public string? ActiveChip { get; set; }
     public decimal Mushroom { get; set; }
     public decimal RedShell { get; set; }

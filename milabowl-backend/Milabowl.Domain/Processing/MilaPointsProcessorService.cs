@@ -14,6 +14,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
     private readonly IProcessingRepository _repository;
     private string _BombHolder = "Henrik Granum";
     private string _DarthMaul = "Henrik Granum";
+    private int _DarthListOrderCount = 0;
 
     public MilaPointsProcessorService(IMilaRuleBusiness milaRuleBusiness, IProcessingRepository repository)
     {
@@ -24,7 +25,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
     public async Task UpdateMilaPoints()
     {
         var numberOfGameWeeks = await _repository.GetNumGameWeeks();
-        var random = new Random(42);
+        var random = new Random(69);
         var bombRounds = new List<int>();
 
         while (bombRounds.Count < 7)
@@ -115,7 +116,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     playersForUserLastWeek
                         .Where(p => playerEventsForUserOnEvent.All(pe => pe.Player.PlayerId != p.PlayerId)).ToList()
                     : new List<Player>();
-
+                
                 var milaPoints = new MilaGWScore
                 {
                     MilaGWScoreId = Guid.NewGuid(),
@@ -139,6 +140,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     UniqueCap = _milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups),
                     SixtyNineSub = _milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent),
                     TrendyBitch = _milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer),
+                    MissedPenalties = _milaRuleBusiness.GetMissedPenalties(playerEventsForUserOnEvent),
                     ActiveChip = user.Lineups?.First(l => l.Event.EventId == evt.EventId)?.ActiveChip
                 };
 
@@ -286,8 +288,28 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             if (evt.GameWeek <= darthMaulCutoff)
             {
                 var darthMaul = milaGameweekScores.First(b => b.UserName == _DarthMaul);
-                var contender = milaGameweekScores.OrderBy(b => b.UserId).FirstOrDefault(b => b.UserId > darthMaul.UserId) 
-                                ?? milaGameweekScores.Where(b => b.UserId != darthMaul.UserId).OrderBy(b => b.UserId).First();
+
+                var orderedList = milaGameweekScores.OrderBy(b => b.UserId).ToList();
+                if (evt.GameWeek % users.Count == 0)
+                {
+                    switch (_DarthListOrderCount)
+                    {
+                        case 0:
+                            orderedList = milaGameweekScores.OrderBy(b => b.UserName).ToList();
+                            break;
+                        case 1:
+                            orderedList = milaGameweekScores.OrderBy(b => b.TeamName).ToList();
+                            break;
+                        default: 
+                            orderedList = milaGameweekScores.OrderBy(b => b.UserId).ToList();
+                            break;
+                    }
+
+                    _DarthListOrderCount++;
+                }
+                
+                var contender =orderedList.FirstOrDefault(b => b.UserId > darthMaul.UserId) 
+                               ?? orderedList.First(b => b.UserId != darthMaul.UserId);
                 
                 darthMaul.IsDarthMaul = true;
                 contender.IsDarthMaulContender = true;
