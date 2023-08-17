@@ -54,7 +54,7 @@ namespace Milabowl.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<string> GetUsernameDirectlyInFront(int gameWeek, string userName)
+        public async Task<string> GetUsernameDirectlyInFront(Random random, int gameWeek, string userName)
         {
             var scores = await _context
                 .MilaGWScores
@@ -69,12 +69,14 @@ namespace Milabowl.Infrastructure.Repositories
 
             var userScore = scoresByUser.First(s => s.UserName == userName);
             var nextUser = scoresByUser.FirstOrDefault(s => s.Score > userScore.Score);
+            
             if (nextUser is null)
             {
                 nextUser = scoresByUser[^2];
             }
 
-            return nextUser.UserName;
+            var nextUsers = scoresByUser.Where(s => s.Score == nextUser.Score).ToList();
+            return nextUsers[random.Next(0, nextUsers.Count - 1)].UserName;
         }
 
         public async Task<bool> IsEventAlreadyCalculated(string eventName, string userEntryName)

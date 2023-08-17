@@ -12,6 +12,7 @@ namespace Milabowl.Domain.Processing
         decimal GetRedCardScore(IList<MilaRuleData> playerEvents);
         decimal GetYellowCardScore(IList<MilaRuleData> playerEvents);
         decimal GetMinusIsPlusScore(IList<MilaRuleData> playerEvents);
+        decimal GetMissedPenalties(IList<MilaRuleData> playerEvents);
         decimal GetTrendyBitchScore(IList<Player> subsIn, IList<Player> subsOut, Player mostTransferredInPlayer, Player mostTransferredOutPlayer);
         decimal GetSixtyNineSub(IList<MilaRuleData> playerEvents);
         decimal GetIncreaseStreakScore(IList<int> playerEvents, int gw);
@@ -65,6 +66,11 @@ namespace Milabowl.Domain.Processing
         public decimal GetMinusIsPlusScore(IList<MilaRuleData> playerEvents)
         {
             return playerEvents.Where(pe => pe.TotalPoints < 0).Sum(pe => pe.TotalPoints * -1 * pe.Multiplier);
+        }
+
+        public decimal GetMissedPenalties(IList<MilaRuleData> playerEvents)
+        {
+            return playerEvents.Sum(p => (p.PenaltiesMissed > 0 ? -3 : 0) * p.Multiplier);
         }
 
         public decimal GetTrendyBitchScore(IList<Player> subsIn, IList<Player> subsOut, Player mostTransferredInPlayer,

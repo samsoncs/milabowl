@@ -104,10 +104,11 @@ const images : ImageMetadata[] = await Astro.glob("../assets/*").then(files => {
                       const bombHander = r.results.find(rr => rr.milaPoints.bombState !== null && rr.milaPoints.bombState.includes("Handing"));
                       return(
                         <div class="col-span-5">
-                          GW {r.gameWeek} - {bombHander && bombHander.teamName + " 👋 =>" } 
+
+                          GW {r.gameWeek} - {`${bombHander?.teamName.substring(0, 14)}${((bombHander?.teamName?.length ?? 0) >= 14 ? '...' : '')} 👋 =>`}
                           {bombHolder?.milaPoints.bombState !== "Exploded" && '💣'}
                           {bombHolder?.milaPoints.bombState === "Exploded" && '💥 (- 5 pts) '}
-                          {bombHolder?.teamName} 
+                          {`${bombHolder?.teamName.substring(0, 14)}${((bombHolder?.teamName?.length ?? 0) >= 14 ? '...' : '')}`} 
                         </div>
                       )
                     })
@@ -122,16 +123,16 @@ const images : ImageMetadata[] = await Astro.glob("../assets/*").then(files => {
                     return(
                         <div class="col-span-5">
                           GW {r.gameWeek} - 
-                          {r.results.find(r => r.milaPoints.isDarthMaulContender)?.teamName}
-                          {
-                            (r.results.find(r => r.milaPoints.isDarthMaulContender)?.milaPoints.darthMaulPoints ?? 0) < 0 && 
-                            `${r.results.find(r => r.milaPoints.isDarthMaulContender)?.milaPoints.darthMaulPoints } points`
-                          }
                           {   
                               (r.results.find(r => r.milaPoints.isDarthMaulContender)?.milaPoints.darthMaulPoints ?? 0) < 0 && 
-                              `(Killed by ${r.results.find(r => r.milaPoints.isDarthMaul)?.teamName})`
+                              `👺 ${r.results.find(r => r.milaPoints.isDarthMaul)?.teamName.substring(0, 10)}${(r.results.find(r => r.milaPoints.isDarthMaul)?.teamName?.length ?? 0) >= 10 ? '...' : ''} 🗡️=> `
                           }
-                            
+                          {r.results.find(r => r.milaPoints.isDarthMaulContender)?.teamName.substring(0, 10)}
+                          {(r.results.find(r => r.milaPoints.isDarthMaul)?.teamName?.length ?? 0) >= 10 ? '...' : ''}
+                          {
+                            (r.results.find(r => r.milaPoints.isDarthMaulContender)?.milaPoints.darthMaulPoints ?? 0) < 0 && 
+                            `(${r.results.find(r => r.milaPoints.isDarthMaulContender)?.milaPoints.darthMaulPoints} pts)`
+                          }                       
                         </div>
                       )
                     })

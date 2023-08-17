@@ -17,6 +17,7 @@ public class MilaRulePoints
     public decimal SixtyNineSub { get; set; }
     public decimal UniqueCap { get; set; }
     public decimal TrendyBitch { get; set; }
+    public decimal PenaltiesMissed { get; set; }
     public decimal? Total { get; set; }
     public string? ActiveChip { get; set; }
     public decimal Mushroom { get; set; }

@@ -92,6 +92,26 @@ Get **-1** point if you traded in the most traded in player in FPL overall
 for a given gameweek. Get **-1** point if you traded out the most traded out 
 player in FPL overall for a given gameweek.
 
+#### Missed Penalties (Pn)
+Get **-3** points for every player that misses a penalty (-6 points if a player
+is captain)
+
+## Powerups
+
+#### Green Shell (Chip: Freehit)
+
+#### Red Shell (Chip: Tripple Captain)
+
+#### Banana (Chip: Wildcard)
+
+#### Mushroom (Chip: Benchboost)
+
+## Bomb
+The bomb explodes in 7 random gameweek (but can't explode in gw 1). The bomb 
+starts in posession of last years loser. The bomb is passed on to the h2h loser
+if a player wins H2H, or to the player above you if you use any powerup. When
+the bomb explodes, the holder will get -3 points.
+
 ## Suggested Rule Revisions
 These are rules that have proposed revisions, that will be voted on during 
 next board meeting.
@@ -112,10 +132,6 @@ FPL league, and not overall FPL trades.
 Here are suggestions for new rules, that will be voted on during the next 
 board meeting of Milabowl. All the point values are provisional and should
 also be determined during said board meeting.
-
-#### Penalty (P)
-Get **3** points per player on your FPL team that missed a penalty. If player
-is captained recieve **6** points.
 
 #### Sellout (-$)
 Get **-2** if the players you traded out this round recieved more points than
