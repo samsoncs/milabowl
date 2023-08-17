@@ -29,6 +29,7 @@ export interface GameWeekResult {
     sixtyNineSub: number;
     uniqueCap: number;
     trendyBitch: number;
+    penaltiesMissed: number;
     activeChip: string | null;
     greenShell: number;
     redShell: number;
