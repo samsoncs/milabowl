@@ -55,7 +55,12 @@ Get **-1** point if your captain __at the end of round__ receives less
 than 5 points.
 
 #### Cap Def (CD)
-Get **1** point if your captain __at the end of round__ is a defender.
+Get **1** point if your captain __at the start of round__ is a defender.
+The player must play at least 45 minutes.
+
+#### Unique Cap (Unq Cap)
+Get **1** point if your captain __at the start of round__ is a unique across
+all milaplayers. The player must play at least 45 minutes.
 
 #### Minus is Plus (MiP)
 Get **1** point per negative points each player gets (at the end of a round).
@@ -96,21 +101,47 @@ player in FPL overall for a given gameweek.
 Get **-3** points for every player that misses a penalty (-6 points if a player
 is captain)
 
+#### Sellout ($O)
+Get **-2** if the players you traded out this round recieved more points than
+the players you traded in.
+
 ## Powerups
 
 #### Green Shell (Chip: Freehit)
+When freehit is activated in FPL, a green shell is used in Milabowl. The person
+in front of you in milapoints this gameweek recieves -3 points. If multiple 
+people in front of you have the same score, a target is picked
+from a random person in the pool.
 
 #### Red Shell (Chip: Tripple Captain)
+When tripple captain is activated in FPL, a red shell is used in Milabowl.
+The person in front of you in total FPL points recieves -3 points.
+If multiple people in front of you have the same score, a target is picked
+from a random person in the pool.
 
 #### Banana (Chip: Wildcard)
+When wildcard is activated in FPL, a banana is used in Milabowl.
+The person behind you in milapoints this gameweek recieves -3 points.
+If multiple people behind you have the same score, a target is picked
+from a random person in the pool.
 
 #### Mushroom (Chip: Benchboost)
+When benchboost is activated in FPL, a mushroom is used in Milabowl.
+Recieve half of the milepoints (before powerups, darth and bomb) this gameweek
+as a bonus.
 
 ## Bomb
 The bomb explodes in 7 random gameweek (but can't explode in gw 1). The bomb 
 starts in posession of last years loser. The bomb is passed on to the h2h loser
 if a player wins H2H, or to the player above you if you use any powerup. When
 the bomb explodes, the holder will get -3 points.
+
+## Darth Maul
+Last years looser is selected as Darth Maul the first gameweek. The "next" player
+in line has to beat Darth Maul, or recieve -1 points. The "next" player then 
+becomes darth maul the next gameweek, and so on. The order of players is changed
+every #of milaplayers GW, and every one becomes Darth Maul exactly the same amount
+of times (meaning the last Darth maul Gameweek is: # gameweeks - (#gameweeks % #milaplayers)).
 
 ## Suggested Rule Revisions
 These are rules that have proposed revisions, that will be voted on during 
@@ -132,7 +163,3 @@ FPL league, and not overall FPL trades.
 Here are suggestions for new rules, that will be voted on during the next 
 board meeting of Milabowl. All the point values are provisional and should
 also be determined during said board meeting.
-
-#### Sellout (-$)
-Get **-2** if the players you traded out this round recieved more points than
-the players you traded in.

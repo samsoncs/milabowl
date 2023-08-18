@@ -63,7 +63,7 @@ static async Task Import(IServiceProvider services)
     var milaPointsProcessorService = services.GetRequiredService<IMilaPointsProcessorService>()!;
     var milaResultsService = services.GetRequiredService<IMilaResultsService>()!;
 
-    // await dataImportService.ImportData();
+    await dataImportService.ImportData();
     await milaPointsProcessorService.UpdateMilaPoints();
     var milaResults = await milaResultsService.GetMilaResults();
 

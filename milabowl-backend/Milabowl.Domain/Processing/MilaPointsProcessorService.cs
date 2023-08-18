@@ -141,6 +141,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     SixtyNineSub = _milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent),
                     TrendyBitch = _milaRuleBusiness.GetTrendyBitchScore(subsIn, subsOut, mostTradedInPlayer, mostTradedOutPlayer),
                     MissedPenalties = _milaRuleBusiness.GetMissedPenalties(playerEventsForUserOnEvent),
+                    Sellout = _milaRuleBusiness.GetSellout(subsIn, subsOut, evt.GameWeek),
                     ActiveChip = user.Lineups?.First(l => l.Event.EventId == evt.EventId)?.ActiveChip
                 };
 
