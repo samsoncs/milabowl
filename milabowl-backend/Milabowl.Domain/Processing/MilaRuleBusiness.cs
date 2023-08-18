@@ -18,6 +18,7 @@ namespace Milabowl.Domain.Processing
         decimal GetIncreaseStreakScore(IList<int> playerEvents, int gw);
         decimal GetHeadToHeadMetaScore(UserHeadToHead userHeadToHeadDto);
         decimal GetHeadToHeadStrongerOpponentScore(UserHeadToHead userHeadToHeadDto);
+        decimal GetSellout(IList<Player> subsIn, IList<Player> subsOut, int gameWeek);
         decimal GetUniqueCaptainScore(Player currentUserCaptain, IList<Lineup> lineupsThisWeek);
 
         decimal GetGWScore(IList<MilaRuleData> playerEvents);
@@ -70,9 +71,17 @@ namespace Milabowl.Domain.Processing
 
         public decimal GetMissedPenalties(IList<MilaRuleData> playerEvents)
         {
-            return playerEvents.Sum(p => (p.PenaltiesMissed > 0 ? -3 : 0) * p.Multiplier);
+            return playerEvents.Sum(p => (p.PenaltiesMissed > 0 ? 3 : 0) * p.Multiplier);
         }
 
+        public decimal GetSellout(IList<Player> subsIn, IList<Player> subsOut, int gameWeek)
+        {
+            var sumPointsPlayersIn = subsIn.Sum(p => p.PlayerEvents.First(pe => pe.Event.GameWeek == gameWeek).TotalPoints);
+            var sumPointsPlayersOut = subsOut.Sum(p => p.PlayerEvents.First(pe => pe.Event.GameWeek == gameWeek).TotalPoints);
+
+            return sumPointsPlayersOut > sumPointsPlayersIn ? -2 : 0;
+        }
+        
         public decimal GetTrendyBitchScore(IList<Player> subsIn, IList<Player> subsOut, Player mostTransferredInPlayer,
             Player mostTransferredOutPlayer)
         {
