@@ -76,6 +76,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                         OwnGoals = pel.PlayerEvent.OwnGoals,
                         YellowCards = pel.PlayerEvent.YellowCards,
                         RedCards = pel.PlayerEvent.RedCards,
+                        PenaltiesMissed = pel.PlayerEvent.PenaltiesMissed,
                         TotalPoints = pel.PlayerEvent.TotalPoints,
                         PlayerPosition = pel.PlayerEvent.Player.ElementType,
                         Player = pel.PlayerEvent.Player

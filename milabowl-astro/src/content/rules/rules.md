@@ -98,7 +98,7 @@ for a given gameweek. Get **-1** point if you traded out the most traded out
 player in FPL overall for a given gameweek.
 
 #### Missed Penalties (Pn)
-Get **-3** points for every player that misses a penalty (-6 points if a player
+Get **1.69** points for every player that misses a penalty (3.38) points if a player
 is captain)
 
 #### Sellout ($O)
