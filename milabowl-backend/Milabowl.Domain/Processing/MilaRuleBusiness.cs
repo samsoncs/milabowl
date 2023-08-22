@@ -71,7 +71,7 @@ namespace Milabowl.Domain.Processing
 
         public decimal GetMissedPenalties(IList<MilaRuleData> playerEvents)
         {
-            return playerEvents.Sum(p => (p.PenaltiesMissed > 0 ? 3 : 0) * p.Multiplier);
+            return playerEvents.Sum(p => (p.PenaltiesMissed > 0 ? 1.69m : 0) * p.Multiplier);
         }
 
         public decimal GetSellout(IList<Player> subsIn, IList<Player> subsOut, int gameWeek)
