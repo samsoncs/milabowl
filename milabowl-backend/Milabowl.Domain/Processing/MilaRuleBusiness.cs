@@ -76,8 +76,13 @@ namespace Milabowl.Domain.Processing
 
         public decimal GetSellout(IList<Player> subsIn, IList<Player> subsOut, int gameWeek)
         {
-            var sumPointsPlayersIn = subsIn.Sum(p => p.PlayerEvents.First(pe => pe.Event.GameWeek == gameWeek).TotalPoints);
-            var sumPointsPlayersOut = subsOut.Sum(p => p.PlayerEvents.First(pe => pe.Event.GameWeek == gameWeek).TotalPoints);
+            if(!subsOut.Any() || !subsIn.Any())
+            {
+                return 0;
+            }
+        
+            var sumPointsPlayersIn = subsIn.Sum(p => p.PlayerEvents.FirstOrDefault(pe => pe?.Event?.GameWeek == gameWeek)?.TotalPoints ?? 0);
+            var sumPointsPlayersOut = subsOut.Sum(p => p.PlayerEvents.FirstOrDefault(pe => pe?.Event?.GameWeek == gameWeek)?.TotalPoints ?? 0);
 
             return sumPointsPlayersOut > sumPointsPlayersIn ? -2 : 0;
         }
