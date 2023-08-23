@@ -2,6 +2,12 @@
 title: First meme
 date: 2023-01-30
 ---
+### GW 2 - milablowl.no? - Markus
+![Implications](../../assets/memes/milabowlcom.jpg)
+
+### GW 2 - Waiting... - Semilaks
+![Implications](../../assets/memes/waiting.png)
+
 ### GW 2 - Semilaks on top - Sam
 ![Implications](../../assets/memes/semilaks.jpg)
 
