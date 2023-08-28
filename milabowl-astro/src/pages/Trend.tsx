@@ -85,7 +85,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     
 
     const [week, setWeek] = useState<number[]>([
-      results.resultsByWeek.length - 5,
+      results.resultsByWeek.length < 5 ? 0 : results.resultsByWeek.length - 5,
       results.resultsByWeek.length
     ]);
   
