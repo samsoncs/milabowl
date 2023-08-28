@@ -2,6 +2,9 @@
 title: First meme
 date: 2023-01-30
 ---
+### GW 3 - stick in wheel - Markus
+![Implications](../../assets/memes/anders_stickwheel.jpg)
+
 ### GW 2 - milablowl.no? - Markus
 ![Implications](../../assets/memes/milabowlcom.jpg)
 
