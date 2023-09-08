@@ -1,8 +1,8 @@
 import { animated, useSpring } from "react-spring";
 import {
-    BumpPoint,
-    BumpDatum,
-    BumpSerieExtraProps,
+    type BumpPoint,
+    type BumpDatum,
+    type BumpSerieExtraProps,
     ResponsiveBump
 } from "@nivo/bump";
 import { useEffect, useState } from "react";

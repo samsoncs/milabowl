@@ -1,4 +1,4 @@
-import { ResponsiveLine, Serie } from "@nivo/line";
+import { ResponsiveLine, type Serie } from "@nivo/line";
 import { useEffect, useState } from "react";
 import colors from "tailwindcss/colors";
 import type { GameWeekResult } from "../../../src/game_state/gameState";
