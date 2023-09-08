@@ -1,4 +1,4 @@
-import { BumpDatum, BumpPoint, BumpSerie, BumpSerieExtraProps, ResponsiveBump } from "@nivo/bump";
+import { type BumpDatum, type BumpPoint, type BumpSerie, type BumpSerieExtraProps, ResponsiveBump } from "@nivo/bump";
 import { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import colors from 'tailwindcss/colors';

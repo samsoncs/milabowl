@@ -1,10 +1,8 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { CollectionEntry, getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
 import readingTime from "reading-time"; 
 import { format } from "date-fns";
-import Card from "../../components/core/Card.astro";
 import AuthorIcon from "./_components/AuthorIcon.astro";
 import Tags from "./_components/Tags.astro";
 import BlogNavigation from "./_components/BlogNavigation.astro";
