@@ -107,7 +107,7 @@ const images : ImageMetadata[] = await Astro.glob("../assets/*").then(files => {
 
                           GW {r.gameWeek} - {bombHander && `${bombHander?.teamName.substring(0, 14)}${((bombHander?.teamName?.length ?? 0) >= 14 ? '...' : '')} 👋 =>`}
                           {bombHolder?.milaPoints.bombState !== "Exploded" && '💣'}
-                          {bombHolder?.milaPoints.bombState === "Exploded" && '💥 (- 5 pts) '}
+                          {bombHolder?.milaPoints.bombState === "Exploded" && '💥 (-3 pts) '}
                           {`${bombHolder?.teamName.substring(0, 14)}${((bombHolder?.teamName?.length ?? 0) >= 14 ? '...' : '')}`} 
                         </div>
                       )
