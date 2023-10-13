@@ -33,7 +33,7 @@ jobs:
         working-directory: ./milabowl-backend
         run: |
           dotnet build
-          dotnet run --project ./Migrations/Processing.csproj
+          dotnet run --project ./Migrations/Processing.csproj -- ../milabowl-astro/src/game_state
 
           
       # - name: Run
