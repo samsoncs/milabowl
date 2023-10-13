@@ -33,7 +33,7 @@ jobs:
         working-directory: ./milabowl-backend
         run: |
           dotnet build
-          dotnet run
+          dotnet run --project ./Migrations/Processing.csproj
 
           
       # - name: Run
