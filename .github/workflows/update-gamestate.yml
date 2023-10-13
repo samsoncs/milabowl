@@ -33,7 +33,7 @@ jobs:
         run: dotnet build
           
       - name: Run
-        run: dotnet run
+        run: dotnet run 
         
       # - name: Use Node.js
         # uses: actions/setup-node@v2
