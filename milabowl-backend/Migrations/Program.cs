@@ -35,16 +35,8 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddHttpClient();
     }).Build();
 
-
-if (args[0] == "Migrate")
-{
-    await Migrate();
-}
-else if (args[0] == "Import")
-{
-    await Migrate();
-    await Import(host.Services);
-}
+await Migrate();
+await Import(host.Services, args[0]);
 
 static async Task Migrate()
 {
@@ -56,7 +48,7 @@ static async Task Migrate()
     Console.WriteLine("Finished running migrations");
 }
 
-static async Task Import(IServiceProvider services)
+static async Task Import(IServiceProvider services, string filePath)
 {
     Console.WriteLine("Importing data");
     var dataImportService = services.GetRequiredService<IDataImportService>()!;
@@ -69,6 +61,6 @@ static async Task Import(IServiceProvider services)
 
     var json = JsonSerializer.Serialize(milaResults, new JsonSerializerOptions{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
     
-    await File.WriteAllTextAsync("C:\\Users\\SamsonSvendsen\\Garbage\\game_state.json", json);
+    await File.WriteAllTextAsync($"{filePath}/game_state.json", json);
     Console.WriteLine("Finished importing data");
 }
