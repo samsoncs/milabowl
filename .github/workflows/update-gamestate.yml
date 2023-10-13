@@ -1,10 +1,6 @@
 name: Update gamestate
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
-  push:
-    branches: [ gh-actions ]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
   
