@@ -27,7 +27,7 @@ const PowerUpModal: React.FC<PowerUpModalProps> = ({ modal_id, name, icon, info 
                         </button>
                         <div className="p-6 text-center">
                             <h3 className="text-lg font-normal text-white ">{icon + "  " + name}</h3>
-                            <div className="mb-5 font-normal text-gray-500 dark:text-gray-400">{info}</div>
+                            <div className="mb-5 font-normal text-gray-500 dark:text-gray-400 whitespace-normal">{info}</div>
                             <button data-modal-hide={modal_id} type="button"
                                 className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300
                                     dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
