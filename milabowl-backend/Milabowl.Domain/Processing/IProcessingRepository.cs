@@ -14,4 +14,5 @@ public interface IProcessingRepository
     Task<UserHeadToHeadEvent?> GetOpponentHeadToHead(int userHeadToHeadEventId, Guid userId);
     Task AddMilaGwScores(IList<MilaGWScore> milaGwScores);
     Task<string> GetUsernameDirectlyInFront(Random random, int gameWeek, string userName);
+    Task<IList<Player>> GetPlayersForGw(IList<Player> players);
 }

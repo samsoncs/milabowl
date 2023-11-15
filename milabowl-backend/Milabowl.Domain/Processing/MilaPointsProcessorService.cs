@@ -113,11 +113,13 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                         .Where(pe => playersForUserLastWeek.All(ip => ip.PlayerId != pe.Player.PlayerId))
                         .Select(p => p.Player).ToList() : new List<Player>();
 
-                var subsOut = playerEventsForUserOnEvent != null && playersForUserLastWeek != null ?
+                var subsOutPlayers = playerEventsForUserOnEvent != null && playersForUserLastWeek != null ?
                     playersForUserLastWeek
                         .Where(p => playerEventsForUserOnEvent.All(pe => pe.Player.PlayerId != p.PlayerId)).ToList()
                     : new List<Player>();
-                
+
+                var subsOut = await _repository.GetPlayersForGw(subsOutPlayers);
+
                 var milaPoints = new MilaGWScore
                 {
                     MilaGWScoreId = Guid.NewGuid(),
