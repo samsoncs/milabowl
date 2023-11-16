@@ -4,7 +4,7 @@ using Milabowl.Domain.Entities.Milabowl;
 namespace Milabowl.Domain.Processing;
 
 public interface IProcessingRepository
-{
+{ 
     Task<IList<Event>> GetEventsToProcess();
     Task<int> GetNumGameWeeks();
 

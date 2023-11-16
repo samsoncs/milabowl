@@ -84,7 +84,7 @@ namespace Milabowl.Infrastructure.Repositories
         }
 
         public async Task<IList<Player>> GetPlayersForGw(IList<Player> players)
-        {
+        { 
             var playerIds = players.Select(p => p.PlayerId).ToList();
             return await _context.Players
                 .Include(p => p.PlayerEvents)
