@@ -76,6 +76,12 @@ namespace Milabowl.Domain.Processing
 
         public decimal GetSellout(IList<Player> subsIn, IList<Player> subsOut, int gameWeek)
         {
+            // TODO: This can be removed after 23/24 season
+            if (gameWeek < 13)
+            {
+                return 0;
+            }
+            
             if(!subsOut.Any() || !subsIn.Any())
             {
                 return 0;

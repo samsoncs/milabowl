@@ -45,6 +45,10 @@ namespace Milabowl.Infrastructure.Repositories
                     .ThenInclude(pel => pel.PlayerEvent)
                     .ThenInclude(pel => pel.Player)
                 .Include(u => u.Lineups)
+                    .ThenInclude(l => l.PlayerEventLineups)
+                    .ThenInclude(pel => pel.PlayerEvent)
+                    .ThenInclude(pel => pel.Event)
+                .Include(u => u.Lineups)
                     .ThenInclude(l => l.Event)
                 .Include(u => u.HeadToHeadEvents)
                     .ThenInclude(hu => hu.Event)
@@ -77,6 +81,16 @@ namespace Milabowl.Infrastructure.Repositories
 
             var nextUsers = scoresByUser.Where(s => s.Score == nextUser.Score).ToList();
             return nextUsers[random.Next(0, nextUsers.Count - 1)].UserName;
+        }
+
+        public async Task<IList<Player>> GetPlayersForGw(IList<Player> players)
+        { 
+            var playerIds = players.Select(p => p.PlayerId).ToList();
+            return await _context.Players
+                .Include(p => p.PlayerEvents)
+                .ThenInclude(p => p.Event)
+                .Where(p => playerIds.Contains(p.PlayerId))
+                .ToListAsync();
         }
 
         public async Task<bool> IsEventAlreadyCalculated(string eventName, string userEntryName)
