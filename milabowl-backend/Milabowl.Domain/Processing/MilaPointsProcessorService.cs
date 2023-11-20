@@ -278,7 +278,6 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
             {
                 roundEndBombHolder.BombState = BombState.Exploded;
                 roundEndBombHolder.BombPoints = -3;
-                roundEndBombHolder.MilaPoints += roundEndBombHolder.BombPoints;
 
                 var newBombHolder = milaGameweekScores.FirstOrDefault(m => m.GWPosition == bombHolder?.GWPosition - 1) 
                                     ?? milaGameweekScores.OrderBy(m => m.GWPosition).Skip(1).First();
