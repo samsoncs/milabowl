@@ -2,116 +2,134 @@
 title: First meme
 date: 2023-01-30
 ---
-### GW x - name - Sam
-![Implications](../../assets/memes/sam_guy_thinking_about.jpeg)
+### GW 12 - Mikkel som arkiveringsansvarlig - Eivind
+![Implications](../../assets/memes/20231117_eivind.png)
 
-### GW x - name - Sam
+### GW 12 - Escalation - Sam
+![Implications](../../assets/memes/20231117_sam_2.gif)
+
+### GW 12 - Bug reverse - Malte
+![Implications](../../assets/memes/20231117_malte.png)
+
+### GW 12 - No fun - Anders
+![Implications](../../assets/memes/20231117_anders.jpeg)
+
+### GW 12 - Red card - Sam
+![Implications](../../assets/memes/20231117_sam.jpeg)
+
+### GW 12 - Misliker at Sellout faktisk ble implementert - Anders
+![Implications](../../assets/memes/20231116_anders.jpeg)
+
+### GW 12 - Hackathon hype - Sam
 ![Implications](../../assets/memes/sam_20231114.jpeg)
 
-### GW x - name - Simen
+### GW 12 - Mikkel er awesome i FPL, men har hatt litt uflaks i Milabowl - Simen
 ![Implications](../../assets/memes/simen_20231113.jpeg)
 
-### GW x - name - Simen
+### GW 12 - Eivind er desperat og tyr til selvjinx som last resort!? - Simen
 ![Implications](../../assets/memes/simen_20231112.jpeg)
 
-### GW x - name - Sam
+### GW 11 - Milalead on wish list - Sam
 ![Implications](../../assets/memes/sam_20231108.jpeg)
 
-### GW x - name - Simen
+### GW 11 - Malte tar en rolig MilaGW - Simen
 ![Implications](../../assets/memes/simen_20231106.jpeg)
 
-### GW x - name - Simen
+### GW 11 - Gordon får 0 BPS, til tross for kampens eneste mål - Simen
 ![Implications](../../assets/memes/simen_20231105.jpeg)
 
-### GW x - name - Sam
+### GW 10 - Sam godter seg med Eivinds dårlige meme-game - Sam
 ![Implications](../../assets/memes/sam_20231029.jpeg)
 
-### GW x - name - Eivind
+### GW 10 - 0 reactions på forrige meme forsøk (som ikke var morsomt). Får dessverre én trøstereaksjon fra Martin - Eivind
 ![Implications](../../assets/memes/eivind_20231029.jpeg)
 
-### GW x - name - Simen
+### GW 10 - Simen tar gledelig imot 🍌 - Simen
 ![Implications](../../assets/memes/simen_20231028.gif)
 
-### GW x - name - Sam
+### GW 10 - Eating bananas like Champ's - Sam
 ![Implications](../../assets/memes/sam_20231028.gif)
 
-### GW x - name - Sam
+### GW 10 - Mikkel sutrer for glemt frist 👶 - Simen
+![Implications](../../assets/memes/simen_20231027.jpeg)
+
+### GW 9 - Sien feiler på en Maddison Jinx som ender på 9pts - Sam
 ![Implications](../../assets/memes/sam_20231024.jpeg)
 
-### GW x - name - Simen
+### GW 8 - Banana rules baserer seg på FPL- og ikke milrank - Simen
 ![Implications](../../assets/memes/simen_20231009.jpeg)
 
-### GW x - name - Sam
+### GW 8 - Martin og Eivind kjører template WC, men liker ikke å bli callet ut på det! - Sam
 ![Implications](../../assets/memes/sam_20231007.gif)
 
-### GW x - name - Sam
+### GW 7 - Når sprenger bomben? 💣 - Sam
 ![Implications](../../assets/memes/sam_20230930.jpeg)
 
-### GW x - name - Sam
+### GW 7 - Det er mye som er vondt å svelge tidlig i sesongen - Sam
 ![Implications](../../assets/memes/sam_20230930_3.jpeg)
 
-### GW x - name - Sam
+### GW 7 - Semilaks har startet sesongen med gode predictions - Sam
 ![Implications](../../assets/memes/sam_20230930_2.jpeg)
 
-### GW x - Sam lanserer oppdatert Milabowl.com! - Mikkel
+### GW 4 - Sam lanserer oppdatert Milabowl.com! - Mikkel
 ![Implications](../../assets/memes/mikkel_20230908.jpeg)
 
-### GW x - name - Sam
+### GW 4 - Colonizing Mars. MilaCorp innoverer i et forrykende temp. - Sam
 ![Implications](../../assets/memes/sam_20230908.jpeg)
 
-### GW x - Sagaen om bombebattle e.III - Sam
+### GW 4 - Sagaen om bombebattle e.III - Sam
 ![Implications](../../assets/memes/sam_20230904.png)
 
-### GW x - Onanana gjør det dårlig - Sam
+### GW 4 - Onanana gjør det dårlig - Sam
 ![Implications](../../assets/memes/sam_20230903.jpeg)
 
-### GW x - Gabriel varmer benken igjen - Sam
+### GW 4 - Gabriel varmer benken igjen - Sam
 ![Implications](../../assets/memes/sam_20230901.jpeg)
 
-### GW x - Udogie blanker - Sam
+### GW 4 - Udogie blanker - Sam
 ![Implications](../../assets/memes/sam_20230901_2.jpeg)
 
-### GW 5 - Semilaks begynner sterkt men ingen har troen videre - Sam
+### GW 3 - Semilaks begynner sterkt men ingen har troen videre - Sam
 ![Implications](../../assets/memes/sam_20230828_2.png)
 
-### GW x - Peproulette offer - Sam
+### GW 3 - Peproulette offer - Sam
 ![Implications](../../assets/memes/sam_20230827.jpeg)
 
-### GW 4 - Bombebattle mellom Malte og Simen 💥 - Sam
+### GW 3 - Bombebattle mellom Malte og Simen 💥 - Sam
 ![Implications](../../assets/memes/sam_20230828.png)
 
-### GW x - Eivind forsøker seg på en bombjinx - Eivind
+### GW 3 - Eivind forsøker seg på en bombjinx - Eivind
 ![Implications](../../assets/memes/eivind_20230827.gif)
 
-### GW x - The implications ... ⁉️ - Sam
-![Implications](../../assets/memes/sam_20230818.jpeg)
-
-### GW x - FPL bets are placed ihht MiLaw §6 ledd 9 - Sam
+### GW 2 - FPL bets are placed ihht MiLaw §6 ledd 9 - Sam
 ![Implications](../../assets/memes/sam_20230815.gif)
 
-### GW x - Creds til Kingmememe's meme game - Eivind
+### GW 2 - Creds til Kingmememe's meme game - Eivind
 ![Implications](../../assets/memes/eivind_20230815.png)
 
-### GW x - Forvirring rundt milabomb og darth mila - Sam
+### GW 2 - Forvirring rundt milabomb og darth mila - Sam
 ![Implications](../../assets/memes/sam_20230815_2.jpeg)
 
-### GW x - Mange template teams - Sam
+### GW 2 - Mange template teams - Sam
 ![Implications](../../assets/memes/sam_20230812.jpeg)
 
-### GW x - Milahype i starten av sesongen! - Sam
+### GW 1 - Milahype i starten av sesongen! - Sam
 ![Implications](../../assets/memes/sam_20230811.jpeg)
 
-### GW x - Antakelse om at Henrik gjør endringer rett før start - Kingmeme
+### GW 1 - Antakelse om at Henrik gjør endringer rett før start - Kingmeme
 ![Implications](../../assets/memes/sam_20230811_2.jpeg)
 
-### GW x - Simen er fremdeles ikke sikker på seson-lineup - Anders
+### GW 1 - Simen er fremdeles ikke sikker på seson-lineup - Anders
 ![Implications](../../assets/memes/anders_20230811.png)
 
-### GW x - Simen kommer i siste liten - Sam
+### GW 1 - Simen kommer i siste liten - Sam
 ![Implications](../../assets/memes/sam_20230811_3.jpeg)
 
-### GW x - Usikkerhet rundt uttale av climax - Anders
+### GW 1 - Usikkerhet rundt uttale av climax - Anders
 ![Implications](../../assets/memes/anders_20230806.jpeg)
+
+### GW 1 - Sam og Eivind kan ikke skjønne hvordan Henrik's Håndjagere ikke var årets beste navn - Sam
+![Implications](../../assets/memes/sam_guy_thinking_about.jpeg)
 
 ### GW 3 - Stick in wheel. Bytte ut Fernandes som får 12 poeng - Eivind
 ![Implications](../../assets/memes/anders_stickwheel.jpg)
@@ -125,7 +143,7 @@ date: 2023-01-30
 ### GW 2 - Semilaks on top - Sam
 ![Implications](../../assets/memes/semilaks.jpg)
 
-### GW 1 - Implications - Sam
+### GW 1 - Implications... ⁉️ - Sam
 ![Implications](../../assets/memes/implications.jpg)
 
 ### GW 1 - Mubama? - Sam
