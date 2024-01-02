@@ -2,6 +2,12 @@
 title: First meme
 date: 2023-01-30
 ---
+### GW18 - Når du lager memes før kampen er ferdig - del 2 - Simen
+![Implications](../../assets/memes/simen_221223_2.jpg)
+
+### GW18 - Når du lager memes før kampen er ferdig - del 1 - Simen
+![Implications](../../assets/memes/simen_221223.jpg)
+
 ### GW 12 - Mikkel som arkiveringsansvarlig - Eivind
 ![Implications](../../assets/memes/20231117_eivind.png)
 
