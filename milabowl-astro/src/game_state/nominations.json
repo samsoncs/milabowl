@@ -1,5 +1,40 @@
 [
 	{
+		"personNominated": "Malte",
+		"gw": 20,
+		"date": "02.01.2024",
+		"reason": "Eneste manager som ikke har fått med seg at Palmer er kandidat til årets FPL spiller, og denne runden går han glipp av 18 poeng. På tide å følge med!",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Anders, Eivind",
+		"gw": 20,
+		"date": "02.01.2024",
+		"reason": "Både Anders og Eivind prøver å outsmarte resten av MilaBowl med ved å gå for 'Unique Def Cap' comboen til Malte. Men det er tydelig at de fortsatt har mye å lære av årets MilaBowl leder når de ødelegger hverandres Unique Cap og TAA ender med 0 FPL poeng (mest valgte kaptein var Salah med 16 poeng).",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Malte",
+		"gw": 20,
+		"date": "02.01.2024",
+		"reason": "Eneste manager som ikke har fått med seg at Palmer er kandidat til årets FPL spiller, og denne runden går han glipp av 18 poeng. Mener selv at han fortjener en SKILL nominasjonen siden han er eneste uten Palmer. Morsomt fra Dansken.",
+		"category": "DERP"
+	},
+	{
+		"personNominated": "Simen",
+		"gw": 19,
+		"date": "28.12.2023",
+		"reason": "Har klokketro på startelleveren og stiller med en blodrød benk (3 røde spillere og 1 oransje keeper). Det er risky, men det betaler seg når han blir rundevinner i både FPL og MilaBowl! Nicely played!",
+		"category": "SKILL"
+	},
+	{
+		"personNominated": "Anders",
+		"gw": 15,
+		"date": "08.12.2023",
+		"reason": "Gjør opprør mot MilaBowl sitt veletablerte demokrati og lovgivendeforsamling når han forsøker å snikimplementere regelendringer, nemlig at Sellout-regelen kun skal gjelde fra og med GW13",
+		"category": "SHAME"
+	},
+	{
 		"personNominated": "Simen",
 		"gw": 33,
 		"date": "28.04.2023",
