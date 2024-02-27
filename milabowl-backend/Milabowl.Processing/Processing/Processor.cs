@@ -4,60 +4,30 @@ namespace Milabowl.Processing.Processing;
 
 public class Processor
 {
+    private readonly FplImporter _importer;
     private readonly IRulesProcessor _rulesProcessor;
-    
-    public Processor(IRulesProcessor rulesProcessor)
+
+    public Processor(FplImporter importer, IRulesProcessor rulesProcessor)
     {
         _rulesProcessor = rulesProcessor;
+        _importer = importer;
     }
 
-    public void ProcessMilaPoints()
+    public async Task ProcessMilaPoints()
     {
+        Console.WriteLine("Starting to import FPL data");
+        var userGameWeeksByGameWeek = await _importer.Import();
+        Console.WriteLine("FPL data imported");
+
         Console.WriteLine("Starting to process mila points");
-
-        var gameWeeks = new List<int>{1};
-        var userGameWeeks = new List<UserGameWeek>
+        foreach (var gameWeek in userGameWeeksByGameWeek.Keys)
         {
-            new UserGameWeek(new List<PlayerEvent>
+            foreach (var userGameWeek in userGameWeeksByGameWeek[gameWeek])
             {
-                new PlayerEvent(
-                    1,
-                    2,
-                    4,
-                    6,
-                    3,
-                    6,
-                    3,
-                    5,
-                    1,
-                    1,
-                    0,
-                    0,
-                    1,
-                    1,
-                    "",
-                    "",
-                    "",
-                    "",
-                    1,
-                    true,
-                    2,
-                    true,
-                    1,
-                    2,
-                    1
-                    )
-            })
-        };
-
-        foreach (var gameWeek in gameWeeks)
-        {
-            foreach (var userGameWeek in userGameWeeks)
-            {
-                _rulesProcessor.CalculateForUserGameWeek(userGameWeek);
+                var results = _rulesProcessor.CalculateForUserGameWeek(userGameWeek);
+                var totalMilaScore = results.Sum(r => r.Points);
             }
         }
-        
         Console.WriteLine("Mila points processing complete");
 
     }

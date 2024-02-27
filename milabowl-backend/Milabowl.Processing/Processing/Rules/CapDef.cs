@@ -2,14 +2,14 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class RedCards: IMilaRule
+public class CapDef: IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {
         return new MilaRuleResult(
-            "RedCard",
-            "RC",
-            userGameWeek.Lineup.Where(pe => pe.RedCards == 1).Sum(pe => pe.Multiplier)
+            "CapDef",
+            "CD",
+            userGameWeek.Lineup.Any(pe => pe.PlayerPosition == 2 && pe is { IsCaptain: true, Minutes: > 45 }) ? 1 : 0
         );
     }
 }

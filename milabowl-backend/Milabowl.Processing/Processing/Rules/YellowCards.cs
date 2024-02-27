@@ -7,7 +7,8 @@ public class YellowCards: IMilaRule
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {
         return new MilaRuleResult(
-            "YellowCard",
+            "YellowCards",
+            "YC",
             userGameWeek.Lineup.Where(pe => pe.YellowCards == 1).Sum(pe => pe.Multiplier)
         );
     }

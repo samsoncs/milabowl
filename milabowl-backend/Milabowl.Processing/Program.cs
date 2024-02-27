@@ -7,7 +7,7 @@ Console.WriteLine("Hello, World!");
 var serviceProvider = DependencyInjection.GetServiceProvider();
 var processor = serviceProvider.GetRequiredService<Processor>();
 
-processor.ProcessMilaPoints();
+await processor.ProcessMilaPoints();
 
 
 
