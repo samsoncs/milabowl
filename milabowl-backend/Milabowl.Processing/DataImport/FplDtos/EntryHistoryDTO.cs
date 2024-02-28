@@ -1,5 +1,3 @@
 ﻿namespace Milabowl.Processing.DataImport.FplDtos;
 
-public class EntryHistoryDTO
-{
-}
+public class EntryHistoryDTO { }

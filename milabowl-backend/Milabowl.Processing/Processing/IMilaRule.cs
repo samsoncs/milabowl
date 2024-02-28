@@ -2,10 +2,7 @@
 
 namespace Milabowl.Processing.Processing;
 
-public record MilaRuleResult(string RuleName, string RuleShosfdardstName, decimal Points)
-{
-    public int SomeLonsgdsaadName = 23;
-};
+public record MilaRuleResult(string RuleName, string RuleShortName, decimal Points);
 
 public interface IMilaRule
 {

@@ -1,6 +1,4 @@
 ﻿namespace Milabowl.Processing.DataImport.MilaDtos
 {
-    public class PlayerEventHistory
-    {
-    }
+    public class PlayerEventHistory { }
 }

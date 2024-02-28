@@ -2,14 +2,16 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class GameWeekPosition: IMilaRule
+public class GameWeekPosition : IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {
         var rulePoints = 0.0m;
         var iteration = 0.0m;
         var isSoleHighestScore = true;
-        foreach (var grp in userGameWeek.Opponents.OrderBy(m => m.TotalScore).GroupBy(g => g.TotalScore))
+        foreach (
+            var grp in userGameWeek.Opponents.OrderBy(m => m.TotalScore).GroupBy(g => g.TotalScore)
+        )
         {
             if (userGameWeek.TotalScore <= grp.Key)
             {
@@ -26,11 +28,6 @@ public class GameWeekPosition: IMilaRule
             rulePoints = iteration / 2;
         }
 
-        return new MilaRuleResult(
-            "GameWeekPositionScore",
-            "GW PS",
-            rulePoints
-        );
-
+        return new MilaRuleResult("GameWeekPositionScore", "GW PS", rulePoints);
     }
 }

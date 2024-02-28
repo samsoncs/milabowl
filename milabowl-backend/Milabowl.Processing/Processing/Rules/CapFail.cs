@@ -2,7 +2,7 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class CapFailScore: IMilaRule
+public class CapFailScore : IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {
@@ -11,6 +11,5 @@ public class CapFailScore: IMilaRule
             "CF",
             userGameWeek.Lineup.Any(pe => pe is { IsCaptain: true, TotalPoints: < 5 }) ? -1 : 0
         );
-
     }
 }

@@ -10,5 +10,4 @@ public class PlayerEventLineup
     public int Multiplier { get; set; }
     public bool IsCaptain { get; set; }
     public bool IsViceCaptain { get; set; }
-
 }

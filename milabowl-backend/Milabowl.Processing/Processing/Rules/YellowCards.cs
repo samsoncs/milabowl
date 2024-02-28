@@ -2,7 +2,7 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class YellowCards: IMilaRule
+public class YellowCards : IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {

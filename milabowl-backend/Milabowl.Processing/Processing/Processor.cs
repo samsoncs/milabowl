@@ -29,6 +29,5 @@ public class Processor
             }
         }
         Console.WriteLine("Mila points processing complete");
-
     }
 }

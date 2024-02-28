@@ -2,7 +2,7 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class MissedPenalties: IMilaRule
+public class MissedPenalties : IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {

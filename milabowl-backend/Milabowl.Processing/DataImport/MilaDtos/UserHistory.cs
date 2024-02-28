@@ -2,7 +2,6 @@
 
 public class UserHistory
 {
-    
     public Guid UserHistoryId { get; set; }
     public User User { get; set; } = default!;
     public Guid FkUserId { get; set; }

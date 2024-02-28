@@ -16,9 +16,7 @@ public static class DependencyInjection
         serviceCollection.AddHttpClient<IFplService, FplService>();
 
         serviceCollection.Scan(s =>
-            s.FromAssemblyOf<IMilaRule>()
-                .AddClasses()
-                .AsImplementedInterfaces()
+            s.FromAssemblyOf<IMilaRule>().AddClasses().AsImplementedInterfaces()
         );
 
         return serviceCollection.BuildServiceProvider();

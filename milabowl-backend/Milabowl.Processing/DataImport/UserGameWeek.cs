@@ -2,10 +2,7 @@
 
 namespace Milabowl.Processing.DataImport;
 
-public record Event(
-    int GameWeek,
-    string Name
-);
+public record Event(int GameWeek, string Name);
 
 public record HeadToHeadEvent(
     int Points,
@@ -36,6 +33,7 @@ public record UserGameWeek(
 )
 {
     public IList<UserGameWeek> Opponents { get; private set; } = new List<UserGameWeek>();
+
     public void AddOpponentsForGameWeek(IList<UserGameWeek> userGameWeeks)
     {
         Opponents = userGameWeeks.Where(u => u.User.Id != User.Id).ToList();

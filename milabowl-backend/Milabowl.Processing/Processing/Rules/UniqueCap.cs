@@ -2,7 +2,7 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class UniqueCap: IMilaRule
+public class UniqueCap : IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {
@@ -11,11 +11,13 @@ public class UniqueCap: IMilaRule
         return new MilaRuleResult(
             "Unique Cap",
             "Unq Cap",
-                userGameWeek.Opponents.Any(o =>
-                {
-                    var opCap = o.Lineup.First(l => l.IsCaptain);
-                    return opCap.FantasyPlayerEventId == cap.FantasyPlayerEventId;
-                }) ? 0 : 2
-            );
+            userGameWeek.Opponents.Any(o =>
+            {
+                var opCap = o.Lineup.First(l => l.IsCaptain);
+                return opCap.FantasyPlayerEventId == cap.FantasyPlayerEventId;
+            })
+                ? 0
+                : 2
+        );
     }
 }

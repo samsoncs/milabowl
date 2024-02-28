@@ -7,7 +7,7 @@ public interface IRulesProcessor
     List<MilaRuleResult> CalculateForUserGameWeek(UserGameWeek userGameWeek);
 }
 
-public class RulesProcessor: IRulesProcessor
+public class RulesProcessor : IRulesProcessor
 {
     private readonly IEnumerable<IMilaRule> _rules;
 

@@ -7,6 +7,7 @@ public class League
     public string Name { get; set; }
     public DateTime Created { get; set; }
     public bool Closed { get; set; }
+
     //public object MaxEntries { get; set; }
     public string LeagueType { get; set; }
     public string Scoring { get; set; }

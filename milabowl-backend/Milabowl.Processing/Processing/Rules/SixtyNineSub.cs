@@ -2,7 +2,7 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class SixtyNineSub: IMilaRule
+public class SixtyNineSub : IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {
@@ -14,10 +14,6 @@ public class SixtyNineSub: IMilaRule
         }
 
         points = userGameWeek.Lineup.Any(pe => pe.Minutes == 69) ? 2.69m : 0;
-        return new MilaRuleResult(
-            "SixtyNineSub",
-            "69Sub",
-            points
-        );
+        return new MilaRuleResult("SixtyNineSub", "69Sub", points);
     }
 }
