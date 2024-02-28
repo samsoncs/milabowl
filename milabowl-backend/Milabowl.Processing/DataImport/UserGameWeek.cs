@@ -106,15 +106,6 @@ public record UserGameWeek(
                     : 0
             ) + 1;
 
-    //     return gameWeekScoresUpToNow.Where(im => im.GameWeek == m.GameWeek)
-    // .OrderByDescending(im =>
-    // Math.Round(
-    // gameWeekScoresUpToNow.Where(g => g.TeamName == im.TeamName)
-    // .Sum(g => g.MilaPoints), 2
-    //     )
-    //     ).ToList()
-    //     .FindIndex(i => i.TeamName == m.TeamName) + 1;
-
     public Dictionary<string, RuleResult> Rules =>
         _ruleResults.ToDictionary(k => k.RuleName, e => new RuleResult(e.Points, e.RuleShortName));
 };
