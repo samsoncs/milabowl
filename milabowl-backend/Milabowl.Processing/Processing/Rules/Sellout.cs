@@ -2,25 +2,17 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class Sellout
+public class Sellout : IMilaRule
 {
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)
     {
-        // if(!subsOut.Any() || !subsIn.Any())
-        // {
-        //     return 0;
-        // }
-        //
-        // var sumPointsPlayersIn = subsIn.Sum(p => p.PlayerEvents.FirstOrDefault(pe => pe?.Event?.GameWeek == gameWeek)?.TotalPoints ?? 0);
-        // var sumPointsPlayersOut = subsOut.Sum(p => p.PlayerEvents.FirstOrDefault(pe => pe?.Event?.GameWeek == gameWeek)?.TotalPoints ?? 0);
-        //
-        // return sumPointsPlayersOut > sumPointsPlayersIn ? -2 : 0;
+        var sumPointsPlayersIn = userGameWeek.SubsIn.Sum(pe => pe.Multiplier * pe.TotalPoints);
+        var sumPointsPlayersOut = userGameWeek.SubsOut.Sum(pe => pe.Multiplier * pe.TotalPoints);
 
-        // return new MilaRuleResult(
-        //     "$ellout",
-        //     "$O",
-        //     );
-
-        throw new NotImplementedException("Need subs for sellout");
+        return new MilaRuleResult(
+            "$ellout",
+            "$O",
+            sumPointsPlayersOut > sumPointsPlayersIn ? -2 : 0
+        );
     }
 }

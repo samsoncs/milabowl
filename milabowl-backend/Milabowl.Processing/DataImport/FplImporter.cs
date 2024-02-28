@@ -1,14 +1,17 @@
 ﻿using System.Collections.ObjectModel;
+using Milabowl.Processing.Processing;
 
 namespace Milabowl.Processing.DataImport;
 
 public class FplImporter
 {
     private readonly IFplService _fplService;
+    private readonly IRulesProcessor _rulesProcessor;
 
-    public FplImporter(IFplService fplService)
+    public FplImporter(IFplService fplService, IRulesProcessor rulesProcessor)
     {
         _fplService = fplService;
+        _rulesProcessor = rulesProcessor;
     }
 
     public async Task<ReadOnlyDictionary<int, List<UserGameWeek>>> Import()
@@ -49,7 +52,7 @@ public class FplImporter
         //         .Select(e => _mapper.GetUserHistory(e, user));
         // }
 
-
+        Dictionary<int, List<UserGameWeek>> historicEvents = new();
 
         foreach (var finishedEvent in events.Where(e => e.Finished && e.DataChecked))
         {
@@ -60,6 +63,11 @@ public class FplImporter
 
             foreach (var user in users)
             {
+                if (!historicEvents.ContainsKey(user.id))
+                {
+                    historicEvents.Add(user.id, []);
+                }
+
                 var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
                 if (picksRoot.picks is null)
                 {
@@ -112,28 +120,34 @@ public class FplImporter
                 //     .First(r => r.entry_1_entry == user.FantasyEntryId
                 //                 || r.entry_2_entry == user.FantasyEntryId);
 
-
-                userGameWeeks.Add(
-                    new UserGameWeek(
-                        new Event(finishedEvent.Id, finishedEvent.Name),
-                        new HeadToHeadEvent(1, 1, 1, 1, 1, false, 1, false),
-                        new User(
-                            user.id,
-                            user.player_name,
-                            user.entry_name,
-                            user.rank,
-                            user.last_rank,
-                            user.event_total
-                        ),
-                        lineup,
-                        picksRoot.active_chip
+                var userGameWeek = new UserGameWeek(
+                    new Event(finishedEvent.Id, finishedEvent.Name),
+                    new HeadToHeadEvent(1, 1, 1, 1, 1, false, 1, false),
+                    new User(
+                        user.id,
+                        user.player_name,
+                        user.entry_name,
+                        user.rank,
+                        user.last_rank,
+                        user.event_total
+                    ),
+                    lineup,
+                    picksRoot.active_chip,
+                    new List<UserGameWeek>(historicEvents[user.id]),
+                    new List<UserGameWeek>(
+                        historicEvents.Where(h => h.Key != user.id).SelectMany(h => h.Value)
                     )
                 );
+
+                userGameWeeks.Add(userGameWeek);
+                historicEvents[user.id].Add(userGameWeek);
             }
 
             foreach (var userGameWeek in userGameWeeks)
             {
                 userGameWeek.AddOpponentsForGameWeek(userGameWeeks);
+                var rulesResults = _rulesProcessor.CalculateForUserGameWeek(userGameWeek);
+                userGameWeek.AddRuleResult(rulesResults);
             }
 
             userGameWeeksByGameWeek.Add(finishedEvent.Id, userGameWeeks);

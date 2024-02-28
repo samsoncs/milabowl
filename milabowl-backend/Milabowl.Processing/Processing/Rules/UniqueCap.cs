@@ -9,7 +9,7 @@ public class UniqueCap : IMilaRule
         var cap = userGameWeek.Lineup.First(l => l.IsCaptain);
 
         return new MilaRuleResult(
-            "Unique Cap",
+            "UniqueCap",
             "Unq Cap",
             userGameWeek.Opponents.Any(o =>
             {

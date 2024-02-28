@@ -28,28 +28,23 @@ public class Processor
         {
             foreach (var userGameWeek in userGameWeeksByGameWeek[gameWeek])
             {
-                var rulesResults = _rulesProcessor.CalculateForUserGameWeek(userGameWeek);
-                var totalMilaScore = rulesResults.Sum(r => r.Points);
-
-                var rules = rulesResults.ToDictionary(
-                    k => k.RuleName,
-                    e => new RuleResult(e.Points, e.RuleShortName)
-                );
+                // var rulesResults = _rulesProcessor.CalculateForUserGameWeek(userGameWeek);
+                // var totalMilaScore = rulesResults.Sum(r => r.Points);
 
                 var result = new MilaResult(
                     userGameWeek.Event.Name,
-                    totalMilaScore,
+                    userGameWeek.TotalMilaScore,
                     userGameWeek.User.TeamName,
                     userGameWeek.User.UserName,
                     userGameWeek.User.Id,
-                    1,
+                    userGameWeek.GwPosition,
                     userGameWeek.Event.GameWeek,
-                    1,
-                    1,
-                    1,
-                    1,
-                    1,
-                    rules
+                    userGameWeek.CumulativeTotalMilaScore,
+                    userGameWeek.AvgCumulativeTotalMilaScore,
+                    userGameWeek.TotalCumulativeAverageMilaScore,
+                    userGameWeek.MilaRank,
+                    userGameWeek.MilaRankLastWeek,
+                    userGameWeek.Rules
                 );
 
                 results.Add(result);
@@ -57,11 +52,31 @@ public class Processor
             }
         }
 
+        var resultsByWeek = results
+            .GroupBy(m => m.GameWeek)
+            .Select(grp => new GameWeekResults
+            {
+                GameWeek = grp.Key,
+                Results = grp.OrderByDescending(g => g.CumulativeMilaPoints).ToList()
+            })
+            .ToList();
+
+        var resultsByUser = results
+            .GroupBy(m => m.TeamName)
+            .Select(grp => new UserResults
+            {
+                TeamName = grp.Key,
+                Results = grp.OrderBy(g => g.GameWeek).ToList()
+            })
+            .ToList();
+
+        var lastGameWeek = results.Max(r => r.GameWeek);
+
         var res = new MilaResults
         {
-            OverallScore = new List<MilaResult>(),
-            ResultsByUser = new List<UserResults>(),
-            ResultsByWeek = new List<GameWeekResults>()
+            OverallScore = results.Where(r => r.GameWeek == lastGameWeek).ToList(),
+            ResultsByUser = resultsByUser,
+            ResultsByWeek = resultsByWeek
         };
         Console.WriteLine("Mila points processing complete");
     }
