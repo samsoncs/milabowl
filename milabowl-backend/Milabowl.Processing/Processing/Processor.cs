@@ -16,9 +16,7 @@ public class Processor
 
     public async Task ProcessMilaPoints()
     {
-        Console.WriteLine(
-            "Starting to import FPL data ......................................................."
-        );
+        Console.WriteLine("Starting to import FPL data");
         var userGameWeeksByGameWeek = await _importer.Import();
         Console.WriteLine("FPL data imported");
 
