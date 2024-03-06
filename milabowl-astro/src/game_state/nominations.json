@@ -3,15 +3,8 @@
 		"personNominated": "Martin",
 		"gw": 27,
 		"date": "06.03.2024",
-		"reason": "Etter 27 spilte runder er Martin den ENESTE med 0 poeng på unique cap-kategorien. Kanskje han klarer alle 38 runder? Kunne like gjerne spilt copy paste simulator.",
+		"reason": "Etter 27 spilte runder er Martin den eneste med 0 poeng på unique cap-kategorien. Kanskje han klarer alle 38 runder? Kunne like gjerne spilt copy paste simulator.",
 		"category": "SHAME"
-	},
-	{
-		"personNominated": "Malte",
-		"gw": 20,
-		"date": "02.01.2024",
-		"reason": "Eneste manager som ikke har fått med seg at Palmer er kandidat til årets FPL spiller, og denne runden går han glipp av 18 poeng. På tide å følge med!",
-		"category": "DERP"
 	},
 	{
 		"personNominated": "Anders, Eivind",
@@ -40,6 +33,13 @@
 		"date": "08.12.2023",
 		"reason": "Gjør opprør mot MilaBowl sitt veletablerte demokrati og lovgivendeforsamling når han forsøker å snikimplementere regelendringer, nemlig at Sellout-regelen kun skal gjelde fra og med GW13",
 		"category": "SHAME"
+	},
+	{
+		"personNominated": "Eivind",
+		"gw": 0,
+		"date": "08.08.2023",
+		"reason": "I forbindelse med navnekåring er alle bedt om å sende inn lagnavn fra anonym eposkonto. Eivind oppretter anonym epostadresse, men fyller inn 'Eivind Kristoffersen' på navn og avslører seg selv til kåringsansvarlig. Vi forventet mer fra sikkerhetseksperten!",
+		"category": "FAIL"
 	},
 	{
 		"personNominated": "Simen",
