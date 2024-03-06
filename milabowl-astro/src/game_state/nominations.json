@@ -28,6 +28,13 @@
 		"category": "SHAME"
 	},
 	{
+		"personNominated": "Eivind",
+		"gw": 0,
+		"date": "08.08.2023",
+		"reason": "I forbindelse med navnekåring er alle bedt om å sende inn lagnavn fra anonym eposkonto. Eivind oppretter anonym epostadresse, men fyller inn 'Eivind Kristoffersen' på navn og avslører seg selv til kåringsansvarlig. Vi forventet mer fra sikkerhetseksperten!",
+		"category": "FAIL"
+	},
+	{
 		"personNominated": "Simen",
 		"gw": 33,
 		"date": "28.04.2023",
