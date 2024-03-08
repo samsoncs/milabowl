@@ -6,11 +6,9 @@ namespace Milabowl.Processing.Processing;
 public class Processor
 {
     private readonly FplImporter _importer;
-    private readonly IRulesProcessor _rulesProcessor;
 
-    public Processor(FplImporter importer, IRulesProcessor rulesProcessor)
+    public Processor(FplImporter importer)
     {
-        _rulesProcessor = rulesProcessor;
         _importer = importer;
     }
 
@@ -28,27 +26,23 @@ public class Processor
         {
             foreach (var userGameWeek in userGameWeeksByGameWeek[gameWeek])
             {
-                // var rulesResults = _rulesProcessor.CalculateForUserGameWeek(userGameWeek);
-                // var totalMilaScore = rulesResults.Sum(r => r.Points);
-
                 var result = new MilaResult(
                     userGameWeek.Event.Name,
                     userGameWeek.TotalMilaScore,
                     userGameWeek.User.TeamName,
                     userGameWeek.User.UserName,
                     userGameWeek.User.Id,
-                    userGameWeek.GwPosition,
+                    userGameWeek.Position.GwPosition,
                     userGameWeek.Event.GameWeek,
                     userGameWeek.CumulativeTotalMilaScore,
                     userGameWeek.AvgCumulativeTotalMilaScore,
-                    userGameWeek.TotalCumulativeAverageMilaScore,
-                    userGameWeek.MilaRank,
-                    userGameWeek.MilaRankLastWeek,
+                    userGameWeek.TotalCumulativeAvgMilaScore,
+                    userGameWeek.Position.MilaRank,
+                    userGameWeek.Position.MilaRankLastWeek,
                     userGameWeek.Rules
                 );
 
                 results.Add(result);
-                var json = JsonSerializer.Serialize(result);
             }
         }
 
@@ -78,6 +72,8 @@ public class Processor
             ResultsByUser = resultsByUser,
             ResultsByWeek = resultsByWeek
         };
+
+        var json = JsonSerializer.Serialize(res);
         Console.WriteLine("Mila points processing complete");
     }
 }

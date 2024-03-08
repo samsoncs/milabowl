@@ -1,4 +1,4 @@
-﻿using Milabowl.Processing.DataImport;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
