@@ -1,11 +1,12 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class BenchFail : IMilaRule
+public class BenchFail : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "BF";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
         var points =
             (decimal)
@@ -13,6 +14,6 @@ public class BenchFail : IMilaRule
                     userGameWeek.Lineup.Where(pe => pe.Multiplier == 0).Sum(pe => pe.TotalPoints)
                         / 5.0
                 ) * -1;
-        return new MilaRuleResult("BenchFail", "BF", points);
+        return points;
     }
 }

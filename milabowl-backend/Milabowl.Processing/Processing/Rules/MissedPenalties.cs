@@ -1,16 +1,13 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class MissedPenalties : IMilaRule
+public class MissedPenalties : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "MP";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
-        return new MilaRuleResult(
-            "MissedPenalties",
-            "Mp",
-            userGameWeek.Lineup.Sum(p => (p.PenaltiesMissed > 0 ? 1.69m : 0) * p.Multiplier)
-        );
+        return userGameWeek.Lineup.Sum(p => (p.PenaltiesMissed > 0 ? 1.69m : 0) * p.Multiplier);
     }
 }

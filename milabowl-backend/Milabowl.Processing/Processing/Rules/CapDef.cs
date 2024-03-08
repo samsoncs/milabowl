@@ -1,20 +1,17 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class CapDef : IMilaRule
+public class CapDef : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "CD";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
-        return new MilaRuleResult(
-            "CapDef",
-            "CD",
-            userGameWeek.Lineup.Any(pe =>
-                pe.PlayerPosition == 2 && pe is { IsCaptain: true, Minutes: > 45 }
-            )
-                ? 1
-                : 0
-        );
+        return userGameWeek.Lineup.Any(pe =>
+            pe.PlayerPosition == 2 && pe is { IsCaptain: true, Minutes: > 45 }
+        )
+            ? 1
+            : 0;
     }
 }

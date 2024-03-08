@@ -1,16 +1,13 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class RedCards : IMilaRule
+public class RedCards : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "RC";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
-        return new MilaRuleResult(
-            "RedCard",
-            "RC",
-            userGameWeek.Lineup.Where(pe => pe.RedCards == 1).Sum(pe => pe.Multiplier)
-        );
+        return userGameWeek.Lineup.Where(pe => pe.RedCards == 1).Sum(pe => pe.Multiplier);
     }
 }
