@@ -1,13 +1,14 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class SixtyNine : IMilaRule
+public class SixtyNine : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "69";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
-        decimal totalTeamScore = userGameWeek.Lineup.Sum(pe => pe.TotalPoints * pe.Multiplier);
-        return new MilaRuleResult("SixtyNine", "69", totalTeamScore == 69 ? 6.9m : 0);
+        var totalTeamScore = userGameWeek.Lineup.Sum(pe => pe.TotalPoints * pe.Multiplier);
+        return totalTeamScore == 69 ? 6.9m : 0;
     }
 }

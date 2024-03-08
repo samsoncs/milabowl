@@ -2,12 +2,13 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class SixtyNineSub : IMilaRule
+public class SixtyNineSub : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "69Sub";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
         var cap = userGameWeek.Lineup.First(pe => pe.IsCaptain);
-        var points = userGameWeek.Lineup.Any(pe => pe.Minutes == 69) ? 2.69m * cap.Multiplier : 0;
-        return new MilaRuleResult("SixtyNineSub", "69Sub", points);
+        return userGameWeek.Lineup.Any(pe => pe.Minutes == 69) ? 2.69m * cap.Multiplier : 0;
     }
 }

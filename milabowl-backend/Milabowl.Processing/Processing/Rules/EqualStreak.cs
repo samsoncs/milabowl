@@ -3,9 +3,11 @@ using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class EqualStreak : IMilaRule
+public class EqualStreak : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "ES";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
         var points = 0.0m;
 
@@ -18,6 +20,6 @@ public class EqualStreak : IMilaRule
                     : 0;
         }
 
-        return new MilaRuleResult("EqualStreak", "ES", points);
+        return points;
     }
 }

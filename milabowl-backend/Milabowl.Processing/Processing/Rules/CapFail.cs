@@ -1,16 +1,13 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class CapFailScore : IMilaRule
+public class CapFailScore : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "CF";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
-        return new MilaRuleResult(
-            "CapFail",
-            "CF",
-            userGameWeek.Lineup.Any(pe => pe is { IsCaptain: true, TotalPoints: < 5 }) ? -1 : 0
-        );
+        return userGameWeek.Lineup.Any(pe => pe is { IsCaptain: true, TotalPoints: < 5 }) ? -1 : 0;
     }
 }

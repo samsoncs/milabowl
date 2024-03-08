@@ -1,11 +1,12 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class IncreaseStreak : IMilaRule
+public class IncreaseStreak : MilaRule
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public override string ShortName => "IS";
+
+    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {
         var hasStreak = !(userGameWeek.UserHistory.Count < 2);
         var prevGameWeekScore = 0.0m;
@@ -30,6 +31,6 @@ public class IncreaseStreak : IMilaRule
             points = 1;
         }
 
-        return new MilaRuleResult("IncreaseStreak", "IS", points);
+        return points;
     }
 }

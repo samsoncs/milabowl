@@ -1,5 +1,4 @@
-﻿using Milabowl.Processing.DataImport;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing;
 
@@ -8,4 +7,15 @@ public record MilaRuleResult(string RuleName, string RuleShortName, decimal Poin
 public interface IMilaRule
 {
     MilaRuleResult Calculate(UserGameWeek userGameWeek);
+}
+
+public abstract class MilaRule : IMilaRule
+{
+    public abstract string ShortName { get; }
+    protected abstract decimal CalculatePoints(UserGameWeek userGameWeek);
+
+    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    {
+        return new MilaRuleResult(GetType().Name, ShortName, CalculatePoints(userGameWeek));
+    }
 }
