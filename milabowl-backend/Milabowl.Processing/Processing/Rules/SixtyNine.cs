@@ -8,7 +8,7 @@ public class SixtyNine : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var totalTeamScore = userGameWeek.Lineup.Sum(pe => pe.TotalPoints * pe.Multiplier);
+        var totalTeamScore = userGameWeek.User.Lineup.Sum(pe => pe.TotalPoints * pe.Multiplier);
         return totalTeamScore == 69 ? 6.9m : 0;
     }
 }

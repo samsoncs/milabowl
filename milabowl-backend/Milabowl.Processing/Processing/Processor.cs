@@ -15,37 +15,10 @@ public class Processor
     public async Task ProcessMilaPoints()
     {
         Console.WriteLine("Starting to import FPL data");
-        var userGameWeeksByGameWeek = await _importer.Import();
+        var results = await _importer.Import();
         Console.WriteLine("FPL data imported");
 
         Console.WriteLine("Starting to process mila points");
-
-        var results = new List<MilaResult>();
-
-        foreach (var gameWeek in userGameWeeksByGameWeek.Keys)
-        {
-            foreach (var userGameWeek in userGameWeeksByGameWeek[gameWeek])
-            {
-                var result = new MilaResult(
-                    userGameWeek.Event.Name,
-                    userGameWeek.MilaScores.TotalMilaScore,
-                    userGameWeek.User.TeamName,
-                    userGameWeek.User.UserName,
-                    userGameWeek.User.Id,
-                    userGameWeek.Position.GwPosition,
-                    userGameWeek.Event.GameWeek,
-                    userGameWeek.MilaScores.CumulativeTotalMilaScore,
-                    userGameWeek.MilaScores.AvgCumulativeTotalMilaScore,
-                    userGameWeek.MilaScores.TotalCumulativeAvgMilaScore,
-                    userGameWeek.Position.MilaRank,
-                    userGameWeek.Position.MilaRankLastWeek,
-                    userGameWeek.Rules
-                );
-
-                results.Add(result);
-            }
-        }
-
         var resultsByWeek = results
             .GroupBy(m => m.GameWeek)
             .Select(grp => new GameWeekResults

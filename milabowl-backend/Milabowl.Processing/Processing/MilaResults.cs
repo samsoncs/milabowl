@@ -32,7 +32,7 @@ public record MilaResult(
     decimal TotalCumulativeAverageMilaPoints,
     int? MilaRank,
     int? MilaRankLastWeek,
-    Dictionary<string, RuleResult> Rules
+    IReadOnlyDictionary<string, RuleResult> Rules
 );
 
 public record RuleResult(decimal Points, string ShortName);

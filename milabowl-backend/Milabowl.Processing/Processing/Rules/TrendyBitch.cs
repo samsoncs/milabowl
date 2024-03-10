@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class TrendyBitch
 {
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public MilaRuleResult Calculate(UserState userState)
     {
         throw new NotImplementedException("Need most transferred");
     }

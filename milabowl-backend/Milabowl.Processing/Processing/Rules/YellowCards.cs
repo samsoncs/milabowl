@@ -8,6 +8,6 @@ public class YellowCards : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        return userGameWeek.Lineup.Where(pe => pe.YellowCards == 1).Sum(pe => pe.Multiplier);
+        return userGameWeek.User.Lineup.Where(pe => pe.YellowCards == 1).Sum(pe => pe.Multiplier);
     }
 }

@@ -9,10 +9,11 @@ public class HeadToHeadMeta : MilaRule
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var scoreDiff =
-            userGameWeek.HeadToHead.CurrentUser.Points - userGameWeek.HeadToHead.Opponent.Points;
+            userGameWeek.User.HeadToHead.CurrentUser.Points
+            - userGameWeek.User.HeadToHead.Opponent.Points;
 
         var points =
-            userGameWeek.HeadToHead.CurrentUser.DidWin && scoreDiff is > 0 and <= 2 ? 2 : 0;
+            userGameWeek.User.HeadToHead.CurrentUser.DidWin && scoreDiff is > 0 and <= 2 ? 2 : 0;
 
         return points;
     }

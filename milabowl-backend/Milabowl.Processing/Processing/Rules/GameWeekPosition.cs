@@ -12,12 +12,10 @@ public class GameWeekPosition : MilaRule
         var iteration = 0.0m;
         var isSoleHighestScore = true;
         foreach (
-            var grp in userGameWeek
-                .Opponents.OrderBy(m => m.FplScores.TotalScore)
-                .GroupBy(g => g.FplScores.TotalScore)
+            var grp in userGameWeek.Opponents.OrderBy(m => m.TotalScore).GroupBy(g => g.TotalScore)
         )
         {
-            if (userGameWeek.FplScores.TotalScore <= grp.Key)
+            if (userGameWeek.User.TotalScore <= grp.Key)
             {
                 rulePoints = iteration / 2.0m;
                 isSoleHighestScore = false;

@@ -1,11 +1,11 @@
-﻿using Milabowl.Processing.DataImport;
+﻿using System.Collections.ObjectModel;
 using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.Processing;
 
 public interface IRulesProcessor
 {
-    List<MilaRuleResult> CalculateForUserGameWeek(MilaGameWeekState userGameWeek);
+    MilaResult CalculateForUserGameWeek(MilaGameWeekState userGameWeek);
 }
 
 public class RulesProcessor : IRulesProcessor
@@ -17,8 +17,31 @@ public class RulesProcessor : IRulesProcessor
         _rules = rules;
     }
 
-    public List<MilaRuleResult> CalculateForUserGameWeek(MilaGameWeekState userGameWeek)
+    public MilaResult CalculateForUserGameWeek(MilaGameWeekState userGameWeek)
     {
-        return _rules.Select(r => r.Calculate(userGameWeek)).ToList();
+        var ruleResults = _rules.Select(r => r.Calculate(userGameWeek)).ToList();
+
+        var totalScore = ruleResults.Sum(r => r.Points);
+
+        var rules = ruleResults.ToDictionary(
+            r => r.RuleName,
+            r => new RuleResult(r.Points, r.RuleShortName)
+        );
+
+        return new MilaResult(
+            userGameWeek.User.Event.Name,
+            totalScore,
+            userGameWeek.User.User.TeamName,
+            userGameWeek.User.User.UserName,
+            userGameWeek.User.User.Id,
+            1, //userGameWeek.User.Position.GwPosition,
+            userGameWeek.User.Event.GameWeek,
+            1, //userGameWeek.User.MilaScores.CumulativeTotalMilaScore,
+            1, //userGameWeek.MilaScores.AvgCumulativeTotalMilaScore,
+            1, //userGameWeek.MilaScores.TotalCumulativeAvgMilaScore,
+            1, //userGameWeek.Position.MilaRank,
+            1, //userGameWeek.Position.MilaRankLastWeek,
+            new ReadOnlyDictionary<string, RuleResult>(rules)
+        );
     }
 }

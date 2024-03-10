@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Collections.ObjectModel;
-using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing;
 
 namespace Milabowl.Processing.DataImport;
@@ -16,25 +14,26 @@ public class FplImporter
         _rulesProcessor = rulesProcessor;
     }
 
-    public async Task<ReadOnlyDictionary<int, ImmutableList<UserGameWeek>>> Import()
+    public async Task<IReadOnlyList<MilaResult>> Import()
     {
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
         var players = bootstrapRoot.Players;
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.standings.results;
-        List<UserGameWeek> gameWeeks = [];
-        List<MilaGameWeekState> milaGameWeekStates = [];
+        List<UserState> userStates = [];
         foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
         {
             var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
             var headToHeadEventRootDto = await _fplService.GetHead2HeadEventRoot(finishedEvent.Id);
-            List<UserGameWeek> userGameWeeks = [];
             foreach (var user in users)
             {
                 var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
-                var historicGameWeeks = new List<UserGameWeek>(gameWeeks);
-                var userGameWeek = new UserGameWeek(
+                var historicGameWeeks = new List<UserState>(
+                    userStates.Where(u => u.Event.GameWeek < finishedEvent.Id)
+                );
+
+                var userGameWeek = new UserState(
                     finishedEvent.ToEvent(),
                     headToHeadEventRootDto.ToHeadToHeadEvent(user.entry),
                     user.ToUser(),
@@ -43,26 +42,24 @@ public class FplImporter
                     historicGameWeeks
                 );
 
-                userGameWeeks.Add(userGameWeek);
+                userStates.Add(userGameWeek);
             }
-
-            foreach (var userGameWeek in userGameWeeks)
-            {
-                userGameWeek.AddOpponentsForGameWeek(userGameWeeks);
-                milaGameWeekStates.Add(userGameWeek.GetCalculationState());
-            }
-
-            gameWeeks.AddRange(userGameWeeks);
         }
 
-        foreach (var milaGameWeekState in milaGameWeekStates)
-        {
-            var rulesResult = _rulesProcessor.CalculateForUserGameWeek(milaGameWeekState);
-        }
+        var milaGameWeekStates = userStates
+            .GroupBy(u => u.Event)
+            .SelectMany(s =>
+                s.ToList()
+                    .Select(u => new MilaGameWeekState(
+                        u,
+                        s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
+                    ))
+            )
+            .ToList();
 
-        return gameWeeks
-            .GroupBy(g => g.Event.GameWeek)
-            .ToDictionary(g => g.Key, g => g.ToImmutableList())
+        return milaGameWeekStates
+            .Select(m => _rulesProcessor.CalculateForUserGameWeek(m))
+            .ToList()
             .AsReadOnly();
     }
 }

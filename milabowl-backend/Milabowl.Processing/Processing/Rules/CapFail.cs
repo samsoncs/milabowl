@@ -8,6 +8,8 @@ public class CapFailScore : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        return userGameWeek.Lineup.Any(pe => pe is { IsCaptain: true, TotalPoints: < 5 }) ? -1 : 0;
+        return userGameWeek.User.Lineup.Any(pe => pe is { IsCaptain: true, TotalPoints: < 5 })
+            ? -1
+            : 0;
     }
 }

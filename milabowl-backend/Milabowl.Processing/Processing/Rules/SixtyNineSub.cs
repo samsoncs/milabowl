@@ -8,7 +8,7 @@ public class SixtyNineSub : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var cap = userGameWeek.Lineup.First(pe => pe.IsCaptain);
-        return userGameWeek.Lineup.Any(pe => pe.Minutes == 69) ? 2.69m * cap.Multiplier : 0;
+        var cap = userGameWeek.User.Lineup.First(pe => pe.IsCaptain);
+        return userGameWeek.User.Lineup.Any(pe => pe.Minutes == 69) ? 2.69m * cap.Multiplier : 0;
     }
 }

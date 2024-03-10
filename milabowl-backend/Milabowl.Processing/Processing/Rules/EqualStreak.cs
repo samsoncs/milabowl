@@ -11,13 +11,10 @@ public class EqualStreak : MilaRule
     {
         var points = 0.0m;
 
-        var previousGameWeek = userGameWeek.PreviousGameWeek;
+        var previousGameWeek = userGameWeek.User.PreviousGameWeek;
         if (previousGameWeek is not null)
         {
-            points =
-                userGameWeek.FplScores.TotalScore == previousGameWeek.FplScores.TotalScore
-                    ? 6.9m
-                    : 0;
+            points = userGameWeek.User.TotalScore == previousGameWeek.TotalScore ? 6.9m : 0;
         }
 
         return points;

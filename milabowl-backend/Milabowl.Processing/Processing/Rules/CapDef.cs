@@ -8,7 +8,7 @@ public class CapDef : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        return userGameWeek.Lineup.Any(pe =>
+        return userGameWeek.User.Lineup.Any(pe =>
             pe.PlayerPosition == 2 && pe is { IsCaptain: true, Minutes: > 45 }
         )
             ? 1

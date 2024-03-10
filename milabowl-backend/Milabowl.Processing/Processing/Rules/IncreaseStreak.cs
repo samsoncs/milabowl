@@ -8,25 +8,25 @@ public class IncreaseStreak : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var hasStreak = !(userGameWeek.UserHistory.Count < 2);
+        var hasStreak = !(userGameWeek.User.History.Count < 2);
         var prevGameWeekScore = 0.0m;
         foreach (
             var gameWeek in userGameWeek
-                .UserHistory.OrderByDescending(u => u.Event.GameWeek)
+                .User.History.OrderByDescending(u => u.Event.GameWeek)
                 .Take(3)
         )
         {
-            if (gameWeek.FplScores.TotalScore < prevGameWeekScore)
+            if (gameWeek.TotalScore < prevGameWeekScore)
             {
                 hasStreak = false;
                 break;
             }
 
-            prevGameWeekScore = gameWeek.FplScores.TotalScore;
+            prevGameWeekScore = gameWeek.TotalScore;
         }
 
         var points = 0.0m;
-        if (hasStreak && userGameWeek.FplScores.TotalScore > prevGameWeekScore)
+        if (hasStreak && userGameWeek.User.TotalScore > prevGameWeekScore)
         {
             points = 1;
         }

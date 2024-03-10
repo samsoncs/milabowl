@@ -8,7 +8,7 @@ public class UniqueCap : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var cap = userGameWeek.Lineup.First(l => l.IsCaptain);
+        var cap = userGameWeek.User.Lineup.First(l => l.IsCaptain);
 
         return userGameWeek.Opponents.Any(o =>
         {
