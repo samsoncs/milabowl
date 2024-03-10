@@ -16,10 +16,6 @@ public class UserGameWeek
     public UserGameWeek? PreviousGameWeek { get; }
     public IList<UserGameWeek> UserHistory { get; }
     public Position Position { get; private set; } = null!;
-    public decimal TotalMilaScore { get; private set; }
-    public decimal TotalCumulativeAvgMilaScore { get; private set; }
-    public decimal CumulativeTotalMilaScore { get; private set; }
-    public decimal AvgCumulativeTotalMilaScore { get; private set; }
     public Dictionary<string, RuleResult> Rules { get; private set; } = new();
     private readonly IList<UserGameWeek> _historicGameWeeks;
 
@@ -81,16 +77,18 @@ public class UserGameWeek
         var gwPosition =
             Opponents.Sum(u => u.FplScores.TotalScore > FplScores.TotalScore ? 1 : 0) + 1;
         var milaRank =
-            Opponents.Sum(o => o.CumulativeTotalMilaScore > CumulativeTotalMilaScore ? 1 : 0) + 1;
+            Opponents.Sum(o =>
+                o.MilaScores.CumulativeTotalMilaScore > MilaScores.CumulativeTotalMilaScore ? 1 : 0
+            ) + 1;
         var milaRankLastWeek =
             _historicGameWeeks
                 .Where(h => h.User.Id != User.Id && h.Event.GameWeek == Event.GameWeek - 1)
                 .Sum(o =>
-                    o.CumulativeTotalMilaScore
+                    o.MilaScores.CumulativeTotalMilaScore
                     > _historicGameWeeks
                         .Where(h => h.User.Id == User.Id)
                         .FirstOrDefault(h => h.Event.GameWeek == Event.GameWeek - 1)
-                        ?.CumulativeTotalMilaScore
+                        ?.MilaScores.CumulativeTotalMilaScore
                         ? 1
                         : 0
                 ) + 1;
@@ -100,15 +98,19 @@ public class UserGameWeek
     private void SetMilaScores(List<MilaRuleResult> results)
     {
         var totalMilaScore = results.Sum(r => r.Points);
-        var totalCumulativeAvgMilaScore = Math.Round(CumulativeTotalMilaScore / Event.GameWeek, 2);
+        var totalCumulativeAvgMilaScore = Math.Round(
+            MilaScores.CumulativeTotalMilaScore / Event.GameWeek,
+            2
+        );
         var cumulativeTotalMilaScore =
-            _historicGameWeeks.Where(u => u.User.Id == User.Id).Sum(h => h.TotalMilaScore)
-            + TotalMilaScore;
+            _historicGameWeeks
+                .Where(u => u.User.Id == User.Id)
+                .Sum(h => h.MilaScores.TotalMilaScore) + MilaScores.TotalMilaScore;
         var avgCumulativeTotalMilaScore = Math.Round(
             (
-                _historicGameWeeks.Sum(h => h.TotalMilaScore)
-                + Opponents.Sum(h => h.TotalMilaScore)
-                + TotalMilaScore
+                _historicGameWeeks.Sum(h => h.MilaScores.TotalMilaScore)
+                + Opponents.Sum(h => h.MilaScores.TotalMilaScore)
+                + MilaScores.TotalMilaScore
             ) / (_historicGameWeeks.Count + Opponents.Count + 1),
             2
         );

@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class UniqueCap : MilaRule
 {
-    public override string ShortName => "Unq Cap";
+    protected override string ShortName => "Unq Cap";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

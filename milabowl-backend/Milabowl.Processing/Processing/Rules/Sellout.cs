@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class Sellout : MilaRule
 {
-    public override string ShortName => "$0";
+    protected override string ShortName => "$0";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class MinusIsPlus : MilaRule
 {
-    public override string ShortName => "MiP";
+    protected override string ShortName => "MiP";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

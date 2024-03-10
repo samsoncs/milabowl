@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class CapDef : MilaRule
 {
-    public override string ShortName => "CD";
+    protected override string ShortName => "CD";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

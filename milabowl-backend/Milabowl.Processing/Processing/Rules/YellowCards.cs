@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class YellowCards : MilaRule
 {
-    public override string ShortName => "YC";
+    protected override string ShortName => "YC";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

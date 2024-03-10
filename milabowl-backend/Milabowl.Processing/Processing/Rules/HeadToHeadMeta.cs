@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class HeadToHeadMeta : MilaRule
 {
-    public override string ShortName => "H2H";
+    protected override string ShortName => "H2H";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

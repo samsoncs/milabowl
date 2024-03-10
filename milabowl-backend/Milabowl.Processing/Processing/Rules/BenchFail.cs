@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class BenchFail : MilaRule
 {
-    public override string ShortName => "BF";
+    protected override string ShortName => "BF";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

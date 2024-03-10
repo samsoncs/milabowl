@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class GameWeekPosition : MilaRule
 {
-    public override string ShortName => "GW PS";
+    protected override string ShortName => "GW PS";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class MissedPenalties : MilaRule
 {
-    public override string ShortName => "MP";
+    protected override string ShortName => "MP";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

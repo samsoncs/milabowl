@@ -5,7 +5,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class EqualStreak : MilaRule
 {
-    public override string ShortName => "ES";
+    protected override string ShortName => "ES";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

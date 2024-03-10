@@ -11,7 +11,7 @@ public interface IMilaRule
 
 public abstract class MilaRule : IMilaRule
 {
-    public abstract string ShortName { get; }
+    protected abstract string ShortName { get; }
     protected abstract decimal CalculatePoints(UserGameWeek userGameWeek);
 
     public MilaRuleResult Calculate(UserGameWeek userGameWeek)

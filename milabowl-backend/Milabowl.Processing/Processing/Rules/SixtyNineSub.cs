@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class SixtyNineSub : MilaRule
 {
-    public override string ShortName => "69Sub";
+    protected override string ShortName => "69Sub";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

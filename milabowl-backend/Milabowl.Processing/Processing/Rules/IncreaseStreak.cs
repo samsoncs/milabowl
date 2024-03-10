@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class IncreaseStreak : MilaRule
 {
-    public override string ShortName => "IS";
+    protected override string ShortName => "IS";
 
     protected override decimal CalculatePoints(UserGameWeek userGameWeek)
     {

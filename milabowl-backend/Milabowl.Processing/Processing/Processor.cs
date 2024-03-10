@@ -28,15 +28,15 @@ public class Processor
             {
                 var result = new MilaResult(
                     userGameWeek.Event.Name,
-                    userGameWeek.TotalMilaScore,
+                    userGameWeek.MilaScores.TotalMilaScore,
                     userGameWeek.User.TeamName,
                     userGameWeek.User.UserName,
                     userGameWeek.User.Id,
                     userGameWeek.Position.GwPosition,
                     userGameWeek.Event.GameWeek,
-                    userGameWeek.CumulativeTotalMilaScore,
-                    userGameWeek.AvgCumulativeTotalMilaScore,
-                    userGameWeek.TotalCumulativeAvgMilaScore,
+                    userGameWeek.MilaScores.CumulativeTotalMilaScore,
+                    userGameWeek.MilaScores.AvgCumulativeTotalMilaScore,
+                    userGameWeek.MilaScores.TotalCumulativeAvgMilaScore,
                     userGameWeek.Position.MilaRank,
                     userGameWeek.Position.MilaRankLastWeek,
                     userGameWeek.Rules
