@@ -6,7 +6,7 @@ public class BenchFail : MilaRule
 {
     protected override string ShortName => "BF";
 
-    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
+    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var points =
             (decimal)

@@ -6,7 +6,7 @@ public class UniqueCap : MilaRule
 {
     protected override string ShortName => "Unq Cap";
 
-    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
+    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var cap = userGameWeek.Lineup.First(l => l.IsCaptain);
 

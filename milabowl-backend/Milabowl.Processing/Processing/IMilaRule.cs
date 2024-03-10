@@ -6,15 +6,15 @@ public record MilaRuleResult(string RuleName, string RuleShortName, decimal Poin
 
 public interface IMilaRule
 {
-    MilaRuleResult Calculate(UserGameWeek userGameWeek);
+    MilaRuleResult Calculate(MilaGameWeekState userGameWeek);
 }
 
 public abstract class MilaRule : IMilaRule
 {
     protected abstract string ShortName { get; }
-    protected abstract decimal CalculatePoints(UserGameWeek userGameWeek);
+    protected abstract decimal CalculatePoints(MilaGameWeekState userGameWeek);
 
-    public MilaRuleResult Calculate(UserGameWeek userGameWeek)
+    public MilaRuleResult Calculate(MilaGameWeekState userGameWeek)
     {
         return new MilaRuleResult(GetType().Name, ShortName, CalculatePoints(userGameWeek));
     }

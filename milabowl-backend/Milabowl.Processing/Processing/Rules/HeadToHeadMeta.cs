@@ -6,7 +6,7 @@ public class HeadToHeadMeta : MilaRule
 {
     protected override string ShortName => "H2H";
 
-    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
+    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var scoreDiff =
             userGameWeek.HeadToHead.CurrentUser.Points - userGameWeek.HeadToHead.Opponent.Points;

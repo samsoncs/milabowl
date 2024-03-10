@@ -2,6 +2,20 @@
 
 namespace Milabowl.Processing.DataImport.Models;
 
+public record MilaGameWeekState(
+    User User,
+    Event Event,
+    IReadOnlyList<PlayerEvent> Lineup,
+    IReadOnlyList<PlayerEvent> SubsIn,
+    IReadOnlyList<PlayerEvent> SubsOut,
+    IReadOnlyList<UserGameWeek> Opponents,
+    HeadToHead HeadToHead,
+    FplScores FplScores,
+    MilaScores MilaScores,
+    UserGameWeek? PreviousGameWeek,
+    IReadOnlyList<UserGameWeek> UserHistory
+);
+
 public class UserGameWeek
 {
     public User User { get; }
@@ -64,6 +78,23 @@ public class UserGameWeek
     public void AddOpponentsForGameWeek(IList<UserGameWeek> userGameWeeks)
     {
         Opponents = userGameWeeks.Where(u => u.User.Id != User.Id).ToList();
+    }
+
+    public MilaGameWeekState GetCalculationState()
+    {
+        return new MilaGameWeekState(
+            User,
+            Event,
+            Lineup.AsReadOnly(),
+            SubsIn.AsReadOnly(),
+            SubsOut.AsReadOnly(),
+            Opponents.AsReadOnly(),
+            HeadToHead,
+            FplScores,
+            MilaScores,
+            PreviousGameWeek,
+            UserHistory.AsReadOnly()
+        );
     }
 
     public void AddMilaRuleResults(List<MilaRuleResult> results)

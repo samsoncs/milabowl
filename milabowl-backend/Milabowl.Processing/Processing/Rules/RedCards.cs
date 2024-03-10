@@ -6,7 +6,7 @@ public class RedCards : MilaRule
 {
     protected override string ShortName => "RC";
 
-    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
+    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         return userGameWeek.Lineup.Where(pe => pe.RedCards == 1).Sum(pe => pe.Multiplier);
     }

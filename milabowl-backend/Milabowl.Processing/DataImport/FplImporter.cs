@@ -24,11 +24,12 @@ public class FplImporter
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.standings.results;
         List<UserGameWeek> gameWeeks = [];
+        List<MilaGameWeekState> milaGameWeekStates = [];
         foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
         {
-            var userGameWeeks = new List<UserGameWeek>();
             var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
             var headToHeadEventRootDto = await _fplService.GetHead2HeadEventRoot(finishedEvent.Id);
+            List<UserGameWeek> userGameWeeks = [];
             foreach (var user in users)
             {
                 var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
@@ -48,11 +49,15 @@ public class FplImporter
             foreach (var userGameWeek in userGameWeeks)
             {
                 userGameWeek.AddOpponentsForGameWeek(userGameWeeks);
-                var rulesResults = _rulesProcessor.CalculateForUserGameWeek(userGameWeek);
-                userGameWeek.AddMilaRuleResults(rulesResults);
+                milaGameWeekStates.Add(userGameWeek.GetCalculationState());
             }
 
             gameWeeks.AddRange(userGameWeeks);
+        }
+
+        foreach (var milaGameWeekState in milaGameWeekStates)
+        {
+            var rulesResult = _rulesProcessor.CalculateForUserGameWeek(milaGameWeekState);
         }
 
         return gameWeeks

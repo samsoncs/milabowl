@@ -7,7 +7,7 @@ public class EqualStreak : MilaRule
 {
     protected override string ShortName => "ES";
 
-    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
+    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var points = 0.0m;
 

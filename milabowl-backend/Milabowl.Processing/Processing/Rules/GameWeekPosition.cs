@@ -6,7 +6,7 @@ public class GameWeekPosition : MilaRule
 {
     protected override string ShortName => "GW PS";
 
-    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
+    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var rulePoints = 0.0m;
         var iteration = 0.0m;

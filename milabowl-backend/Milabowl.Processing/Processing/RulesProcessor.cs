@@ -5,7 +5,7 @@ namespace Milabowl.Processing.Processing;
 
 public interface IRulesProcessor
 {
-    List<MilaRuleResult> CalculateForUserGameWeek(UserGameWeek userGameWeek);
+    List<MilaRuleResult> CalculateForUserGameWeek(MilaGameWeekState userGameWeek);
 }
 
 public class RulesProcessor : IRulesProcessor
@@ -17,7 +17,7 @@ public class RulesProcessor : IRulesProcessor
         _rules = rules;
     }
 
-    public List<MilaRuleResult> CalculateForUserGameWeek(UserGameWeek userGameWeek)
+    public List<MilaRuleResult> CalculateForUserGameWeek(MilaGameWeekState userGameWeek)
     {
         return _rules.Select(r => r.Calculate(userGameWeek)).ToList();
     }

@@ -6,7 +6,7 @@ public class IncreaseStreak : MilaRule
 {
     protected override string ShortName => "IS";
 
-    protected override decimal CalculatePoints(UserGameWeek userGameWeek)
+    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var hasStreak = !(userGameWeek.UserHistory.Count < 2);
         var prevGameWeekScore = 0.0m;
