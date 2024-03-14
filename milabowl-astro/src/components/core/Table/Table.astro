@@ -2,26 +2,24 @@
 export interface Props {
     headers?: string[];
 }
-const {headers} = Astro.props;
+const { headers } = Astro.props;
 ---
+
 <table>
     <thead class="text-indigo-900 dark:text-dark-text">
         {
-            headers &&
-            <tr>
-                {
-                    headers.map(h => (
+            headers && (
+                <tr>
+                    {headers.map((h) => (
                         <th>{h}</th>
-                    ))
-                }
-            </tr>
+                    ))}
+                </tr>
+            )
         }
-        {
-            !headers && <slot name="header"/>
-        }
+        {!headers && <slot name="header" />}
     </thead>
     <tbody>
-        <slot/>
+        <slot />
     </tbody>
 </table>
 
@@ -39,7 +37,7 @@ const {headers} = Astro.props;
         color: inherit;
         display: table-row;
         vertical-align: middle;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         outline: 0px;
     }
     th {
@@ -80,7 +78,8 @@ const {headers} = Astro.props;
             max-width: none;
         }
     }
-    td.right-align, th.right-align{
+    td.right-align,
+    th.right-align {
         text-align: right;
     }
     tbody {
