@@ -9,7 +9,7 @@ tags: [Tech]
 Backend prosesseringen til Milabowl bærer mye preg av teknsik gjeld og dårlig struktur som følge av mange snarveier når man gikk fra live
 applikasjon i Azure til Github Pages. En omfattende omskrivning nærmer seg nå slutten. Hovedfokuset er å senke terskelen for å legge til 
 nye regler. Dette blir gjort ved å ta i bruk en helt ny rules engine, "MilaEngine"🧙🏼‍♂️. Det eneste man trenger for å legge til en ny regel 
-er å implementere IMilaRule interfacet, deretter skjer alt automagisk:
+er å implementere `IMilaRule` interfacet, deretter skjer alt automagisk:
 
 ``` C#
 public record MilaRuleResult(string RuleName, string RuleShortName, decimal Points);
@@ -22,7 +22,7 @@ public interface IMilaRule
 
 Alle implementasjoner vil automatisk bli plukket opp av .NET sin DI container, og automatisk kalkulert og lagt inn i game_state.json. 
 Frontendend vil også bli oppdatert til å automatisk plukke opp alle nye regler, og rendre nye regler. For å forenkle enda mer kan man
-implementere den abstrakte klassen MilaRule. Man må da sette et ShortName (som vil dukke opp i tabellene i front end), og en metode 
+implementere den abstrakte klassen `MilaRule`. Man må da sette et ShortName (som vil dukke opp i tabellene i front end), og en metode 
 for å beregne poeng. Regelen vil dukke opp med samme navn som klassen i JSON resultatet.
 
 ``` C#
