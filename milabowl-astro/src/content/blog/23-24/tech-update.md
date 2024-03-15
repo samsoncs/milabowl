@@ -11,7 +11,7 @@ applikasjon i Azure til Github Pages. En omfattende omskrivning nærmer seg nå 
 nye regler. Dette blir gjort ved å ta i bruk en helt ny rules engine, "MilaEngine"🧙🏼‍♂️. Det eneste man trenger for å legge til en ny regel 
 er å implementere `IMilaRule` interfacet, deretter skjer alt automagisk:
 
-``` C#
+``` csharp
 public record MilaRuleResult(string RuleName, string RuleShortName, decimal Points);
 
 public interface IMilaRule
@@ -25,7 +25,7 @@ Frontendend vil også bli oppdatert til å automatisk plukke opp alle nye regler
 implementere den abstrakte klassen `MilaRule`. Man må da sette et ShortName (som vil dukke opp i tabellene i front end), og en metode 
 for å beregne poeng. Regelen vil dukke opp med samme navn som klassen i JSON resultatet.
 
-``` C#
+``` csharp
 public abstract class MilaRule : IMilaRule
 {
     protected abstract string ShortName { get; }
@@ -40,7 +40,7 @@ public abstract class MilaRule : IMilaRule
 
 For å vise hvor enkelt det blir å legge til en ny regel kan vi se på implementasjonen av regelen for gult kort:
 
-``` C#
+``` csharp
 public class YellowCards : MilaRule
 {
     protected override string ShortName => "YC";
