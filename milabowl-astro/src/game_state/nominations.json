@@ -1,5 +1,12 @@
 [
 	{
+		"personNominated": "Anders",
+		"gw": 29,
+		"date": "20.03.2024",
+		"reason": "Anders glemmer å gjøre bytter inn mot årets største blank gameweek, men har så mye flaks at han likevel unngår å tape runden! Heldig som han er møter han (selvfølgelig) rundetaperen Markus i H2H som gir han enda en H2H seier. Makan til flaks skal du lete lenge etter!",
+		"category": "LUCK"
+	},
+	{
 		"personNominated": "Martin",
 		"gw": 27,
 		"date": "06.03.2024",
@@ -53,7 +60,7 @@
 		"gw": 0,
 		"date": "08.08.2023",
 		"reason": "I forbindelse med navnekåring er alle bedt om å sende inn lagnavn fra anonym eposkonto. Eivind oppretter anonym epostadresse, men fyller inn 'Eivind Kristoffersen' på navn og avslører seg selv til kåringsansvarlig. Vi forventet mer fra sikkerhetseksperten!",
-		"category": "FAIL"
+		"category": "DERP"
 	},
 	{
 		"personNominated": "Simen",
