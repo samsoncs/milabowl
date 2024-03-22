@@ -15,15 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
             
       - name: Spinning up SQL Server
         run: docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=!5omeSup3rF4ncyPwd!" -p 1431:1433 -d mcr.microsoft.com/mssql/server:2022-latest
           
-      - name: Setup .NET 7.x
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET 8.x
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '7.x'
+          dotnet-version: '8.x'
         
       - name: Build and run milabowl processing
         working-directory: ./milabowl-backend
@@ -32,7 +32,7 @@ jobs:
           dotnet run --project ./Migrations/Processing.csproj -- ../milabowl-astro/src/game_state
         
       - name: use node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
@@ -60,4 +60,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
