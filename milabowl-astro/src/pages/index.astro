@@ -28,11 +28,11 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
           </div>
           <Table>
             <tr slot="header">
-              <th>Rank</th>
-              <th>Team</th>
+              <th class="pr-0 pl-2 md:p-4">Rank</th>
+              <th class="pl-0 md:p-4">Team</th>
               <th class="right-align">GW</th>
-              <th class="right-align hidden md:table-cell">Avg</th>
-              <th class="right-align table-cell md:hidden">Total</th>
+              <th class="pr-0 pl-0 md:p-4 right-align hidden md:table-cell">Avg</th>
+              <th class="pr-2 pl-0 md:p-4 right-align table-cell md:hidden">Total</th>
               <th class="right-align hidden md:table-cell">Total Score</th>
             </tr>
 
@@ -54,16 +54,16 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
                   i;
                 return (
                   <tr class="border-1 border-slate-200 dark:border-slate-700">
-                    <td class="pr-0">
+                    <td class="pr-0 pl-2 md:p-4">
                       <div class="flex space-x-2 flex-row items-center justify-items-center">
-                        <div>
+                        <div class="flex flex-col items-center justify-between gap-1">
                           {isLastPlace && <span class="text-md">💩</span>}
-                          {!isLastPlace && `${i + 1}.`}
+                          {!isLastPlace && <span class="font-bold">{i + 1}</span>}
+                          <PositionDelta delta={deltaPosition} />
                         </div>
-                        <PositionDelta delta={deltaPosition} />
                       </div>
                     </td>
-                    <td>
+                    <td class="pl-0 md:p-4">
                       <Avatar teamName={r.teamName} client:idle>
                         <AvatarProvider userName={r.userName} />
                       </Avatar>
@@ -78,7 +78,7 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
                     <td class="right-align hidden md:table-cell">
                       {r.cumulativeAverageMilaPoints}
                     </td>
-                    <td class="right-align font-bold text-indigo-900 dark:text-orange-200">
+                    <td class="pr-2 pl-0 md:p-4 right-align font-bold text-indigo-900 dark:text-orange-200">
                       {r.cumulativeMilaPoints}
                     </td>
                   </tr>
