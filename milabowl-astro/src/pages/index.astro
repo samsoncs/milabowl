@@ -28,9 +28,9 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
           </div>
           <Table>
             <tr slot="header">
-              <th class="pr-0 pl-2 md:p-4">Rank</th>
+              <th class="pr-1 pl-2 md:p-4">#</th>
               <th class="pl-0 md:p-4">Team</th>
-              <th class="right-align">GW</th>
+              <th class="pl-0 md:p-4 right-align">GW</th>
               <th class="pr-0 pl-0 md:p-4 right-align hidden md:table-cell">Avg</th>
               <th class="pr-2 pl-0 md:p-4 right-align table-cell md:hidden">Total</th>
               <th class="right-align hidden md:table-cell">Total Score</th>
@@ -54,7 +54,7 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
                   i;
                 return (
                   <tr class="border-1 border-slate-200 dark:border-slate-700">
-                    <td class="pr-0 pl-2 md:p-4">
+                    <td class="pr-1 pl-2 md:p-4 p-3">
                       <div class="flex space-x-2 flex-row items-center justify-items-center">
                         <div class="flex flex-col items-center justify-between gap-1">
                           {isLastPlace && <span class="text-md">💩</span>}
@@ -64,17 +64,18 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
                       </div>
                     </td>
                     <td class="pl-0 md:p-4">
-                      <Avatar teamName={r.teamName} client:idle>
-                        <AvatarProvider userName={r.userName} />
-                      </Avatar>
-
-                      <Link
-                        href={`/players/${r.teamName.replaceAll(" ", "-")}`}
-                      >
-                        {r.teamName}
-                      </Link>
+                      <div class="flex items-center gap-2">
+                        <Avatar teamName={r.teamName} client:idle>
+                          <AvatarProvider userName={r.userName} />
+                        </Avatar>
+                        <Link
+                          href={`/players/${r.teamName.replaceAll(" ", "-")}`}
+                        >
+                          {r.teamName}
+                        </Link>
+                      </div>
                     </td>
-                    <td class="right-align">{r.milaPoints.total}</td>
+                    <td class="right-align pl-0 md:p-4">{r.milaPoints.total}</td>
                     <td class="right-align hidden md:table-cell">
                       {r.cumulativeAverageMilaPoints}
                     </td>
