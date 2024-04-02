@@ -1,21 +1,178 @@
 ---
-import game_state from "../../../../src/game_state/game_state.json";
-import type { MilaResultsDTO, ResultsByUser } from "../../../../src/game_state/gameState";
 import Layout from "../../../layouts/Layout.astro";
 import FplPitch from "./_FplPitch.astro";
 
 interface Props{
-    userResults: ResultsByUser;
+    userResults: FplUserGameweekResult;
+}
+
+interface FplPlayerResult{
+    lastName: string;
+    points: number;
+    position: string;
+    isCap: boolean;
+    isViceCap: boolean;
+    team: string;
+    isBench: boolean;
+}
+
+export interface FplUserGameweekResult{
+    gameWeek: number;
+    teamName: string;
+    lineup: FplPlayerResult[];
 }
 
 export function getStaticPaths() {
-  const gameState: MilaResultsDTO = game_state;
-  const paths = gameState.resultsByUser.map(r => (
-    { 
-      params: { player: r.teamName.replaceAll(" ", "-")},
-      props: { userResults: r }
-    }));
-  return paths;
+    const fplResults: FplUserGameweekResult[] = [
+        { 
+            gameWeek: 30,
+            teamName: "$jeik og betalt",
+            lineup: [
+            {
+                    lastName: "Something",
+                    points: 2,
+                    position: "GK",
+                    team: "Liverpool",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Def",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Def",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Def",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Mid",
+                    team: "Arsenal",
+                    isCap: true,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Mid",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: true,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Mid",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Mid",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Fwd",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Fwd",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Fwd",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: false
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "GK",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: true
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "DEF",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: true
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Def",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: true
+                },
+                {
+                    lastName: "Gabriel",
+                    points: 6,
+                    position: "Mid",
+                    team: "Arsenal",
+                    isCap: false,
+                    isViceCap: false,
+                    isBench: true
+                },
+            ]     
+        }
+    ];
+
+    const paths = fplResults.map(r => (
+        { 
+        params: { player: r.teamName.replaceAll(" ", "-")},
+        props: { userResults: r }
+        }));
+    return paths;
 }
 
 const { userResults } = Astro.props;
@@ -52,7 +209,7 @@ const { userResults } = Astro.props;
         </div>
         
 
-        <FplPitch/>
+        <FplPitch fplUserGameweekResults={userResults}/>
 
         <div class="h-96"/>
 
