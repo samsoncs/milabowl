@@ -22,7 +22,7 @@ const { userResults } = Astro.props;
 ---
 <Layout title={`${userResults.teamName}`}>
     <div class="text-base dark:text-dark-text"><!-- Extract common text component -->
-        <div class="flex flex-col items-center w-full bg-gradient-to-b from-slate-900 to-slate-800">
+        <div class="flex flex-col items-center w-full bg-gradient-to-b from-slate-900 to-slate-800 sticky top-14">
             <div class="pt-2 text-xl font-bold">
                 $jeikOgBetalt
             </div>
@@ -52,6 +52,8 @@ const { userResults } = Astro.props;
         </div>
 
         <FplPitch/>
+
+        <div class="h-96"/>
 
     </div>
 </Layout>
