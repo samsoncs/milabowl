@@ -1,0 +1,57 @@
+---
+import type { Dictionary } from 'lodash';
+
+export interface Props {
+    name: string;
+    info: string;
+    pos?: string;
+    showPos?: boolean;
+    team: string;
+    isCap?: boolean;
+    isViceCap?: boolean;
+}
+
+const jerseyColors: Dictionary<string> = {
+    "Liverpool": "#bb2633",
+    "GK_Liverpool": "#343434",
+    "Arsenal": "#c9103a",
+    "City": "#a8c9ea"
+};
+
+const { name, info, pos, showPos, team, isCap, isViceCap } = Astro.props;
+
+const jerseyColorPos = pos === "GK" ? "GK_" : "";
+const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? "grey";
+---
+<div class="flex flex-col items-center gap-1">
+    {
+        showPos && pos &&
+        <div class="flex justify-center text-sm">{pos}</div>
+    }
+    <div class="relative">
+        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={jerseyColor}>
+            <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+        </svg>
+        {
+            isCap &&
+            <span class="absolute text-xs flex items-center justify-center -right-1 bottom-0 h-4 w-4 bg-slate-800 rounded-full">
+                C
+            </span>
+        }
+         {
+            isViceCap &&
+            <span class="absolute text-xs flex items-center justify-center -right-1 bottom-0 h-4 w-4 bg-slate-800 rounded-full">
+                V
+            </span>
+        }
+    </div>
+          
+    <div>
+        <div class="flex justify-center text-sm py-0.5 px-1 bg-indigo-800 rounded-t-sm">
+            {name}
+        </div>
+        <div class="flex justify-center text-sm bg-slate-900 bg-opacity-20 p-0.5 rounded-b-sm">
+            {info}
+        </div>
+    </div>
+<div/>

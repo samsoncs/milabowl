@@ -2,9 +2,31 @@
 
 namespace Milabowl.Domain.Milabowl;
 
+public record FplPlayerEventResult(
+    string LastName,
+    string TeamName,
+    int Points,
+    string Position,
+    bool IsCap,
+    bool IsViceCap,
+    bool IsBench
+);
+
+public record FplUserGameWeekResult(
+    int GameWeek,
+    string TeamName,
+    int TotalScore,
+    IList<FplPlayerEventResult> Lineup
+);
+
+public record FplResults(
+    IList<FplUserGameWeekResult> Results
+);
+
 public interface IMilaResultsService
 {
     Task<MilaResults> GetMilaResults();
+    Task<FplResults> GetFplResults();
 }
 
 public class MilaResultsService: IMilaResultsService
@@ -56,5 +78,11 @@ public class MilaResultsService: IMilaResultsService
             ResultsByUser = resultsByUser,
             OverallScore = overall
         };
+    }
+
+    public async Task<FplResults> GetFplResults()
+    {
+        var fplResults = await _milaRepository.GetFplResults();
+        return fplResults;
     }
 }

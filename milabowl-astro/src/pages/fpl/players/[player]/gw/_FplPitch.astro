@@ -1,0 +1,65 @@
+---
+import type { FplUserGameweekResult } from "../../../game_state/fplState";
+import FplPlayer from "./_FplPlayer.astro"
+
+interface Props{
+    fplUserGameweekResults: FplUserGameweekResult;
+}
+
+const { fplUserGameweekResults } = Astro.props;
+---
+<div class="relative bg-gradient-to-b from-green-400 to-green-500 rounded-md p-14 py-1 mx-2">
+    <div class="absolute top-2 bottom-0 left-2 right-2 border-4 border-b-0"/>
+    <div class="absolute top-2 left-1/4 right-1/4 border-4 h-20"/>
+    <div class="absolute bottom-40 left-2 right-2 border-2 h-1"/>
+    <div class="absolute bottom-14 mx-auto right-0 left-0 border-4 p-1/4 w-1/4 h-1/4 rounded-full"/>
+
+    <div class="relative">
+        <div class="flex justify-center pt-4 pb-2">
+        {
+            fplUserGameweekResults.lineup
+                .filter(pe => pe.position === "GK" && !pe.isBench)
+                .map(pe => (
+                    <FplPlayer team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                ))
+        }
+        </div>
+        <div class="flex justify-around py-2">
+        {
+            fplUserGameweekResults.lineup
+                .filter(pe => pe.position === "DEF" && !pe.isBench)
+                .map(pe => (
+                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                ))
+        }
+        </div>
+        <div class="flex justify-around py-2">
+        {
+            fplUserGameweekResults.lineup
+                .filter(pe => pe.position === "MID" && !pe.isBench)
+                .map(pe => (
+                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                ))
+        }
+        </div>
+        <div class="flex justify-around py-2">
+        {
+            fplUserGameweekResults.lineup
+                .filter(pe => pe.position === "FWD" && !pe.isBench)
+                .map(pe => (
+                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                ))
+        }
+        </div>
+        
+        <div class="flex justify-around bg-white bg-green-300 px-4 py-2 mx-4 my-2 rounded-md">
+        {
+            fplUserGameweekResults.lineup
+                .filter(pe => pe.isBench)
+                .map(pe => (
+                    <FplPlayer showPos isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                ))
+        }
+        </div>
+    </div>
+</div>
