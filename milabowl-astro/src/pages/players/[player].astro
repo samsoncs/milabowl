@@ -24,7 +24,7 @@ export function getStaticPaths() {
 const { userResults } = Astro.props;
 ---
 <Layout title={`${userResults.teamName} - details`}>
-  <PlayerLayout teamName={userResults.teamName}/>
+  <PlayerLayout view="mila" teamName={userResults.teamName}/>
 
   <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4 pt-20">	
     <div class="lg:col-span-4 order-last lg:order-first">
