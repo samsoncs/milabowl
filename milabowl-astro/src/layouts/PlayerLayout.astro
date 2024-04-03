@@ -1,0 +1,17 @@
+---
+interface Props{
+    teamName: string;
+}
+
+const { teamName } = Astro.props;
+---
+<div class="flex flex-col items-center w-full bg-gradient-to-b from-slate-900 to-slate-800 fixed top-14">
+    <div class="pt-2 text-xl font-bold">
+        {teamName}
+    </div>
+
+    <div class="flex px-4 py-0 w-full justify-start">
+        <a href={`/players/${teamName.replaceAll(" ", "-")}`} class="px-4 py-2">Mila</a>
+        <div class="px-4 py-2 border-b-4 border-indigo-700">FPL</div>
+    </div>
+</div>

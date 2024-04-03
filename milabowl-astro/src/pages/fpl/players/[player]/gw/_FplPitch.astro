@@ -1,5 +1,5 @@
 ---
-import type { FplUserGameweekResult } from "./[player].astro";
+import type { FplUserGameweekResult } from "../../../game_state/fplState";
 import FplPlayer from "./_FplPlayer.astro"
 
 interface Props{
@@ -20,44 +20,44 @@ const { fplUserGameweekResults } = Astro.props;
             fplUserGameweekResults.lineup
                 .filter(pe => pe.position === "GK" && !pe.isBench)
                 .map(pe => (
-                    <FplPlayer team={pe.team} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                    <FplPlayer team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
                 ))
         }
         </div>
         <div class="flex justify-around py-2">
         {
             fplUserGameweekResults.lineup
-                .filter(pe => pe.position === "Def" && !pe.isBench)
+                .filter(pe => pe.position === "DEF" && !pe.isBench)
                 .map(pe => (
-                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.team} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
                 ))
         }
         </div>
         <div class="flex justify-around py-2">
         {
             fplUserGameweekResults.lineup
-                .filter(pe => pe.position === "Mid" && !pe.isBench)
+                .filter(pe => pe.position === "MID" && !pe.isBench)
                 .map(pe => (
-                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.team} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
                 ))
         }
         </div>
         <div class="flex justify-around py-2">
         {
             fplUserGameweekResults.lineup
-                .filter(pe => pe.position === "Fwd" && !pe.isBench)
+                .filter(pe => pe.position === "FWD" && !pe.isBench)
                 .map(pe => (
-                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.team} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                    <FplPlayer isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
                 ))
         }
         </div>
         
-        <div class="flex justify-around bg-white bg-green-400 px-4 py-2 mx-4 my-2 rounded-md">
+        <div class="flex justify-around bg-white bg-green-300 px-4 py-2 mx-4 my-2 rounded-md">
         {
             fplUserGameweekResults.lineup
                 .filter(pe => pe.isBench)
                 .map(pe => (
-                    <FplPlayer showPos isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.team} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
+                    <FplPlayer showPos isCap={pe.isCap} isViceCap={pe.isViceCap} team={pe.teamName} pos={pe.position} name={pe.lastName} info={`${pe.points}`}/>
                 ))
         }
         </div>
