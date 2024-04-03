@@ -5,6 +5,7 @@ export interface FplResults{
 export interface FplUserGameweekResult{
     gameWeek: number;
     teamName: string;
+    totalScore: number;
     lineup: FplPlayerResult[];
 }
 
