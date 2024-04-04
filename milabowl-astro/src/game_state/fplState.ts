@@ -10,7 +10,7 @@ export interface FplUserGameweekResult{
 }
 
 export interface FplPlayerResult{
-    lastName: string;
+    webName: string;
     points: number;
     position: string;
     isCap: boolean;

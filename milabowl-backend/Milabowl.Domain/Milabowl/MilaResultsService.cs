@@ -3,7 +3,7 @@
 namespace Milabowl.Domain.Milabowl;
 
 public record FplPlayerEventResult(
-    string LastName,
+    string WebName,
     string TeamName,
     int Points,
     string Position,

@@ -55,11 +55,11 @@ static async Task Import(IServiceProvider services, string filePath)
     var milaPointsProcessorService = services.GetRequiredService<IMilaPointsProcessorService>()!;
     var milaResultsService = services.GetRequiredService<IMilaResultsService>()!;
 
-    await dataImportService.ImportData();
-    await milaPointsProcessorService.UpdateMilaPoints();
+    // await dataImportService.ImportData();
+    // await milaPointsProcessorService.UpdateMilaPoints();
     var fplResults = await milaResultsService.GetFplResults();
     var fplJson = JsonSerializer.Serialize(fplResults, new JsonSerializerOptions{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-    await File.WriteAllTextAsync($"{filePath}/fpl_state.json", fplJson);
+    await File.WriteAllTextAsync($"C:\\Users\\SamsonSvendsen\\programming\\Other\\milabowl\\milabowl-astro\\src\\game_state\\fpl_state2.json", fplJson);
     
     var milaResults = await milaResultsService.GetMilaResults();
 

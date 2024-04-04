@@ -15,7 +15,22 @@ const jerseyColors: Dictionary<string> = {
     "Liverpool": "#bb2633",
     "GK_Liverpool": "#343434",
     "Arsenal": "#c9103a",
-    "City": "#a8c9ea"
+    "Man City": "#a8c9ea",
+    "Brighton": "#2d5ebf",
+    "Spurs": "#fcfbfc",
+    "Bournemouth": "#312f2f",
+    "Aston Villa": "#5b1a30",
+    "Newcastle": "#262626",
+    "GK_Newcastle": "#ebf400",
+    "Chelsea": "#38489f",
+    "Sheffield Utd": "#c7171e",
+    "Burnley": "#691d2d",
+    "West Ham": "#7f2f48",
+    "GK_West Ham": "#54af57",
+    "Nott'm Forest": "#d31d3b",
+    "Luton": "#f03c00",
+    "Brentford": "#d22236",
+    "GK_Brentford": "#e90b6a"
 };
 
 const { name, info, pos, showPos, team, isCap, isViceCap } = Astro.props;
@@ -23,13 +38,13 @@ const { name, info, pos, showPos, team, isCap, isViceCap } = Astro.props;
 const jerseyColorPos = pos === "GK" ? "GK_" : "";
 const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? "grey";
 ---
-<div class="flex flex-col items-center gap-1">
+<div class="flex flex-col items-center">
     {
         showPos && pos &&
         <div class="flex justify-center text-sm">{pos}</div>
     }
     <div class="relative">
-        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={jerseyColor}>
+        <svg class="w-10 h-9 d:w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={jerseyColor}>
             <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
         </svg>
         {
@@ -47,10 +62,10 @@ const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? "grey";
     </div>
           
     <div>
-        <div class="flex justify-center text-sm py-0.5 px-1 bg-indigo-800 rounded-t-sm">
+        <div class="flex justify-center text-xs font-bold bg-indigo-800 rounded-t-sm w-16 truncate">
             {name}
         </div>
-        <div class="flex justify-center text-sm bg-slate-900 bg-opacity-20 p-0.5 rounded-b-sm">
+        <div class="flex justify-center text-xs bg-green-600 rounded-b-sm">
             {info}
         </div>
     </div>
