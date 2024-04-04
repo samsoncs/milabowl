@@ -48,7 +48,7 @@ namespace Milabowl.Infrastructure.Repositories
                         u.EntryName,
                         total,
                         l.PlayerEventLineups.Select(pel => new FplPlayerEventResult(
-                            pel.PlayerEvent.Player.LastName,
+                            pel.PlayerEvent.Player.WebName,
                             pel.PlayerEvent.Player.Team.TeamName,
                             pel.PlayerEvent.TotalPoints,
                             pel.PlayerEvent.Player.ElementType switch
