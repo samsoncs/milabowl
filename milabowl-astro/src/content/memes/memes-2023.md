@@ -2,6 +2,9 @@
 title: First meme
 date: 2023-01-30
 ---
+### GW31 - Martin på MilaAwards - Martin
+![Implications](../../assets/memes/martin_20240404.jpg)
+
 ### GW18 - Når du lager memes før kampen er ferdig - del 2 - Simen
 ![Implications](../../assets/memes/simen_221223_2.jpg)
 
