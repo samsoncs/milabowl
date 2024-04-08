@@ -1,4 +1,6 @@
 ---
+import AvatarProvider from '../components/core/AvatarProvider.astro';
+
 interface Props{
     teamName: string;
     view: string;
@@ -6,14 +8,20 @@ interface Props{
 
 const { teamName, view } = Astro.props;
 ---
-<!-- <div class="flex flex-col items-center w-full bg-gradient-to-b from-slate-900 to-slate-800 fixed top-14"> -->
-<div class="flex flex-col items-center w-full bg-slate-900 fixed top-14 z-10">
-        
-    <div class="pt-2 text-xl font-bold">
-        {teamName}
+<div class="w-full bg-slate-900 fixed top-14 z-10">
+    <div class="flex items-center gap-2 px-4 py-2">
+        <div transition:name={`avatar ${teamName}`}>
+            <div class="w-20 h-20 md:w-36 md:h-36">
+                <AvatarProvider teamName={teamName}/>
+            </div>
+          </div>
+        <div transition:name={`name ${teamName}`} class="pt-2 text-xl font-bold">
+            {teamName}
+        </div>
     </div>
+    
 
-    <div class="flex px-4 py-0 w-full justify-start">
+    <div class="flex px-0 py-0 w-full justify-start">
         <a href={`/players/${teamName.replaceAll(" ", "-")}`} class={`px-4 py-2 ${view === "mila" ? "border-b-4 border-indigo-700" : ""}`}>Mila</a>
         <a href={`/fpl/players/${teamName.replaceAll(" ", "-")}/gw/30`} class={`px-4 py-2 ${view === "fpl" ? "border-b-4 border-indigo-700" : ""}`}>FPL</a> 
     </div>
