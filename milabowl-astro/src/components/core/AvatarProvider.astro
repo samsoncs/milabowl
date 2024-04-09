@@ -17,7 +17,7 @@ const images: ImageMetadata[] = await Astro.glob("../../assets/*").then(
   style="border-radius: 999px; display:inline"
   src={
     images.find((i) =>
-      i.src.includes(teamName.toLowerCase().replaceAll(" ", "_"))
+      i.src.includes(teamName.replace("$", "s").toLowerCase().replaceAll(" ", "_"))
     )!
   }
   alt={`Avatar for ${teamName}`}
