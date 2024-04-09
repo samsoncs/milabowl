@@ -2,6 +2,18 @@
 title: First meme
 date: 2023-01-30
 ---
+### GW31 - Martin på MilaAwards - Martin
+![Implications](../../assets/memes/martin_20240404.jpg)
+
+### GW30 - Mikkel og Henrik imponerer stort i FPL i år - Simen
+![Implications](../../assets/memes/mikkel_og_henrik.jpg)
+
+### GW25 - Martin elsker Douglas Luiz - Eivind
+![Implications](../../assets/memes/martin_luiz.jpg)
+
+### GW20 - Sam roter med chattene - Simen
+![Implications](../../assets/memes/sam_wrong_chat.jpg)
+
 ### GW18 - Når du lager memes før kampen er ferdig - del 2 - Simen
 ![Implications](../../assets/memes/simen_221223_2.jpg)
 
