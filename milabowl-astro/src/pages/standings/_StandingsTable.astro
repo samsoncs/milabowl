@@ -59,7 +59,7 @@ const { resultsForGameweek, isOverallScore } = Astro.props;
           </td>
           <td>
             <Avatar teamName={r.teamName} client:idle >
-              <AvatarProvider userName={r.userName}/>
+              <AvatarProvider teamName={r.teamName}/>
             </Avatar>
             {r.teamName}
           </td>

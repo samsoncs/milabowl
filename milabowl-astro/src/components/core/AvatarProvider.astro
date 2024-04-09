@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 
 export interface Props {
-  userName: string;
+  teamName: string;
 }
 
-const { userName } = Astro.props;
+const { teamName } = Astro.props;
 
 const images: ImageMetadata[] = await Astro.glob("../../assets/*").then(
   (files) => {
@@ -13,11 +13,12 @@ const images: ImageMetadata[] = await Astro.glob("../../assets/*").then(
   }
 );
 ---
-
 <Image
   style="border-radius: 999px; display:inline"
-  src={images.find((i) =>
-    i.src.includes(userName.toLowerCase().replaceAll(" ", "_"))
-  )!}
-  alt={`Avatar for ${userName}`}
+  src={
+    images.find((i) =>
+      i.src.includes(teamName.toLowerCase().replaceAll(" ", "_"))
+    )!
+  }
+  alt={`Avatar for ${teamName}`}
 />

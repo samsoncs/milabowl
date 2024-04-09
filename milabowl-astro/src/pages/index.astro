@@ -18,7 +18,7 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
 );
 ---
 
-<Layout title="Milabowl - Dashboard">
+<Layout title="Milabowl - Dashboard" enableViewTransitions>
   <main>
     <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">
       <div class="lg:col-span-5">
@@ -65,17 +65,21 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
                       </div>
                     </td>
                     <td class="pl-0 pr-0">
-                        <Avatar teamName={r.teamName} client:idle>
-                          <AvatarProvider userName={r.userName} />
-                        </Avatar>
+                      <div transition:name={`avatar ${r.teamName}`} class="w-9 h-9 md:w-12 md:h12">
+                        <AvatarProvider teamName={r.teamName}/>
+                      </div>
+                      
                        
                     </td>
                     <td class="pl-0 pr-0 md:p-4">
-                      <Link
+                      <div transition:name={`name ${r.teamName}`}>
+                        <Link
                           href={`/players/${r.teamName.replaceAll(" ", "-")}`}
                         >
                           {r.teamName}
-                      </Link>
+                        </Link>
+                      </div>
+                     
                     </td>
                     <td class="right-align pl-0 md:p-4">{r.milaPoints.total}</td>
                     <td class="right-align hidden md:table-cell">

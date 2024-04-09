@@ -19,7 +19,7 @@
     "@nivo/line": "^0.80.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "astro": "^3.0.11",
+    "astro": "^4.5.16",
     "date-fns": "^2.29.3",
     "flowbite": "^1.8.0",
     "lodash": "^4.17.21",
