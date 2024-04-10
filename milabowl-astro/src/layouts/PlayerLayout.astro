@@ -1,10 +1,13 @@
 ---
 import AvatarProvider from '../components/core/AvatarProvider.astro';
+import fpl_state from "../../src/game_state/fpl_state.json";
 
 interface Props{
     teamName: string;
     view: string;
 }
+
+const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek));
 
 const { teamName, view } = Astro.props;
 ---
@@ -23,6 +26,6 @@ const { teamName, view } = Astro.props;
 
     <div class="flex px-0 py-0 w-full justify-start">
         <a href={`/players/${teamName.replaceAll(" ", "-")}`} class={`px-4 py-2 ${view === "mila" ? "border-b-4 border-indigo-700" : ""}`}>Mila</a>
-        <a href={`/fpl/players/${teamName.replaceAll(" ", "-")}/gw/30`} class={`px-4 py-2 ${view === "fpl" ? "border-b-4 border-indigo-700" : ""}`}>FPL</a> 
+        <a href={`/fpl/players/${teamName.replaceAll(" ", "-")}/gw/${lastGameWeek}`} class={`px-4 py-2 ${view === "fpl" ? "border-b-4 border-indigo-700" : ""}`}>FPL</a> 
     </div>
 </div>
