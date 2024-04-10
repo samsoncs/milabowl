@@ -8,7 +8,7 @@ interface Props{
 
 const { teamName, view } = Astro.props;
 ---
-<div class="w-full bg-slate-900 fixed top-14 z-10">
+<div class="w-full bg-slate-100 dark:bg-slate-900 fixed top-14 z-10 text-indigo-900 dark:text-dark-text">
     <div class="flex items-center gap-2 px-4 py-2">
         <div transition:name={`avatar ${teamName}`}>
             <div class="w-20 h-20 md:w-36 md:h-36">

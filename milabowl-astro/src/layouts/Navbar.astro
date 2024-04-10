@@ -34,7 +34,7 @@ const navLinks: { href: string, name: string }[] = [
 
 const { pathname } = Astro.url;
 ---
-<nav class="bg-slate-100 dark:bg-slate-900 fixed top-0 w-full z-50">
+<nav class="bg-slate-100 dark:bg-slate-900 fixed top-0 w-full z-50" transition:animate="none" transition:name="navbar">
     <div class="max-w-screen-2xl mx-auto px-4 2xl:px-0">
     <div class="flex h-14 items-center justify-between">
         <div class="flex items-center">
