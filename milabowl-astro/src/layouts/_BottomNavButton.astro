@@ -1,0 +1,29 @@
+---
+interface Props{
+    name: string;
+    active?: boolean;
+    href?: string;
+    buttonId?: string;
+}
+
+const { name, active, href, buttonId } = Astro.props;
+---
+{
+    buttonId &&
+    <button id={buttonId} type="button" class="flex flex-col grow gap-1 text-xs font-bold items-center justify-center text-slate-500 dark:text-slate-400"}   
+        aria-controls="mobile-menu" 
+        aria-expanded="false"
+    >
+        {active && <slot name="active-icon"/>}
+        {!active && <slot name="inactive-icon"/>}
+        {name}
+    </a>
+}
+{
+    !buttonId &&
+    <a href={href} class={`flex flex-col grow gap-1 text-[0.7rem] font-bold items-center justify-center ${active ? "dark:text-dark-text" : "text-slate-500 dark:text-slate-400"}`} transition:animate="none">
+        {active && <slot name="active-icon"/>}
+        {!active && <slot name="inactive-icon"/>}
+        {name}
+    </a>
+}

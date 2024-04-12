@@ -9,7 +9,7 @@ const stortedEntries = firstBlogEntries.sort((a, b) =>
     a.data.date < b.data.date ? 1 : -1
 ).slice(0, 10);
 ---
-<Layout title="Mila blog">
+<Layout title="Mila blog" enableViewTransitions>
     <div class="mb-2 space-y-2 max-w-screen-lg mx-auto">
         {
             stortedEntries.map(post => 
