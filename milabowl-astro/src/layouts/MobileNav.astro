@@ -38,7 +38,7 @@ const navLinks: { href: string, name: string }[] = [
 const currentPath = Astro.url.pathname;
 ---
 <div class="md:hidden">
-    <div id="mobile-nav" class="expanded flex justify-around h-[4rem] w-full top-[calc(100svh-4rem)] bg-slate-100 dark:bg-slate-900 fixed z-50" transition:animate="none">
+    <div id="mobile-nav" class="expanded mobile-nav flex justify-around h-[4rem] w-full bottom-0 bg-slate-100 dark:bg-slate-900 fixed z-50" transition:animate="none">
         <BottomNavButton active={currentPath === "/"} name="Home" href="/">
             <HomeSolid slot="active-icon"/>
             <HomeOutline slot="inactive-icon"/>
@@ -130,4 +130,8 @@ const currentPath = Astro.url.pathname;
         opacity:0.555;
         display: block;
     }
+
+    .mobile-nav {
+       padding-bottom: env(safe-area-inset-bottom);
+     }
 </style>
