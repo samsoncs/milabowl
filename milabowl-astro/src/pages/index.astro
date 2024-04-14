@@ -6,6 +6,7 @@ import Card from "../components/core/Card.astro";
 import Table from "../components/core/Table/Table.astro";
 import Trend from "./Trend";
 import game_state from "../../src/game_state/game_state.json";
+import fpl_state from "../../src/game_state/fpl_state.json";
 import type { MilaResultsDTO } from "../../src/game_state/gameState";
 import Link from "../components/core/Link.astro";
 import PositionDelta from "../components/core/PositionDelta.astro";
@@ -16,6 +17,8 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
     return files.map((file) => file.default);
   }
 );
+
+const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek));
 ---
 
 <Layout title="Milabowl - Dashboard" enableViewTransitions>
@@ -74,7 +77,7 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
                     <td class="pl-0 pr-0 md:p-4">
                       <div transition:name={`name ${r.teamName}`}>
                         <Link
-                          href={`/players/${r.teamName.replaceAll(" ", "-")}`}
+                          href={`/fpl/players/${r.teamName.replaceAll(" ", "-")}/gw/${lastGameWeek}`}
                         >
                           {r.teamName}
                         </Link>

@@ -45,7 +45,7 @@ const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? "grey";
         showPos && pos &&
         <div class="flex justify-center text-sm">{pos}</div>
     }
-    <div>
+    <div class="h-10 w-10 md:h-16 md:w-16">
         <FplJersey torso={jerseyColor.torso} sleeves={jerseyColor.sleeves} collar={jerseyColor.collar} striped={jerseyColor.striped}/>
         {
             isCap &&
@@ -61,7 +61,7 @@ const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? "grey";
         }
     </div>
           
-    <div class="-my-2">
+    <div class="-my-1">
         <div class="block text-center text-xs font-bold bg-indigo-800 rounded-t-sm w-16 truncate">
             {name}
         </div>
