@@ -7,6 +7,7 @@ import HomeOutline from "../components/core/Icons/HomeOutline.astro";
 import HomeSolid from "../components/core/Icons/HomeSolid.astro";
 import VerticalDots from "../components/core/Icons/VerticalDots.astro";
 import BottomNavButton from "./_BottomNavButton.astro";
+import fpl_state from "../game_state/fpl_state.json";
 
 const navLinks: { href: string, name: string }[] = [
 	{
@@ -36,6 +37,7 @@ const navLinks: { href: string, name: string }[] = [
 ];
 
 const currentPath = Astro.url.pathname;
+const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek));
 ---
 <div class="md:hidden">
     <div id="mobile-nav" class="expanded mobile-nav flex justify-around h-[4rem] w-full bottom-0 bg-slate-100 dark:bg-slate-900 fixed z-50" transition:animate="none">
@@ -43,7 +45,7 @@ const currentPath = Astro.url.pathname;
             <HomeSolid slot="active-icon"/>
             <HomeOutline slot="inactive-icon"/>
         </BottomNavButton>
-        <BottomNavButton active={currentPath.includes("/players/")} name="Team" href="/players/$jeik-og-betalt">
+        <BottomNavButton active={currentPath.includes("/players/")} name="Team" href={`/fpl/players/$jeik-og-betalt/gw/${lastGameWeek}`}>
             <BallSolid slot="active-icon"/>
             <BallOutline slot="inactive-icon"/>   
         </BottomNavButton>

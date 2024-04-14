@@ -12,13 +12,10 @@ const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek)
 const { teamName, view } = Astro.props;
 ---
 <div>
-    <a href="/" class="md:hidden bg-slate-100 dark:bg-slate-900 fixed top-0 w-screen z-50 flex items-center px-4 h-14 text-indigo-900 dark:text-dark-text text-xl font-bold no-underline">
-        Milabowl
-    </a>
-    <div class="w-full fixed bg-slate-100 dark:bg-slate-900 top-14 z-10 text-indigo-900 dark:text-dark-text">
+    <div class="w-full fixed bg-slate-100 dark:bg-slate-900 top-0 z-10 text-indigo-900 dark:text-dark-text md:pt-16">
         <div class="flex items-center gap-2 px-4 py-2">
             <div transition:name={`avatar ${teamName}`}>
-                <div class="w-20 h-20 md:w-36 md:h-36">
+                <div class="w-16 h-16 md:w-36 md:h-36">
                     <AvatarProvider teamName={teamName}/>
                 </div>
             </div>
@@ -29,8 +26,8 @@ const { teamName, view } = Astro.props;
         
 
         <div class="flex px-0 py-0 w-full justify-start">
-            <a href={`/players/${teamName.replaceAll(" ", "-")}`} class={`px-4 py-2 ${view === "mila" ? "border-b-4 border-indigo-700" : ""}`}>Mila</a>
             <a href={`/fpl/players/${teamName.replaceAll(" ", "-")}/gw/${lastGameWeek}`} class={`px-4 py-2 ${view === "fpl" ? "border-b-4 border-indigo-700" : ""}`}>FPL</a> 
+            <a href={`/players/${teamName.replaceAll(" ", "-")}`} class={`px-4 py-2 ${view === "mila" ? "border-b-4 border-indigo-700" : ""}`}>Mila</a>
         </div>
     </div>
-</>
+</div>

@@ -25,8 +25,8 @@ const { userResults, lastGw } = Astro.props;
 ---
 <Layout title={`${userResults.teamName}`} enableViewTransitions>
     <PlayerLayout view="fpl" teamName={userResults.teamName}/>
-    <div class="flex flex-col items-center gap-4 pb-4 bg-slate-200 dark:bg-slate-800 pt-32">
-        <div class="flex justify-between w-full p-4">
+    <div class="flex flex-col items-center gap-2 pb-2 bg-slate-200 dark:bg-slate-800 pt-[4.5rem] md:pt-[13rem]">
+        <div class="flex justify-between w-full p-2 md:p-4">
             {
                 userResults.gameWeek > 1 ?
                 <a href={`/fpl/players/${userResults.teamName.replaceAll(" ", "-")}/gw/${userResults.gameWeek - 1}`}>
@@ -48,12 +48,13 @@ const { userResults, lastGw } = Astro.props;
             }
         </div>
 
-        <div class="rounded-md bg-gradient-to-r from-indigo-800 to-indigo-700 p-4">
+        <div class="rounded-md bg-gradient-to-r from-indigo-800 to-indigo-700 p-2">
             Score {userResults.totalScore} (-Y hits)
         </div>
     </div>
     
-
-    <FplPitch fplUserGameweekResults={userResults}/>
+    <div class="bg-slate-200 dark:bg-slate-800 flex justify-center">
+        <FplPitch fplUserGameweekResults={userResults}/>
+    </div>
 
 </Layout>
