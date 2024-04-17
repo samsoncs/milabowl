@@ -7,10 +7,13 @@ import Table from "../components/core/Table/Table.astro";
 import Trend from "./Trend";
 import game_state from "../../src/game_state/game_state.json";
 import fpl_state from "../../src/game_state/fpl_state.json";
-import type { MilaResultsDTO } from "../../src/game_state/gameState";
+import type { GameWeekResult, MilaResultsDTO } from "../../src/game_state/gameState";
 import Link from "../components/core/Link.astro";
 import PositionDelta from "../components/core/PositionDelta.astro";
-import SortableTable from "../components/core/Table/SortableTable";
+import SortableTable, {CustomHeader} from "../components/core/Table/SortableTable";
+import { createColumnHelper, flexRender } from '@tanstack/react-table'
+import OverviewTable from "./_OverviewTable";
+
 const milaResults: MilaResultsDTO = game_state;
 
 const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
@@ -18,8 +21,17 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
     return files.map((file) => file.default);
   }
 );
-
 const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek));
+
+const lastWeekGwResults = milaResults.resultsByWeek[
+  milaResults.resultsByWeek.length - 1
+].results;
+
+const imgs: ImageMetadata[] = await Astro.glob("../assets/*").then(
+  (files) => {
+    return files.map((file) => file.default);
+  }
+);
 ---
 
 <Layout title="Milabowl - Dashboard" enableViewTransitions>
@@ -31,7 +43,7 @@ const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek)
             <Link href="/standings">See More</Link>
           </div>
 
-          <SortableTable client:idle/>
+          <OverviewTable data={lastWeekGwResults} lastGameWeek={lastGameWeek} client:idle/>
           <!-- <Table>
             <tr slot="header">
               <th class="pr-1 pl-2 md:p-4">#</th>
