@@ -3,8 +3,9 @@ import type { GameWeekResult } from "../game_state/gameState";
 import SortableTable from "../components/core/Table/SortableTable";
 import {useMemo} from "react";
 import PositionDelta from "../components/core/PositionDelta";
-
-import '@tanstack/react-table' //or vue, svelte, solid, qwik, etc.
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{webp}')
+import ac_mila from "../assets/ac_mila.webp";
+import '@tanstack/react-table'
 
 declare module '@tanstack/react-table' {
   interface ColumnMeta<TData extends RowData, TValue> {
@@ -43,7 +44,7 @@ const OverviewTable: React.FC<Props> = ({data, lastGameWeek}) => {
             header: "Team",
             cell: (props) => (
             <span className="flex items-center gap-2 max-w-10">
-                <div className="bg-slate-100 w-9 h-9 rounded-full"></div>
+                <img src={ac_mila.src} className="h-9 w-9 rounded-full"/>
                 <a className="underline max-w-[120px] truncate" href={`/fpl/players/${props.row.original.teamName.replaceAll(" ", "-")}/gw/${lastGameWeek}`}>
                     {props.cell.getValue()}
                 </a>
