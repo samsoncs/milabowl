@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import game_state from "../../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../../src/game_state/gameState";
 import StandingsTable from "./_StandingsTable.tsx";
+import StandingsTableMobile from "./_StandingsTable_Mobile.tsx";
 import Link from "../../components/core/Link.astro";
 const milaResults: MilaResultsDTO = game_state;
 const overallScore = milaResults.overallScore;
@@ -19,11 +20,22 @@ const lastGameWeek = Math.max.apply(Math, game_state.resultsByWeek.map(r => r.ga
         <div slot="secondary">
             <Link href={`/standings/${lastGameWeek}`}>Latest Gameweek</Link>
         </div>
-        <StandingsTable 
-            data={overallScore} 
-            lastGameWeek={lastGameWeek} 
-            avatars={images} 
-            client:idle
-        />
+        <div class="hidden md:block">
+            <StandingsTable 
+                data={overallScore} 
+                lastGameWeek={lastGameWeek} 
+                avatars={images} 
+                client:idle
+            />
+        </div>
+        <div class="block md:hidden">
+            <StandingsTableMobile
+                data={overallScore} 
+                lastGameWeek={lastGameWeek} 
+                avatars={images} 
+                client:idle
+            />
+        </div>
+        
     </Card>
 </Layout>
