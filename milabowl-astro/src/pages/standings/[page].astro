@@ -5,6 +5,7 @@ import game_state from "../../../src/game_state/game_state.json";
 import type { MilaResultsDTO, ResultsByWeek } from "../../../src/game_state/gameState";
 import Card from "../../components/core/Card.astro";
 import StandingsTable from "./_StandingsTable.tsx";
+import StandingsTableMobile from "./_StandingsTable_Mobile.tsx";
 import Link from "../../components/core/Link.astro";
 const images: ImageMetadata[] = await Astro.glob("../../assets/*").then(
   (files) => {
@@ -31,12 +32,22 @@ const standingsTitle = `Standings - GW ${page.data[0].gameWeek}`;
       <Link href="/standings">Overall Standings</Link>
     </div>
 
-    <StandingsTable 
-      data={page.data[0].results} 
-      lastGameWeek={0} 
-      avatars={images} 
-      client:idle
-    />
+    <div class="hidden md:block">
+      <StandingsTable 
+          data={page.data[0].results} 
+          lastGameWeek={0} 
+          avatars={images} 
+          client:idle
+      />
+    </div>
+    <div class="block md:hidden">
+        <StandingsTableMobile
+            data={page.data[0].results} 
+            lastGameWeek={0} 
+            avatars={images} 
+            client:idle
+        />
+    </div>
 
     <div class="page-conatiner">
       {page.url.prev ? <Link href={page.url.prev}>Prev GW</Link> : null}
