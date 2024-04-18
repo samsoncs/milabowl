@@ -13,7 +13,7 @@ const { teamName, view } = Astro.props;
 ---
 <div>
     <div class="w-full fixed bg-slate-100 dark:bg-slate-900 top-0 z-10 text-indigo-900 dark:text-dark-text md:pt-16">
-        <div class="flex items-center gap-2 px-4 py-2">
+        <div class="flex items-center gap-2 px-2 py-2 md:p-4">
             <div transition:name={`avatar ${teamName}`}>
                 <div class="w-16 h-16 md:w-36 md:h-36">
                     <AvatarProvider teamName={teamName}/>

@@ -7,9 +7,13 @@ import Table from "../components/core/Table/Table.astro";
 import Trend from "./Trend";
 import game_state from "../../src/game_state/game_state.json";
 import fpl_state from "../../src/game_state/fpl_state.json";
-import type { MilaResultsDTO } from "../../src/game_state/gameState";
+import type { GameWeekResult, MilaResultsDTO } from "../../src/game_state/gameState";
 import Link from "../components/core/Link.astro";
 import PositionDelta from "../components/core/PositionDelta.astro";
+import SortableTable, {CustomHeader} from "../components/core/Table/SortableTable";
+import { createColumnHelper, flexRender } from '@tanstack/react-table'
+import OverviewTable from "./_OverviewTable";
+
 const milaResults: MilaResultsDTO = game_state;
 
 const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
@@ -17,8 +21,11 @@ const images: ImageMetadata[] = await Astro.glob("../assets/*").then(
     return files.map((file) => file.default);
   }
 );
-
 const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek));
+
+const lastWeekGwResults = milaResults.resultsByWeek[
+  milaResults.resultsByWeek.length - 1
+].results;
 ---
 
 <Layout title="Milabowl - Dashboard" enableViewTransitions>
@@ -29,73 +36,8 @@ const lastGameWeek = Math.max.apply(Math, fpl_state.results.map(r => r.gameWeek)
           <div slot="secondary">
             <Link href="/standings">See More</Link>
           </div>
-          <Table>
-            <tr slot="header">
-              <th class="pr-1 pl-2 md:p-4">#</th>
-              <th class="pl-0 pr-0">Team</th>
-              <th class="pl-0 pr-0 md:p-4"></th>
-              <th class="pl-0 md:p-4 right-align">GW</th>
-              <th class="pr-0 pl-0 md:p-4 right-align hidden md:table-cell">Avg</th>
-              <th class="pr-2 pl-0 md:p-4 right-align table-cell md:hidden">Total</th>
-              <th class="right-align hidden md:table-cell">Total Score</th>
-            </tr>
 
-            {
-              milaResults.resultsByWeek[
-                milaResults.resultsByWeek.length - 1
-              ].results.map((r, i) => {
-                const deltaPosition =
-                  r.milaRankLastWeek === null ||
-                  r.milaRankLastWeek === undefined
-                    ? 0
-                    : r.milaRankLastWeek - r.milaRank;
-
-                const isLastPlace =
-                  milaResults.resultsByWeek[
-                    milaResults.resultsByWeek.length - 1
-                  ].results.length -
-                    1 ===
-                  i;
-                return (
-                  <tr class="border-1 border-slate-200 dark:border-slate-700">
-                    <td class="pr-1 pl-2 p-3">
-                      <div class="flex space-x-2 flex-row items-center justify-items-center">
-                        <div class="flex flex-col items-center justify-between gap-1">
-                          {isLastPlace && <span class="text-md">💩</span>}
-                          {!isLastPlace && <span class="font-bold">{i + 1}</span>}
-                          <PositionDelta delta={deltaPosition} />
-                        </div>
-                      </div>
-                    </td>
-                    <td class="pl-0 pr-0">
-                      <div transition:name={`avatar ${r.teamName}`} class="w-9 h-9 md:w-12 md:h12">
-                        <AvatarProvider teamName={r.teamName}/>
-                      </div>
-                      
-                       
-                    </td>
-                    <td class="pl-0 pr-0 md:p-4">
-                      <div transition:name={`name ${r.teamName}`}>
-                        <Link
-                          href={`/fpl/players/${r.teamName.replaceAll(" ", "-")}/gw/${lastGameWeek}`}
-                        >
-                          {r.teamName}
-                        </Link>
-                      </div>
-                     
-                    </td>
-                    <td class="right-align pl-0 md:p-4">{r.milaPoints.total}</td>
-                    <td class="right-align hidden md:table-cell">
-                      {r.cumulativeAverageMilaPoints}
-                    </td>
-                    <td class="pr-2 pl-0 md:p-4 right-align font-bold text-indigo-900 dark:text-orange-200">
-                      {r.cumulativeMilaPoints}
-                    </td>
-                  </tr>
-                );
-              })
-            }
-          </Table>
+          <OverviewTable avatars={images} data={lastWeekGwResults} lastGameWeek={lastGameWeek} client:idle/>
         </Card>
       </div>
 

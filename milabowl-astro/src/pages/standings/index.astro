@@ -3,15 +3,27 @@ import Card from "../../components/core/Card.astro";
 import Layout from "../../layouts/Layout.astro";
 import game_state from "../../../src/game_state/game_state.json";
 import type { MilaResultsDTO } from "../../../src/game_state/gameState";
-import StandingsTable from "./_StandingsTable.astro";
+import StandingsTable from "./_StandingsTable.tsx";
 import Link from "../../components/core/Link.astro";
 const milaResults: MilaResultsDTO = game_state;
+const overallScore = milaResults.overallScore;
+const images: ImageMetadata[] = await Astro.glob("../../assets/*").then(
+  (files) => {
+    return files.map((file) => file.default);
+  }
+);
+const lastGameWeek = Math.max.apply(Math, game_state.resultsByWeek.map(r => r.gameWeek));
 ---
 <Layout title="Milabowl - Overall standings">
     <Card title="Standings - Overall">
         <div slot="secondary">
-            <Link href={`/standings/${milaResults.resultsByWeek.length}`}>Latest Gameweek</Link>
+            <Link href={`/standings/${lastGameWeek}`}>Latest Gameweek</Link>
         </div>
-        <StandingsTable isOverallScore resultsForGameweek={milaResults.overallScore}/>
+        <StandingsTable 
+            data={overallScore} 
+            lastGameWeek={lastGameWeek} 
+            avatars={images} 
+            client:idle
+        />
     </Card>
 </Layout>
