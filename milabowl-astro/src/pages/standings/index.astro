@@ -14,7 +14,7 @@ const images: ImageMetadata[] = await Astro.glob("../../assets/*").then(
 );
 const lastGameWeek = Math.max.apply(Math, game_state.resultsByWeek.map(r => r.gameWeek));
 ---
-<Layout title="Milabowl - Overall standings">
+<Layout title="Milabowl - Overall standings" enableViewTransitions>
     <Card title="Standings - Overall">
         <div slot="secondary">
             <Link href={`/standings/${lastGameWeek}`}>Latest Gameweek</Link>

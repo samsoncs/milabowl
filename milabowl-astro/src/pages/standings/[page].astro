@@ -25,7 +25,7 @@ interface Props{
 const { page } = Astro.props;
 const standingsTitle = `Standings - GW ${page.data[0].gameWeek}`;
 ---
-<Layout title={standingsTitle}>
+<Layout title={standingsTitle} enableViewTransitions>
   <Card title={standingsTitle}>
     <div slot="secondary">
       <Link href="/standings">Overall Standings</Link>
