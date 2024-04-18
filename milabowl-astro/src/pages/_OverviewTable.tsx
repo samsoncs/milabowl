@@ -3,8 +3,6 @@ import type { GameWeekResult } from "../game_state/gameState";
 import SortableTable from "../components/core/Table/SortableTable";
 import {useMemo} from "react";
 import PositionDelta from "../components/core/PositionDelta";
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{webp}')
-import ac_mila from "../assets/ac_mila.webp";
 import '@tanstack/react-table'
 
 declare module '@tanstack/react-table' {
@@ -19,9 +17,10 @@ const columnHelper = createColumnHelper<GameWeekResult>();
 interface Props{
     data: GameWeekResult[];
     lastGameWeek: number;
+    avatars: ImageMetadata[];
 }
 
-const OverviewTable: React.FC<Props> = ({data, lastGameWeek}) => {
+const OverviewTable: React.FC<Props> = ({data, lastGameWeek, avatars}) => {
     const columns = useMemo(() => [
         columnHelper.display({
             id: "rank",
@@ -43,9 +42,9 @@ const OverviewTable: React.FC<Props> = ({data, lastGameWeek}) => {
             id: "teamName",
             header: "Team",
             cell: (props) => (
-            <span className="flex items-center gap-2 max-w-10">
-                <img src={ac_mila.src} className="h-9 w-9 rounded-full"/>
-                <a className="underline max-w-[120px] truncate" href={`/fpl/players/${props.row.original.teamName.replaceAll(" ", "-")}/gw/${lastGameWeek}`}>
+            <span className="flex items-center gap-2">
+                <img src={avatars.find(a => a.src.includes(props.row.original.teamName.replace("$", "s").toLowerCase().replaceAll(" ", "_")))?.src} className="h-9 w-9 rounded-full"/>
+                <a className="underline max-w-[130px] sm:max-w-[300px] truncate" href={`/fpl/players/${props.row.original.teamName.replaceAll(" ", "-")}/gw/${lastGameWeek}`}>
                     {props.cell.getValue()}
                 </a>
             </span>
@@ -81,7 +80,7 @@ const OverviewTable: React.FC<Props> = ({data, lastGameWeek}) => {
       ],[]);
           
     return (
-    <SortableTable data={data} columns={columns}/>
+        <SortableTable data={data} columns={columns}/>
     )
 };
 
