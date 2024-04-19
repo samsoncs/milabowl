@@ -1,69 +1,73 @@
 ---
-import type { GetStaticPaths, Page } from "astro";
-import Layout from "../../layouts/Layout.astro";
-import game_state from "../../../src/game_state/game_state.json";
-import type { MilaResultsDTO, ResultsByWeek } from "../../../src/game_state/gameState";
-import Card from "../../components/core/Card.astro";
-import StandingsTable from "./_StandingsTable.tsx";
-import StandingsTableMobile from "./_StandingsTable_Mobile.tsx";
-import Link from "../../components/core/Link.astro";
-const images: ImageMetadata[] = await Astro.glob("../../assets/*").then(
-  (files) => {
-    return files.map((file) => file.default);
-  }
-);
+import type { GetStaticPaths, Page } from 'astro'
+import Layout from '../../layouts/Layout.astro'
+import game_state from '../../../src/game_state/game_state.json'
+import type {
+    MilaResultsDTO,
+    ResultsByWeek,
+} from '../../../src/game_state/gameState'
+import Card from '../../components/core/Card.astro'
+import StandingsTable from './_StandingsTable.tsx'
+import StandingsTableMobile from './_StandingsTable_Mobile.tsx'
+import Link from '../../components/core/Link.astro'
+const images: ImageMetadata[] = await Astro.glob('../../assets/*').then(
+    (files) => {
+        return files.map((file) => file.default)
+    }
+)
 
-export const getStaticPaths: GetStaticPaths = async ({paginate}) => {
-    const milaResults: MilaResultsDTO = game_state;
-    const milaResultsByWeek = milaResults.resultsByWeek;
-    return paginate(milaResultsByWeek, { pageSize: 1 });
-};
-
-interface Props{
-    page: Page<ResultsByWeek>;
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+    const milaResults: MilaResultsDTO = game_state
+    const milaResultsByWeek = milaResults.resultsByWeek
+    return paginate(milaResultsByWeek, { pageSize: 1 })
 }
 
-const { page } = Astro.props;
-const standingsTitle = `Standings - GW ${page.data[0].gameWeek}`;
+interface Props {
+    page: Page<ResultsByWeek>
+}
+
+const { page } = Astro.props
+const standingsTitle = `Standings - GW ${page.data[0].gameWeek}`
 ---
+
 <Layout title={standingsTitle} enableViewTransitions>
-  <Card title={standingsTitle}>
-    <div slot="secondary">
-      <Link href="/standings">Overall Standings</Link>
-    </div>
+    <Card title={standingsTitle}>
+        <div slot="secondary">
+            <Link href="/standings">Overall Standings</Link>
+        </div>
 
-    <div class="hidden md:block">
-      <StandingsTable 
-          data={page.data[0].results} 
-          lastGameWeek={0} 
-          avatars={images} 
-          client:idle
-      />
-    </div>
-    <div class="block md:hidden">
-        <StandingsTableMobile
-            data={page.data[0].results} 
-            lastGameWeek={0} 
-            avatars={images} 
-            client:idle
-        />
-    </div>
+        <div class="hidden md:block">
+            <StandingsTable
+                data={page.data[0].results}
+                lastGameWeek={0}
+                avatars={images}
+                client:idle
+            />
+        </div>
+        <div class="block md:hidden">
+            <StandingsTableMobile
+                data={page.data[0].results}
+                lastGameWeek={0}
+                avatars={images}
+                client:idle
+            />
+        </div>
 
-    <div class="page-conatiner">
-      {page.url.prev ? <Link href={page.url.prev}>Prev GW</Link> : null}
-      {page.url.next ? <Link href={page.url.next}>Next GW</Link> : null}
-    </div>
-  </Card>
+        <div class="page-conatiner">
+            {page.url.prev ? <Link href={page.url.prev}>Prev GW</Link> : null}
+            {page.url.next ? <Link href={page.url.next}>Next GW</Link> : null}
+        </div>
+    </Card>
 </Layout>
 
 <style>
-  .page-conatiner {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    gap: 20px;
-  }
-  .paging-left {
-    flex-grow: 1;
-  }
+    .page-conatiner {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        gap: 20px;
+    }
+    .paging-left {
+        flex-grow: 1;
+    }
 </style>

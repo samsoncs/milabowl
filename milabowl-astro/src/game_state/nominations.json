@@ -1,212 +1,212 @@
 [
-	{
-		"personNominated": "Anders",
-		"gw": 29,
-		"date": "20.03.2024",
-		"reason": "Anders glemmer å gjøre bytter inn mot årets største blank gameweek, men har så mye flaks at han likevel unngår å tape runden! Heldig som han er møter han (selvfølgelig) rundetaperen Markus i H2H som gir han enda en H2H seier. Makan til flaks skal du lete lenge etter!",
-		"category": "LUCK"
-	},
-	{
-		"personNominated": "Martin",
-		"gw": 27,
-		"date": "06.03.2024",
-		"reason": "Etter 27 spilte runder er Martin den eneste med 0 poeng på unique cap-kategorien. Kanskje han klarer alle 38 runder? Kunne like gjerne spilt copy paste simulator.",
-		"category": "SHAME"
-	},
-	{
-		"personNominated": "Martin, Eivind",
-		"gw": 21,
-		"date": "12.01.2024",
-		"reason": "Manglende gentlemen og sportsmanship i gruppen, og samtlige satser på å ta innpå Mikkel ved å ikke si fra at FPL tydeligvis kan endre GW deadlines.... Spesielt shame på Martin og Eivind som sitter og venter på at fristen skal gå ut før de diskuterer i chatten ☠️  Ja, jeg er bitter enda!",
-		"category": "SHAME"
-	},
-	{
-		"personNominated": "Anders, Eivind",
-		"gw": 20,
-		"date": "02.01.2024",
-		"reason": "Både Anders og Eivind prøver å outsmarte resten av MilaBowl med ved å gå for 'Unique Def Cap' comboen til Malte. Men det er tydelig at de fortsatt har mye å lære av årets MilaBowl leder når de ødelegger hverandres Unique Cap og TAA ender med 0 FPL poeng (mest valgte kaptein var Salah med 16 poeng).",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Malte",
-		"gw": 20,
-		"date": "02.01.2024",
-		"reason": "Eneste manager som ikke har fått med seg at Palmer er kandidat til årets FPL spiller, og denne runden går han glipp av 18 poeng. Mener selv at han fortjener en SKILL nominasjonen siden han er eneste uten Palmer. Morsomt fra Dansken.",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Simen",
-		"gw": 19,
-		"date": "28.12.2023",
-		"reason": "Har klokketro på startelleveren og stiller med en blodrød benk (3 røde spillere og 1 oransje keeper). Det er risky, men det betaler seg når han blir rundevinner i både FPL og MilaBowl! Nicely played!",
-		"category": "SKILL"
-	},
-	{
-		"personNominated": "Anders",
-		"gw": 15,
-		"date": "08.12.2023",
-		"reason": "Gjør opprør mot MilaBowl sitt veletablerte demokrati og lovgivendeforsamling når han forsøker å snikimplementere regelendringer, nemlig at Sellout-regelen kun skal gjelde fra og med GW13",
-		"category": "SHAME"
-	},
-	{
-		"personNominated": "Martin, Eivind",
-		"gw": 8,
-		"date": "07.10.2023",
-		"reason": "Hard templating med wildcard, fulgt opp med bitterness for å bli called out for it. Prøver seg på UNO reverse og finne andre templatere, men graver seg vel bare dypere ned her.. ",
-		"category": "SHAME"
-	},
-	{
-		"personNominated": "Eivind",
-		"gw": 0,
-		"date": "08.08.2023",
-		"reason": "I forbindelse med navnekåring er alle bedt om å sende inn lagnavn fra anonym eposkonto. Eivind oppretter anonym epostadresse, men fyller inn 'Eivind Kristoffersen' på navn og avslører seg selv til kåringsansvarlig. Vi forventet mer fra sikkerhetseksperten!",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Simen",
-		"gw": 33,
-		"date": "28.04.2023",
-		"reason": "Wildcarder seg til en 69!",
-		"category": "SKILL"
-	},
-	{
-		"personNominated": "Mikkel",
-		"gw": 32,
-		"date": "28.04.2023",
-		"reason": "Rundevinner uten chips til tross for 4 free hits og et wildcard",
-		"category": "SKILL"
-	},
-	{
-		"personNominated": "Markus",
-		"gw": 23,
-		"date": "21.02.2023",
-		"reason": "Dropper en melding i den offisielle MilaChatten og informerer alle om Mila's (loop) hole, istedet for å utnytte det selv i stillhet",
-		"category": "SHAME"
-	},
-	{
-		"personNominated": "Eivind",
-		"gw": 21,
-		"date": "24.01.2023",
-		"reason": "Presterer å be om 1min og 6s stillhet for Anders sin double 69 prestasjon, istedenfor 1 min og 9s!",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Anders",
-		"gw": 21,
-		"date": "24.01.2023",
-		"reason": "Scorer 69 poeng i to runder på rad, og trigger dermed både 69 points og equal streak i en og samme runde!",
-		"category": "LUCK"
-	},
-	{
-		"personNominated": "Anders",
-		"gw": 21,
-		"date": "24.01.2023",
-		"reason": "Scorer 69 poeng i to runder på rad, og trigger dermed både 69 points og equal streak i en og samme runde!",
-		"category": "SKILL"
-	},
-	{
-		"personNominated": "Markus",
-		"gw": 19,
-		"date": "05.01.2023",
-		"reason": "Har tydeligvis glemt adressen til milabowl.com. Ingen unnskyldninger oppgitt",
-		"category": "SHAME"
-	},
-	{
-		"personNominated": "Markus",
-		"gw": 19,
-		"date": "04.01.2023",
-		"reason": "Free hit reverseres aka Ødegaard -> Gross: Ødegaard blanker med 2 pts mens Gross scorer 8pts.",
-		"category": "LUCK"
-	},
-	{
-		"personNominated": "Markus",
-		"gw": 18,
-		"date": "01.01.2023",
-		"reason": "Gjør 1 bytte: Gross -> Ødegaard, men bruker ved et uhell free hit til dette. Går da også glipp av prisøkning på Ødegaard.",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Simen",
-		"gw": 18,
-		"date": "01.01.2023",
-		"reason": "Rotation-Cancelo ble erstattet av 3. reserve Ferguson som hadde spilt 7 minutter på 17 kamper. Utrolig nok klarer han å score hjemme mot Arsenal og skaffe 5 pts",
-		"category": "LUCK"
-	},
-	{
-		"personNominated": "Mikkel",
-		"gw": 17,
-		"date": "01.01.2023",
-		"reason": "Kjører strategisk wildcard for å score høyt i Milabowl, men har misforstått reglene: Cap Def gjelder KUN for den som ender opp som kaptein. Må passe seg for MilaLoser fremover!",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Simen",
-		"gw": 13,
-		"date": "22.10.2022",
-		"reason": "Wildcard og 31 poeng på benken -> 6 bench fail points",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Sam",
-		"gw": 12,
-		"date": "19.10.2022",
-		"reason": "2 free transfers, men glemte fristen :( #småbarnsforelder",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Eivind",
-		"gw": 9,
-		"date": "02.10.2022",
-		"reason": "Alle capper Haaland i storform, bortsett fra Eivind som capper Maddison. Haaland sikrer rolige 23 pts, men Maddison henter seg pent inn med 18 pts til Eivinds store lettelse",
-		"category": "SKILL"
-	},
-	{
-		"personNominated": "Eivind",
-		"gw": 7,
-		"date": "10.09.2022",
-		"reason": "Marginal interesse for engelsk kultur medfører at Eivind ikke predikerer dronning Elizabeths død. Gjør tidlige bytter for å sikre prisstigning, men for spank på baken av kongehuset når runden kanselleres",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Malte",
-		"gw": 5,
-		"date": "31.08.2022",
-		"reason": "Capper KDB i kjent stil, VC på Haaland. Haaland starter kampen, mens KDB er benket. Haaland starter friskt og ligger an til 17 pts. På dette tidspunktet truer Malte fpl gudene med å slutte dersom Pep bytter inn KDB. Trusler fungerer aldri og i det 69 minutt (trøstepoeng) bytter Pep inn KDB som sikrer seg 1 poeng, som gir 16 tapte fpl poeng for Malte",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Henrik",
-		"gw": 4,
-		"date": "29.08.2022",
-		"reason": "Eneste som capper Haaland hjemme mot Crystal Palace. Haaland sikrer 17 pts før kapteinsbonus! 7 stykker capper Salah med 3 pts og Malte capper selvfølgelig KDB med 2 pts",
-		"category": "SKILL"
-	},
-	{
-		"personNominated": "Mikkel, Markus, Sam, Martin, Anders, Eivind, Simen",
-		"gw": 4,
-		"date": "29.08.2022",
-		"reason": "Capper Salah når Liverpool vinner 9-0, men Salah imponerer ingen med stusselige 3 pts",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Henrik",
-		"gw": 3,
-		"date": "23.08.2022",
-		"reason": "Planla å bytte ut Perisic, men et uidentifisert kusehår gjør at han dropper det. Perisic sikrer 12 pts",
-		"category": "LUCK"
-	},
-	{
-		"personNominated": "Markus",
-		"gw": 3,
-		"date": "23.08.2022",
-		"reason": "Byttet ut rashford 10 poeng og inn med Cancelo 0 poeng",
-		"category": "DERP"
-	},
-	{
-		"personNominated": "Mikkel",
-		"gw": 1,
-		"date": "10.08.2022",
-		"reason": "Inspirert av araberes tilnærming til Premier League stiller Mikkel med lag som er kjøpt og betalt! På tide med Financial Mila Play?",
-		"category": "SHAME"
-	}
+    {
+        "personNominated": "Anders",
+        "gw": 29,
+        "date": "20.03.2024",
+        "reason": "Anders glemmer å gjøre bytter inn mot årets største blank gameweek, men har så mye flaks at han likevel unngår å tape runden! Heldig som han er møter han (selvfølgelig) rundetaperen Markus i H2H som gir han enda en H2H seier. Makan til flaks skal du lete lenge etter!",
+        "category": "LUCK"
+    },
+    {
+        "personNominated": "Martin",
+        "gw": 27,
+        "date": "06.03.2024",
+        "reason": "Etter 27 spilte runder er Martin den eneste med 0 poeng på unique cap-kategorien. Kanskje han klarer alle 38 runder? Kunne like gjerne spilt copy paste simulator.",
+        "category": "SHAME"
+    },
+    {
+        "personNominated": "Martin, Eivind",
+        "gw": 21,
+        "date": "12.01.2024",
+        "reason": "Manglende gentlemen og sportsmanship i gruppen, og samtlige satser på å ta innpå Mikkel ved å ikke si fra at FPL tydeligvis kan endre GW deadlines.... Spesielt shame på Martin og Eivind som sitter og venter på at fristen skal gå ut før de diskuterer i chatten ☠️  Ja, jeg er bitter enda!",
+        "category": "SHAME"
+    },
+    {
+        "personNominated": "Anders, Eivind",
+        "gw": 20,
+        "date": "02.01.2024",
+        "reason": "Både Anders og Eivind prøver å outsmarte resten av MilaBowl med ved å gå for 'Unique Def Cap' comboen til Malte. Men det er tydelig at de fortsatt har mye å lære av årets MilaBowl leder når de ødelegger hverandres Unique Cap og TAA ender med 0 FPL poeng (mest valgte kaptein var Salah med 16 poeng).",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Malte",
+        "gw": 20,
+        "date": "02.01.2024",
+        "reason": "Eneste manager som ikke har fått med seg at Palmer er kandidat til årets FPL spiller, og denne runden går han glipp av 18 poeng. Mener selv at han fortjener en SKILL nominasjonen siden han er eneste uten Palmer. Morsomt fra Dansken.",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Simen",
+        "gw": 19,
+        "date": "28.12.2023",
+        "reason": "Har klokketro på startelleveren og stiller med en blodrød benk (3 røde spillere og 1 oransje keeper). Det er risky, men det betaler seg når han blir rundevinner i både FPL og MilaBowl! Nicely played!",
+        "category": "SKILL"
+    },
+    {
+        "personNominated": "Anders",
+        "gw": 15,
+        "date": "08.12.2023",
+        "reason": "Gjør opprør mot MilaBowl sitt veletablerte demokrati og lovgivendeforsamling når han forsøker å snikimplementere regelendringer, nemlig at Sellout-regelen kun skal gjelde fra og med GW13",
+        "category": "SHAME"
+    },
+    {
+        "personNominated": "Martin, Eivind",
+        "gw": 8,
+        "date": "07.10.2023",
+        "reason": "Hard templating med wildcard, fulgt opp med bitterness for å bli called out for it. Prøver seg på UNO reverse og finne andre templatere, men graver seg vel bare dypere ned her.. ",
+        "category": "SHAME"
+    },
+    {
+        "personNominated": "Eivind",
+        "gw": 0,
+        "date": "08.08.2023",
+        "reason": "I forbindelse med navnekåring er alle bedt om å sende inn lagnavn fra anonym eposkonto. Eivind oppretter anonym epostadresse, men fyller inn 'Eivind Kristoffersen' på navn og avslører seg selv til kåringsansvarlig. Vi forventet mer fra sikkerhetseksperten!",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Simen",
+        "gw": 33,
+        "date": "28.04.2023",
+        "reason": "Wildcarder seg til en 69!",
+        "category": "SKILL"
+    },
+    {
+        "personNominated": "Mikkel",
+        "gw": 32,
+        "date": "28.04.2023",
+        "reason": "Rundevinner uten chips til tross for 4 free hits og et wildcard",
+        "category": "SKILL"
+    },
+    {
+        "personNominated": "Markus",
+        "gw": 23,
+        "date": "21.02.2023",
+        "reason": "Dropper en melding i den offisielle MilaChatten og informerer alle om Mila's (loop) hole, istedet for å utnytte det selv i stillhet",
+        "category": "SHAME"
+    },
+    {
+        "personNominated": "Eivind",
+        "gw": 21,
+        "date": "24.01.2023",
+        "reason": "Presterer å be om 1min og 6s stillhet for Anders sin double 69 prestasjon, istedenfor 1 min og 9s!",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Anders",
+        "gw": 21,
+        "date": "24.01.2023",
+        "reason": "Scorer 69 poeng i to runder på rad, og trigger dermed både 69 points og equal streak i en og samme runde!",
+        "category": "LUCK"
+    },
+    {
+        "personNominated": "Anders",
+        "gw": 21,
+        "date": "24.01.2023",
+        "reason": "Scorer 69 poeng i to runder på rad, og trigger dermed både 69 points og equal streak i en og samme runde!",
+        "category": "SKILL"
+    },
+    {
+        "personNominated": "Markus",
+        "gw": 19,
+        "date": "05.01.2023",
+        "reason": "Har tydeligvis glemt adressen til milabowl.com. Ingen unnskyldninger oppgitt",
+        "category": "SHAME"
+    },
+    {
+        "personNominated": "Markus",
+        "gw": 19,
+        "date": "04.01.2023",
+        "reason": "Free hit reverseres aka Ødegaard -> Gross: Ødegaard blanker med 2 pts mens Gross scorer 8pts.",
+        "category": "LUCK"
+    },
+    {
+        "personNominated": "Markus",
+        "gw": 18,
+        "date": "01.01.2023",
+        "reason": "Gjør 1 bytte: Gross -> Ødegaard, men bruker ved et uhell free hit til dette. Går da også glipp av prisøkning på Ødegaard.",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Simen",
+        "gw": 18,
+        "date": "01.01.2023",
+        "reason": "Rotation-Cancelo ble erstattet av 3. reserve Ferguson som hadde spilt 7 minutter på 17 kamper. Utrolig nok klarer han å score hjemme mot Arsenal og skaffe 5 pts",
+        "category": "LUCK"
+    },
+    {
+        "personNominated": "Mikkel",
+        "gw": 17,
+        "date": "01.01.2023",
+        "reason": "Kjører strategisk wildcard for å score høyt i Milabowl, men har misforstått reglene: Cap Def gjelder KUN for den som ender opp som kaptein. Må passe seg for MilaLoser fremover!",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Simen",
+        "gw": 13,
+        "date": "22.10.2022",
+        "reason": "Wildcard og 31 poeng på benken -> 6 bench fail points",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Sam",
+        "gw": 12,
+        "date": "19.10.2022",
+        "reason": "2 free transfers, men glemte fristen :( #småbarnsforelder",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Eivind",
+        "gw": 9,
+        "date": "02.10.2022",
+        "reason": "Alle capper Haaland i storform, bortsett fra Eivind som capper Maddison. Haaland sikrer rolige 23 pts, men Maddison henter seg pent inn med 18 pts til Eivinds store lettelse",
+        "category": "SKILL"
+    },
+    {
+        "personNominated": "Eivind",
+        "gw": 7,
+        "date": "10.09.2022",
+        "reason": "Marginal interesse for engelsk kultur medfører at Eivind ikke predikerer dronning Elizabeths død. Gjør tidlige bytter for å sikre prisstigning, men for spank på baken av kongehuset når runden kanselleres",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Malte",
+        "gw": 5,
+        "date": "31.08.2022",
+        "reason": "Capper KDB i kjent stil, VC på Haaland. Haaland starter kampen, mens KDB er benket. Haaland starter friskt og ligger an til 17 pts. På dette tidspunktet truer Malte fpl gudene med å slutte dersom Pep bytter inn KDB. Trusler fungerer aldri og i det 69 minutt (trøstepoeng) bytter Pep inn KDB som sikrer seg 1 poeng, som gir 16 tapte fpl poeng for Malte",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Henrik",
+        "gw": 4,
+        "date": "29.08.2022",
+        "reason": "Eneste som capper Haaland hjemme mot Crystal Palace. Haaland sikrer 17 pts før kapteinsbonus! 7 stykker capper Salah med 3 pts og Malte capper selvfølgelig KDB med 2 pts",
+        "category": "SKILL"
+    },
+    {
+        "personNominated": "Mikkel, Markus, Sam, Martin, Anders, Eivind, Simen",
+        "gw": 4,
+        "date": "29.08.2022",
+        "reason": "Capper Salah når Liverpool vinner 9-0, men Salah imponerer ingen med stusselige 3 pts",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Henrik",
+        "gw": 3,
+        "date": "23.08.2022",
+        "reason": "Planla å bytte ut Perisic, men et uidentifisert kusehår gjør at han dropper det. Perisic sikrer 12 pts",
+        "category": "LUCK"
+    },
+    {
+        "personNominated": "Markus",
+        "gw": 3,
+        "date": "23.08.2022",
+        "reason": "Byttet ut rashford 10 poeng og inn med Cancelo 0 poeng",
+        "category": "DERP"
+    },
+    {
+        "personNominated": "Mikkel",
+        "gw": 1,
+        "date": "10.08.2022",
+        "reason": "Inspirert av araberes tilnærming til Premier League stiller Mikkel med lag som er kjøpt og betalt! På tide med Financial Mila Play?",
+        "category": "SHAME"
+    }
 ]

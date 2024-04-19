@@ -1,5 +1,5 @@
 ---
-title: "Kunngjøring: Ny blog feature!💥"
+title: 'Kunngjøring: Ny blog feature!💥'
 date: 2023-01-04
 author: MilaCorp
 tags: [Announcement]

@@ -1,37 +1,39 @@
 ---
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/700.css";
-import Navbar from "./Navbar.astro";
-import { ViewTransitions } from "astro:transitions";
-import MobileNav from "./MobileNav.astro";
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/700.css'
+import Navbar from './Navbar.astro'
+import { ViewTransitions } from 'astro:transitions'
+import MobileNav from './MobileNav.astro'
 
 export interface Props {
-  title: string;
-  enableViewTransitions?: boolean;
+    title: string
+    enableViewTransitions?: boolean
 }
 
-const { title,enableViewTransitions } = Astro.props;
+const { title, enableViewTransitions } = Astro.props
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    {enableViewTransitions && <ViewTransitions />}
-  </head>
-  <body class="bg-slate-100 dark:bg-slate-900">
-    <Navbar />
-    <div class="max-w-screen-2xl mx-auto md:mt-14 mb-[4rem] md:mb-0 dark:text-dark-text">
-      <slot />
-    </div>
-    <MobileNav/>
-    <script
-      is:inline
-      src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"
-    ></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        {enableViewTransitions && <ViewTransitions />}
+    </head>
+    <body class="bg-slate-100 dark:bg-slate-900">
+        <Navbar />
+        <div
+            class="mx-auto mb-[4rem] max-w-screen-2xl dark:text-dark-text md:mb-0 md:mt-14"
+        >
+            <slot />
+        </div>
+        <MobileNav />
+        <script
+            is:inline
+            src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"
+        ></script>
+    </body>
 </html>

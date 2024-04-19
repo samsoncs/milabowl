@@ -1,14 +1,14 @@
 ---
 export interface Props {
-	variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body1" | "body2";
-	bold?: boolean;
+    variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2'
+    bold?: boolean
 }
 
-const { variant = "body1", bold = false } = Astro.props;
+const { variant = 'body1', bold = false } = Astro.props
 ---
 
-<p class={`typography ${variant}${bold ? " bold" : ""}`}>
-    <slot/>
+<p class={`typography ${variant}${bold ? ' bold' : ''}`}>
+    <slot />
 </p>
 
 <style>

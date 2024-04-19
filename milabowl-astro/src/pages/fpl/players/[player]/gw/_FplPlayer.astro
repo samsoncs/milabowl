@@ -1,72 +1,97 @@
 ---
-import type { Dictionary } from 'lodash';
-import FplJersey from './_FplJersey.astro';
+import type { Dictionary } from 'lodash'
+import FplJersey from './_FplJersey.astro'
 
 export interface Props {
-    name: string;
-    info: string;
-    pos?: string;
-    showPos?: boolean;
-    team: string;
-    isCap?: boolean;
-    isViceCap?: boolean;
+    name: string
+    info: string
+    pos?: string
+    showPos?: boolean
+    team: string
+    isCap?: boolean
+    isViceCap?: boolean
 }
 
-const jerseyColors: Dictionary<{sleeves: string, torso:string, collar?: string, striped?: string[]}> = {
-    "Liverpool": { torso: "#bb2633", sleeves: "#bb2633"},
-    "GK_Liverpool": { torso: "#343434", sleeves: "#343434"},
-    "Arsenal": { torso: "#c9103a", sleeves: "#fcfbfc"},
-    "Man City": { torso: "#a8c9ea", sleeves: "#a8c9ea"},
-    "Brighton": { torso: "#2d5ebf", sleeves: "#2d5ebf"},
-    "Spurs": { torso: "#fcfbfc", sleeves: "#312f2f"},
-    "Bournemouth": { torso: "#312f2f", sleeves: "#312f2f", striped: ["#312f2f", "#ae2c39"]},
-    "Aston Villa": { torso: "#5b1a30", sleeves: "#9eb8d9"},
-    "Newcastle": { torso: "#262626", sleeves: "#262626", striped: ["#fcfbfc", "#262626"]},
-    "GK_Newcastle": { torso: "#ebf400", sleeves: "#ebf400"},
-    "Chelsea": { torso: "#38489f", sleeves: "#38489f"},
-    "Sheffield Utd": { torso: "#c7171e", sleeves: "#c7171e", striped: ["#fdfefe", "#c7171e"]},
-    "Burnley": { torso: "#691d2d", sleeves: "#799ec7"},
-    "West Ham": { torso: "#7f2f48", sleeves: "#7f2f48"},
-    "GK_West Ham": { torso: "#54af57", sleeves: "#54af57"},
-    "Nott'm Forest": { torso: "#d31d3b", sleeves: "#d31d3b"},
-    "Luton": { torso: "#f03c00", sleeves: "#f03c00"},
-    "Brentford": { torso: "#d22236", sleeves: "#d22236"},
-    "GK_Brentford": { torso: "#e90b6a", sleeves: "#e90b6a"},
-    "Wolves": { torso: "#ecb600", sleeves: "#ecb600", collar: "#312f2f"},
-};
+const jerseyColors: Dictionary<{
+    sleeves: string
+    torso: string
+    collar?: string
+    striped?: string[]
+}> = {
+    Liverpool: { torso: '#bb2633', sleeves: '#bb2633' },
+    GK_Liverpool: { torso: '#343434', sleeves: '#343434' },
+    Arsenal: { torso: '#c9103a', sleeves: '#fcfbfc' },
+    'Man City': { torso: '#a8c9ea', sleeves: '#a8c9ea' },
+    Brighton: { torso: '#2d5ebf', sleeves: '#2d5ebf' },
+    Spurs: { torso: '#fcfbfc', sleeves: '#312f2f' },
+    Bournemouth: {
+        torso: '#312f2f',
+        sleeves: '#312f2f',
+        striped: ['#312f2f', '#ae2c39'],
+    },
+    'Aston Villa': { torso: '#5b1a30', sleeves: '#9eb8d9' },
+    Newcastle: {
+        torso: '#262626',
+        sleeves: '#262626',
+        striped: ['#fcfbfc', '#262626'],
+    },
+    GK_Newcastle: { torso: '#ebf400', sleeves: '#ebf400' },
+    Chelsea: { torso: '#38489f', sleeves: '#38489f' },
+    'Sheffield Utd': {
+        torso: '#c7171e',
+        sleeves: '#c7171e',
+        striped: ['#fdfefe', '#c7171e'],
+    },
+    Burnley: { torso: '#691d2d', sleeves: '#799ec7' },
+    'West Ham': { torso: '#7f2f48', sleeves: '#7f2f48' },
+    'GK_West Ham': { torso: '#54af57', sleeves: '#54af57' },
+    "Nott'm Forest": { torso: '#d31d3b', sleeves: '#d31d3b' },
+    Luton: { torso: '#f03c00', sleeves: '#f03c00' },
+    Brentford: { torso: '#d22236', sleeves: '#d22236' },
+    GK_Brentford: { torso: '#e90b6a', sleeves: '#e90b6a' },
+    Wolves: { torso: '#ecb600', sleeves: '#ecb600', collar: '#312f2f' },
+}
 
-const { name, info, pos, showPos, team, isCap, isViceCap } = Astro.props;
+const { name, info, pos, showPos, team, isCap, isViceCap } = Astro.props
 
-const jerseyColorPos = pos === "GK" ? "GK_" : "";
-const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? "grey";
+const jerseyColorPos = pos === 'GK' ? 'GK_' : ''
+const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? 'grey'
 ---
-<div class="flex flex-col items-center relative">
-    {
-        showPos && pos &&
-        <div class="flex justify-center text-sm">{pos}</div>
-    }
+
+<div class="relative flex flex-col items-center">
+    {showPos && pos && <div class="flex justify-center text-sm">{pos}</div>}
     <div class="h-10 w-10 md:h-16 md:w-16">
-        <FplJersey torso={jerseyColor.torso} sleeves={jerseyColor.sleeves} collar={jerseyColor.collar} striped={jerseyColor.striped}/>
+        <FplJersey
+            torso={jerseyColor.torso}
+            sleeves={jerseyColor.sleeves}
+            collar={jerseyColor.collar}
+            striped={jerseyColor.striped}
+        />
         {
-            isCap &&
-            <span class="absolute text-xs flex items-center justify-center -right-1 bottom-0 h-4 w-4 bg-slate-800 rounded-full">
-                C
-            </span>
+            isCap && (
+                <span class="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-800 text-xs">
+                    C
+                </span>
+            )
         }
-         {
-            isViceCap &&
-            <span class="absolute text-xs flex items-center justify-center -right-1 bottom-0 h-4 w-4 bg-slate-800 rounded-full">
-                V
-            </span>
+        {
+            isViceCap && (
+                <span class="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-800 text-xs">
+                    V
+                </span>
+            )
         }
     </div>
-          
+
     <div class="-my-1">
-        <div class="block text-center text-xs font-bold bg-indigo-800 rounded-t-sm w-16 truncate">
+        <div
+            class="block w-16 truncate rounded-t-sm bg-indigo-800 text-center text-xs font-bold"
+        >
             {name}
         </div>
-        <div class="flex justify-center text-xs bg-green-600 rounded-b-sm">
+        <div class="flex justify-center rounded-b-sm bg-green-600 text-xs">
             {info}
         </div>
     </div>
-<div/>
+    <div></div>
+</div>

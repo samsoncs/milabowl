@@ -1,16 +1,16 @@
 ---
-import Card from "../../components/core/Card.astro";
-import Table from "../../components/core/Table/Table.astro";
-import Layout from "../../layouts/Layout.astro";
+import Card from '../../components/core/Card.astro'
+import Table from '../../components/core/Table/Table.astro'
+import Layout from '../../layouts/Layout.astro'
 
-import game_state from "../../../src/game_state/game_state.json";
-import type { MilaResultsDTO } from "../../../src/game_state/gameState";
+import game_state from '../../../src/game_state/game_state.json'
+import type { MilaResultsDTO } from '../../../src/game_state/gameState'
 
-const milaResults: MilaResultsDTO = game_state;
+const milaResults: MilaResultsDTO = game_state
 ---
 
 <Layout title="Darth Maul History">
-    <div class="flex flex-col lg:grid lg:grid-cols-6 gap-4">
+    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-6">
         <div class="lg:col-span-6">
             <Card title="Darth Maul History">
                 <Table>
@@ -25,54 +25,54 @@ const milaResults: MilaResultsDTO = game_state;
                     {
                         milaResults.resultsByWeek.map((r) => {
                             const darth = r.results.find(
-                                (rr) => rr.milaPoints.isDarthMaul !== null,
-                            );
+                                (rr) => rr.milaPoints.isDarthMaul !== null
+                            )
 
                             const contender = r.results.find(
                                 (rr) =>
-                                    rr.milaPoints.isDarthMaulContender !== null,
-                            );
+                                    rr.milaPoints.isDarthMaulContender !== null
+                            )
 
                             const points =
-                                darth?.gwScore > contender?.gwScore ? -1 : 0;
+                                darth?.gwScore > contender?.gwScore ? -1 : 0
 
                             const darthColor =
-                                points != 0 ? "text-green-500" : "text-red-500";
+                                points != 0 ? 'text-green-500' : 'text-red-500'
                             const condtenderColor =
-                                points != 0 ? "text-red-500" : "text-green-500";
+                                points != 0 ? 'text-red-500' : 'text-green-500'
 
                             return (
                                 <div>
                                     <tr>
-                                        <td>{"GW " + r.gameWeek}</td>
-                                        <td class={"text-right " + darthColor}>
+                                        <td>{'GW ' + r.gameWeek}</td>
+                                        <td class={'text-right ' + darthColor}>
                                             {darth?.teamName}
                                         </td>
                                         <td class="text-center">
                                             <span class={darthColor}>
                                                 {darth?.gwScore}
-                                            </span>{" "}
-                                            -{" "}
+                                            </span>{' '}
+                                            -{' '}
                                             <span class={condtenderColor}>
                                                 {contender?.gwScore}
                                             </span>
                                         </td>
                                         <td
                                             class={
-                                                "text-left " + condtenderColor
+                                                'text-left ' + condtenderColor
                                             }
                                         >
                                             {contender?.teamName}
                                         </td>
                                         <td>
                                             {points != 0
-                                                ? "🗡️ - contender failed"
-                                                : "👺 - Darth passed on"}
+                                                ? '🗡️ - contender failed'
+                                                : '👺 - Darth passed on'}
                                         </td>
                                         <td>{points}</td>
                                     </tr>
                                 </div>
-                            );
+                            )
                         })
                     }
                 </Table>

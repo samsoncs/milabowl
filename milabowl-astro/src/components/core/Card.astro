@@ -1,23 +1,26 @@
 ---
 export interface Props {
-    title?: string;
+    title?: string
 }
-const { title } = Astro.props;
+const { title } = Astro.props
 ---
 
-<div class="bg-white dark:bg-slate-800 rounded-md p-4 shadow-sm dark:shadow-sm-dark space-y-2 h-full">
+<div
+    class="h-full space-y-2 rounded-md bg-white p-4 shadow-sm dark:bg-slate-800 dark:shadow-sm-dark"
+>
     {
-        title && 
-        <div class="flex items-center mb-3 md:mb-5">
-            <div class="md:text-xl font-bold text-indigo-900 dark:text-dark-text grow">
-                {title}
+        title && (
+            <div class="mb-3 flex items-center md:mb-5">
+                <div class="grow font-bold text-indigo-900 dark:text-dark-text md:text-xl">
+                    {title}
+                </div>
+                <div class="text-sm dark:text-dark-text md:text-base">
+                    <slot name="secondary" />
+                </div>
             </div>
-            <div class="text-sm md:text-base dark:text-dark-text">
-                <slot name="secondary"/>
-            </div>
-        </div>
-    }   
-    <div class="text-base dark:text-dark-text overflow-x-auto h-full">
-        <slot/>
+        )
+    }
+    <div class="h-full overflow-x-auto text-base dark:text-dark-text">
+        <slot />
     </div>
 </div>
