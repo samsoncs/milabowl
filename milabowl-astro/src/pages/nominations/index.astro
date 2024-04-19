@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import noms from '../../../src/game_state/nominations.json';
 import type { Nomination } from '../../../src/game_state/nominations';
-import Nominations from './Nominations';
+import Nominations from './_Nominations';
 
 const nominations: Nomination[] = noms;
 ---
@@ -10,3 +10,4 @@ const nominations: Nomination[] = noms;
 <Layout title="Milabowl - Nominations">
     <Nominations nominations={nominations} client:idle />
 </Layout>
+./_Nominations

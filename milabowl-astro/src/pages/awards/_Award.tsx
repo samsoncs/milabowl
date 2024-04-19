@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './Award.module.css';
+import styles from './_Award.module.css';
 import party from 'party-js';
 
 export interface AwardProps {
