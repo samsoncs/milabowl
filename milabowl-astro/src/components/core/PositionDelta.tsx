@@ -1,6 +1,6 @@
 interface Props {
-    delta: number
-    pos: number
+    delta: number;
+    pos: number;
 }
 
 const PositionDelta: React.FC<Props> = ({ delta, pos }) => (
@@ -53,6 +53,6 @@ const PositionDelta: React.FC<Props> = ({ delta, pos }) => (
         )}
         {delta === 0 && <div>-</div>}
     </div>
-)
+);
 
-export default PositionDelta
+export default PositionDelta;

@@ -1,16 +1,16 @@
 ---
-import Avatar from '../../components/core/Avatar'
-import AvatarProvider from '../../components/core/AvatarProvider.astro'
-import PositionDelta from '../../components/core/PositionDelta.astro'
-import Table from '../../components/core/Table/Table.astro'
-import type { GameWeekResult } from '../../game_state/gameState'
+import Avatar from '../../components/core/Avatar';
+import AvatarProvider from '../../components/core/AvatarProvider.astro';
+import PositionDelta from '../../components/core/PositionDelta.astro';
+import Table from '../../components/core/Table/Table.astro';
+import type { GameWeekResult } from '../../game_state/gameState';
 
 export interface Props {
-    resultsForGameweek: GameWeekResult[]
-    isOverallScore?: boolean
+    resultsForGameweek: GameWeekResult[];
+    isOverallScore?: boolean;
 }
 
-const { resultsForGameweek, isOverallScore } = Astro.props
+const { resultsForGameweek, isOverallScore } = Astro.props;
 ---
 
 <Table>
@@ -48,7 +48,7 @@ const { resultsForGameweek, isOverallScore } = Astro.props
             const deltaPosition =
                 r.milaRankLastWeek === null || r.milaRankLastWeek === undefined
                     ? 0
-                    : r.milaRankLastWeek - r.milaRank
+                    : r.milaRankLastWeek - r.milaRank;
             return (
                 <tr class="border-1 border-slate-200 dark:border-slate-700">
                     <td scope="row">
@@ -95,7 +95,7 @@ const { resultsForGameweek, isOverallScore } = Astro.props
                         {r.cumulativeMilaPoints}
                     </td>
                 </tr>
-            )
+            );
         })
     }
 </Table>

@@ -1,34 +1,34 @@
-import { animated, useSpring } from 'react-spring'
+import { animated, useSpring } from 'react-spring';
 import {
     type BumpPoint,
     type BumpDatum,
     type BumpSerieExtraProps,
     ResponsiveBump,
-} from '@nivo/bump'
-import { useEffect, useState } from 'react'
-import game_state from '../../src/game_state/game_state.json'
-import type { MilaResultsDTO } from '../../src/game_state/gameState'
-import colors from 'tailwindcss/colors'
+} from '@nivo/bump';
+import { useEffect, useState } from 'react';
+import game_state from '../../src/game_state/game_state.json';
+import type { MilaResultsDTO } from '../../src/game_state/gameState';
+import colors from 'tailwindcss/colors';
 
 interface PlayerStandingsChartProps {
-    results: MilaResultsDTO
+    results: MilaResultsDTO;
 }
 
 interface CustomBumpDatum extends BumpDatum {
-    points: number
+    points: number;
 }
 
 const CustomPoint: React.FC<{
-    point: BumpPoint<CustomBumpDatum, BumpSerieExtraProps>
+    point: BumpPoint<CustomBumpDatum, BumpSerieExtraProps>;
 }> = ({ point }) => {
     const animatedProps = useSpring<{
-        x: number
-        y: number
-        radius: number
-        color: string
-        borderColor: string
-        borderWidth: number
-        backgroundRadius: number
+        x: number;
+        y: number;
+        radius: number;
+        color: string;
+        borderColor: string;
+        borderWidth: number;
+        backgroundRadius: number;
     }>({
         x: point.x,
         y: point.y,
@@ -38,7 +38,7 @@ const CustomPoint: React.FC<{
         borderColor: point.borderColor,
         borderWidth: point.borderWidth,
         config: { mass: 1, tension: 170, friction: 26, clamp: true },
-    })
+    });
 
     return (
         <animated.g
@@ -63,29 +63,29 @@ const CustomPoint: React.FC<{
                 </animated.text>
             )}
         </animated.g>
-    )
-}
+    );
+};
 
 const GetFriendlyName = (name: string, isXs: boolean): string => {
-    return isXs ? `${name.substring(0, 10)}..` : name
-}
+    return isXs ? `${name.substring(0, 10)}..` : name;
+};
 
 const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     results,
 }: PlayerStandingsChartProps) => {
-    const [isDarkTheme, setIsDarkTheme] = useState(false)
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
 
     useEffect(() => {
-        const storedTheme = localStorage.getItem('theme')
+        const storedTheme = localStorage.getItem('theme');
         if (storedTheme === 'dark') {
-            setIsDarkTheme(true)
+            setIsDarkTheme(true);
         }
-    }, [])
+    }, []);
 
     const [week, setWeek] = useState<number[]>([
         results.resultsByWeek.length < 5 ? 0 : results.resultsByWeek.length - 5,
         results.resultsByWeek.length,
-    ])
+    ]);
 
     const data = results.resultsByUser.map((r, i) => ({
         id: r.teamName,
@@ -94,7 +94,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             y: rr.milaRank,
             points: rr.cumulativeAverageMilaPoints,
         })),
-    }))
+    }));
 
     return (
         <div style={{ height: '55vh' }}>
@@ -161,13 +161,13 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
                 axisRight={null}
             />
         </div>
-    )
-}
+    );
+};
 
 const Trend = () => {
-    const milaResults: MilaResultsDTO = game_state
+    const milaResults: MilaResultsDTO = game_state;
 
-    return <PlayerStandingsChart results={milaResults} />
-}
+    return <PlayerStandingsChart results={milaResults} />;
+};
 
-export default Trend
+export default Trend;

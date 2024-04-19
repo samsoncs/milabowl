@@ -1,29 +1,29 @@
 ---
-import game_state from '../../../src/game_state/game_state.json'
+import game_state from '../../../src/game_state/game_state.json';
 import type {
     MilaResultsDTO,
     ResultsByUser,
-} from '../../../src/game_state/gameState'
-import Layout from '../../layouts/Layout.astro'
-import Table from '../../components/core/Table/Table.astro'
-import Card from '../../components/core/Card.astro'
-import PlayerStandingsChart from './PlayerStandingsChart'
-import PlayerLayout from '../../layouts/PlayerLayout.astro'
+} from '../../../src/game_state/gameState';
+import Layout from '../../layouts/Layout.astro';
+import Table from '../../components/core/Table/Table.astro';
+import Card from '../../components/core/Card.astro';
+import PlayerStandingsChart from './PlayerStandingsChart';
+import PlayerLayout from '../../layouts/PlayerLayout.astro';
 
 interface Props {
-    userResults: ResultsByUser
+    userResults: ResultsByUser;
 }
 
 export function getStaticPaths() {
-    const gameState: MilaResultsDTO = game_state
+    const gameState: MilaResultsDTO = game_state;
     const paths = gameState.resultsByUser.map((r) => ({
         params: { player: r.teamName.replaceAll(' ', '-') },
         props: { userResults: r },
-    }))
-    return paths
+    }));
+    return paths;
 }
 
-const { userResults } = Astro.props
+const { userResults } = Astro.props;
 ---
 
 <Layout title={`${userResults.teamName} - details`} enableViewTransitions>

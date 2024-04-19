@@ -1,15 +1,15 @@
-import iconBomb from './../../assets/icon_bomb.svg'
-import PowerUpModal from './PowerUpModal'
-import React, { useState } from 'react'
+import iconBomb from './../../assets/icon_bomb.svg';
+import PowerUpModal from './PowerUpModal';
+import React, { useState } from 'react';
 
 export interface PowerUpProps {
-    type: string // One of 3xc, wildcard, freehit, bboost
-    gwPlayed?: string | null // Make this nullable?
-    playerName: string // To know which user card to create modal on
+    type: string; // One of 3xc, wildcard, freehit, bboost
+    gwPlayed?: string | null; // Make this nullable?
+    playerName: string; // To know which user card to create modal on
 }
 
 interface iTypeToColor {
-    [key: string]: string
+    [key: string]: string;
 }
 
 const typeToColor: iTypeToColor = {
@@ -17,19 +17,19 @@ const typeToColor: iTypeToColor = {
     wildcard: 'yellow',
     freehit: 'green',
     bboost: 'red',
-}
+};
 interface PowerUpInfo {
-    color: string
-    icon: string
-    name: string
-    explanation: string
+    color: string;
+    icon: string;
+    name: string;
+    explanation: string;
 }
 
 interface TypeDetails {
-    [key: string]: PowerUpInfo
+    [key: string]: PowerUpInfo;
 }
 
-const num_points = '3'
+const num_points = '3';
 
 const powerUpDetails: TypeDetails = {
     '3xc': {
@@ -64,7 +64,7 @@ const powerUpDetails: TypeDetails = {
         explanation:
             '+50% MilaPts this GW, excluding effects from 💣 and other power ups',
     },
-}
+};
 
 const icon_envelope = (
     <svg
@@ -77,25 +77,25 @@ const icon_envelope = (
         <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
         <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
     </svg>
-)
+);
 
 const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type, playerName }) => {
-    const powerUp: PowerUpInfo = powerUpDetails[type]
+    const powerUp: PowerUpInfo = powerUpDetails[type];
     //let color = typeToColor[type];
-    let color = powerUp.color
-    let playedWeekIndicator
+    let color = powerUp.color;
+    let playedWeekIndicator;
 
     // Set chip shadow based on whether it is played or not
-    let classShadow: string
+    let classShadow: string;
 
     // Set hover effect based on whether it is played or not
-    let classHover: string
+    let classHover: string;
 
     // If chip is not played, then use default text:
     if (gwPlayed === undefined || gwPlayed == null || gwPlayed == '') {
-        gwPlayed = '-'
+        gwPlayed = '-';
 
-        classShadow = ' shadow-lg shadow-' + color + '-500/50 '
+        classShadow = ' shadow-lg shadow-' + color + '-500/50 ';
         classHover =
             ' hover:bg-' +
             color +
@@ -105,7 +105,7 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type, playerName }) => {
             color +
             '-700 dark:focus:ring-' +
             color +
-            '-800 '
+            '-800 ';
         playedWeekIndicator = (
             <div
                 className={
@@ -118,12 +118,12 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type, playerName }) => {
             >
                 {gwPlayed}{' '}
             </div>
-        )
+        );
     } else {
         // If chip is used, set the GW label in a gray-tone
-        color = 'stone'
-        classShadow = ''
-        classHover = ' grayscale-[60%]'
+        color = 'stone';
+        classShadow = '';
+        classHover = ' grayscale-[60%]';
         playedWeekIndicator = (
             <div
                 className={
@@ -138,10 +138,10 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type, playerName }) => {
             >
                 {gwPlayed}{' '}
             </div>
-        )
+        );
     }
-    let powerUpIcon
-    powerUpIcon = powerUp.icon
+    let powerUpIcon;
+    powerUpIcon = powerUp.icon;
 
     /* By including all dynamically used colors in a comment, Tailwind will pull the styling for that class. See: https://stackoverflow.com/a/74959709
     bg-blue-800 hover:bg-blue-900 dark:border-gray-900
@@ -152,9 +152,9 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type, playerName }) => {
     shadow-stone-500/50 text-white bg-stone-700 hover:bg-stone-800 focus:ring-stone-300 dark:bg-stone-600 dark:hover:bg-stone-700 dark:focus:ring-stone-800
     */
 
-    const [hover, setHover] = useState(false)
+    const [hover, setHover] = useState(false);
 
-    const modal_id = 'popup-modal-' + type + playerName
+    const modal_id = 'popup-modal-' + type + playerName;
 
     return (
         <div>
@@ -187,7 +187,7 @@ const PowerUp: React.FC<PowerUpProps> = ({ gwPlayed, type, playerName }) => {
                 name={powerUp.name}
             />
         </div>
-    )
-}
+    );
+};
 
-export default PowerUp
+export default PowerUp;

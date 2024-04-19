@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content'
-import Markdown from '../../components/core/Typography/Markdown.astro'
-import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
+import { getCollection } from 'astro:content';
+import Markdown from '../../components/core/Typography/Markdown.astro';
+import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
 
-const memeEntries = await getCollection('memes')
+const memeEntries = await getCollection('memes');
 
-const { Content } = await memeEntries[0].render()
+const { Content } = await memeEntries[0].render();
 ---
 
 <MarkdownLayout title="Mila blog">
