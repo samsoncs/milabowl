@@ -34,6 +34,9 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/lodash": "^4.14.191",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.14",
     "typescript": "^5.2.2"
   }
 }
