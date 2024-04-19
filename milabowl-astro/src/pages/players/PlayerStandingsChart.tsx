@@ -51,7 +51,12 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             <div className="h-72 lg:h-1/2">
                 <ResponsiveLine
                     data={data}
-                    margin={{ top: 20, right: 40, bottom: 50, left: 60 }}
+                    margin={{
+                        top: 20,
+                        right: 40,
+                        bottom: 50,
+                        left: 60,
+                    }}
                     xScale={{ type: 'linear', min: 1 }}
                     xFormat=" >-"
                     yScale={{
