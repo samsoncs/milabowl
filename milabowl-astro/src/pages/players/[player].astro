@@ -1,59 +1,78 @@
 ---
-import game_state from "../../../src/game_state/game_state.json";
-import type { MilaResultsDTO, ResultsByUser } from "../../../src/game_state/gameState";
-import Layout from "../../layouts/Layout.astro";
-import Table from "../../components/core/Table/Table.astro";
-import Card from "../../components/core/Card.astro";
-import PlayerStandingsChart from "./PlayerStandingsChart";
-import PlayerLayout from "../../layouts/PlayerLayout.astro";
+import game_state from '../../../src/game_state/game_state.json'
+import type {
+    MilaResultsDTO,
+    ResultsByUser,
+} from '../../../src/game_state/gameState'
+import Layout from '../../layouts/Layout.astro'
+import Table from '../../components/core/Table/Table.astro'
+import Card from '../../components/core/Card.astro'
+import PlayerStandingsChart from './PlayerStandingsChart'
+import PlayerLayout from '../../layouts/PlayerLayout.astro'
 
-interface Props{
-    userResults: ResultsByUser;
+interface Props {
+    userResults: ResultsByUser
 }
 
 export function getStaticPaths() {
-  const gameState: MilaResultsDTO = game_state;
-  const paths = gameState.resultsByUser.map(r => (
-    { 
-      params: { player: r.teamName.replaceAll(" ", "-")},
-      props: { userResults: r }
-    }));
-  return paths;
+    const gameState: MilaResultsDTO = game_state
+    const paths = gameState.resultsByUser.map((r) => ({
+        params: { player: r.teamName.replaceAll(' ', '-') },
+        props: { userResults: r },
+    }))
+    return paths
 }
 
-const { userResults } = Astro.props;
+const { userResults } = Astro.props
 ---
-<Layout title={`${userResults.teamName} - details`} enableViewTransitions>
-  <PlayerLayout view="mila" teamName={userResults.teamName}/>
 
-  <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4 pt-[4.5rem] md:pt-[13rem]">	
-    <div class="lg:col-span-4 order-last lg:order-first">
-      <Card title={userResults.teamName}>
-        <Table>
-          <tr slot="header">
-            <th>GW</th>
-            <th class="right-align">Pts</th>
-            <th class="right-align">Avg</th>
-            <th class="right-align">Tot</th>
-          </tr>							
-  
-          {
-            userResults.results.sort((a,b) => b.gameWeek - a.gameWeek).map((r, i) => (
-              <tr>
-                <td>{`GW ${r.gameWeek}`}</td>
-                <td class="right-align">{r.milaPoints.total}</td>
-                <td class="right-align">{r.cumulativeAverageMilaPoints}</td>
-                <td class="right-align">{r.cumulativeMilaPoints}</td>
-              </tr>
-            ))
-          }
-        </Table>
-      </Card>
+<Layout title={`${userResults.teamName} - details`} enableViewTransitions>
+    <PlayerLayout view="mila" teamName={userResults.teamName} />
+
+    <div
+        class="flex flex-col gap-4 pt-[4.5rem] md:pt-[13rem] lg:grid lg:grid-cols-12"
+    >
+        <div class="order-last lg:order-first lg:col-span-4">
+            <Card title={userResults.teamName}>
+                <Table>
+                    <tr slot="header">
+                        <th>GW</th>
+                        <th class="right-align">Pts</th>
+                        <th class="right-align">Avg</th>
+                        <th class="right-align">Tot</th>
+                    </tr>
+
+                    {
+                        userResults.results
+                            .sort((a, b) => b.gameWeek - a.gameWeek)
+                            .map((r, i) => (
+                                <tr>
+                                    <td>{`GW ${r.gameWeek}`}</td>
+                                    <td class="right-align">
+                                        {r.milaPoints.total}
+                                    </td>
+                                    <td class="right-align">
+                                        {r.cumulativeAverageMilaPoints}
+                                    </td>
+                                    <td class="right-align">
+                                        {r.cumulativeMilaPoints}
+                                    </td>
+                                </tr>
+                            ))
+                    }
+                </Table>
+            </Card>
+        </div>
+        <div class="lg:col-span-8">
+            <Card title="Performance vs. Average">
+                <PlayerStandingsChart
+                    teamname={userResults.teamName}
+                    results={userResults.results.sort(
+                        (a, b) => a.gameWeek - b.gameWeek
+                    )}
+                    client:only="react"
+                />
+            </Card>
+        </div>
     </div>
-    <div class="lg:col-span-8">
-      <Card title="Performance vs. Average">
-        <PlayerStandingsChart teamname={userResults.teamName} results={userResults.results.sort((a,b) => a.gameWeek - b.gameWeek)} client:only="react"/>
-      </Card>
-    </div>
-  </div>
 </Layout>

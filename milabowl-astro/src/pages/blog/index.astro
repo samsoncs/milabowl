@@ -1,27 +1,25 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import BlogPreview from "./_components/BlogPreview.astro";
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import BlogPreview from './_components/BlogPreview.astro'
 
-const firstBlogEntries = await getCollection('blog');
+const firstBlogEntries = await getCollection('blog')
 
-const stortedEntries = firstBlogEntries.sort((a, b) => 
-    a.data.date < b.data.date ? 1 : -1
-).slice(0, 10);
+const stortedEntries = firstBlogEntries
+    .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+    .slice(0, 10)
 ---
+
 <Layout title="Mila blog" enableViewTransitions>
-    <div class="mb-2 space-y-2 max-w-screen-lg mx-auto">
-        {
-            stortedEntries.map(post => 
-                <BlogPreview post={post}/>
-            )
-        }
+    <div class="mx-auto mb-2 max-w-screen-lg space-y-2">
+        {stortedEntries.map((post) => <BlogPreview post={post} />)}
         <a class="pl-2 md:pl-0" href="/blog/archive">
-            <button class="mt-4 p-4 dark:bg-slate-700 dark:text-dark-text rounded-md">
+            <button
+                class="mt-4 rounded-md p-4 dark:bg-slate-700 dark:text-dark-text"
+            >
                 See Archive
             </button>
         </a>
-        
     </div>
 </Layout>
 
