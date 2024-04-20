@@ -1,13 +1,13 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import Card from '../../../components/core/Card.astro'
+import type { CollectionEntry } from 'astro:content';
+import Card from '../../../components/core/Card.astro';
 
 export interface Props {
-    post: CollectionEntry<'blog'>
-    navigationText: 'Previous Post' | 'Next Post'
+    post: CollectionEntry<'blog'>;
+    navigationText: 'Previous Post' | 'Next Post';
 }
 
-const { post, navigationText } = Astro.props
+const { post, navigationText } = Astro.props;
 ---
 
 <a href={`/blog/${post.slug}`}>

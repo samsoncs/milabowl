@@ -1,29 +1,29 @@
-import styles from './Avatar.module.css'
-import party from 'party-js'
-import PowerUp from './PowerUp'
-import game_state from '../../game_state/game_state.json'
-import type { ResultsByUser, GameWeekResult } from '../../game_state/gameState'
+import styles from './Avatar.module.css';
+import party from 'party-js';
+import PowerUp from './PowerUp';
+import game_state from '../../game_state/game_state.json';
+import type { ResultsByUser, GameWeekResult } from '../../game_state/gameState';
 
-const milaResultsByUser: ResultsByUser = game_state.resultsByUser
+const milaResultsByUser: ResultsByUser = game_state.resultsByUser;
 
 export interface AvatarProps {
-    teamName: string
-    children: any
+    teamName: string;
+    children: any;
 }
 
 interface UserProfileInfo {
-    info: string | null
-    followers: number | null
-    following: number | null
-    name: string
-    avatarSrc: string
+    info: string | null;
+    followers: number | null;
+    following: number | null;
+    name: string;
+    avatarSrc: string;
 }
 
 interface UserProfiles {
-    [key: string]: UserProfileInfo
+    [key: string]: UserProfileInfo;
 }
 
-const imageRoot = '/avatars/'
+const imageRoot = '/avatars/';
 const userProfileDict: UserProfiles = {
     '$jeik og betalt': {
         info: 'Mila-source founder and evangelist',
@@ -88,7 +88,7 @@ const userProfileDict: UserProfiles = {
         name: 'henrik',
         avatarSrc: imageRoot + 'henrik.png',
     },
-}
+};
 
 const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
     let user: UserProfileInfo = {
@@ -98,9 +98,9 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
         following: -1,
         avatarSrc:
             'https://www.nicepng.com/png/detail/186-1869910_ic-question-mark-roblox-question-mark-avatar.png',
-    }
+    };
     if (teamName in userProfileDict) {
-        user = userProfileDict[teamName]
+        user = userProfileDict[teamName];
     }
 
     // List of existing power ups
@@ -109,17 +109,17 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
         wildcard: '',
         freehit: '',
         bboost: '',
-    }
+    };
     // For each power up, determine if (and when) it has been used by the current player
     const userResults: GameWeekResult[] = milaResultsByUser.find(
         (e) => e.teamName == teamName
-    ).results
+    ).results;
 
     for (const [key, value] of Object.entries(powerUpGWs)) {
         let gw = userResults.find(
             (e) => e.milaPoints.activeChip == key
-        )?.gameWeek
-        powerUpGWs[key] = gw
+        )?.gameWeek;
+        powerUpGWs[key] = gw;
     }
 
     return (
@@ -162,7 +162,7 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
                                 type="button"
                                 // @ts-ignore
                                 onClick={(e) => {
-                                    party.confetti(e.target)
+                                    party.confetti(e.target);
                                 }}
                                 className="rounded-lg bg-blue-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             >
@@ -237,7 +237,7 @@ const Avatar: React.FC<AvatarProps> = ({ children, teamName }) => {
                 <div data-popper-arrow></div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Avatar
+export default Avatar;

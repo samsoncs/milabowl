@@ -1,12 +1,12 @@
 ---
-import Card from '../../components/core/Card.astro'
-import Table from '../../components/core/Table/Table.astro'
-import Layout from '../../layouts/Layout.astro'
+import Card from '../../components/core/Card.astro';
+import Table from '../../components/core/Table/Table.astro';
+import Layout from '../../layouts/Layout.astro';
 
-import game_state from '../../../src/game_state/game_state.json'
-import type { MilaResultsDTO } from '../../../src/game_state/gameState'
+import game_state from '../../../src/game_state/game_state.json';
+import type { MilaResultsDTO } from '../../../src/game_state/gameState';
 
-const milaResults: MilaResultsDTO = game_state
+const milaResults: MilaResultsDTO = game_state;
 ---
 
 <Layout title="Darth Maul History">
@@ -26,20 +26,20 @@ const milaResults: MilaResultsDTO = game_state
                         milaResults.resultsByWeek.map((r) => {
                             const darth = r.results.find(
                                 (rr) => rr.milaPoints.isDarthMaul !== null
-                            )
+                            );
 
                             const contender = r.results.find(
                                 (rr) =>
                                     rr.milaPoints.isDarthMaulContender !== null
-                            )
+                            );
 
                             const points =
-                                darth?.gwScore > contender?.gwScore ? -1 : 0
+                                darth?.gwScore > contender?.gwScore ? -1 : 0;
 
                             const darthColor =
-                                points != 0 ? 'text-green-500' : 'text-red-500'
+                                points != 0 ? 'text-green-500' : 'text-red-500';
                             const condtenderColor =
-                                points != 0 ? 'text-red-500' : 'text-green-500'
+                                points != 0 ? 'text-red-500' : 'text-green-500';
 
                             return (
                                 <div>
@@ -72,7 +72,7 @@ const milaResults: MilaResultsDTO = game_state
                                         <td>{points}</td>
                                     </tr>
                                 </div>
-                            )
+                            );
                         })
                     }
                 </Table>

@@ -1,8 +1,8 @@
-import { createColumnHelper, type ColumnDef } from '@tanstack/react-table'
-import type { GameWeekResult } from '../../game_state/gameState'
-import PositionDelta from '../../components/core/PositionDelta'
+import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
+import type { GameWeekResult } from '../../game_state/gameState';
+import PositionDelta from '../../components/core/PositionDelta';
 
-const columnHelper = createColumnHelper<GameWeekResult>()
+const columnHelper = createColumnHelper<GameWeekResult>();
 
 export function getStandingsColmns(
     avatars: ImageMetadata[],
@@ -18,7 +18,7 @@ export function getStandingsColmns(
                     props.row.original.milaRankLastWeek === undefined
                         ? 0
                         : props.row.original.milaRankLastWeek -
-                          props.row.original.milaRank
+                          props.row.original.milaRank;
 
                 return (
                     <div className="flex flex-col items-center justify-between gap-1">
@@ -27,7 +27,7 @@ export function getStandingsColmns(
                             delta={deltaPosition}
                         />
                     </div>
-                )
+                );
             },
             size: 40,
         }),
@@ -167,5 +167,5 @@ export function getStandingsColmns(
             header: 'Total MP',
             size: 120,
         }),
-    ]
+    ];
 }

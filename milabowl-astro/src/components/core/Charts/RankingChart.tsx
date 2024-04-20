@@ -4,26 +4,26 @@ import {
     type BumpSerie,
     type BumpSerieExtraProps,
     ResponsiveBump,
-} from '@nivo/bump'
-import { useEffect, useState } from 'react'
-import { animated, useSpring } from 'react-spring'
-import colors from 'tailwindcss/colors'
+} from '@nivo/bump';
+import { useEffect, useState } from 'react';
+import { animated, useSpring } from 'react-spring';
+import colors from 'tailwindcss/colors';
 
 interface CustomBumpDatum extends BumpDatum {
-    points: number | null
+    points: number | null;
 }
 
 const CustomPoint: React.FC<{
-    point: BumpPoint<CustomBumpDatum, BumpSerieExtraProps>
+    point: BumpPoint<CustomBumpDatum, BumpSerieExtraProps>;
 }> = ({ point }) => {
     const animatedProps = useSpring<{
-        x: number
-        y: number
-        radius: number
-        color: string
-        borderColor: string
-        borderWidth: number
-        backgroundRadius: number
+        x: number;
+        y: number;
+        radius: number;
+        color: string;
+        borderColor: string;
+        borderWidth: number;
+        backgroundRadius: number;
     }>({
         x: point.x,
         y: point.y,
@@ -33,7 +33,7 @@ const CustomPoint: React.FC<{
         borderColor: point.borderColor,
         borderWidth: point.borderWidth,
         config: { mass: 1, tension: 170, friction: 26, clamp: true },
-    })
+    });
 
     return (
         <animated.g
@@ -58,20 +58,20 @@ const CustomPoint: React.FC<{
                 </animated.text>
             )}
         </animated.g>
-    )
-}
+    );
+};
 
 const RankingChart: React.FC<{
-    data: BumpSerie<CustomBumpDatum, BumpSerieExtraProps>[]
+    data: BumpSerie<CustomBumpDatum, BumpSerieExtraProps>[];
 }> = ({ data }) => {
-    const [isDarkTheme, setIsDarkTheme] = useState(false)
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
 
     useEffect(() => {
-        const storedTheme = localStorage.getItem('theme')
+        const storedTheme = localStorage.getItem('theme');
         if (storedTheme === 'dark') {
-            setIsDarkTheme(true)
+            setIsDarkTheme(true);
         }
-    }, [])
+    }, []);
 
     return (
         <ResponsiveBump
@@ -134,7 +134,7 @@ const RankingChart: React.FC<{
             }}
             axisRight={null}
         />
-    )
-}
+    );
+};
 
-export default RankingChart
+export default RankingChart;

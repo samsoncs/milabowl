@@ -1,19 +1,19 @@
 ---
-import Card from '../../components/core/Card.astro'
-import Layout from '../../layouts/Layout.astro'
-import RankingChart from '../../components/core/Charts/RankingChart'
+import Card from '../../components/core/Card.astro';
+import Layout from '../../layouts/Layout.astro';
+import RankingChart from '../../components/core/Charts/RankingChart';
 
 interface PlayerResult {
-    name: string
-    fplPoints: number | null
-    fplPos: number | null
-    milaPoints?: number | null
-    milaPos?: number | null
+    name: string;
+    fplPoints: number | null;
+    fplPos: number | null;
+    milaPoints?: number | null;
+    milaPos?: number | null;
 }
 
 interface PlayerResults {
-    name: string
-    seasons: PlayerResult[]
+    name: string;
+    seasons: PlayerResult[];
 }
 
 const historicResultsByPlayer: PlayerResults[] = [
@@ -404,7 +404,7 @@ const historicResultsByPlayer: PlayerResults[] = [
             },
         ],
     },
-]
+];
 
 const fplData = historicResultsByPlayer.map((r, i) => ({
     id: r.name,
@@ -413,7 +413,7 @@ const fplData = historicResultsByPlayer.map((r, i) => ({
         y: rr.fplPos,
         points: rr.fplPoints,
     })),
-}))
+}));
 
 const milaData = historicResultsByPlayer.map((r, i) => ({
     id: r.name,
@@ -424,7 +424,7 @@ const milaData = historicResultsByPlayer.map((r, i) => ({
             y: rr.milaPos!,
             points: rr.milaPoints!,
         })),
-}))
+}));
 ---
 
 <Layout title="History">

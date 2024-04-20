@@ -1,18 +1,18 @@
 ---
-import { getCollection } from 'astro:content'
-import { format } from 'date-fns'
-import groupBy from 'lodash/groupBy'
-import Card from '../../../components/core/Card.astro'
-import Table from '../../../components/core/Table/Table.astro'
-import Layout from '../../../layouts/Layout.astro'
+import { getCollection } from 'astro:content';
+import { format } from 'date-fns';
+import groupBy from 'lodash/groupBy';
+import Card from '../../../components/core/Card.astro';
+import Table from '../../../components/core/Table/Table.astro';
+import Layout from '../../../layouts/Layout.astro';
 
 const blogEntries = (
     await getCollection('blog', ({ data }) => {
-        return data.date <= new Date()
+        return data.date <= new Date();
     })
-).sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+).sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
 
-const blogsBySlug = groupBy(blogEntries, (b) => b.slug.split('/')[0])
+const blogsBySlug = groupBy(blogEntries, (b) => b.slug.split('/')[0]);
 ---
 
 <Layout title="Blog - archive">

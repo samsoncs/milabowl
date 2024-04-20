@@ -1,15 +1,15 @@
 ---
-import BallOutline from '../components/core/Icons/BallOutline.astro'
-import BallSolid from '../components/core/Icons/BallSolid.astro'
-import BookOutline from '../components/core/Icons/BookOutline.astro'
-import BookSolid from '../components/core/Icons/BookSolid.astro'
-import HomeOutline from '../components/core/Icons/HomeOutline.astro'
-import HomeSolid from '../components/core/Icons/HomeSolid.astro'
-import VerticalDots from '../components/core/Icons/VerticalDots.astro'
-import QueueListOutline from '../components/core/Icons/QueueListOutline.astro'
-import QueueListSolid from '../components/core/Icons/QueueListSolid.astro'
-import BottomNavButton from './_BottomNavButton.astro'
-import game_state from '../game_state/game_state.json'
+import BallOutline from '../components/core/Icons/BallOutline.astro';
+import BallSolid from '../components/core/Icons/BallSolid.astro';
+import BookOutline from '../components/core/Icons/BookOutline.astro';
+import BookSolid from '../components/core/Icons/BookSolid.astro';
+import HomeOutline from '../components/core/Icons/HomeOutline.astro';
+import HomeSolid from '../components/core/Icons/HomeSolid.astro';
+import VerticalDots from '../components/core/Icons/VerticalDots.astro';
+import QueueListOutline from '../components/core/Icons/QueueListOutline.astro';
+import QueueListSolid from '../components/core/Icons/QueueListSolid.astro';
+import BottomNavButton from './_BottomNavButton.astro';
+import game_state from '../game_state/game_state.json';
 
 const navLinks: { href: string; name: string }[] = [
     {
@@ -36,13 +36,13 @@ const navLinks: { href: string; name: string }[] = [
         href: '/history',
         name: 'History',
     },
-]
+];
 
-const currentPath = Astro.url.pathname
+const currentPath = Astro.url.pathname;
 const lastGameWeek = Math.max.apply(
     Math,
     game_state.resultsByWeek.map((r) => r.gameWeek)
-)
+);
 ---
 
 <div class="md:hidden">
@@ -92,15 +92,15 @@ const lastGameWeek = Math.max.apply(
         <div class="flex flex-col gap-2 p-4">
             {
                 navLinks.map((m) => {
-                    const isSelected = currentPath.includes(m.href)
+                    const isSelected = currentPath.includes(m.href);
                     const classes = isSelected
                         ? 'bg-slate-300 dark:bg-slate-600 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold no-underline'
-                        : 'text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold no-underline'
+                        : 'text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold no-underline';
                     return (
                         <a href={m.href} class={classes}>
                             {m.name}
                         </a>
-                    )
+                    );
                 })
             }
             <button
@@ -153,29 +153,29 @@ const lastGameWeek = Math.max.apply(
             ?.addEventListener('click', () => {
                 document
                     .querySelector('#mobile-menu')
-                    ?.classList.toggle('expanded')
+                    ?.classList.toggle('expanded');
                 document
                     .querySelector('#mobile-nav')
-                    ?.classList.toggle('expanded')
+                    ?.classList.toggle('expanded');
                 document
                     .querySelector('#mobile-backdrop')
-                    ?.classList.toggle('expanded')
-            })
+                    ?.classList.toggle('expanded');
+            });
 
         document
             .querySelector('#mobile-backdrop')
             ?.addEventListener('click', () => {
                 document
                     .querySelector('#mobile-menu')
-                    ?.classList.toggle('expanded')
+                    ?.classList.toggle('expanded');
                 document
                     .querySelector('#mobile-nav')
-                    ?.classList.toggle('expanded')
+                    ?.classList.toggle('expanded');
                 document
                     .querySelector('#mobile-backdrop')
-                    ?.classList.toggle('expanded')
-            })
-    })
+                    ?.classList.toggle('expanded');
+            });
+    });
 </script>
 
 <style>

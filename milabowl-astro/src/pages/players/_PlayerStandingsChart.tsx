@@ -1,25 +1,25 @@
-import { ResponsiveLine, type Serie } from '@nivo/line'
-import { useEffect, useState } from 'react'
-import colors from 'tailwindcss/colors'
-import type { GameWeekResult } from '../../game_state/gameState'
+import { ResponsiveLine, type Serie } from '@nivo/line';
+import { useEffect, useState } from 'react';
+import colors from 'tailwindcss/colors';
+import type { GameWeekResult } from '../../game_state/gameState';
 
 interface PlayerStandingsChartProps {
-    results: GameWeekResult[]
-    teamname: string
+    results: GameWeekResult[];
+    teamname: string;
 }
 
 const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     results,
     teamname,
 }: PlayerStandingsChartProps) => {
-    const [isDarkTheme, setIsDarkTheme] = useState(false)
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
 
     useEffect(() => {
-        const storedTheme = localStorage.getItem('theme')
+        const storedTheme = localStorage.getItem('theme');
         if (storedTheme === 'dark') {
-            setIsDarkTheme(true)
+            setIsDarkTheme(true);
         }
-    }, [])
+    }, []);
 
     const data: Serie[] = [
         {
@@ -35,12 +35,12 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
                         ) / 100,
                 })) ?? [],
         },
-    ]
+    ];
 
     const minValue = Math.min.apply(
         null,
         data[0].data.map((d) => d.y as number)
-    )
+    );
 
     return (
         <div className="h-full">
@@ -130,7 +130,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PlayerStandingsChart
+export default PlayerStandingsChart;

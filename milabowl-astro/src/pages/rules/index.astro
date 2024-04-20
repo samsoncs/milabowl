@@ -1,12 +1,12 @@
 ---
-import { getEntryBySlug } from 'astro:content'
-import { format } from 'date-fns'
-import readingTime from 'reading-time'
-import Markdown from '../../components/core/Typography/Markdown.astro'
-import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
+import { getEntryBySlug } from 'astro:content';
+import { format } from 'date-fns';
+import readingTime from 'reading-time';
+import Markdown from '../../components/core/Typography/Markdown.astro';
+import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
 
-const rulesPage = await getEntryBySlug('rules', 'rules')
-const { Content } = await rulesPage.render()
+const rulesPage = await getEntryBySlug('rules', 'rules');
+const { Content } = await rulesPage.render();
 ---
 
 <MarkdownLayout title="Milabowl - Rules">
