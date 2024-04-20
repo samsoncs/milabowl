@@ -1,22 +1,13 @@
 ---
-import Avatar from '../components/core/Avatar'
-import AvatarProvider from '../components/core/AvatarProvider.astro'
 import Layout from '../layouts/Layout.astro'
 import Card from '../components/core/Card.astro'
-import Table from '../components/core/Table/Table.astro'
-import Trend from './Trend'
+import Trend from './_Trend'
 import game_state from '../../src/game_state/game_state.json'
 import fpl_state from '../../src/game_state/fpl_state.json'
 import type {
-    GameWeekResult,
     MilaResultsDTO,
 } from '../../src/game_state/gameState'
 import Link from '../components/core/Link.astro'
-import PositionDelta from '../components/core/PositionDelta.astro'
-import SortableTable, {
-    CustomHeader,
-} from '../components/core/Table/SortableTable'
-import { createColumnHelper, flexRender } from '@tanstack/react-table'
 import OverviewTable from './_OverviewTable'
 
 const milaResults: MilaResultsDTO = game_state
@@ -206,3 +197,4 @@ const lastWeekGwResults =
         </div>
     </main>
 </Layout>
+./_Trend
