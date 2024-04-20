@@ -6,8 +6,8 @@ import {
     ResponsiveBump,
 } from '@nivo/bump'
 import { useEffect, useState } from 'react'
-import game_state from '../../src/game_state/game_state.json'
-import type { MilaResultsDTO } from '../../src/game_state/gameState'
+import game_state from '../game_state/game_state.json'
+import type { MilaResultsDTO } from '../game_state/gameState'
 import colors from 'tailwindcss/colors'
 
 interface PlayerStandingsChartProps {
