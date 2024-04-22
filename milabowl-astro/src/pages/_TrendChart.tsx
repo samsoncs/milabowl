@@ -71,7 +71,7 @@ const TrendChart: React.FC<TrendChartProps> = ({
             width={120}
             data={data}
             margin={{ top: 4, right: 0, bottom: 4, left: -120 }}
-            xScale={{ type: 'linear', min: 1 }}
+            xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
             yScale={{
                 type: 'linear',
                 min: minValue,
