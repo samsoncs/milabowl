@@ -83,7 +83,7 @@ const SortableTable = <T,>({
                                           }
                                         : undefined
                                 }
-                                className={`bg-white p-2 p-3 text-sm dark:bg-slate-800 ${header.column.columnDef.meta?.padding} ${header.column.getIsFirstColumn() ? 'pl-0' : ''} ${header.column.getIsLastColumn() ? 'pr-0' : ''} ${header.column.columnDef.meta?.align === 'right' ? 'text-right' : 'text-left'}`}
+                                className={`bg-white p-2 p-3 text-sm dark:bg-slate-800 ${header.column.columnDef.meta?.classNames} ${header.column.getIsFirstColumn() ? 'pl-0' : ''} ${header.column.getIsLastColumn() ? 'pr-0' : ''} ${header.column.columnDef.meta?.align === 'right' ? 'text-right' : 'text-left'}`}
                                 key={header.id}
                             >
                                 <div
@@ -215,7 +215,7 @@ const SortableTable = <T,>({
                                           }
                                         : undefined
                                 }
-                                className={`bg-white p-2 text-center align-middle dark:bg-slate-800 ${cell.column.columnDef.meta?.padding ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
+                                className={`bg-white p-2 text-center align-middle dark:bg-slate-800 ${cell.column.columnDef.meta?.classNames ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
                                 key={cell.id}
                             >
                                 {flexRender(

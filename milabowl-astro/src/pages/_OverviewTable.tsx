@@ -1,14 +1,16 @@
 import { createColumnHelper, type RowData } from '@tanstack/react-table';
-import type { GameWeekResult } from '../game_state/gameState';
+import type { GameWeekResult, ResultsByUser } from '../game_state/gameState';
 import SortableTable from '../components/core/Table/SortableTable';
 import { useMemo } from 'react';
 import PositionDelta from '../components/core/PositionDelta';
 import '@tanstack/react-table';
+import LastWeeksChart from './_LastWeekChart';
+import TrendChart from './_TrendChart';
 
 declare module '@tanstack/react-table' {
     interface ColumnMeta<TData extends RowData, TValue> {
         align?: 'right' | 'left';
-        padding?: string;
+        classNames?: string;
     }
 }
 
@@ -16,11 +18,17 @@ const columnHelper = createColumnHelper<GameWeekResult>();
 
 interface Props {
     data: GameWeekResult[];
+    resultsByUser: ResultsByUser[];
     lastGameWeek: number;
     avatars: ImageMetadata[];
 }
 
-const OverviewTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
+const OverviewTable: React.FC<Props> = ({
+    data,
+    lastGameWeek,
+    avatars,
+    resultsByUser,
+}) => {
     const columns = useMemo(
         () => [
             columnHelper.display({
@@ -72,6 +80,39 @@ const OverviewTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
                 ),
                 enableSorting: false,
             }),
+            columnHelper.display({
+                id: 'trend',
+                header: 'Trend',
+                cell: (props) => (
+                    <>
+                        {/* <LastWeeksChart
+                            height={30}
+                            teamname={props.row.original.teamName}
+                            results={resultsByUser
+                                .find(
+                                    (r) =>
+                                        r.teamName ===
+                                        props.row.original.teamName
+                                )!
+                                .results.slice(-5)}
+                        /> */}
+                        <TrendChart
+                            height={30}
+                            teamname={props.row.original.teamName}
+                            results={resultsByUser
+                                .find(
+                                    (r) =>
+                                        r.teamName ===
+                                        props.row.original.teamName
+                                )!
+                                .results.slice(-5)}
+                        />
+                    </>
+                ),
+                meta: {
+                    classNames: 'hidden sm:table-cell lg:hidden xl:table-cell',
+                },
+            }),
             columnHelper.accessor('milaPoints.total', {
                 id: 'gameWeek',
                 header: 'GW',
@@ -99,7 +140,7 @@ const OverviewTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
                 ),
                 meta: {
                     align: 'right',
-                    padding: 'pl-0 md:pl-3',
+                    classNames: 'pl-0 md:pl-3',
                 },
             }),
         ],
