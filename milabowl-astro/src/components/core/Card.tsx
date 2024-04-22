@@ -1,7 +1,7 @@
 export interface Props {
-    title?: string
-    secondary?: React.ReactNode
-    children?: React.ReactNode
+    title?: string;
+    secondary?: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 const Card2: React.FC<Props> = ({ children, title, secondary }) => (
@@ -17,6 +17,6 @@ const Card2: React.FC<Props> = ({ children, title, secondary }) => (
             {children}
         </div>
     </div>
-)
+);
 
-export default Card2
+export default Card2;

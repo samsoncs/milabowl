@@ -1,22 +1,22 @@
 ---
-import type { Dictionary } from 'lodash'
-import FplJersey from './_FplJersey.astro'
+import type { Dictionary } from 'lodash';
+import FplJersey from './_FplJersey.astro';
 
 export interface Props {
-    name: string
-    info: string
-    pos?: string
-    showPos?: boolean
-    team: string
-    isCap?: boolean
-    isViceCap?: boolean
+    name: string;
+    info: string;
+    pos?: string;
+    showPos?: boolean;
+    team: string;
+    isCap?: boolean;
+    isViceCap?: boolean;
 }
 
 const jerseyColors: Dictionary<{
-    sleeves: string
-    torso: string
-    collar?: string
-    striped?: string[]
+    sleeves: string;
+    torso: string;
+    collar?: string;
+    striped?: string[];
 }> = {
     Liverpool: { torso: '#bb2633', sleeves: '#bb2633' },
     GK_Liverpool: { torso: '#343434', sleeves: '#343434' },
@@ -50,12 +50,12 @@ const jerseyColors: Dictionary<{
     Brentford: { torso: '#d22236', sleeves: '#d22236' },
     GK_Brentford: { torso: '#e90b6a', sleeves: '#e90b6a' },
     Wolves: { torso: '#ecb600', sleeves: '#ecb600', collar: '#312f2f' },
-}
+};
 
-const { name, info, pos, showPos, team, isCap, isViceCap } = Astro.props
+const { name, info, pos, showPos, team, isCap, isViceCap } = Astro.props;
 
-const jerseyColorPos = pos === 'GK' ? 'GK_' : ''
-const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? 'grey'
+const jerseyColorPos = pos === 'GK' ? 'GK_' : '';
+const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? 'grey';
 ---
 
 <div class="relative flex flex-col items-center">

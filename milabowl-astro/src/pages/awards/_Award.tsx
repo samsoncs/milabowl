@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import styles from './_Award.module.css'
-import party from 'party-js'
+import { useState } from 'react';
+import styles from './_Award.module.css';
+import party from 'party-js';
 
 export interface AwardProps {
-    title: string
-    firstPlace: { name: string; points: number }
-    seccondPlace: { name: string; points: number }
-    thirdPlace: { name: string; points: number }
-    id: string
+    title: string;
+    firstPlace: { name: string; points: number };
+    seccondPlace: { name: string; points: number };
+    thirdPlace: { name: string; points: number };
+    id: string;
 }
 
 interface TrophyProps {
-    fill: string
-    stroke: string
-    h?: string
-    w?: string
+    fill: string;
+    stroke: string;
+    h?: string;
+    w?: string;
 }
 
 const Trophy: React.FC<TrophyProps> = ({ fill, stroke, h, w }) => (
@@ -30,7 +30,7 @@ const Trophy: React.FC<TrophyProps> = ({ fill, stroke, h, w }) => (
             clipRule="evenodd"
         />
     </svg>
-)
+);
 
 const Award: React.FC<AwardProps> = ({
     title,
@@ -39,8 +39,8 @@ const Award: React.FC<AwardProps> = ({
     thirdPlace,
     id,
 }) => {
-    const [isClicked, setIsClicked] = useState(false)
-    const firstPlaceDiff = firstPlace.points - seccondPlace.points
+    const [isClicked, setIsClicked] = useState(false);
+    const firstPlaceDiff = firstPlace.points - seccondPlace.points;
     return (
         <div className="mx-auto mb-16 flex flex-col items-center">
             <div className="mb-4 text-center text-2xl font-bold text-indigo-900 dark:text-dark-text">
@@ -56,9 +56,9 @@ const Award: React.FC<AwardProps> = ({
                 onClick={(e) => {
                     if (!isClicked) {
                         // @ts-ignore
-                        party.confetti(e.target)
+                        party.confetti(e.target);
                     }
-                    setIsClicked(true)
+                    setIsClicked(true);
                 }}
             >
                 <div className={styles.flipCardInner}>
@@ -172,7 +172,7 @@ const Award: React.FC<AwardProps> = ({
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Award
+export default Award;

@@ -52,7 +52,7 @@ Man kan også legge til kode blokker i et hvilket som helst kodespråk:
 // Example of .tsx code block
 const FunctionalClass: React.FC<{}> = () => (
     <div>Example of a React functional component</div>
-)
+);
 ```
 
 Alt som er gyldig markdown er støttet!

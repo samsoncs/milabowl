@@ -1,23 +1,23 @@
-import { createColumnHelper, type RowData } from '@tanstack/react-table'
-import type { GameWeekResult } from '../game_state/gameState'
-import SortableTable from '../components/core/Table/SortableTable'
-import { useMemo } from 'react'
-import PositionDelta from '../components/core/PositionDelta'
-import '@tanstack/react-table'
+import { createColumnHelper, type RowData } from '@tanstack/react-table';
+import type { GameWeekResult } from '../game_state/gameState';
+import SortableTable from '../components/core/Table/SortableTable';
+import { useMemo } from 'react';
+import PositionDelta from '../components/core/PositionDelta';
+import '@tanstack/react-table';
 
 declare module '@tanstack/react-table' {
     interface ColumnMeta<TData extends RowData, TValue> {
-        align?: 'right' | 'left'
-        padding?: string
+        align?: 'right' | 'left';
+        padding?: string;
     }
 }
 
-const columnHelper = createColumnHelper<GameWeekResult>()
+const columnHelper = createColumnHelper<GameWeekResult>();
 
 interface Props {
-    data: GameWeekResult[]
-    lastGameWeek: number
-    avatars: ImageMetadata[]
+    data: GameWeekResult[];
+    lastGameWeek: number;
+    avatars: ImageMetadata[];
 }
 
 const OverviewTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
@@ -32,7 +32,7 @@ const OverviewTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
                         props.row.original.milaRankLastWeek === undefined
                             ? 0
                             : props.row.original.milaRankLastWeek -
-                              props.row.original.milaRank
+                              props.row.original.milaRank;
 
                     return (
                         <div className="flex flex-col items-center justify-between gap-1">
@@ -41,7 +41,7 @@ const OverviewTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
                                 delta={deltaPosition}
                             />
                         </div>
-                    )
+                    );
                 },
             }),
             columnHelper.accessor('teamName', {
@@ -104,9 +104,9 @@ const OverviewTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
             }),
         ],
         []
-    )
+    );
 
-    return <SortableTable data={data} columns={columns} />
-}
+    return <SortableTable data={data} columns={columns} />;
+};
 
-export default OverviewTable
+export default OverviewTable;

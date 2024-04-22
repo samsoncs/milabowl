@@ -1,32 +1,32 @@
 ---
-import fpl_state from '../../../../../../src/game_state/fpl_state.json'
+import fpl_state from '../../../../../../src/game_state/fpl_state.json';
 import type {
     FplResults,
     FplUserGameweekResult,
-} from '../../../../../game_state/fplState'
-import Layout from '../../../../../layouts/Layout.astro'
-import PlayerLayout from '../../../../../layouts/PlayerLayout.astro'
-import FplPitch from './_FplPitch.astro'
+} from '../../../../../game_state/fplState';
+import Layout from '../../../../../layouts/Layout.astro';
+import PlayerLayout from '../../../../../layouts/PlayerLayout.astro';
+import FplPitch from './_FplPitch.astro';
 
 interface Props {
-    userResults: FplUserGameweekResult
-    lastGw: number
+    userResults: FplUserGameweekResult;
+    lastGw: number;
 }
 
 export function getStaticPaths() {
-    const fplState: FplResults = fpl_state
+    const fplState: FplResults = fpl_state;
     const gw = Math.max.apply(
         Math,
         fpl_state.results.map((r) => r.gameWeek)
-    )
+    );
     const paths = fplState.results.map((r) => ({
         params: { player: r.teamName.replaceAll(' ', '-'), gw: r.gameWeek },
         props: { userResults: r, lastGw: gw },
-    }))
-    return paths
+    }));
+    return paths;
 }
 
-const { userResults, lastGw } = Astro.props
+const { userResults, lastGw } = Astro.props;
 ---
 
 <Layout title={`${userResults.teamName}`} enableViewTransitions>
