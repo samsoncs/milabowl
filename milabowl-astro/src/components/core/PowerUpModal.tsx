@@ -1,8 +1,8 @@
 export interface PowerUpModalProps {
-    modal_id: string // THe ID of the modal to link button and modal
-    name: string // The header name to display for this modal
-    icon: string // The icon to display
-    info: string // The information to display
+    modal_id: string; // THe ID of the modal to link button and modal
+    name: string; // The header name to display for this modal
+    icon: string; // The icon to display
+    info: string; // The information to display
 }
 
 /*
@@ -76,7 +76,7 @@ const PowerUpModal: React.FC<PowerUpModalProps> = ({
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PowerUpModal
+export default PowerUpModal;

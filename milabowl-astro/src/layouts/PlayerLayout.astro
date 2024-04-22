@@ -1,18 +1,18 @@
 ---
-import AvatarProvider from '../components/core/AvatarProvider.astro'
-import fpl_state from '../../src/game_state/fpl_state.json'
+import AvatarProvider from '../components/core/AvatarProvider.astro';
+import fpl_state from '../../src/game_state/fpl_state.json';
 
 interface Props {
-    teamName: string
-    view: string
+    teamName: string;
+    view: string;
 }
 
 const lastGameWeek = Math.max.apply(
     Math,
     fpl_state.results.map((r) => r.gameWeek)
-)
+);
 
-const { teamName, view } = Astro.props
+const { teamName, view } = Astro.props;
 ---
 
 <div>

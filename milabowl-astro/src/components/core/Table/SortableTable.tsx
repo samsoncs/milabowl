@@ -7,21 +7,21 @@ import {
     type ColumnDef,
     type ColumnPinningState,
     type Column,
-} from '@tanstack/react-table'
-import { useState, type CSSProperties } from 'react'
+} from '@tanstack/react-table';
+import { useState, type CSSProperties } from 'react';
 
 interface Props<T> {
-    data: T[]
-    columns: ColumnDef<T, any>[]
-    initialColumnPinnings?: string[]
+    data: T[];
+    columns: ColumnDef<T, any>[];
+    initialColumnPinnings?: string[];
 }
 
 const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
-    const isPinned = column.getIsPinned()
+    const isPinned = column.getIsPinned();
     const isLastLeftPinnedColumn =
-        isPinned === 'left' && column.getIsLastColumn('left')
+        isPinned === 'left' && column.getIsLastColumn('left');
     const isFirstRightPinnedColumn =
-        isPinned === 'right' && column.getIsFirstColumn('right')
+        isPinned === 'right' && column.getIsFirstColumn('right');
 
     return {
         boxShadow: isLastLeftPinnedColumn
@@ -35,19 +35,19 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
         position: isPinned ? 'sticky' : 'relative',
         width: column.getSize(),
         zIndex: isPinned ? 1 : 0,
-    }
-}
+    };
+};
 
 const SortableTable = <T,>({
     data,
     columns,
     initialColumnPinnings,
 }: Props<T>) => {
-    const [sorting, setSorting] = useState<SortingState>([])
+    const [sorting, setSorting] = useState<SortingState>([]);
     const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
         left: initialColumnPinnings ? [...initialColumnPinnings] : [],
         right: [],
-    })
+    });
 
     const table = useReactTable({
         data,
@@ -60,7 +60,7 @@ const SortableTable = <T,>({
             sorting,
             columnPinning,
         },
-    })
+    });
 
     return (
         <table
@@ -83,7 +83,7 @@ const SortableTable = <T,>({
                                           }
                                         : undefined
                                 }
-                                className={`bg-white p-2 p-3 text-sm dark:bg-slate-800 ${header.column.columnDef.meta?.padding} ${header.column.getIsFirstColumn() ? 'pl-0' : ''} ${header.column.getIsLastColumn() ? 'pr-0' : ''} ${header.column.columnDef.meta?.align === 'right' ? 'text-right' : 'text-left'}`}
+                                className={`bg-white p-2 p-3 text-sm dark:bg-slate-800 ${header.column.columnDef.meta?.classNames} ${header.column.getIsFirstColumn() ? 'pl-0' : ''} ${header.column.getIsLastColumn() ? 'pr-0' : ''} ${header.column.columnDef.meta?.align === 'right' ? 'text-right' : 'text-left'}`}
                                 key={header.id}
                             >
                                 <div
@@ -215,7 +215,7 @@ const SortableTable = <T,>({
                                           }
                                         : undefined
                                 }
-                                className={`bg-white p-2 text-center align-middle dark:bg-slate-800 ${cell.column.columnDef.meta?.padding ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
+                                className={`bg-white p-2 text-center align-middle dark:bg-slate-800 ${cell.column.columnDef.meta?.classNames ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
                                 key={cell.id}
                             >
                                 {flexRender(
@@ -228,15 +228,15 @@ const SortableTable = <T,>({
                 ))}
             </tbody>
         </table>
-    )
-}
+    );
+};
 
 interface CustomHeaderProps {
-    children?: React.ReactNode
+    children?: React.ReactNode;
 }
 
 export const CustomHeader: React.FC<CustomHeaderProps> = ({ children }) => (
     <div>{children}</div>
-)
+);
 
-export default SortableTable
+export default SortableTable;

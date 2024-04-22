@@ -1,12 +1,12 @@
-import type { GameWeekResult } from '../../game_state/gameState'
-import { useMemo } from 'react'
-import SortableTable from '../../components/core/Table/SortableTable'
-import { getStandingsColmns } from './_standingsColumns'
+import type { GameWeekResult } from '../../game_state/gameState';
+import { useMemo } from 'react';
+import SortableTable from '../../components/core/Table/SortableTable';
+import { getStandingsColmns } from './_standingsColumns';
 
 interface Props {
-    data: GameWeekResult[]
-    lastGameWeek: number
-    avatars: ImageMetadata[]
+    data: GameWeekResult[];
+    lastGameWeek: number;
+    avatars: ImageMetadata[];
 }
 
 const StandingsTableMobile: React.FC<Props> = ({
@@ -25,7 +25,7 @@ const StandingsTableMobile: React.FC<Props> = ({
             columns={columns}
             initialColumnPinnings={[]}
         />
-    )
-}
+    );
+};
 
-export default StandingsTableMobile
+export default StandingsTableMobile;

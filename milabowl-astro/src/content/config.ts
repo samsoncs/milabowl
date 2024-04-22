@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content'
+import { defineCollection, z } from 'astro:content';
 
 const blogCollection = defineCollection({
     schema: z.object({
@@ -22,24 +22,24 @@ const blogCollection = defineCollection({
             .optional()
             .default([]),
     }),
-})
+});
 
 const rulesCollection = defineCollection({
     schema: z.object({
         title: z.string().max(60),
         date: z.date(),
     }),
-})
+});
 
 const memesCollection = defineCollection({
     schema: z.object({
         title: z.string().max(60),
         date: z.date(),
     }),
-})
+});
 
 export const collections = {
     blog: blogCollection,
     rules: rulesCollection,
     memes: memesCollection,
-}
+};

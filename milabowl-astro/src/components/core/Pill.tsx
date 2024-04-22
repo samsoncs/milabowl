@@ -1,7 +1,7 @@
 export interface PillProps {
-    title: string
-    color: string
-    disabled?: boolean
+    title: string;
+    color: string;
+    disabled?: boolean;
 }
 
 const Pill: React.FC<PillProps> = ({ title, color, disabled }) => (
@@ -19,6 +19,6 @@ const Pill: React.FC<PillProps> = ({ title, color, disabled }) => (
     >
         {title}
     </div>
-)
+);
 
-export default Pill
+export default Pill;

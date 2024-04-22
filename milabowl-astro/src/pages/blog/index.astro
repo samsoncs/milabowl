@@ -1,13 +1,13 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-import BlogPreview from './_components/BlogPreview.astro'
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import BlogPreview from './_components/BlogPreview.astro';
 
-const firstBlogEntries = await getCollection('blog')
+const firstBlogEntries = await getCollection('blog');
 
 const stortedEntries = firstBlogEntries
     .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
-    .slice(0, 10)
+    .slice(0, 10);
 ---
 
 <Layout title="Mila blog" enableViewTransitions>

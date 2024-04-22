@@ -1,46 +1,46 @@
-import { useState } from 'react'
-import Card from '../../components/core/Card'
-import Pill from '../../components/core/Pill'
-import type { Nomination } from '../../game_state/nominations'
+import { useState } from 'react';
+import Card from '../../components/core/Card';
+import Pill from '../../components/core/Pill';
+import type { Nomination } from '../../game_state/nominations';
 
 export interface NominationsProps {
-    nominations: Nomination[]
+    nominations: Nomination[];
 }
 
 const GetChipColor = (category: string): string => {
     switch (category) {
         case 'SKILL':
-            return 'bg-sky-600'
+            return 'bg-sky-600';
         case 'SHAME':
-            return 'bg-red-600'
+            return 'bg-red-600';
         case 'DERP':
-            return 'bg-yellow-500'
+            return 'bg-yellow-500';
         case 'LUCK':
-            return 'bg-green-600'
+            return 'bg-green-600';
         default:
-            return 'bg-gray-600'
+            return 'bg-gray-600';
     }
-}
+};
 
 const GetIcon = (category: string): string => {
     switch (category) {
         case 'SKILL':
-            return '⭐'
+            return '⭐';
         case 'SHAME':
-            return '🤦'
+            return '🤦';
         case 'DERP':
-            return '🥴'
+            return '🥴';
         case 'LUCK':
-            return '🍀'
+            return '🍀';
         default:
-            return ''
+            return '';
     }
-}
+};
 
 interface NominationChipProps {
-    category: 'SKILL' | 'SHAME' | 'DERP' | 'LUCK'
-    filters: string[]
-    setFilter: (value: React.SetStateAction<string[]>) => void
+    category: 'SKILL' | 'SHAME' | 'DERP' | 'LUCK';
+    filters: string[];
+    setFilter: (value: React.SetStateAction<string[]>) => void;
 }
 
 const NominationChip: React.FC<NominationChipProps> = ({
@@ -52,15 +52,15 @@ const NominationChip: React.FC<NominationChipProps> = ({
         onClick={() => {
             setFilter((of) => {
                 if (of.includes(category)) {
-                    return of.filter((item) => item !== category)
+                    return of.filter((item) => item !== category);
                 }
 
                 if (of.length > 2) {
-                    return []
+                    return [];
                 }
 
-                return [...of, category]
-            })
+                return [...of, category];
+            });
         }}
     >
         <Pill
@@ -69,10 +69,10 @@ const NominationChip: React.FC<NominationChipProps> = ({
             disabled={filters.length > 0 && !filters.includes(category)}
         />
     </div>
-)
+);
 
 const Nominations: React.FC<NominationsProps> = ({ nominations }) => {
-    const [filters, setFilters] = useState<string[]>([])
+    const [filters, setFilters] = useState<string[]>([]);
 
     return (
         <div className="mx-auto flex w-screen max-w-screen-lg flex-col space-y-2">
@@ -129,7 +129,7 @@ const Nominations: React.FC<NominationsProps> = ({ nominations }) => {
                     </Card>
                 ))}
         </div>
-    )
-}
+    );
+};
 
-export default Nominations
+export default Nominations;

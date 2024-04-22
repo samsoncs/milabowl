@@ -1,17 +1,17 @@
 ---
-import { Image } from 'astro:assets'
+import { Image } from 'astro:assets';
 
 export interface Props {
-    teamName: string
+    teamName: string;
 }
 
-const { teamName } = Astro.props
+const { teamName } = Astro.props;
 
 const images: ImageMetadata[] = await Astro.glob('../../assets/*').then(
     (files) => {
-        return files.map((file) => file.default)
+        return files.map((file) => file.default);
     }
-)
+);
 ---
 
 <Image
