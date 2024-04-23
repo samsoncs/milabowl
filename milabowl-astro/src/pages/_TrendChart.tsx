@@ -47,42 +47,63 @@ const TrendChart: React.FC<TrendChartProps> = ({
         )
     );
 
+    const buffer =
+        Math.round(
+            (results[0].cumulativeAverageMilaPoints -
+                results[0].totalCumulativeAverageMilaPoints) *
+                100
+        ) / 100;
+
     const data: Serie[] = [
         {
             id: teamname,
             data:
-                results?.map((rr) => ({
-                    x: rr.gameWeek,
-                    y:
-                        Math.round(
-                            (rr.cumulativeAverageMilaPoints -
-                                rr.totalCumulativeAverageMilaPoints) *
-                                100
-                        ) / 100,
-                })) ?? [],
+                results?.map((rr) => {
+                    return {
+                        x: rr.gameWeek,
+                        y:
+                            Math.round(
+                                (rr.cumulativeAverageMilaPoints -
+                                    rr.totalCumulativeAverageMilaPoints) *
+                                    100
+                            ) /
+                                100 -
+                            buffer,
+                    };
+                }) ?? [],
         },
     ];
 
-    const areaBaselineValue = data[0].data[0].y as number;
+    const minX = Math.min.apply(
+        null,
+        data[0].data.map((d) => d.x?.valueOf() as number)
+    );
+    const maxX = Math.max.apply(
+        null,
+        data[0].data.map((d) => d.x?.valueOf() as number)
+    );
+
+    console.log(`min: ${minX}`);
+    console.log(`max: ${maxX}`);
 
     return (
         <Line
             height={height}
             width={120}
             data={data}
-            margin={{ top: 4, right: 0, bottom: 4, left: -120 }}
-            xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+            margin={{ top: 4, right: 0, bottom: 4, left: 0 }}
+            xScale={{ type: 'linear', min: minX, max: maxX }}
             yScale={{
                 type: 'linear',
-                min: minValue,
-                max: maxValue,
+                min: minValue - buffer,
+                max: maxValue - buffer,
                 stacked: false,
                 reverse: false,
             }}
             curve="natural"
             enableArea
+            enablePoints={false}
             areaOpacity={0.1}
-            areaBaselineValue={areaBaselineValue}
             axisTop={null}
             axisRight={null}
             axisBottom={null}
@@ -91,7 +112,6 @@ const TrendChart: React.FC<TrendChartProps> = ({
             enableGridY={false}
             colors={[colors.indigo[300], colors.orange[300]]}
             lineWidth={2}
-            enablePoints={false}
             pointColor={{ theme: 'background' }}
             useMesh={false}
             isInteractive={false}
