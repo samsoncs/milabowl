@@ -80,26 +80,28 @@ const Nominations: React.FC<NominationsProps> = ({ nominations }) => {
                 <div className="px-2 font-bold dark:text-dark-text lg:px-0">
                     Filter:
                 </div>
-                <NominationChip
-                    category="SKILL"
-                    filters={filters}
-                    setFilter={setFilters}
-                />
-                <NominationChip
-                    category="SHAME"
-                    filters={filters}
-                    setFilter={setFilters}
-                />
-                <NominationChip
-                    category="DERP"
-                    filters={filters}
-                    setFilter={setFilters}
-                />
-                <NominationChip
-                    category="LUCK"
-                    filters={filters}
-                    setFilter={setFilters}
-                />
+                <div className="cursor-pointer flex items-center space-x-2">
+                    <NominationChip
+                        category="SKILL"
+                        filters={filters}
+                        setFilter={setFilters}
+                    />
+                    <NominationChip
+                        category="SHAME"
+                        filters={filters}
+                        setFilter={setFilters}
+                    />
+                    <NominationChip
+                        category="DERP"
+                        filters={filters}
+                        setFilter={setFilters}
+                    />
+                    <NominationChip
+                        category="LUCK"
+                        filters={filters}
+                        setFilter={setFilters}
+                    />
+                </div>
             </div>
 
             {nominations
