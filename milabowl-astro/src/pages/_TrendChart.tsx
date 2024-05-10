@@ -83,9 +83,6 @@ const TrendChart: React.FC<TrendChartProps> = ({
         data[0].data.map((d) => d.x?.valueOf() as number)
     );
 
-    console.log(`min: ${minX}`);
-    console.log(`max: ${maxX}`);
-
     return (
         <Line
             height={height}

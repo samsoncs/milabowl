@@ -9,4 +9,10 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
     integrations: [react(), tailwind()],
     devToolbar: { enabled: false },
+    vite: {
+        ssr: {
+            // Needed because of ESM wonky support in Nivo
+            noExternal: ["@nivo/*"],
+        },
+    }
 });
