@@ -63,15 +63,15 @@ public class MilaGWScore
 
     public void CalculateChipPoints()
     {
-        MilaPoints += RedShell;
-        MilaPoints += GreenShell;
-        MilaPoints += Banana;
-        
         if (ActiveChip == "bboost")
         {
             Mushroom = MilaPoints;
             MilaPoints += Mushroom;
         }
+        
+        MilaPoints += RedShell;
+        MilaPoints += GreenShell;
+        MilaPoints += Banana;
     }
     
     public void CalculateBombPoints()
