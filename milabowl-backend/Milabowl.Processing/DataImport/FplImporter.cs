@@ -39,7 +39,8 @@ public class FplImporter
                     user.ToUser(),
                     picksRoot.ToLineup(eventRootDto, players),
                     picksRoot.active_chip,
-                    historicGameWeeks
+                    historicGameWeeks,
+                    eventRootDto
                 );
 
                 userStates.Add(userGameWeek);

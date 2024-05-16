@@ -8,10 +8,8 @@ public class Sellout : MilaRule
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var sumPointsPlayersIn = userGameWeek.User.SubsIn.Sum(pe => pe.Multiplier * pe.TotalPoints);
-        var sumPointsPlayersOut = userGameWeek.User.SubsOut.Sum(pe =>
-            pe.Multiplier * pe.TotalPoints
-        );
+        var sumPointsPlayersIn = userGameWeek.User.SubsIn.Sum(pe => pe.TotalPoints);
+        var sumPointsPlayersOut = userGameWeek.User.SubsOut.Sum(pe => pe.TotalPoints);
         return sumPointsPlayersOut > sumPointsPlayersIn ? -2 : 0;
     }
 }
