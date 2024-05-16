@@ -1,5 +1,12 @@
 [
     {
+    	"personNominated": "Eivind",
+    	"gw": 37,
+    	"date": "13.05.2024",
+    	"reason": "Eivind legger inn endringer i samme fil i to PRs. Får smekk på pungen av Sam. Deretter innrømmer han at han ville melke commits for å ikke få minuspoeng. Yikes",
+    	"category": "SHAME"
+	},
+    {
 		"personNominated": "Eivind",
 		"gw": 22,
 		"date": "30.01.2024",
