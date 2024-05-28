@@ -7,7 +7,7 @@ tags: [Awards]
 
 # Mini mila awards
 
-With the 23/24 FPL season concluded, I have compiled some "fun fact" stats, and compiled them in these tables.
+With the 23/24 FPL season concluded, I have compiled some "fun fact" stats in these tables.
 I have not included categories which can easily be viewed in the overview table. Also, these numbers are derived
 from the file with correct bomb and powerup states.
 
@@ -53,7 +53,7 @@ from the file with correct bomb and powerup states.
 | Milady’s Cmilax         | 79    |
 | Henriks H&#229;ndjagere | 76    |
 
-## Best wildcarders
+### Best wildcarders
 
 | Team                    | Score |
 | ----------------------- | ----- |
@@ -67,7 +67,7 @@ from the file with correct bomb and powerup states.
 | The KaneSaw Massacre    | 111   |
 | Skodad Octavia          | 72    |
 
-## Best bench boosters
+### Best bench boosters
 
 | Team                    | Score |
 | ----------------------- | ----- |
@@ -81,7 +81,7 @@ from the file with correct bomb and powerup states.
 | SplitteMilaBramseil     | 100   |
 | Milady’s Cmilax         | 56    |
 
-## Best free hitters
+### Best free hitters
 
 | Team                    | Score |
 | ----------------------- | ----- |
@@ -95,7 +95,7 @@ from the file with correct bomb and powerup states.
 | AC Mila                 | 15    |
 | MilaysianBucketBoys     | 15    |
 
-## Max mila score in a game week
+### Max mila score in a game week
 
 | Team                    | Score |
 | ----------------------- | ----- |
@@ -109,7 +109,7 @@ from the file with correct bomb and powerup states.
 | Milady’s Cmilax         | 7.00  |
 | Skodad Octavia          | 6.19  |
 
-## Most mila points from powerups
+### Most mila points from powerups
 
 | Team                    | Score  |
 | ----------------------- | ------ |
@@ -123,7 +123,7 @@ from the file with correct bomb and powerup states.
 | $jeik og betalt         | -10.00 |
 | Skodad Octavia          | -12.00 |
 
-## Most unique players in lineup during season
+### Most unique players in lineup during season
 
 | Team                    | #   |
 | ----------------------- | --- |
@@ -137,7 +137,7 @@ from the file with correct bomb and powerup states.
 | $jeik og betalt         | 59  |
 | Skodad Octavia          | 54  |
 
-## Most unique teams in lineup during season
+### Most unique teams in lineup during season
 
 | Team                    | #   |
 | ----------------------- | --- |
