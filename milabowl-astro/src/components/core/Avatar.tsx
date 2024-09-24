@@ -25,63 +25,63 @@ interface UserProfiles {
 
 const imageRoot = '/avatars/';
 const userProfileDict: UserProfiles = {
-    '$jeik og betalt': {
+    'Flat Shoe Society': {
         info: 'Mila-source founder and evangelist',
         followers: 42,
         following: 69,
         name: 'sam',
         avatarSrc: imageRoot + 'sam.png',
     },
-    'Milady’s Cmilax': {
+    'Kvarts Kvaratskhmila': {
         info: 'Mila-source contributor',
         followers: 0,
         following: 0,
         name: 'mikkel',
         avatarSrc: imageRoot + 'mikkel.png',
     },
-    'Henriks Håndjagere': {
+    AkchyuallyNotThatBig: {
         info: 'Mila try-hard',
         followers: 1,
         following: 1,
         name: 'eivind',
         avatarSrc: imageRoot + 'eivind.png',
     },
-    'The KaneSaw Massacre': {
+    casemilaX: {
         info: '',
         followers: 0,
         following: 0,
         name: 'malte',
         avatarSrc: imageRoot + 'malte.png',
     },
-    MilaysianBucketBoys: {
+    'Mila High Club': {
         info: 'Mila-source founder',
         followers: 0,
         following: 0,
         name: 'simen',
         avatarSrc: imageRoot + 'simen.png',
     },
-    SplitteMilaBramseil: {
+    'Mila Bay Bucketeers': {
         info: 'He came',
         followers: 0,
         following: 0,
         name: 'anders',
         avatarSrc: imageRoot + 'anders.png',
     },
-    'Skodad Octavia': {
+    '10km Onlyice': {
         info: 'Legendary BieUgle',
         followers: 0,
         following: 0,
         name: 'markus',
         avatarSrc: imageRoot + 'markus.png',
     },
-    'AC Mila': {
+    'Valg må tas': {
         info: '',
         followers: 0,
         following: 0,
         name: 'martin',
         avatarSrc: imageRoot + 'martin.png',
     },
-    Mast69urbinho: {
+    'Son skal det gjøres!': {
         info: '💩',
         followers: 0,
         following: 0,
