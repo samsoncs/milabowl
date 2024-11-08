@@ -1,7 +1,7 @@
 import { Line, type Serie } from '@nivo/line';
 import { useEffect, useState } from 'react';
 import colors from 'tailwindcss/colors';
-import type { GameWeekResult } from '../game_state/gameState';
+import type { GameWeekResult } from '../game_state/gameState_v2';
 
 interface TrendChartProps {
     results: GameWeekResult[];

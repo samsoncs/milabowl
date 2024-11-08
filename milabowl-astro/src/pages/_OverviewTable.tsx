@@ -1,5 +1,5 @@
 import { createColumnHelper, type RowData } from '@tanstack/react-table';
-import type { GameWeekResult, ResultsByUser } from '../game_state/gameState';
+import type { GameWeekResult, ResultsByUser } from '../game_state/gameState_v2';
 import SortableTable from '../components/core/Table/SortableTable';
 import { useMemo } from 'react';
 import PositionDelta from '../components/core/PositionDelta';
@@ -113,8 +113,8 @@ const OverviewTable: React.FC<Props> = ({
                     classNames: 'hidden sm:table-cell lg:hidden xl:table-cell',
                 },
             }),
-            columnHelper.accessor('milaPoints.total', {
-                id: 'gameWeek',
+            columnHelper.accessor('gwScore', {
+                id: 'gwScore',
                 header: 'GW',
                 meta: {
                     align: 'right',
