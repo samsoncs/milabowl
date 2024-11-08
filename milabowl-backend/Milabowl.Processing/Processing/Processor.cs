@@ -46,7 +46,10 @@ public class Processor
             ResultsByWeek = resultsByWeek
         };
 
-        var json = JsonSerializer.Serialize(res);
+        var json = JsonSerializer.Serialize(
+            res,
+            new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
+        );
         Console.WriteLine("Mila points processing complete");
     }
 }

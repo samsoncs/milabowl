@@ -41,7 +41,8 @@ public class RulesProcessor : IRulesProcessor
             1, //userGameWeek.MilaScores.TotalCumulativeAvgMilaScore,
             1, //userGameWeek.Position.MilaRank,
             1, //userGameWeek.Position.MilaRankLastWeek,
-            new ReadOnlyDictionary<string, RuleResult>(rules)
+            // new ReadOnlyDictionary<string, RuleResult>(rules)
+            ruleResults
         );
     }
 }
