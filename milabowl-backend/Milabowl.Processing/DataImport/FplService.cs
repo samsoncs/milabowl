@@ -34,7 +34,7 @@ public class FplService : IFplService
     public async Task<LeagueRootDTO> GetLeagueRoot()
     {
         return await _httpClient.GetDeserializedAsync<LeagueRootDTO>(
-            "https://fantasy.premierleague.com/api/leagues-classic/957279/standings/?page_new_entries=1&page_standings=1&phase=1"
+            "https://fantasy.premierleague.com/api/leagues-classic/1650213/standings/?page_new_entries=1&page_standings=1&phase=1"
         );
     }
 
@@ -80,7 +80,7 @@ public class FplService : IFplService
         }
 
         headToHeadEventRoot = await _httpClient.GetDeserializedAsync<HeadToHeadEventRootDTO>(
-            $"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1392446/?page=1&event={eventID}"
+            $"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1649633/?page=1&event={eventID}"
         );
         _headToHeadEventCache.Add(eventID, headToHeadEventRoot);
         return headToHeadEventRoot;
