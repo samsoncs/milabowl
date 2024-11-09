@@ -1,5 +1,9 @@
 import { createColumnHelper, type RowData } from '@tanstack/react-table';
-import type { GameWeekResult, ResultsByUser } from '../game_state/gameState_v2';
+import type {
+    GameWeekResult,
+    OverallResult,
+    ResultsByUser,
+} from '../game_state/gameState_v2';
 import SortableTable from '../components/core/Table/SortableTable';
 import { useMemo } from 'react';
 import PositionDelta from '../components/core/PositionDelta';
@@ -14,10 +18,10 @@ declare module '@tanstack/react-table' {
     }
 }
 
-const columnHelper = createColumnHelper<GameWeekResult>();
+const columnHelper = createColumnHelper<OverallResult>();
 
 interface Props {
-    data: GameWeekResult[];
+    data: OverallResult[];
     resultsByUser: ResultsByUser[];
     lastGameWeek: number;
     avatars: ImageMetadata[];
@@ -131,7 +135,7 @@ const OverviewTable: React.FC<Props> = ({
             //     }
             // }),
             columnHelper.accessor('cumulativeMilaPoints', {
-                id: 'total',
+                id: 'cumulativeMilaPoints',
                 header: 'Total',
                 cell: (props) => (
                     <span className="font-bold text-indigo-900 dark:text-orange-200">

@@ -37,5 +37,19 @@ export interface ResultsByUser {
 export interface MilaResultsDTO {
     resultsByWeek: ResultsByWeek[];
     resultsByUser: ResultsByUser[];
-    overallScore: GameWeekResult[];
+    overallScore: OverallResult[];
+}
+
+export interface OverallResult {
+    gwScore: number;
+    teamName: string;
+    userName: string;
+    userId: number;
+    gwPosition: number;
+    gameWeek: number;
+    cumulativeMilaPoints: number;
+    cumulativeAverageMilaPoints: number;
+    totalCumulativeAverageMilaPoints: number;
+    milaRank: number;
+    milaRankLastWeek: number;
 }
