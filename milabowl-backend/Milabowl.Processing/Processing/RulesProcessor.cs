@@ -34,13 +34,13 @@ public class RulesProcessor : IRulesProcessor
             userGameWeek.User.User.TeamName,
             userGameWeek.User.User.UserName,
             userGameWeek.User.User.Id,
-            1, //userGameWeek.User.Position.GwPosition,
+            //1, //userGameWeek.User.Position.GwPosition,
+            //userGameWeek.User.Event.GameWeek,
+            //1, //userGameWeek.User.MilaScores.CumulativeTotalMilaScore,
+            // 1, //userGameWeek.MilaScores.AvgCumulativeTotalMilaScore,
+            //1, //userGameWeek.MilaScores.TotalCumulativeAvgMilaScore,
+            //1, //userGameWeek.Position.MilaRank,
             userGameWeek.User.Event.GameWeek,
-            1, //userGameWeek.User.MilaScores.CumulativeTotalMilaScore,
-            1, //userGameWeek.MilaScores.AvgCumulativeTotalMilaScore,
-            1, //userGameWeek.MilaScores.TotalCumulativeAvgMilaScore,
-            1, //userGameWeek.Position.MilaRank,
-            1, //userGameWeek.Position.MilaRankLastWeek,
             // new ReadOnlyDictionary<string, RuleResult>(rules)
             ruleResults
         );

@@ -18,8 +18,59 @@ public class Processor
         var results = await _importer.Import();
         Console.WriteLine("FPL data imported");
 
+        var summedMilaResults = results
+            .GroupBy(r => r.TeamName)
+            .SelectMany(g =>
+            {
+                var cumulativeMilaPoints = 0m;
+                return g.OrderBy(v => v.GameWeek)
+                    .Select(r =>
+                    {
+                        var milaRankThisWeek =
+                            results.Count(v =>
+                                v.TeamName != r.TeamName
+                                && v.GameWeek == r.GameWeek
+                                && v.Rules.Sum(ru => ru.Points) > r.Rules.Sum(ru => ru.Points)
+                            ) + 1;
+
+                        int? milaRankLastWeek =
+                            r.GameWeek > 1
+                                ? results.Count(v =>
+                                    v.TeamName != r.TeamName
+                                    && v.GameWeek == r.GameWeek - 1
+                                    && v.Rules.Sum(ru => ru.Points) > r.Rules.Sum(ru => ru.Points)
+                                ) + 1
+                                : null;
+
+                        var gwPosition =
+                            results.Count(v =>
+                                v.TeamName != r.TeamName
+                                && v.GameWeek == r.GameWeek
+                                && v.GwScore > r.GwScore
+                            ) + 1;
+
+                        cumulativeMilaPoints += r.Rules.Sum(v => v.Points);
+                        return new MilaResultDto(
+                            r.Gw,
+                            r.GwScore,
+                            r.TeamName,
+                            r.UserName,
+                            r.UserId,
+                            gwPosition,
+                            r.GameWeek,
+                            milaRankThisWeek,
+                            milaRankLastWeek,
+                            cumulativeMilaPoints,
+                            cumulativeMilaPoints / r.GameWeek,
+                            cumulativeMilaPoints / r.GameWeek,
+                            r.Rules
+                        );
+                    });
+            })
+            .ToList();
+
         Console.WriteLine("Starting to process mila points");
-        var resultsByWeek = results
+        var resultsByWeek = summedMilaResults
             .GroupBy(m => m.GameWeek)
             .Select(grp => new GameWeekResults
             {
@@ -28,7 +79,7 @@ public class Processor
             })
             .ToList();
 
-        var resultsByUser = results
+        var resultsByUser = summedMilaResults
             .GroupBy(m => m.TeamName)
             .Select(grp => new UserResults
             {
@@ -37,11 +88,30 @@ public class Processor
             })
             .ToList();
 
-        var lastGameWeek = results.Max(r => r.GameWeek);
+        var lastGameWeek = summedMilaResults.Max(r => r.GameWeek);
 
         var res = new MilaResults
         {
-            OverallScore = results.Where(r => r.GameWeek == lastGameWeek).ToList(),
+            OverallScore = summedMilaResults
+                .GroupBy(r => r.TeamName)
+                .Select(s =>
+                {
+                    var last = s.OrderBy(r => r.GameWeek).Last();
+                    return new OverallResult(
+                        last.GwScore,
+                        last.TeamName,
+                        last.UserName,
+                        last.UserId,
+                        last.GwPosition,
+                        last.GameWeek,
+                        last.CumulativeMilaPoints,
+                        last.CumulativeAverageMilaPoints,
+                        last.CumulativeAverageMilaPoints,
+                        last.MilaRank,
+                        last.MilaRankLastWeek
+                    );
+                })
+                .ToList(),
             ResultsByUser = resultsByUser,
             ResultsByWeek = resultsByWeek
         };
