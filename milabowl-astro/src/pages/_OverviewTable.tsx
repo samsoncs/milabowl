@@ -36,7 +36,7 @@ const OverviewTable: React.FC<Props> = ({
     const columns = useMemo(
         () => [
             columnHelper.display({
-                id: 'rank',
+                id: 'milaRank',
                 header: '#',
                 cell: (props) => {
                     const deltaPosition =
@@ -151,7 +151,13 @@ const OverviewTable: React.FC<Props> = ({
         []
     );
 
-    return <SortableTable data={data} columns={columns} />;
+    return (
+        <SortableTable
+            data={data}
+            columns={columns}
+            initialSort={[{ id: 'cumulativeMilaPoints', desc: true }]}
+        />
+    );
 };
 
 export default OverviewTable;
