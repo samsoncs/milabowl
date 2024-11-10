@@ -18,11 +18,22 @@ public class Processor
         var results = await _importer.Import();
         Console.WriteLine("FPL data imported");
 
+        var totalMilaPoints = new Dictionary<string, decimal>(
+            results
+                .Select(r => r.TeamName)
+                .Distinct()
+                .Select(s => new KeyValuePair<string, decimal>(s, 0))
+        );
+
         var summedMilaResults = results
-            .GroupBy(r => r.TeamName)
+            .GroupBy(r => r.GameWeek)
             .SelectMany(g =>
             {
-                var cumulativeMilaPoints = 0m;
+                foreach (var gr in g)
+                {
+                    totalMilaPoints[gr.TeamName] += gr.Rules.Sum(ru => ru.Points);
+                }
+
                 return g.OrderBy(v => v.GameWeek)
                     .Select(r =>
                     {
@@ -30,15 +41,19 @@ public class Processor
                             results.Count(v =>
                                 v.TeamName != r.TeamName
                                 && v.GameWeek == r.GameWeek
-                                && v.Rules.Sum(ru => ru.Points) > r.Rules.Sum(ru => ru.Points)
+                                && totalMilaPoints[v.TeamName] > totalMilaPoints[r.TeamName]
                             ) + 1;
 
                         int? milaRankLastWeek =
                             r.GameWeek > 1
                                 ? results.Count(v =>
                                     v.TeamName != r.TeamName
-                                    && v.GameWeek == r.GameWeek - 1
-                                    && v.Rules.Sum(ru => ru.Points) > r.Rules.Sum(ru => ru.Points)
+                                    && v.GameWeek == r.GameWeek
+                                    && (totalMilaPoints[v.TeamName] - v.Rules.Sum(ru => ru.Points))
+                                        > (
+                                            totalMilaPoints[r.TeamName]
+                                            - r.Rules.Sum(ru => ru.Points)
+                                        )
                                 ) + 1
                                 : null;
 
@@ -46,10 +61,9 @@ public class Processor
                             results.Count(v =>
                                 v.TeamName != r.TeamName
                                 && v.GameWeek == r.GameWeek
-                                && v.GwScore > r.GwScore
+                                && v.Rules.Sum(ru => ru.Points) > r.Rules.Sum(ru => ru.Points)
                             ) + 1;
 
-                        cumulativeMilaPoints += r.Rules.Sum(v => v.Points);
                         return new MilaResultDto(
                             r.Gw,
                             r.GwScore,
@@ -60,9 +74,13 @@ public class Processor
                             r.GameWeek,
                             milaRankThisWeek,
                             milaRankLastWeek,
-                            cumulativeMilaPoints,
-                            cumulativeMilaPoints / r.GameWeek,
-                            cumulativeMilaPoints / r.GameWeek,
+                            Math.Round(totalMilaPoints[r.TeamName], 2),
+                            Math.Round(totalMilaPoints[r.TeamName] / r.GameWeek, 2),
+                            Math.Round(
+                                totalMilaPoints.Sum(t => t.Value)
+                                    / (r.GameWeek * totalMilaPoints.Count),
+                                2
+                            ),
                             r.Rules
                         );
                     });

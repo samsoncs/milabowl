@@ -14,7 +14,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 10.4,
           "cumulativeAverageMilaPoints": 10.4,
-          "totalCumulativeAverageMilaPoints": 10.4,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -91,92 +91,6 @@
         {
           "gw": "Gameweek 1",
           "gwScore": 9.38,
-          "teamName": "casemilaX",
-          "userName": "Malte Loller-Andersen",
-          "userId": 62250921,
-          "gwPosition": 2,
-          "gameWeek": 1,
-          "milaRank": 2,
-          "milaRankLastWeek": null,
-          "cumulativeMilaPoints": 9.38,
-          "cumulativeAverageMilaPoints": 9.38,
-          "totalCumulativeAverageMilaPoints": 9.38,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0.0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 0
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 5.38
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 4
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 1",
-          "gwScore": 9.38,
           "teamName": "Mila High Club",
           "userName": "Simen Aakhus",
           "userId": 62250799,
@@ -186,7 +100,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 9.38,
           "cumulativeAverageMilaPoints": 9.38,
-          "totalCumulativeAverageMilaPoints": 9.38,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -262,6 +176,92 @@
         },
         {
           "gw": "Gameweek 1",
+          "gwScore": 9.38,
+          "teamName": "casemilaX",
+          "userName": "Malte Loller-Andersen",
+          "userId": 62250921,
+          "gwPosition": 2,
+          "gameWeek": 1,
+          "milaRank": 2,
+          "milaRankLastWeek": null,
+          "cumulativeMilaPoints": 9.38,
+          "cumulativeAverageMilaPoints": 9.38,
+          "totalCumulativeAverageMilaPoints": 6.02,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0.0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 0
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 5.38
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 4
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 1",
           "gwScore": 6.5,
           "teamName": "10km Onlyice",
           "userName": "Markus Andersson",
@@ -272,7 +272,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 6.5,
           "cumulativeAverageMilaPoints": 6.5,
-          "totalCumulativeAverageMilaPoints": 6.5,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -358,7 +358,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 6.0,
           "cumulativeAverageMilaPoints": 6.0,
-          "totalCumulativeAverageMilaPoints": 6.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -444,7 +444,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 5.0,
           "cumulativeAverageMilaPoints": 5.0,
-          "totalCumulativeAverageMilaPoints": 5.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -530,7 +530,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 4.0,
           "cumulativeAverageMilaPoints": 4.0,
-          "totalCumulativeAverageMilaPoints": 4.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -616,7 +616,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 3.0,
           "cumulativeAverageMilaPoints": 3.0,
-          "totalCumulativeAverageMilaPoints": 3.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -702,7 +702,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 0.5,
           "cumulativeAverageMilaPoints": 0.5,
-          "totalCumulativeAverageMilaPoints": 0.5,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -789,11 +789,11 @@
           "userId": 62250875,
           "gwPosition": 4,
           "gameWeek": 2,
-          "milaRank": 4,
-          "milaRankLastWeek": 7,
+          "milaRank": 1,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 13.9,
           "cumulativeAverageMilaPoints": 6.95,
-          "totalCumulativeAverageMilaPoints": 6.95,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -875,11 +875,11 @@
           "userId": 62250921,
           "gwPosition": 5,
           "gameWeek": 2,
-          "milaRank": 5,
-          "milaRankLastWeek": 7,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 12.38,
           "cumulativeAverageMilaPoints": 6.19,
-          "totalCumulativeAverageMilaPoints": 6.19,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -961,11 +961,11 @@
           "userId": 62250892,
           "gwPosition": 1,
           "gameWeek": 2,
-          "milaRank": 1,
-          "milaRankLastWeek": 5,
+          "milaRank": 3,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 12.0,
           "cumulativeAverageMilaPoints": 6.0,
-          "totalCumulativeAverageMilaPoints": 6.0,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1047,11 +1047,11 @@
           "userId": 62250799,
           "gwPosition": 6,
           "gameWeek": 2,
-          "milaRank": 6,
-          "milaRankLastWeek": 8,
+          "milaRank": 4,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 11.38,
           "cumulativeAverageMilaPoints": 5.69,
-          "totalCumulativeAverageMilaPoints": 5.69,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1133,11 +1133,11 @@
           "userId": 62250811,
           "gwPosition": 2,
           "gameWeek": 2,
-          "milaRank": 2,
+          "milaRank": 5,
           "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 8.0,
           "cumulativeAverageMilaPoints": 4.0,
-          "totalCumulativeAverageMilaPoints": 4.0,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1219,11 +1219,11 @@
           "userId": 62250902,
           "gwPosition": 7,
           "gameWeek": 2,
-          "milaRank": 7,
-          "milaRankLastWeek": 8,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 7.5,
           "cumulativeAverageMilaPoints": 3.75,
-          "totalCumulativeAverageMilaPoints": 3.75,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1305,11 +1305,11 @@
           "userId": 62250861,
           "gwPosition": 8,
           "gameWeek": 2,
-          "milaRank": 8,
-          "milaRankLastWeek": 8,
+          "milaRank": 7,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 6.0,
           "cumulativeAverageMilaPoints": 3.0,
-          "totalCumulativeAverageMilaPoints": 3.0,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1391,11 +1391,11 @@
           "userId": 62250853,
           "gwPosition": 2,
           "gameWeek": 2,
-          "milaRank": 2,
-          "milaRankLastWeek": 7,
+          "milaRank": 8,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 4.5,
           "cumulativeAverageMilaPoints": 2.25,
-          "totalCumulativeAverageMilaPoints": 2.25,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1481,7 +1481,7 @@
           "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 3.5,
           "cumulativeAverageMilaPoints": 1.75,
-          "totalCumulativeAverageMilaPoints": 1.75,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1568,11 +1568,11 @@
           "userId": 62250892,
           "gwPosition": 2,
           "gameWeek": 3,
-          "milaRank": 2,
-          "milaRankLastWeek": 1,
+          "milaRank": 1,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 19.5,
           "cumulativeAverageMilaPoints": 6.5,
-          "totalCumulativeAverageMilaPoints": 6.5,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1654,11 +1654,11 @@
           "userId": 62250875,
           "gwPosition": 3,
           "gameWeek": 3,
-          "milaRank": 3,
-          "milaRankLastWeek": 2,
+          "milaRank": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 18.4,
-          "cumulativeAverageMilaPoints": 6.1333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 6.1333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 6.13,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1740,11 +1740,11 @@
           "userId": 62250921,
           "gwPosition": 4,
           "gameWeek": 3,
-          "milaRank": 4,
+          "milaRank": 3,
           "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 16.38,
           "cumulativeAverageMilaPoints": 5.46,
-          "totalCumulativeAverageMilaPoints": 5.46,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1826,11 +1826,11 @@
           "userId": 62250853,
           "gwPosition": 1,
           "gameWeek": 3,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
+          "milaRank": 4,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 13.4,
-          "cumulativeAverageMilaPoints": 4.4666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 4.4666666666666666666666666667,
+          "cumulativeAverageMilaPoints": 4.47,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1912,11 +1912,11 @@
           "userId": 62250799,
           "gwPosition": 9,
           "gameWeek": 3,
-          "milaRank": 9,
-          "milaRankLastWeek": 7,
+          "milaRank": 5,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 12.38,
-          "cumulativeAverageMilaPoints": 4.1266666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 4.1266666666666666666666666667,
+          "cumulativeAverageMilaPoints": 4.13,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -1998,11 +1998,11 @@
           "userId": 62250861,
           "gwPosition": 4,
           "gameWeek": 3,
-          "milaRank": 4,
-          "milaRankLastWeek": 2,
+          "milaRank": 6,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 10.0,
-          "cumulativeAverageMilaPoints": 3.3333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 3.3333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 3.33,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2084,11 +2084,11 @@
           "userId": 62250811,
           "gwPosition": 8,
           "gameWeek": 3,
-          "milaRank": 8,
-          "milaRankLastWeek": 6,
+          "milaRank": 7,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 9.5,
-          "cumulativeAverageMilaPoints": 3.1666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.1666666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.17,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2173,8 +2173,8 @@
           "milaRank": 7,
           "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 9.5,
-          "cumulativeAverageMilaPoints": 3.1666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.1666666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.17,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2256,11 +2256,11 @@
           "userId": 62250788,
           "gwPosition": 6,
           "gameWeek": 3,
-          "milaRank": 6,
-          "milaRankLastWeek": 6,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 6.0,
           "cumulativeAverageMilaPoints": 2.0,
-          "totalCumulativeAverageMilaPoints": 2.0,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2351,7 +2351,7 @@
           "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 21.88,
           "cumulativeAverageMilaPoints": 5.47,
-          "totalCumulativeAverageMilaPoints": 5.47,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2433,11 +2433,11 @@
           "userId": 62250892,
           "gwPosition": 5,
           "gameWeek": 4,
-          "milaRank": 5,
-          "milaRankLastWeek": 6,
+          "milaRank": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 21.5,
-          "cumulativeAverageMilaPoints": 5.375,
-          "totalCumulativeAverageMilaPoints": 5.375,
+          "cumulativeAverageMilaPoints": 5.38,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2519,11 +2519,11 @@
           "userId": 62250875,
           "gwPosition": 8,
           "gameWeek": 4,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
+          "milaRank": 3,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 17.9,
-          "cumulativeAverageMilaPoints": 4.475,
-          "totalCumulativeAverageMilaPoints": 4.475,
+          "cumulativeAverageMilaPoints": 4.48,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2605,11 +2605,11 @@
           "userId": 62250902,
           "gwPosition": 3,
           "gameWeek": 4,
-          "milaRank": 3,
-          "milaRankLastWeek": 4,
+          "milaRank": 4,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 13.5,
-          "cumulativeAverageMilaPoints": 3.375,
-          "totalCumulativeAverageMilaPoints": 3.375,
+          "cumulativeAverageMilaPoints": 3.38,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2691,11 +2691,11 @@
           "userId": 62250811,
           "gwPosition": 4,
           "gameWeek": 4,
-          "milaRank": 4,
-          "milaRankLastWeek": 6,
+          "milaRank": 5,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 12.5,
-          "cumulativeAverageMilaPoints": 3.125,
-          "totalCumulativeAverageMilaPoints": 3.125,
+          "cumulativeAverageMilaPoints": 3.12,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2777,11 +2777,11 @@
           "userId": 62250799,
           "gwPosition": 7,
           "gameWeek": 4,
-          "milaRank": 7,
-          "milaRankLastWeek": 9,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 12.38,
-          "cumulativeAverageMilaPoints": 3.095,
-          "totalCumulativeAverageMilaPoints": 3.095,
+          "cumulativeAverageMilaPoints": 3.10,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2863,11 +2863,11 @@
           "userId": 62250853,
           "gwPosition": 9,
           "gameWeek": 4,
-          "milaRank": 9,
-          "milaRankLastWeek": 9,
+          "milaRank": 7,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 11.4,
           "cumulativeAverageMilaPoints": 2.85,
-          "totalCumulativeAverageMilaPoints": 2.85,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -2949,11 +2949,11 @@
           "userId": 62250861,
           "gwPosition": 6,
           "gameWeek": 4,
-          "milaRank": 6,
-          "milaRankLastWeek": 8,
+          "milaRank": 8,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 11.0,
           "cumulativeAverageMilaPoints": 2.75,
-          "totalCumulativeAverageMilaPoints": 2.75,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3035,11 +3035,11 @@
           "userId": 62250788,
           "gwPosition": 2,
           "gameWeek": 4,
-          "milaRank": 2,
-          "milaRankLastWeek": 3,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 10.5,
-          "cumulativeAverageMilaPoints": 2.625,
-          "totalCumulativeAverageMilaPoints": 2.625,
+          "cumulativeAverageMilaPoints": 2.62,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3126,11 +3126,11 @@
           "userId": 62250921,
           "gwPosition": 6,
           "gameWeek": 5,
-          "milaRank": 6,
-          "milaRankLastWeek": 4,
+          "milaRank": 1,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 24.38,
-          "cumulativeAverageMilaPoints": 4.876,
-          "totalCumulativeAverageMilaPoints": 4.876,
+          "cumulativeAverageMilaPoints": 4.88,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3212,11 +3212,11 @@
           "userId": 62250892,
           "gwPosition": 8,
           "gameWeek": 5,
-          "milaRank": 8,
-          "milaRankLastWeek": 5,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 23.5,
           "cumulativeAverageMilaPoints": 4.7,
-          "totalCumulativeAverageMilaPoints": 4.7,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3299,10 +3299,10 @@
           "gwPosition": 3,
           "gameWeek": 5,
           "milaRank": 3,
-          "milaRankLastWeek": 1,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 23.4,
           "cumulativeAverageMilaPoints": 4.68,
-          "totalCumulativeAverageMilaPoints": 4.68,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3384,11 +3384,11 @@
           "userId": 62250788,
           "gwPosition": 1,
           "gameWeek": 5,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
+          "milaRank": 4,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 17.5,
           "cumulativeAverageMilaPoints": 3.5,
-          "totalCumulativeAverageMilaPoints": 3.5,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3470,11 +3470,11 @@
           "userId": 62250853,
           "gwPosition": 2,
           "gameWeek": 5,
-          "milaRank": 2,
-          "milaRankLastWeek": 1,
+          "milaRank": 5,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 17.4,
           "cumulativeAverageMilaPoints": 3.48,
-          "totalCumulativeAverageMilaPoints": 3.48,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3556,11 +3556,11 @@
           "userId": 62250811,
           "gwPosition": 4,
           "gameWeek": 5,
-          "milaRank": 4,
-          "milaRankLastWeek": 3,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 16.5,
           "cumulativeAverageMilaPoints": 3.3,
-          "totalCumulativeAverageMilaPoints": 3.3,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3642,11 +3642,11 @@
           "userId": 62250902,
           "gwPosition": 6,
           "gameWeek": 5,
-          "milaRank": 6,
+          "milaRank": 7,
           "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 16.0,
           "cumulativeAverageMilaPoints": 3.2,
-          "totalCumulativeAverageMilaPoints": 3.2,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3728,11 +3728,11 @@
           "userId": 62250799,
           "gwPosition": 5,
           "gameWeek": 5,
-          "milaRank": 5,
-          "milaRankLastWeek": 4,
+          "milaRank": 8,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 15.88,
-          "cumulativeAverageMilaPoints": 3.176,
-          "totalCumulativeAverageMilaPoints": 3.176,
+          "cumulativeAverageMilaPoints": 3.18,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3815,10 +3815,10 @@
           "gwPosition": 9,
           "gameWeek": 5,
           "milaRank": 9,
-          "milaRankLastWeek": 6,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 11.0,
           "cumulativeAverageMilaPoints": 2.2,
-          "totalCumulativeAverageMilaPoints": 2.2,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3909,7 +3909,7 @@
           "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 31.38,
           "cumulativeAverageMilaPoints": 5.23,
-          "totalCumulativeAverageMilaPoints": 5.23,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -3991,11 +3991,11 @@
           "userId": 62250892,
           "gwPosition": 4,
           "gameWeek": 6,
-          "milaRank": 4,
-          "milaRankLastWeek": 6,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 26.0,
-          "cumulativeAverageMilaPoints": 4.3333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 4.3333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 4.33,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4077,11 +4077,11 @@
           "userId": 62250875,
           "gwPosition": 8,
           "gameWeek": 6,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
+          "milaRank": 3,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 22.4,
-          "cumulativeAverageMilaPoints": 3.7333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 3.7333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 3.73,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4163,11 +4163,11 @@
           "userId": 62250902,
           "gwPosition": 2,
           "gameWeek": 6,
-          "milaRank": 2,
-          "milaRankLastWeek": 4,
+          "milaRank": 4,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 20.5,
-          "cumulativeAverageMilaPoints": 3.4166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.4166666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.42,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4249,11 +4249,11 @@
           "userId": 62250788,
           "gwPosition": 3,
           "gameWeek": 6,
-          "milaRank": 3,
-          "milaRankLastWeek": 5,
+          "milaRank": 4,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 20.5,
-          "cumulativeAverageMilaPoints": 3.4166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.4166666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.42,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4335,11 +4335,11 @@
           "userId": 62250853,
           "gwPosition": 4,
           "gameWeek": 6,
-          "milaRank": 4,
+          "milaRank": 6,
           "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 19.9,
-          "cumulativeAverageMilaPoints": 3.3166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.3166666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.32,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4421,11 +4421,11 @@
           "userId": 62250811,
           "gwPosition": 4,
           "gameWeek": 6,
-          "milaRank": 4,
-          "milaRankLastWeek": 5,
+          "milaRank": 7,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 19.0,
-          "cumulativeAverageMilaPoints": 3.1666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.1666666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.17,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4507,11 +4507,11 @@
           "userId": 62250799,
           "gwPosition": 7,
           "gameWeek": 6,
-          "milaRank": 7,
-          "milaRankLastWeek": 7,
+          "milaRank": 8,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 17.88,
           "cumulativeAverageMilaPoints": 2.98,
-          "totalCumulativeAverageMilaPoints": 2.98,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4596,8 +4596,8 @@
           "milaRank": 9,
           "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 8.5,
-          "cumulativeAverageMilaPoints": 1.4166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 1.4166666666666666666666666667,
+          "cumulativeAverageMilaPoints": 1.42,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4685,10 +4685,10 @@
           "gwPosition": 1,
           "gameWeek": 7,
           "milaRank": 1,
-          "milaRankLastWeek": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 35.38,
-          "cumulativeAverageMilaPoints": 5.0542857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 5.0542857142857142857142857143,
+          "cumulativeAverageMilaPoints": 5.05,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4770,11 +4770,11 @@
           "userId": 62250892,
           "gwPosition": 5,
           "gameWeek": 7,
-          "milaRank": 5,
-          "milaRankLastWeek": 7,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 27.5,
-          "cumulativeAverageMilaPoints": 3.9285714285714285714285714286,
-          "totalCumulativeAverageMilaPoints": 3.9285714285714285714285714286,
+          "cumulativeAverageMilaPoints": 3.93,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4856,11 +4856,11 @@
           "userId": 62250875,
           "gwPosition": 7,
           "gameWeek": 7,
-          "milaRank": 7,
-          "milaRankLastWeek": 8,
+          "milaRank": 3,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 23.4,
-          "cumulativeAverageMilaPoints": 3.3428571428571428571428571429,
-          "totalCumulativeAverageMilaPoints": 3.3428571428571428571428571429,
+          "cumulativeAverageMilaPoints": 3.34,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -4942,11 +4942,11 @@
           "userId": 62250788,
           "gwPosition": 3,
           "gameWeek": 7,
-          "milaRank": 3,
-          "milaRankLastWeek": 3,
+          "milaRank": 4,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 23.0,
-          "cumulativeAverageMilaPoints": 3.2857142857142857142857142857,
-          "totalCumulativeAverageMilaPoints": 3.2857142857142857142857142857,
+          "cumulativeAverageMilaPoints": 3.29,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5028,11 +5028,11 @@
           "userId": 62250902,
           "gwPosition": 4,
           "gameWeek": 7,
-          "milaRank": 4,
-          "milaRankLastWeek": 6,
+          "milaRank": 5,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 22.5,
-          "cumulativeAverageMilaPoints": 3.2142857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 3.2142857142857142857142857143,
+          "cumulativeAverageMilaPoints": 3.21,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5114,11 +5114,11 @@
           "userId": 62250811,
           "gwPosition": 5,
           "gameWeek": 7,
-          "milaRank": 5,
+          "milaRank": 6,
           "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 20.5,
-          "cumulativeAverageMilaPoints": 2.9285714285714285714285714286,
-          "totalCumulativeAverageMilaPoints": 2.9285714285714285714285714286,
+          "cumulativeAverageMilaPoints": 2.93,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5200,11 +5200,11 @@
           "userId": 62250853,
           "gwPosition": 9,
           "gameWeek": 7,
-          "milaRank": 9,
-          "milaRankLastWeek": 7,
+          "milaRank": 7,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 20.4,
-          "cumulativeAverageMilaPoints": 2.9142857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 2.9142857142857142857142857143,
+          "cumulativeAverageMilaPoints": 2.91,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5287,10 +5287,10 @@
           "gwPosition": 8,
           "gameWeek": 7,
           "milaRank": 8,
-          "milaRankLastWeek": 7,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 18.57,
-          "cumulativeAverageMilaPoints": 2.6528571428571428571428571429,
-          "totalCumulativeAverageMilaPoints": 2.6528571428571428571428571429,
+          "cumulativeAverageMilaPoints": 2.65,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5372,11 +5372,11 @@
           "userId": 62250861,
           "gwPosition": 2,
           "gameWeek": 7,
-          "milaRank": 2,
-          "milaRankLastWeek": 3,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 12.0,
-          "cumulativeAverageMilaPoints": 1.7142857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 1.7142857142857142857142857143,
+          "cumulativeAverageMilaPoints": 1.71,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5463,11 +5463,11 @@
           "userId": 62250921,
           "gwPosition": 3,
           "gameWeek": 8,
-          "milaRank": 3,
+          "milaRank": 1,
           "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 40.88,
           "cumulativeAverageMilaPoints": 5.11,
-          "totalCumulativeAverageMilaPoints": 5.11,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5549,11 +5549,11 @@
           "userId": 62250902,
           "gwPosition": 1,
           "gameWeek": 8,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
+          "milaRank": 2,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 33.5,
-          "cumulativeAverageMilaPoints": 4.1875,
-          "totalCumulativeAverageMilaPoints": 4.1875,
+          "cumulativeAverageMilaPoints": 4.19,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5635,11 +5635,11 @@
           "userId": 62250892,
           "gwPosition": 6,
           "gameWeek": 8,
-          "milaRank": 6,
+          "milaRank": 3,
           "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 31.0,
-          "cumulativeAverageMilaPoints": 3.875,
-          "totalCumulativeAverageMilaPoints": 3.875,
+          "cumulativeAverageMilaPoints": 3.88,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5722,10 +5722,10 @@
           "gwPosition": 4,
           "gameWeek": 8,
           "milaRank": 4,
-          "milaRankLastWeek": 1,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 27.5,
-          "cumulativeAverageMilaPoints": 3.4375,
-          "totalCumulativeAverageMilaPoints": 3.4375,
+          "cumulativeAverageMilaPoints": 3.44,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5807,11 +5807,11 @@
           "userId": 62250799,
           "gwPosition": 2,
           "gameWeek": 8,
-          "milaRank": 2,
-          "milaRankLastWeek": 1,
+          "milaRank": 5,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 25.57,
-          "cumulativeAverageMilaPoints": 3.19625,
-          "totalCumulativeAverageMilaPoints": 3.19625,
+          "cumulativeAverageMilaPoints": 3.20,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5894,10 +5894,10 @@
           "gwPosition": 6,
           "gameWeek": 8,
           "milaRank": 6,
-          "milaRankLastWeek": 2,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 24.0,
           "cumulativeAverageMilaPoints": 3.0,
-          "totalCumulativeAverageMilaPoints": 3.0,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -5979,11 +5979,11 @@
           "userId": 62250875,
           "gwPosition": 9,
           "gameWeek": 8,
-          "milaRank": 9,
-          "milaRankLastWeek": 9,
+          "milaRank": 7,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 22.4,
           "cumulativeAverageMilaPoints": 2.8,
-          "totalCumulativeAverageMilaPoints": 2.8,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6065,11 +6065,11 @@
           "userId": 62250853,
           "gwPosition": 8,
           "gameWeek": 8,
-          "milaRank": 8,
-          "milaRankLastWeek": 4,
+          "milaRank": 7,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 22.4,
           "cumulativeAverageMilaPoints": 2.8,
-          "totalCumulativeAverageMilaPoints": 2.8,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6151,11 +6151,11 @@
           "userId": 62250861,
           "gwPosition": 4,
           "gameWeek": 8,
-          "milaRank": 4,
-          "milaRankLastWeek": 1,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 16.5,
-          "cumulativeAverageMilaPoints": 2.0625,
-          "totalCumulativeAverageMilaPoints": 2.0625,
+          "cumulativeAverageMilaPoints": 2.06,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6242,11 +6242,11 @@
           "userId": 62250921,
           "gwPosition": 5,
           "gameWeek": 9,
-          "milaRank": 5,
-          "milaRankLastWeek": 8,
+          "milaRank": 1,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 41.88,
-          "cumulativeAverageMilaPoints": 4.6533333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 4.6533333333333333333333333333,
+          "cumulativeAverageMilaPoints": 4.65,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6328,11 +6328,11 @@
           "userId": 62250902,
           "gwPosition": 1,
           "gameWeek": 9,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 40.5,
           "cumulativeAverageMilaPoints": 4.5,
-          "totalCumulativeAverageMilaPoints": 4.5,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6414,11 +6414,11 @@
           "userId": 62250788,
           "gwPosition": 2,
           "gameWeek": 9,
-          "milaRank": 2,
-          "milaRankLastWeek": 5,
+          "milaRank": 3,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 31.0,
-          "cumulativeAverageMilaPoints": 3.4444444444444444444444444444,
-          "totalCumulativeAverageMilaPoints": 3.4444444444444444444444444444,
+          "cumulativeAverageMilaPoints": 3.44,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6500,11 +6500,11 @@
           "userId": 62250892,
           "gwPosition": 8,
           "gameWeek": 9,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
+          "milaRank": 4,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 29.5,
-          "cumulativeAverageMilaPoints": 3.2777777777777777777777777778,
-          "totalCumulativeAverageMilaPoints": 3.2777777777777777777777777778,
+          "cumulativeAverageMilaPoints": 3.28,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6586,11 +6586,11 @@
           "userId": 62250875,
           "gwPosition": 2,
           "gameWeek": 9,
-          "milaRank": 2,
-          "milaRankLastWeek": 6,
+          "milaRank": 5,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 25.9,
-          "cumulativeAverageMilaPoints": 2.8777777777777777777777777778,
-          "totalCumulativeAverageMilaPoints": 2.8777777777777777777777777778,
+          "cumulativeAverageMilaPoints": 2.88,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6672,11 +6672,11 @@
           "userId": 62250811,
           "gwPosition": 7,
           "gameWeek": 9,
-          "milaRank": 7,
-          "milaRankLastWeek": 8,
+          "milaRank": 6,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 24.5,
-          "cumulativeAverageMilaPoints": 2.7222222222222222222222222222,
-          "totalCumulativeAverageMilaPoints": 2.7222222222222222222222222222,
+          "cumulativeAverageMilaPoints": 2.72,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6758,11 +6758,11 @@
           "userId": 62250799,
           "gwPosition": 8,
           "gameWeek": 9,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
+          "milaRank": 7,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 24.07,
-          "cumulativeAverageMilaPoints": 2.6744444444444444444444444444,
-          "totalCumulativeAverageMilaPoints": 2.6744444444444444444444444444,
+          "cumulativeAverageMilaPoints": 2.67,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6844,11 +6844,11 @@
           "userId": 62250853,
           "gwPosition": 5,
           "gameWeek": 9,
-          "milaRank": 5,
-          "milaRankLastWeek": 8,
+          "milaRank": 8,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 23.4,
           "cumulativeAverageMilaPoints": 2.6,
-          "totalCumulativeAverageMilaPoints": 2.6,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -6930,11 +6930,11 @@
           "userId": 62250861,
           "gwPosition": 4,
           "gameWeek": 9,
-          "milaRank": 4,
-          "milaRankLastWeek": 7,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 18.5,
-          "cumulativeAverageMilaPoints": 2.0555555555555555555555555556,
-          "totalCumulativeAverageMilaPoints": 2.0555555555555555555555555556,
+          "cumulativeAverageMilaPoints": 2.06,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7022,10 +7022,10 @@
           "gwPosition": 1,
           "gameWeek": 10,
           "milaRank": 1,
-          "milaRankLastWeek": 1,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 45.5,
           "cumulativeAverageMilaPoints": 4.55,
-          "totalCumulativeAverageMilaPoints": 4.55,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7107,11 +7107,11 @@
           "userId": 62250921,
           "gwPosition": 4,
           "gameWeek": 10,
-          "milaRank": 4,
-          "milaRankLastWeek": 4,
+          "milaRank": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 43.88,
-          "cumulativeAverageMilaPoints": 4.388,
-          "totalCumulativeAverageMilaPoints": 4.388,
+          "cumulativeAverageMilaPoints": 4.39,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7193,11 +7193,11 @@
           "userId": 62250788,
           "gwPosition": 5,
           "gameWeek": 10,
-          "milaRank": 5,
-          "milaRankLastWeek": 4,
+          "milaRank": 3,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 32.5,
           "cumulativeAverageMilaPoints": 3.25,
-          "totalCumulativeAverageMilaPoints": 3.25,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7279,11 +7279,11 @@
           "userId": 62250892,
           "gwPosition": 8,
           "gameWeek": 10,
-          "milaRank": 8,
-          "milaRankLastWeek": 8,
+          "milaRank": 4,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 29.0,
           "cumulativeAverageMilaPoints": 2.9,
-          "totalCumulativeAverageMilaPoints": 2.9,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7365,11 +7365,11 @@
           "userId": 62250811,
           "gwPosition": 2,
           "gameWeek": 10,
-          "milaRank": 2,
-          "milaRankLastWeek": 2,
+          "milaRank": 5,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 28.5,
           "cumulativeAverageMilaPoints": 2.85,
-          "totalCumulativeAverageMilaPoints": 2.85,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7451,11 +7451,11 @@
           "userId": 62250875,
           "gwPosition": 7,
           "gameWeek": 10,
-          "milaRank": 7,
-          "milaRankLastWeek": 7,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 25.9,
           "cumulativeAverageMilaPoints": 2.59,
-          "totalCumulativeAverageMilaPoints": 2.59,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7537,11 +7537,11 @@
           "userId": 62250799,
           "gwPosition": 5,
           "gameWeek": 10,
-          "milaRank": 5,
-          "milaRankLastWeek": 5,
+          "milaRank": 7,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 25.57,
-          "cumulativeAverageMilaPoints": 2.557,
-          "totalCumulativeAverageMilaPoints": 2.557,
+          "cumulativeAverageMilaPoints": 2.56,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7623,11 +7623,11 @@
           "userId": 62250853,
           "gwPosition": 9,
           "gameWeek": 10,
-          "milaRank": 9,
-          "milaRankLastWeek": 7,
+          "milaRank": 8,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 21.9,
           "cumulativeAverageMilaPoints": 2.19,
-          "totalCumulativeAverageMilaPoints": 2.19,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7709,11 +7709,11 @@
           "userId": 62250861,
           "gwPosition": 3,
           "gameWeek": 10,
-          "milaRank": 3,
-          "milaRankLastWeek": 4,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 21.0,
           "cumulativeAverageMilaPoints": 2.1,
-          "totalCumulativeAverageMilaPoints": 2.1,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7806,7 +7806,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 4.0,
           "cumulativeAverageMilaPoints": 4.0,
-          "totalCumulativeAverageMilaPoints": 4.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7888,11 +7888,11 @@
           "userId": 62250811,
           "gwPosition": 2,
           "gameWeek": 2,
-          "milaRank": 2,
+          "milaRank": 5,
           "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 8.0,
           "cumulativeAverageMilaPoints": 4.0,
-          "totalCumulativeAverageMilaPoints": 4.0,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -7974,11 +7974,11 @@
           "userId": 62250811,
           "gwPosition": 8,
           "gameWeek": 3,
-          "milaRank": 8,
-          "milaRankLastWeek": 6,
+          "milaRank": 7,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 9.5,
-          "cumulativeAverageMilaPoints": 3.1666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.1666666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.17,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8060,11 +8060,11 @@
           "userId": 62250811,
           "gwPosition": 4,
           "gameWeek": 4,
-          "milaRank": 4,
-          "milaRankLastWeek": 6,
+          "milaRank": 5,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 12.5,
-          "cumulativeAverageMilaPoints": 3.125,
-          "totalCumulativeAverageMilaPoints": 3.125,
+          "cumulativeAverageMilaPoints": 3.12,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8146,11 +8146,11 @@
           "userId": 62250811,
           "gwPosition": 4,
           "gameWeek": 5,
-          "milaRank": 4,
-          "milaRankLastWeek": 3,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 16.5,
           "cumulativeAverageMilaPoints": 3.3,
-          "totalCumulativeAverageMilaPoints": 3.3,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8232,11 +8232,11 @@
           "userId": 62250811,
           "gwPosition": 4,
           "gameWeek": 6,
-          "milaRank": 4,
-          "milaRankLastWeek": 5,
+          "milaRank": 7,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 19.0,
-          "cumulativeAverageMilaPoints": 3.1666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.1666666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.17,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8318,11 +8318,11 @@
           "userId": 62250811,
           "gwPosition": 5,
           "gameWeek": 7,
-          "milaRank": 5,
+          "milaRank": 6,
           "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 20.5,
-          "cumulativeAverageMilaPoints": 2.9285714285714285714285714286,
-          "totalCumulativeAverageMilaPoints": 2.9285714285714285714285714286,
+          "cumulativeAverageMilaPoints": 2.93,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8405,10 +8405,10 @@
           "gwPosition": 6,
           "gameWeek": 8,
           "milaRank": 6,
-          "milaRankLastWeek": 2,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 24.0,
           "cumulativeAverageMilaPoints": 3.0,
-          "totalCumulativeAverageMilaPoints": 3.0,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8490,11 +8490,11 @@
           "userId": 62250811,
           "gwPosition": 7,
           "gameWeek": 9,
-          "milaRank": 7,
-          "milaRankLastWeek": 8,
+          "milaRank": 6,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 24.5,
-          "cumulativeAverageMilaPoints": 2.7222222222222222222222222222,
-          "totalCumulativeAverageMilaPoints": 2.7222222222222222222222222222,
+          "cumulativeAverageMilaPoints": 2.72,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8576,11 +8576,11 @@
           "userId": 62250811,
           "gwPosition": 2,
           "gameWeek": 10,
-          "milaRank": 2,
-          "milaRankLastWeek": 2,
+          "milaRank": 5,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 28.5,
           "cumulativeAverageMilaPoints": 2.85,
-          "totalCumulativeAverageMilaPoints": 2.85,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8671,7 +8671,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 10.4,
           "cumulativeAverageMilaPoints": 10.4,
-          "totalCumulativeAverageMilaPoints": 10.4,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8753,11 +8753,11 @@
           "userId": 62250875,
           "gwPosition": 4,
           "gameWeek": 2,
-          "milaRank": 4,
-          "milaRankLastWeek": 7,
+          "milaRank": 1,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 13.9,
           "cumulativeAverageMilaPoints": 6.95,
-          "totalCumulativeAverageMilaPoints": 6.95,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8839,11 +8839,11 @@
           "userId": 62250875,
           "gwPosition": 3,
           "gameWeek": 3,
-          "milaRank": 3,
-          "milaRankLastWeek": 2,
+          "milaRank": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 18.4,
-          "cumulativeAverageMilaPoints": 6.1333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 6.1333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 6.13,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -8925,11 +8925,11 @@
           "userId": 62250875,
           "gwPosition": 8,
           "gameWeek": 4,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
+          "milaRank": 3,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 17.9,
-          "cumulativeAverageMilaPoints": 4.475,
-          "totalCumulativeAverageMilaPoints": 4.475,
+          "cumulativeAverageMilaPoints": 4.48,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -9012,10 +9012,10 @@
           "gwPosition": 3,
           "gameWeek": 5,
           "milaRank": 3,
-          "milaRankLastWeek": 1,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 23.4,
           "cumulativeAverageMilaPoints": 4.68,
-          "totalCumulativeAverageMilaPoints": 4.68,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -9097,11 +9097,11 @@
           "userId": 62250875,
           "gwPosition": 8,
           "gameWeek": 6,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
+          "milaRank": 3,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 22.4,
-          "cumulativeAverageMilaPoints": 3.7333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 3.7333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 3.73,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -9183,11 +9183,11 @@
           "userId": 62250875,
           "gwPosition": 7,
           "gameWeek": 7,
-          "milaRank": 7,
-          "milaRankLastWeek": 8,
+          "milaRank": 3,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 23.4,
-          "cumulativeAverageMilaPoints": 3.3428571428571428571428571429,
-          "totalCumulativeAverageMilaPoints": 3.3428571428571428571428571429,
+          "cumulativeAverageMilaPoints": 3.34,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -9269,11 +9269,11 @@
           "userId": 62250875,
           "gwPosition": 9,
           "gameWeek": 8,
-          "milaRank": 9,
-          "milaRankLastWeek": 9,
+          "milaRank": 7,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 22.4,
           "cumulativeAverageMilaPoints": 2.8,
-          "totalCumulativeAverageMilaPoints": 2.8,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -9355,11 +9355,11 @@
           "userId": 62250875,
           "gwPosition": 2,
           "gameWeek": 9,
-          "milaRank": 2,
-          "milaRankLastWeek": 6,
+          "milaRank": 5,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 25.9,
-          "cumulativeAverageMilaPoints": 2.8777777777777777777777777778,
-          "totalCumulativeAverageMilaPoints": 2.8777777777777777777777777778,
+          "cumulativeAverageMilaPoints": 2.88,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -9441,11 +9441,11 @@
           "userId": 62250875,
           "gwPosition": 7,
           "gameWeek": 10,
-          "milaRank": 7,
-          "milaRankLastWeek": 7,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 25.9,
           "cumulativeAverageMilaPoints": 2.59,
-          "totalCumulativeAverageMilaPoints": 2.59,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -9526,871 +9526,6 @@
       "results": [
         {
           "gw": "Gameweek 1",
-          "gwScore": 6.0,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 5,
-          "gameWeek": 1,
-          "milaRank": 5,
-          "milaRankLastWeek": null,
-          "cumulativeMilaPoints": 6.0,
-          "cumulativeAverageMilaPoints": 6.0,
-          "totalCumulativeAverageMilaPoints": 6.0,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0.0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 3.0
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 3
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 2",
-          "gwScore": 1.5,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 7,
-          "gameWeek": 2,
-          "milaRank": 7,
-          "milaRankLastWeek": 8,
-          "cumulativeMilaPoints": 7.5,
-          "cumulativeAverageMilaPoints": 3.75,
-          "totalCumulativeAverageMilaPoints": 3.75,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 1.5
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 0
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 3",
-          "gwScore": 2.0,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 7,
-          "gameWeek": 3,
-          "milaRank": 7,
-          "milaRankLastWeek": 6,
-          "cumulativeMilaPoints": 9.5,
-          "cumulativeAverageMilaPoints": 3.1666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.1666666666666666666666666667,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 0
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": -2
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 4",
-          "gwScore": 4.0,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 3,
-          "gameWeek": 4,
-          "milaRank": 3,
-          "milaRankLastWeek": 4,
-          "cumulativeMilaPoints": 13.5,
-          "cumulativeAverageMilaPoints": 3.375,
-          "totalCumulativeAverageMilaPoints": 3.375,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 2
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 5",
-          "gwScore": 2.5,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 6,
-          "gameWeek": 5,
-          "milaRank": 6,
-          "milaRankLastWeek": 4,
-          "cumulativeMilaPoints": 16.0,
-          "cumulativeAverageMilaPoints": 3.2,
-          "totalCumulativeAverageMilaPoints": 3.2,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": -1
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 0.5
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 1
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 6",
-          "gwScore": 4.5,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 2,
-          "gameWeek": 6,
-          "milaRank": 2,
-          "milaRankLastWeek": 4,
-          "cumulativeMilaPoints": 20.5,
-          "cumulativeAverageMilaPoints": 3.4166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.4166666666666666666666666667,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 2.5
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 7",
-          "gwScore": 2.0,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 4,
-          "gameWeek": 7,
-          "milaRank": 4,
-          "milaRankLastWeek": 6,
-          "cumulativeMilaPoints": 22.5,
-          "cumulativeAverageMilaPoints": 3.2142857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 3.2142857142857142857142857143,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 2
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": -2
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 8",
-          "gwScore": 11.0,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 1,
-          "gameWeek": 8,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
-          "cumulativeMilaPoints": 33.5,
-          "cumulativeAverageMilaPoints": 4.1875,
-          "totalCumulativeAverageMilaPoints": 4.1875,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 3
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 3
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 1
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 9",
-          "gwScore": 7.0,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 1,
-          "gameWeek": 9,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
-          "cumulativeMilaPoints": 40.5,
-          "cumulativeAverageMilaPoints": 4.5,
-          "totalCumulativeAverageMilaPoints": 4.5,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 3.0
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 1
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 1
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 10",
-          "gwScore": 5.0,
-          "teamName": "Kvarts Kvaratskhmila",
-          "userName": "Mikkel Treu Os",
-          "userId": 62250902,
-          "gwPosition": 1,
-          "gameWeek": 10,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
-          "cumulativeMilaPoints": 45.5,
-          "cumulativeAverageMilaPoints": 4.55,
-          "totalCumulativeAverageMilaPoints": 4.55,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 1
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        }
-      ],
-      "teamName": "Kvarts Kvaratskhmila"
-    },
-    {
-      "results": [
-        {
-          "gw": "Gameweek 1",
           "gwScore": 5.0,
           "teamName": "Flat Shoe Society",
           "userName": "Samson Svendsen",
@@ -10401,7 +9536,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 5.0,
           "cumulativeAverageMilaPoints": 5.0,
-          "totalCumulativeAverageMilaPoints": 5.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -10483,11 +9618,11 @@
           "userId": 62250861,
           "gwPosition": 8,
           "gameWeek": 2,
-          "milaRank": 8,
-          "milaRankLastWeek": 8,
+          "milaRank": 7,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 6.0,
           "cumulativeAverageMilaPoints": 3.0,
-          "totalCumulativeAverageMilaPoints": 3.0,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -10569,11 +9704,11 @@
           "userId": 62250861,
           "gwPosition": 4,
           "gameWeek": 3,
-          "milaRank": 4,
-          "milaRankLastWeek": 2,
+          "milaRank": 6,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 10.0,
-          "cumulativeAverageMilaPoints": 3.3333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 3.3333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 3.33,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -10655,11 +9790,11 @@
           "userId": 62250861,
           "gwPosition": 6,
           "gameWeek": 4,
-          "milaRank": 6,
-          "milaRankLastWeek": 8,
+          "milaRank": 8,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 11.0,
           "cumulativeAverageMilaPoints": 2.75,
-          "totalCumulativeAverageMilaPoints": 2.75,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -10742,10 +9877,10 @@
           "gwPosition": 9,
           "gameWeek": 5,
           "milaRank": 9,
-          "milaRankLastWeek": 6,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 11.0,
           "cumulativeAverageMilaPoints": 2.2,
-          "totalCumulativeAverageMilaPoints": 2.2,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -10830,8 +9965,8 @@
           "milaRank": 9,
           "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 8.5,
-          "cumulativeAverageMilaPoints": 1.4166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 1.4166666666666666666666666667,
+          "cumulativeAverageMilaPoints": 1.42,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -10913,11 +10048,11 @@
           "userId": 62250861,
           "gwPosition": 2,
           "gameWeek": 7,
-          "milaRank": 2,
-          "milaRankLastWeek": 3,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 12.0,
-          "cumulativeAverageMilaPoints": 1.7142857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 1.7142857142857142857142857143,
+          "cumulativeAverageMilaPoints": 1.71,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -10999,11 +10134,11 @@
           "userId": 62250861,
           "gwPosition": 4,
           "gameWeek": 8,
-          "milaRank": 4,
-          "milaRankLastWeek": 1,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 16.5,
-          "cumulativeAverageMilaPoints": 2.0625,
-          "totalCumulativeAverageMilaPoints": 2.0625,
+          "cumulativeAverageMilaPoints": 2.06,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11085,11 +10220,11 @@
           "userId": 62250861,
           "gwPosition": 4,
           "gameWeek": 9,
-          "milaRank": 4,
-          "milaRankLastWeek": 7,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 18.5,
-          "cumulativeAverageMilaPoints": 2.0555555555555555555555555556,
-          "totalCumulativeAverageMilaPoints": 2.0555555555555555555555555556,
+          "cumulativeAverageMilaPoints": 2.06,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11171,11 +10306,11 @@
           "userId": 62250861,
           "gwPosition": 3,
           "gameWeek": 10,
-          "milaRank": 3,
-          "milaRankLastWeek": 4,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 21.0,
           "cumulativeAverageMilaPoints": 2.1,
-          "totalCumulativeAverageMilaPoints": 2.1,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11256,6 +10391,871 @@
       "results": [
         {
           "gw": "Gameweek 1",
+          "gwScore": 6.0,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 5,
+          "gameWeek": 1,
+          "milaRank": 5,
+          "milaRankLastWeek": null,
+          "cumulativeMilaPoints": 6.0,
+          "cumulativeAverageMilaPoints": 6.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0.0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 3.0
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 2",
+          "gwScore": 1.5,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 7,
+          "gameWeek": 2,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
+          "cumulativeMilaPoints": 7.5,
+          "cumulativeAverageMilaPoints": 3.75,
+          "totalCumulativeAverageMilaPoints": 4.40,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 1.5
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 3",
+          "gwScore": 2.0,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 7,
+          "gameWeek": 3,
+          "milaRank": 7,
+          "milaRankLastWeek": 6,
+          "cumulativeMilaPoints": 9.5,
+          "cumulativeAverageMilaPoints": 3.17,
+          "totalCumulativeAverageMilaPoints": 4.26,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 0
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": -2
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 4",
+          "gwScore": 4.0,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 3,
+          "gameWeek": 4,
+          "milaRank": 4,
+          "milaRankLastWeek": 7,
+          "cumulativeMilaPoints": 13.5,
+          "cumulativeAverageMilaPoints": 3.38,
+          "totalCumulativeAverageMilaPoints": 3.68,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 2
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 5",
+          "gwScore": 2.5,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 6,
+          "gameWeek": 5,
+          "milaRank": 7,
+          "milaRankLastWeek": 4,
+          "cumulativeMilaPoints": 16.0,
+          "cumulativeAverageMilaPoints": 3.2,
+          "totalCumulativeAverageMilaPoints": 3.68,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": -1
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 0.5
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 1
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 6",
+          "gwScore": 4.5,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 2,
+          "gameWeek": 6,
+          "milaRank": 4,
+          "milaRankLastWeek": 7,
+          "cumulativeMilaPoints": 20.5,
+          "cumulativeAverageMilaPoints": 3.42,
+          "totalCumulativeAverageMilaPoints": 3.45,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 2.5
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 7",
+          "gwScore": 2.0,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 4,
+          "gameWeek": 7,
+          "milaRank": 5,
+          "milaRankLastWeek": 4,
+          "cumulativeMilaPoints": 22.5,
+          "cumulativeAverageMilaPoints": 3.21,
+          "totalCumulativeAverageMilaPoints": 3.23,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 2
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": -2
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 8",
+          "gwScore": 11.0,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 1,
+          "gameWeek": 8,
+          "milaRank": 2,
+          "milaRankLastWeek": 5,
+          "cumulativeMilaPoints": 33.5,
+          "cumulativeAverageMilaPoints": 4.19,
+          "totalCumulativeAverageMilaPoints": 3.39,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 3
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 3
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 1
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 9",
+          "gwScore": 7.0,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 1,
+          "gameWeek": 9,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
+          "cumulativeMilaPoints": 40.5,
+          "cumulativeAverageMilaPoints": 4.5,
+          "totalCumulativeAverageMilaPoints": 3.20,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 3.0
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 1
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 1
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 10",
+          "gwScore": 5.0,
+          "teamName": "Kvarts Kvaratskhmila",
+          "userName": "Mikkel Treu Os",
+          "userId": 62250902,
+          "gwPosition": 1,
+          "gameWeek": 10,
+          "milaRank": 1,
+          "milaRankLastWeek": 2,
+          "cumulativeMilaPoints": 45.5,
+          "cumulativeAverageMilaPoints": 4.55,
+          "totalCumulativeAverageMilaPoints": 3.04,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 1
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        }
+      ],
+      "teamName": "Kvarts Kvaratskhmila"
+    },
+    {
+      "results": [
+        {
+          "gw": "Gameweek 1",
           "gwScore": 0.5,
           "teamName": "Son skal det gjøres!",
           "userName": "Henrik Granum",
@@ -11266,7 +11266,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 0.5,
           "cumulativeAverageMilaPoints": 0.5,
-          "totalCumulativeAverageMilaPoints": 0.5,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11348,11 +11348,11 @@
           "userId": 62250853,
           "gwPosition": 2,
           "gameWeek": 2,
-          "milaRank": 2,
-          "milaRankLastWeek": 7,
+          "milaRank": 8,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 4.5,
           "cumulativeAverageMilaPoints": 2.25,
-          "totalCumulativeAverageMilaPoints": 2.25,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11434,11 +11434,11 @@
           "userId": 62250853,
           "gwPosition": 1,
           "gameWeek": 3,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
+          "milaRank": 4,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 13.4,
-          "cumulativeAverageMilaPoints": 4.4666666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 4.4666666666666666666666666667,
+          "cumulativeAverageMilaPoints": 4.47,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11520,11 +11520,11 @@
           "userId": 62250853,
           "gwPosition": 9,
           "gameWeek": 4,
-          "milaRank": 9,
-          "milaRankLastWeek": 9,
+          "milaRank": 7,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 11.4,
           "cumulativeAverageMilaPoints": 2.85,
-          "totalCumulativeAverageMilaPoints": 2.85,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11606,11 +11606,11 @@
           "userId": 62250853,
           "gwPosition": 2,
           "gameWeek": 5,
-          "milaRank": 2,
-          "milaRankLastWeek": 1,
+          "milaRank": 5,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 17.4,
           "cumulativeAverageMilaPoints": 3.48,
-          "totalCumulativeAverageMilaPoints": 3.48,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11692,11 +11692,11 @@
           "userId": 62250853,
           "gwPosition": 4,
           "gameWeek": 6,
-          "milaRank": 4,
+          "milaRank": 6,
           "milaRankLastWeek": 5,
           "cumulativeMilaPoints": 19.9,
-          "cumulativeAverageMilaPoints": 3.3166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.3166666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.32,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11778,11 +11778,11 @@
           "userId": 62250853,
           "gwPosition": 9,
           "gameWeek": 7,
-          "milaRank": 9,
-          "milaRankLastWeek": 7,
+          "milaRank": 7,
+          "milaRankLastWeek": 6,
           "cumulativeMilaPoints": 20.4,
-          "cumulativeAverageMilaPoints": 2.9142857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 2.9142857142857142857142857143,
+          "cumulativeAverageMilaPoints": 2.91,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11864,11 +11864,11 @@
           "userId": 62250853,
           "gwPosition": 8,
           "gameWeek": 8,
-          "milaRank": 8,
-          "milaRankLastWeek": 4,
+          "milaRank": 7,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 22.4,
           "cumulativeAverageMilaPoints": 2.8,
-          "totalCumulativeAverageMilaPoints": 2.8,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -11950,11 +11950,11 @@
           "userId": 62250853,
           "gwPosition": 5,
           "gameWeek": 9,
-          "milaRank": 5,
-          "milaRankLastWeek": 8,
+          "milaRank": 8,
+          "milaRankLastWeek": 7,
           "cumulativeMilaPoints": 23.4,
           "cumulativeAverageMilaPoints": 2.6,
-          "totalCumulativeAverageMilaPoints": 2.6,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12036,11 +12036,11 @@
           "userId": 62250853,
           "gwPosition": 9,
           "gameWeek": 10,
-          "milaRank": 9,
-          "milaRankLastWeek": 7,
+          "milaRank": 8,
+          "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 21.9,
           "cumulativeAverageMilaPoints": 2.19,
-          "totalCumulativeAverageMilaPoints": 2.19,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12131,7 +12131,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 3.0,
           "cumulativeAverageMilaPoints": 3.0,
-          "totalCumulativeAverageMilaPoints": 3.0,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12217,7 +12217,7 @@
           "milaRankLastWeek": 8,
           "cumulativeMilaPoints": 3.5,
           "cumulativeAverageMilaPoints": 1.75,
-          "totalCumulativeAverageMilaPoints": 1.75,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12299,11 +12299,11 @@
           "userId": 62250788,
           "gwPosition": 6,
           "gameWeek": 3,
-          "milaRank": 6,
-          "milaRankLastWeek": 6,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 6.0,
           "cumulativeAverageMilaPoints": 2.0,
-          "totalCumulativeAverageMilaPoints": 2.0,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12385,11 +12385,11 @@
           "userId": 62250788,
           "gwPosition": 2,
           "gameWeek": 4,
-          "milaRank": 2,
-          "milaRankLastWeek": 3,
+          "milaRank": 9,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 10.5,
-          "cumulativeAverageMilaPoints": 2.625,
-          "totalCumulativeAverageMilaPoints": 2.625,
+          "cumulativeAverageMilaPoints": 2.62,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12471,11 +12471,11 @@
           "userId": 62250788,
           "gwPosition": 1,
           "gameWeek": 5,
-          "milaRank": 1,
-          "milaRankLastWeek": 1,
+          "milaRank": 4,
+          "milaRankLastWeek": 9,
           "cumulativeMilaPoints": 17.5,
           "cumulativeAverageMilaPoints": 3.5,
-          "totalCumulativeAverageMilaPoints": 3.5,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12557,11 +12557,11 @@
           "userId": 62250788,
           "gwPosition": 3,
           "gameWeek": 6,
-          "milaRank": 3,
-          "milaRankLastWeek": 5,
+          "milaRank": 4,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 20.5,
-          "cumulativeAverageMilaPoints": 3.4166666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 3.4166666666666666666666666667,
+          "cumulativeAverageMilaPoints": 3.42,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12643,11 +12643,11 @@
           "userId": 62250788,
           "gwPosition": 3,
           "gameWeek": 7,
-          "milaRank": 3,
-          "milaRankLastWeek": 3,
+          "milaRank": 4,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 23.0,
-          "cumulativeAverageMilaPoints": 3.2857142857142857142857142857,
-          "totalCumulativeAverageMilaPoints": 3.2857142857142857142857142857,
+          "cumulativeAverageMilaPoints": 3.29,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12730,10 +12730,10 @@
           "gwPosition": 4,
           "gameWeek": 8,
           "milaRank": 4,
-          "milaRankLastWeek": 1,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 27.5,
-          "cumulativeAverageMilaPoints": 3.4375,
-          "totalCumulativeAverageMilaPoints": 3.4375,
+          "cumulativeAverageMilaPoints": 3.44,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12815,11 +12815,11 @@
           "userId": 62250788,
           "gwPosition": 2,
           "gameWeek": 9,
-          "milaRank": 2,
-          "milaRankLastWeek": 5,
+          "milaRank": 3,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 31.0,
-          "cumulativeAverageMilaPoints": 3.4444444444444444444444444444,
-          "totalCumulativeAverageMilaPoints": 3.4444444444444444444444444444,
+          "cumulativeAverageMilaPoints": 3.44,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12901,11 +12901,11 @@
           "userId": 62250788,
           "gwPosition": 5,
           "gameWeek": 10,
-          "milaRank": 5,
-          "milaRankLastWeek": 4,
+          "milaRank": 3,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 32.5,
           "cumulativeAverageMilaPoints": 3.25,
-          "totalCumulativeAverageMilaPoints": 3.25,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -12996,7 +12996,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 6.5,
           "cumulativeAverageMilaPoints": 6.5,
-          "totalCumulativeAverageMilaPoints": 6.5,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13078,11 +13078,11 @@
           "userId": 62250892,
           "gwPosition": 1,
           "gameWeek": 2,
-          "milaRank": 1,
-          "milaRankLastWeek": 5,
+          "milaRank": 3,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 12.0,
           "cumulativeAverageMilaPoints": 6.0,
-          "totalCumulativeAverageMilaPoints": 6.0,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13164,11 +13164,11 @@
           "userId": 62250892,
           "gwPosition": 2,
           "gameWeek": 3,
-          "milaRank": 2,
-          "milaRankLastWeek": 1,
+          "milaRank": 1,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 19.5,
           "cumulativeAverageMilaPoints": 6.5,
-          "totalCumulativeAverageMilaPoints": 6.5,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13250,11 +13250,11 @@
           "userId": 62250892,
           "gwPosition": 5,
           "gameWeek": 4,
-          "milaRank": 5,
-          "milaRankLastWeek": 6,
+          "milaRank": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 21.5,
-          "cumulativeAverageMilaPoints": 5.375,
-          "totalCumulativeAverageMilaPoints": 5.375,
+          "cumulativeAverageMilaPoints": 5.38,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13336,11 +13336,11 @@
           "userId": 62250892,
           "gwPosition": 8,
           "gameWeek": 5,
-          "milaRank": 8,
-          "milaRankLastWeek": 5,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 23.5,
           "cumulativeAverageMilaPoints": 4.7,
-          "totalCumulativeAverageMilaPoints": 4.7,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13422,11 +13422,11 @@
           "userId": 62250892,
           "gwPosition": 4,
           "gameWeek": 6,
-          "milaRank": 4,
-          "milaRankLastWeek": 6,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 26.0,
-          "cumulativeAverageMilaPoints": 4.3333333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 4.3333333333333333333333333333,
+          "cumulativeAverageMilaPoints": 4.33,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13508,11 +13508,11 @@
           "userId": 62250892,
           "gwPosition": 5,
           "gameWeek": 7,
-          "milaRank": 5,
-          "milaRankLastWeek": 7,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 27.5,
-          "cumulativeAverageMilaPoints": 3.9285714285714285714285714286,
-          "totalCumulativeAverageMilaPoints": 3.9285714285714285714285714286,
+          "cumulativeAverageMilaPoints": 3.93,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13594,11 +13594,11 @@
           "userId": 62250892,
           "gwPosition": 6,
           "gameWeek": 8,
-          "milaRank": 6,
+          "milaRank": 3,
           "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 31.0,
-          "cumulativeAverageMilaPoints": 3.875,
-          "totalCumulativeAverageMilaPoints": 3.875,
+          "cumulativeAverageMilaPoints": 3.88,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13680,11 +13680,11 @@
           "userId": 62250892,
           "gwPosition": 8,
           "gameWeek": 9,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
+          "milaRank": 4,
+          "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 29.5,
-          "cumulativeAverageMilaPoints": 3.2777777777777777777777777778,
-          "totalCumulativeAverageMilaPoints": 3.2777777777777777777777777778,
+          "cumulativeAverageMilaPoints": 3.28,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13766,11 +13766,11 @@
           "userId": 62250892,
           "gwPosition": 8,
           "gameWeek": 10,
-          "milaRank": 8,
-          "milaRankLastWeek": 8,
+          "milaRank": 4,
+          "milaRankLastWeek": 4,
           "cumulativeMilaPoints": 29.0,
           "cumulativeAverageMilaPoints": 2.9,
-          "totalCumulativeAverageMilaPoints": 2.9,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13852,6 +13852,871 @@
         {
           "gw": "Gameweek 1",
           "gwScore": 9.38,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 2,
+          "gameWeek": 1,
+          "milaRank": 2,
+          "milaRankLastWeek": null,
+          "cumulativeMilaPoints": 9.38,
+          "cumulativeAverageMilaPoints": 9.38,
+          "totalCumulativeAverageMilaPoints": 6.02,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0.0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 1
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 5.38
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 2",
+          "gwScore": 2.0,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 6,
+          "gameWeek": 2,
+          "milaRank": 4,
+          "milaRankLastWeek": 2,
+          "cumulativeMilaPoints": 11.38,
+          "cumulativeAverageMilaPoints": 5.69,
+          "totalCumulativeAverageMilaPoints": 4.40,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 2
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 3",
+          "gwScore": 1.0,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 9,
+          "gameWeek": 3,
+          "milaRank": 5,
+          "milaRankLastWeek": 4,
+          "cumulativeMilaPoints": 12.38,
+          "cumulativeAverageMilaPoints": 4.13,
+          "totalCumulativeAverageMilaPoints": 4.26,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 1
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 4",
+          "gwScore": 0.0,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 7,
+          "gameWeek": 4,
+          "milaRank": 6,
+          "milaRankLastWeek": 5,
+          "cumulativeMilaPoints": 12.38,
+          "cumulativeAverageMilaPoints": 3.10,
+          "totalCumulativeAverageMilaPoints": 3.68,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": -1
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 1
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": -2
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 5",
+          "gwScore": 3.5,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 5,
+          "gameWeek": 5,
+          "milaRank": 8,
+          "milaRankLastWeek": 6,
+          "cumulativeMilaPoints": 15.88,
+          "cumulativeAverageMilaPoints": 3.18,
+          "totalCumulativeAverageMilaPoints": 3.68,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": -1
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 1.5
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 1
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 6",
+          "gwScore": 2.0,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 7,
+          "gameWeek": 6,
+          "milaRank": 8,
+          "milaRankLastWeek": 8,
+          "cumulativeMilaPoints": 17.88,
+          "cumulativeAverageMilaPoints": 2.98,
+          "totalCumulativeAverageMilaPoints": 3.45,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": -1
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": -1
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 0
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 7",
+          "gwScore": 0.69,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 8,
+          "gameWeek": 7,
+          "milaRank": 8,
+          "milaRankLastWeek": 8,
+          "cumulativeMilaPoints": 18.57,
+          "cumulativeAverageMilaPoints": 2.65,
+          "totalCumulativeAverageMilaPoints": 3.23,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": -1
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 0
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 1.69
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 0
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 8",
+          "gwScore": 7.0,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 2,
+          "gameWeek": 8,
+          "milaRank": 5,
+          "milaRankLastWeek": 8,
+          "cumulativeMilaPoints": 25.57,
+          "cumulativeAverageMilaPoints": 3.20,
+          "totalCumulativeAverageMilaPoints": 3.39,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": -1
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 1
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 3
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 1
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 1
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 9",
+          "gwScore": -1.5,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 8,
+          "gameWeek": 9,
+          "milaRank": 7,
+          "milaRankLastWeek": 5,
+          "cumulativeMilaPoints": 24.07,
+          "cumulativeAverageMilaPoints": 2.67,
+          "totalCumulativeAverageMilaPoints": 3.20,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": -1
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": 0
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 0.5
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": -2
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 0
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 1
+            }
+          ]
+        },
+        {
+          "gw": "Gameweek 10",
+          "gwScore": 1.5,
+          "teamName": "Mila High Club",
+          "userName": "Simen Aakhus",
+          "userId": 62250799,
+          "gwPosition": 5,
+          "gameWeek": 10,
+          "milaRank": 7,
+          "milaRankLastWeek": 7,
+          "cumulativeMilaPoints": 25.57,
+          "cumulativeAverageMilaPoints": 2.56,
+          "totalCumulativeAverageMilaPoints": 3.04,
+          "rules": [
+            {
+              "ruleName": "BenchFail",
+              "ruleShortName": "BF",
+              "points": 0
+            },
+            {
+              "ruleName": "CapFailScore",
+              "ruleShortName": "CF",
+              "points": -1
+            },
+            {
+              "ruleName": "EqualStreak",
+              "ruleShortName": "ES",
+              "points": 0
+            },
+            {
+              "ruleName": "GameWeekPosition",
+              "ruleShortName": "GW PS",
+              "points": 0.5
+            },
+            {
+              "ruleName": "HeadToHeadMeta",
+              "ruleShortName": "H2H",
+              "points": 0
+            },
+            {
+              "ruleName": "IncreaseStreak",
+              "ruleShortName": "IS",
+              "points": 0.0
+            },
+            {
+              "ruleName": "MinusIsPlus",
+              "ruleShortName": "MiP",
+              "points": 0
+            },
+            {
+              "ruleName": "MissedPenalties",
+              "ruleShortName": "MP",
+              "points": 0
+            },
+            {
+              "ruleName": "RedCards",
+              "ruleShortName": "RC",
+              "points": 0
+            },
+            {
+              "ruleName": "Sellout",
+              "ruleShortName": "$0",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNine",
+              "ruleShortName": "69",
+              "points": 0
+            },
+            {
+              "ruleName": "SixtyNineSub",
+              "ruleShortName": "69Sub",
+              "points": 0
+            },
+            {
+              "ruleName": "UniqueCap",
+              "ruleShortName": "Unq Cap",
+              "points": 2
+            },
+            {
+              "ruleName": "YellowCards",
+              "ruleShortName": "YC",
+              "points": 0
+            }
+          ]
+        }
+      ],
+      "teamName": "Mila High Club"
+    },
+    {
+      "results": [
+        {
+          "gw": "Gameweek 1",
+          "gwScore": 9.38,
           "teamName": "casemilaX",
           "userName": "Malte Loller-Andersen",
           "userId": 62250921,
@@ -13861,7 +14726,7 @@
           "milaRankLastWeek": null,
           "cumulativeMilaPoints": 9.38,
           "cumulativeAverageMilaPoints": 9.38,
-          "totalCumulativeAverageMilaPoints": 9.38,
+          "totalCumulativeAverageMilaPoints": 6.02,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -13943,11 +14808,11 @@
           "userId": 62250921,
           "gwPosition": 5,
           "gameWeek": 2,
-          "milaRank": 5,
-          "milaRankLastWeek": 7,
+          "milaRank": 2,
+          "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 12.38,
           "cumulativeAverageMilaPoints": 6.19,
-          "totalCumulativeAverageMilaPoints": 6.19,
+          "totalCumulativeAverageMilaPoints": 4.40,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14029,11 +14894,11 @@
           "userId": 62250921,
           "gwPosition": 4,
           "gameWeek": 3,
-          "milaRank": 4,
+          "milaRank": 3,
           "milaRankLastWeek": 2,
           "cumulativeMilaPoints": 16.38,
           "cumulativeAverageMilaPoints": 5.46,
-          "totalCumulativeAverageMilaPoints": 5.46,
+          "totalCumulativeAverageMilaPoints": 4.26,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14119,7 +14984,7 @@
           "milaRankLastWeek": 3,
           "cumulativeMilaPoints": 21.88,
           "cumulativeAverageMilaPoints": 5.47,
-          "totalCumulativeAverageMilaPoints": 5.47,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14201,11 +15066,11 @@
           "userId": 62250921,
           "gwPosition": 6,
           "gameWeek": 5,
-          "milaRank": 6,
-          "milaRankLastWeek": 4,
+          "milaRank": 1,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 24.38,
-          "cumulativeAverageMilaPoints": 4.876,
-          "totalCumulativeAverageMilaPoints": 4.876,
+          "cumulativeAverageMilaPoints": 4.88,
+          "totalCumulativeAverageMilaPoints": 3.68,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14291,7 +15156,7 @@
           "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 31.38,
           "cumulativeAverageMilaPoints": 5.23,
-          "totalCumulativeAverageMilaPoints": 5.23,
+          "totalCumulativeAverageMilaPoints": 3.45,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14374,10 +15239,10 @@
           "gwPosition": 1,
           "gameWeek": 7,
           "milaRank": 1,
-          "milaRankLastWeek": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 35.38,
-          "cumulativeAverageMilaPoints": 5.0542857142857142857142857143,
-          "totalCumulativeAverageMilaPoints": 5.0542857142857142857142857143,
+          "cumulativeAverageMilaPoints": 5.05,
+          "totalCumulativeAverageMilaPoints": 3.23,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14459,11 +15324,11 @@
           "userId": 62250921,
           "gwPosition": 3,
           "gameWeek": 8,
-          "milaRank": 3,
+          "milaRank": 1,
           "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 40.88,
           "cumulativeAverageMilaPoints": 5.11,
-          "totalCumulativeAverageMilaPoints": 5.11,
+          "totalCumulativeAverageMilaPoints": 3.39,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14545,11 +15410,11 @@
           "userId": 62250921,
           "gwPosition": 5,
           "gameWeek": 9,
-          "milaRank": 5,
-          "milaRankLastWeek": 8,
+          "milaRank": 1,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 41.88,
-          "cumulativeAverageMilaPoints": 4.6533333333333333333333333333,
-          "totalCumulativeAverageMilaPoints": 4.6533333333333333333333333333,
+          "cumulativeAverageMilaPoints": 4.65,
+          "totalCumulativeAverageMilaPoints": 3.20,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14631,11 +15496,11 @@
           "userId": 62250921,
           "gwPosition": 4,
           "gameWeek": 10,
-          "milaRank": 4,
-          "milaRankLastWeek": 4,
+          "milaRank": 2,
+          "milaRankLastWeek": 1,
           "cumulativeMilaPoints": 43.88,
-          "cumulativeAverageMilaPoints": 4.388,
-          "totalCumulativeAverageMilaPoints": 4.388,
+          "cumulativeAverageMilaPoints": 4.39,
+          "totalCumulativeAverageMilaPoints": 3.04,
           "rules": [
             {
               "ruleName": "BenchFail",
@@ -14711,871 +15576,6 @@
         }
       ],
       "teamName": "casemilaX"
-    },
-    {
-      "results": [
-        {
-          "gw": "Gameweek 1",
-          "gwScore": 9.38,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 2,
-          "gameWeek": 1,
-          "milaRank": 2,
-          "milaRankLastWeek": null,
-          "cumulativeMilaPoints": 9.38,
-          "cumulativeAverageMilaPoints": 9.38,
-          "totalCumulativeAverageMilaPoints": 9.38,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0.0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 1
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 5.38
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 3
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 2",
-          "gwScore": 2.0,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 6,
-          "gameWeek": 2,
-          "milaRank": 6,
-          "milaRankLastWeek": 8,
-          "cumulativeMilaPoints": 11.38,
-          "cumulativeAverageMilaPoints": 5.69,
-          "totalCumulativeAverageMilaPoints": 5.69,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 2
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 0
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 3",
-          "gwScore": 1.0,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 9,
-          "gameWeek": 3,
-          "milaRank": 9,
-          "milaRankLastWeek": 7,
-          "cumulativeMilaPoints": 12.38,
-          "cumulativeAverageMilaPoints": 4.1266666666666666666666666667,
-          "totalCumulativeAverageMilaPoints": 4.1266666666666666666666666667,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 1
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 0
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 4",
-          "gwScore": 0.0,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 7,
-          "gameWeek": 4,
-          "milaRank": 7,
-          "milaRankLastWeek": 9,
-          "cumulativeMilaPoints": 12.38,
-          "cumulativeAverageMilaPoints": 3.095,
-          "totalCumulativeAverageMilaPoints": 3.095,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": -1
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 1
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": -2
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 5",
-          "gwScore": 3.5,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 5,
-          "gameWeek": 5,
-          "milaRank": 5,
-          "milaRankLastWeek": 4,
-          "cumulativeMilaPoints": 15.88,
-          "cumulativeAverageMilaPoints": 3.176,
-          "totalCumulativeAverageMilaPoints": 3.176,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": -1
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 1.5
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 1
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 6",
-          "gwScore": 2.0,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 7,
-          "gameWeek": 6,
-          "milaRank": 7,
-          "milaRankLastWeek": 7,
-          "cumulativeMilaPoints": 17.88,
-          "cumulativeAverageMilaPoints": 2.98,
-          "totalCumulativeAverageMilaPoints": 2.98,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": -1
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": -1
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 0
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 2
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 7",
-          "gwScore": 0.69,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 8,
-          "gameWeek": 7,
-          "milaRank": 8,
-          "milaRankLastWeek": 7,
-          "cumulativeMilaPoints": 18.57,
-          "cumulativeAverageMilaPoints": 2.6528571428571428571428571429,
-          "totalCumulativeAverageMilaPoints": 2.6528571428571428571428571429,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": -1
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 0
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 1.69
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 0
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 8",
-          "gwScore": 7.0,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 2,
-          "gameWeek": 8,
-          "milaRank": 2,
-          "milaRankLastWeek": 1,
-          "cumulativeMilaPoints": 25.57,
-          "cumulativeAverageMilaPoints": 3.19625,
-          "totalCumulativeAverageMilaPoints": 3.19625,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": -1
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 1
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 3
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 1
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 1
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 9",
-          "gwScore": -1.5,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 8,
-          "gameWeek": 9,
-          "milaRank": 8,
-          "milaRankLastWeek": 9,
-          "cumulativeMilaPoints": 24.07,
-          "cumulativeAverageMilaPoints": 2.6744444444444444444444444444,
-          "totalCumulativeAverageMilaPoints": 2.6744444444444444444444444444,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": -1
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": 0
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 0.5
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": -2
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 0
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 1
-            }
-          ]
-        },
-        {
-          "gw": "Gameweek 10",
-          "gwScore": 1.5,
-          "teamName": "Mila High Club",
-          "userName": "Simen Aakhus",
-          "userId": 62250799,
-          "gwPosition": 5,
-          "gameWeek": 10,
-          "milaRank": 5,
-          "milaRankLastWeek": 5,
-          "cumulativeMilaPoints": 25.57,
-          "cumulativeAverageMilaPoints": 2.557,
-          "totalCumulativeAverageMilaPoints": 2.557,
-          "rules": [
-            {
-              "ruleName": "BenchFail",
-              "ruleShortName": "BF",
-              "points": 0
-            },
-            {
-              "ruleName": "CapFailScore",
-              "ruleShortName": "CF",
-              "points": -1
-            },
-            {
-              "ruleName": "EqualStreak",
-              "ruleShortName": "ES",
-              "points": 0
-            },
-            {
-              "ruleName": "GameWeekPosition",
-              "ruleShortName": "GW PS",
-              "points": 0.5
-            },
-            {
-              "ruleName": "HeadToHeadMeta",
-              "ruleShortName": "H2H",
-              "points": 0
-            },
-            {
-              "ruleName": "IncreaseStreak",
-              "ruleShortName": "IS",
-              "points": 0.0
-            },
-            {
-              "ruleName": "MinusIsPlus",
-              "ruleShortName": "MiP",
-              "points": 0
-            },
-            {
-              "ruleName": "MissedPenalties",
-              "ruleShortName": "MP",
-              "points": 0
-            },
-            {
-              "ruleName": "RedCards",
-              "ruleShortName": "RC",
-              "points": 0
-            },
-            {
-              "ruleName": "Sellout",
-              "ruleShortName": "$0",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNine",
-              "ruleShortName": "69",
-              "points": 0
-            },
-            {
-              "ruleName": "SixtyNineSub",
-              "ruleShortName": "69Sub",
-              "points": 0
-            },
-            {
-              "ruleName": "UniqueCap",
-              "ruleShortName": "Unq Cap",
-              "points": 2
-            },
-            {
-              "ruleName": "YellowCards",
-              "ruleShortName": "YC",
-              "points": 0
-            }
-          ]
-        }
-      ],
-      "teamName": "Mila High Club"
     }
   ],
   "overallScore": [
@@ -15589,8 +15589,8 @@
       "cumulativeMilaPoints": 28.5,
       "cumulativeAverageMilaPoints": 2.85,
       "totalCumulativeAverageMilaPoints": 2.85,
-      "milaRank": 2,
-      "milaRankLastWeek": 2
+      "milaRank": 5,
+      "milaRankLastWeek": 6
     },
     {
       "gwScore": 0.0,
@@ -15602,8 +15602,21 @@
       "cumulativeMilaPoints": 25.9,
       "cumulativeAverageMilaPoints": 2.59,
       "totalCumulativeAverageMilaPoints": 2.59,
-      "milaRank": 7,
-      "milaRankLastWeek": 7
+      "milaRank": 6,
+      "milaRankLastWeek": 5
+    },
+    {
+      "gwScore": 2.5,
+      "teamName": "Flat Shoe Society",
+      "userName": "Samson Svendsen",
+      "userId": 62250861,
+      "gwPosition": 3,
+      "gameWeek": 10,
+      "cumulativeMilaPoints": 21.0,
+      "cumulativeAverageMilaPoints": 2.1,
+      "totalCumulativeAverageMilaPoints": 2.1,
+      "milaRank": 9,
+      "milaRankLastWeek": 9
     },
     {
       "gwScore": 5.0,
@@ -15616,20 +15629,7 @@
       "cumulativeAverageMilaPoints": 4.55,
       "totalCumulativeAverageMilaPoints": 4.55,
       "milaRank": 1,
-      "milaRankLastWeek": 1
-    },
-    {
-      "gwScore": 2.5,
-      "teamName": "Flat Shoe Society",
-      "userName": "Samson Svendsen",
-      "userId": 62250861,
-      "gwPosition": 3,
-      "gameWeek": 10,
-      "cumulativeMilaPoints": 21.0,
-      "cumulativeAverageMilaPoints": 2.1,
-      "totalCumulativeAverageMilaPoints": 2.1,
-      "milaRank": 3,
-      "milaRankLastWeek": 4
+      "milaRankLastWeek": 2
     },
     {
       "gwScore": -1.5,
@@ -15641,8 +15641,8 @@
       "cumulativeMilaPoints": 21.9,
       "cumulativeAverageMilaPoints": 2.19,
       "totalCumulativeAverageMilaPoints": 2.19,
-      "milaRank": 9,
-      "milaRankLastWeek": 7
+      "milaRank": 8,
+      "milaRankLastWeek": 8
     },
     {
       "gwScore": 1.5,
@@ -15654,8 +15654,8 @@
       "cumulativeMilaPoints": 32.5,
       "cumulativeAverageMilaPoints": 3.25,
       "totalCumulativeAverageMilaPoints": 3.25,
-      "milaRank": 5,
-      "milaRankLastWeek": 4
+      "milaRank": 3,
+      "milaRankLastWeek": 3
     },
     {
       "gwScore": -0.5,
@@ -15667,19 +15667,6 @@
       "cumulativeMilaPoints": 29.0,
       "cumulativeAverageMilaPoints": 2.9,
       "totalCumulativeAverageMilaPoints": 2.9,
-      "milaRank": 8,
-      "milaRankLastWeek": 8
-    },
-    {
-      "gwScore": 2.0,
-      "teamName": "casemilaX",
-      "userName": "Malte Loller-Andersen",
-      "userId": 62250921,
-      "gwPosition": 4,
-      "gameWeek": 10,
-      "cumulativeMilaPoints": 43.88,
-      "cumulativeAverageMilaPoints": 4.388,
-      "totalCumulativeAverageMilaPoints": 4.388,
       "milaRank": 4,
       "milaRankLastWeek": 4
     },
@@ -15691,10 +15678,23 @@
       "gwPosition": 5,
       "gameWeek": 10,
       "cumulativeMilaPoints": 25.57,
-      "cumulativeAverageMilaPoints": 2.557,
-      "totalCumulativeAverageMilaPoints": 2.557,
-      "milaRank": 5,
-      "milaRankLastWeek": 5
+      "cumulativeAverageMilaPoints": 2.56,
+      "totalCumulativeAverageMilaPoints": 2.56,
+      "milaRank": 7,
+      "milaRankLastWeek": 7
+    },
+    {
+      "gwScore": 2.0,
+      "teamName": "casemilaX",
+      "userName": "Malte Loller-Andersen",
+      "userId": 62250921,
+      "gwPosition": 4,
+      "gameWeek": 10,
+      "cumulativeMilaPoints": 43.88,
+      "cumulativeAverageMilaPoints": 4.39,
+      "totalCumulativeAverageMilaPoints": 4.39,
+      "milaRank": 2,
+      "milaRankLastWeek": 1
     }
   ]
 }
