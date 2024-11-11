@@ -11,6 +11,7 @@ public static class DependencyInjection
         var serviceCollection = new ServiceCollection();
 
         serviceCollection.AddTransient<Processor>();
+        serviceCollection.AddTransient<HistorySummarizer>();
         serviceCollection.AddTransient<IRulesProcessor, RulesProcessor>();
         serviceCollection.AddTransient<FplImporter>();
         serviceCollection.AddHttpClient<IFplService, FplService>();
