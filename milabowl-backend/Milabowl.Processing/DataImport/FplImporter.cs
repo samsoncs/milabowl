@@ -6,15 +6,13 @@ namespace Milabowl.Processing.DataImport;
 public class FplImporter
 {
     private readonly IFplService _fplService;
-    private readonly IRulesProcessor _rulesProcessor;
 
-    public FplImporter(IFplService fplService, IRulesProcessor rulesProcessor)
+    public FplImporter(IFplService fplService)
     {
         _fplService = fplService;
-        _rulesProcessor = rulesProcessor;
     }
 
-    public async Task<IReadOnlyList<MilaResult>> Import()
+    public async Task<IReadOnlyList<MilaGameWeekState>> Import()
     {
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
@@ -47,7 +45,7 @@ public class FplImporter
             }
         }
 
-        var milaGameWeekStates = userStates
+        return userStates
             .GroupBy(u => u.Event)
             .SelectMany(s =>
                 s.ToList()
@@ -57,10 +55,5 @@ public class FplImporter
                     ))
             )
             .ToList();
-
-        return milaGameWeekStates
-            .Select(m => _rulesProcessor.CalculateForUserGameWeek(m))
-            .ToList()
-            .AsReadOnly();
     }
 }
