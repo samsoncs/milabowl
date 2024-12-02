@@ -62,7 +62,7 @@ namespace Milabowl.Domain.Processing
 
         public decimal GetRedCardScore(IList<MilaRuleData> playerEvents)
         {
-            return playerEvents.Sum(pe => pe.RedCards * pe.Multiplier * 3);
+            return playerEvents.Sum(pe => pe.RedCards * pe.Multiplier * 6);
         }
         public decimal GetMinusIsPlusScore(IList<MilaRuleData> playerEvents)
         {
