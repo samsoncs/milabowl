@@ -57,12 +57,13 @@ namespace Milabowl.Infrastructure.Repositories
                                 2 => "DEF",
                                 3 => "MID",
                                 4 => "FWD",
+                                5 => "MNG",
                                 _ => throw new ArgumentException("Not possible")
                             },
                             pel.IsCaptain,
                             pel.IsViceCaptain,
                             pel.Multiplier == 0
-                        )).ToList()
+                        )).Where(pel => pel.Position != "MNG").ToList()
                     );
                 });
             });
