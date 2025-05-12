@@ -62,7 +62,7 @@ namespace Milabowl.Domain.Processing
 
         public decimal GetRedCardScore(IList<MilaRuleData> playerEvents)
         {
-            return playerEvents.Sum(pe => pe.RedCards * pe.Multiplier * 3);
+            return playerEvents.Sum(pe => pe.RedCards * pe.Multiplier * 6);
         }
         public decimal GetMinusIsPlusScore(IList<MilaRuleData> playerEvents)
         {
@@ -122,7 +122,7 @@ namespace Milabowl.Domain.Processing
                     increaseStreakCount = 0;
                 }
             }
-            return increaseStreakCount > 1 ? 1 : 0;
+            return increaseStreakCount > 1 ? 0 : 0;
         }
 
         public decimal GetHeadToHeadMetaScore(UserHeadToHead userHeadToHeadDto)
