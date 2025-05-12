@@ -42,7 +42,7 @@ namespace Milabowl.Domain.Processing
         }
         public decimal GetCapDefScore(IList<MilaRuleData> playerEvents, Player currentUserCaptain)
         {
-            return playerEvents.Any(pe => pe.PlayerPosition == 2 && currentUserCaptain.PlayerId == pe.Player.PlayerId && pe.Minutes > 45) ? 1 : 0;
+            return playerEvents.Any(pe => pe.PlayerPosition == 2 && currentUserCaptain.PlayerId == pe.Player.PlayerId && pe.Minutes > 45) ? 0 : 0;
         }
 
         public decimal GetSixtyNine(IList<MilaRuleData> playerEvents)
