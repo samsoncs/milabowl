@@ -138,7 +138,7 @@ public class MilaPointsProcessorService : IMilaPointsProcessorService
                     YellowCard = _milaRuleBusiness.GetYellowCardScore(playerEventsForUserOnEvent),
                     MinusIsPlus = _milaRuleBusiness.GetMinusIsPlusScore(playerEventsForUserOnEvent), //TODO: Change to MinusIsPlus
                     IncreaseStreak = _milaRuleBusiness.GetIncreaseStreakScore(pointsPerGameweekAsc, evt.GameWeek),
-                    EqualStreak = pointsPerGameweekAsc.Count > 1 && pointsPerGameweekAsc[^1] == pointsPerGameweekAsc[^2] ? 6.9m : 0,
+                    EqualStreak = 0, //pointsPerGameweekAsc.Count > 1 && pointsPerGameweekAsc[^1] == pointsPerGameweekAsc[^2] ? 6.9m : 0,
                     HeadToHeadMeta = _milaRuleBusiness.GetHeadToHeadMetaScore(headToHeadDto),
                     UniqueCap = _milaRuleBusiness.GetUniqueCaptainScore(userCaptain, evt.Lineups),
                     SixtyNineSub = _milaRuleBusiness.GetSixtyNineSub(playerEventsForUserOnEvent),
