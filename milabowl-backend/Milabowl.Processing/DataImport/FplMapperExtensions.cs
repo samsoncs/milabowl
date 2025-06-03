@@ -1,4 +1,5 @@
-﻿using Milabowl.Processing.DataImport.FplDtos;
+﻿using System.Diagnostics;
+using Milabowl.Processing.DataImport.FplDtos;
 using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.DataImport;
@@ -97,6 +98,7 @@ public static class FplMapperExtensions
         return new PlayerEvent(
             player.FirstName,
             player.SecondName,
+            player.WebName,
             element.id,
             element.stats.minutes,
             element.stats.goals_scored,
@@ -120,7 +122,16 @@ public static class FplMapperExtensions
             pick.multiplier,
             pick.is_captain,
             pick.is_vice_captain,
-            pick.position
+            pick.position,
+            player.ElementType switch
+            {
+                1 => "GK",
+                2 => "DEF",
+                3 => "MID",
+                4 => "FWD",
+                5 => "MAN",
+                _ => throw new ArgumentOutOfRangeException()
+            }
         );
     }
 }

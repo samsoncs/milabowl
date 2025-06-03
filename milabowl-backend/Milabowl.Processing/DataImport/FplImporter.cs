@@ -1,4 +1,5 @@
-﻿using Milabowl.Processing.DataImport.Models;
+﻿using Milabowl.Processing.DataImport.MilaDtos;
+using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing;
 
 namespace Milabowl.Processing.DataImport;
@@ -12,7 +13,7 @@ public class FplImporter
         _fplService = fplService;
     }
 
-    public async Task<IReadOnlyList<MilaGameWeekState>> Import()
+    public async Task<IReadOnlyList<MilaGameWeekState>> ImportFplDataForRulesProcessing()
     {
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
@@ -55,5 +56,40 @@ public class FplImporter
                     ))
             )
             .ToList();
+    }
+
+    public async Task<FplResults> ImportFplData()
+    {
+        var bootstrapRoot = await _fplService.GetBootstrapRoot();
+        var events = bootstrapRoot.Events;
+        var players = bootstrapRoot.Players;
+        var leagueRoot = await _fplService.GetLeagueRoot();
+        var users = leagueRoot.standings.results;
+
+        var fplUserGameWeekResult = new List<FplUserGameWeekResult>();
+
+        foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
+        {
+            var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
+
+            foreach (var user in users)
+            {
+                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
+
+                var lineup = picksRoot.ToLineup(eventRootDto, players);
+
+                fplUserGameWeekResult.Add(new FplUserGameWeekResult(
+                    finishedEvent.Id,
+                    user.entry_name,
+                    user.total,
+                    lineup.Select(l => new FplPlayerEventResult(l.WebName, "Liverpool",
+                        l.TotalPoints, l.PlayerPositionString, l.IsCaptain, l.IsViceCaptain,
+                        l.Multiplier == 0)).ToList()
+                ));
+
+            }
+        }
+
+        return new FplResults(fplUserGameWeekResult);
     }
 }

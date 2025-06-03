@@ -3,6 +3,7 @@
 public record PlayerEvent(
     string FirstName,
     string Surname,
+    string WebName,
     //Guid PlayerEventId,
     int FantasyPlayerEventId,
     // Player Player,
@@ -31,5 +32,6 @@ public record PlayerEvent(
     int Multiplier,
     bool IsCaptain,
     bool IsViceCaptain,
-    int PlayerPosition
+    int PlayerPosition,
+    string PlayerPositionString
 );
