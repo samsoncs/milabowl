@@ -1,12 +1,12 @@
 ---
 import Card from '../../components/core/Card.astro';
 import Layout from '../../layouts/Layout.astro';
-import game_state from '../../../src/game_state/game_state.json';
-import type { MilaResultsDTO } from '../../../src/game_state/gameState';
+import game_state_v2 from '../../../src/game_state/game_state_v2.json';
+import type { MilaResultsDTO } from '../../../src/game_state/gameState_v2';
 import StandingsTable from './_StandingsTable.tsx';
 import StandingsTableMobile from './_StandingsTable_Mobile.tsx';
 import Link from '../../components/core/Link.astro';
-const milaResults: MilaResultsDTO = game_state;
+const milaResults: MilaResultsDTO = game_state_v2;
 const overallScore = milaResults.overallScore;
 const images: ImageMetadata[] = await Astro.glob('../../assets/*').then(
     (files) => {
@@ -15,7 +15,7 @@ const images: ImageMetadata[] = await Astro.glob('../../assets/*').then(
 );
 const lastGameWeek = Math.max.apply(
     Math,
-    game_state.resultsByWeek.map((r) => r.gameWeek)
+    game_state_v2.resultsByWeek.map((r) => r.gameWeek)
 );
 ---
 

@@ -18,10 +18,10 @@ declare module '@tanstack/react-table' {
     }
 }
 
-const columnHelper = createColumnHelper<OverallResult>();
+const columnHelper = createColumnHelper<GameWeekResult>();
 
 interface Props {
-    data: OverallResult[];
+    data: GameWeekResult[];
     resultsByUser: ResultsByUser[];
     lastGameWeek: number;
     avatars: ImageMetadata[];

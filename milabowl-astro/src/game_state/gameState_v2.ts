@@ -11,7 +11,6 @@ export interface GameWeekResult {
     cumulativeMilaPoints: number;
     cumulativeAverageMilaPoints: number;
     totalCumulativeAverageMilaPoints: number;
-
     rules: MilaRulePoints[];
 }
 
@@ -37,7 +36,7 @@ export interface ResultsByUser {
 export interface MilaResultsDTO {
     resultsByWeek: ResultsByWeek[];
     resultsByUser: ResultsByUser[];
-    overallScore: OverallResult[];
+    overallScore: GameWeekResult[];
 }
 
 export interface OverallResult {
@@ -52,4 +51,5 @@ export interface OverallResult {
     totalCumulativeAverageMilaPoints: number;
     milaRank: number;
     milaRankLastWeek: number;
+    rules: MilaRulePoints[];
 }

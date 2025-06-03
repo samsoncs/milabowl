@@ -1,4 +1,4 @@
-import type { GameWeekResult } from '../../game_state/gameState';
+import type { GameWeekResult } from '../../game_state/gameState_v2';
 import { useMemo } from 'react';
 import SortableTable from '../../components/core/Table/SortableTable';
 import { getStandingsColmns } from './_standingsColumns';
@@ -11,7 +11,7 @@ interface Props {
 
 const StandingsTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
     const columns = useMemo(
-        () => getStandingsColmns(avatars, lastGameWeek),
+        () => getStandingsColmns(data, avatars, lastGameWeek),
         []
     );
 

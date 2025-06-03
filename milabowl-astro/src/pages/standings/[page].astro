@@ -1,11 +1,11 @@
 ---
 import type { GetStaticPaths, Page } from 'astro';
 import Layout from '../../layouts/Layout.astro';
-import game_state from '../../../src/game_state/game_state.json';
+import game_state_v2 from '../../../src/game_state/game_state_v2.json';
 import type {
     MilaResultsDTO,
     ResultsByWeek,
-} from '../../../src/game_state/gameState';
+} from '../../../src/game_state/gameState_v2';
 import Card from '../../components/core/Card.astro';
 import StandingsTable from './_StandingsTable.tsx';
 import StandingsTableMobile from './_StandingsTable_Mobile.tsx';
@@ -17,7 +17,7 @@ const images: ImageMetadata[] = await Astro.glob('../../assets/*').then(
 );
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-    const milaResults: MilaResultsDTO = game_state;
+    const milaResults: MilaResultsDTO = game_state_v2;
     const milaResultsByWeek = milaResults.resultsByWeek;
     return paginate(milaResultsByWeek, { pageSize: 1 });
 };

@@ -26,6 +26,7 @@ public class MilaResults
 public record OverallResult(
     decimal GwScore,
     string TeamName,
+    string Gw,
     string UserName,
     int UserId,
     decimal GwPosition,
@@ -34,7 +35,8 @@ public record OverallResult(
     decimal CumulativeAverageMilaPoints,
     decimal TotalCumulativeAverageMilaPoints,
     int? MilaRank,
-    int? MilaRankLastWeek
+    int? MilaRankLastWeek,
+    IList<MilaRuleResult> Rules
 );
 
 public class GameWeekResults

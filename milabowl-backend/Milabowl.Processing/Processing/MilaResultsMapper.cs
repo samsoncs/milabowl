@@ -29,9 +29,19 @@ public static class MilaResultMapper
                 .Select(s =>
                 {
                     var last = s.OrderBy(r => r.GameWeek).Last();
+                    var summedResults = s.SelectMany(r => r.Rules)
+                        .GroupBy(r => r.RuleShortName)
+                        .Select(a =>
+                        {
+                            var first = a.First();
+                            return first with { Points = a.Sum(aa => aa.Points) };
+                        })
+                        .ToList();
+
                     return new OverallResult(
                         last.GwScore,
                         last.TeamName,
+                        last.Gw,
                         last.UserName,
                         last.UserId,
                         last.GwPosition,
@@ -40,7 +50,8 @@ public static class MilaResultMapper
                         last.CumulativeAverageMilaPoints,
                         last.CumulativeAverageMilaPoints,
                         last.MilaRank,
-                        last.MilaRankLastWeek
+                        last.MilaRankLastWeek,
+                        summedResults
                     );
                 })
                 .ToList(),

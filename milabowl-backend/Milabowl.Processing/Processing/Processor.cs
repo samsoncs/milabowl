@@ -23,7 +23,7 @@ public class Processor
         _rulesProcessor = rulesProcessor;
     }
 
-    public async Task ProcessMilaPoints()
+    public async Task ProcessMilaPoints(string filePath)
     {
         Console.WriteLine("Importing FPL data");
         var importedGameWeekStates = await _importer.Import();
@@ -33,6 +33,7 @@ public class Processor
         Console.WriteLine("Processing rules - Finished");
         var summarizedMilaResults = _summarizer.Summarize(results);
         var json = JsonSerializer.Serialize(summarizedMilaResults.MapToResult(), _jsonOptions);
+        await File.WriteAllTextAsync($"{filePath}/game_state.json", json);
         Console.WriteLine("Mila points processing complete");
     }
 
