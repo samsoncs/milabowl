@@ -1,4 +1,4 @@
-import type { GameWeekResult } from '../../game_state/gameState_v2';
+import type { GameWeekResult } from '../../game_state/gameState';
 import { useMemo } from 'react';
 import SortableTable from '../../components/core/Table/SortableTable';
 import { getStandingsColmns } from './_standingsColumns';

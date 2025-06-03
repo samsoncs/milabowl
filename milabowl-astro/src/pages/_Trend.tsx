@@ -6,8 +6,8 @@ import {
     ResponsiveBump,
 } from '@nivo/bump';
 import { useEffect, useState } from 'react';
-import game_state_v2 from '../game_state/game_state_v2.json';
-import type { MilaResultsDTO } from '../game_state/gameState_v2';
+import game_state from '../game_state/game_state.json';
+import type { MilaResultsDTO } from '../game_state/gameState';
 import colors from 'tailwindcss/colors';
 
 interface PlayerStandingsChartProps {
@@ -165,7 +165,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
 };
 
 const Trend = () => {
-    const milaResults: MilaResultsDTO = game_state_v2;
+    const milaResults: MilaResultsDTO = game_state;
 
     return <PlayerStandingsChart results={milaResults} />;
 };

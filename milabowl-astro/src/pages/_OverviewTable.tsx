@@ -3,7 +3,7 @@ import type {
     GameWeekResult,
     OverallResult,
     ResultsByUser,
-} from '../game_state/gameState_v2';
+} from '../game_state/gameState';
 import SortableTable from '../components/core/Table/SortableTable';
 import { useMemo } from 'react';
 import PositionDelta from '../components/core/PositionDelta';

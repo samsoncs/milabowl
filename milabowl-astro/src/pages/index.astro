@@ -2,13 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/core/Card.astro';
 import Trend from './_Trend';
-import game_state_v2 from '../../src/game_state/game_state_v2.json';
+import game_state from '../../src/game_state/game_state.json';
 import fpl_state from '../../src/game_state/fpl_state.json';
-import type { MilaResultsDTO } from '../../src/game_state/gameState_v2';
+import type { MilaResultsDTO } from '../game_state/gameState';
 import Link from '../components/core/Link.astro';
 import OverviewTable from './_OverviewTable';
 
-const milaResults: MilaResultsDTO = game_state_v2;
+const milaResults: MilaResultsDTO = game_state;
 
 const images: ImageMetadata[] = await Astro.glob('../assets/*').then(
     (files) => {
