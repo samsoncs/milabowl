@@ -11,7 +11,7 @@ interface Props {
 
 const StandingsTable: React.FC<Props> = ({ data, lastGameWeek, avatars }) => {
     const columns = useMemo(
-        () => getStandingsColmns(avatars, lastGameWeek),
+        () => getStandingsColmns(data, avatars, lastGameWeek),
         []
     );
 

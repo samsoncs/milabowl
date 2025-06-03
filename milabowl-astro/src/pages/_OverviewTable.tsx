@@ -1,5 +1,9 @@
 import { createColumnHelper, type RowData } from '@tanstack/react-table';
-import type { GameWeekResult, ResultsByUser } from '../game_state/gameState';
+import type {
+    GameWeekResult,
+    OverallResult,
+    ResultsByUser,
+} from '../game_state/gameState';
 import SortableTable from '../components/core/Table/SortableTable';
 import { useMemo } from 'react';
 import PositionDelta from '../components/core/PositionDelta';
@@ -32,7 +36,7 @@ const OverviewTable: React.FC<Props> = ({
     const columns = useMemo(
         () => [
             columnHelper.display({
-                id: 'rank',
+                id: 'milaRank',
                 header: '#',
                 cell: (props) => {
                     const deltaPosition =
@@ -113,8 +117,8 @@ const OverviewTable: React.FC<Props> = ({
                     classNames: 'hidden sm:table-cell lg:hidden xl:table-cell',
                 },
             }),
-            columnHelper.accessor('milaPoints.total', {
-                id: 'gameWeek',
+            columnHelper.accessor('gwScore', {
+                id: 'gwScore',
                 header: 'GW',
                 meta: {
                     align: 'right',
@@ -131,7 +135,7 @@ const OverviewTable: React.FC<Props> = ({
             //     }
             // }),
             columnHelper.accessor('cumulativeMilaPoints', {
-                id: 'total',
+                id: 'cumulativeMilaPoints',
                 header: 'Total',
                 cell: (props) => (
                     <span className="font-bold text-indigo-900 dark:text-orange-200">
@@ -147,7 +151,13 @@ const OverviewTable: React.FC<Props> = ({
         []
     );
 
-    return <SortableTable data={data} columns={columns} />;
+    return (
+        <SortableTable
+            data={data}
+            columns={columns}
+            initialSort={[{ id: 'cumulativeMilaPoints', desc: true }]}
+        />
+    );
 };
 
 export default OverviewTable;

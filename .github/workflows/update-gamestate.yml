@@ -17,9 +17,6 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
             
-      - name: Spinning up SQL Server
-        run: docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=!5omeSup3rF4ncyPwd!" -p 1431:1433 -d mcr.microsoft.com/mssql/server:2022-latest
-          
       - name: Setup .NET 8.x
         uses: actions/setup-dotnet@v4
         with:
@@ -29,7 +26,7 @@ jobs:
         working-directory: ./milabowl-backend
         run: |
           dotnet build
-          dotnet run --project ./Migrations/Processing.csproj -- ../milabowl-astro/src/game_state
+          dotnet run --project ./Milabowl.Processing/Milabowl.Processing.csproj -- ../milabowl-astro/src/game_state
         
       - name: use node.js
         uses: actions/setup-node@v4

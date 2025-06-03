@@ -4,7 +4,7 @@ import Card from '../components/core/Card.astro';
 import Trend from './_Trend';
 import game_state from '../../src/game_state/game_state.json';
 import fpl_state from '../../src/game_state/fpl_state.json';
-import type { MilaResultsDTO } from '../../src/game_state/gameState';
+import type { MilaResultsDTO } from '../game_state/gameState';
 import Link from '../components/core/Link.astro';
 import OverviewTable from './_OverviewTable';
 
@@ -19,9 +19,6 @@ const lastGameWeek = Math.max.apply(
     Math,
     fpl_state.results.map((r) => r.gameWeek)
 );
-
-const lastWeekGwResults =
-    milaResults.resultsByWeek[milaResults.resultsByWeek.length - 1].results;
 const resultsByUser = milaResults.resultsByUser;
 ---
 
@@ -36,7 +33,7 @@ const resultsByUser = milaResults.resultsByUser;
 
                     <OverviewTable
                         avatars={images}
-                        data={lastWeekGwResults}
+                        data={milaResults.overallScore}
                         lastGameWeek={lastGameWeek}
                         resultsByUser={resultsByUser}
                         client:idle
@@ -51,7 +48,7 @@ const resultsByUser = milaResults.resultsByUser;
                             <div slot="secondary">
                                 <Link href="/bomb_history">See all</Link>
                             </div>
-                            <div class="grid grid-cols-5 gap-2">
+                            <!-- <div class="grid grid-cols-5 gap-2">
                                 {
                                     milaResults.resultsByWeek
                                         .slice(-5)
@@ -108,7 +105,7 @@ const resultsByUser = milaResults.resultsByUser;
                                             );
                                         })
                                 }
-                            </div>
+                            </div> -->
                         </Card>
                     </div>
                     <div class="col-span-12 grid gap-4 md:col-span-6">
@@ -116,7 +113,7 @@ const resultsByUser = milaResults.resultsByUser;
                             <div slot="secondary">
                                 <Link href="/darth_maul_history">See all</Link>
                             </div>
-                            {
+                            <!-- {
                                 milaResults.resultsByWeek
                                     .filter((r) =>
                                         r.results.some(
@@ -184,7 +181,7 @@ const resultsByUser = milaResults.resultsByUser;
                                             </div>
                                         );
                                     })
-                            }
+                            } -->
                         </Card>
                     </div>
                     <div class="col-span-12">

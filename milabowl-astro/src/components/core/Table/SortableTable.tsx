@@ -7,6 +7,7 @@ import {
     type ColumnDef,
     type ColumnPinningState,
     type Column,
+    type ColumnSort,
 } from '@tanstack/react-table';
 import { useState, type CSSProperties } from 'react';
 
@@ -14,6 +15,7 @@ interface Props<T> {
     data: T[];
     columns: ColumnDef<T, any>[];
     initialColumnPinnings?: string[];
+    initialSort?: ColumnSort[];
 }
 
 const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
@@ -42,8 +44,9 @@ const SortableTable = <T,>({
     data,
     columns,
     initialColumnPinnings,
+    initialSort,
 }: Props<T>) => {
-    const [sorting, setSorting] = useState<SortingState>([]);
+    const [sorting, setSorting] = useState<SortingState>(initialSort ?? []);
     const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
         left: initialColumnPinnings ? [...initialColumnPinnings] : [],
         right: [],
