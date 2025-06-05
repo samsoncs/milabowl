@@ -18,6 +18,7 @@ public class FplImporter
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
         var players = bootstrapRoot.Players;
+        var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.standings.results;
         List<UserState> userStates = [];
@@ -36,7 +37,7 @@ public class FplImporter
                     finishedEvent.ToEvent(),
                     headToHeadEventRootDto.ToHeadToHeadEvent(user.entry),
                     user.ToUser(),
-                    picksRoot.ToLineup(eventRootDto, players),
+                    picksRoot.ToLineup(eventRootDto, players, teams),
                     picksRoot.active_chip,
                     historicGameWeeks,
                     eventRootDto
@@ -63,6 +64,7 @@ public class FplImporter
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
         var players = bootstrapRoot.Players;
+        var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.standings.results;
 
@@ -76,7 +78,7 @@ public class FplImporter
             {
                 var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
 
-                var lineup = picksRoot.ToLineup(eventRootDto, players);
+                var lineup = picksRoot.ToLineup(eventRootDto, players, teams);
 
                 fplUserGameWeekResult.Add(new FplUserGameWeekResult(
                     finishedEvent.Id,

@@ -1,0 +1,58 @@
+namespace Milabowl.Milalytics;
+
+public record ManagerGameWeek(
+    Guid ManagerGameWeekId,
+    string ManagerName,
+    string FantasyTeamName,
+    int FantasyEntryId,
+    //int FantasyResultId,
+    int GameWeek,
+    string? ActiveChip
+);
+
+public record ManagerGameWeekLineup(
+    Guid FkManagerGameWeekId,
+    int Multiplier,
+    bool IsCaptain,
+    bool IsViceCaptain,
+    int FantasyPlayerEventId,
+
+    string FirstName,
+    string LastName,
+    string WebName,
+    //int FantasyPlayerId,
+    // int Code,
+    int ElementType,
+    // string News,
+    // DateTime NewsAdded,
+    // string Photo,
+    // string Status,
+    int FantasyTeamId,
+    int FantasyTeamCode,
+    string TeamName,
+    string TeamShortName,
+    int Minutes,
+    int GoalsScored,
+    int Assists,
+    int CleanSheets,
+    int GoalsConceded,
+    int OwnGoals,
+    int PenaltiesSaved,
+    int PenaltiesMissed,
+    int YellowCards,
+    int RedCards,
+    int Saves,
+    int Bonus,
+    int Bps,
+    string Influence,
+    string Creativity,
+    string Threat,
+    string IctIndex,
+    int TotalPoints,
+    bool InDreamTeam
+    // int Selected,
+    // int TransferBalance,
+    // int TransfersIn,
+    // int TransfersOut,
+    //decimal Value
+);
