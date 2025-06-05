@@ -9,20 +9,10 @@ public class TrendyBitch : MilaRule
     protected override decimal CalculatePoints(MilaGameWeekState milaGameWeekState)
     {
         var points = 0.0m;
-
-        var didNotTrade = milaGameWeekState.User.SubsIn.Count == 0 &&
-                          milaGameWeekState.User.SubsOut.Count == 0;
-        var numberOfNoTrades =
-            milaGameWeekState.Opponents.Sum(o =>
-                o.SubsIn.Count == 0 && o.SubsOut.Count == 0 ? 1 : 0)
-            + (didNotTrade ? 1 : 0);
-
         var trendyBitchInPoints = GetTrendyBitchPoints(
             milaGameWeekState.User.SubsIn.ToList(),
             milaGameWeekState.User.SubsIn
                 .Concat(milaGameWeekState.Opponents.SelectMany(o => o.SubsIn)).ToList(),
-            didNotTrade,
-            numberOfNoTrades,
             true
         );
 
@@ -30,8 +20,6 @@ public class TrendyBitch : MilaRule
             milaGameWeekState.User.SubsOut.ToList(),
             milaGameWeekState.User.SubsOut
                 .Concat(milaGameWeekState.Opponents.SelectMany(o => o.SubsOut)).ToList(),
-            didNotTrade,
-            numberOfNoTrades,
             false
         );
 
@@ -40,8 +28,7 @@ public class TrendyBitch : MilaRule
         return points;
     }
 
-    private PointsAndReasoning GetTrendyBitchPoints(IList<Sub> userSubs, IList<Sub> allSubs, bool didNotTrade,
-        int numberOfNoTrades, bool tradeIn)
+    private PointsAndReasoning GetTrendyBitchPoints(IList<Sub> userSubs, IList<Sub> allSubs, bool tradeIn)
     {
         var tradeCounts =
             allSubs
@@ -51,30 +38,18 @@ public class TrendyBitch : MilaRule
                 .ToList();
 
         var mostTradedInPlayer = tradeCounts.FirstOrDefault();
-
-        if (
-            tradeIn &&
-            mostTradedInPlayer is not null // At least one trade was made
-            && didNotTrade
-            && numberOfNoTrades > mostTradedInPlayer.Count
-        )
-        {
-            // Player did the most popular move and did not trade
-            return new PointsAndReasoning(1, $"Did not make trade this game week, like {numberOfNoTrades} other players this round.");
-        }
-
         if (
             mostTradedInPlayer is not null
+            && allSubs.Count > 1
             && userSubs.Any(a => a.FantasyPlayerEventId == mostTradedInPlayer.Player)
             && tradeCounts.Count(p => p.Count == mostTradedInPlayer.Count) == 1
-            && mostTradedInPlayer.Count > numberOfNoTrades
         )
         {
             // Player did the most popular trade
             var tradedInString = tradeIn ? "in" : "out";
             var player =
                 allSubs.First(a => a.FantasyPlayerEventId == mostTradedInPlayer.Player);
-            return new PointsAndReasoning(1, $"Traded {tradedInString} most popular trade: {player.FirstName} {player.Surname}");
+            return new PointsAndReasoning(-1, $"Traded {tradedInString} most popular trade: {player.FirstName} {player.Surname}");
         }
 
         return new PointsAndReasoning(0, null);
