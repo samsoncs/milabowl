@@ -15,7 +15,7 @@ public record MilaGameWeekState
     }
 }
 
-public record Sub(int TotalPoints, string FirstName, string Surname);
+public record Sub(int TotalPoints, string FirstName, string Surname, int FantasyPlayerEventId);
 
 public class UserState
 {
@@ -58,7 +58,7 @@ public class UserState
                         ipe.FantasyPlayerEventId != pe.FantasyPlayerEventId
                     )
                 )
-                .Select(s => new Sub(s.TotalPoints, s.FirstName, s.Surname))
+                .Select(s => new Sub(s.TotalPoints, s.FirstName, s.Surname, s.FantasyPlayerEventId))
                 .ToList()
                 .AsReadOnly();
         SubsOut = PreviousGameWeek is null
@@ -72,7 +72,8 @@ public class UserState
                         .elements.First(e => e.id == s.FantasyPlayerEventId)
                         .stats.total_points,
                     s.FirstName,
-                    s.Surname
+                    s.Surname,
+                    s.FantasyPlayerEventId
                 ))
                 .ToList()
                 .AsReadOnly();

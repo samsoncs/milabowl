@@ -6,7 +6,8 @@ CREATE TABLE [dbo].[ManagerGameWeek](
     --[FantasyResultId] [int] NOT NULL,
     [GameWeek] [int] NOT NULL,
     [ActiveChip] [nvarchar](max) NULL,
-
+    [SubsIn] [nvarchar](max) NULL,
+    [SubsOut] [nvarchar](max) NULL
     CONSTRAINT [PK_ManagerGameWeek] PRIMARY KEY CLUSTERED([ManagerGameWeekId] ASC)
     )
 

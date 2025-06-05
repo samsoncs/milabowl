@@ -23,7 +23,9 @@ public static class FplDataImporter
                 gameWeekState.User.User.TeamName,
                 gameWeekState.User.User.Id,
                 gameWeekState.User.Event.GameWeek,
-                gameWeekState.User.ActiveChip
+                gameWeekState.User.ActiveChip,
+                gameWeekState.User.SubsIn.Select(s => $"{s.FirstName} {s.Surname}").ToList(),
+                gameWeekState.User.SubsOut.Select(s => $"{s.FirstName} {s.Surname}").ToList()
             );
 
             await using var connection = new SqlConnection(DbConnection.CONNECTION_STRING);
@@ -34,7 +36,9 @@ public static class FplDataImporter
                                                   FantasyTeamName,
                                                   FantasyEntryId,
                                                   GameWeek,
-                                                  ActiveChip
+                                                  ActiveChip,
+                                                  SubsIn,
+                                                  SubsOut
                                               )
                                               VALUES (
                                                   @ManagerGameWeekId,
@@ -42,7 +46,9 @@ public static class FplDataImporter
                                                   @FantasyTeamName,
                                                   @FantasyEntryId,
                                                   @GameWeek,
-                                                  @ActiveChip
+                                                  @ActiveChip,
+                                                  @SubsIn,
+                                                  @SubsOut
                                               )
                                           """,
                 new
@@ -52,7 +58,9 @@ public static class FplDataImporter
                     managerGameWeek.FantasyTeamName,
                     managerGameWeek.FantasyEntryId,
                     managerGameWeek.GameWeek,
-                    managerGameWeek.ActiveChip
+                    managerGameWeek.ActiveChip,
+                    SubsIn = string.Join(",", managerGameWeek.SubsIn),
+                    SubsOut = string.Join(",", managerGameWeek.SubsOut)
                 });
 
             foreach (var playerEvent in gameWeekState.User.Lineup)
