@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[ManagerGameWeek](
     [ActiveChip] [nvarchar](max) NULL,
 
     CONSTRAINT [PK_ManagerGameWeek] PRIMARY KEY CLUSTERED([ManagerGameWeekId] ASC)
-)
+    )
 
 CREATE TABLE [dbo].[ManagerGameWeekLineup](
     [ManagerGameWeekLineupId] [uniqueidentifier] NOT NULL DEFAULT newid(),
@@ -65,4 +65,3 @@ CREATE TABLE [dbo].[ManagerGameWeekLineup](
     CONSTRAINT [PK_ManagerGameWeekLineup] PRIMARY KEY CLUSTERED([ManagerGameWeekLineupId] ASC),
     CONSTRAINT FK_ManagerGameWeek_UserGameWeekLineup FOREIGN KEY (FkManagerGameWeekId) REFERENCES ManagerGameWeek(ManagerGameWeekId)
     )
-

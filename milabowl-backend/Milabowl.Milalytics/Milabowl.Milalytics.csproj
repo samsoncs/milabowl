@@ -13,7 +13,13 @@
 
     <ItemGroup>
       <PackageReference Include="Dapper" Version="2.1.66" />
-      <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+      <PackageReference Include="dbup-core" Version="6.0.4" />
+      <PackageReference Include="dbup-sqlserver" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="scripts/**/*.sql" />
     </ItemGroup>
 
 </Project>

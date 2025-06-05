@@ -76,7 +76,8 @@ public static class FplMapperExtensions
     public static IList<PlayerEvent> ToLineup(
         this PicksRootDTO picksRootDto,
         EventRootDTO eventRootDto,
-        List<PlayerDTO> players
+        List<PlayerDTO> players,
+        List<TeamDTO> teams
     )
     {
         return picksRootDto
@@ -84,7 +85,8 @@ public static class FplMapperExtensions
             {
                 var element = eventRootDto.elements.First(e => e.id == p.element);
                 var player = players.First(plr => plr.Id == element.id);
-                return element.ToPlayerEvent(player, p);
+                var team = teams.First(t => t.Id == player.Team);
+                return element.ToPlayerEvent(player, team, p);
             })
             .ToList();
     }
@@ -92,6 +94,7 @@ public static class FplMapperExtensions
     private static PlayerEvent ToPlayerEvent(
         this ElementDTO element,
         PlayerDTO player,
+        TeamDTO team,
         PickDTO pick
     )
     {
@@ -100,6 +103,10 @@ public static class FplMapperExtensions
             player.SecondName,
             player.WebName,
             element.id,
+            team.Id,
+            team.Code,
+            team.Name,
+            team.ShortName,
             element.stats.minutes,
             element.stats.goals_scored,
             element.stats.assists,
