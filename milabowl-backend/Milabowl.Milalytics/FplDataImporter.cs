@@ -8,8 +8,13 @@ public static class FplDataImporter
 {
     public static async Task ImportToSql(FplImporter importer)
     {
-        var importedData = await importer.ImportFplDataForRulesProcessing();
+        await CleanDatabase();
 
+        Console.WriteLine("Fetching FplData from APIs");
+        var importedData = await importer.ImportFplDataForRulesProcessing();
+        Console.WriteLine("Fetching FplData from APIs - Finished");
+
+        Console.WriteLine("Importing FplData to SQL Database");
         foreach (var gameWeekState in importedData)
         {
             var managerGameWeek = new ManagerGameWeek(
@@ -196,5 +201,16 @@ public static class FplDataImporter
                     });
             }
         }
+
+        Console.WriteLine("Importing FplData to SQL Database - finished");
+    }
+
+    private static async Task CleanDatabase()
+    {
+        Console.WriteLine("Cleaning data from database");
+        await using var connection = new SqlConnection(DbConnection.CONNECTION_STRING);
+        await connection.ExecuteAsync("DELETE FROM ManagerGameWeekLineup");
+        await connection.ExecuteAsync("DELETE FROM ManagerGameWeek");
+        Console.WriteLine("Cleaning data from database - Finished");
     }
 }
