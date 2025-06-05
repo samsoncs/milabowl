@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Migrations": {
-      "commandName": "Project",
-      "commandLineArgs": "Import"
-    }
-  }
-}
