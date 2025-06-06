@@ -2,14 +2,14 @@
 
 namespace Milabowl.Processing.Processing.Rules;
 
-public class Sellout : MilaRule
+public class SellIn : MilaRule
 {
-    protected override string ShortName => "$0";
+    protected override string ShortName => "$In";
 
     protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var sumPointsPlayersIn = userGameWeek.User.SubsIn.Sum(pe => pe.TotalPoints);
         var sumPointsPlayersOut = userGameWeek.User.SubsOut.Sum(pe => pe.TotalPoints);
-        return sumPointsPlayersOut > sumPointsPlayersIn ? -2 : 0;
+        return sumPointsPlayersIn > sumPointsPlayersOut ? 1 : 0;
     }
 }
