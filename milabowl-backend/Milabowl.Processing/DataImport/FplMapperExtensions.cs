@@ -129,7 +129,15 @@ public static class FplMapperExtensions
             pick.multiplier,
             pick.is_captain,
             pick.is_vice_captain,
-            pick.position,
+            player.ElementType switch
+            {
+                1 => PlayerPosition.GK,
+                2 => PlayerPosition.DEF,
+                3 => PlayerPosition.MID,
+                4 => PlayerPosition.MID,
+                5 => PlayerPosition.MAN,
+                _ => throw new ArgumentOutOfRangeException()
+            },
             player.ElementType switch
             {
                 1 => "GK",

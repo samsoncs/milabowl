@@ -36,6 +36,15 @@ public record PlayerEvent(
     int Multiplier,
     bool IsCaptain,
     bool IsViceCaptain,
-    int PlayerPosition,
+    PlayerPosition PlayerPosition,
     string PlayerPositionString
 );
+
+public enum PlayerPosition
+{
+    GK,
+    DEF,
+    MID,
+    FWD,
+    MAN
+}
