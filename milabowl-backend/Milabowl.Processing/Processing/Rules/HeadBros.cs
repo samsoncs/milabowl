@@ -5,17 +5,15 @@ namespace Milabowl.Processing.Processing.Rules;
 public class HeadBros: MilaRule
 {
     protected override string ShortName => "HdBrs";
-    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override string Description => "Score 2.69 points if you and your head bro has the highest total score that round. If tied all ties receive 2.69 pts.";
+
+    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var currentHeadBrosPoints =  userGameWeek.User.HeadToHead.CurrentUser.Points
                            + userGameWeek.User.HeadToHead.Opponent.Points;
         var maxOpponentsHeadBroPoints = userGameWeek.Opponents.Max(o => o.HeadToHead.CurrentUser.Points + o.HeadToHead.Opponent.Points);
+        var points = currentHeadBrosPoints >= maxOpponentsHeadBroPoints ? 2.69m : 0;
 
-        if (currentHeadBrosPoints >= maxOpponentsHeadBroPoints)
-        {
-            return 2.69m;
-        }
-
-        return 0;
+        return new RulePoints(points, null);
     }
 }

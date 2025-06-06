@@ -5,14 +5,20 @@ namespace Milabowl.Processing.Processing.Rules;
 public class DreamTiming: MilaRule
 {
     protected override string ShortName => "DrTm";
-    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
+
+    protected override string Description =>
+        "Receive 1.5 points if you sub in a player that is in dream team.";
+
+    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var subsIn = userGameWeek.User.SubsIn.Select(u => u.FantasyPlayerEventId).ToList();
-        if(userGameWeek.User.Lineup.Any(l => l.InDreamteam && subsIn.Contains(l.FantasyPlayerEventId)))
-        {
-            return 1.5m;
-        }
+        var subsInDreamTeam =
+            userGameWeek.User.Lineup.Where(l =>
+                l.InDreamteam && subsIn.Contains(l.FantasyPlayerEventId))
+                .ToList();
+        var points = subsInDreamTeam.Any()
+            ? 1.5m : 0;
 
-        return 0;
+        return new RulePoints(points, $"Subs in dream team: {string.Join(",", subsInDreamTeam.Select(s => $"{s.FirstName} {s.Surname}"))}");
     }
 }

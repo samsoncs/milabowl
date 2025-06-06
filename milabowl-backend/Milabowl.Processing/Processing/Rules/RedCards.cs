@@ -5,9 +5,11 @@ namespace Milabowl.Processing.Processing.Rules;
 public class RedCards : MilaRule
 {
     protected override string ShortName => "RC";
+    protected override string Description => "Receive 2 points for all red cards. Captains double score.";
 
-    protected override decimal CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        return userGameWeek.User.Lineup.Where(pe => pe.RedCards == 1).Sum(pe => pe.Multiplier * 2);
+        var points = userGameWeek.User.Lineup.Where(pe => pe.RedCards == 1).Sum(pe => pe.Multiplier * 2);
+        return new RulePoints(points, null);
     }
 }

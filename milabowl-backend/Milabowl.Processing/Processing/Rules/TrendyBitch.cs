@@ -5,8 +5,9 @@ namespace Milabowl.Processing.Processing.Rules;
 public class TrendyBitch : MilaRule
 {
     protected override string ShortName => "Trnd";
+    protected override string Description => "Receive -1 penalty point if you sub out the most popular transferred out player, and -1 point if you sub in the most popular transferred in player.";
 
-    protected override decimal CalculatePoints(MilaGameWeekState milaGameWeekState)
+    protected override RulePoints CalculatePoints(MilaGameWeekState milaGameWeekState)
     {
         var points = 0.0m;
         var trendyBitchInPoints = GetTrendyBitchPoints(
@@ -25,10 +26,10 @@ public class TrendyBitch : MilaRule
 
         points += trendyBitchInPoints.Points + trendyBitchOutPoints.Points;
 
-        return points;
+        return new RulePoints(points,$"{trendyBitchInPoints.Reasoning} {trendyBitchOutPoints.Reasoning}");
     }
 
-    private PointsAndReasoning GetTrendyBitchPoints(IList<Sub> userSubs, IList<Sub> allSubs, bool tradeIn)
+    private RulePoints GetTrendyBitchPoints(IList<Sub> userSubs, IList<Sub> allSubs, bool tradeIn)
     {
         var tradeCounts =
             allSubs
@@ -49,11 +50,9 @@ public class TrendyBitch : MilaRule
             var tradedInString = tradeIn ? "in" : "out";
             var player =
                 allSubs.First(a => a.FantasyPlayerEventId == mostTradedInPlayer.Player);
-            return new PointsAndReasoning(-1, $"Traded {tradedInString} most popular trade: {player.FirstName} {player.Surname}");
+            return new RulePoints(-1, $"Traded {tradedInString} most popular player: {player.FirstName} {player.Surname}.");
         }
 
-        return new PointsAndReasoning(0, null);
+        return new RulePoints(0, null);
     }
-
-    private record PointsAndReasoning(int Points, string? Reasoning);
 }

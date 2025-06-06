@@ -15,8 +15,7 @@ public class Processor
     public Processor(
         FplImporter importer,
         HistorySummarizer summarizer,
-        IRulesProcessor rulesProcessor
-    )
+        IRulesProcessor rulesProcessor)
     {
         _importer = importer;
         _summarizer = summarizer;
@@ -40,10 +39,6 @@ public class Processor
         var fplJson = JsonSerializer.Serialize(fplData, _jsonOptions);
         await File.WriteAllTextAsync($"{filePath}/fpl_state.json", fplJson);
         Console.WriteLine("FPL data import - Finished");
-
-
-
-
     }
 
     private IReadOnlyList<MilaResult> ProcessRules(

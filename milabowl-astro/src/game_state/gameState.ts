@@ -14,6 +14,12 @@ export interface GameWeekResult {
     rules: MilaRulePoints[];
 }
 
+export interface Rule {
+    name: string;
+    shortName: string;
+    description: string;
+}
+
 // export interface MilaRules {
 //     rules: MilaRulePoints[];
 // }
@@ -21,6 +27,9 @@ export interface GameWeekResult {
 export interface MilaRulePoints {
     points: number;
     ruleShortName: string;
+    ruleName: string;
+    reasoning?: string | null;
+    description: string;
 }
 
 export interface ResultsByWeek {
@@ -37,6 +46,7 @@ export interface MilaResultsDTO {
     resultsByWeek: ResultsByWeek[];
     resultsByUser: ResultsByUser[];
     overallScore: GameWeekResult[];
+    rules: Rule[];
 }
 
 export interface OverallResult {
