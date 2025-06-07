@@ -12,7 +12,7 @@ public class Bomb: MilaRule
     }
 
     protected override string ShortName => "Bmb";
-    protected override string Description => "The bomb explodes 7 times during a season. The person holding the bomb upon explosion receives -5 points. To pass the bomb along, you must win your H2H match.";
+    protected override string Description => "The bomb explodes 7 times during a season. The person holding the bomb upon explosion receives -5 points. To pass the bomb along, you must wither win your H2H match or use a chip. If you win H2H, the bomb is passed to the H2H opponent. If a chip is used the bomb is passed to the top scoring FPL manager this week (that is not holding the bomb).";
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
         var bombState = _bombState.CalcBombStateForGw(userGameWeek);
