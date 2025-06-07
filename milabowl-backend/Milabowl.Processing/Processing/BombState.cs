@@ -69,6 +69,14 @@ public class BombState
                 h2hOpponent.User.UserName
             ));
         }
+        else if (roundStartBombHolder.ActiveChip is not null && roundStartBombHolder.ActiveChip != "manager")
+        {
+            var playersAndScores = milaGameWeekState
+                .Opponents.Select(o => new { Player = new BombHolder(o.User.EntryId, o.User.TeamName, o.User.UserName) , Score = o.TotalScore }).ToList();
+            playersAndScores.Add(new { Player = new BombHolder(milaGameWeekState.User.User.EntryId, milaGameWeekState.User.User.TeamName, milaGameWeekState.User.User.UserName), Score = milaGameWeekState.User.TotalScore });
+            var topScoringNonBombHolderPlayerThisRound = playersAndScores.Where(p => p.Player.FantasyManagerId != roundStartBombHolder.User.EntryId).MaxBy(o => o.Score)!.Player;
+            bombState = new ManagerBombState(BombState: BombStateEnum.HandedOver_Chip, BombThrower: bombState.BombHolder, BombHolder: topScoringNonBombHolderPlayerThisRound);
+        }
 
         if (WillBombExplode(milaGameWeekState))
         {
