@@ -14,6 +14,7 @@ public static class DependencyInjection
         serviceCollection.AddTransient<HistorySummarizer>();
         serviceCollection.AddTransient<IRulesProcessor, RulesProcessor>();
         serviceCollection.AddTransient<FplImporter>();
+        serviceCollection.AddSingleton<BombState>();
         serviceCollection.AddHttpClient<IFplService, FplService>();
 
         serviceCollection.Scan(s =>

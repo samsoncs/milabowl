@@ -74,7 +74,7 @@ public static class FplDataImporter
                     playerEvent.FirstName,
                     playerEvent.Surname,
                     playerEvent.WebName,
-                    playerEvent.PlayerPosition,
+                    1, //playerEvent.PlayerPosition, TODO: Map enum to stirng in DB
                     playerEvent.FantasyTeamId,
                     playerEvent.FantasyTeamCode,
                     playerEvent.TeamName,
