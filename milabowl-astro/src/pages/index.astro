@@ -3,12 +3,17 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/core/Card.astro';
 import Trend from './_Trend';
 import game_state from '../../src/game_state/game_state.json';
+import bomb_state from '../../src/game_state/bomb_state.json';
 import fpl_state from '../../src/game_state/fpl_state.json';
 import type { MilaResultsDTO } from '../game_state/gameState';
+import type { BombGameWeekState } from '../game_state/bombState';
 import Link from '../components/core/Link.astro';
 import OverviewTable from './_OverviewTable';
 
 const milaResults: MilaResultsDTO = game_state;
+const bombState: BombGameWeekState[] = bomb_state;
+
+console.log(bombState);
 
 const images: ImageMetadata[] = await Astro.glob('../assets/*').then(
     (files) => {
@@ -48,55 +53,30 @@ const resultsByUser = milaResults.resultsByUser;
                             <div slot="secondary">
                                 <Link href="/bomb_history">See all</Link>
                             </div>
-                            <!-- <div class="grid grid-cols-5 gap-2">
+                            <div class="grid grid-cols-5 gap-2">
                                 {
-                                    milaResults.resultsByWeek
+                                    bombState
                                         .slice(-5)
                                         .reverse()
                                         .map((r, i) => {
-                                            const bombHolder = r.results.find(
-                                                (rr) =>
-                                                    rr.milaPoints.bombState !==
-                                                        null &&
-                                                    (rr.milaPoints.bombState ===
-                                                        'Holding' ||
-                                                        rr.milaPoints
-                                                            .bombState ===
-                                                            'Recieving' ||
-                                                        rr.milaPoints
-                                                            .bombState ===
-                                                            'Exploded')
-                                            );
-
-                                            const bombHander = r.results.find(
-                                                (rr) =>
-                                                    rr.milaPoints.bombState !==
-                                                        null &&
-                                                    rr.milaPoints.bombState.includes(
-                                                        'Handing'
-                                                    )
-                                            );
                                             return (
                                                 <div class="col-span-5">
                                                     GW {r.gameWeek} -{' '}
-                                                    {bombHander &&
-                                                        `${bombHander?.teamName.substring(0, 14)}${
-                                                            (bombHander
-                                                                ?.teamName
+                                                    {r.bombThrower &&
+                                                        `${r.bombThrower.managerName.substring(0, 14)}${
+                                                            (r.bombThrower.managerName
                                                                 ?.length ??
                                                                 0) >= 14
                                                                 ? '...'
                                                                 : ''
                                                         } 👋 =>`}
-                                                    {bombHolder?.milaPoints
-                                                        .bombState !==
+                                                    {r.bombState !==
                                                         'Exploded' && '💣'}
-                                                    {bombHolder?.milaPoints
-                                                        .bombState ===
+                                                    {r.bombState ===
                                                         'Exploded' &&
                                                         '💥 (-3 pts) '}
-                                                    {`${bombHolder?.teamName.substring(0, 14)}${
-                                                        (bombHolder?.teamName
+                                                    {`${r.bombHolder.managerName.substring(0, 14)}${
+                                                        (r.bombHolder.managerName
                                                             ?.length ?? 0) >= 14
                                                             ? '...'
                                                             : ''
@@ -105,7 +85,7 @@ const resultsByUser = milaResults.resultsByUser;
                                             );
                                         })
                                 }
-                            </div> -->
+                            </div>
                         </Card>
                     </div>
                     <div class="col-span-12 grid gap-4 md:col-span-6">

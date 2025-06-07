@@ -7,8 +7,7 @@ public enum BombStateEnum
 {
     Holding,
     Exploded,
-    HandedOver_H2H,
-    None
+    HandedOver_H2H
 }
 
 public record ManagerBombState(
@@ -118,5 +117,5 @@ public class BombState
     }
 }
 
-public record BombGameWeekState(int GameWeek, BombStateEnum BombState, BombHolder BombHolder, BombHolder? HandedOverFantasyManagerId);
+public record BombGameWeekState(int GameWeek, BombStateEnum BombState, BombHolder BombHolder, BombHolder? BombThrower);
 public record BombHolder(int FantasyManagerId, string ManagerName, string UserName);

@@ -18,10 +18,16 @@ public class Bomb: MilaRule
         var bombState = _bombState.CalcBombStateForGw(userGameWeek);
         var bombPoints =
             bombState.BombState == BombStateEnum.Exploded &&
-            bombState.BombHolder.FantasyManagerId == userGameWeek.User.User.Id
+            bombState.BombHolder.FantasyManagerId == userGameWeek.User.User.EntryId
                 ? -5m
                 : 0;
 
-        return new RulePoints(bombPoints, null);
+        // Suggestion for addition to bomb, if you throw a bomb that explodes the same round get points
+        var bombThrowerPoints = bombState.BombState == BombStateEnum.Exploded &&
+                                 bombState.BombThrower is not null
+                                 && bombState.BombThrower.FantasyManagerId ==
+                                 userGameWeek.User.User.EntryId ? 5m : 0;
+
+        return new RulePoints(bombPoints + bombThrowerPoints, null);
     }
 }

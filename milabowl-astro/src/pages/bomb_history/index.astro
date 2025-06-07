@@ -3,11 +3,10 @@ import Card from '../../components/core/Card.astro';
 import Table from '../../components/core/Table/Table.astro';
 import Layout from '../../layouts/Layout.astro';
 
-import game_state from '../../../src/game_state/game_state.json';
-import type { MilaResultsDTO } from '../../../src/game_state/gameState';
+import bomb_state from '../../../src/game_state/bomb_state.json';
+import type { BombGameWeekState } from '../../../src/game_state/bombState';
 
-const milaResults: MilaResultsDTO = game_state;
-const bomb_penalty = -3; // TODO: Read this in from a points/rule section for consistency across pages
+const bombState: BombGameWeekState[] = bomb_state;
 ---
 
 <Layout title="Bomb History">
@@ -17,102 +16,29 @@ const bomb_penalty = -3; // TODO: Read this in from a points/rule section for co
                 <Table
                     headers={[
                         'GW',
-                        'Holder start of GW',
-                        'Receiver',
+                        'Bomb Holder',
+                        'Bomb Thrower',
                         'Bomb Events',
-                        'Active chip',
-                        'Points',
+                        // 'Active chip',
+                        // 'Points',
                     ]}
                 >
-                    <!-- {
-                        milaResults.resultsByWeek.map((r) => {
-                            const bombHolder = r.results.find(
-                                (rr) =>
-                                    (rr.milaPoints.bombState !== null &&
-                                        rr.milaPoints.bombState ===
-                                            'Holding') ||
-                                    rr.milaPoints.bombState === 'Recieving' ||
-                                    rr.milaPoints.bombState === 'Exploded'
-                            );
-
-                            const bombHander = r.results.find(
-                                (rr) =>
-                                    rr.milaPoints.bombState !== null &&
-                                    rr.milaPoints.bombState.includes('Handing')
-                            );
-
-                            const bombEvents = r.results
-                                .filter((r) => r.milaPoints.bombState !== null)
-                                .map((a) => {
-                                    if (
-                                        a.milaPoints.bombState?.includes(
-                                            'Holding'
-                                        )
-                                    ) {
-                                        return '💣 ' + a.milaPoints.bombState;
-                                    } else if (
-                                        a.milaPoints.bombState?.includes(
-                                            'Handing'
-                                        )
-                                    ) {
-                                        return '👋 ' + a.milaPoints.bombState;
-                                    } else if (
-                                        a.milaPoints.bombState?.includes(
-                                            'Exploded'
-                                        )
-                                    ) {
-                                        return '💥 ' + a.milaPoints.bombState;
-                                    } else {
-                                        return a.milaPoints.bombState;
-                                    }
-                                }) //`${a.milaPoints.bombState}`)
-                                .join(', ');
-
-                            const holderStartOfGw =
-                                bombHander !== null && bombHander !== undefined
-                                    ? bombHander?.teamName
-                                    : bombHolder?.teamName;
-
-                            const receiver =
-                                bombHander === undefined
-                                    ? ''
-                                    : bombHolder?.teamName;
-
-                            const activeChips = r.results
-                                .filter(
-                                    (r) =>
-                                        r.milaPoints.activeChip !== null &&
-                                        (r.teamName === holderStartOfGw ||
-                                            r.teamName === receiver)
-                                )
-                                .map(
-                                    (r) =>
-                                        `${
-                                            r.teamName +
-                                            ': ' +
-                                            r.milaPoints.activeChip
-                                        }`
-                                )
-                                .join(', ');
-
-                            const points = bombEvents.includes('Exploded')
-                                ? bomb_penalty.toString() + ' points'
-                                : '';
-
+                    {
+                        bombState.map((r) => {
                             return (
                                 <div>
                                     <tr>
                                         <td>{'GW ' + r.gameWeek}</td>
-                                        <td>{holderStartOfGw}</td>
-                                        <td>{receiver}</td>
-                                        <td>{bombEvents}</td>
-                                        <td>{activeChips}</td>
-                                        <td>{points}</td>
+                                        <td>{r.bombHolder.managerName}</td>
+                                        <td>{r.bombThrower?.managerName}</td>
+                                        <td>{r.bombState}</td>
+                                        {/* <td>{activeChips}</td> */}
+                                        {/* <td></td> */}
                                     </tr>
                                 </div>
                             );
                         })
-                    } -->
+                    }
                 </Table>
             </Card>
         </div>
