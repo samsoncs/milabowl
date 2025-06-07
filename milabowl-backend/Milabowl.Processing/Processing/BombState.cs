@@ -7,7 +7,8 @@ public enum BombStateEnum
 {
     Holding,
     Exploded,
-    HandedOver_H2H
+    HandedOver_H2H,
+    HandedOver_Chip
 }
 
 public record ManagerBombState(
