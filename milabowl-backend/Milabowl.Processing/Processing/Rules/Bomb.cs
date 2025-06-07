@@ -22,12 +22,6 @@ public class Bomb: MilaRule
                 ? -5m
                 : 0;
 
-        // Suggestion for addition to bomb, if you throw a bomb that explodes the same round get points
-        var bombThrowerPoints = bombState.BombState == BombStateEnum.Exploded &&
-                                 bombState.BombThrower is not null
-                                 && bombState.BombThrower.FantasyManagerId ==
-                                 userGameWeek.User.User.EntryId ? 5m : 0;
-
-        return new RulePoints(bombPoints + bombThrowerPoints, null);
+        return new RulePoints(bombPoints, null);
     }
 }
