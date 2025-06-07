@@ -7,7 +7,9 @@ public record ManagerGameWeek(
     int FantasyEntryId,
     //int FantasyResultId,
     int GameWeek,
-    string? ActiveChip
+    string? ActiveChip,
+    IList<string> SubsIn,
+    IList<string> SubsOut
 );
 
 public record ManagerGameWeekLineup(

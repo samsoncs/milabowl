@@ -38,6 +38,9 @@ public static class FplMapperExtensions
         bool isEntryOne
     )
     {
+        var entryId = isEntryOne
+            ? headToHeadResultDto.entry_1_entry
+            : headToHeadResultDto.entry_2_entry;
         return new HeadToHeadEvent(
             isEntryOne ? headToHeadResultDto.entry_1_points : headToHeadResultDto.entry_2_points,
             isEntryOne
@@ -52,7 +55,8 @@ public static class FplMapperExtensions
             isEntryOne ? headToHeadResultDto.entry_1_total : headToHeadResultDto.entry_2_total,
             headToHeadResultDto.is_knockout,
             headToHeadResultDto.league,
-            headToHeadResultDto.is_bye
+            headToHeadResultDto.is_bye,
+            entryId
         );
     }
 
@@ -65,6 +69,7 @@ public static class FplMapperExtensions
     {
         return new User(
             user.id,
+            user.entry,
             user.player_name,
             user.entry_name,
             user.rank,
@@ -129,7 +134,15 @@ public static class FplMapperExtensions
             pick.multiplier,
             pick.is_captain,
             pick.is_vice_captain,
-            pick.position,
+            player.ElementType switch
+            {
+                1 => PlayerPosition.GK,
+                2 => PlayerPosition.DEF,
+                3 => PlayerPosition.MID,
+                4 => PlayerPosition.MID,
+                5 => PlayerPosition.MAN,
+                _ => throw new ArgumentOutOfRangeException()
+            },
             player.ElementType switch
             {
                 1 => "GK",

@@ -56,7 +56,9 @@ public static class MilaResultMapper
                 })
                 .ToList(),
             ResultsByUser = resultsByUser,
-            ResultsByWeek = resultsByWeek
+            ResultsByWeek = resultsByWeek,
+            Rules = resultsByWeek.FirstOrDefault()?.Results.FirstOrDefault()?.Rules.Select(r => new Rule(r.RuleName, r.RuleShortName, r.Description))?.ToList() ??
+                    []
         };
     }
 }

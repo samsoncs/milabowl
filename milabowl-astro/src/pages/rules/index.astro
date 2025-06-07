@@ -1,29 +1,31 @@
 ---
-import { getEntryBySlug } from 'astro:content';
-import { format } from 'date-fns';
-import readingTime from 'reading-time';
-import Markdown from '../../components/core/Typography/Markdown.astro';
-import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
+import Layout from '../../layouts/Layout.astro';
+import game_state from '../../../src/game_state/game_state.json';
+import type { MilaResultsDTO } from '../../game_state/gameState';
+import Card from '../../components/core/Card.astro';
 
-const rulesPage = await getEntryBySlug('rules', 'rules');
-const { Content } = await rulesPage.render();
+const milaResults: MilaResultsDTO = game_state;
 ---
 
-<MarkdownLayout title="Milabowl - Rules">
-    <div
-        class="mb-4 flex text-sm text-gray-400 dark:text-slate-400 md:text-base"
-    >
-        <div class="grow">
-            {readingTime(rulesPage.body).text}
-        </div>
-        Last Updated on {format(rulesPage.data.date, 'dd.MM.yyyy')}
+<Layout title={`Rules of Milabowl`} enableViewTransitions>
+    <div class="mx-auto flex w-screen max-w-screen-lg flex-col space-y-2">
+        <Card>
+            <div class="text-xl font-bold mb-2">
+                Rules
+            </div>
+            {
+            milaResults.rules.map(r => 
+                <div class="py-2">
+                    <div class="font-bold">
+                        {`${r.name} (${r.shortName})`}
+                    </div>
+                    <div>
+                        {r.description}
+                    </div>
+                </div>
+            )
+            }
+        </Card>
+        
     </div>
-    <Markdown>
-        <h1>
-            {rulesPage.data.title}
-        </h1>
-
-        <Content />
-    </Markdown>
-    <div slot="post-card" class="mb-2"></div>
-</MarkdownLayout>
+</Layout>

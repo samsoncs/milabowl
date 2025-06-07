@@ -8,5 +8,6 @@ public record HeadToHeadEvent(
     int Total,
     bool IsKnockout,
     int LeagueId,
-    bool IsBye
+    bool IsBye,
+    int? FantasyPlayerId
 );

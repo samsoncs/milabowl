@@ -84,9 +84,15 @@ public class FplImporter
                     finishedEvent.Id,
                     user.entry_name,
                     user.total,
-                    lineup.Select(l => new FplPlayerEventResult(l.WebName, "Liverpool",
-                        l.TotalPoints, l.PlayerPositionString, l.IsCaptain, l.IsViceCaptain,
-                        l.Multiplier == 0)).ToList()
+                    lineup.Select(l => new FplPlayerEventResult(
+                        l.WebName,
+                        l.TeamName,
+                        l.TotalPoints,
+                        l.PlayerPositionString,
+                        l.IsCaptain,
+                        l.IsViceCaptain,
+                        l.Multiplier == 0)
+                    ).ToList()
                 ));
 
             }

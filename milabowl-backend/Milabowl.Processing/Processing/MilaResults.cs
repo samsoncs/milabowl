@@ -21,7 +21,10 @@ public class MilaResults
     public IList<GameWeekResults> ResultsByWeek { get; set; }
     public IList<UserResults> ResultsByUser { get; set; }
     public IList<OverallResult> OverallScore { get; set; }
+    public IList<Rule> Rules { get; set; }
 }
+
+public record Rule(string Name, string ShortName, string Description);
 
 public record OverallResult(
     decimal GwScore,

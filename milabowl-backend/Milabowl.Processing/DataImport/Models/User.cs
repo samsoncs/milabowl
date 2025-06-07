@@ -2,6 +2,7 @@
 
 public record User(
     int Id,
+    int EntryId,
     string UserName,
     string TeamName,
     int Rank,
