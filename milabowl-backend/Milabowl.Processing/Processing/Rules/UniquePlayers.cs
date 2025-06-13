@@ -4,9 +4,8 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class UniquePlayers: MilaRule
 {
-    private const decimal TotalPot = 8.125m;
     protected override string ShortName => "UnqP";
-    protected override string Description => "Gameweek scores are weighted on uniqueness, and a total pot of 8.125 pts is split according to the percentage of your weighted score to the total weighted score.";
+    protected override string Description => "Game week scores are weighted based on uniqueness of the player. If a player is owned by 5 or more players their score counts as 0. The 3 top scoring teams receive 3,2 or 1 points according to team score.";
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
@@ -19,15 +18,28 @@ public class UniquePlayers: MilaRule
             .ToDictionary(k => k.Key, v => v.Count());
 
         var weightedPoints = userGameWeek.User.Lineup.Where(l => l.Multiplier > 0).Sum(u => GetWeightedPoints(u, userGameWeek.Opponents.Count + 1, playerCountsById));
-        var opponentsWeightedPoints = userGameWeek.Opponents.SelectMany(o => o.Lineup.Where(l => l.Multiplier > 0)).Sum(u => GetWeightedPoints(u, userGameWeek.Opponents.Count + 1, playerCountsById));
-        var points = Math.Round(TotalPot * (weightedPoints/opponentsWeightedPoints), 2);
+        var playersInFront = userGameWeek.Opponents
+            .Select(o => o.Lineup.Where(l => l.Multiplier > 0).Sum(pe => GetWeightedPoints(pe, userGameWeek.Opponents.Count + 1, playerCountsById)))
+            .Count(s => s > weightedPoints);
 
-        return new RulePoints(points, null);
+        var reasoning = $"Unique weighted score of: {weightedPoints}";
+        return playersInFront switch
+        {
+            0 => new RulePoints(3, reasoning),
+            1 => new RulePoints(2, reasoning),
+            2 => new RulePoints(1, reasoning),
+            _ => new RulePoints(0, reasoning)
+        };
     }
 
     private decimal GetWeightedPoints(PlayerEvent pe, int numberOfLeaguePlayers,
         IDictionary<int, int> playerCountsById)
     {
+        if (playerCountsById[pe.FantasyPlayerEventId] > 4)
+        {
+            return 0;
+        }
+
         var rarenessFactor = 1 + ((decimal)1 / numberOfLeaguePlayers) -
                              ((decimal)playerCountsById[pe.FantasyPlayerEventId] /
                               numberOfLeaguePlayers);
