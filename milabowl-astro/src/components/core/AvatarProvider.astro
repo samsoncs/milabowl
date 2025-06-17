@@ -7,11 +7,8 @@ export interface Props {
 
 const { teamName } = Astro.props;
 
-const images: ImageMetadata[] = await Astro.glob('../../assets/*').then(
-    (files) => {
-        return files.map((file) => file.default);
-    }
-);
+const imgs = Object.values(import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', { eager: true }));
+const images = imgs.map((i) => i.default);
 ---
 
 <Image
