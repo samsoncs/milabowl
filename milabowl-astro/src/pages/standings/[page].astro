@@ -10,11 +10,9 @@ import Card from '../../components/core/Card.astro';
 import StandingsTable from './_StandingsTable.tsx';
 import StandingsTableMobile from './_StandingsTable_Mobile.tsx';
 import Link from '../../components/core/Link.astro';
-const images: ImageMetadata[] = await Astro.glob('../../assets/*').then(
-    (files) => {
-        return files.map((file) => file.default);
-    }
-);
+
+const imgs = Object.values(import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', { eager: true }));
+const images = imgs.map((i) => i.default);
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
     const milaResults: MilaResultsDTO = game_state;

@@ -1,8 +1,9 @@
 ---
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/700.css';
+import './src/styles/global.css' 
 import Navbar from './Navbar.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import MobileNav from './MobileNav.astro';
 
 export interface Props {
@@ -10,7 +11,7 @@ export interface Props {
     enableViewTransitions?: boolean;
 }
 
-const { title, enableViewTransitions } = Astro.props;
+ const { title, enableViewTransitions } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,7 +22,7 @@ const { title, enableViewTransitions } = Astro.props;
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
-        {enableViewTransitions && <ViewTransitions />}
+        {enableViewTransitions && <ClientRouter />}
     </head>
     <body class="bg-slate-100 dark:bg-slate-900">
         <Navbar />
@@ -31,9 +32,5 @@ const { title, enableViewTransitions } = Astro.props;
             <slot />
         </div>
         <MobileNav />
-        <script
-            is:inline
-            src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"
-        ></script>
     </body>
 </html>

@@ -13,13 +13,8 @@ import OverviewTable from './_OverviewTable';
 const milaResults: MilaResultsDTO = game_state;
 const bombState: BombGameWeekState[] = bomb_state;
 
-console.log(bombState);
-
-const images: ImageMetadata[] = await Astro.glob('../assets/*').then(
-    (files) => {
-        return files.map((file) => file.default);
-    }
-);
+const imgs = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/*.webp', { eager: true }));
+const images = imgs.map((i) => i.default);
 const lastGameWeek = Math.max.apply(
     Math,
     fpl_state.results.map((r) => r.gameWeek)
@@ -48,7 +43,7 @@ const resultsByUser = milaResults.resultsByUser;
 
             <div class="lg:col-span-7">
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12 grid gap-4 md:col-span-6">
+                    <div class="col-span-12 grid gap-4">
                         <Card title="Bomb State">
                             <div slot="secondary">
                                 <Link href="/bomb_history">See all</Link>
@@ -63,10 +58,10 @@ const resultsByUser = milaResults.resultsByUser;
                                                 <div class="col-span-5">
                                                     GW {r.gameWeek} -{' '}
                                                     {r.bombThrower &&
-                                                        `${r.bombThrower.managerName.substring(0, 14)}${
+                                                        `${r.bombThrower.managerName.substring(0, 30)}${
                                                             (r.bombThrower.managerName
                                                                 ?.length ??
-                                                                0) >= 14
+                                                                0) >= 30
                                                                 ? '...'
                                                                 : ''
                                                         } 👋 =>`}
@@ -75,9 +70,9 @@ const resultsByUser = milaResults.resultsByUser;
                                                     {r.bombState ===
                                                         'Exploded' &&
                                                         '💥 (-3 pts) '}
-                                                    {`${r.bombHolder.managerName.substring(0, 14)}${
+                                                    {`${r.bombHolder.managerName.substring(0, 30)}${
                                                         (r.bombHolder.managerName
-                                                            ?.length ?? 0) >= 14
+                                                            ?.length ?? 0) >= 30
                                                             ? '...'
                                                             : ''
                                                     }`}
@@ -86,82 +81,6 @@ const resultsByUser = milaResults.resultsByUser;
                                         })
                                 }
                             </div>
-                        </Card>
-                    </div>
-                    <div class="col-span-12 grid gap-4 md:col-span-6">
-                        <Card title="Darth Maul">
-                            <div slot="secondary">
-                                <Link href="/darth_maul_history">See all</Link>
-                            </div>
-                            <!-- {
-                                milaResults.resultsByWeek
-                                    .filter((r) =>
-                                        r.results.some(
-                                            (rr) => rr.milaPoints.isDarthMaul
-                                        )
-                                    )
-                                    .slice(-5)
-                                    .reverse()
-                                    .map((r, i) => {
-                                        return (
-                                            <div class="col-span-5">
-                                                GW {r.gameWeek} -
-                                                {(r.results.find(
-                                                    (r) =>
-                                                        r.milaPoints
-                                                            .isDarthMaulContender
-                                                )?.milaPoints.darthMaulPoints ??
-                                                    0) < 0 &&
-                                                    `👺 ${r.results
-                                                        .find(
-                                                            (r) =>
-                                                                r.milaPoints
-                                                                    .isDarthMaul
-                                                        )
-                                                        ?.teamName.substring(
-                                                            0,
-                                                            10
-                                                        )}${
-                                                        (r.results.find(
-                                                            (r) =>
-                                                                r.milaPoints
-                                                                    .isDarthMaul
-                                                        )?.teamName?.length ??
-                                                            0) >= 10
-                                                            ? '...'
-                                                            : ''
-                                                    } 🗡️=> `}
-                                                {r.results
-                                                    .find(
-                                                        (r) =>
-                                                            r.milaPoints
-                                                                .isDarthMaulContender
-                                                    )
-                                                    ?.teamName.substring(0, 10)}
-                                                {(r.results.find(
-                                                    (r) =>
-                                                        r.milaPoints.isDarthMaul
-                                                )?.teamName?.length ?? 0) >= 10
-                                                    ? '...'
-                                                    : ''}
-                                                {(r.results.find(
-                                                    (r) =>
-                                                        r.milaPoints
-                                                            .isDarthMaulContender
-                                                )?.milaPoints.darthMaulPoints ??
-                                                    0) < 0 &&
-                                                    `(${
-                                                        r.results.find(
-                                                            (r) =>
-                                                                r.milaPoints
-                                                                    .isDarthMaulContender
-                                                        )?.milaPoints
-                                                            .darthMaulPoints
-                                                    } pts)`}
-                                            </div>
-                                        );
-                                    })
-                            } -->
                         </Card>
                     </div>
                     <div class="col-span-12">

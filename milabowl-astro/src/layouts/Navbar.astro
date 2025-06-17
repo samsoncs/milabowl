@@ -141,8 +141,9 @@ const { pathname } = Astro.url;
 </script>
 
 <script>
-    document.addEventListener('astro:page-load', () => {
+    document.addEventListener("astro:page-load", () => {
         const handleToggleClick = () => {
+            console.log("Im toggling");
             const element = document.documentElement;
             element.classList.toggle('dark');
 
@@ -153,14 +154,11 @@ const { pathname } = Astro.url;
         document
             .getElementById('theme-toggle-1')
             ?.addEventListener('click', handleToggleClick);
-        document
-            .getElementById('theme-toggle-2')
-            ?.addEventListener('click', handleToggleClick);
     });
 
     document.addEventListener('astro:after-swap', () => {
         localStorage.theme === 'dark'
             ? document.documentElement.classList.add('dark')
             : document.documentElement.classList.remove('dark');
-    });
+   });
 </script>
