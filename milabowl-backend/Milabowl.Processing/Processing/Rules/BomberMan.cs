@@ -4,9 +4,9 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class BomberMan: MilaRule
 {
-    private readonly BombState _bombState;
+    private readonly IBombState _bombState;
 
-    public BomberMan(BombState bombState)
+    public BomberMan(IBombState bombState)
     {
         _bombState = bombState;
     }

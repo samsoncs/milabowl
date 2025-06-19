@@ -17,7 +17,13 @@ public record ManagerBombState(
     BombHolder? BombThrower
 );
 
-public class BombState
+public interface IBombState
+{
+    ManagerBombState CalcBombStateForGw(MilaGameWeekState milaGameWeekState);
+    IList<BombGameWeekState> GetBombState();
+}
+
+public class BombState: IBombState
 {
     private IDictionary<int, ManagerBombState> _bombStateByGameWeek;
     private const int INITIAL_BOMB_HOLDER = 2216421;
