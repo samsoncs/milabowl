@@ -13,7 +13,7 @@ public class FplImporter
         _fplService = fplService;
     }
 
-    public async Task<IReadOnlyList<MilaGameWeekState>> ImportFplDataForRulesProcessing()
+    public async Task<IReadOnlyList<ManagerGameWeekState>> ImportFplDataForRulesProcessing()
     {
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
@@ -21,7 +21,7 @@ public class FplImporter
         var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.standings.results;
-        List<MilaGameWeekState> userStates = [];
+        List<ManagerGameWeekState> userStates = [];
         foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
         {
             var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
@@ -29,7 +29,7 @@ public class FplImporter
             foreach (var user in users)
             {
                 var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
-                var historicGameWeeks = new List<MilaGameWeekState>(
+                var historicGameWeeks = new List<ManagerGameWeekState>(
                     userStates.Where(u => u.Event.GameWeek < finishedEvent.Id)
                 );
 
@@ -41,7 +41,7 @@ public class FplImporter
                     picksRoot.active_chip,
                     historicGameWeeks,
                     eventRootDto,
-                    new List<MilaGameWeekState>()
+                    new List<ManagerGameWeekState>()
                 );
 
                 userStates.Add(userGameWeek);

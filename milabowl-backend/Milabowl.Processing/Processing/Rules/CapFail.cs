@@ -7,7 +7,7 @@ public class CapFailScore : MilaRule
     protected override string ShortName => "CF";
     protected override string Description => "Receive -1 penalty points if captain scores less than 5 points.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var captain = userGameWeek.Lineup.First(pe => pe.IsCaptain);
         var points = captain.TotalPoints < 5

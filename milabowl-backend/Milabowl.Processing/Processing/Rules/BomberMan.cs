@@ -13,7 +13,7 @@ public class BomberMan: MilaRule
 
     protected override string ShortName => "BmbMn";
     protected override string Description => "Get 5 points if you throw an exploding bomb.";
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var bombState = _bombState.CalcBombStateForGw(userGameWeek);
 

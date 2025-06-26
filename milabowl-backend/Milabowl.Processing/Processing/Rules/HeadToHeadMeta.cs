@@ -7,7 +7,7 @@ public class HeadToHeadMeta : MilaRule
     protected override string ShortName => "H2H";
     protected override string Description => "Receive 2 points if you beat your H2H opponent with less than 3 points.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var scoreDiff =
             userGameWeek.HeadToHead.CurrentUser.Points

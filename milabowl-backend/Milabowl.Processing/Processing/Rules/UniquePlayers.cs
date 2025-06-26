@@ -7,7 +7,7 @@ public class UniquePlayers: MilaRule
     protected override string ShortName => "UnqP";
     protected override string Description => "Game week scores are weighted based on uniqueness of the player. If a player is owned by 5 or more players their score counts as 0. The 3 top scoring teams receive 3,2 or 1 points according to team score.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var playerCountsById = userGameWeek
             .Opponents

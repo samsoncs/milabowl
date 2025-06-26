@@ -3,7 +3,7 @@ using Milabowl.Processing.DataImport.FplDtos;
 
 namespace Milabowl.Processing.DataImport.Models;
 
-public record MilaGameWeekState
+public record ManagerGameWeekState
 {
     public required User User { get; init; }
     public required Event Event { get; init; }
@@ -11,11 +11,11 @@ public record MilaGameWeekState
     public required IReadOnlyList<Sub> SubsIn { get; init; }
     public required IReadOnlyList<Sub> SubsOut { get; init; }
     public required HeadToHead HeadToHead { get; init; }
-    public MilaGameWeekState? PreviousGameWeek { get; init; }
-    public required IList<MilaGameWeekState> History { get; init; }
+    public ManagerGameWeekState? PreviousGameWeek { get; init; }
+    public required IList<ManagerGameWeekState> History { get; init; }
     public required decimal TotalScore { get; init; }
     public string? ActiveChip { get; init; }
-    public required IReadOnlyList<MilaGameWeekState> Opponents { get; init; }
+    public required IReadOnlyList<ManagerGameWeekState> Opponents { get; init; }
 }
 
 public record Sub
@@ -28,15 +28,15 @@ public record Sub
 
 public static class StateFactory
 {
-    public static MilaGameWeekState CreateUserState(
+    public static ManagerGameWeekState CreateUserState(
         Event @event,
         HeadToHead headToHead,
         User user,
         IList<PlayerEvent> lineup,
         string? activeChip,
-        IList<MilaGameWeekState> historicGameWeeks,
+        IList<ManagerGameWeekState> historicGameWeeks,
         EventRootDTO eventRootDto,
-        IList<MilaGameWeekState> opponents)
+        IList<ManagerGameWeekState> opponents)
     {
         historicGameWeeks = historicGameWeeks
             .Where(e => e.Event.GameWeek < @event.GameWeek)
@@ -47,7 +47,7 @@ public static class StateFactory
                 h.Event.GameWeek == @event.GameWeek - 1 && h.User.Id == user.Id
             );
 
-        return new MilaGameWeekState
+        return new ManagerGameWeekState
         {
             PreviousGameWeek = previousGameWeek,
             HeadToHead = headToHead,

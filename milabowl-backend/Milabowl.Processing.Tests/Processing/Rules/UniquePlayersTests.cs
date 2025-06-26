@@ -83,7 +83,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
         result.Points.Should().Be(0);
     }
 
-    private MilaGameWeekState GetOpponent(int points)
+    private ManagerGameWeekState GetOpponent(int points)
     {
         return new MilaGameWeekStateBuilder()
             .WithLineup(

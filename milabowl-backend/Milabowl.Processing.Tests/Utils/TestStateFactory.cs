@@ -13,11 +13,11 @@ public class MilaGameWeekStateBuilder
         private int _totalScore;
         private IList<PlayerEvent> _lineup;
         private string _activeChip;
-        private IList<MilaGameWeekState> _history;
+        private IList<ManagerGameWeekState> _history;
         private IList<Sub> _subsIn;
         private IList<Sub> _subsOut;
         private EventRootDTO _eventRoot;
-        private IList<MilaGameWeekState> _opponents;
+        private IList<ManagerGameWeekState> _opponents;
 
         public MilaGameWeekStateBuilder()
         {
@@ -26,11 +26,11 @@ public class MilaGameWeekStateBuilder
             _totalScore = _faker.Random.Int(0, 200);
             _lineup = TestStateFactory.GetPlayerEvent().Generate(15);
             _activeChip = "freehit";
-            _history = new List<MilaGameWeekState>();
+            _history = new List<ManagerGameWeekState>();
             _eventRoot = new EventRootDTO();
             _subsIn = TestStateFactory.GetSub().Generate(1);
             _subsOut = TestStateFactory.GetSub().Generate(1);
-            _opponents = new List<MilaGameWeekState>();
+            _opponents = new List<ManagerGameWeekState>();
         }
 
         public MilaGameWeekStateBuilder WithEvent(Event @event)
@@ -57,7 +57,7 @@ public class MilaGameWeekStateBuilder
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithOpponents(params IList<MilaGameWeekState> opponents)
+        public MilaGameWeekStateBuilder WithOpponents(params IList<ManagerGameWeekState> opponents)
         {
             _opponents = opponents;
             return this;
@@ -81,15 +81,15 @@ public class MilaGameWeekStateBuilder
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithHistory(IList<MilaGameWeekState> history)
+        public MilaGameWeekStateBuilder WithHistory(IList<ManagerGameWeekState> history)
         {
             _history = history;
             return this;
         }
 
-        public MilaGameWeekState Build()
+        public ManagerGameWeekState Build()
         {
-            return new MilaGameWeekState
+            return new ManagerGameWeekState
             {
                 ActiveChip = _activeChip,
                 Event = _event,

@@ -7,7 +7,7 @@ public class SellIn : MilaRule
     protected override string ShortName => "$In";
     protected override string Description => "Receive 1 point if your subs in outperform your subs out.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var sumPointsPlayersIn = userGameWeek.SubsIn.Sum(pe => pe.TotalPoints);
         var sumPointsPlayersOut = userGameWeek.SubsOut.Sum(pe => pe.TotalPoints);

@@ -48,7 +48,7 @@ public class Processor
     }
 
     private IReadOnlyList<MilaResult> ProcessRules(
-        IReadOnlyList<MilaGameWeekState> importedGameWeekStates
+        IReadOnlyList<ManagerGameWeekState> importedGameWeekStates
     )
     {
         return importedGameWeekStates

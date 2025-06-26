@@ -7,7 +7,7 @@ public class BenchFail : MilaRule
     protected override string ShortName => "BF";
     protected override string Description => "Receive -1 penalty points pr. 5 points on bench.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var points =
             (decimal)

@@ -7,20 +7,20 @@ public class TrendyBitch : MilaRule
     protected override string ShortName => "Trnd";
     protected override string Description => "Receive -1 penalty point if you sub out the most popular transferred out player, and -1 point if you sub in the most popular transferred in player.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState milaGameWeekState)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState managerGameWeekState)
     {
         var points = 0.0m;
         var trendyBitchInPoints = GetTrendyBitchPoints(
-            milaGameWeekState.SubsIn.ToList(),
-            milaGameWeekState.SubsIn
-                .Concat(milaGameWeekState.Opponents.SelectMany(o => o.SubsIn)).ToList(),
+            managerGameWeekState.SubsIn.ToList(),
+            managerGameWeekState.SubsIn
+                .Concat(managerGameWeekState.Opponents.SelectMany(o => o.SubsIn)).ToList(),
             true
         );
 
         var trendyBitchOutPoints = GetTrendyBitchPoints(
-            milaGameWeekState.SubsOut.ToList(),
-            milaGameWeekState.SubsOut
-                .Concat(milaGameWeekState.Opponents.SelectMany(o => o.SubsOut)).ToList(),
+            managerGameWeekState.SubsOut.ToList(),
+            managerGameWeekState.SubsOut
+                .Concat(managerGameWeekState.Opponents.SelectMany(o => o.SubsOut)).ToList(),
             false
         );
 
