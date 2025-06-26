@@ -20,7 +20,7 @@ public class BomberMan: MilaRule
         var bombThrowerPoints = bombState.BombState == BombStateEnum.Exploded &&
                                 bombState.BombThrower is not null
                                 && bombState.BombThrower.FantasyManagerId ==
-                                userGameWeek.User.User.EntryId ? 5m : 0;
+                                userGameWeek.User.EntryId ? 5m : 0;
 
         return new RulePoints(bombThrowerPoints, null);
 

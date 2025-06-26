@@ -16,7 +16,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombThrower, new BombHolder(state.User.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombThrower, new BombHolder(state.User.EntryId, "Team", "User"))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<MilaGameWeekState>()).Returns(managerBombState);
         var rule = new BomberMan(bombStateMock);
@@ -33,7 +33,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, f => f.PickRandom(BombStateEnum.Holding, BombStateEnum.HandedOver_Chip, BombStateEnum.HandedOver_H2H))
-            .RuleFor(x => x.BombThrower, new BombHolder(state.User.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombThrower, new BombHolder(state.User.EntryId, "Team", "User"))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<MilaGameWeekState>()).Returns(managerBombState);
         var rule = new BomberMan(bombStateMock);
@@ -50,7 +50,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombThrower, new BombHolder(state.User.User.EntryId+1, "Team", "User"))
+            .RuleFor(x => x.BombThrower, new BombHolder(state.User.EntryId+1, "Team", "User"))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<MilaGameWeekState>()).Returns(managerBombState);
         var rule = new BomberMan(bombStateMock);

@@ -11,7 +11,7 @@ public class HardestThrust: MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var goalsScored = GetGoalsByDefender(userGameWeek.User.Lineup);
+        var goalsScored = GetGoalsByDefender(userGameWeek.Lineup);
         var maxOpponentsGoalsScored = userGameWeek
             .Opponents.Select(u => GetGoalsByDefender(u.Lineup)).Max();
 

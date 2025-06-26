@@ -9,7 +9,7 @@ public class TightButthole: MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var goalsConceded = userGameWeek.User.Lineup
+        var goalsConceded = userGameWeek.Lineup
             .Where(l => l.Multiplier > 0)
             .Sum(l => l.GoalsConceded);
 

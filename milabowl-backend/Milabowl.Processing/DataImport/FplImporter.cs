@@ -21,7 +21,7 @@ public class FplImporter
         var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.standings.results;
-        List<UserState> userStates = [];
+        List<MilaGameWeekState> userStates = [];
         foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
         {
             var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
@@ -29,7 +29,7 @@ public class FplImporter
             foreach (var user in users)
             {
                 var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
-                var historicGameWeeks = new List<UserState>(
+                var historicGameWeeks = new List<MilaGameWeekState>(
                     userStates.Where(u => u.Event.GameWeek < finishedEvent.Id)
                 );
 
@@ -40,7 +40,8 @@ public class FplImporter
                     picksRoot.ToLineup(eventRootDto, players, teams),
                     picksRoot.active_chip,
                     historicGameWeeks,
-                    eventRootDto
+                    eventRootDto,
+                    new List<MilaGameWeekState>()
                 );
 
                 userStates.Add(userGameWeek);
@@ -51,12 +52,11 @@ public class FplImporter
             .GroupBy(u => u.Event)
             .SelectMany(s =>
                 s.ToList()
-                    .Select(u => StateFactory.CreateMilaGameWeekState(
-                        u,
-                        s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
-                    ))
-            )
-            .ToList();
+                    .Select(u => u with
+                    {
+                        Opponents = s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
+                            .AsReadOnly()
+                    })).ToList();
     }
 
     public async Task<FplResults> ImportFplData()

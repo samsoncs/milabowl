@@ -11,9 +11,9 @@ public class DreamTiming: MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var subsIn = userGameWeek.User.SubsIn.Select(u => u.FantasyPlayerEventId).ToList();
+        var subsIn = userGameWeek.SubsIn.Select(u => u.FantasyPlayerEventId).ToList();
         var subsInDreamTeam =
-            userGameWeek.User.Lineup.Where(l =>
+            userGameWeek.Lineup.Where(l =>
                 l.InDreamteam && subsIn.Contains(l.FantasyPlayerEventId))
                 .ToList();
         var points = subsInDreamTeam.Any()

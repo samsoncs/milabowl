@@ -83,9 +83,9 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
         result.Points.Should().Be(0);
     }
 
-    private UserState GetOpponent(int points)
+    private MilaGameWeekState GetOpponent(int points)
     {
-        return new UserStateBuilder()
+        return new MilaGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)

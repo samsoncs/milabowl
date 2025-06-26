@@ -9,8 +9,8 @@ public class SixtyNineSub : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var capMultiplier = userGameWeek.User.Lineup.FirstOrDefault(pe => pe is { IsCaptain: true, Minutes: 69 })?.Multiplier ?? 1;
-        var points = userGameWeek.User.Lineup.Any(pe => pe.Minutes == 69) ? 2.69m * capMultiplier : 0;
+        var capMultiplier = userGameWeek.Lineup.FirstOrDefault(pe => pe is { IsCaptain: true, Minutes: 69 })?.Multiplier ?? 1;
+        var points = userGameWeek.Lineup.Any(pe => pe.Minutes == 69) ? 2.69m * capMultiplier : 0;
         return new RulePoints(points, null);
     }
 }

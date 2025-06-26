@@ -12,12 +12,12 @@ public class UniquePlayers: MilaRule
         var playerCountsById = userGameWeek
             .Opponents
             .SelectMany(p => p.Lineup)
-            .Concat(userGameWeek.User.Lineup)
+            .Concat(userGameWeek.Lineup)
             .Where(pe => pe.Multiplier > 0)
             .GroupBy(pe => pe.FantasyPlayerEventId)
             .ToDictionary(k => k.Key, v => v.Count());
 
-        var weightedPoints = userGameWeek.User.Lineup.Where(l => l.Multiplier > 0).Sum(u => GetWeightedPoints(u, userGameWeek.Opponents.Count + 1, playerCountsById));
+        var weightedPoints = userGameWeek.Lineup.Where(l => l.Multiplier > 0).Sum(u => GetWeightedPoints(u, userGameWeek.Opponents.Count + 1, playerCountsById));
         var playersInFront = userGameWeek.Opponents
             .Select(o => o.Lineup.Where(l => l.Multiplier > 0).Sum(pe => GetWeightedPoints(pe, userGameWeek.Opponents.Count + 1, playerCountsById)))
             .Count(s => s > weightedPoints);

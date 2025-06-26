@@ -9,7 +9,7 @@ public class CapFailScore : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var captain = userGameWeek.User.Lineup.First(pe => pe.IsCaptain);
+        var captain = userGameWeek.Lineup.First(pe => pe.IsCaptain);
         var points = captain.TotalPoints < 5
             ? -1
             : 0;

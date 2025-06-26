@@ -10,14 +10,14 @@ public class Processor
     private readonly FplImporter _importer;
     private readonly HistorySummarizer _summarizer;
     private readonly IRulesProcessor _rulesProcessor;
-    private readonly BombState _bombState;
+    private readonly IBombState _bombState;
     private readonly JsonSerializerOptions _jsonOptions =
         new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter() }};
 
     public Processor(
         FplImporter importer,
         HistorySummarizer summarizer,
-        IRulesProcessor rulesProcessor, BombState bombState)
+        IRulesProcessor rulesProcessor, IBombState bombState)
     {
         _importer = importer;
         _summarizer = summarizer;

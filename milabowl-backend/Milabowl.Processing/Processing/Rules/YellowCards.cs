@@ -9,7 +9,7 @@ public class YellowCards : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var points = userGameWeek.User.Lineup.Where(pe => pe.YellowCards == 1).Sum(pe => pe.Multiplier);
+        var points = userGameWeek.Lineup.Where(pe => pe.YellowCards == 1).Sum(pe => pe.Multiplier);
         return new RulePoints(points, null);
     }
 }

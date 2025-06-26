@@ -11,15 +11,15 @@ public class TrendyBitch : MilaRule
     {
         var points = 0.0m;
         var trendyBitchInPoints = GetTrendyBitchPoints(
-            milaGameWeekState.User.SubsIn.ToList(),
-            milaGameWeekState.User.SubsIn
+            milaGameWeekState.SubsIn.ToList(),
+            milaGameWeekState.SubsIn
                 .Concat(milaGameWeekState.Opponents.SelectMany(o => o.SubsIn)).ToList(),
             true
         );
 
         var trendyBitchOutPoints = GetTrendyBitchPoints(
-            milaGameWeekState.User.SubsOut.ToList(),
-            milaGameWeekState.User.SubsOut
+            milaGameWeekState.SubsOut.ToList(),
+            milaGameWeekState.SubsOut
                 .Concat(milaGameWeekState.Opponents.SelectMany(o => o.SubsOut)).ToList(),
             false
         );

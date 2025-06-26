@@ -9,8 +9,7 @@ public class MinusIsPlus : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var points = userGameWeek
-            .User.Lineup.Where(pe => pe.TotalPoints < 0)
+        var points = userGameWeek.Lineup.Where(pe => pe.TotalPoints < 0)
             .Sum(pe => pe.TotalPoints * -1 * pe.Multiplier);
         return new RulePoints(points, null);
     }

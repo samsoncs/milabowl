@@ -9,7 +9,7 @@ public class MissedPenalties : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var points = userGameWeek.User.Lineup.Sum(p =>
+        var points = userGameWeek.Lineup.Sum(p =>
             (p.PenaltiesMissed > 0 ? 1.69m : 0) * p.Multiplier
         );
 

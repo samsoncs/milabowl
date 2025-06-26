@@ -18,7 +18,7 @@ public class Bomb: MilaRule
         var bombState = _bombState.CalcBombStateForGw(userGameWeek);
         var bombPoints =
             bombState.BombState == BombStateEnum.Exploded &&
-            bombState.BombHolder.FantasyManagerId == userGameWeek.User.User.EntryId
+            bombState.BombHolder.FantasyManagerId == userGameWeek.User.EntryId
                 ? -5m
                 : 0;
 

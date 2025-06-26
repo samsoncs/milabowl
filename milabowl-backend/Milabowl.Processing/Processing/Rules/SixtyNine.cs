@@ -9,7 +9,7 @@ public class SixtyNine : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var totalTeamScore = userGameWeek.User.Lineup.Sum(pe => pe.TotalPoints * pe.Multiplier);
+        var totalTeamScore = userGameWeek.Lineup.Sum(pe => pe.TotalPoints * pe.Multiplier);
         var points = totalTeamScore == 69 ? 6.9m : 0;
         return new RulePoints(points, null);
     }

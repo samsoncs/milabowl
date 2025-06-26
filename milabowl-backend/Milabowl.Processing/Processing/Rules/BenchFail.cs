@@ -12,8 +12,7 @@ public class BenchFail : MilaRule
         var points =
             (decimal)
                 Math.Floor(
-                    userGameWeek
-                        .User.Lineup.Where(pe => pe.Multiplier == 0)
+                    userGameWeek.Lineup.Where(pe => pe.Multiplier == 0)
                         .Sum(pe => pe.TotalPoints) / 5.0
                 ) * -1;
         return new RulePoints(points, null);

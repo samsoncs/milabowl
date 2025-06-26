@@ -9,7 +9,7 @@ public class UniqueCap : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var cap = userGameWeek.User.Lineup.First(l => l.IsCaptain);
+        var cap = userGameWeek.Lineup.First(l => l.IsCaptain);
 
         var points = cap.Minutes < 46 || userGameWeek.Opponents.Any(o =>
         {

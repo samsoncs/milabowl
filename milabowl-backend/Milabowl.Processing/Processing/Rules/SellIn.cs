@@ -9,10 +9,10 @@ public class SellIn : MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var sumPointsPlayersIn = userGameWeek.User.SubsIn.Sum(pe => pe.TotalPoints);
-        var sumPointsPlayersOut = userGameWeek.User.SubsOut.Sum(pe => pe.TotalPoints);
+        var sumPointsPlayersIn = userGameWeek.SubsIn.Sum(pe => pe.TotalPoints);
+        var sumPointsPlayersOut = userGameWeek.SubsOut.Sum(pe => pe.TotalPoints);
         var points = sumPointsPlayersIn > sumPointsPlayersOut ? 1 : 0;
-        return new RulePoints(points, $"Subbed in: {GetSubsString(userGameWeek.User.SubsIn)} - Subbed out: {GetSubsString(userGameWeek.User.SubsOut)}");
+        return new RulePoints(points, $"Subbed in: {GetSubsString(userGameWeek.SubsIn)} - Subbed out: {GetSubsString(userGameWeek.SubsOut)}");
     }
 
     private string GetSubsString(IReadOnlyList<Sub> lineup)

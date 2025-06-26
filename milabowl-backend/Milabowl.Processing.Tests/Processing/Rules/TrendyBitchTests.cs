@@ -18,7 +18,7 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         {
             FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId + 1
         };
-        var opponent = new UserStateBuilder()
+        var opponent = new MilaGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn, leastTradedIn)
             .Build();
         var state = new MilaGameWeekStateBuilder()
@@ -44,7 +44,7 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         {
             FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId + 1
         };
-        var opponent = new UserStateBuilder()
+        var opponent = new MilaGameWeekStateBuilder()
             .WithSubsOut(mostTradedOut, leastTradedOut)
             .Build();
         var state = new MilaGameWeekStateBuilder()
@@ -63,7 +63,7 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
     {
         var mostTradedOut = TestStateFactory.GetSub().Generate();
         var mostTradedIn = TestStateFactory.GetSub().Generate();
-        var opponent = new UserStateBuilder()
+        var opponent = new MilaGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn)
             .WithSubsOut(mostTradedOut)
             .Build();
@@ -92,11 +92,11 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         {
             FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1
         };
-        var opponent1 = new UserStateBuilder()
+        var opponent1 = new MilaGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn)
             .WithSubsOut(mostTradedOut)
             .Build();
-        var opponent2 = new UserStateBuilder()
+        var opponent2 = new MilaGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn)
             .WithSubsOut(mostTradedOut)
             .Build();

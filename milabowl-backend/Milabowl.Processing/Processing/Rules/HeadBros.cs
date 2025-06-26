@@ -9,8 +9,8 @@ public class HeadBros: MilaRule
 
     protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
     {
-        var currentHeadBrosPoints =  userGameWeek.User.HeadToHead.CurrentUser.Points
-                           + userGameWeek.User.HeadToHead.Opponent.Points;
+        var currentHeadBrosPoints =  userGameWeek.HeadToHead.CurrentUser.Points
+                           + userGameWeek.HeadToHead.Opponent.Points;
         var maxOpponentsHeadBroPoints = userGameWeek.Opponents.Max(o => o.HeadToHead.CurrentUser.Points + o.HeadToHead.Opponent.Points);
         var points = currentHeadBrosPoints >= maxOpponentsHeadBroPoints ? 2.69m : 0;
 

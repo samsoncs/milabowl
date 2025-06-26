@@ -15,7 +15,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(-1*state.User.Lineup[0].TotalPoints);
+        result.Points.Should().Be(-1*state.Lineup[0].TotalPoints);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(-1*2*state.User.Lineup[0].TotalPoints);
+        result.Points.Should().Be(-1*2*state.Lineup[0].TotalPoints);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
                 TestStateFactory.GetBenchPlayer().RuleFor(r => r.TotalPoints, -10)
             )
             .Build();
-        
+
         var result = Rule.Calculate(state);
 
         result.Points.Should().Be(42);
