@@ -12,7 +12,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
     [Fact]
     public void Should_return_5_if_user_is_bomb_thrower_and_bomb_explodes()
     {
-        var state = new MilaGameWeekStateBuilder().Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
@@ -29,7 +29,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
     [Fact]
     public void Should_return_0_if_bomb_did_not_explode()
     {
-        var state = new MilaGameWeekStateBuilder().Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, f => f.PickRandom(BombStateEnum.Holding, BombStateEnum.HandedOver_Chip, BombStateEnum.HandedOver_H2H))
@@ -46,7 +46,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
     [Fact]
     public void Should_return_0_if_bomb_exploded_but_different_thrower()
     {
-        var state = new MilaGameWeekStateBuilder().Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
@@ -63,7 +63,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
     [Fact]
     public void Should_return_0_if_bomb_exploded_but_no_thrower()
     {
-        var state = new MilaGameWeekStateBuilder().Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)

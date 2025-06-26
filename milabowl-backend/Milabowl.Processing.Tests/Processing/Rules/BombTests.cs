@@ -12,7 +12,7 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_minus_5_if_user_holds_exploding_bomb()
     {
-        var state = new MilaGameWeekStateBuilder().Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
@@ -29,7 +29,7 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_0_if_bomb_did_not_explode()
     {
-        var state = new MilaGameWeekStateBuilder().Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, f => f.PickRandom(BombStateEnum.HandedOver_Chip, BombStateEnum.HandedOver_H2H, BombStateEnum.Holding))
@@ -46,7 +46,7 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_0_if_bomb_exploded_on_different_person()
     {
-        var state = new MilaGameWeekStateBuilder().Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)

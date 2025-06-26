@@ -9,7 +9,7 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
     [Fact]
     public void Should_return_0_if_no_penalties_missed()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetPlayer().RuleFor(x => x.PenaltiesMissed, 0))
             .Build();
 
@@ -21,7 +21,7 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
     [Fact]
     public void Should_return_1_69_for_one_missed_penalty()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetPlayer().RuleFor(x => x.PenaltiesMissed, 1))
             .Build();
 
@@ -33,7 +33,7 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
     [Fact]
     public void Should_double_points_for_captain()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetCaptain().RuleFor(x => x.PenaltiesMissed, 1))
             .Build();
 
@@ -45,7 +45,7 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
     [Fact]
     public void Should_sum_points_for_all_missed_penalties_in_lineup()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer().RuleFor(x => x.PenaltiesMissed, 1).Generate(),
                 TestStateFactory.GetPlayer().RuleFor(x => x.PenaltiesMissed, 2).Generate(),

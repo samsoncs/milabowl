@@ -18,10 +18,10 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         {
             FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId + 1
         };
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn, leastTradedIn)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup()
             .WithSubsIn(mostTradedIn, leastTradedIn2)
             .WithOpponents(opponent)
@@ -44,10 +44,10 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         {
             FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId + 1
         };
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithSubsOut(mostTradedOut, leastTradedOut)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup()
             .WithSubsOut(mostTradedOut, leastTradedOut2)
             .WithOpponents(opponent)
@@ -63,11 +63,11 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
     {
         var mostTradedOut = TestStateFactory.GetSub().Generate();
         var mostTradedIn = TestStateFactory.GetSub().Generate();
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn)
             .WithSubsOut(mostTradedOut)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup()
             .WithSubsIn(mostTradedIn)
             .WithSubsOut(mostTradedOut)
@@ -92,15 +92,15 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         {
             FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1
         };
-        var opponent1 = new MilaGameWeekStateBuilder()
+        var opponent1 = new ManagerGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn)
             .WithSubsOut(mostTradedOut)
             .Build();
-        var opponent2 = new MilaGameWeekStateBuilder()
+        var opponent2 = new ManagerGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn)
             .WithSubsOut(mostTradedOut)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup()
             .WithSubsIn(leastTradedIn)
             .WithSubsOut(leastTradedOut)

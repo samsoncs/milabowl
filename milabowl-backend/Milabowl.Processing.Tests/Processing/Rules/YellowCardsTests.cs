@@ -9,7 +9,7 @@ public class YellowCardsTests: MilaRuleTest<YellowCards>
     [Fact]
     public void Should_get_one_point_for_every_playing_player()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer().RuleFor(r => r.YellowCards, 1),
                 TestStateFactory.GetCaptain().RuleFor(r => r.YellowCards, 1),

@@ -9,7 +9,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
     [Fact]
     public void Should_get_plus_points_for_all_minus_points()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)))
             .Build();
 
@@ -21,7 +21,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
     [Fact]
     public void Should_get_doubled_plus_points_for_captain_minus_points()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetCaptain().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)))
             .Build();
 
@@ -33,7 +33,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
     [Fact]
     public void Should_sum_all_minus_points()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetCaptain().RuleFor(r => r.TotalPoints, -5),
                 TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, -32),

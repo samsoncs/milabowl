@@ -5,7 +5,7 @@ using Milabowl.Processing.Processing;
 
 namespace Milabowl.Processing.Tests.Utils;
 
-public class MilaGameWeekStateBuilder
+public class ManagerGameWeekStateBuilder
     {
         private readonly Faker _faker = new();
         private Event _event;
@@ -19,7 +19,7 @@ public class MilaGameWeekStateBuilder
         private EventRootDTO _eventRoot;
         private IList<ManagerGameWeekState> _opponents;
 
-        public MilaGameWeekStateBuilder()
+        public ManagerGameWeekStateBuilder()
         {
             _event = new Event(_faker.Random.Int(0, 38), _faker.Lorem.Word());
             _headToHead = TestStateFactory.GetHeadToHead(_faker.Random.Int(10), _faker.Random.Int(10)).Generate();
@@ -33,55 +33,55 @@ public class MilaGameWeekStateBuilder
             _opponents = new List<ManagerGameWeekState>();
         }
 
-        public MilaGameWeekStateBuilder WithEvent(Event @event)
+        public ManagerGameWeekStateBuilder WithEvent(Event @event)
         {
             _event = @event;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithHeadToHead(HeadToHead headToHead)
+        public ManagerGameWeekStateBuilder WithHeadToHead(HeadToHead headToHead)
         {
             _headToHead = headToHead;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithTotalScore(int totalScore)
+        public ManagerGameWeekStateBuilder WithTotalScore(int totalScore)
         {
             _totalScore = totalScore;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithLineup(params IList<PlayerEvent> lineup)
+        public ManagerGameWeekStateBuilder WithLineup(params IList<PlayerEvent> lineup)
         {
             _lineup = lineup;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithOpponents(params IList<ManagerGameWeekState> opponents)
+        public ManagerGameWeekStateBuilder WithOpponents(params IList<ManagerGameWeekState> opponents)
         {
             _opponents = opponents;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithSubsIn(params IList<Sub> subsIn)
+        public ManagerGameWeekStateBuilder WithSubsIn(params IList<Sub> subsIn)
         {
             _subsIn = subsIn;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithSubsOut(params IList<Sub> subsOut)
+        public ManagerGameWeekStateBuilder WithSubsOut(params IList<Sub> subsOut)
         {
             _subsOut = subsOut;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithActiveChip(string activeChip)
+        public ManagerGameWeekStateBuilder WithActiveChip(string activeChip)
         {
             _activeChip = activeChip;
             return this;
         }
 
-        public MilaGameWeekStateBuilder WithHistory(IList<ManagerGameWeekState> history)
+        public ManagerGameWeekStateBuilder WithHistory(IList<ManagerGameWeekState> history)
         {
             _history = history;
             return this;

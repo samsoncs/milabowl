@@ -9,7 +9,7 @@ public class SixtyNineTests: MilaRuleTest<SixtyNine>
     [Fact]
     public void Should_get_6_point_9_points_if_team_scores_69()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory
                     .GetCaptain()
@@ -28,7 +28,7 @@ public class SixtyNineTests: MilaRuleTest<SixtyNine>
     [Fact]
     public void Should_not_get_points_if_team_scores_other_than_69()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory
                     .GetPlayer()

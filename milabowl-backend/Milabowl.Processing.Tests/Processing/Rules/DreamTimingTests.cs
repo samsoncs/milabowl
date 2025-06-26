@@ -11,7 +11,7 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
     public void Should_get_1point5_points_if_sub_in_dream_team()
     {
         var playerId = 1;
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(r => r.FantasyPlayerEventId, playerId)
@@ -34,7 +34,7 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
     {
         var player1Id = 1;
         var player2Id = 1;
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(r => r.FantasyPlayerEventId, player1Id)
@@ -62,7 +62,7 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
     public void Should_get_no_points_if_not_in_dream_team()
     {
         var playerId = 1;
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(r => r.FantasyPlayerEventId, playerId)

@@ -11,7 +11,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
     public void Should_award_3_points_if_user_has_highest_weighted_score()
     {
         var opponent = GetOpponent(9);
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer().RuleFor(x => x.FantasyPlayerEventId, 1)
                 .RuleFor(x => x.TotalPoints, 10))
@@ -28,7 +28,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
     {
         var opponent = GetOpponent(11);
 
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)
@@ -48,7 +48,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
         var opponent1 = GetOpponent(12);
         var opponent2 = GetOpponent(11);
 
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)
@@ -69,7 +69,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
         var opponent2 = GetOpponent(12);
         var opponent3 = GetOpponent(11);
 
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)
@@ -85,7 +85,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
     private ManagerGameWeekState GetOpponent(int points)
     {
-        return new MilaGameWeekStateBuilder()
+        return new ManagerGameWeekStateBuilder()
             .WithLineup(
                 TestStateFactory.GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)

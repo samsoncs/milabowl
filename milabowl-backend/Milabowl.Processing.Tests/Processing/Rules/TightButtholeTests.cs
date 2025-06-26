@@ -10,10 +10,10 @@ public class TightButtholeTests: MilaRuleTest<TightButthole>
     public void Should_get_2_point_1_points_if_player_conceded_fewest_goals()
     {
         var player = TestStateFactory.GetPlayer().RuleFor(r => r.GoalsConceded, 1);
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithLineup(player, player)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(player)
             .WithOpponents(opponent)
             .Build();
@@ -27,10 +27,10 @@ public class TightButtholeTests: MilaRuleTest<TightButthole>
     public void Should_get_0_points_if_player_did_not_conceded_fewest_goals()
     {
         var player = TestStateFactory.GetPlayer().RuleFor(r => r.GoalsConceded, 1);
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithLineup(player)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(player)
             .WithOpponents(opponent)
             .Build();
@@ -45,10 +45,10 @@ public class TightButtholeTests: MilaRuleTest<TightButthole>
     {
         var player = TestStateFactory.GetPlayer().RuleFor(r => r.GoalsConceded, 1);
         var benchedPlayer = TestStateFactory.GetBenchPlayer().RuleFor(r => r.GoalsConceded, 1);
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithLineup(player)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(benchedPlayer)
             .WithOpponents(opponent)
             .Build();

@@ -9,7 +9,7 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
     [Fact]
     public void Should_award_2_69_if_any_player_played_69_minutes()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetPlayer().RuleFor(x => x.Minutes, 69))
             .Build();
 
@@ -21,7 +21,7 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
     [Fact]
     public void Should_double_points_if_captain_played_69_minutes()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetCaptain().RuleFor(x => x.Minutes, 69))
             .Build();
 
@@ -33,7 +33,7 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
     [Fact]
     public void Should_award_0_if_no_player_played_69_minutes()
     {
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(TestStateFactory.GetPlayer().RuleFor(x => x.Minutes, 68))
             .Build();
 

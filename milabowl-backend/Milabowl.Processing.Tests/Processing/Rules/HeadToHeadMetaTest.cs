@@ -17,7 +17,7 @@ public class HeadToHeadMetaTest: MilaRuleTest<HeadToHeadMeta>
         var headToHead = TestStateFactory
             .GetHeadToHead(10, 8)
             .RuleFor(r => r.CurrentUser, headToHeadEvent).Generate();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithHeadToHead(headToHead)
             .Build();
 
@@ -37,7 +37,7 @@ public class HeadToHeadMetaTest: MilaRuleTest<HeadToHeadMeta>
         var headToHead = TestStateFactory
             .GetHeadToHead(11, 8)
             .RuleFor(r => r.CurrentUser, headToHeadEvent).Generate();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithHeadToHead(headToHead)
             .Build();
 
@@ -57,7 +57,7 @@ public class HeadToHeadMetaTest: MilaRuleTest<HeadToHeadMeta>
         var headToHead = TestStateFactory
             .GetHeadToHead(10, 10)
             .RuleFor(r => r.CurrentUser, headToHeadEvent).Generate();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithHeadToHead(headToHead)
             .Build();
 

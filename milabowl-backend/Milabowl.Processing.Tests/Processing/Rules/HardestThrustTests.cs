@@ -18,10 +18,10 @@ public class HardestThrustTests: MilaRuleTest<HardestThrust>
             .GetPlayer()
             .RuleFor(r => r.PlayerPosition, PlayerPosition.DEF)
             .RuleFor(r => r.GoalsScored, 2);
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithLineup(oneGoalDefender)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(twoGoalDefender)
             .WithOpponents(opponent)
             .Build();
@@ -42,10 +42,10 @@ public class HardestThrustTests: MilaRuleTest<HardestThrust>
             .GetPlayer()
             .RuleFor(r => r.PlayerPosition, PlayerPosition.DEF)
             .RuleFor(r => r.GoalsScored, 2);
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithLineup(twoGoalDefender)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(oneGoalDefender)
             .WithOpponents(opponent)
             .Build();
@@ -62,10 +62,10 @@ public class HardestThrustTests: MilaRuleTest<HardestThrust>
             .GetPlayer()
             .RuleFor(r => r.PlayerPosition, PlayerPosition.DEF)
             .RuleFor(r => r.GoalsScored, 1);
-        var opponent = new MilaGameWeekStateBuilder()
+        var opponent = new ManagerGameWeekStateBuilder()
             .WithLineup(oneGoalDefender)
             .Build();
-        var state = new MilaGameWeekStateBuilder()
+        var state = new ManagerGameWeekStateBuilder()
             .WithLineup(oneGoalDefender)
             .WithOpponents(opponent)
             .Build();
