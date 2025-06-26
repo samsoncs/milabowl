@@ -9,9 +9,9 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
     [Fact]
     public void Should_award_2_69_if_any_player_played_69_minutes()
     {
-        var state = StateFactory.GetMilaGameWeekState([
-            StateFactory.GetPlayer().RuleFor(x => x.Minutes, 69).Generate()
-        ]).Generate();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(TestStateFactory.GetPlayer().RuleFor(x => x.Minutes, 69))
+            .Build();
 
         var result = Rule.Calculate(state);
 
@@ -21,9 +21,9 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
     [Fact]
     public void Should_double_points_if_captain_played_69_minutes()
     {
-        var state = StateFactory.GetMilaGameWeekState([
-            StateFactory.GetCaptain().RuleFor(x => x.Minutes, 69).Generate()
-        ]).Generate();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(TestStateFactory.GetCaptain().RuleFor(x => x.Minutes, 69))
+            .Build();
 
         var result = Rule.Calculate(state);
 
@@ -33,9 +33,9 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
     [Fact]
     public void Should_award_0_if_no_player_played_69_minutes()
     {
-        var state = StateFactory.GetMilaGameWeekState([
-            StateFactory.GetPlayer().RuleFor(x => x.Minutes, 68).Generate()
-        ]).Generate();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(TestStateFactory.GetPlayer().RuleFor(x => x.Minutes, 68))
+            .Build();
 
         var result = Rule.Calculate(state);
 

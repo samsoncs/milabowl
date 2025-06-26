@@ -12,11 +12,9 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_minus_5_if_user_holds_exploding_bomb()
     {
-        var state = StateFactory
-            .GetMilaGameWeekState()
-            .Generate();
+        var state = new MilaGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
-        var managerBombState = StateFactory.GetManagerBombState()
+        var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
             .RuleFor(x => x.BombHolder, new BombHolder(state.User.User.EntryId, "Team", "User"))
             .Generate();
@@ -31,11 +29,9 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_0_if_bomb_did_not_explode()
     {
-        var state = StateFactory
-            .GetMilaGameWeekState()
-            .Generate();
+        var state = new MilaGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
-        var managerBombState = StateFactory.GetManagerBombState()
+        var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, f => f.PickRandom(BombStateEnum.HandedOver_Chip, BombStateEnum.HandedOver_H2H, BombStateEnum.Holding))
             .RuleFor(x => x.BombHolder, new BombHolder(state.User.User.EntryId, "Team", "User"))
             .Generate();
@@ -50,11 +46,9 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_0_if_bomb_exploded_on_different_person()
     {
-        var state = StateFactory
-            .GetMilaGameWeekState()
-            .Generate();
+        var state = new MilaGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
-        var managerBombState = StateFactory.GetManagerBombState()
+        var managerBombState = TestStateFactory.GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
             .RuleFor(x => x.BombHolder, new BombHolder(state.User.User.EntryId + 1, "Team", "User"))
             .Generate();

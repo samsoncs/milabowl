@@ -1,0 +1,114 @@
+using FluentAssertions;
+using Milabowl.Processing.Processing.Rules;
+using Milabowl.Processing.Tests.Utils;
+
+namespace Milabowl.Processing.Tests.Processing.Rules;
+
+public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
+{
+    [Fact]
+    public void Should_get_minus_point_if_player_traded_in_most_traded_in_player()
+    {
+        var mostTradedIn = TestStateFactory.GetSub().Generate();
+        var leastTradedIn = mostTradedIn with
+        {
+            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1
+        };
+        var leastTradedIn2 = mostTradedIn with
+        {
+            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId + 1
+        };
+        var opponent = new UserStateBuilder()
+            .WithSubsIn(mostTradedIn, leastTradedIn)
+            .Build();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup()
+            .WithSubsIn(mostTradedIn, leastTradedIn2)
+            .WithOpponents(opponent)
+            .Build();
+
+        var result = Rule.Calculate(state);
+
+        result.Points.Should().Be(-1);
+    }
+
+    [Fact]
+    public void Should_get_minus_point_if_player_traded_out_most_traded_out_player()
+    {
+        var mostTradedOut = TestStateFactory.GetSub().Generate();
+        var leastTradedOut = mostTradedOut with
+        {
+            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId - 1
+        };
+        var leastTradedOut2 = mostTradedOut with
+        {
+            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId + 1
+        };
+        var opponent = new UserStateBuilder()
+            .WithSubsOut(mostTradedOut, leastTradedOut)
+            .Build();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup()
+            .WithSubsOut(mostTradedOut, leastTradedOut2)
+            .WithOpponents(opponent)
+            .Build();
+
+        var result = Rule.Calculate(state);
+
+        result.Points.Should().Be(-1);
+    }
+
+    [Fact]
+    public void Should_get_minus_2_points_if_player_traded_out_and_in_most_traded_players()
+    {
+        var mostTradedOut = TestStateFactory.GetSub().Generate();
+        var mostTradedIn = TestStateFactory.GetSub().Generate();
+        var opponent = new UserStateBuilder()
+            .WithSubsIn(mostTradedIn)
+            .WithSubsOut(mostTradedOut)
+            .Build();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup()
+            .WithSubsIn(mostTradedIn)
+            .WithSubsOut(mostTradedOut)
+            .WithOpponents(opponent)
+            .Build();
+
+        var result = Rule.Calculate(state);
+
+        result.Points.Should().Be(-2);
+    }
+
+    [Fact]
+    public void Should_get_zero_points_if_player_did_not_trade_most_popular_trades()
+    {
+        var mostTradedOut = TestStateFactory.GetSub().Generate();
+        var leastTradedOut = mostTradedOut with
+        {
+            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId - 1
+        };
+        var mostTradedIn = TestStateFactory.GetSub().Generate();
+        var leastTradedIn = mostTradedIn with
+        {
+            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1
+        };
+        var opponent1 = new UserStateBuilder()
+            .WithSubsIn(mostTradedIn)
+            .WithSubsOut(mostTradedOut)
+            .Build();
+        var opponent2 = new UserStateBuilder()
+            .WithSubsIn(mostTradedIn)
+            .WithSubsOut(mostTradedOut)
+            .Build();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup()
+            .WithSubsIn(leastTradedIn)
+            .WithSubsOut(leastTradedOut)
+            .WithOpponents(opponent1, opponent2)
+            .Build();
+
+        var result = Rule.Calculate(state);
+
+        result.Points.Should().Be(0);
+    }
+}

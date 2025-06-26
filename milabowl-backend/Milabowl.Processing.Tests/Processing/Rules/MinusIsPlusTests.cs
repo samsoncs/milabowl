@@ -9,11 +9,9 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
     [Fact]
     public void Should_get_plus_points_for_all_minus_points()
     {
-        var state = StateFactory.GetMilaGameWeekState(
-            [
-                StateFactory.GetPlayer().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)),
-            ]
-        ).Generate();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)))
+            .Build();
 
         var result = Rule.Calculate(state);
 
@@ -23,11 +21,9 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
     [Fact]
     public void Should_get_doubled_plus_points_for_captain_minus_points()
     {
-        var state = StateFactory.GetMilaGameWeekState(
-            [
-                StateFactory.GetCaptain().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)),
-            ]
-        ).Generate();
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(TestStateFactory.GetCaptain().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)))
+            .Build();
 
         var result = Rule.Calculate(state);
 
@@ -37,16 +33,16 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
     [Fact]
     public void Should_sum_all_minus_points()
     {
-        var state = StateFactory.GetMilaGameWeekState(
-            [
-                StateFactory.GetCaptain().RuleFor(r => r.TotalPoints, -5),
-                StateFactory.GetPlayer().RuleFor(r => r.TotalPoints, -32),
-                StateFactory.GetPlayer().RuleFor(r => r.TotalPoints, 0),
-                StateFactory.GetPlayer().RuleFor(r => r.TotalPoints, 4),
-                StateFactory.GetBenchPlayer().RuleFor(r => r.TotalPoints, -10),
-            ]
-        );
-
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(
+                TestStateFactory.GetCaptain().RuleFor(r => r.TotalPoints, -5),
+                TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, -32),
+                TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, 0),
+                TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, 4),
+                TestStateFactory.GetBenchPlayer().RuleFor(r => r.TotalPoints, -10)
+            )
+            .Build();
+        
         var result = Rule.Calculate(state);
 
         result.Points.Should().Be(42);

@@ -9,16 +9,16 @@ public class SixtyNineTests: MilaRuleTest<SixtyNine>
     [Fact]
     public void Should_get_6_point_9_points_if_team_scores_69()
     {
-        var state = StateFactory.GetMilaGameWeekState(
-            [
-                StateFactory
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(
+                TestStateFactory
                     .GetCaptain()
                     .RuleFor(r => r.TotalPoints, 3),
-                StateFactory
+                TestStateFactory
                     .GetPlayer()
                     .RuleFor(r => r.TotalPoints, 63)
-            ]
-        );
+            )
+            .Build();
 
         var result = Rule.Calculate(state);
 
@@ -28,16 +28,16 @@ public class SixtyNineTests: MilaRuleTest<SixtyNine>
     [Fact]
     public void Should_not_get_points_if_team_scores_other_than_69()
     {
-        var state = StateFactory.GetMilaGameWeekState(
-            [
-                StateFactory
+        var state = new MilaGameWeekStateBuilder()
+            .WithLineup(
+                TestStateFactory
                     .GetPlayer()
                     .RuleFor(r => r.TotalPoints, 3),
-                StateFactory
+                TestStateFactory
                     .GetPlayer()
-                    .RuleFor(r => r.TotalPoints, 63),
-            ]
-        );
+                    .RuleFor(r => r.TotalPoints, 63)
+            )
+            .Build();
 
         var result = Rule.Calculate(state);
 

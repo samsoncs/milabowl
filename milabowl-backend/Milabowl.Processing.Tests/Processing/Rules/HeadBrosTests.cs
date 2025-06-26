@@ -9,33 +9,30 @@ public class HeadBrosTests : MilaRuleTest<HeadBros>
     [Fact]
     public void Should_award_points_if_user_and_opponent_have_highest_combined_score()
     {
-        var userHeadToHead = StateFactory
-            .GetHeadToHead()
-            .RuleFor(x => x.CurrentUser.Points, 30)
-            .RuleFor(x => x.Opponent.Points, 40)
-            .Generate();
+        var user = new UserStateBuilder()
+            .WithHeadToHead(
+                TestStateFactory.GetHeadToHead(30, 40)
+            )
+            .Build();
 
-        var opp1HeadToHead = StateFactory
-            .GetHeadToHead()
-            .RuleFor(x => x.CurrentUser.Points, 20)
-            .RuleFor(x => x.Opponent.Points, 10)
-            .Generate();
+        var opponent1 = new UserStateBuilder()
+            .WithHeadToHead(
+                TestStateFactory.GetHeadToHead(20, 10)
+            )
+            .Build();
 
-        var opp2HeadToHead = StateFactory
-            .GetHeadToHead()
-            .RuleFor(x => x.CurrentUser.Points, 30)
-            .RuleFor(x => x.Opponent.Points, 10)
-            .Generate();
+        var opponent2 = new UserStateBuilder()
+            .WithHeadToHead(
+                TestStateFactory.GetHeadToHead(30, 10)
+            )
+            .Build();
 
-        var userState = StateFactory.GetMilaGameWeekState(
-            userHeadToHead: userHeadToHead,
-            opponents: [
-                StateFactory.GetMilaGameWeekState(userHeadToHead: opp1HeadToHead).Generate().User,
-                StateFactory.GetMilaGameWeekState(userHeadToHead: opp2HeadToHead).Generate().User
-            ]
-            ).Generate();
+        var state = new MilaGameWeekStateBuilder()
+            .WithUser(user)
+            .WithOpponents(opponent1, opponent2)
+            .Build();
 
-        var result = Rule.Calculate(userState);
+        var result = Rule.Calculate(state);
 
         result.Points.Should().Be(2.69m);
     }
@@ -43,24 +40,24 @@ public class HeadBrosTests : MilaRuleTest<HeadBros>
     [Fact]
     public void Should_award_0_if_user_and_opponent_do_not_have_highest_combined_score()
     {
-        var userHeadToHead = StateFactory
-            .GetHeadToHead()
-            .RuleFor(x => x.CurrentUser.Points, 10)
-            .RuleFor(x => x.Opponent.Points, 10)
-            .Generate();
-        var oppHeadToHead = StateFactory
-            .GetHeadToHead()
-            .RuleFor(x => x.CurrentUser.Points, 30)
-            .RuleFor(x => x.Opponent.Points, 40)
-            .Generate();
-        var userState = StateFactory
-            .GetMilaGameWeekState(
-                userHeadToHead: userHeadToHead,
-                opponents: [StateFactory.GetMilaGameWeekState(userHeadToHead: oppHeadToHead).Generate().User]
+        var user = new UserStateBuilder()
+            .WithHeadToHead(
+                TestStateFactory.GetHeadToHead(10, 20)
             )
-            .Generate();
+            .Build();
 
-        var result = Rule.Calculate(userState);
+        var opponent = new UserStateBuilder()
+            .WithHeadToHead(
+                TestStateFactory.GetHeadToHead(30, 10)
+            )
+            .Build();
+
+        var state = new MilaGameWeekStateBuilder()
+            .WithUser(user)
+            .WithOpponents(opponent)
+            .Build();
+
+        var result = Rule.Calculate(state);
 
         result.Points.Should().Be(0);
     }

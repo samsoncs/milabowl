@@ -10,8 +10,8 @@ public class AllMilaRulesShouldHaveTest
     public void All_MilaRules_Should_Have_Test()
     {
         // Arrange
-        var milaRules = typeof(Milabowl.Processing.Processing.IMilaRule).Assembly.GetTypes()
-            .Where(t => t.IsClass && typeof(IMilaRule).IsAssignableFrom(t))
+        var milaRules = typeof(IMilaRule).Assembly.GetTypes()
+            .Where(t => t.IsClass && typeof(IMilaRule).IsAssignableFrom(t) && !t.IsAbstract)
             .Select(t => t.Name)
             .ToList();
 
@@ -20,7 +20,7 @@ public class AllMilaRulesShouldHaveTest
             .Select(t => t.BaseType!.GetGenericArguments()[0].Name)
             .ToList();
 
-        milaRuleTests.Should().BeEquivalentTo(milaRules, "all MilaRules should have a corresponding test class implementing MilaRuleTest<T> where T is the MilaRule type.");
+        milaRuleTests.Should().BeEquivalentTo(milaRules, $"all MilaRules should have a corresponding test class implementing MilaRuleTest<T> where T is the MilaRule type. Missing: {string.Join(",", milaRules.Where(r => !milaRuleTests.Contains(r)))}");
     }
 
 }

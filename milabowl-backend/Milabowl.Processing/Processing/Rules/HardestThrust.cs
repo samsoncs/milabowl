@@ -24,6 +24,6 @@ public class HardestThrust: MilaRule
     {
         return lineup
             .Where(l => l is { Multiplier: > 0, PlayerPosition: PlayerPosition.DEF })
-            .Sum(pe => pe.GoalsConceded);
+            .Sum(pe => pe.GoalsScored);
     }
 }

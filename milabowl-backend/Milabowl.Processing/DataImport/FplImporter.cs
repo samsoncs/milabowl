@@ -33,7 +33,7 @@ public class FplImporter
                     userStates.Where(u => u.Event.GameWeek < finishedEvent.Id)
                 );
 
-                var userGameWeek = new UserState(
+                var userGameWeek = StateFactory.CreateUserState(
                     finishedEvent.ToEvent(),
                     headToHeadEventRootDto.ToHeadToHeadEvent(user.entry),
                     user.ToUser(),
@@ -51,7 +51,7 @@ public class FplImporter
             .GroupBy(u => u.Event)
             .SelectMany(s =>
                 s.ToList()
-                    .Select(u => new MilaGameWeekState(
+                    .Select(u => StateFactory.CreateMilaGameWeekState(
                         u,
                         s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
                     ))
