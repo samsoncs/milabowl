@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milabowl.Processing", "Mila
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milabowl.Milalytics", "Milabowl.Milalytics\Milabowl.Milalytics.csproj", "{E1DA0997-DCC1-4C32-B777-24DAE0C2A946}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milabowl.Processing.Tests", "Milabowl.Processing.Tests\Milabowl.Processing.Tests.csproj", "{A4EA31DB-3302-480E-B18D-2047B488F5D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E1DA0997-DCC1-4C32-B777-24DAE0C2A946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1DA0997-DCC1-4C32-B777-24DAE0C2A946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1DA0997-DCC1-4C32-B777-24DAE0C2A946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4EA31DB-3302-480E-B18D-2047B488F5D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4EA31DB-3302-480E-B18D-2047B488F5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4EA31DB-3302-480E-B18D-2047B488F5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4EA31DB-3302-480E-B18D-2047B488F5D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

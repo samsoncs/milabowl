@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Processing;
 
 public interface IRulesProcessor
 {
-    MilaResult CalculateForUserGameWeek(MilaGameWeekState userGameWeek);
+    MilaResult CalculateForUserGameWeek(ManagerGameWeekState userGameWeek);
 }
 
 public class RulesProcessor : IRulesProcessor
@@ -15,17 +15,17 @@ public class RulesProcessor : IRulesProcessor
         _rules = rules;
     }
 
-    public MilaResult CalculateForUserGameWeek(MilaGameWeekState userGameWeek)
+    public MilaResult CalculateForUserGameWeek(ManagerGameWeekState userGameWeek)
     {
         var ruleResults = _rules.Select(r => r.Calculate(userGameWeek)).ToList();
         var totalScore = ruleResults.Sum(r => r.Points);
         return new MilaResult(
-            userGameWeek.User.Event.Name,
+            userGameWeek.Event.Name,
             totalScore,
-            userGameWeek.User.User.TeamName,
-            userGameWeek.User.User.UserName,
-            userGameWeek.User.User.Id,
-            userGameWeek.User.Event.GameWeek,
+            userGameWeek.User.TeamName,
+            userGameWeek.User.UserName,
+            userGameWeek.User.Id,
+            userGameWeek.Event.GameWeek,
             ruleResults
         );
     }

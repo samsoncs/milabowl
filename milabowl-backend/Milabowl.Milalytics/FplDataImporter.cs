@@ -19,13 +19,13 @@ public static class FplDataImporter
         {
             var managerGameWeek = new ManagerGameWeek(
                 Guid.NewGuid(),
-                gameWeekState.User.User.UserName,
-                gameWeekState.User.User.TeamName,
-                gameWeekState.User.User.Id,
-                gameWeekState.User.Event.GameWeek,
-                gameWeekState.User.ActiveChip,
-                gameWeekState.User.SubsIn.Select(s => $"{s.FirstName} {s.Surname}").ToList(),
-                gameWeekState.User.SubsOut.Select(s => $"{s.FirstName} {s.Surname}").ToList()
+                gameWeekState.User.UserName,
+                gameWeekState.User.TeamName,
+                gameWeekState.User.Id,
+                gameWeekState.Event.GameWeek,
+                gameWeekState.ActiveChip,
+                gameWeekState.SubsIn.Select(s => $"{s.FirstName} {s.Surname}").ToList(),
+                gameWeekState.SubsOut.Select(s => $"{s.FirstName} {s.Surname}").ToList()
             );
 
             await using var connection = new SqlConnection(DbConnection.CONNECTION_STRING);
@@ -63,7 +63,7 @@ public static class FplDataImporter
                     SubsOut = string.Join(",", managerGameWeek.SubsOut)
                 });
 
-            foreach (var playerEvent in gameWeekState.User.Lineup)
+            foreach (var playerEvent in gameWeekState.Lineup)
             {
                 var managerGameWeekLineup = new ManagerGameWeekLineup(
                     managerGameWeek.ManagerGameWeekId,

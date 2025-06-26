@@ -9,9 +9,9 @@ public class HardestThrust: MilaRule
     protected override string Description =>
         "Receive 1.6 points if your defenders scored the most goals. No points if tie.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
-        var goalsScored = GetGoalsByDefender(userGameWeek.User.Lineup);
+        var goalsScored = GetGoalsByDefender(userGameWeek.Lineup);
         var maxOpponentsGoalsScored = userGameWeek
             .Opponents.Select(u => GetGoalsByDefender(u.Lineup)).Max();
 
@@ -24,6 +24,6 @@ public class HardestThrust: MilaRule
     {
         return lineup
             .Where(l => l is { Multiplier: > 0, PlayerPosition: PlayerPosition.DEF })
-            .Sum(pe => pe.GoalsConceded);
+            .Sum(pe => pe.GoalsScored);
     }
 }

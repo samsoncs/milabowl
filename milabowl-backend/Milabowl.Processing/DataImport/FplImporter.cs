@@ -13,7 +13,7 @@ public class FplImporter
         _fplService = fplService;
     }
 
-    public async Task<IReadOnlyList<MilaGameWeekState>> ImportFplDataForRulesProcessing()
+    public async Task<IReadOnlyList<ManagerGameWeekState>> ImportFplDataForRulesProcessing()
     {
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
@@ -21,7 +21,7 @@ public class FplImporter
         var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.standings.results;
-        List<UserState> userStates = [];
+        List<ManagerGameWeekState> userStates = [];
         foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
         {
             var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
@@ -29,18 +29,19 @@ public class FplImporter
             foreach (var user in users)
             {
                 var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
-                var historicGameWeeks = new List<UserState>(
+                var historicGameWeeks = new List<ManagerGameWeekState>(
                     userStates.Where(u => u.Event.GameWeek < finishedEvent.Id)
                 );
 
-                var userGameWeek = new UserState(
+                var userGameWeek = StateFactory.CreateUserState(
                     finishedEvent.ToEvent(),
                     headToHeadEventRootDto.ToHeadToHeadEvent(user.entry),
                     user.ToUser(),
                     picksRoot.ToLineup(eventRootDto, players, teams),
                     picksRoot.active_chip,
                     historicGameWeeks,
-                    eventRootDto
+                    eventRootDto,
+                    new List<ManagerGameWeekState>()
                 );
 
                 userStates.Add(userGameWeek);
@@ -51,12 +52,11 @@ public class FplImporter
             .GroupBy(u => u.Event)
             .SelectMany(s =>
                 s.ToList()
-                    .Select(u => new MilaGameWeekState(
-                        u,
-                        s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
-                    ))
-            )
-            .ToList();
+                    .Select(u => u with
+                    {
+                        Opponents = s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
+                            .AsReadOnly()
+                    })).ToList();
     }
 
     public async Task<FplResults> ImportFplData()

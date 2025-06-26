@@ -9,11 +9,11 @@ public class DreamTiming: MilaRule
     protected override string Description =>
         "Receive 1.5 points if you sub in a player that is in dream team.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
-        var subsIn = userGameWeek.User.SubsIn.Select(u => u.FantasyPlayerEventId).ToList();
+        var subsIn = userGameWeek.SubsIn.Select(u => u.FantasyPlayerEventId).ToList();
         var subsInDreamTeam =
-            userGameWeek.User.Lineup.Where(l =>
+            userGameWeek.Lineup.Where(l =>
                 l.InDreamteam && subsIn.Contains(l.FantasyPlayerEventId))
                 .ToList();
         var points = subsInDreamTeam.Any()

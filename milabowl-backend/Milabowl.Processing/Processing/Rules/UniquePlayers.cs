@@ -7,17 +7,17 @@ public class UniquePlayers: MilaRule
     protected override string ShortName => "UnqP";
     protected override string Description => "Game week scores are weighted based on uniqueness of the player. If a player is owned by 5 or more players their score counts as 0. The 3 top scoring teams receive 3,2 or 1 points according to team score.";
 
-    protected override RulePoints CalculatePoints(MilaGameWeekState userGameWeek)
+    protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var playerCountsById = userGameWeek
             .Opponents
             .SelectMany(p => p.Lineup)
-            .Concat(userGameWeek.User.Lineup)
+            .Concat(userGameWeek.Lineup)
             .Where(pe => pe.Multiplier > 0)
             .GroupBy(pe => pe.FantasyPlayerEventId)
             .ToDictionary(k => k.Key, v => v.Count());
 
-        var weightedPoints = userGameWeek.User.Lineup.Where(l => l.Multiplier > 0).Sum(u => GetWeightedPoints(u, userGameWeek.Opponents.Count + 1, playerCountsById));
+        var weightedPoints = userGameWeek.Lineup.Where(l => l.Multiplier > 0).Sum(u => GetWeightedPoints(u, userGameWeek.Opponents.Count + 1, playerCountsById));
         var playersInFront = userGameWeek.Opponents
             .Select(o => o.Lineup.Where(l => l.Multiplier > 0).Sum(pe => GetWeightedPoints(pe, userGameWeek.Opponents.Count + 1, playerCountsById)))
             .Count(s => s > weightedPoints);
