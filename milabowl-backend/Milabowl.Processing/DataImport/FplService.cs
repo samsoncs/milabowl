@@ -10,7 +10,7 @@ public interface IFplService
     Task<EventRootDTO> GetEventRoot(int eventID);
     Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID);
     Task<PicksRootDTO> GetPicksRoot(int eventID, int userID);
-    Task<ElementHistoryRootDTO> GetPlayerHistoryRoot(int playerId);
+    Task<ElementHistoryRootDto> GetPlayerHistoryRoot(int playerId);
     Task<IList<FixtureDTO>> GetFixtures();
     Task<EntryRootDTO> GetEntryRoot(int userID);
 }
@@ -86,9 +86,9 @@ public class FplService : IFplService
         return headToHeadEventRoot;
     }
 
-    public async Task<ElementHistoryRootDTO> GetPlayerHistoryRoot(int playerId)
+    public async Task<ElementHistoryRootDto> GetPlayerHistoryRoot(int playerId)
     {
-        var root = await _httpClient.GetDeserializedAsync<ElementHistoryRootDTO>(
+        var root = await _httpClient.GetDeserializedAsync<ElementHistoryRootDto>(
             $"https://fantasy.premierleague.com/api/element-summary/{playerId}/"
         );
         root.FantasyElementId = playerId;

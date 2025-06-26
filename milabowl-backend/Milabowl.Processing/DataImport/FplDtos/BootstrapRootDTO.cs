@@ -4,12 +4,12 @@ namespace Milabowl.Processing.DataImport.FplDtos;
 
 public class BootstrapRootDTO
 {
-    public List<EventDTO> Events { get; set; }
-    public List<TeamDTO> Teams { get; set; }
+    public required List<EventDTO> Events { get; init; }
+    public required List<TeamDTO> Teams { get; init; }
 
     [JsonPropertyName("total_players")]
-    public int TotalPlayers { get; set; }
+    public required int TotalPlayers { get; init; }
 
     [JsonPropertyName("elements")]
-    public List<PlayerDTO> Players { get; set; }
+    public required List<PlayerDTO> Players { get; init; }
 }

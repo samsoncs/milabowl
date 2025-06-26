@@ -3,6 +3,6 @@
 public class ElementDTO
 {
     public int id { get; set; }
-    public StatsDTO stats { get; set; }
-    public List<ExplainDTO> explain { get; set; }
+    public required StatsDTO stats { get; init; }
+    public required List<ExplainDTO> explain { get; init; }
 }
