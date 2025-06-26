@@ -1,0 +1,23 @@
+name: Run .NET Tests
+
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Run Tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore milabowl-backend/Milabowl.sln
+
+      - name: Run tests
+        run: dotnet test milabowl-backend/Milabowl.Processing.Tests/Milabowl.Processing.Tests.csproj --no-restore --configuration Release --verbosity normal
