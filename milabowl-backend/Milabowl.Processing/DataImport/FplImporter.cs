@@ -12,7 +12,7 @@ public class FplImporter
         _fplService = fplService;
     }
 
-    public async Task<IReadOnlyList<ManagerGameWeekState>> ImportFplDataForRulesProcessing()
+    public async Task<ImportData> ImportFplDataForRulesProcessing()
     {
         var bootstrapRoot = await _fplService.GetBootstrapRoot();
         var events = bootstrapRoot.Events;
@@ -21,7 +21,7 @@ public class FplImporter
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.Standings.Results;
         List<ManagerGameWeekState> userStates = [];
-        foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
+        foreach (var finishedEvent in events.Where(e => e.DeadlineTime < DateTime.UtcNow))
         {
             var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
             var headToHeadEventRootDto = await _fplService.GetHead2HeadEventRoot(finishedEvent.Id);
@@ -47,15 +47,23 @@ public class FplImporter
             }
         }
 
-        return userStates
-            .GroupBy(u => u.Event)
-            .SelectMany(s =>
-                s.ToList()
-                    .Select(u => u with
-                    {
-                        Opponents = s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
-                            .AsReadOnly()
-                    })).ToList();
+        var lastEvent = events.Last(e => e.DeadlineTime < DateTime.UtcNow);
+
+        return new ImportData
+        {
+            ManagerGameWeekStates = userStates
+                .GroupBy(u => u.Event)
+                .SelectMany(s =>
+                    s.ToList()
+                        .Select(u => u with
+                        {
+                            Opponents = s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
+                                .AsReadOnly()
+                        })).ToList(),
+            IsLive = lastEvent is { Finished: false, DataChecked: false }
+        };
+
+
     }
 
     public async Task<FplResults> ImportFplData()

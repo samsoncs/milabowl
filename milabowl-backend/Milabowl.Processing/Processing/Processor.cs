@@ -28,13 +28,13 @@ public class Processor
     public async Task ProcessMilaPoints(string filePath)
     {
         Console.WriteLine("Importing FPL data for rules processing");
-        var importedGameWeekStates = await _importer.ImportFplDataForRulesProcessing();
+        var importData = await _importer.ImportFplDataForRulesProcessing();
         Console.WriteLine("Importing FPL data for rules processing - Finished");
         Console.WriteLine("Processing rules");
-        var results = ProcessRules(importedGameWeekStates);
+        var results = ProcessRules(importData.ManagerGameWeekStates);
         Console.WriteLine("Processing rules - Finished");
         var summarizedMilaResults = _summarizer.Summarize(results);
-        var json = JsonSerializer.Serialize(summarizedMilaResults.MapToResult(), _jsonOptions);
+        var json = JsonSerializer.Serialize(summarizedMilaResults.MapToResult(importData.IsLive), _jsonOptions);
         await File.WriteAllTextAsync($"{filePath}/game_state.json", json);
         var bombState = _bombState.GetBombState();
         var bombStateJson = JsonSerializer.Serialize(bombState, _jsonOptions);
