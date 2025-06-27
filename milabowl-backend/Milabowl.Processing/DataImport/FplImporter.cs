@@ -21,19 +21,19 @@ public class FplImporter
         var leagueRoot = await _fplService.GetLeagueRoot();
         var users = leagueRoot.Standings.Results;
         List<ManagerGameWeekState> userStates = [];
-        foreach (var finishedEvent in events.Where(e => e.DeadlineTime < DateTime.UtcNow))
+        foreach (var @event in events.Where(e => e.DeadlineTime < DateTime.UtcNow))
         {
-            var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
-            var headToHeadEventRootDto = await _fplService.GetHead2HeadEventRoot(finishedEvent.Id);
+            var eventRootDto = await _fplService.GetEventRoot(@event.Id);
+            var headToHeadEventRootDto = await _fplService.GetHead2HeadEventRoot(@event.Id);
             foreach (var user in users)
             {
-                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.Entry);
+                var picksRoot = await _fplService.GetPicksRoot(@event.Id, user.Entry);
                 var historicGameWeeks = new List<ManagerGameWeekState>(
-                    userStates.Where(u => u.Event.GameWeek < finishedEvent.Id)
+                    userStates.Where(u => u.Event.GameWeek < @event.Id)
                 );
 
                 var userGameWeek = StateFactory.CreateUserState(
-                    finishedEvent.ToEvent(),
+                    @event.ToEvent(),
                     headToHeadEventRootDto.ToHeadToHeadEvent(user.Entry),
                     user.ToUser(),
                     picksRoot.ToLineup(eventRootDto, players, teams),

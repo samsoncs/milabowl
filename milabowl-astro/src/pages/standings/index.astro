@@ -20,8 +20,14 @@ const lastGameWeek = Math.max.apply(
 
 <Layout title="Milabowl - Overall standings" enableViewTransitions>
     <Card title="Standings - Overall">
-        <div slot="secondary">
+        <div slot="secondary" class="flex flex-row gap-3">
             <Link href={`/standings/${lastGameWeek}`}>Latest Gameweek</Link>
+            { 
+                milaResults.isLive && 
+                <div class="font-bold">
+                    🔴 Live
+                </div>
+            }
         </div>
         <div class="hidden md:block">
             <StandingsTable
