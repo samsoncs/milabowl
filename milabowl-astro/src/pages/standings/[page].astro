@@ -43,38 +43,27 @@ const standingsTitle = `Standings - GW ${page.data[0].gameWeek}`;
             }
         </div>
 
-        <div class="hidden md:block">
-            <StandingsTable
-                data={page.data[0].results}
-                lastGameWeek={0}
-                avatars={images}
-                client:idle
-            />
+        <div class="overflow-x-auto">
+            <div class="hidden md:block">
+                <StandingsTable
+                    data={page.data[0].results}
+                    lastGameWeek={0}
+                    avatars={images}
+                    client:idle
+                />
+            </div>
+            <div class="block md:hidden">
+                <StandingsTableMobile
+                    data={page.data[0].results}
+                    lastGameWeek={0}
+                    avatars={images}
+                    client:idle
+                />
+            </div>
         </div>
-        <div class="block md:hidden">
-            <StandingsTableMobile
-                data={page.data[0].results}
-                lastGameWeek={0}
-                avatars={images}
-                client:idle
-            />
-        </div>
-
-        <div class="page-conatiner">
+        <div class="flex items-center mt-2 gap-2">
             {page.url.prev ? <Link href={page.url.prev}>Prev GW</Link> : null}
             {page.url.next ? <Link href={page.url.next}>Next GW</Link> : null}
         </div>
     </Card>
 </Layout>
-
-<style>
-    .page-conatiner {
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-        gap: 20px;
-    }
-    .paging-left {
-        flex-grow: 1;
-    }
-</style>
