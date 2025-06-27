@@ -24,8 +24,8 @@ public static class FplDataImporter
                 gameWeekState.User.Id,
                 gameWeekState.Event.GameWeek,
                 gameWeekState.ActiveChip,
-                gameWeekState.SubsIn.Select(s => $"{s.FirstName} {s.Surname}").ToList(),
-                gameWeekState.SubsOut.Select(s => $"{s.FirstName} {s.Surname}").ToList()
+                gameWeekState.TransfersIn.Select(s => $"{s.FirstName} {s.Surname}").ToList(),
+                gameWeekState.TransfersOut.Select(s => $"{s.FirstName} {s.Surname}").ToList()
             );
 
             await using var connection = new SqlConnection(DbConnection.CONNECTION_STRING);

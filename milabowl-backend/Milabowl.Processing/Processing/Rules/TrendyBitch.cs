@@ -5,22 +5,22 @@ namespace Milabowl.Processing.Processing.Rules;
 public class TrendyBitch : MilaRule
 {
     protected override string ShortName => "Trnd";
-    protected override string Description => "Receive -1 penalty point if you sub out the most popular transferred out player, and -1 point if you sub in the most popular transferred in player.";
+    protected override string Description => "Receive -1 penalty point if you transfer out the most popular transferred out player, and -1 point if you sub in the most popular transferred in player.";
 
     protected override RulePoints CalculatePoints(ManagerGameWeekState managerGameWeekState)
     {
         var points = 0.0m;
         var trendyBitchInPoints = GetTrendyBitchPoints(
-            managerGameWeekState.SubsIn.ToList(),
-            managerGameWeekState.SubsIn
-                .Concat(managerGameWeekState.Opponents.SelectMany(o => o.SubsIn)).ToList(),
+            managerGameWeekState.TransfersIn.ToList(),
+            managerGameWeekState.TransfersIn
+                .Concat(managerGameWeekState.Opponents.SelectMany(o => o.TransfersIn)).ToList(),
             true
         );
 
         var trendyBitchOutPoints = GetTrendyBitchPoints(
-            managerGameWeekState.SubsOut.ToList(),
-            managerGameWeekState.SubsOut
-                .Concat(managerGameWeekState.Opponents.SelectMany(o => o.SubsOut)).ToList(),
+            managerGameWeekState.TransfersOut.ToList(),
+            managerGameWeekState.TransfersOut
+                .Concat(managerGameWeekState.Opponents.SelectMany(o => o.TransfersOut)).ToList(),
             false
         );
 
@@ -29,7 +29,7 @@ public class TrendyBitch : MilaRule
         return new RulePoints(points,$"{trendyBitchInPoints.Reasoning} {trendyBitchOutPoints.Reasoning}");
     }
 
-    private RulePoints GetTrendyBitchPoints(IList<Sub> userSubs, IList<Sub> allSubs, bool tradeIn)
+    private RulePoints GetTrendyBitchPoints(IList<Transfer> userSubs, IList<Transfer> allSubs, bool tradeIn)
     {
         var tradeCounts =
             allSubs

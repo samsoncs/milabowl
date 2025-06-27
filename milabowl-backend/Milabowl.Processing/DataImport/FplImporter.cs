@@ -37,7 +37,9 @@ public class FplImporter
                     headToHeadEventRootDto.ToHeadToHeadEvent(user.Entry),
                     user.ToUser(),
                     picksRoot.ToLineup(eventRootDto, players, teams),
+                    picksRoot.ToAutoSubs(eventRootDto, players),
                     picksRoot.ActiveChip,
+                    picksRoot.EntryHistory.EventTransfersCost,
                     historicGameWeeks,
                     eventRootDto,
                     new List<ManagerGameWeekState>()

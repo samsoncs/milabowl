@@ -95,6 +95,41 @@ public static class FplMapperExtensions
             .ToList();
     }
 
+    public static AutoSub ToAutoSubs(this PicksRootDto picksRootDto, EventRootDto eventRootDto, List<PlayerDto> players)
+    {
+        var subsIn = picksRootDto.AutoSubs.Select(a =>
+        {
+            var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementIn);
+            var playerIn = players.First(p => p.Id == a.ElementIn);
+            return new Sub
+            {
+                TotalPoints = elementIn.Stats.TotalPoints,
+                FirstName = playerIn.FirstName,
+                Surname = playerIn.SecondName,
+                FantasyPlayerEventId = playerIn.Id
+            };
+        }).ToList();
+
+        var subsOut = picksRootDto.AutoSubs.Select(a =>
+        {
+            var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementOut);
+            var playerIn = players.First(p => p.Id == a.ElementOut);
+            return new Sub
+            {
+                TotalPoints = elementIn.Stats.TotalPoints,
+                FirstName = playerIn.FirstName,
+                Surname = playerIn.SecondName,
+                FantasyPlayerEventId = playerIn.Id
+            };
+        }).ToList();
+
+        return new AutoSub
+        {
+            In = subsIn,
+            Out = subsOut
+        };
+    }
+
     private static PlayerEvent ToPlayerEvent(this ElementDto element,
         PlayerDto player,
         TeamDto team,
