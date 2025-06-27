@@ -17,7 +17,9 @@ public class Processor
     public Processor(
         FplImporter importer,
         HistorySummarizer summarizer,
-        IRulesProcessor rulesProcessor, IBombState bombState)
+        IRulesProcessor rulesProcessor,
+        IBombState bombState
+    )
     {
         _importer = importer;
         _summarizer = summarizer;

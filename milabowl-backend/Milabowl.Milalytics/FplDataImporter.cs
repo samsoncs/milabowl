@@ -15,7 +15,7 @@ public static class FplDataImporter
         Console.WriteLine("Fetching FplData from APIs - Finished");
 
         Console.WriteLine("Importing FplData to SQL Database");
-        foreach (var gameWeekState in importedData)
+        foreach (var gameWeekState in importedData.ManagerGameWeekStates)
         {
             var managerGameWeek = new ManagerGameWeek(
                 Guid.NewGuid(),
