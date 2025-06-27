@@ -15,10 +15,10 @@ public class Fixture
     public int TeamHomeDifficulty { get; set; }
     public int TeamAwayDifficulty { get; set; }
 
-    public virtual Team TeamAway { get; set; }
+    public required Team TeamAway { get; set; }
     public Guid FkTeamAwayId { get; set; }
-    public virtual Team TeamHome { get; set; }
+    public required Team TeamHome { get; set; }
     public Guid FkTeamHomeId { get; set; }
-    public virtual Event Event { get; set; }
+    public required Event Event { get; set; }
     public Guid FkEventId { get; set; }
 }

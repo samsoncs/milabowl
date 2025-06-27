@@ -15,7 +15,7 @@ public static class FplDataImporter
         Console.WriteLine("Fetching FplData from APIs - Finished");
 
         Console.WriteLine("Importing FplData to SQL Database");
-        foreach (var gameWeekState in importedData)
+        foreach (var gameWeekState in importedData.ManagerGameWeekStates)
         {
             var managerGameWeek = new ManagerGameWeek(
                 Guid.NewGuid(),
@@ -24,8 +24,8 @@ public static class FplDataImporter
                 gameWeekState.User.Id,
                 gameWeekState.Event.GameWeek,
                 gameWeekState.ActiveChip,
-                gameWeekState.SubsIn.Select(s => $"{s.FirstName} {s.Surname}").ToList(),
-                gameWeekState.SubsOut.Select(s => $"{s.FirstName} {s.Surname}").ToList()
+                gameWeekState.TransfersIn.Select(s => $"{s.FirstName} {s.Surname}").ToList(),
+                gameWeekState.TransfersOut.Select(s => $"{s.FirstName} {s.Surname}").ToList()
             );
 
             await using var connection = new SqlConnection(DbConnection.CONNECTION_STRING);

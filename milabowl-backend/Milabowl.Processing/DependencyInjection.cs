@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Milabowl.Processing.DataImport;
 using Milabowl.Processing.Processing;
+using Scrutor;
 
 namespace Milabowl.Processing;
 
@@ -14,13 +15,14 @@ public static class DependencyInjection
         serviceCollection.AddTransient<HistorySummarizer>();
         serviceCollection.AddTransient<IRulesProcessor, RulesProcessor>();
         serviceCollection.AddTransient<FplImporter>();
-        serviceCollection.AddSingleton<IBombState, BombState>();
         serviceCollection.AddHttpClient<IFplService, FplService>();
-
         serviceCollection.Scan(s =>
-            s.FromAssemblyOf<IMilaRule>().AddClasses().AsImplementedInterfaces()
+            s.FromAssemblyOf<IMilaRule>()
+                .AddClasses()
+                .AsSelfWithInterfaces()
+                .WithTransientLifetime()
         );
-
+        serviceCollection.AddSingleton<IBombState, BombState>();
         return serviceCollection.BuildServiceProvider();
     }
 }

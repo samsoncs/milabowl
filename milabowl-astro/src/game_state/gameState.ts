@@ -46,6 +46,7 @@ export interface MilaResultsDTO {
     resultsByWeek: ResultsByWeek[];
     resultsByUser: ResultsByUser[];
     overallScore: GameWeekResult[];
+    isLive: boolean;
     rules: Rule[];
 }
 

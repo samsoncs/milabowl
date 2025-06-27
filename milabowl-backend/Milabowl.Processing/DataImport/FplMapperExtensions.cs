@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Milabowl.Processing.DataImport.FplDtos;
+﻿using Milabowl.Processing.DataImport.FplDtos;
 using Milabowl.Processing.DataImport.Models;
 
 namespace Milabowl.Processing.DataImport;
@@ -7,12 +6,12 @@ namespace Milabowl.Processing.DataImport;
 public static class FplMapperExtensions
 {
     public static HeadToHead ToHeadToHeadEvent(
-        this HeadToHeadEventRootDTO headToHeadEventRootDto,
+        this HeadToHeadEventRootDto headToHeadEventRootDto,
         int userEntry
     )
     {
-        var headToHeadHomeDto = headToHeadEventRootDto.results.FirstOrDefault(r =>
-            r.entry_1_entry == userEntry
+        var headToHeadHomeDto = headToHeadEventRootDto.Results.FirstOrDefault(r =>
+            r.Entry1Entry == userEntry
         );
 
         if (headToHeadHomeDto is not null)
@@ -23,8 +22,8 @@ public static class FplMapperExtensions
             );
         }
 
-        var headToHeadAwayDto = headToHeadEventRootDto.results.First(r =>
-            r.entry_2_entry == userEntry
+        var headToHeadAwayDto = headToHeadEventRootDto.Results.First(r =>
+            r.Entry2Entry == userEntry
         );
 
         return new HeadToHead(
@@ -34,106 +33,140 @@ public static class FplMapperExtensions
     }
 
     private static HeadToHeadEvent GetHeadToHeadEvent(
-        HeadToHeadResultDTO headToHeadResultDto,
+        HeadToHeadResultDto headToHeadResultDto,
         bool isEntryOne
     )
     {
         var entryId = isEntryOne
-            ? headToHeadResultDto.entry_1_entry
-            : headToHeadResultDto.entry_2_entry;
+            ? headToHeadResultDto.Entry1Entry
+            : headToHeadResultDto.Entry2Entry;
         return new HeadToHeadEvent(
-            isEntryOne ? headToHeadResultDto.entry_1_points : headToHeadResultDto.entry_2_points,
+            isEntryOne ? headToHeadResultDto.Entry1Points : headToHeadResultDto.Entry2Points,
             isEntryOne
-                ? headToHeadResultDto.entry_1_win == 1
-                : headToHeadResultDto.entry_2_win == 1,
+                ? headToHeadResultDto.Entry1Win == 1
+                : headToHeadResultDto.Entry2Win == 1,
             isEntryOne
-                ? headToHeadResultDto.entry_1_draw == 1
-                : headToHeadResultDto.entry_2_draw == 1,
+                ? headToHeadResultDto.Entry1Draw == 1
+                : headToHeadResultDto.Entry2Draw == 1,
             isEntryOne
-                ? headToHeadResultDto.entry_1_loss == 1
-                : headToHeadResultDto.entry_2_loss == 1,
-            isEntryOne ? headToHeadResultDto.entry_1_total : headToHeadResultDto.entry_2_total,
-            headToHeadResultDto.is_knockout,
-            headToHeadResultDto.league,
-            headToHeadResultDto.is_bye,
+                ? headToHeadResultDto.Entry1Loss == 1
+                : headToHeadResultDto.Entry2Loss == 1,
+            isEntryOne ? headToHeadResultDto.Entry1Total : headToHeadResultDto.Entry2Total,
+            headToHeadResultDto.IsKnockout,
+            headToHeadResultDto.League,
+            headToHeadResultDto.IsBye,
             entryId
         );
     }
 
-    public static Event ToEvent(this EventDTO @event)
+    public static Event ToEvent(this EventDto @event)
     {
         return new Event(@event.Id, @event.Name);
     }
 
-    public static User ToUser(this ResultDTO user)
+    public static User ToUser(this ResultDto user)
     {
         return new User(
-            user.id,
-            user.entry,
-            user.player_name,
-            user.entry_name,
-            user.rank,
-            user.last_rank,
-            user.event_total
+            user.Id,
+            user.Entry,
+            user.PlayerName,
+            user.EntryName,
+            user.Rank,
+            user.LastRank,
+            user.EventTotal
         );
     }
 
     public static IList<PlayerEvent> ToLineup(
-        this PicksRootDTO picksRootDto,
-        EventRootDTO eventRootDto,
-        List<PlayerDTO> players,
-        List<TeamDTO> teams
+        this PicksRootDto picksRootDto,
+        EventRootDto eventRootDto,
+        List<PlayerDto> players,
+        List<TeamDto> teams
     )
     {
         return picksRootDto
-            .picks.Select(p =>
+            .Picks.Select(p =>
             {
-                var element = eventRootDto.elements.First(e => e.id == p.element);
-                var player = players.First(plr => plr.Id == element.id);
+                var element = eventRootDto.Elements.First(e => e.Id == p.Element);
+                var player = players.First(plr => plr.Id == element.Id);
                 var team = teams.First(t => t.Id == player.Team);
                 return element.ToPlayerEvent(player, team, p);
             })
             .ToList();
     }
 
-    private static PlayerEvent ToPlayerEvent(
-        this ElementDTO element,
-        PlayerDTO player,
-        TeamDTO team,
-        PickDTO pick
+    public static AutoSub ToAutoSubs(this PicksRootDto picksRootDto, EventRootDto eventRootDto, List<PlayerDto> players)
+    {
+        var subsIn = picksRootDto.AutoSubs.Select(a =>
+        {
+            var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementIn);
+            var playerIn = players.First(p => p.Id == a.ElementIn);
+            return new Sub
+            {
+                TotalPoints = elementIn.Stats.TotalPoints,
+                FirstName = playerIn.FirstName,
+                Surname = playerIn.SecondName,
+                FantasyPlayerEventId = playerIn.Id
+            };
+        }).ToList();
+
+        var subsOut = picksRootDto.AutoSubs.Select(a =>
+        {
+            var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementOut);
+            var playerIn = players.First(p => p.Id == a.ElementOut);
+            return new Sub
+            {
+                TotalPoints = elementIn.Stats.TotalPoints,
+                FirstName = playerIn.FirstName,
+                Surname = playerIn.SecondName,
+                FantasyPlayerEventId = playerIn.Id
+            };
+        }).ToList();
+
+        return new AutoSub
+        {
+            In = subsIn,
+            Out = subsOut
+        };
+    }
+
+    private static PlayerEvent ToPlayerEvent(this ElementDto element,
+        PlayerDto player,
+        TeamDto team,
+        PickDto pick
     )
     {
         return new PlayerEvent(
             player.FirstName,
             player.SecondName,
             player.WebName,
-            element.id,
+            element.Id,
             team.Id,
             team.Code,
             team.Name,
             team.ShortName,
-            element.stats.minutes,
-            element.stats.goals_scored,
-            element.stats.assists,
-            element.stats.goals_conceded,
-            element.stats.clean_sheets,
-            element.stats.penalties_saved,
-            element.stats.own_goals,
-            element.stats.penalties_missed,
-            element.stats.yellow_cards,
-            element.stats.red_cards,
-            element.stats.saves,
-            element.stats.bonus,
-            element.stats.bps,
-            element.stats.influence,
-            element.stats.creativity,
-            element.stats.threat,
-            element.stats.ict_index,
-            element.stats.total_points,
-            element.stats.in_dreamteam,
-            pick.multiplier,
-            pick.is_captain,
-            pick.is_vice_captain,
+            element.Stats.Minutes,
+            element.Stats.GoalsScored,
+            element.Stats.Assists,
+            element.Stats.GoalsConceded,
+            element.Stats.CleanSheets,
+            element.Stats.PenaltiesSaved,
+            element.Stats.OwnGoals,
+            element.Stats.PenaltiesMissed,
+            element.Stats.YellowCards,
+            element.Stats.RedCards,
+            element.Stats.Saves,
+            element.Stats.Bonus,
+            element.Stats.Bps,
+            element.Stats.Influence,
+            element.Stats.Creativity,
+            element.Stats.Threat,
+            element.Stats.IctIndex,
+            element.Stats.TotalPoints,
+            element.Stats.InDreamteam,
+            pick.Multiplier,
+            pick.IsCaptain,
+            pick.IsViceCaptain,
             player.ElementType switch
             {
                 1 => PlayerPosition.GK,

@@ -19,5 +19,8 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore milabowl-backend/Milabowl.sln
 
+      - name: Build with warnings as errors
+        run: dotnet build milabowl-backend/Milabowl.sln --no-restore --configuration Release --warnaserror
+
       - name: Run tests
-        run: dotnet test milabowl-backend/Milabowl.Processing.Tests/Milabowl.Processing.Tests.csproj --no-restore --configuration Release --verbosity normal
+        run: dotnet test milabowl-backend/Milabowl.Processing.Tests/Milabowl.Processing.Tests.csproj --no-build --configuration Release --verbosity normal

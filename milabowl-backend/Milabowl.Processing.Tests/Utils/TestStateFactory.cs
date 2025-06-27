@@ -14,10 +14,11 @@ public class ManagerGameWeekStateBuilder
         private IList<PlayerEvent> _lineup;
         private string _activeChip;
         private IList<ManagerGameWeekState> _history;
-        private IList<Sub> _subsIn;
-        private IList<Sub> _subsOut;
-        private EventRootDTO _eventRoot;
+        private IList<Transfer> _subsIn;
+        private IList<Transfer> _subsOut;
+        private EventRootDto _eventRoot;
         private IList<ManagerGameWeekState> _opponents;
+        private int _transferCost;
 
         public ManagerGameWeekStateBuilder()
         {
@@ -27,10 +28,14 @@ public class ManagerGameWeekStateBuilder
             _lineup = TestStateFactory.GetPlayerEvent().Generate(15);
             _activeChip = "freehit";
             _history = new List<ManagerGameWeekState>();
-            _eventRoot = new EventRootDTO();
+            _eventRoot = new EventRootDto
+            {
+                Elements = new List<ElementDto>(),
+            };
             _subsIn = TestStateFactory.GetSub().Generate(1);
             _subsOut = TestStateFactory.GetSub().Generate(1);
             _opponents = new List<ManagerGameWeekState>();
+            _transferCost = _faker.Random.Int(0,3) * 4;
         }
 
         public ManagerGameWeekStateBuilder WithEvent(Event @event)
@@ -63,13 +68,13 @@ public class ManagerGameWeekStateBuilder
             return this;
         }
 
-        public ManagerGameWeekStateBuilder WithSubsIn(params IList<Sub> subsIn)
+        public ManagerGameWeekStateBuilder WithSubsIn(params IList<Transfer> subsIn)
         {
             _subsIn = subsIn;
             return this;
         }
 
-        public ManagerGameWeekStateBuilder WithSubsOut(params IList<Sub> subsOut)
+        public ManagerGameWeekStateBuilder WithSubsOut(params IList<Transfer> subsOut)
         {
             _subsOut = subsOut;
             return this;
@@ -87,6 +92,12 @@ public class ManagerGameWeekStateBuilder
             return this;
         }
 
+        public ManagerGameWeekStateBuilder WithTransferCost(int transferCost)
+        {
+            _transferCost = transferCost;
+            return this;
+        }
+
         public ManagerGameWeekState Build()
         {
             return new ManagerGameWeekState
@@ -96,6 +107,12 @@ public class ManagerGameWeekStateBuilder
                 HeadToHead = _headToHead,
                 History = _history,
                 Lineup = _lineup.AsReadOnly(),
+                TransferCost = _transferCost,
+                AutoSubs = new AutoSub
+                {
+                    In = new List<Sub>(),
+                    Out = new List<Sub>()
+                },
                 TotalScore = _totalScore,
                 User = new User(
                     _faker.Random.Int(0, 100000),
@@ -106,8 +123,8 @@ public class ManagerGameWeekStateBuilder
                     _faker.Random.Int(0, 100000),
                     _faker.Random.Int(0, 200)
                 ),
-                SubsIn = _subsIn.AsReadOnly(),
-                SubsOut = _subsOut.AsReadOnly(),
+                TransfersIn = _subsIn.AsReadOnly(),
+                TransfersOut = _subsOut.AsReadOnly(),
                 Opponents = _opponents.AsReadOnly(),
             };
         }
@@ -130,9 +147,9 @@ public static class TestStateFactory
         return GetPlayerEvent().RuleFor(r => r.Multiplier, 0);
     }
 
-    public static Faker<Sub> GetSub()
+    public static Faker<Transfer> GetSub()
     {
-        return new Faker<Sub>()
+        return new Faker<Transfer>()
             .RuleFor(r => r.FantasyPlayerEventId, f => f.Random.Int(1, 100000))
             .RuleFor(r => r.FirstName, f => f.Name.FirstName())
             .RuleFor(r => r.Surname, f => f.Name.LastName())

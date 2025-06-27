@@ -2,9 +2,11 @@
 
 namespace Milabowl.Processing.DataImport.FplDtos;
 
-public record EntryRootDTO([property: JsonPropertyName("past")] IList<EntryResultDTO> Past);
+public record EntryRootDto(
+    [property: JsonPropertyName("past")] IList<EntryResultDto> Past
+);
 
-public record EntryResultDTO(
+public record EntryResultDto(
     [property: JsonPropertyName("season_name")] string SeasonName,
     [property: JsonPropertyName("total_points")] int TotalPoints,
     [property: JsonPropertyName("rank")] int Rank

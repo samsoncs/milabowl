@@ -27,10 +27,16 @@ const resultsByUser = milaResults.resultsByUser;
         <div class="flex flex-col gap-4 lg:grid lg:grid-cols-12">
             <div class="lg:col-span-5">
                 <Card title="Standings">
-                    <div slot="secondary">
+                    <div slot="secondary" class="flex flex-row gap-3">
                         <Link href="/standings">See More</Link>
+                        { 
+                            milaResults.isLive && 
+                            <div class="font-bold">
+                                🔴 Live
+                            </div>
+                        }
                     </div>
-
+                 
                     <OverviewTable
                         avatars={images}
                         data={milaResults.overallScore}

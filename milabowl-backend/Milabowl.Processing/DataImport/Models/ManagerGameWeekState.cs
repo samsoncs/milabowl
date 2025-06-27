@@ -8,14 +8,30 @@ public record ManagerGameWeekState
     public required User User { get; init; }
     public required Event Event { get; init; }
     public required IReadOnlyList<PlayerEvent> Lineup { get; init; }
-    public required IReadOnlyList<Sub> SubsIn { get; init; }
-    public required IReadOnlyList<Sub> SubsOut { get; init; }
+    public required IReadOnlyList<Transfer> TransfersIn { get; init; }
+    public required IReadOnlyList<Transfer> TransfersOut { get; init; }
+    public required int TransferCost { get; init; }
     public required HeadToHead HeadToHead { get; init; }
     public ManagerGameWeekState? PreviousGameWeek { get; init; }
     public required IList<ManagerGameWeekState> History { get; init; }
     public required decimal TotalScore { get; init; }
     public string? ActiveChip { get; init; }
     public required IReadOnlyList<ManagerGameWeekState> Opponents { get; init; }
+    public required AutoSub AutoSubs { get; init; }
+}
+
+public record Transfer
+{
+    public required int TotalPoints { get; init; }
+    public required string FirstName { get; init; }
+    public required string Surname { get; init; }
+    public required int FantasyPlayerEventId { get; init; }
+};
+
+public record AutoSub
+{
+    public required IList<Sub> In { get; init; }
+    public required IList<Sub> Out { get; init; }
 }
 
 public record Sub
@@ -24,7 +40,7 @@ public record Sub
     public required string FirstName { get; init; }
     public required string Surname { get; init; }
     public required int FantasyPlayerEventId { get; init; }
-};
+}
 
 public static class StateFactory
 {
@@ -33,10 +49,13 @@ public static class StateFactory
         HeadToHead headToHead,
         User user,
         IList<PlayerEvent> lineup,
+        AutoSub autoSubs,
         string? activeChip,
+        int transferCost,
         IList<ManagerGameWeekState> historicGameWeeks,
-        EventRootDTO eventRootDto,
-        IList<ManagerGameWeekState> opponents)
+        EventRootDto eventRootDto,
+        IList<ManagerGameWeekState> opponents
+    )
     {
         historicGameWeeks = historicGameWeeks
             .Where(e => e.Event.GameWeek < @event.GameWeek)
@@ -54,10 +73,12 @@ public static class StateFactory
             ActiveChip = activeChip,
             User = user,
             Event = @event,
+            AutoSubs = autoSubs,
             Lineup = lineup.AsReadOnly(),
             TotalScore = lineup.Sum(l => l.TotalPoints * l.Multiplier),
-            SubsIn = previousGameWeek is null
-                ? new ReadOnlyCollection<Sub>([
+            TransferCost = transferCost,
+            TransfersIn = previousGameWeek is null
+                ? new ReadOnlyCollection<Transfer>([
                 ])
                 : lineup
                     .Where(pe =>
@@ -65,7 +86,7 @@ public static class StateFactory
                             ipe.FantasyPlayerEventId != pe.FantasyPlayerEventId
                         )
                     )
-                    .Select(s => new Sub{
+                    .Select(s => new Transfer{
                         TotalPoints = s.TotalPoints,
                         FirstName = s.FirstName,
                         Surname = s.Surname,
@@ -73,18 +94,18 @@ public static class StateFactory
                     })
                     .ToList()
                     .AsReadOnly(),
-            SubsOut = previousGameWeek is null
-                ? new ReadOnlyCollection<Sub>([
+            TransfersOut = previousGameWeek is null
+                ? new ReadOnlyCollection<Transfer>([
                 ])
                 : previousGameWeek
                     .Lineup.Where(pe =>
                         lineup.All(ipe => ipe.FantasyPlayerEventId != pe.FantasyPlayerEventId)
                     )
-                    .Select(s => new Sub
+                    .Select(s => new Transfer
                     {
                         TotalPoints = eventRootDto
-                            .elements.First(e => e.id == s.FantasyPlayerEventId)
-                            .stats.total_points,
+                            .Elements.First(e => e.Id == s.FantasyPlayerEventId)
+                            .Stats.TotalPoints,
                         FirstName = s.FirstName,
                         Surname = s.Surname,
                         FantasyPlayerEventId = s.FantasyPlayerEventId

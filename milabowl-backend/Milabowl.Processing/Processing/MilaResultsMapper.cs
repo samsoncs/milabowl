@@ -2,7 +2,7 @@
 
 public static class MilaResultMapper
 {
-    public static MilaResults MapToResult(this IReadOnlyList<MilaResultDto> results)
+    public static MilaResults MapToResult(this IReadOnlyList<MilaResultDto> results, bool isLive)
     {
         var resultsByWeek = results
             .GroupBy(m => m.GameWeek)
@@ -57,6 +57,7 @@ public static class MilaResultMapper
                 .ToList(),
             ResultsByUser = resultsByUser,
             ResultsByWeek = resultsByWeek,
+            IsLive = isLive,
             Rules = resultsByWeek.FirstOrDefault()?.Results.FirstOrDefault()?.Rules.Select(r => new Rule(r.RuleName, r.RuleShortName, r.Description))?.ToList() ??
                     []
         };

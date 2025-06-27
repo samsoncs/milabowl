@@ -72,7 +72,7 @@ const OverviewTable: React.FC<Props> = ({
                                     )
                                 )?.src
                             }
-                            className="h-10 w-10 rounded-full md:h-14 md:w-14"
+                            className="rounded-full h-10 w-10 sm:h-12 sm:w-12"
                         />
                         <a
                             className="max-w-[130px] truncate underline sm:max-w-[300px]"

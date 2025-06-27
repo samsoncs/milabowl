@@ -18,7 +18,7 @@ export interface Props {
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
@@ -27,7 +27,7 @@ export interface Props {
     <body class="bg-slate-100 dark:bg-slate-900">
         <Navbar />
         <div
-            class="mx-auto mb-[4rem] max-w-screen-2xl dark:text-dark-text md:mb-0 md:mt-14"
+            class="mx-auto mb-[4rem] max-w-screen-2xl dark:text-dark-text md:mb-0 md:mt-14 md:mx-4"
         >
             <slot />
         </div>
