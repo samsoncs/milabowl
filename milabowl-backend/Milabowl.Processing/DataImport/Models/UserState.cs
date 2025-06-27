@@ -35,7 +35,7 @@ public static class StateFactory
         IList<PlayerEvent> lineup,
         string? activeChip,
         IList<ManagerGameWeekState> historicGameWeeks,
-        EventRootDTO eventRootDto,
+        EventRootDto eventRootDto,
         IList<ManagerGameWeekState> opponents)
     {
         historicGameWeeks = historicGameWeeks
@@ -83,8 +83,8 @@ public static class StateFactory
                     .Select(s => new Sub
                     {
                         TotalPoints = eventRootDto
-                            .elements.First(e => e.id == s.FantasyPlayerEventId)
-                            .stats.total_points,
+                            .Elements.First(e => e.Id == s.FantasyPlayerEventId)
+                            .Stats.TotalPoints,
                         FirstName = s.FirstName,
                         Surname = s.Surname,
                         FantasyPlayerEventId = s.FantasyPlayerEventId

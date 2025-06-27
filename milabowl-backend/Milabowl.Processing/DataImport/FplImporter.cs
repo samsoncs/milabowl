@@ -1,6 +1,5 @@
 ﻿using Milabowl.Processing.DataImport.MilaDtos;
 using Milabowl.Processing.DataImport.Models;
-using Milabowl.Processing.Processing;
 
 namespace Milabowl.Processing.DataImport;
 
@@ -20,7 +19,7 @@ public class FplImporter
         var players = bootstrapRoot.Players;
         var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
-        var users = leagueRoot.standings.results;
+        var users = leagueRoot.Standings.Results;
         List<ManagerGameWeekState> userStates = [];
         foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
         {
@@ -28,17 +27,17 @@ public class FplImporter
             var headToHeadEventRootDto = await _fplService.GetHead2HeadEventRoot(finishedEvent.Id);
             foreach (var user in users)
             {
-                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
+                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.Entry);
                 var historicGameWeeks = new List<ManagerGameWeekState>(
                     userStates.Where(u => u.Event.GameWeek < finishedEvent.Id)
                 );
 
                 var userGameWeek = StateFactory.CreateUserState(
                     finishedEvent.ToEvent(),
-                    headToHeadEventRootDto.ToHeadToHeadEvent(user.entry),
+                    headToHeadEventRootDto.ToHeadToHeadEvent(user.Entry),
                     user.ToUser(),
                     picksRoot.ToLineup(eventRootDto, players, teams),
-                    picksRoot.active_chip,
+                    picksRoot.ActiveChip,
                     historicGameWeeks,
                     eventRootDto,
                     new List<ManagerGameWeekState>()
@@ -66,7 +65,7 @@ public class FplImporter
         var players = bootstrapRoot.Players;
         var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
-        var users = leagueRoot.standings.results;
+        var users = leagueRoot.Standings.Results;
 
         var fplUserGameWeekResult = new List<FplUserGameWeekResult>();
 
@@ -76,14 +75,14 @@ public class FplImporter
 
             foreach (var user in users)
             {
-                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.entry);
+                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.Entry);
 
                 var lineup = picksRoot.ToLineup(eventRootDto, players, teams);
 
                 fplUserGameWeekResult.Add(new FplUserGameWeekResult(
                     finishedEvent.Id,
-                    user.entry_name,
-                    user.total,
+                    user.EntryName,
+                    user.Total,
                     lineup.Select(l => new FplPlayerEventResult(
                         l.WebName,
                         l.TeamName,

@@ -2,26 +2,31 @@
 
 namespace Milabowl.Processing.DataImport.FplDtos;
 
-public class EventDTO
+public record EventDto
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    [JsonPropertyName("id")]
+    public required int Id { get; set; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; set; }
 
     [JsonPropertyName("deadline_time")]
-    public DateTime DeadlineTime { get; set; }
-    public bool Finished { get; set; }
+    public required DateTime DeadlineTime { get; set; }
+
+    [JsonPropertyName("finished")]
+    public required bool Finished { get; set; }
 
     [JsonPropertyName("data_checked")]
-    public bool DataChecked { get; set; }
+    public required bool DataChecked { get; set; }
 
     [JsonPropertyName("is_previous")]
-    public bool IsPrevious { get; set; }
+    public required bool IsPrevious { get; set; }
 
     [JsonPropertyName("is_current")]
-    public bool IsCurrent { get; set; }
+    public required bool IsCurrent { get; set; }
 
     [JsonPropertyName("is_next")]
-    public bool IsNext { get; set; }
+    public required bool IsNext { get; set; }
 
     [JsonPropertyName("most_selected")]
     public int? MostSelected { get; set; }

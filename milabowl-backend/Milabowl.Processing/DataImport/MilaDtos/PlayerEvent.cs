@@ -4,9 +4,9 @@ public class PlayerEvent
 {
     public Guid PlayerEventId { get; set; }
     public int FantasyPlayerEventId { get; set; }
-    public Player Player { get; set; }
+    public required Player Player { get; set; }
     public Guid FkPlayerId { get; set; }
-    public Event Event { get; set; }
+    public required Event Event { get; set; }
     public Guid FkEventId { get; set; }
     public int Minutes { get; set; }
     public int GoalsScored { get; set; }
@@ -21,10 +21,10 @@ public class PlayerEvent
     public int Saves { get; set; }
     public int Bonus { get; set; }
     public int Bps { get; set; }
-    public string Influence { get; set; }
-    public string Creativity { get; set; }
-    public string Threat { get; set; }
-    public string IctIndex { get; set; }
+    public required string Influence { get; set; }
+    public required string Creativity { get; set; }
+    public required string Threat { get; set; }
+    public required string IctIndex { get; set; }
     public int TotalPoints { get; set; }
     public bool InDreamteam { get; set; }
 
@@ -34,5 +34,5 @@ public class PlayerEvent
     public int? Selected { get; set; }
     public decimal? Value { get; set; }
 
-    public IList<PlayerEventLineup> PlayerEventLineups { get; set; }
+    public required IList<PlayerEventLineup> PlayerEventLineups { get; set; }
 }

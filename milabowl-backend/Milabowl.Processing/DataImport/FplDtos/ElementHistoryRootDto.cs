@@ -1,9 +1,14 @@
-﻿namespace Milabowl.Processing.DataImport.FplDtos;
+﻿using System.Text.Json.Serialization;
 
-public class ElementHistoryRootDto
+namespace Milabowl.Processing.DataImport.FplDtos;
+
+public record ElementHistoryRootDto
 {
-    //public List<ElementHistoryFixtureDTO> fixtures { get; set; }
-    public required List<ElementHistoryDTO> history { get; init; }
-    public required List<ElementHistoryPastDTO> history_past { get; init; }
+    //public List<ElementHistoryFixtureDto> Fixtures { get; set; }
+    [JsonPropertyName("history")]
+    public required List<ElementHistoryDto> History { get; init; }
+    [JsonPropertyName("history_past")]
+    public required List<ElementHistoryPastDto> HistoryPast { get; init; }
+    [JsonPropertyName("id")]
     public int FantasyElementId { get; set; }
 }

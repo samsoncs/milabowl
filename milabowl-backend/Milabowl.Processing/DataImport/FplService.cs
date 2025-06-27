@@ -5,14 +5,14 @@ namespace Milabowl.Processing.DataImport;
 
 public interface IFplService
 {
-    Task<BootstrapRootDTO> GetBootstrapRoot();
-    Task<LeagueRootDTO> GetLeagueRoot();
-    Task<EventRootDTO> GetEventRoot(int eventID);
-    Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID);
-    Task<PicksRootDTO> GetPicksRoot(int eventID, int userID);
+    Task<BootstrapRootDto> GetBootstrapRoot();
+    Task<LeagueRootDto> GetLeagueRoot();
+    Task<EventRootDto> GetEventRoot(int eventId);
+    Task<HeadToHeadEventRootDto> GetHead2HeadEventRoot(int eventId);
+    Task<PicksRootDto> GetPicksRoot(int eventId, int userId);
     Task<ElementHistoryRootDto> GetPlayerHistoryRoot(int playerId);
-    Task<IList<FixtureDTO>> GetFixtures();
-    Task<EntryRootDTO> GetEntryRoot(int userID);
+    Task<IList<FixtureDto>> GetFixtures();
+    Task<EntryRootDto> GetEntryRoot(int userId);
 }
 
 public class FplService : IFplService
@@ -24,65 +24,65 @@ public class FplService : IFplService
         _httpClient = httpClientFactory.CreateClient();
     }
 
-    public async Task<BootstrapRootDTO> GetBootstrapRoot()
+    public async Task<BootstrapRootDto> GetBootstrapRoot()
     {
-        return await _httpClient.GetDeserializedAsync<BootstrapRootDTO>(
+        return await _httpClient.GetDeserializedAsync<BootstrapRootDto>(
             "https://fantasy.premierleague.com/api/bootstrap-static/"
         );
     }
 
-    public async Task<LeagueRootDTO> GetLeagueRoot()
+    public async Task<LeagueRootDto> GetLeagueRoot()
     {
-        return await _httpClient.GetDeserializedAsync<LeagueRootDTO>(
+        return await _httpClient.GetDeserializedAsync<LeagueRootDto>(
             "https://fantasy.premierleague.com/api/leagues-classic/1650213/standings/?page_new_entries=1&page_standings=1&phase=1"
         );
     }
 
-    private Dictionary<int, EventRootDTO> _eventRootCache = new();
+    private Dictionary<int, EventRootDto> _eventRootCache = new();
 
-    public async Task<EventRootDTO> GetEventRoot(int eventID)
+    public async Task<EventRootDto> GetEventRoot(int eventId)
     {
-        if (_eventRootCache.TryGetValue(eventID, out var eventRootDto))
+        if (_eventRootCache.TryGetValue(eventId, out var eventRootDto))
         {
             return eventRootDto;
         }
 
-        eventRootDto = await _httpClient.GetDeserializedAsync<EventRootDTO>(
-            $"https://fantasy.premierleague.com/api/event/{eventID}/live/"
+        eventRootDto = await _httpClient.GetDeserializedAsync<EventRootDto>(
+            $"https://fantasy.premierleague.com/api/event/{eventId}/live/"
         );
-        _eventRootCache.Add(eventID, eventRootDto);
+        _eventRootCache.Add(eventId, eventRootDto);
         return eventRootDto;
     }
 
-    private Dictionary<string, PicksRootDTO> _picsRootCache = new();
+    private Dictionary<string, PicksRootDto> _picsRootCache = new();
 
-    public async Task<PicksRootDTO> GetPicksRoot(int eventID, int userID)
+    public async Task<PicksRootDto> GetPicksRoot(int eventId, int userId)
     {
-        if (_picsRootCache.TryGetValue($"{eventID},{userID}", out var picksRootDto))
+        if (_picsRootCache.TryGetValue($"{eventId},{userId}", out var picksRootDto))
         {
             return picksRootDto;
         }
 
-        picksRootDto = await _httpClient.GetDeserializedAsync<PicksRootDTO>(
-            $@"https://fantasy.premierleague.com/api/entry/{userID}/event/{eventID}/picks/"
+        picksRootDto = await _httpClient.GetDeserializedAsync<PicksRootDto>(
+            $@"https://fantasy.premierleague.com/api/entry/{userId}/event/{eventId}/picks/"
         );
-        _picsRootCache.Add($"{eventID},{userID}", picksRootDto);
+        _picsRootCache.Add($"{eventId},{userId}", picksRootDto);
         return picksRootDto;
     }
 
-    private Dictionary<int, HeadToHeadEventRootDTO> _headToHeadEventCache = new();
+    private Dictionary<int, HeadToHeadEventRootDto> _headToHeadEventCache = new();
 
-    public async Task<HeadToHeadEventRootDTO> GetHead2HeadEventRoot(int eventID)
+    public async Task<HeadToHeadEventRootDto> GetHead2HeadEventRoot(int eventId)
     {
-        if (_headToHeadEventCache.TryGetValue(eventID, out var headToHeadEventRoot))
+        if (_headToHeadEventCache.TryGetValue(eventId, out var headToHeadEventRoot))
         {
             return headToHeadEventRoot;
         }
 
-        headToHeadEventRoot = await _httpClient.GetDeserializedAsync<HeadToHeadEventRootDTO>(
-            $"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1649633/?page=1&event={eventID}"
+        headToHeadEventRoot = await _httpClient.GetDeserializedAsync<HeadToHeadEventRootDto>(
+            $"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1649633/?page=1&event={eventId}"
         );
-        _headToHeadEventCache.Add(eventID, headToHeadEventRoot);
+        _headToHeadEventCache.Add(eventId, headToHeadEventRoot);
         return headToHeadEventRoot;
     }
 
@@ -95,23 +95,23 @@ public class FplService : IFplService
         return root;
     }
 
-    public async Task<IList<FixtureDTO>> GetFixtures()
+    public async Task<IList<FixtureDto>> GetFixtures()
     {
-        return await _httpClient.GetDeserializedAsync<IList<FixtureDTO>>(
+        return await _httpClient.GetDeserializedAsync<IList<FixtureDto>>(
             $"https://fantasy.premierleague.com/api/fixtures/"
         );
     }
 
-    private Dictionary<int, EntryRootDTO> _entryRootDtoCache = new();
+    private Dictionary<int, EntryRootDto> _entryRootDtoCache = new();
 
-    public async Task<EntryRootDTO> GetEntryRoot(int userId)
+    public async Task<EntryRootDto> GetEntryRoot(int userId)
     {
         if (_entryRootDtoCache.TryGetValue(userId, out var entryRootDto))
         {
             return entryRootDto;
         }
 
-        entryRootDto = await _httpClient.GetDeserializedAsync<EntryRootDTO>(
+        entryRootDto = await _httpClient.GetDeserializedAsync<EntryRootDto>(
             $"https://fantasy.premierleague.com/api/entry/{userId}/history/"
         );
         _entryRootDtoCache.Add(userId, entryRootDto);

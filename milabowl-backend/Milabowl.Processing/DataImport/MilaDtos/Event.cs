@@ -10,15 +10,15 @@ public class Event
     public DateTime Deadline { get; set; }
     public bool Finished { get; set; }
     public bool DataChecked { get; set; }
-    public string Name { get; set; }
+    public required string Name { get; set; }
     public int GameWeek { get; set; }
-    public int? MostSelectedPlayerID { get; set; }
-    public int? MostTransferredInPlayerID { get; set; }
-    public int? MostCaptainedPlayerID { get; set; }
-    public int? MostViceCaptainedPlayerID { get; set; }
+    public int? MostSelectedPlayerId { get; set; }
+    public int? MostTransferredInPlayerId { get; set; }
+    public int? MostCaptainedPlayerId { get; set; }
+    public int? MostViceCaptainedPlayerId { get; set; }
 
-    public IList<PlayerEvent> PlayerEvents { get; set; }
-    public IList<UserHeadToHeadEvent> PlayerHeadToHeadEvents { get; set; }
-    public IList<Lineup> Lineups { get; set; }
-    public virtual IList<Fixture> Fixtures { get; set; }
+    public required IList<PlayerEvent> PlayerEvents { get; set; }
+    public required IList<UserHeadToHeadEvent> PlayerHeadToHeadEvents { get; set; }
+    public required IList<Lineup> Lineups { get; set; }
+    public required IList<Fixture> Fixtures { get; set; }
 }

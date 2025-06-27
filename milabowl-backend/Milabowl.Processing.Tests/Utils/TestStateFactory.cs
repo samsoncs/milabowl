@@ -16,7 +16,7 @@ public class ManagerGameWeekStateBuilder
         private IList<ManagerGameWeekState> _history;
         private IList<Sub> _subsIn;
         private IList<Sub> _subsOut;
-        private EventRootDTO _eventRoot;
+        private EventRootDto _eventRoot;
         private IList<ManagerGameWeekState> _opponents;
 
         public ManagerGameWeekStateBuilder()
@@ -27,7 +27,10 @@ public class ManagerGameWeekStateBuilder
             _lineup = TestStateFactory.GetPlayerEvent().Generate(15);
             _activeChip = "freehit";
             _history = new List<ManagerGameWeekState>();
-            _eventRoot = new EventRootDTO();
+            _eventRoot = new EventRootDto
+            {
+                Elements = new List<ElementDto>(),
+            };
             _subsIn = TestStateFactory.GetSub().Generate(1);
             _subsOut = TestStateFactory.GetSub().Generate(1);
             _opponents = new List<ManagerGameWeekState>();
