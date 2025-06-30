@@ -45,6 +45,12 @@ jobs:
           cache: "npm"
           cache-dependency-path: "milabowl-astro/package-lock.json"
 
+      - name: Cache Astro build
+        uses: actions/cache@v4
+        with:
+          path: milabowl-astro/.astro
+          key: astro-${{ hashFiles('milabowl-astro/package-lock.json') }}-${{ hashFiles('milabowl-astro/src/**') }}
+
       - name: install dependencies
         working-directory: ./milabowl-astro
         run: npm ci
