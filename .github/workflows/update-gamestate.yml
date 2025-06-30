@@ -3,7 +3,7 @@ name: Update gamestate
 on:
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
-  
+
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -16,33 +16,43 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-            
+
       - name: Setup .NET 9.x
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.x'
-        
+          dotnet-version: "9.x"
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ hashFiles('milabowl-backend/Directory.Packages.props') }}
+
+      - name: Restore dependencies
+        working-directory: ./milabowl-backend
+        run: dotnet restore Milabowl.sln
+
       - name: Build and run milabowl processing
         working-directory: ./milabowl-backend
         run: |
-          dotnet build
+          dotnet build --no-restore
           dotnet run --project ./Milabowl.Processing/Milabowl.Processing.csproj -- ../milabowl-astro/src/game_state
-        
+
       - name: use node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: 'milabowl-astro/package-lock.json'
-          
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: "milabowl-astro/package-lock.json"
+
       - name: install dependencies
         working-directory: ./milabowl-astro
         run: npm ci
-        
+
       - name: build astro
         working-directory: ./milabowl-astro
         run: npm run build
-        
+
       - name: upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
