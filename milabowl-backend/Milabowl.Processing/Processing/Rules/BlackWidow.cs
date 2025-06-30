@@ -8,7 +8,7 @@ public class BlackWidow: MilaRule
     protected override string Description => "Win or loose points based on hits taken. If there are an even number of opponents with hits multiply number of hits by 0.42, otherwise multiply by -0.42. If no hits, no points.";
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
-        var hits = GetHits(userGameWeek.TransferCost);
+        var hits =  Math.Clamp(GetHits(userGameWeek.TransferCost), 0, 3);
         var opponentsWithHits = userGameWeek.Opponents.Sum(o => GetHits(o.TransferCost) > 0 ? 1 : 0);
 
         if (hits > 0 && opponentsWithHits % 2 == 0)
