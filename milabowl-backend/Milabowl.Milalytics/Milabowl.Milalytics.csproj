@@ -12,10 +12,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Dapper" Version="2.1.66" />
-      <PackageReference Include="dbup-core" Version="6.0.4" />
-      <PackageReference Include="dbup-sqlserver" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+      <PackageReference Include="Dapper" />
+      <PackageReference Include="dbup-core" />
+      <PackageReference Include="dbup-sqlserver" />
+      <PackageReference Include="Microsoft.Data.SqlClient" />
     </ItemGroup>
 
     <ItemGroup>
