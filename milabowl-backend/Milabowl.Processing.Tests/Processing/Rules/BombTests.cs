@@ -1,9 +1,9 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
 using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing;
 using NSubstitute;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -23,7 +23,7 @@ public class BombTests : MilaRuleTest<Bomb>
 
         var result = rule.Calculate(state);
 
-        result.Points.Should().Be(-5);
+        result.Points.ShouldBe(-5);
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class BombTests : MilaRuleTest<Bomb>
 
         var result = rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -57,6 +57,6 @@ public class BombTests : MilaRuleTest<Bomb>
 
         var result = rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 }

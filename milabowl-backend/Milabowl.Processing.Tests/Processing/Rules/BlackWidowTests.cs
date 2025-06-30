@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -15,7 +15,7 @@ public class BlackWidowTests: MilaRuleTest<BlackWidow>
 
         var points = Rule.Calculate(userGameWeek);
 
-        points.Points.Should().Be(0);
+        points.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class BlackWidowTests: MilaRuleTest<BlackWidow>
 
         var points = Rule.Calculate(userGameWeek);
 
-        points.Points.Should().Be(4.2m);
+        points.Points.ShouldBe(4.2m);
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public class BlackWidowTests: MilaRuleTest<BlackWidow>
 
         var points = Rule.Calculate(userGameWeek);
 
-        points.Points.Should().Be(8.4m);
+        points.Points.ShouldBe(8.4m);
     }
 
     [Fact]
@@ -69,6 +69,6 @@ public class BlackWidowTests: MilaRuleTest<BlackWidow>
 
         var points = Rule.Calculate(userGameWeek);
 
-        points.Points.Should().Be(-4.2m);
+        points.Points.ShouldBe(-4.2m);
     }
 }

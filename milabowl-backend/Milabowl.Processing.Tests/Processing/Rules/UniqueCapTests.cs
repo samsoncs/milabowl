@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -25,7 +25,7 @@ public class UniqueCapTests : MilaRuleTest<UniqueCap>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(2);
+        result.Points.ShouldBe(2);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class UniqueCapTests : MilaRuleTest<UniqueCap>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -70,6 +70,6 @@ public class UniqueCapTests : MilaRuleTest<UniqueCap>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 }

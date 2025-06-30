@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -15,7 +15,7 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(1.69m);
+        result.Points.ShouldBe(1.69m);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(3.38m);
+        result.Points.ShouldBe(3.38m);
     }
 
     [Fact]
@@ -56,6 +56,6 @@ public class MissedPenaltiesTests : MilaRuleTest<MissedPenalties>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(5.07m);
+        result.Points.ShouldBe(5.07m);
     }
 }

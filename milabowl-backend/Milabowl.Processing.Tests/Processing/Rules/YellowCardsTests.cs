@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -20,6 +20,6 @@ public class YellowCardsTests: MilaRuleTest<YellowCards>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(3);
+        result.Points.ShouldBe(3);
     }
 }

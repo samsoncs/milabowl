@@ -1,7 +1,7 @@
-using FluentAssertions;
 using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -20,7 +20,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(3);
+        result.Points.ShouldBe(3);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(2);
+        result.Points.ShouldBe(2);
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(1);
+        result.Points.ShouldBe(1);
     }
 
     [Fact]
@@ -80,7 +80,7 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     private ManagerGameWeekState GetOpponent(int points)
@@ -94,4 +94,3 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
             .Build();
     }
 }
-
