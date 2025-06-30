@@ -14,7 +14,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "9.0.x"
+          dotnet-version: "9.x"
 
       - name: Cache NuGet packages
         uses: actions/cache@v4
@@ -30,13 +30,3 @@ jobs:
 
       - name: Run tests
         run: dotnet test milabowl-backend/Milabowl.Processing.Tests/Milabowl.Processing.Tests.csproj --no-build --configuration Release --verbosity normal
-
-      - name: Publish .NET artifacts
-        run: dotnet publish milabowl-backend/Milabowl.Processing/Milabowl.Processing.csproj --no-build --configuration Release --output ./publish
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dotnet-build-${{ github.sha }}
-          path: ./publish
-          retention-days: 3
