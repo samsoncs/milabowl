@@ -37,15 +37,15 @@ jobs:
 
       - name: Restore dependencies
         working-directory: ./milabowl-backend
-        run: dotnet restore Milabowl.sln
+        run: dotnet restore ./Milabowl.Processing/Milabowl.Processing.csproj
 
       - name: Build .NET project
         working-directory: ./milabowl-backend
-        run: dotnet publish ./Milabowl.Processing/Milabowl.Processing.csproj --no-restore --configuration Release --output ../publish
+        run: dotnet build ./Milabowl.Processing/Milabowl.Processing.csproj --no-restore --configuration Release
 
       - name: Generate game state
-        working-directory: ./publish
-        run: dotnet Milabowl.Processing.dll ../milabowl-astro/src/game_state
+        working-directory: ./milabowl-backend
+        run: dotnet run --project ./Milabowl.Processing/Milabowl.Processing.csproj --no-build --configuration Release -- ../milabowl-astro/src/game_state
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
