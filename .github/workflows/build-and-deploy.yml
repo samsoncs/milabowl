@@ -29,13 +29,9 @@ jobs:
         with:
           dotnet-version: "9.x"
 
-      - name: Restore dependencies
-        working-directory: ./milabowl-backend
-        run: dotnet restore ./Milabowl.Processing/Milabowl.Processing.csproj
-
       - name: Build .NET project
         working-directory: ./milabowl-backend
-        run: dotnet build ./Milabowl.Processing/Milabowl.Processing.csproj --no-restore --configuration Release
+        run: dotnet build ./Milabowl.Processing/Milabowl.Processing.csproj --configuration Release
 
       - name: Generate game state
         working-directory: ./milabowl-backend
