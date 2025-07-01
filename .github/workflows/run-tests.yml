@@ -37,7 +37,7 @@ jobs:
 
       - name: Install dotnet tools
         working-directory: ./milabowl-backend
-        run: dotnet tools install
+        run: dotnet tool restore
 
       - name: Check formatting
         working-directory: ./milabowl-backend
