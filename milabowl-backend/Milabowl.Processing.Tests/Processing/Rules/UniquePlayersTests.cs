@@ -13,8 +13,11 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
         var opponent = GetOpponent(9);
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer().RuleFor(x => x.FantasyPlayerEventId, 1)
-                .RuleFor(x => x.TotalPoints, 10))
+                TestStateFactory
+                    .GetPlayer()
+                    .RuleFor(x => x.FantasyPlayerEventId, 1)
+                    .RuleFor(x => x.TotalPoints, 10)
+            )
             .WithOpponents(opponent)
             .Build();
 
@@ -30,7 +33,8 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)
                     .RuleFor(x => x.TotalPoints, 10)
             )
@@ -50,7 +54,8 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)
                     .RuleFor(x => x.TotalPoints, 10)
             )
@@ -71,7 +76,8 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
 
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)
                     .RuleFor(x => x.TotalPoints, 10)
             )
@@ -87,7 +93,8 @@ public class UniquePlayersTests : MilaRuleTest<UniquePlayers>
     {
         return new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(x => x.FantasyPlayerEventId, 1)
                     .RuleFor(x => x.TotalPoints, points)
             )

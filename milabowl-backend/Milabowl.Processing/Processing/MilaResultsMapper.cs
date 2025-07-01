@@ -9,7 +9,7 @@ public static class MilaResultMapper
             .Select(grp => new GameWeekResults
             {
                 GameWeek = grp.Key,
-                Results = grp.OrderByDescending(g => g.CumulativeMilaPoints).ToList()
+                Results = grp.OrderByDescending(g => g.CumulativeMilaPoints).ToList(),
             })
             .ToList();
 
@@ -18,7 +18,7 @@ public static class MilaResultMapper
             .Select(grp => new UserResults
             {
                 TeamName = grp.Key,
-                Results = grp.OrderBy(g => g.GameWeek).ToList()
+                Results = grp.OrderBy(g => g.GameWeek).ToList(),
             })
             .ToList();
 
@@ -58,8 +58,12 @@ public static class MilaResultMapper
             ResultsByUser = resultsByUser,
             ResultsByWeek = resultsByWeek,
             IsLive = isLive,
-            Rules = resultsByWeek.FirstOrDefault()?.Results.FirstOrDefault()?.Rules.Select(r => new Rule(r.RuleName, r.RuleShortName, r.Description))?.ToList() ??
-                    []
+            Rules =
+                resultsByWeek
+                    .FirstOrDefault()
+                    ?.Results.FirstOrDefault()
+                    ?.Rules.Select(r => new Rule(r.RuleName, r.RuleShortName, r.Description))
+                    ?.ToList() ?? [],
         };
     }
 }

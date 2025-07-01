@@ -1,7 +1,7 @@
-using Milabowl.Processing.Processing.Rules;
-using Milabowl.Processing.Tests.Utils;
 using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing;
+using Milabowl.Processing.Processing.Rules;
+using Milabowl.Processing.Tests.Utils;
 using NSubstitute;
 using Shouldly;
 
@@ -14,7 +14,8 @@ public class BombTests : MilaRuleTest<Bomb>
     {
         var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
-        var managerBombState = TestStateFactory.GetManagerBombState()
+        var managerBombState = TestStateFactory
+            .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
             .RuleFor(x => x.BombHolder, new BombHolder(state.User.EntryId, "Team", "User"))
             .Generate();
@@ -31,8 +32,17 @@ public class BombTests : MilaRuleTest<Bomb>
     {
         var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
-        var managerBombState = TestStateFactory.GetManagerBombState()
-            .RuleFor(x => x.BombState, f => f.PickRandom(BombStateEnum.HandedOver_Chip, BombStateEnum.HandedOver_H2H, BombStateEnum.Holding))
+        var managerBombState = TestStateFactory
+            .GetManagerBombState()
+            .RuleFor(
+                x => x.BombState,
+                f =>
+                    f.PickRandom(
+                        BombStateEnum.HandedOver_Chip,
+                        BombStateEnum.HandedOver_H2H,
+                        BombStateEnum.Holding
+                    )
+            )
             .RuleFor(x => x.BombHolder, new BombHolder(state.User.EntryId, "Team", "User"))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
@@ -48,7 +58,8 @@ public class BombTests : MilaRuleTest<Bomb>
     {
         var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
-        var managerBombState = TestStateFactory.GetManagerBombState()
+        var managerBombState = TestStateFactory
+            .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
             .RuleFor(x => x.BombHolder, new BombHolder(state.User.EntryId + 1, "Team", "User"))
             .Generate();

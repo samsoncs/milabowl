@@ -46,5 +46,5 @@ public enum PlayerPosition
     DEF,
     MID,
     FWD,
-    MAN
+    MAN,
 }

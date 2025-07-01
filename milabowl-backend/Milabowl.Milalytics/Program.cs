@@ -13,4 +13,3 @@ if (!wasSuccessful)
 var serviceProvider = DependencyInjection.GetServiceProvider();
 var importer = serviceProvider.GetRequiredService<FplImporter>();
 await FplDataImporter.ImportToSql(importer);
-

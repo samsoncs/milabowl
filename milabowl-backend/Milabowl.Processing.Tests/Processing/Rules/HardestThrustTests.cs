@@ -5,7 +5,7 @@ using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
-public class HardestThrustTests: MilaRuleTest<HardestThrust>
+public class HardestThrustTests : MilaRuleTest<HardestThrust>
 {
     [Fact]
     public void Should_get_1_point_6_points_if_players_defenders_scored_most_goals()
@@ -18,9 +18,7 @@ public class HardestThrustTests: MilaRuleTest<HardestThrust>
             .GetPlayer()
             .RuleFor(r => r.PlayerPosition, PlayerPosition.DEF)
             .RuleFor(r => r.GoalsScored, 2);
-        var opponent = new ManagerGameWeekStateBuilder()
-            .WithLineup(oneGoalDefender)
-            .Build();
+        var opponent = new ManagerGameWeekStateBuilder().WithLineup(oneGoalDefender).Build();
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(twoGoalDefender)
             .WithOpponents(opponent)
@@ -42,9 +40,7 @@ public class HardestThrustTests: MilaRuleTest<HardestThrust>
             .GetPlayer()
             .RuleFor(r => r.PlayerPosition, PlayerPosition.DEF)
             .RuleFor(r => r.GoalsScored, 2);
-        var opponent = new ManagerGameWeekStateBuilder()
-            .WithLineup(twoGoalDefender)
-            .Build();
+        var opponent = new ManagerGameWeekStateBuilder().WithLineup(twoGoalDefender).Build();
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(oneGoalDefender)
             .WithOpponents(opponent)
@@ -62,9 +58,7 @@ public class HardestThrustTests: MilaRuleTest<HardestThrust>
             .GetPlayer()
             .RuleFor(r => r.PlayerPosition, PlayerPosition.DEF)
             .RuleFor(r => r.GoalsScored, 1);
-        var opponent = new ManagerGameWeekStateBuilder()
-            .WithLineup(oneGoalDefender)
-            .Build();
+        var opponent = new ManagerGameWeekStateBuilder().WithLineup(oneGoalDefender).Build();
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(oneGoalDefender)
             .WithOpponents(opponent)

@@ -4,30 +4,36 @@ using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
-public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
+public class MinusIsPlusTests : MilaRuleTest<MinusIsPlus>
 {
     [Fact]
     public void Should_get_plus_points_for_all_minus_points()
     {
         var state = new ManagerGameWeekStateBuilder()
-            .WithLineup(TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)))
+            .WithLineup(
+                TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1))
+            )
             .Build();
 
         var result = Rule.Calculate(state);
 
-        result.Points.ShouldBe(-1*state.Lineup[0].TotalPoints);
+        result.Points.ShouldBe(-1 * state.Lineup[0].TotalPoints);
     }
 
     [Fact]
     public void Should_get_doubled_plus_points_for_captain_minus_points()
     {
         var state = new ManagerGameWeekStateBuilder()
-            .WithLineup(TestStateFactory.GetCaptain().RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1)))
+            .WithLineup(
+                TestStateFactory
+                    .GetCaptain()
+                    .RuleFor(r => r.TotalPoints, f => f.Random.Int(-10, -1))
+            )
             .Build();
 
         var result = Rule.Calculate(state);
 
-        result.Points.ShouldBe(-1*2*state.Lineup[0].TotalPoints);
+        result.Points.ShouldBe(-1 * 2 * state.Lineup[0].TotalPoints);
     }
 
     [Fact]

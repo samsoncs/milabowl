@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
-public class YellowCardsTests: MilaRuleTest<YellowCards>
+public class YellowCardsTests : MilaRuleTest<YellowCards>
 {
     [Fact]
     public void Should_get_one_point_for_every_playing_player()

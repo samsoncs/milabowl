@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
-public class RedCardsTests: MilaRuleTest<RedCards>
+public class RedCardsTests : MilaRuleTest<RedCards>
 {
     [Fact]
     public void Should_get_six_points_for_playing_player_with_red_card()
@@ -68,5 +68,4 @@ public class RedCardsTests: MilaRuleTest<RedCards>
 
         result.Points.ShouldBe(12);
     }
-
 }

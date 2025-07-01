@@ -5,7 +5,8 @@ namespace Milabowl.Processing.Processing.Rules;
 public class YellowCards : MilaRule
 {
     protected override string ShortName => "YC";
-    protected override string Description => "Receive 1 point pr. yellow card. Captains double score.";
+    protected override string Description =>
+        "Receive 1 point pr. yellow card. Captains double score.";
 
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {

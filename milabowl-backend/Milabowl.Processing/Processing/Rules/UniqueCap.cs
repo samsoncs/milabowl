@@ -11,13 +11,15 @@ public class UniqueCap : MilaRule
     {
         var cap = userGameWeek.Lineup.First(l => l.IsCaptain);
 
-        var points = cap.Minutes < 46 || userGameWeek.Opponents.Any(o =>
-        {
-            var opCap = o.Lineup.First(l => l.IsCaptain);
-            return opCap.FantasyPlayerEventId == cap.FantasyPlayerEventId;
-        })
-            ? 0
-            : 2;
+        var points =
+            cap.Minutes < 46
+            || userGameWeek.Opponents.Any(o =>
+            {
+                var opCap = o.Lineup.First(l => l.IsCaptain);
+                return opCap.FantasyPlayerEventId == cap.FantasyPlayerEventId;
+            })
+                ? 0
+                : 2;
         return new RulePoints(points, null);
     }
 }

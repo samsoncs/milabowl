@@ -11,8 +11,11 @@ public class Processor
     private readonly HistorySummarizer _summarizer;
     private readonly IRulesProcessor _rulesProcessor;
     private readonly IBombState _bombState;
-    private readonly JsonSerializerOptions _jsonOptions =
-        new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter() }};
+    private readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        Converters = { new JsonStringEnumConverter() },
+    };
 
     public Processor(
         FplImporter importer,
@@ -36,7 +39,10 @@ public class Processor
         var results = ProcessRules(importData.ManagerGameWeekStates);
         Console.WriteLine("Processing rules - Finished");
         var summarizedMilaResults = _summarizer.Summarize(results);
-        var json = JsonSerializer.Serialize(summarizedMilaResults.MapToResult(importData.IsLive), _jsonOptions);
+        var json = JsonSerializer.Serialize(
+            summarizedMilaResults.MapToResult(importData.IsLive),
+            _jsonOptions
+        );
         await File.WriteAllTextAsync($"{filePath}/game_state.json", json);
         var bombState = _bombState.GetBombState();
         var bombStateJson = JsonSerializer.Serialize(bombState, _jsonOptions);

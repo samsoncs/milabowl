@@ -4,19 +4,15 @@ using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
-public class SixtyNineTests: MilaRuleTest<SixtyNine>
+public class SixtyNineTests : MilaRuleTest<SixtyNine>
 {
     [Fact]
     public void Should_get_6_point_9_points_if_team_scores_69()
     {
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory
-                    .GetCaptain()
-                    .RuleFor(r => r.TotalPoints, 3),
-                TestStateFactory
-                    .GetPlayer()
-                    .RuleFor(r => r.TotalPoints, 63)
+                TestStateFactory.GetCaptain().RuleFor(r => r.TotalPoints, 3),
+                TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, 63)
             )
             .Build();
 
@@ -30,12 +26,8 @@ public class SixtyNineTests: MilaRuleTest<SixtyNine>
     {
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory
-                    .GetPlayer()
-                    .RuleFor(r => r.TotalPoints, 3),
-                TestStateFactory
-                    .GetPlayer()
-                    .RuleFor(r => r.TotalPoints, 63)
+                TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, 3),
+                TestStateFactory.GetPlayer().RuleFor(r => r.TotalPoints, 63)
             )
             .Build();
 

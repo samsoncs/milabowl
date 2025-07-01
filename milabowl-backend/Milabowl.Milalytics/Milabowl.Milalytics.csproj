@@ -1,22 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <OutputType>Exe</OutputType>
     </PropertyGroup>
-
     <ItemGroup>
-      <ProjectReference Include="..\Milabowl.Processing\Milabowl.Processing.csproj" />
+        <ProjectReference Include="..\Milabowl.Processing\Milabowl.Processing.csproj" />
     </ItemGroup>
-
     <ItemGroup>
-      <PackageReference Include="Dapper" />
-      <PackageReference Include="dbup-core" />
-      <PackageReference Include="dbup-sqlserver" />
-      <PackageReference Include="Microsoft.Data.SqlClient" />
+        <PackageReference Include="Dapper" />
+        <PackageReference Include="dbup-core" />
+        <PackageReference Include="dbup-sqlserver" />
+        <PackageReference Include="Microsoft.Data.SqlClient" />
     </ItemGroup>
-
     <ItemGroup>
         <EmbeddedResource Include="scripts/**/*.sql" />
     </ItemGroup>
-
 </Project>

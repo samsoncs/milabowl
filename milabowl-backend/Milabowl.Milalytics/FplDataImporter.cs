@@ -29,28 +29,29 @@ public static class FplDataImporter
             );
 
             await using var connection = new SqlConnection(DbConnection.CONNECTION_STRING);
-            await connection.ExecuteAsync("""
-                                              INSERT INTO ManagerGameWeek (
-                                                  ManagerGameWeekId,
-                                                  ManagerName,
-                                                  FantasyTeamName,
-                                                  FantasyEntryId,
-                                                  GameWeek,
-                                                  ActiveChip,
-                                                  SubsIn,
-                                                  SubsOut
-                                              )
-                                              VALUES (
-                                                  @ManagerGameWeekId,
-                                                  @ManagerName,
-                                                  @FantasyTeamName,
-                                                  @FantasyEntryId,
-                                                  @GameWeek,
-                                                  @ActiveChip,
-                                                  @SubsIn,
-                                                  @SubsOut
-                                              )
-                                          """,
+            await connection.ExecuteAsync(
+                """
+                    INSERT INTO ManagerGameWeek (
+                        ManagerGameWeekId,
+                        ManagerName,
+                        FantasyTeamName,
+                        FantasyEntryId,
+                        GameWeek,
+                        ActiveChip,
+                        SubsIn,
+                        SubsOut
+                    )
+                    VALUES (
+                        @ManagerGameWeekId,
+                        @ManagerName,
+                        @FantasyTeamName,
+                        @FantasyEntryId,
+                        @GameWeek,
+                        @ActiveChip,
+                        @SubsIn,
+                        @SubsOut
+                    )
+                """,
                 new
                 {
                     managerGameWeek.ManagerGameWeekId,
@@ -60,8 +61,9 @@ public static class FplDataImporter
                     managerGameWeek.GameWeek,
                     managerGameWeek.ActiveChip,
                     SubsIn = string.Join(",", managerGameWeek.SubsIn),
-                    SubsOut = string.Join(",", managerGameWeek.SubsOut)
-                });
+                    SubsOut = string.Join(",", managerGameWeek.SubsOut),
+                }
+            );
 
             foreach (var playerEvent in gameWeekState.Lineup)
             {
@@ -205,8 +207,9 @@ public static class FplDataImporter
                         managerGameWeekLineup.Threat,
                         managerGameWeekLineup.IctIndex,
                         managerGameWeekLineup.TotalPoints,
-                        managerGameWeekLineup.InDreamTeam
-                    });
+                        managerGameWeekLineup.InDreamTeam,
+                    }
+                );
             }
         }
 

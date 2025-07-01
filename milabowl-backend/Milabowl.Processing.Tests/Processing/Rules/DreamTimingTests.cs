@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
-public class DreamTimingTests: MilaRuleTest<DreamTiming>
+public class DreamTimingTests : MilaRuleTest<DreamTiming>
 {
     [Fact]
     public void Should_get_1point5_points_if_sub_in_dream_team()
@@ -12,15 +12,12 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
         var playerId = 1;
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(r => r.FantasyPlayerEventId, playerId)
                     .RuleFor(r => r.InDreamteam, true)
             )
-            .WithSubsIn(
-                TestStateFactory
-                    .GetSub()
-                    .RuleFor(r => r.FantasyPlayerEventId, playerId)
-                )
+            .WithSubsIn(TestStateFactory.GetSub().RuleFor(r => r.FantasyPlayerEventId, playerId))
             .Build();
 
         var result = Rule.Calculate(state);
@@ -35,20 +32,18 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
         var player2Id = 1;
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(r => r.FantasyPlayerEventId, player1Id)
                     .RuleFor(r => r.InDreamteam, true),
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(r => r.FantasyPlayerEventId, player2Id)
                     .RuleFor(r => r.InDreamteam, true)
             )
             .WithSubsIn(
-                TestStateFactory
-                    .GetSub()
-                    .RuleFor(r => r.FantasyPlayerEventId, player1Id),
-                TestStateFactory
-                    .GetSub()
-                    .RuleFor(r => r.FantasyPlayerEventId, player2Id)
+                TestStateFactory.GetSub().RuleFor(r => r.FantasyPlayerEventId, player1Id),
+                TestStateFactory.GetSub().RuleFor(r => r.FantasyPlayerEventId, player2Id)
             )
             .Build();
 
@@ -63,15 +58,12 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
         var playerId = 1;
         var state = new ManagerGameWeekStateBuilder()
             .WithLineup(
-                TestStateFactory.GetPlayer()
+                TestStateFactory
+                    .GetPlayer()
                     .RuleFor(r => r.FantasyPlayerEventId, playerId)
                     .RuleFor(r => r.InDreamteam, false)
             )
-            .WithSubsIn(
-                TestStateFactory
-                    .GetSub()
-                    .RuleFor(r => r.FantasyPlayerEventId, playerId)
-            )
+            .WithSubsIn(TestStateFactory.GetSub().RuleFor(r => r.FantasyPlayerEventId, playerId))
             .Build();
 
         var result = Rule.Calculate(state);

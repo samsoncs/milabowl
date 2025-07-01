@@ -1,5 +1,3 @@
 namespace Milabowl.Processing.DataImport.MilaDtos;
 
-public record FplResults(
-    IList<FplUserGameWeekResult> Results
-);
+public record FplResults(IList<FplUserGameWeekResult> Results);

@@ -6,6 +6,7 @@ public record BootstrapRootDto
 {
     [JsonPropertyName("events")]
     public required List<EventDto> Events { get; init; }
+
     [JsonPropertyName("teams")]
     public required List<TeamDto> Teams { get; init; }
 

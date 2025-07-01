@@ -42,15 +42,9 @@ public static class FplMapperExtensions
             : headToHeadResultDto.Entry2Entry;
         return new HeadToHeadEvent(
             isEntryOne ? headToHeadResultDto.Entry1Points : headToHeadResultDto.Entry2Points,
-            isEntryOne
-                ? headToHeadResultDto.Entry1Win == 1
-                : headToHeadResultDto.Entry2Win == 1,
-            isEntryOne
-                ? headToHeadResultDto.Entry1Draw == 1
-                : headToHeadResultDto.Entry2Draw == 1,
-            isEntryOne
-                ? headToHeadResultDto.Entry1Loss == 1
-                : headToHeadResultDto.Entry2Loss == 1,
+            isEntryOne ? headToHeadResultDto.Entry1Win == 1 : headToHeadResultDto.Entry2Win == 1,
+            isEntryOne ? headToHeadResultDto.Entry1Draw == 1 : headToHeadResultDto.Entry2Draw == 1,
+            isEntryOne ? headToHeadResultDto.Entry1Loss == 1 : headToHeadResultDto.Entry2Loss == 1,
             isEntryOne ? headToHeadResultDto.Entry1Total : headToHeadResultDto.Entry2Total,
             headToHeadResultDto.IsKnockout,
             headToHeadResultDto.League,
@@ -95,42 +89,47 @@ public static class FplMapperExtensions
             .ToList();
     }
 
-    public static AutoSub ToAutoSubs(this PicksRootDto picksRootDto, EventRootDto eventRootDto, List<PlayerDto> players)
+    public static AutoSub ToAutoSubs(
+        this PicksRootDto picksRootDto,
+        EventRootDto eventRootDto,
+        List<PlayerDto> players
+    )
     {
-        var subsIn = picksRootDto.AutoSubs.Select(a =>
-        {
-            var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementIn);
-            var playerIn = players.First(p => p.Id == a.ElementIn);
-            return new Sub
+        var subsIn = picksRootDto
+            .AutoSubs.Select(a =>
             {
-                TotalPoints = elementIn.Stats.TotalPoints,
-                FirstName = playerIn.FirstName,
-                Surname = playerIn.SecondName,
-                FantasyPlayerEventId = playerIn.Id
-            };
-        }).ToList();
+                var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementIn);
+                var playerIn = players.First(p => p.Id == a.ElementIn);
+                return new Sub
+                {
+                    TotalPoints = elementIn.Stats.TotalPoints,
+                    FirstName = playerIn.FirstName,
+                    Surname = playerIn.SecondName,
+                    FantasyPlayerEventId = playerIn.Id,
+                };
+            })
+            .ToList();
 
-        var subsOut = picksRootDto.AutoSubs.Select(a =>
-        {
-            var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementOut);
-            var playerIn = players.First(p => p.Id == a.ElementOut);
-            return new Sub
+        var subsOut = picksRootDto
+            .AutoSubs.Select(a =>
             {
-                TotalPoints = elementIn.Stats.TotalPoints,
-                FirstName = playerIn.FirstName,
-                Surname = playerIn.SecondName,
-                FantasyPlayerEventId = playerIn.Id
-            };
-        }).ToList();
+                var elementIn = eventRootDto.Elements.First(e => e.Id == a.ElementOut);
+                var playerIn = players.First(p => p.Id == a.ElementOut);
+                return new Sub
+                {
+                    TotalPoints = elementIn.Stats.TotalPoints,
+                    FirstName = playerIn.FirstName,
+                    Surname = playerIn.SecondName,
+                    FantasyPlayerEventId = playerIn.Id,
+                };
+            })
+            .ToList();
 
-        return new AutoSub
-        {
-            In = subsIn,
-            Out = subsOut
-        };
+        return new AutoSub { In = subsIn, Out = subsOut };
     }
 
-    private static PlayerEvent ToPlayerEvent(this ElementDto element,
+    private static PlayerEvent ToPlayerEvent(
+        this ElementDto element,
         PlayerDto player,
         TeamDto team,
         PickDto pick
@@ -174,7 +173,7 @@ public static class FplMapperExtensions
                 3 => PlayerPosition.MID,
                 4 => PlayerPosition.MID,
                 5 => PlayerPosition.MAN,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(),
             },
             player.ElementType switch
             {
@@ -183,7 +182,7 @@ public static class FplMapperExtensions
                 3 => "MID",
                 4 => "FWD",
                 5 => "MAN",
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(),
             }
         );
     }
