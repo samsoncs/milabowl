@@ -10,15 +10,11 @@ public class HeadBrosTests : MilaRuleTest<HeadBros>
     public void Should_award_points_if_user_and_opponent_have_highest_combined_score()
     {
         var opponent1 = new ManagerGameWeekStateBuilder()
-            .WithHeadToHead(
-                TestStateFactory.GetHeadToHead(20, 10)
-            )
+            .WithHeadToHead(TestStateFactory.GetHeadToHead(20, 10))
             .Build();
 
         var opponent2 = new ManagerGameWeekStateBuilder()
-            .WithHeadToHead(
-                TestStateFactory.GetHeadToHead(30, 10)
-            )
+            .WithHeadToHead(TestStateFactory.GetHeadToHead(30, 10))
             .Build();
 
         var state = new ManagerGameWeekStateBuilder()
@@ -35,9 +31,7 @@ public class HeadBrosTests : MilaRuleTest<HeadBros>
     public void Should_award_0_if_user_and_opponent_do_not_have_highest_combined_score()
     {
         var opponent = new ManagerGameWeekStateBuilder()
-            .WithHeadToHead(
-                TestStateFactory.GetHeadToHead(30, 10)
-            )
+            .WithHeadToHead(TestStateFactory.GetHeadToHead(30, 10))
             .Build();
 
         var state = new ManagerGameWeekStateBuilder()

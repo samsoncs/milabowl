@@ -10,6 +10,7 @@ public interface IRulesProcessor
 public class RulesProcessor : IRulesProcessor
 {
     private readonly IEnumerable<IMilaRule> _rules;
+
     public RulesProcessor(IEnumerable<IMilaRule> rules)
     {
         _rules = rules;

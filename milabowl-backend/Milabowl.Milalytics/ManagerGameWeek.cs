@@ -18,7 +18,6 @@ public record ManagerGameWeekLineup(
     bool IsCaptain,
     bool IsViceCaptain,
     int FantasyPlayerEventId,
-
     string FirstName,
     string LastName,
     string WebName,
@@ -52,9 +51,9 @@ public record ManagerGameWeekLineup(
     string IctIndex,
     int TotalPoints,
     bool InDreamTeam
-    // int Selected,
-    // int TransferBalance,
-    // int TransfersIn,
-    // int TransfersOut,
-    //decimal Value
+// int Selected,
+// int TransferBalance,
+// int TransfersIn,
+// int TransfersOut,
+//decimal Value
 );

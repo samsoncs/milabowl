@@ -57,15 +57,19 @@ public class FplImporter
                 .GroupBy(u => u.Event)
                 .SelectMany(s =>
                     s.ToList()
-                        .Select(u => u with
-                        {
-                            Opponents = s.ToList().Where(x => x.User.Id != u.User.Id).ToList()
-                                .AsReadOnly()
-                        })).ToList(),
-            IsLive = lastEvent is { Finished: false, DataChecked: false }
+                        .Select(u =>
+                            u with
+                            {
+                                Opponents = s.ToList()
+                                    .Where(x => x.User.Id != u.User.Id)
+                                    .ToList()
+                                    .AsReadOnly(),
+                            }
+                        )
+                )
+                .ToList(),
+            IsLive = lastEvent is { Finished: false, DataChecked: false },
         };
-
-
     }
 
     public async Task<FplResults> ImportFplData()
@@ -89,21 +93,24 @@ public class FplImporter
 
                 var lineup = picksRoot.ToLineup(eventRootDto, players, teams);
 
-                fplUserGameWeekResult.Add(new FplUserGameWeekResult(
-                    finishedEvent.Id,
-                    user.EntryName,
-                    user.Total,
-                    lineup.Select(l => new FplPlayerEventResult(
-                        l.WebName,
-                        l.TeamName,
-                        l.TotalPoints,
-                        l.PlayerPositionString,
-                        l.IsCaptain,
-                        l.IsViceCaptain,
-                        l.Multiplier == 0)
-                    ).ToList()
-                ));
-
+                fplUserGameWeekResult.Add(
+                    new FplUserGameWeekResult(
+                        finishedEvent.Id,
+                        user.EntryName,
+                        user.Total,
+                        lineup
+                            .Select(l => new FplPlayerEventResult(
+                                l.WebName,
+                                l.TeamName,
+                                l.TotalPoints,
+                                l.PlayerPositionString,
+                                l.IsCaptain,
+                                l.IsViceCaptain,
+                                l.Multiplier == 0
+                            ))
+                            .ToList()
+                    )
+                );
             }
         }
 

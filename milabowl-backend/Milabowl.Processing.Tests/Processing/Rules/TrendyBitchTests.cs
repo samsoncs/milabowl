@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
-public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
+public class TrendyBitchTests : MilaRuleTest<TrendyBitch>
 {
     [Fact]
     public void Should_get_minus_point_if_player_traded_in_most_traded_in_player()
@@ -12,11 +12,11 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         var mostTradedIn = TestStateFactory.GetSub().Generate();
         var leastTradedIn = mostTradedIn with
         {
-            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1
+            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1,
         };
         var leastTradedIn2 = mostTradedIn with
         {
-            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId + 1
+            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId + 1,
         };
         var opponent = new ManagerGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn, leastTradedIn)
@@ -38,11 +38,11 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         var mostTradedOut = TestStateFactory.GetSub().Generate();
         var leastTradedOut = mostTradedOut with
         {
-            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId - 1
+            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId - 1,
         };
         var leastTradedOut2 = mostTradedOut with
         {
-            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId + 1
+            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId + 1,
         };
         var opponent = new ManagerGameWeekStateBuilder()
             .WithSubsOut(mostTradedOut, leastTradedOut)
@@ -85,12 +85,12 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
         var mostTradedOut = TestStateFactory.GetSub().Generate();
         var leastTradedOut = mostTradedOut with
         {
-            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId - 1
+            FantasyPlayerEventId = mostTradedOut.FantasyPlayerEventId - 1,
         };
         var mostTradedIn = TestStateFactory.GetSub().Generate();
         var leastTradedIn = mostTradedIn with
         {
-            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1
+            FantasyPlayerEventId = mostTradedIn.FantasyPlayerEventId - 1,
         };
         var opponent1 = new ManagerGameWeekStateBuilder()
             .WithSubsIn(mostTradedIn)

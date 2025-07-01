@@ -8,7 +8,7 @@ public enum BombStateEnum
     Holding,
     Exploded,
     HandedOver_H2H,
-    HandedOver_Chip
+    HandedOver_Chip,
 }
 
 public record ManagerBombState(
@@ -23,7 +23,7 @@ public interface IBombState
     IList<BombGameWeekState> GetBombState();
 }
 
-public class BombState: IBombState
+public class BombState : IBombState
 {
     private IDictionary<int, ManagerBombState> _bombStateByGameWeek;
     private const int INITIAL_BOMB_HOLDER = 2216421;
@@ -33,7 +33,7 @@ public class BombState: IBombState
     {
         _bombStateByGameWeek = new ConcurrentDictionary<int, ManagerBombState>();
         var random = new Random(69);
-       _bombRounds = new List<int>();
+        _bombRounds = new List<int>();
 
         while (_bombRounds.Count < 7)
         {
@@ -65,23 +65,58 @@ public class BombState: IBombState
             null
         );
 
-        if (roundStartBombHolder.HeadToHead.CurrentUser.DidWin && roundStartBombHolder.HeadToHead.Opponent.FantasyPlayerId is not null)
+        if (
+            roundStartBombHolder.HeadToHead.CurrentUser.DidWin
+            && roundStartBombHolder.HeadToHead.Opponent.FantasyPlayerId is not null
+        )
         {
             var h2hOpponentId = (int)roundStartBombHolder.HeadToHead.Opponent.FantasyPlayerId!;
-            var h2hOpponent = managerGameWeekState.User.EntryId == h2hOpponentId ? managerGameWeekState : managerGameWeekState.Opponents.First(o => o.User.EntryId == h2hOpponentId);
-            bombState = new ManagerBombState(BombState: BombStateEnum.HandedOver_H2H, BombThrower: bombState.BombHolder, BombHolder: new BombHolder(
-                h2hOpponent.User.EntryId,
-                h2hOpponent.User.TeamName,
-                h2hOpponent.User.UserName
-            ));
+            var h2hOpponent =
+                managerGameWeekState.User.EntryId == h2hOpponentId
+                    ? managerGameWeekState
+                    : managerGameWeekState.Opponents.First(o => o.User.EntryId == h2hOpponentId);
+            bombState = new ManagerBombState(
+                BombState: BombStateEnum.HandedOver_H2H,
+                BombThrower: bombState.BombHolder,
+                BombHolder: new BombHolder(
+                    h2hOpponent.User.EntryId,
+                    h2hOpponent.User.TeamName,
+                    h2hOpponent.User.UserName
+                )
+            );
         }
-        else if (roundStartBombHolder.ActiveChip is not null && roundStartBombHolder.ActiveChip != "manager")
+        else if (
+            roundStartBombHolder.ActiveChip is not null
+            && roundStartBombHolder.ActiveChip != "manager"
+        )
         {
             var playersAndScores = managerGameWeekState
-                .Opponents.Select(o => new { Player = new BombHolder(o.User.EntryId, o.User.TeamName, o.User.UserName) , Score = o.TotalScore }).ToList();
-            playersAndScores.Add(new { Player = new BombHolder(managerGameWeekState.User.EntryId, managerGameWeekState.User.TeamName, managerGameWeekState.User.UserName), Score = managerGameWeekState.TotalScore });
-            var topScoringNonBombHolderPlayerThisRound = playersAndScores.Where(p => p.Player.FantasyManagerId != roundStartBombHolder.User.EntryId).MaxBy(o => o.Score)!.Player;
-            bombState = new ManagerBombState(BombState: BombStateEnum.HandedOver_Chip, BombThrower: bombState.BombHolder, BombHolder: topScoringNonBombHolderPlayerThisRound);
+                .Opponents.Select(o => new
+                {
+                    Player = new BombHolder(o.User.EntryId, o.User.TeamName, o.User.UserName),
+                    Score = o.TotalScore,
+                })
+                .ToList();
+            playersAndScores.Add(
+                new
+                {
+                    Player = new BombHolder(
+                        managerGameWeekState.User.EntryId,
+                        managerGameWeekState.User.TeamName,
+                        managerGameWeekState.User.UserName
+                    ),
+                    Score = managerGameWeekState.TotalScore,
+                }
+            );
+            var topScoringNonBombHolderPlayerThisRound = playersAndScores
+                .Where(p => p.Player.FantasyManagerId != roundStartBombHolder.User.EntryId)
+                .MaxBy(o => o.Score)!
+                .Player;
+            bombState = new ManagerBombState(
+                BombState: BombStateEnum.HandedOver_Chip,
+                BombThrower: bombState.BombHolder,
+                BombHolder: topScoringNonBombHolderPlayerThisRound
+            );
         }
 
         if (WillBombExplode(managerGameWeekState))
@@ -93,12 +128,16 @@ public class BombState: IBombState
         return bombState;
     }
 
-    private ManagerGameWeekState GetRoundStartBombHolderUser(ManagerGameWeekState managerGameWeekState)
+    private ManagerGameWeekState GetRoundStartBombHolderUser(
+        ManagerGameWeekState managerGameWeekState
+    )
     {
-        var bombHolderId = managerGameWeekState.Event.GameWeek == 1
-            ? INITIAL_BOMB_HOLDER
-            : _bombStateByGameWeek[managerGameWeekState.Event.GameWeek - 1].BombHolder
-                .FantasyManagerId;
+        var bombHolderId =
+            managerGameWeekState.Event.GameWeek == 1
+                ? INITIAL_BOMB_HOLDER
+                : _bombStateByGameWeek[managerGameWeekState.Event.GameWeek - 1]
+                    .BombHolder
+                    .FantasyManagerId;
 
         if (managerGameWeekState.User.EntryId == bombHolderId)
         {
@@ -132,5 +171,11 @@ public class BombState: IBombState
     }
 }
 
-public record BombGameWeekState(int GameWeek, BombStateEnum BombState, BombHolder BombHolder, BombHolder? BombThrower);
+public record BombGameWeekState(
+    int GameWeek,
+    BombStateEnum BombState,
+    BombHolder BombHolder,
+    BombHolder? BombThrower
+);
+
 public record BombHolder(int FantasyManagerId, string ManagerName, string UserName);

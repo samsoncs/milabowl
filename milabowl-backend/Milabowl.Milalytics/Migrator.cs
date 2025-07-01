@@ -9,12 +9,11 @@ public static class Migrator
     {
         EnsureDatabase.For.SqlDatabase(DbConnection.CONNECTION_STRING);
 
-        var upgrader =
-            DeployChanges.To
-                .SqlDatabase(DbConnection.CONNECTION_STRING)
-                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
-                .LogToConsole()
-                .Build();
+        var upgrader = DeployChanges
+            .To.SqlDatabase(DbConnection.CONNECTION_STRING)
+            .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+            .LogToConsole()
+            .Build();
 
         var result = upgrader.PerformUpgrade();
         return result.Successful;

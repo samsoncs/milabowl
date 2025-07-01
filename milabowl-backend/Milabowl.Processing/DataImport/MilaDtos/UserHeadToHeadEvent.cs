@@ -2,7 +2,7 @@
 
 public class UserHeadToHeadEvent
 {
-    public  Guid UserHeadToHeadEventId { get; set; }
+    public Guid UserHeadToHeadEventId { get; set; }
     public int FantasyUserHeadToHeadEventId { get; set; }
     public required User User { get; set; }
     public Guid FkUserId { get; set; }

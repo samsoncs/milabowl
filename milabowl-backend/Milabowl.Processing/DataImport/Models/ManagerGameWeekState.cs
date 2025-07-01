@@ -61,10 +61,9 @@ public static class StateFactory
             .Where(e => e.Event.GameWeek < @event.GameWeek)
             .ToList();
 
-        var previousGameWeek = historicGameWeeks
-            .FirstOrDefault(h =>
-                h.Event.GameWeek == @event.GameWeek - 1 && h.User.Id == user.Id
-            );
+        var previousGameWeek = historicGameWeeks.FirstOrDefault(h =>
+            h.Event.GameWeek == @event.GameWeek - 1 && h.User.Id == user.Id
+        );
 
         return new ManagerGameWeekState
         {
@@ -78,25 +77,24 @@ public static class StateFactory
             TotalScore = lineup.Sum(l => l.TotalPoints * l.Multiplier),
             TransferCost = transferCost,
             TransfersIn = previousGameWeek is null
-                ? new ReadOnlyCollection<Transfer>([
-                ])
+                ? new ReadOnlyCollection<Transfer>([])
                 : lineup
                     .Where(pe =>
                         previousGameWeek.Lineup.All(ipe =>
                             ipe.FantasyPlayerEventId != pe.FantasyPlayerEventId
                         )
                     )
-                    .Select(s => new Transfer{
+                    .Select(s => new Transfer
+                    {
                         TotalPoints = s.TotalPoints,
                         FirstName = s.FirstName,
                         Surname = s.Surname,
-                        FantasyPlayerEventId = s.FantasyPlayerEventId
+                        FantasyPlayerEventId = s.FantasyPlayerEventId,
                     })
                     .ToList()
                     .AsReadOnly(),
             TransfersOut = previousGameWeek is null
-                ? new ReadOnlyCollection<Transfer>([
-                ])
+                ? new ReadOnlyCollection<Transfer>([])
                 : previousGameWeek
                     .Lineup.Where(pe =>
                         lineup.All(ipe => ipe.FantasyPlayerEventId != pe.FantasyPlayerEventId)
@@ -108,13 +106,11 @@ public static class StateFactory
                             .Stats.TotalPoints,
                         FirstName = s.FirstName,
                         Surname = s.Surname,
-                        FantasyPlayerEventId = s.FantasyPlayerEventId
+                        FantasyPlayerEventId = s.FantasyPlayerEventId,
                     })
                     .ToList()
                     .AsReadOnly(),
-            History = historicGameWeeks.Where(h => h.User.Id == user.Id)
-                .ToList()
-                .AsReadOnly(),
+            History = historicGameWeeks.Where(h => h.User.Id == user.Id).ToList().AsReadOnly(),
             Opponents = opponents.AsReadOnly(),
         };
     }

@@ -5,7 +5,8 @@ namespace Milabowl.Processing.Processing.Rules;
 public class RedCards : MilaRule
 {
     protected override string ShortName => "RC";
-    protected override string Description => "Receive 2 points for all red cards. Captains double score.";
+    protected override string Description =>
+        "Receive 2 points for all red cards. Captains double score.";
 
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {

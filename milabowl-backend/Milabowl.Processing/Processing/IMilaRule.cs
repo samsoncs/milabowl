@@ -2,7 +2,13 @@
 
 namespace Milabowl.Processing.Processing;
 
-public record MilaRuleResult(string RuleName, string RuleShortName,  string Description, decimal Points, string? Reasoning);
+public record MilaRuleResult(
+    string RuleName,
+    string RuleShortName,
+    string Description,
+    decimal Points,
+    string? Reasoning
+);
 
 public interface IMilaRule
 {
@@ -20,6 +26,12 @@ public abstract class MilaRule : IMilaRule
     public MilaRuleResult Calculate(ManagerGameWeekState userGameWeek)
     {
         var rulePoints = CalculatePoints(userGameWeek);
-        return new MilaRuleResult(GetType().Name, ShortName, Description, rulePoints.Points, rulePoints.Reasoning);
+        return new MilaRuleResult(
+            GetType().Name,
+            ShortName,
+            Description,
+            rulePoints.Points,
+            rulePoints.Reasoning
+        );
     }
 }
