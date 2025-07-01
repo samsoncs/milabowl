@@ -16,12 +16,6 @@ jobs:
         with:
           dotnet-version: "9.x"
 
-      - name: Cache NuGet packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.nuget/packages
-          key: nuget-${{ hashFiles('milabowl-backend/Directory.Packages.props') }}
-
       - name: Restore dependencies
         run: dotnet restore milabowl-backend/Milabowl.sln
 
