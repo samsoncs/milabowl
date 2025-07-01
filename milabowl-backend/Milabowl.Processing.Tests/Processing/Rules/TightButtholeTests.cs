@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -20,7 +20,7 @@ public class TightButtholeTests: MilaRuleTest<TightButthole>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(2.1m);
+        result.Points.ShouldBe(2.1m);
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class TightButtholeTests: MilaRuleTest<TightButthole>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -55,6 +55,6 @@ public class TightButtholeTests: MilaRuleTest<TightButthole>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(2.1m);
+        result.Points.ShouldBe(2.1m);
     }
 }

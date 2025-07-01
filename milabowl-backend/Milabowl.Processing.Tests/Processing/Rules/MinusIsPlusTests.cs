@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -15,7 +15,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(-1*state.Lineup[0].TotalPoints);
+        result.Points.ShouldBe(-1*state.Lineup[0].TotalPoints);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(-1*2*state.Lineup[0].TotalPoints);
+        result.Points.ShouldBe(-1*2*state.Lineup[0].TotalPoints);
     }
 
     [Fact]
@@ -45,6 +45,6 @@ public class MinusIsPlusTests: MilaRuleTest<MinusIsPlus>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(42);
+        result.Points.ShouldBe(42);
     }
 }

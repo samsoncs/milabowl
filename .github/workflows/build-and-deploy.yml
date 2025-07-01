@@ -1,0 +1,69 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+
+      - name: Validate branch for manual dispatch
+        if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::This workflow can only be dispatched from the main branch"
+          exit 1
+
+      - name: Setup .NET 9.x
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.x"
+
+      - name: Build .NET project
+        working-directory: ./milabowl-backend
+        run: dotnet build ./Milabowl.Processing/Milabowl.Processing.csproj --configuration Release
+
+      - name: Generate game state
+        working-directory: ./milabowl-backend
+        run: dotnet run --project ./Milabowl.Processing/Milabowl.Processing.csproj --no-build --configuration Release -- ../milabowl-astro/src/game_state
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: "milabowl-astro/package-lock.json"
+
+      - name: Install dependencies
+        working-directory: ./milabowl-astro
+        run: npm ci
+
+      - name: Build Astro
+        working-directory: ./milabowl-astro
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./milabowl-astro/dist
+
+  github-pages:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

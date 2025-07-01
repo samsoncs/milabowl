@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -15,7 +15,7 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(2.69m);
+        result.Points.ShouldBe(2.69m);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(5.38m);
+        result.Points.ShouldBe(5.38m);
     }
 
     [Fact]
@@ -39,7 +39,6 @@ public class SixtyNineSubTests : MilaRuleTest<SixtyNineSub>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 }
-

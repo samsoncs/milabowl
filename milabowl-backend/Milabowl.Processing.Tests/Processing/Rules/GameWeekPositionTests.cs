@@ -1,7 +1,6 @@
-using FluentAssertions;
-using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -20,7 +19,7 @@ public class GameWeekPositionTests : MilaRuleTest<GameWeekPosition>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -36,6 +35,6 @@ public class GameWeekPositionTests : MilaRuleTest<GameWeekPosition>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0.5m);
+        result.Points.ShouldBe(0.5m);
     }
 }

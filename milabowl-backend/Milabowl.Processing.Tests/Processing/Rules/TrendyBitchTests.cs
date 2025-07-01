@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -29,7 +29,7 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(-1);
+        result.Points.ShouldBe(-1);
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(-1);
+        result.Points.ShouldBe(-1);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(-2);
+        result.Points.ShouldBe(-2);
     }
 
     [Fact]
@@ -109,6 +109,6 @@ public class TrendyBitchTests: MilaRuleTest<TrendyBitch>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 }

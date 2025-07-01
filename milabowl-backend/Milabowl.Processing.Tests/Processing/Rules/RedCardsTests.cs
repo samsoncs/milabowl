@@ -1,6 +1,6 @@
-using FluentAssertions;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -15,7 +15,7 @@ public class RedCardsTests: MilaRuleTest<RedCards>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(6);
+        result.Points.ShouldBe(6);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class RedCardsTests: MilaRuleTest<RedCards>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(12);
+        result.Points.ShouldBe(12);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class RedCardsTests: MilaRuleTest<RedCards>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public class RedCardsTests: MilaRuleTest<RedCards>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class RedCardsTests: MilaRuleTest<RedCards>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(12);
+        result.Points.ShouldBe(12);
     }
 
 }

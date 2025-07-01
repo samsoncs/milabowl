@@ -14,13 +14,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "9.0.x"
-
-      - name: Restore dependencies
-        run: dotnet restore milabowl-backend/Milabowl.sln
+          dotnet-version: "9.x"
 
       - name: Build with warnings as errors
-        run: dotnet build milabowl-backend/Milabowl.sln --no-restore --configuration Release --warnaserror
+        run: dotnet build milabowl-backend/Milabowl.sln --configuration Release --warnaserror
 
       - name: Run tests
         run: dotnet test milabowl-backend/Milabowl.Processing.Tests/Milabowl.Processing.Tests.csproj --no-build --configuration Release --verbosity normal

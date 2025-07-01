@@ -1,7 +1,6 @@
-using FluentAssertions;
-using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
+using Shouldly;
 
 namespace Milabowl.Processing.Tests.Processing.Rules;
 
@@ -26,7 +25,7 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(1.5m);
+        result.Points.ShouldBe(1.5m);
     }
 
     [Fact]
@@ -55,7 +54,7 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(1.5m);
+        result.Points.ShouldBe(1.5m);
     }
 
     [Fact]
@@ -77,6 +76,6 @@ public class DreamTimingTests: MilaRuleTest<DreamTiming>
 
         var result = Rule.Calculate(state);
 
-        result.Points.Should().Be(0);
+        result.Points.ShouldBe(0);
     }
 }
