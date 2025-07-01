@@ -15,6 +15,7 @@
     <PackageVersion Include="dbup-core" Version="6.0.4" />
     <PackageVersion Include="dbup-sqlserver" Version="6.0.0" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
   </ItemGroup>
 </Project>
 
