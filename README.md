@@ -161,6 +161,7 @@ The project includes automated build and quality checks that ensure:
 -   ✅ **Clean Builds**: Project compiles without warnings or errors
 -   ✅ **Test Coverage**: All tests pass and new rules have corresponding tests
 -   ✅ **Code Formatting**: Code adheres to [CSharpier](https://csharpier.com/) formatting standards (backend) and [Prettier](https://prettier.io/) standards (frontend)
+-   ✅ **Code Quality**: Code passes [ESLint](https://eslint.org/) linting checks for TypeScript and Astro files (frontend)
 
 Before submitting changes, ensure your code passes all checks (could be done automatically with git hooks etc.):
 
@@ -191,6 +192,14 @@ npx prettier --check .
 
 # Format code automatically
 npx prettier --write .
+
+# Check code quality with ESLint
+npx eslint .
+# or alternatively: npm run lint
+
+# Fix ESLint issues automatically (where possible)
+npx eslint . --fix
+# or alternatively: npm run lint:fix
 ```
 
 ## 🤝 Contributing

@@ -8,7 +8,7 @@ export function getStandingsColmns(
     data: GameWeekResult[],
     avatars: ImageMetadata[],
     lastGameWeek: number
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): ColumnDef<GameWeekResult, any>[] {
     return [
         columnHelper.display({

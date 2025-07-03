@@ -149,11 +149,9 @@ const { pathname } = Astro.url;
     });
 
     document.addEventListener('astro:after-swap', () => {
-
-        if(localStorage.theme === 'dark'){
-            document.documentElement.classList.add('dark')
-        }
-        else{
+        if (localStorage.theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
             document.documentElement.classList.remove('dark');
         }
     });

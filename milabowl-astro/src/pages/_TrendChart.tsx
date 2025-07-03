@@ -13,7 +13,6 @@ const TrendChart: React.FC<TrendChartProps> = ({
     teamname,
     height,
 }: TrendChartProps) => {
-
     const minValue = Math.min.apply(
         null,
         results?.map(

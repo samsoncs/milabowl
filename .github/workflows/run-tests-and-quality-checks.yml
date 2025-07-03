@@ -60,7 +60,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "22"
           cache: "npm"
           cache-dependency-path: milabowl-astro/package-lock.json
 
@@ -71,3 +71,7 @@ jobs:
       - name: Check formatting with Prettier
         working-directory: ./milabowl-astro
         run: npx prettier --check .
+
+      - name: Check code quality with ESLint
+        working-directory: ./milabowl-astro
+        run: npx eslint .

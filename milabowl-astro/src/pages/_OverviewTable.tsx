@@ -1,8 +1,5 @@
 import { createColumnHelper, type RowData } from '@tanstack/react-table';
-import type {
-    GameWeekResult,
-    ResultsByUser,
-} from '../game_state/gameState';
+import type { GameWeekResult, ResultsByUser } from '../game_state/gameState';
 import SortableTable from '../components/core/Table/SortableTable';
 import { useMemo } from 'react';
 import PositionDelta from '../components/core/PositionDelta';
