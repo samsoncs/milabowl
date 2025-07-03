@@ -20,7 +20,13 @@ jobs:
         run: dotnet build milabowl-backend/Milabowl.sln --configuration Release --warnaserror
 
       - name: Run tests
-        run: dotnet test milabowl-backend/Milabowl.Processing.Tests/Milabowl.Processing.Tests.csproj --no-build --configuration Release --verbosity normal
+        id: tests
+        run: dotnet test milabowl-backend/Milabowl.Processing.Tests/Milabowl.Processing.Tests.csproj --no-build --configuration Release --verbosity normal --logger:"junit;LogFileName={assembly}.results.xml" --results-directory "TestResults"
+
+      - name: Generate test summary
+        shell: pwsh
+        run: ./scripts/generate-test-summary.ps1 "TestResults" >> $env:GITHUB_STEP_SUMMARY
+        if: steps.tests.outcome == 'success'
 
   code-quality:
     runs-on: ubuntu-latest
