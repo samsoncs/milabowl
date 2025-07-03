@@ -9,11 +9,11 @@ export default defineConfig({
     integrations: [react()],
     devToolbar: { enabled: false },
     vite: {
-      ssr: {
-          // Needed because of ESM wonky support in Nivo
-          noExternal: ["@nivo/*"],
-      },
+        ssr: {
+            // Needed because of ESM wonky support in Nivo
+            noExternal: ['@nivo/*'],
+        },
 
-      plugins: [tailwindcss()]
-    }
+        plugins: [tailwindcss()],
+    },
 });

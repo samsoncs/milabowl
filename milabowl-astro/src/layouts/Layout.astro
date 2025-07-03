@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css' 
+import '../styles/global.css';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/700.css';
 import Navbar from './Navbar.astro';
@@ -11,7 +11,7 @@ export interface Props {
     enableViewTransitions?: boolean;
 }
 
- const { title, enableViewTransitions } = Astro.props;
+const { title, enableViewTransitions } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,7 +27,7 @@ export interface Props {
     <body class="bg-slate-100 dark:bg-slate-900">
         <Navbar />
         <div
-            class="mx-auto mb-[4rem] max-w-screen-2xl dark:text-dark-text md:mb-0 md:mt-14 md:mx-4"
+            class="mx-auto mb-[4rem] max-w-screen-2xl dark:text-dark-text md:mx-4 md:mb-0 md:mt-14"
         >
             <slot />
         </div>

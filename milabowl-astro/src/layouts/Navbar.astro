@@ -135,9 +135,9 @@ const { pathname } = Astro.url;
 </script>
 
 <script>
-    document.addEventListener("astro:page-load", () => {
+    document.addEventListener('astro:page-load', () => {
         const handleToggleClick = () => {
-            console.log("Im toggling");
+            console.log('Im toggling');
             const element = document.documentElement;
             element.classList.toggle('dark');
 
@@ -154,5 +154,5 @@ const { pathname } = Astro.url;
         localStorage.theme === 'dark'
             ? document.documentElement.classList.add('dark')
             : document.documentElement.classList.remove('dark');
-   });
+    });
 </script>

@@ -48,9 +48,7 @@ const { userResults } = Astro.props;
                             .map((r, i) => (
                                 <tr>
                                     <td>{`GW ${r.gameWeek}`}</td>
-                                    <td class="right-align">
-                                        {r.gwScore}
-                                    </td>
+                                    <td class="right-align">{r.gwScore}</td>
                                     <td class="right-align">
                                         {r.cumulativeAverageMilaPoints}
                                     </td>

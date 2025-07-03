@@ -80,7 +80,7 @@ const Nominations: React.FC<NominationsProps> = ({ nominations }) => {
                 <div className="px-2 font-bold dark:text-dark-text lg:px-0">
                     Filter:
                 </div>
-                <div className="cursor-pointer flex items-center space-x-2">
+                <div className="flex cursor-pointer items-center space-x-2">
                     <NominationChip
                         category="SKILL"
                         filters={filters}

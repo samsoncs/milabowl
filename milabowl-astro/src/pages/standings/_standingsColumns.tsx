@@ -62,7 +62,11 @@ export function getStandingsColmns(
             size: 230,
             maxSize: 400,
         }),
-        ...data[0].rules.map((r, i) => columnHelper.accessor(r => r.rules[i].points , {id: r.ruleShortName})),
+        ...data[0].rules.map((r, i) =>
+            columnHelper.accessor((r) => r.rules[i].points, {
+                id: r.ruleShortName,
+            })
+        ),
         columnHelper.accessor('cumulativeMilaPoints', {
             id: 'totmp',
             header: 'Total MP',

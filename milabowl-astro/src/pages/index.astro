@@ -13,7 +13,11 @@ import OverviewTable from './_OverviewTable';
 const milaResults: MilaResultsDTO = game_state;
 const bombState: BombGameWeekState[] = bomb_state;
 
-const imgs = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/*.webp', { eager: true }));
+const imgs = Object.values(
+    import.meta.glob<{ default: ImageMetadata }>('../assets/*.webp', {
+        eager: true,
+    })
+);
 const images = imgs.map((i) => i.default);
 const lastGameWeek = Math.max.apply(
     Math,
@@ -29,14 +33,13 @@ const resultsByUser = milaResults.resultsByUser;
                 <Card title="Standings">
                     <div slot="secondary" class="flex flex-row gap-3">
                         <Link href="/standings">See More</Link>
-                        { 
-                            milaResults.isLive && 
-                            <div class="font-bold">
-                                🔴 Live
-                            </div>
+                        {
+                            milaResults.isLive && (
+                                <div class="font-bold">🔴 Live</div>
+                            )
                         }
                     </div>
-                 
+
                     <OverviewTable
                         avatars={images}
                         data={milaResults.overallScore}
@@ -65,7 +68,8 @@ const resultsByUser = milaResults.resultsByUser;
                                                     GW {r.gameWeek} -{' '}
                                                     {r.bombThrower &&
                                                         `${r.bombThrower.managerName.substring(0, 30)}${
-                                                            (r.bombThrower.managerName
+                                                            (r.bombThrower
+                                                                .managerName
                                                                 ?.length ??
                                                                 0) >= 30
                                                                 ? '...'
@@ -77,7 +81,8 @@ const resultsByUser = milaResults.resultsByUser;
                                                         'Exploded' &&
                                                         '💥 (-3 pts) '}
                                                     {`${r.bombHolder.managerName.substring(0, 30)}${
-                                                        (r.bombHolder.managerName
+                                                        (r.bombHolder
+                                                            .managerName
                                                             ?.length ?? 0) >= 30
                                                             ? '...'
                                                             : ''

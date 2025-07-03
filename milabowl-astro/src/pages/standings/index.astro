@@ -9,7 +9,11 @@ import Link from '../../components/core/Link.astro';
 const milaResults: MilaResultsDTO = game_state;
 const overallScore = milaResults.overallScore;
 
-const imgs = Object.values(import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', { eager: true }));
+const imgs = Object.values(
+    import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', {
+        eager: true,
+    })
+);
 const images = imgs.map((i) => i.default);
 
 const lastGameWeek = Math.max.apply(
@@ -22,12 +26,7 @@ const lastGameWeek = Math.max.apply(
     <Card title="Standings - Overall">
         <div slot="secondary" class="flex flex-row gap-3">
             <Link href={`/standings/${lastGameWeek}`}>Latest Gameweek</Link>
-            { 
-                milaResults.isLive && 
-                <div class="font-bold">
-                    🔴 Live
-                </div>
-            }
+            {milaResults.isLive && <div class="font-bold">🔴 Live</div>}
         </div>
         <div class="hidden md:block">
             <StandingsTable

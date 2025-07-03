@@ -7,8 +7,8 @@ interface Props {
 }
 
 const RuleBoxPlot: React.FC<Props> = ({ overallScore }) => {
-    const data = overallScore.flatMap((o) => 
-        o.rules.map(r => ({group: r.ruleShortName, value: r.points}))
+    const data = overallScore.flatMap((o) =>
+        o.rules.map((r) => ({ group: r.ruleShortName, value: r.points }))
     );
     return (
         <ResponsiveBoxPlot
