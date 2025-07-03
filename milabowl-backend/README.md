@@ -11,6 +11,7 @@ This repository consists of a .NET console application for FPL data processing, 
 -   [The latest version of the .NET SDK](https://dotnet.microsoft.com/download)
 -   [The latest version of node](https://nodejs.org/)
 -   [npm](https://www.npmjs.com/)
+-   [(required for Milalytics): Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Running the Backend (Data Processing)
 
@@ -29,6 +30,28 @@ The backend will:
 1. Fetch data from FPL APIs
 2. Calculate milapoints for all managers
 3. Output JSON state files to the frontend's `game_state` directory
+
+### Running Milalytics (Data Analysis)
+
+The Milalytics project loads processed data into SQL Server for deeper analysis:
+
+```powershell
+# Navigate to backend directory
+cd milabowl-backend
+
+# Run SQL Server as a docker conatiner
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=!5omeSup3rF4ncyPwd!" -p 1431:1433
+-d mcr.microsoft.com/mssql/server:2022-latest
+
+# Run the analytics loader
+dotnet run --project ./Milabowl.Milalytics/Milabowl.Milalytics.csproj
+```
+
+This will load relevant data into a SQL Server database, enabling:
+
+-   Historical trend analysis
+-   Advanced querying capabilities
+-   Custom reporting and visualizations
 
 ### Running the Frontend (Website)
 
@@ -139,7 +162,7 @@ The project includes automated build and quality checks that ensure:
 -   ✅ **Test Coverage**: All tests pass and new rules have corresponding tests
 -   ✅ **Code Formatting**: Code adheres to [CSharpier](https://csharpier.com/) formatting standards
 
-Before submitting changes, ensure your code passes all checks:
+Before submitting changes, ensure your code passes all checks (could be done automatically with git hooks etc.):
 
 ```powershell
 # Check formatting
