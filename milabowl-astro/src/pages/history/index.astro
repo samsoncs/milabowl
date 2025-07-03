@@ -532,7 +532,7 @@ const historicResultsByPlayer: PlayerResults[] = [
     },
 ];
 
-const fplData = historicResultsByPlayer.map((r, i) => ({
+const fplData = historicResultsByPlayer.map((r) => ({
     id: r.name,
     data: r.seasons.map((rr) => ({
         x: rr.name,
@@ -541,7 +541,7 @@ const fplData = historicResultsByPlayer.map((r, i) => ({
     })),
 }));
 
-const milaData = historicResultsByPlayer.map((r, i) => ({
+const milaData = historicResultsByPlayer.map((r) => ({
     id: r.name,
     data: r.seasons
         .filter((rr) => rr.milaPoints !== undefined)

@@ -10,6 +10,7 @@ import Card from '../../components/core/Card.astro';
 import StandingsTable from './_StandingsTable.tsx';
 import StandingsTableMobile from './_StandingsTable_Mobile.tsx';
 import Link from '../../components/core/Link.astro';
+import type { ImageMetadata } from 'astro'; 
 
 const imgs = Object.values(
     import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', {

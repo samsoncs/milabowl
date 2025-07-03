@@ -66,10 +66,6 @@ const CustomPoint: React.FC<{
     );
 };
 
-const GetFriendlyName = (name: string, isXs: boolean): string => {
-    return isXs ? `${name.substring(0, 10)}..` : name;
-};
-
 const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     results,
 }: PlayerStandingsChartProps) => {
@@ -82,12 +78,12 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         }
     }, []);
 
-    const [week, setWeek] = useState<number[]>([
+    const week = [
         results.resultsByWeek.length < 5 ? 0 : results.resultsByWeek.length - 5,
         results.resultsByWeek.length,
-    ]);
+    ];
 
-    const data = results.resultsByUser.map((r, i) => ({
+    const data = results.resultsByUser.map((r) => ({
         id: r.teamName,
         data: r.results.slice(week[0], week[1]).map((rr) => ({
             x: `GW ${rr.gameWeek}`,

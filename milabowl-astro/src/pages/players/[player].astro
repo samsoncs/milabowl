@@ -45,7 +45,7 @@ const { userResults } = Astro.props;
                     {
                         userResults.results
                             .sort((a, b) => b.gameWeek - a.gameWeek)
-                            .map((r, i) => (
+                            .map((r) => (
                                 <tr>
                                     <td>{`GW ${r.gameWeek}`}</td>
                                     <td class="right-align">{r.gwScore}</td>

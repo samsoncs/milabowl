@@ -1,5 +1,4 @@
 import { Line, type Serie } from '@nivo/line';
-import { useEffect, useState } from 'react';
 import colors from 'tailwindcss/colors';
 import type { GameWeekResult } from '../game_state/gameState';
 
@@ -14,14 +13,6 @@ const TrendChart: React.FC<TrendChartProps> = ({
     teamname,
     height,
 }: TrendChartProps) => {
-    const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-    useEffect(() => {
-        const storedTheme = localStorage.getItem('theme');
-        if (storedTheme === 'dark') {
-            setIsDarkTheme(true);
-        }
-    }, []);
 
     const minValue = Math.min.apply(
         null,

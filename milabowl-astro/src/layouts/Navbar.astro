@@ -1,6 +1,4 @@
 ---
-import Hamburger from './Hamburger.astro';
-
 const navLinks: { href: string; name: string }[] = [
     {
         href: '/blog',
@@ -151,8 +149,12 @@ const { pathname } = Astro.url;
     });
 
     document.addEventListener('astro:after-swap', () => {
-        localStorage.theme === 'dark'
-            ? document.documentElement.classList.add('dark')
-            : document.documentElement.classList.remove('dark');
+
+        if(localStorage.theme === 'dark'){
+            document.documentElement.classList.add('dark')
+        }
+        else{
+            document.documentElement.classList.remove('dark');
+        }
     });
 </script>

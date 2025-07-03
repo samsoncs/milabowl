@@ -1,17 +1,16 @@
 import { createColumnHelper, type RowData } from '@tanstack/react-table';
 import type {
     GameWeekResult,
-    OverallResult,
     ResultsByUser,
 } from '../game_state/gameState';
 import SortableTable from '../components/core/Table/SortableTable';
 import { useMemo } from 'react';
 import PositionDelta from '../components/core/PositionDelta';
 import '@tanstack/react-table';
-import LastWeeksChart from './_LastWeekChart';
 import TrendChart from './_TrendChart';
 
 declare module '@tanstack/react-table' {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface ColumnMeta<TData extends RowData, TValue> {
         align?: 'right' | 'left';
         classNames?: string;

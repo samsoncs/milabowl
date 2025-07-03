@@ -37,7 +37,6 @@ const Award: React.FC<AwardProps> = ({
     firstPlace,
     seccondPlace,
     thirdPlace,
-    id,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     const firstPlaceDiff = firstPlace.points - seccondPlace.points;
@@ -55,7 +54,7 @@ const Award: React.FC<AwardProps> = ({
                 ].join(' ')}
                 onClick={(e) => {
                     if (!isClicked) {
-                        // @ts-ignore
+                        // @ts-expect-error expecting error
                         party.confetti(e.target);
                     }
                     setIsClicked(true);
@@ -78,7 +77,6 @@ const Award: React.FC<AwardProps> = ({
                             'rounded-md',
                             'dark:bg-slate-900',
                             'bg-slate-100',
-                            ,
                             styles.flipCardBack,
                         ].join(' ')}
                     >
