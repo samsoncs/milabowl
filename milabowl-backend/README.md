@@ -160,9 +160,11 @@ The project includes automated build and quality checks that ensure:
 
 -   ✅ **Clean Builds**: Project compiles without warnings or errors
 -   ✅ **Test Coverage**: All tests pass and new rules have corresponding tests
--   ✅ **Code Formatting**: Code adheres to [CSharpier](https://csharpier.com/) formatting standards
+-   ✅ **Code Formatting**: Code adheres to [CSharpier](https://csharpier.com/) formatting standards (backend) and [Prettier](https://prettier.io/) standards (frontend)
 
 Before submitting changes, ensure your code passes all checks (could be done automatically with git hooks etc.):
+
+**Backend:**
 
 ```powershell
 # Check formatting
@@ -176,6 +178,19 @@ dotnet build --no-restore --verbosity normal
 
 # Run all tests
 dotnet test --no-build
+```
+
+**Frontend:**
+
+```powershell
+# Navigate to frontend directory
+cd milabowl-astro
+
+# Check formatting
+npx prettier --check .
+
+# Format code automatically
+npx prettier --write .
 ```
 
 ## 🤝 Contributing
