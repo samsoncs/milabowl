@@ -8,10 +8,10 @@ This repository consists of a .NET console application for FPL data processing, 
 
 ### Prerequisites
 
--   [The latest version of the .NET SDK](https://dotnet.microsoft.com/download)
--   [The latest version of node](https://nodejs.org/)
--   [npm](https://www.npmjs.com/)
--   [(required for Milalytics): Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [The latest version of the .NET SDK](https://dotnet.microsoft.com/download)
+- [The latest version of node](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- [(required for Milalytics): Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Running the Backend (Data Processing)
 
@@ -49,9 +49,9 @@ dotnet run --project ./Milabowl.Milalytics/Milabowl.Milalytics.csproj
 
 This will load relevant data into a SQL Server database, enabling:
 
--   Historical trend analysis
--   Advanced querying capabilities
--   Custom reporting and visualizations
+- Historical trend analysis
+- Advanced querying capabilities
+- Custom reporting and visualizations
 
 ### Running the Frontend (Website)
 
@@ -122,10 +122,10 @@ public class YourAwesomeRule : MilaRule
 
 The rule will be automatically:
 
--   ✅ Discovered by dependency injection
--   ✅ Executed by the rules processor
--   ✅ Included in JSON output
--   ✅ Displayed on the website
+- ✅ Discovered by dependency injection
+- ✅ Executed by the rules processor
+- ✅ Included in JSON output
+- ✅ Displayed on the website
 
 ### Step 3: Add Tests
 
@@ -158,10 +158,10 @@ There is a test that requires all MilaRules to have tests. Create a matching tes
 
 The project includes automated build and quality checks that ensure:
 
--   ✅ **Clean Builds**: Project compiles without warnings or errors
--   ✅ **Test Coverage**: All tests pass and new rules have corresponding tests
--   ✅ **Code Formatting**: Code adheres to [CSharpier](https://csharpier.com/) formatting standards (backend) and [Prettier](https://prettier.io/) standards (frontend)
--   ✅ **Code Quality**: Code passes [ESLint](https://eslint.org/) linting checks for TypeScript and Astro files (frontend)
+- ✅ **Clean Builds**: Project compiles without warnings or errors
+- ✅ **Test Coverage**: All tests pass and new rules have corresponding tests
+- ✅ **Code Formatting**: Code adheres to [CSharpier](https://csharpier.com/) formatting standards (backend) and [Prettier](https://prettier.io/) standards (frontend)
+- ✅ **Code Quality**: Code passes [ESLint](https://eslint.org/) linting checks for TypeScript and Astro files (frontend)
 
 Before submitting changes, ensure your code passes all checks (could be done automatically with git hooks etc.):
 
@@ -187,19 +187,11 @@ dotnet test --no-build
 # Navigate to frontend directory
 cd milabowl-astro
 
-# Check formatting
-npx prettier --check .
+# Check formatting and code quality
+npm run lint
 
-# Format code automatically
-npx prettier --write .
-
-# Check code quality with ESLint
-npx eslint .
-# or alternatively: npm run lint
-
-# Fix ESLint issues automatically (where possible)
-npx eslint . --fix
-# or alternatively: npm run lint:fix
+# Fix formatting and code quality issues automatically
+npm run lint:fix
 ```
 
 ## 🤝 Contributing
