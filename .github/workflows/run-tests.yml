@@ -25,7 +25,7 @@ jobs:
 
       - name: Generate test summary
         shell: pwsh
-        run: ./scripts/generate-test-summary.ps1 "TestResults" >> $env:GITHUB_STEP_SUMMARY
+        run: ./milabowl-backend/scripts/generate-test-summary.ps1 "TestResults" >> $env:GITHUB_STEP_SUMMARY
         if: steps.tests.outcome == 'success'
 
   code-quality:
