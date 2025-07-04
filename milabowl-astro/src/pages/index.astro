@@ -1,14 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/core/Card.astro';
-import Trend from './_Trend';
+import Trend from './_components/Trend';
 import game_state from '../../src/game_state/game_state.json';
 import bomb_state from '../../src/game_state/bomb_state.json';
 import fpl_state from '../../src/game_state/fpl_state.json';
 import type { MilaResultsDTO } from '../game_state/gameState';
 import type { BombGameWeekState } from '../game_state/bombState';
 import Link from '../components/core/Link.astro';
-import OverviewTable from './_OverviewTable';
+import OverviewTable from './_components/OverviewTable';
+import BombState from './_components/BombState.astro';
 import type { ImageMetadata } from 'astro';
 
 const milaResults: MilaResultsDTO = game_state;
@@ -65,31 +66,7 @@ const trendData = resultsByUser.map((team) => ({
                 <Link href="/bomb_history">See all</Link>
               </div>
               <div class="grid grid-cols-5 gap-2">
-                {
-                  bombState
-                    .slice(-5)
-                    .reverse()
-                    .map((r) => {
-                      return (
-                        <div class="col-span-5">
-                          GW {r.gameWeek} -{' '}
-                          {r.bombThrower &&
-                            `${r.bombThrower.managerName.substring(0, 30)}${
-                              (r.bombThrower.managerName?.length ?? 0) >= 30
-                                ? '...'
-                                : ''
-                            } 👋 =>`}
-                          {r.bombState !== 'Exploded' && '💣'}
-                          {r.bombState === 'Exploded' && '💥 (-3 pts) '}
-                          {`${r.bombHolder.managerName.substring(0, 30)}${
-                            (r.bombHolder.managerName?.length ?? 0) >= 30
-                              ? '...'
-                              : ''
-                          }`}
-                        </div>
-                      );
-                    })
-                }
+                <BombState bombState={bombState}/>
               </div>
             </Card>
           </div>

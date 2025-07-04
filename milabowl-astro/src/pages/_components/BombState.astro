@@ -1,0 +1,31 @@
+---
+import type { BombGameWeekState } from '../../game_state/bombState';
+
+export interface Props {
+  bombState: BombGameWeekState[];
+}
+const { bombState } = Astro.props;
+---
+<>
+  {bombState
+    .slice(-5)
+    .reverse()
+    .map((r) => (
+      <div class="col-span-5">
+        GW {r.gameWeek} -{' '}
+        {r.bombThrower &&
+          `${r.bombThrower.managerName.substring(0, 30)}${
+            (r.bombThrower.managerName?.length ?? 0) >= 30
+              ? '...'
+              : ''
+          } 👋 =>`}
+        {r.bombState !== 'Exploded' && '💣'}
+        {r.bombState === 'Exploded' && '💥 (-3 pts) '}
+        {`${r.bombHolder.managerName.substring(0, 30)}${
+          (r.bombHolder.managerName?.length ?? 0) >= 30
+            ? '...'
+            : ''
+        }`}
+      </div>
+    ))}
+</>
