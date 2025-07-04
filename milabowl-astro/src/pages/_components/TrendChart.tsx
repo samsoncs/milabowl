@@ -1,6 +1,6 @@
 import { Line } from '@nivo/line';
 import colors from 'tailwindcss/colors';
-import type { GameWeekResult } from '../game_state/gameState';
+import type { GameWeekResult } from '../../game_state/gameState';
 
 interface TrendChartProps {
   results: GameWeekResult[];

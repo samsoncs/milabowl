@@ -1,10 +1,10 @@
 import { createColumnHelper, type RowData } from '@tanstack/react-table';
-import type { GameWeekResult, ResultsByUser } from '../game_state/gameState';
-import SortableTable from '../components/core/Table/SortableTable';
+import type { GameWeekResult, ResultsByUser } from '../../game_state/gameState';
+import SortableTable from '../../components/core/Table/SortableTable';
 import { useMemo } from 'react';
-import PositionDelta from '../components/core/PositionDelta';
+import PositionDelta from '../../components/core/PositionDelta';
 import '@tanstack/react-table';
-import TrendChart from './_TrendChart';
+import TrendChart from './TrendChart';
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
