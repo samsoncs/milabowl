@@ -1,12 +1,17 @@
-import { ResponsiveLine, type Serie } from '@nivo/line';
+import { ResponsiveLine } from '@nivo/line';
 import { useEffect, useState } from 'react';
 import colors from 'tailwindcss/colors';
-import type { GameWeekResult } from '../../game_state/gameState';
+import type { GameWeekResult } from '../../../game_state/gameState';
 
 interface PlayerStandingsChartProps {
   results: GameWeekResult[];
   teamname: string;
 }
+
+type ChartSerie = {
+  id: string;
+  data: { x: number; y: number }[];
+};
 
 const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
   results,
@@ -21,7 +26,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     }
   }, []);
 
-  const data: Serie[] = [
+  const data: ChartSerie[] = [
     {
       id: teamname,
       data:
@@ -86,7 +91,9 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
           pointSize={5}
           pointColor={{ theme: 'background' }}
           theme={{
-            textColor: isDarkTheme ? colors.slate[300] : colors.slate[700],
+            text:{
+              fill: isDarkTheme ? colors.slate[300] : colors.slate[700],
+            },
             grid: {
               line: {
                 stroke: `${isDarkTheme ? colors.slate[700] : colors.slate[200]}`,
