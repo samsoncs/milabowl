@@ -1,6 +1,6 @@
 ---
 import type { Dictionary } from 'lodash';
-import FplJersey from './_FplJersey.astro';
+import FplJersey from './FplJersey.astro';
 
 export interface Props {
   name: string;
@@ -58,9 +58,9 @@ const jerseyColorPos = pos === 'GK' ? 'GK_' : '';
 const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? 'grey';
 ---
 
-<div className="relative flex flex-col items-center">
-  {showPos && pos && <div className="flex justify-center text-sm">{pos}</div>}
-  <div className="h-10 w-10 md:h-16 md:w-16">
+<div class="relative flex flex-col items-center">
+  {showPos && pos && <div class="flex justify-center text-sm">{pos}</div>}
+  <div class="h-10 w-10 md:h-16 md:w-16">
     <FplJersey
       torso={jerseyColor.torso}
       sleeves={jerseyColor.sleeves}
@@ -69,27 +69,27 @@ const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? 'grey';
     />
     {
       isCap && (
-        <span className="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-800 text-xs">
+        <span class="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-800 text-xs">
           C
         </span>
       )
     }
     {
       isViceCap && (
-        <span className="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-800 text-xs">
+        <span class="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-800 text-xs">
           V
         </span>
       )
     }
   </div>
 
-  <div className="-my-1">
+  <div class="-my-1">
     <div
-      className="block w-16 truncate rounded-t-sm bg-indigo-800 text-center text-xs font-bold"
+      class="block w-16 truncate rounded-t-sm bg-indigo-800 text-center text-xs font-bold"
     >
       {name}
     </div>
-    <div className="flex justify-center rounded-b-sm bg-green-600 text-xs">
+    <div class="flex justify-center rounded-b-sm bg-green-600 text-xs">
       {info}
     </div>
   </div>

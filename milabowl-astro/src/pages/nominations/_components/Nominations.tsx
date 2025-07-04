@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Card from '../../components/core/Card';
-import Pill from '../../components/core/Pill';
-import type { Nomination } from '../../game_state/nominations';
+import Card from '../../../components/core/Card';
+import Pill from '../../../components/core/Pill';
+import type { Nomination } from '../../../game_state/nominations';
 
 export interface NominationsProps {
   nominations: Nomination[];
