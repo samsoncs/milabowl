@@ -3,108 +3,108 @@ import type { FplUserGameweekResult } from '../../../../../game_state/fplState';
 import FplPlayer from '../../[player]/gw/_FplPlayer.astro';
 
 interface Props {
-    fplUserGameweekResults: FplUserGameweekResult;
+  fplUserGameweekResults: FplUserGameweekResult;
 }
 
 const { fplUserGameweekResults } = Astro.props;
 ---
 
 <div
-    className="relative mx-2 max-w-screen-md rounded-md bg-gradient-to-b from-green-400 to-green-500 p-2 py-1 text-dark-text md:p-14"
+  className="relative mx-2 max-w-screen-md rounded-md bg-gradient-to-b from-green-400 to-green-500 p-2 py-1 text-dark-text md:p-14"
 >
-    <div className="absolute bottom-0 left-2 right-2 top-2 border-4 border-b-0">
+  <div className="absolute bottom-0 left-2 right-2 top-2 border-4 border-b-0">
+  </div>
+  <div className="absolute left-1/4 right-1/4 top-2 h-20 border-4"></div>
+  <div className="absolute bottom-40 left-2 right-2 h-1 border-2"></div>
+  <div
+    className="p-1/4 absolute bottom-14 left-0 right-0 mx-auto h-1/4 w-1/4 rounded-full border-4"
+  >
+  </div>
+
+  <div className="relative">
+    <div className="flex justify-center pb-2 pt-4">
+      {
+        fplUserGameweekResults.lineup
+          .filter((pe) => pe.position === 'GK' && !pe.isBench)
+          .map((pe) => (
+            <FplPlayer
+              isCap={pe.isCap}
+              isViceCap={pe.isViceCap}
+              team={pe.teamName}
+              pos={pe.position}
+              name={pe.webName}
+              info={`${pe.points * (pe.isCap ? 2 : 1)}`}
+            />
+          ))
+      }
     </div>
-    <div className="absolute left-1/4 right-1/4 top-2 h-20 border-4"></div>
-    <div className="absolute bottom-40 left-2 right-2 h-1 border-2"></div>
+    <div className="flex justify-around gap-1 py-2">
+      {
+        fplUserGameweekResults.lineup
+          .filter((pe) => pe.position === 'DEF' && !pe.isBench)
+          .map((pe) => (
+            <FplPlayer
+              isCap={pe.isCap}
+              isViceCap={pe.isViceCap}
+              team={pe.teamName}
+              pos={pe.position}
+              name={pe.webName}
+              info={`${pe.points * (pe.isCap ? 2 : 1)}`}
+            />
+          ))
+      }
+    </div>
+    <div className="flex justify-around gap-1 py-2">
+      {
+        fplUserGameweekResults.lineup
+          .filter((pe) => pe.position === 'MID' && !pe.isBench)
+          .map((pe) => (
+            <FplPlayer
+              isCap={pe.isCap}
+              isViceCap={pe.isViceCap}
+              team={pe.teamName}
+              pos={pe.position}
+              name={pe.webName}
+              info={`${pe.points * (pe.isCap ? 2 : 1)}`}
+            />
+          ))
+      }
+    </div>
+    <div className="flex justify-around gap-1 py-2">
+      {
+        fplUserGameweekResults.lineup
+          .filter((pe) => pe.position === 'FWD' && !pe.isBench)
+          .map((pe) => (
+            <FplPlayer
+              isCap={pe.isCap}
+              isViceCap={pe.isViceCap}
+              team={pe.teamName}
+              pos={pe.position}
+              name={pe.webName}
+              info={`${pe.points * (pe.isCap ? 2 : 1)}`}
+            />
+          ))
+      }
+    </div>
+
     <div
-        className="p-1/4 absolute bottom-14 left-0 right-0 mx-auto h-1/4 w-1/4 rounded-full border-4"
+      className="mx-4 my-2 flex justify-center gap-1 rounded-md bg-green-400 px-4 py-4"
     >
+      {
+        fplUserGameweekResults.lineup
+          .filter((pe) => pe.isBench)
+          .map((pe) => (
+            <FplPlayer
+              showPos
+              isCap={pe.isCap}
+              isViceCap={pe.isViceCap}
+              team={pe.teamName}
+              pos={pe.position}
+              name={pe.webName}
+              info={`${pe.points * (pe.isCap ? 2 : 1)}`}
+            />
+          ))
+      }
     </div>
-
-    <div className="relative">
-        <div className="flex justify-center pb-2 pt-4">
-            {
-                fplUserGameweekResults.lineup
-                    .filter((pe) => pe.position === 'GK' && !pe.isBench)
-                    .map((pe) => (
-                        <FplPlayer
-                            isCap={pe.isCap}
-                            isViceCap={pe.isViceCap}
-                            team={pe.teamName}
-                            pos={pe.position}
-                            name={pe.webName}
-                            info={`${pe.points * (pe.isCap ? 2 : 1)}`}
-                        />
-                    ))
-            }
-        </div>
-        <div className="flex justify-around gap-1 py-2">
-            {
-                fplUserGameweekResults.lineup
-                    .filter((pe) => pe.position === 'DEF' && !pe.isBench)
-                    .map((pe) => (
-                        <FplPlayer
-                            isCap={pe.isCap}
-                            isViceCap={pe.isViceCap}
-                            team={pe.teamName}
-                            pos={pe.position}
-                            name={pe.webName}
-                            info={`${pe.points * (pe.isCap ? 2 : 1)}`}
-                        />
-                    ))
-            }
-        </div>
-        <div className="flex justify-around gap-1 py-2">
-            {
-                fplUserGameweekResults.lineup
-                    .filter((pe) => pe.position === 'MID' && !pe.isBench)
-                    .map((pe) => (
-                        <FplPlayer
-                            isCap={pe.isCap}
-                            isViceCap={pe.isViceCap}
-                            team={pe.teamName}
-                            pos={pe.position}
-                            name={pe.webName}
-                            info={`${pe.points * (pe.isCap ? 2 : 1)}`}
-                        />
-                    ))
-            }
-        </div>
-        <div className="flex justify-around gap-1 py-2">
-            {
-                fplUserGameweekResults.lineup
-                    .filter((pe) => pe.position === 'FWD' && !pe.isBench)
-                    .map((pe) => (
-                        <FplPlayer
-                            isCap={pe.isCap}
-                            isViceCap={pe.isViceCap}
-                            team={pe.teamName}
-                            pos={pe.position}
-                            name={pe.webName}
-                            info={`${pe.points * (pe.isCap ? 2 : 1)}`}
-                        />
-                    ))
-            }
-        </div>
-
-        <div
-            className="mx-4 my-2 flex justify-center gap-1 rounded-md bg-green-400 px-4 py-4"
-        >
-            {
-                fplUserGameweekResults.lineup
-                    .filter((pe) => pe.isBench)
-                    .map((pe) => (
-                        <FplPlayer
-                            showPos
-                            isCap={pe.isCap}
-                            isViceCap={pe.isViceCap}
-                            team={pe.teamName}
-                            pos={pe.position}
-                            name={pe.webName}
-                            info={`${pe.points * (pe.isCap ? 2 : 1)}`}
-                        />
-                    ))
-            }
-        </div>
-    </div>
+  </div>
 </div>

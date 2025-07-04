@@ -7,8 +7,8 @@ import { ClientRouter } from 'astro:transitions';
 import MobileNav from './MobileNav.astro';
 
 export interface Props {
-    title: string;
-    enableViewTransitions?: boolean;
+  title: string;
+  enableViewTransitions?: boolean;
 }
 
 const { title, enableViewTransitions } = Astro.props;
@@ -16,21 +16,21 @@ const { title, enableViewTransitions } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-        {enableViewTransitions && <ClientRouter />}
-    </head>
-    <body class="bg-slate-100 dark:bg-slate-900">
-        <Navbar />
-        <div
-            class="mx-auto mb-[4rem] max-w-screen-2xl dark:text-dark-text md:mx-4 md:mb-0 md:mt-14"
-        >
-            <slot />
-        </div>
-        <MobileNav />
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {enableViewTransitions && <ClientRouter />}
+  </head>
+  <body class="bg-slate-100 dark:bg-slate-900">
+    <Navbar />
+    <div
+      class="mx-auto mb-[4rem] max-w-screen-2xl dark:text-dark-text md:mx-4 md:mb-0 md:mt-14"
+    >
+      <slot />
+    </div>
+    <MobileNav />
+  </body>
 </html>

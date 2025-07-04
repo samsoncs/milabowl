@@ -4,28 +4,24 @@ import SortableTable from '../../components/core/Table/SortableTable';
 import { getStandingsColmns } from './_standingsColumns';
 
 interface Props {
-    data: GameWeekResult[];
-    lastGameWeek: number;
-    avatars: ImageMetadata[];
+  data: GameWeekResult[];
+  lastGameWeek: number;
+  avatars: ImageMetadata[];
 }
 
 const StandingsTableMobile: React.FC<Props> = ({
-    data,
-    lastGameWeek,
-    avatars,
+  data,
+  lastGameWeek,
+  avatars,
 }) => {
-    const columns = useMemo(
-        () => getStandingsColmns(data, avatars, lastGameWeek),
-        [data, lastGameWeek, avatars]
-    );
+  const columns = useMemo(
+    () => getStandingsColmns(data, avatars, lastGameWeek),
+    [data, lastGameWeek, avatars]
+  );
 
-    return (
-        <SortableTable
-            data={data}
-            columns={columns}
-            initialColumnPinnings={[]}
-        />
-    );
+  return (
+    <SortableTable data={data} columns={columns} initialColumnPinnings={[]} />
+  );
 };
 
 export default StandingsTableMobile;

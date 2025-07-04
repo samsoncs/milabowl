@@ -4,570 +4,570 @@ import Layout from '../../layouts/Layout.astro';
 import RankingChart from '../../components/core/Charts/RankingChart';
 
 interface PlayerResult {
-    name: string;
-    fplPoints: number | null;
-    fplPos: number | null;
-    milaPoints?: number | null;
-    milaPos?: number | null;
+  name: string;
+  fplPoints: number | null;
+  fplPos: number | null;
+  milaPoints?: number | null;
+  milaPos?: number | null;
 }
 
 interface PlayerResults {
-    name: string;
-    seasons: PlayerResult[];
+  name: string;
+  seasons: PlayerResult[];
 }
 
 const historicResultsByPlayer: PlayerResults[] = [
-    {
-        name: 'Anders',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: 1956,
-                fplPos: 4,
-            },
-            {
-                name: '2018/19',
-                fplPoints: 1982,
-                fplPos: 5,
-            },
-            {
-                name: '2019/20',
-                fplPoints: 2106,
-                fplPos: 5,
-                milaPoints: 64.5,
-                milaPos: 4,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 2372,
-                fplPos: 2,
-                milaPoints: 150.2,
-                milaPos: 2,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2488,
-                fplPos: 3,
-                milaPoints: 161.6,
-                milaPos: 3,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2520,
-                fplPos: 2,
-                milaPoints: 147.68,
-                milaPos: 3,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2385,
-                fplPos: 6,
-                milaPoints: 181.51,
-                milaPos: 1,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2140,
-                fplPos: 8,
-                milaPoints: 120.69,
-                milaPos: 7,
-            },
-        ],
-    },
-    {
-        name: 'Eivind',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: 1983,
-                fplPos: 3,
-            },
-            {
-                name: '2018/19',
-                fplPoints: 2323,
-                fplPos: 1,
-            },
-            {
-                name: '2019/20',
-                fplPoints: 2282,
-                fplPos: 1,
-                milaPoints: 88.9,
-                milaPos: 1,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 2325,
-                fplPos: 4,
-                milaPoints: 128.5,
-                milaPos: 7,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2618,
-                fplPos: 2,
-                milaPoints: 191.57,
-                milaPos: 2,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2437,
-                fplPos: 4,
-                milaPoints: 205.18,
-                milaPos: 1,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2274,
-                fplPos: 8,
-                milaPoints: 121.63,
-                milaPos: 7,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2471,
-                fplPos: 3,
-                milaPoints: 149.69,
-                milaPos: 3,
-            },
-        ],
-    },
-    {
-        name: 'Henrik',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: 1752,
-                fplPos: 5,
-            },
-            {
-                name: '2018/19',
-                fplPoints: 1910,
-                fplPos: 6,
-            },
-            {
-                name: '2019/20',
-                fplPoints: 2003,
-                fplPos: 6,
-                milaPoints: 24,
-                milaPos: 6,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 1890,
-                fplPos: 8,
-                milaPoints: 113.3,
-                milaPos: 8,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 1988,
-                fplPos: 9,
-                milaPoints: 92.69,
-                milaPos: 9,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2179,
-                fplPos: 9,
-                milaPoints: 95.49,
-                milaPos: 9,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2451,
-                fplPos: 3,
-                milaPoints: 133.92,
-                milaPos: 5,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2416,
-                fplPos: 5,
-                milaPoints: 96.03,
-                milaPos: 9,
-            },
-        ],
-    },
-    {
-        name: 'Malte',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: null,
-                fplPos: null,
-            },
-            {
-                name: '2018/19',
-                fplPoints: null,
-                fplPos: null,
-            },
-            {
-                name: '2019/20',
-                fplPoints: null,
-                fplPos: null,
-                milaPoints: null,
-                milaPos: null,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 2236,
-                fplPos: 6,
-                milaPoints: 133.5,
-                milaPos: 5, // actually 4, but need to differentiate in chart
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2269,
-                fplPos: 6,
-                milaPoints: 139.3,
-                milaPos: 7,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2216,
-                fplPos: 8,
-                milaPoints: 166.38,
-                milaPos: 2,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2137,
-                fplPos: 9,
-                milaPoints: 180.47,
-                milaPos: 2,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2082,
-                fplPos: 9,
-                milaPoints: 108.37,
-                milaPos: 8,
-            },
-        ],
-    },
-    {
-        name: 'Markus',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: null,
-                fplPos: null,
-            },
-            {
-                name: '2018/19',
-                fplPoints: 1515,
-                fplPos: 7,
-            },
-            {
-                name: '2019/20',
-                fplPoints: 2214,
-                fplPos: 3,
-                milaPoints: 80.9,
-                milaPos: 2,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 2400,
-                fplPos: 1,
-                milaPoints: 133.5,
-                milaPos: 4,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2402,
-                fplPos: 4,
-                milaPoints: 140.89,
-                milaPos: 6,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2351,
-                fplPos: 6,
-                milaPoints: 138.47,
-                milaPos: 7,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2309,
-                fplPos: 7,
-                milaPoints: 85.01,
-                milaPos: 9,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2442,
-                fplPos: 4,
-                milaPoints: 135.76,
-                milaPos: 4,
-            },
-        ],
-    },
-    {
-        name: 'Martin',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: null,
-                fplPos: null,
-            },
-            {
-                name: '2018/19',
-                fplPoints: 2016,
-                fplPos: 4,
-            },
-            {
-                name: '2019/20',
-                fplPoints: null,
-                fplPos: null,
-                milaPoints: null,
-                milaPos: null,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 2368,
-                fplPos: 3,
-                milaPoints: 150.3,
-                milaPos: 1,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2686,
-                fplPos: 1,
-                milaPoints: 191.68,
-                milaPos: 1,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2481,
-                fplPos: 3,
-                milaPoints: 124.27,
-                milaPos: 8,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2576,
-                fplPos: 1,
-                milaPoints: 127.31,
-                milaPos: 6,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2535,
-                fplPos: 1,
-                milaPoints: 127.27,
-                milaPos: 6,
-            },
-        ],
-    },
-    {
-        name: 'Mikkel',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: null,
-                fplPos: null,
-            },
-            {
-                name: '2018/19',
-                fplPoints: null,
-                fplPos: null,
-            },
-            {
-                name: '2019/20',
-                fplPoints: null,
-                fplPos: null,
-                milaPoints: null,
-                milaPos: null,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 2179,
-                fplPos: 7,
-                milaPoints: 138.7,
-                milaPos: 3,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2226,
-                fplPos: 7,
-                milaPoints: 124.79,
-                milaPos: 8,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2341,
-                fplPos: 7,
-                milaPoints: 141.38,
-                milaPos: 6,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2387,
-                fplPos: 5,
-                milaPoints: 113.85,
-                milaPos: 8,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2223,
-                fplPos: 7,
-                milaPoints: 163.75,
-                milaPos: 1,
-            },
-        ],
-    },
-    {
-        name: 'Sam',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: 2284,
-                fplPos: 1,
-            },
-            {
-                name: '2018/19',
-                fplPoints: 2119,
-                fplPos: 3,
-            },
-            {
-                name: '2019/20',
-                fplPoints: 2110,
-                fplPos: 4,
-                milaPoints: 47,
-                milaPos: 5,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 1690,
-                fplPos: 9,
-                milaPoints: 81.1,
-                milaPos: 9,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2165,
-                fplPos: 8,
-                milaPoints: 156.28,
-                milaPos: 4,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2574,
-                fplPos: 1,
-                milaPoints: 143.28,
-                milaPos: 5,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2430,
-                fplPos: 4,
-                milaPoints: 162.61,
-                milaPos: 3,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2474,
-                fplPos: 2,
-                milaPoints: 133.97,
-                milaPos: 5,
-            },
-        ],
-    },
-    {
-        name: 'Simen',
-        seasons: [
-            {
-                name: '2017/18',
-                fplPoints: 2172,
-                fplPos: 2,
-            },
-            {
-                name: '2018/19',
-                fplPoints: 2156,
-                fplPos: 2,
-            },
-            {
-                name: '2019/20',
-                fplPoints: 2259,
-                fplPos: 2,
-                milaPoints: 76.4,
-                milaPos: 3,
-            },
-            {
-                name: '2020/21',
-                fplPoints: 2283,
-                fplPos: 5,
-                milaPoints: 132.1,
-                milaPos: 6,
-            },
-            {
-                name: '2021/22',
-                fplPoints: 2326,
-                fplPos: 5,
-                milaPoints: 148,
-                milaPos: 5,
-            },
-            {
-                name: '2022/23',
-                fplPoints: 2416,
-                fplPos: 5,
-                milaPoints: 145.88,
-                milaPos: 4,
-            },
-            {
-                name: '2023/24',
-                fplPoints: 2488,
-                fplPos: 2,
-                milaPoints: 158.51,
-                milaPos: 4,
-            },
-            {
-                name: '2024/25',
-                fplPoints: 2278,
-                fplPos: 6,
-                milaPoints: 150.45,
-                milaPos: 2,
-            },
-        ],
-    },
+  {
+    name: 'Anders',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: 1956,
+        fplPos: 4,
+      },
+      {
+        name: '2018/19',
+        fplPoints: 1982,
+        fplPos: 5,
+      },
+      {
+        name: '2019/20',
+        fplPoints: 2106,
+        fplPos: 5,
+        milaPoints: 64.5,
+        milaPos: 4,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 2372,
+        fplPos: 2,
+        milaPoints: 150.2,
+        milaPos: 2,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2488,
+        fplPos: 3,
+        milaPoints: 161.6,
+        milaPos: 3,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2520,
+        fplPos: 2,
+        milaPoints: 147.68,
+        milaPos: 3,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2385,
+        fplPos: 6,
+        milaPoints: 181.51,
+        milaPos: 1,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2140,
+        fplPos: 8,
+        milaPoints: 120.69,
+        milaPos: 7,
+      },
+    ],
+  },
+  {
+    name: 'Eivind',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: 1983,
+        fplPos: 3,
+      },
+      {
+        name: '2018/19',
+        fplPoints: 2323,
+        fplPos: 1,
+      },
+      {
+        name: '2019/20',
+        fplPoints: 2282,
+        fplPos: 1,
+        milaPoints: 88.9,
+        milaPos: 1,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 2325,
+        fplPos: 4,
+        milaPoints: 128.5,
+        milaPos: 7,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2618,
+        fplPos: 2,
+        milaPoints: 191.57,
+        milaPos: 2,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2437,
+        fplPos: 4,
+        milaPoints: 205.18,
+        milaPos: 1,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2274,
+        fplPos: 8,
+        milaPoints: 121.63,
+        milaPos: 7,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2471,
+        fplPos: 3,
+        milaPoints: 149.69,
+        milaPos: 3,
+      },
+    ],
+  },
+  {
+    name: 'Henrik',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: 1752,
+        fplPos: 5,
+      },
+      {
+        name: '2018/19',
+        fplPoints: 1910,
+        fplPos: 6,
+      },
+      {
+        name: '2019/20',
+        fplPoints: 2003,
+        fplPos: 6,
+        milaPoints: 24,
+        milaPos: 6,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 1890,
+        fplPos: 8,
+        milaPoints: 113.3,
+        milaPos: 8,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 1988,
+        fplPos: 9,
+        milaPoints: 92.69,
+        milaPos: 9,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2179,
+        fplPos: 9,
+        milaPoints: 95.49,
+        milaPos: 9,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2451,
+        fplPos: 3,
+        milaPoints: 133.92,
+        milaPos: 5,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2416,
+        fplPos: 5,
+        milaPoints: 96.03,
+        milaPos: 9,
+      },
+    ],
+  },
+  {
+    name: 'Malte',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: null,
+        fplPos: null,
+      },
+      {
+        name: '2018/19',
+        fplPoints: null,
+        fplPos: null,
+      },
+      {
+        name: '2019/20',
+        fplPoints: null,
+        fplPos: null,
+        milaPoints: null,
+        milaPos: null,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 2236,
+        fplPos: 6,
+        milaPoints: 133.5,
+        milaPos: 5, // actually 4, but need to differentiate in chart
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2269,
+        fplPos: 6,
+        milaPoints: 139.3,
+        milaPos: 7,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2216,
+        fplPos: 8,
+        milaPoints: 166.38,
+        milaPos: 2,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2137,
+        fplPos: 9,
+        milaPoints: 180.47,
+        milaPos: 2,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2082,
+        fplPos: 9,
+        milaPoints: 108.37,
+        milaPos: 8,
+      },
+    ],
+  },
+  {
+    name: 'Markus',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: null,
+        fplPos: null,
+      },
+      {
+        name: '2018/19',
+        fplPoints: 1515,
+        fplPos: 7,
+      },
+      {
+        name: '2019/20',
+        fplPoints: 2214,
+        fplPos: 3,
+        milaPoints: 80.9,
+        milaPos: 2,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 2400,
+        fplPos: 1,
+        milaPoints: 133.5,
+        milaPos: 4,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2402,
+        fplPos: 4,
+        milaPoints: 140.89,
+        milaPos: 6,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2351,
+        fplPos: 6,
+        milaPoints: 138.47,
+        milaPos: 7,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2309,
+        fplPos: 7,
+        milaPoints: 85.01,
+        milaPos: 9,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2442,
+        fplPos: 4,
+        milaPoints: 135.76,
+        milaPos: 4,
+      },
+    ],
+  },
+  {
+    name: 'Martin',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: null,
+        fplPos: null,
+      },
+      {
+        name: '2018/19',
+        fplPoints: 2016,
+        fplPos: 4,
+      },
+      {
+        name: '2019/20',
+        fplPoints: null,
+        fplPos: null,
+        milaPoints: null,
+        milaPos: null,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 2368,
+        fplPos: 3,
+        milaPoints: 150.3,
+        milaPos: 1,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2686,
+        fplPos: 1,
+        milaPoints: 191.68,
+        milaPos: 1,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2481,
+        fplPos: 3,
+        milaPoints: 124.27,
+        milaPos: 8,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2576,
+        fplPos: 1,
+        milaPoints: 127.31,
+        milaPos: 6,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2535,
+        fplPos: 1,
+        milaPoints: 127.27,
+        milaPos: 6,
+      },
+    ],
+  },
+  {
+    name: 'Mikkel',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: null,
+        fplPos: null,
+      },
+      {
+        name: '2018/19',
+        fplPoints: null,
+        fplPos: null,
+      },
+      {
+        name: '2019/20',
+        fplPoints: null,
+        fplPos: null,
+        milaPoints: null,
+        milaPos: null,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 2179,
+        fplPos: 7,
+        milaPoints: 138.7,
+        milaPos: 3,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2226,
+        fplPos: 7,
+        milaPoints: 124.79,
+        milaPos: 8,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2341,
+        fplPos: 7,
+        milaPoints: 141.38,
+        milaPos: 6,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2387,
+        fplPos: 5,
+        milaPoints: 113.85,
+        milaPos: 8,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2223,
+        fplPos: 7,
+        milaPoints: 163.75,
+        milaPos: 1,
+      },
+    ],
+  },
+  {
+    name: 'Sam',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: 2284,
+        fplPos: 1,
+      },
+      {
+        name: '2018/19',
+        fplPoints: 2119,
+        fplPos: 3,
+      },
+      {
+        name: '2019/20',
+        fplPoints: 2110,
+        fplPos: 4,
+        milaPoints: 47,
+        milaPos: 5,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 1690,
+        fplPos: 9,
+        milaPoints: 81.1,
+        milaPos: 9,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2165,
+        fplPos: 8,
+        milaPoints: 156.28,
+        milaPos: 4,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2574,
+        fplPos: 1,
+        milaPoints: 143.28,
+        milaPos: 5,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2430,
+        fplPos: 4,
+        milaPoints: 162.61,
+        milaPos: 3,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2474,
+        fplPos: 2,
+        milaPoints: 133.97,
+        milaPos: 5,
+      },
+    ],
+  },
+  {
+    name: 'Simen',
+    seasons: [
+      {
+        name: '2017/18',
+        fplPoints: 2172,
+        fplPos: 2,
+      },
+      {
+        name: '2018/19',
+        fplPoints: 2156,
+        fplPos: 2,
+      },
+      {
+        name: '2019/20',
+        fplPoints: 2259,
+        fplPos: 2,
+        milaPoints: 76.4,
+        milaPos: 3,
+      },
+      {
+        name: '2020/21',
+        fplPoints: 2283,
+        fplPos: 5,
+        milaPoints: 132.1,
+        milaPos: 6,
+      },
+      {
+        name: '2021/22',
+        fplPoints: 2326,
+        fplPos: 5,
+        milaPoints: 148,
+        milaPos: 5,
+      },
+      {
+        name: '2022/23',
+        fplPoints: 2416,
+        fplPos: 5,
+        milaPoints: 145.88,
+        milaPos: 4,
+      },
+      {
+        name: '2023/24',
+        fplPoints: 2488,
+        fplPos: 2,
+        milaPoints: 158.51,
+        milaPos: 4,
+      },
+      {
+        name: '2024/25',
+        fplPoints: 2278,
+        fplPos: 6,
+        milaPoints: 150.45,
+        milaPos: 2,
+      },
+    ],
+  },
 ];
 
 const fplData = historicResultsByPlayer.map((r) => ({
-    id: r.name,
-    data: r.seasons.map((rr) => ({
-        x: rr.name,
-        y: rr.fplPos,
-        points: rr.fplPoints,
-    })),
+  id: r.name,
+  data: r.seasons.map((rr) => ({
+    x: rr.name,
+    y: rr.fplPos,
+    points: rr.fplPoints,
+  })),
 }));
 
 const milaData = historicResultsByPlayer.map((r) => ({
-    id: r.name,
-    data: r.seasons
-        .filter((rr) => rr.milaPoints !== undefined)
-        .map((rr) => ({
-            x: rr.name,
-            y: rr.milaPos!,
-            points: rr.milaPoints!,
-        })),
+  id: r.name,
+  data: r.seasons
+    .filter((rr) => rr.milaPoints !== undefined)
+    .map((rr) => ({
+      x: rr.name,
+      y: rr.milaPos!,
+      points: rr.milaPoints!,
+    })),
 }));
 ---
 
 <Layout title="History">
-    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-12">
-        <div class="lg:col-span-12">
-            <Card title="Historic FPL Results">
-                <div style={{ height: '55vh' }}>
-                    <RankingChart client:idle data={fplData} />
-                </div>
-            </Card>
+  <div class="flex flex-col gap-4 lg:grid lg:grid-cols-12">
+    <div class="lg:col-span-12">
+      <Card title="Historic FPL Results">
+        <div style={{ height: '55vh' }}>
+          <RankingChart client:idle data={fplData} />
         </div>
-        <div class="lg:col-span-12">
-            <Card title="Historic Milabowl Results">
-                <div style={{ height: '55vh' }}>
-                    <RankingChart client:idle data={milaData} />
-                </div>
-            </Card>
-        </div>
+      </Card>
     </div>
+    <div class="lg:col-span-12">
+      <Card title="Historic Milabowl Results">
+        <div style={{ height: '55vh' }}>
+          <RankingChart client:idle data={milaData} />
+        </div>
+      </Card>
+    </div>
+  </div>
 </Layout>

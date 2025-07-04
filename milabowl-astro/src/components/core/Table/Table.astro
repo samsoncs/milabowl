@@ -1,88 +1,88 @@
 ---
 export interface Props {
-    headers?: string[];
+  headers?: string[];
 }
 const { headers } = Astro.props;
 ---
 
 <table>
-    <thead class="text-indigo-900 dark:text-dark-text">
-        {
-            headers && (
-                <tr>
-                    {headers.map((h) => (
-                        <th>{h}</th>
-                    ))}
-                </tr>
-            )
-        }
-        {!headers && <slot name="header" />}
-    </thead>
-    <tbody>
-        <slot />
-    </tbody>
+  <thead class="text-indigo-900 dark:text-dark-text">
+    {
+      headers && (
+        <tr>
+          {headers.map((h) => (
+            <th>{h}</th>
+          ))}
+        </tr>
+      )
+    }
+    {!headers && <slot name="header" />}
+  </thead>
+  <tbody>
+    <slot />
+  </tbody>
 </table>
 
 <style is:global>
-    table {
-        border-collapse: collapse;
-        box-sizing: border-box;
-        border-spacing: 0px;
-        width: 100%;
-    }
-    thead {
-        display: table-header-group;
-    }
-    tr {
-        color: inherit;
-        display: table-row;
-        vertical-align: middle;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        outline: 0px;
-    }
-    th {
-        font-size: 0.875rem;
-        line-height: 1.5rem;
-        display: table-cell;
-        vertical-align: inherit;
-        text-align: left;
-        padding: 16px;
-        font-weight: bold;
-        white-space: nowrap;
-    }
+  table {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    border-spacing: 0px;
+    width: 100%;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr {
+    color: inherit;
+    display: table-row;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    outline: 0px;
+  }
+  th {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: left;
+    padding: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  td {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: left;
+    padding: 16px;
+    flex-direction: row-reverse;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 120px;
+  }
+  @media only screen and (min-width: 700px) {
     td {
-        font-weight: 400;
-        font-size: 0.875rem;
-        line-height: 1.43;
-        display: table-cell;
-        vertical-align: inherit;
-        text-align: left;
-        padding: 16px;
-        flex-direction: row-reverse;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 120px;
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.43;
+      display: table-cell;
+      vertical-align: inherit;
+      text-align: left;
+      padding: 16px;
+      flex-direction: row-reverse;
+      white-space: nowrap;
+      max-width: none;
     }
-    @media only screen and (min-width: 700px) {
-        td {
-            font-weight: 400;
-            font-size: 0.875rem;
-            line-height: 1.43;
-            display: table-cell;
-            vertical-align: inherit;
-            text-align: left;
-            padding: 16px;
-            flex-direction: row-reverse;
-            white-space: nowrap;
-            max-width: none;
-        }
-    }
-    td.right-align,
-    th.right-align {
-        text-align: right;
-    }
-    tbody {
-        display: table-row-group;
-    }
+  }
+  td.right-align,
+  th.right-align {
+    text-align: right;
+  }
+  tbody {
+    display: table-row-group;
+  }
 </style>

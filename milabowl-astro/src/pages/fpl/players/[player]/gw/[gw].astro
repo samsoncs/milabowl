@@ -1,101 +1,101 @@
 ---
 import fpl_state from '../../../../../../src/game_state/fpl_state.json';
 import type {
-    FplResults,
-    FplUserGameweekResult,
+  FplResults,
+  FplUserGameweekResult,
 } from '../../../../../game_state/fplState';
 import Layout from '../../../../../layouts/Layout.astro';
 import PlayerLayout from '../../../../../layouts/PlayerLayout.astro';
 import FplPitch from './_FplPitch.astro';
 
 interface Props {
-    userResults: FplUserGameweekResult;
-    lastGw: number;
+  userResults: FplUserGameweekResult;
+  lastGw: number;
 }
 
 export function getStaticPaths() {
-    const fplState: FplResults = fpl_state;
-    const gw = Math.max.apply(
-        Math,
-        fpl_state.results.map((r) => r.gameWeek)
-    );
-    const paths = fplState.results.map((r) => ({
-        params: { player: r.teamName.replaceAll(' ', '-'), gw: r.gameWeek },
-        props: { userResults: r, lastGw: gw },
-    }));
-    return paths;
+  const fplState: FplResults = fpl_state;
+  const gw = Math.max.apply(
+    Math,
+    fpl_state.results.map((r) => r.gameWeek)
+  );
+  const paths = fplState.results.map((r) => ({
+    params: { player: r.teamName.replaceAll(' ', '-'), gw: r.gameWeek },
+    props: { userResults: r, lastGw: gw },
+  }));
+  return paths;
 }
 
 const { userResults, lastGw } = Astro.props;
 ---
 
 <Layout title={`${userResults.teamName}`} enableViewTransitions>
-    <PlayerLayout view="fpl" teamName={userResults.teamName} />
+  <PlayerLayout view="fpl" teamName={userResults.teamName} />
+  <div
+    className="flex flex-col items-center gap-2 bg-slate-200 pb-2 pt-[4.5rem] dark:bg-slate-800 md:pt-[13rem]"
+  >
+    <div className="flex w-full justify-between p-2 md:p-4">
+      {
+        userResults.gameWeek > 1 ? (
+          <a
+            href={`/fpl/players/${userResults.teamName.replaceAll(' ', '-')}/gw/${userResults.gameWeek - 1}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+              />
+            </svg>
+          </a>
+        ) : (
+          <div />
+        )
+      }
+      <div>
+        Gameweek {userResults.gameWeek}
+      </div>
+      {
+        userResults.gameWeek !== lastGw ? (
+          <a
+            href={`/fpl/players/${userResults.teamName.replaceAll(' ', '-')}/gw/${userResults.gameWeek + 1}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+              />
+            </svg>
+          </a>
+        ) : (
+          <div />
+        )
+      }
+    </div>
+
     <div
-        className="flex flex-col items-center gap-2 bg-slate-200 pb-2 pt-[4.5rem] dark:bg-slate-800 md:pt-[13rem]"
+      className="rounded-md bg-gradient-to-r from-indigo-800 to-indigo-700 p-2"
     >
-        <div className="flex w-full justify-between p-2 md:p-4">
-            {
-                userResults.gameWeek > 1 ? (
-                    <a
-                        href={`/fpl/players/${userResults.teamName.replaceAll(' ', '-')}/gw/${userResults.gameWeek - 1}`}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            className="h-6 w-6"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-                            />
-                        </svg>
-                    </a>
-                ) : (
-                    <div />
-                )
-            }
-            <div>
-                Gameweek {userResults.gameWeek}
-            </div>
-            {
-                userResults.gameWeek !== lastGw ? (
-                    <a
-                        href={`/fpl/players/${userResults.teamName.replaceAll(' ', '-')}/gw/${userResults.gameWeek + 1}`}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            className="h-6 w-6"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                            />
-                        </svg>
-                    </a>
-                ) : (
-                    <div />
-                )
-            }
-        </div>
-
-        <div
-            className="rounded-md bg-gradient-to-r from-indigo-800 to-indigo-700 p-2"
-        >
-            Score {userResults.totalScore} (-Y hits)
-        </div>
+      Score {userResults.totalScore} (-Y hits)
     </div>
+  </div>
 
-    <div className="flex justify-center bg-slate-200 dark:bg-slate-800">
-        <FplPitch fplUserGameweekResults={userResults} />
-    </div>
+  <div className="flex justify-center bg-slate-200 dark:bg-slate-800">
+    <FplPitch fplUserGameweekResults={userResults} />
+  </div>
 </Layout>

@@ -7,59 +7,49 @@ import Table from '../../../components/core/Table/Table.astro';
 import Layout from '../../../layouts/Layout.astro';
 
 const blogEntries = (
-    await getCollection('blog', ({ data }) => {
-        return data.date <= new Date();
-    })
+  await getCollection('blog', ({ data }) => {
+    return data.date <= new Date();
+  })
 ).sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
 
 const blogsBySlug = groupBy(blogEntries, (b) => b.slug.split('/')[0]);
 ---
 
 <Layout title="Blog - archive">
-    <Card title="Blog Archive">
-        {
-            Object.keys(blogsBySlug).map((key, i) => (
-                <div>
-                    <h1
-                        class:list={[
-                            'text-md',
-                            'font-bold',
-                            'mb-4',
-                            { 'mt-8': i !== 0 },
-                        ]}
-                    >
-                        Season: {key}
-                    </h1>
-                    <Table>
-                        <tr slot="header">
-                            <th className="w-36">Date</th>
-                            <th>Title</th>
-                        </tr>
-                        {blogsBySlug[key].map((post) => (
-                            <tr>
-                                <td>
-                                    <time
-                                        dateTime={format(
-                                            post.data.date,
-                                            'yyyy-MM-dd'
-                                        )}
-                                    >
-                                        {format(post.data.date, 'dd.MM.yyyy')}
-                                    </time>
-                                </td>
-                                <td>
-                                    <a
-                                        className="col-span-2 underline"
-                                        href={`/blog/${post.slug}`}
-                                    >
-                                        {post.data.title}
-                                    </a>
-                                </td>
-                            </tr>
-                        ))}
-                    </Table>
-                </div>
-            ))
-        }
-    </Card>
+  <Card title="Blog Archive">
+    {
+      Object.keys(blogsBySlug).map((key, i) => (
+        <div>
+          <h1
+            class:list={['text-md', 'font-bold', 'mb-4', { 'mt-8': i !== 0 }]}
+          >
+            Season: {key}
+          </h1>
+          <Table>
+            <tr slot="header">
+              <th className="w-36">Date</th>
+              <th>Title</th>
+            </tr>
+            {blogsBySlug[key].map((post) => (
+              <tr>
+                <td>
+                  <time dateTime={format(post.data.date, 'yyyy-MM-dd')}>
+                    {format(post.data.date, 'dd.MM.yyyy')}
+                  </time>
+                </td>
+                <td>
+                  <a
+                    className="col-span-2 underline"
+                    href={`/blog/${post.slug}`}
+                  >
+                    {post.data.title}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </Table>
+        </div>
+      ))
+    }
+  </Card>
 </Layout>

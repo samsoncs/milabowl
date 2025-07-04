@@ -1,30 +1,30 @@
 ---
 export interface Props {
-    variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2';
-    bold?: boolean;
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2';
+  bold?: boolean;
 }
 
 const { variant = 'body1', bold = false } = Astro.props;
 ---
 
 <p class={`typography ${variant}${bold ? ' bold' : ''}`}>
-    <slot />
+  <slot />
 </p>
 
 <style>
-    .typography {
-        margin: 0;
-    }
-    .body1 {
-        font-size: 1rem;
-    }
-    .h5 {
-        font-size: 1.5rem;
-    }
-    .h6 {
-        font-size: 1.3rem;
-    }
-    .bold {
-        font-weight: 700;
-    }
+  .typography {
+    margin: 0;
+  }
+  .body1 {
+    font-size: 1rem;
+  }
+  .h5 {
+    font-size: 1.5rem;
+  }
+  .h6 {
+    font-size: 1.3rem;
+  }
+  .bold {
+    font-weight: 700;
+  }
 </style>

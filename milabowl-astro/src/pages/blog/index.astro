@@ -6,35 +6,35 @@ import BlogPreview from './_components/BlogPreview.astro';
 const firstBlogEntries = await getCollection('blog');
 
 const stortedEntries = firstBlogEntries
-    .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
-    .slice(0, 10);
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+  .slice(0, 10);
 ---
 
 <Layout title="Mila blog" enableViewTransitions>
-    <div className="mx-auto mb-2 max-w-screen-lg space-y-2">
-        {stortedEntries.map((post) => <BlogPreview post={post} />)}
-        <a className="pl-2 md:pl-0" href="/blog/archive">
-            <button
-                className="mt-4 rounded-md p-4 dark:bg-slate-700 dark:text-dark-text"
-            >
-                See Archive
-            </button>
-        </a>
-    </div>
+  <div className="mx-auto mb-2 max-w-screen-lg space-y-2">
+    {stortedEntries.map((post) => <BlogPreview post={post} />)}
+    <a className="pl-2 md:pl-0" href="/blog/archive">
+      <button
+        className="mt-4 rounded-md p-4 dark:bg-slate-700 dark:text-dark-text"
+      >
+        See Archive
+      </button>
+    </a>
+  </div>
 </Layout>
 
 <style>
-    .blog-container {
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .blog-entry:not(:first-child) {
-        margin-top: 1rem;
-    }
+  .blog-container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .blog-entry:not(:first-child) {
+    margin-top: 1rem;
+  }
 
-    h1 {
-        font-size: 4.5rem;
-        font-weight: 800;
-    }
+  h1 {
+    font-size: 4.5rem;
+    font-weight: 800;
+  }
 </style>

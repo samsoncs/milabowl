@@ -3,5 +3,5 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-    --color-dark-text: var(--color-violet-100);
+  --color-dark-text: var(--color-violet-100);
 }

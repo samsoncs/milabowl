@@ -6,14 +6,14 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: [react()],
-    devToolbar: { enabled: false },
-    vite: {
-        ssr: {
-            // Needed because of ESM wonky support in Nivo
-            noExternal: ['@nivo/*'],
-        },
-
-        plugins: [tailwindcss()],
+  integrations: [react()],
+  devToolbar: { enabled: false },
+  vite: {
+    ssr: {
+      // Needed because of ESM wonky support in Nivo
+      noExternal: ['@nivo/*'],
     },
+
+    plugins: [tailwindcss()],
+  },
 });
