@@ -9,6 +9,9 @@ import {
   type ColumnPinningState,
   type Column,
   type ColumnSort,
+  getExpandedRowModel,
+  type ExpandedState,
+  type OnChangeFn,
 } from '@tanstack/react-table';
 import { useState, type CSSProperties } from 'react';
 
@@ -17,6 +20,10 @@ interface Props<T> {
   columns: ColumnDef<T, any>[];
   initialColumnPinnings?: string[];
   initialSort?: ColumnSort[];
+  expandedState?: ExpandedState;
+  onExpandedChange?: OnChangeFn<ExpandedState>;
+  getRowCanExpand?: (row: any) => boolean;
+  renderSubComponent?: (props: { row: any }) => React.ReactElement;
 }
 
 const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
@@ -45,23 +52,32 @@ const SortableTable = <T,>({
   columns,
   initialColumnPinnings,
   initialSort,
+  expandedState,
+  onExpandedChange,
+  getRowCanExpand,
+  renderSubComponent,
 }: Props<T>) => {
   const [sorting, setSorting] = useState<SortingState>(initialSort ?? []);
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
     left: initialColumnPinnings ? [...initialColumnPinnings] : [],
     right: [],
   });
+  const [expanded, setExpanded] = useState<ExpandedState>(expandedState ?? {});
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getExpandedRowModel: onExpandedChange ? getExpandedRowModel() : undefined,
     onSortingChange: setSorting,
     onColumnPinningChange: setColumnPinning,
+    onExpandedChange: onExpandedChange || setExpanded,
+    getRowCanExpand: getRowCanExpand,
     state: {
       sorting,
       columnPinning,
+      expanded: expandedState || expanded,
     },
   });
 
@@ -190,26 +206,39 @@ const SortableTable = <T,>({
       </thead>
       <tbody className="w-full">
         {table.getRowModel().rows.map((row) => (
-          <tr
-            className={`border-b border-slate-200 text-sm dark:border-slate-700`}
-            key={row.id}
-          >
-            {row.getVisibleCells().map((cell) => (
-              <td
-                style={
-                  initialColumnPinnings
-                    ? {
-                        ...getCommonPinningStyles(cell.column),
-                      }
-                    : undefined
-                }
-                className={`bg-white p-2 text-center align-middle dark:bg-slate-800 ${cell.column.columnDef.meta?.classNames ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
-                key={cell.id}
-              >
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
+          <>
+            <tr
+              className={`text-sm ${
+                row.getIsExpanded() 
+                  ? 'dark:border-slate-700'
+                  : 'border-b border-slate-200 dark:border-slate-700'
+              }`}
+              key={row.id}
+            >
+              {row.getVisibleCells().map((cell) => (
+                <td
+                  style={
+                    initialColumnPinnings
+                      ? {
+                          ...getCommonPinningStyles(cell.column),
+                        }
+                      : undefined
+                  }
+                  className={`bg-white p-2 text-center align-middle dark:bg-slate-800 ${cell.column.columnDef.meta?.classNames ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
+                  key={cell.id}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+            {row.getIsExpanded() && renderSubComponent && (
+              <tr key={`${row.id}-expanded`} className="border-b border-slate-200 dark:border-slate-700">
+                <td colSpan={row.getVisibleCells().length} className="p-0">
+                  {renderSubComponent({ row })}
+                </td>
+              </tr>
+            )}
+          </>
         ))}
       </tbody>
     </table>

@@ -1,7 +1,7 @@
-import { createColumnHelper, type RowData } from '@tanstack/react-table';
+import { createColumnHelper, type RowData, type ExpandedState } from '@tanstack/react-table';
 import type { GameWeekResult } from '../../game_state/gameState';
 import SortableTable from '../../components/core/Table/SortableTable';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import PositionDelta from '../../components/core/PositionDelta';
 import '@tanstack/react-table';
 import TrendChart from './TrendChart';
@@ -28,6 +28,58 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
   avatars,
   teams
 }) => {
+  const [expanded, setExpanded] = useState<ExpandedState>({});
+
+  const renderSubComponent = ({ row }: { row: { original: GameWeekResult } }) => {
+    const teamData = teams?.find(t => t.teamName === row.original.teamName);
+    
+    return (
+      <div className="p-4">
+
+        <div className="mb-6 p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+          <h5 className="font-medium text-gray-900 dark:text-gray-100 mb-3">
+            Game Week {row.original.gameWeek} - Rules & Scores
+          </h5>
+          <div className="space-y-2 text-sm">
+
+            {
+                // This is using overall rules results, want to change to use from current gw
+                row.original.rules.filter(r => r.points !== 0).map(r => <div key={r.ruleShortName}>
+                    {r.ruleShortName} - {r.points} pts.
+                    </div>)
+            }
+
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="space-y-2">
+            <h5 className="font-medium text-gray-700 dark:text-gray-300">Performance Trend (Last 10 GWs)</h5>
+            <div className="h-24">
+              {teamData && (
+                <TrendChart
+                  results={teamData.results.slice(-10)}
+                  teamName={row.original.teamName}
+                  height={96}
+                />
+              )}
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h5 className="font-medium text-gray-700 dark:text-gray-300">Recent History</h5>
+            <div className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
+              {teamData?.results.slice(-3).map((result) => (
+                <div key={result.gameWeek} className="flex justify-between">
+                  <span>GW {result.gameWeek}:</span>
+                  <span className="font-medium">#{result.milaRank} ({result.cumulativeAverageMilaPoints} pts)</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const lastGameWeek = data[data.length - 1].gameWeek;
   const columns = useMemo(
@@ -119,8 +171,43 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
           classNames: 'pl-0 md:pl-3',
         },
       }),
+      columnHelper.display({
+        id: 'expand',
+        header: '',
+        cell: ({ row }) => {
+          return row.getCanExpand() ? (
+            <div className="flex justify-end">
+              <button
+                onClick={row.getToggleExpandedHandler()}
+                className="flex items-center justify-center p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                aria-label={row.getIsExpanded() ? 'Collapse details' : 'Expand details'}
+              >
+                <svg
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    row.getIsExpanded() ? 'rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
+          ) : null;
+        },
+        meta: {
+          align: 'right',
+          classNames: 'w-12',
+        },
+      }),
     ],
-    []
+    [teams, avatars, lastGameWeek]
   );
 
   return (
@@ -128,6 +215,10 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
       data={data}
       columns={columns}
       initialSort={[{ id: 'cumulativeMilaPoints', desc: true }]}
+      expandedState={expanded}
+      onExpandedChange={setExpanded}
+      getRowCanExpand={() => true}
+      renderSubComponent={renderSubComponent}
     />
   );
 };
