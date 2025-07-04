@@ -6,13 +6,7 @@ import {
     ResponsiveBump,
 } from '@nivo/bump';
 import { useEffect, useState } from 'react';
-import game_state from '../game_state/game_state.json';
-import type { MilaResultsDTO } from '../game_state/gameState';
 import colors from 'tailwindcss/colors';
-
-interface PlayerStandingsChartProps {
-    results: MilaResultsDTO;
-}
 
 interface CustomBumpDatum extends BumpDatum {
     points: number;
@@ -66,9 +60,7 @@ const CustomPoint: React.FC<{
     );
 };
 
-const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
-    results,
-}: PlayerStandingsChartProps) => {
+const PlayerStandingsChart: React.FC<TrendProps> = ({ teams }) => {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
 
     useEffect(() => {
@@ -78,24 +70,19 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
         }
     }, []);
 
-    const week = [
-        results.resultsByWeek.length < 5 ? 0 : results.resultsByWeek.length - 5,
-        results.resultsByWeek.length,
-    ];
-
-    const data = results.resultsByUser.map((r) => ({
-        id: r.teamName,
-        data: r.results.slice(week[0], week[1]).map((rr) => ({
-            x: `GW ${rr.gameWeek}`,
-            y: rr.milaRank,
-            points: rr.cumulativeAverageMilaPoints,
+    const chartData = teams.map((team) => ({
+        id: team.teamName,
+        data: team.results.map((result) => ({
+            x: `GW ${result.gameWeek}`,
+            y: result.milaRank,
+            points: result.cumulativeAverageMilaPoints,
         })),
     }));
 
     return (
         <div style={{ height: '55vh' }}>
             <ResponsiveBump
-                data={data}
+                data={chartData}
                 xOuterPadding={0.3}
                 theme={{
                     text:{
@@ -162,10 +149,21 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
     );
 };
 
-const Trend = () => {
-    const milaResults: MilaResultsDTO = game_state;
+interface TrendTeam {
+    teamName: string;
+    results: {
+        gameWeek: number;
+        milaRank: number;
+        cumulativeAverageMilaPoints: number;
+    }[];
+}
 
-    return <PlayerStandingsChart results={milaResults} />;
+interface TrendProps {
+    teams: TrendTeam[];
+}
+
+const Trend = ({ teams }: TrendProps) => {
+    return <PlayerStandingsChart teams={teams} />;
 };
 
 export default Trend;

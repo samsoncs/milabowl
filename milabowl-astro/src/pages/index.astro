@@ -25,6 +25,18 @@ const lastGameWeek = Math.max.apply(
     fpl_state.results.map((r) => r.gameWeek)
 );
 const resultsByUser = milaResults.resultsByUser;
+
+// Transform data for Trend component - only last 5 gameweeks with minimal data
+const trendData = resultsByUser.map((team) => ({
+    teamName: team.teamName,
+    results: team.results
+        .slice(-5)
+        .map(result => ({
+            gameWeek: result.gameWeek,
+            milaRank: result.milaRank,
+            cumulativeAverageMilaPoints: result.cumulativeAverageMilaPoints,
+        }))
+}));
 ---
 
 <Layout title="Milabowl - Dashboard" enableViewTransitions>
@@ -97,7 +109,7 @@ const resultsByUser = milaResults.resultsByUser;
                     </div>
                     <div class="col-span-12">
                         <Card title="Trend">
-                            <Trend client:load />
+                            <Trend teams={trendData} client:load />
                         </Card>
                     </div>
                 </div>
@@ -105,4 +117,3 @@ const resultsByUser = milaResults.resultsByUser;
         </div>
     </main>
 </Layout>
-./_Trend
