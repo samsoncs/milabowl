@@ -3,7 +3,7 @@ import Card from '../../components/core/Card.astro';
 import Layout from '../../layouts/Layout.astro';
 import game_state from '../../../src/game_state/game_state.json';
 import type { MilaResultsDTO } from '../../../src/game_state/gameState';
-import RuleBoxPlot from './_RuleBoxPlot';
+import RuleBoxPlot from './_components/RuleBoxPlot';
 
 const milaResults: MilaResultsDTO = game_state;
 const overallScore = milaResults.overallScore;

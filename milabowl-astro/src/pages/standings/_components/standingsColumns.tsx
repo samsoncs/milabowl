@@ -1,6 +1,6 @@
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
-import type { GameWeekResult } from '../../game_state/gameState';
-import PositionDelta from '../../components/core/PositionDelta';
+import type { GameWeekResult } from '../../../game_state/gameState';
+import PositionDelta from '../../../components/core/PositionDelta';
 
 const columnHelper = createColumnHelper<GameWeekResult>();
 

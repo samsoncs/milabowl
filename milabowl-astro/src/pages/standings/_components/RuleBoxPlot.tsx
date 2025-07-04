@@ -1,6 +1,6 @@
 import { ResponsiveBoxPlot } from '@nivo/boxplot';
 import colors from 'tailwindcss/colors';
-import type { GameWeekResult } from '../../game_state/gameState';
+import type { GameWeekResult } from '../../../game_state/gameState';
 
 interface Props {
   overallScore: GameWeekResult[];
