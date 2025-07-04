@@ -7,11 +7,6 @@ import react from 'eslint-plugin-react';
 import prettier from 'eslint-config-prettier';
 
 export default [
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  react.configs.flat.recommended,
-  ...eslintPluginAstro.configs.recommended,
-  prettier,
   {
     ignores: [
       '**/node_modules/**',
@@ -26,6 +21,13 @@ export default [
       '.eslintrc.js',
       'src/env.d.ts',
     ],
+  },
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  react.configs.flat.recommended,
+  ...eslintPluginAstro.configs.recommended,
+  prettier,
+  {
     settings: {
       react: {
         version: 'detect',
