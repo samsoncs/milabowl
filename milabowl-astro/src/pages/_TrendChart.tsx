@@ -1,4 +1,4 @@
-import { Line, type Serie } from '@nivo/line';
+import { Line } from '@nivo/line';
 import colors from 'tailwindcss/colors';
 import type { GameWeekResult } from '../game_state/gameState';
 
@@ -7,6 +7,12 @@ interface TrendChartProps {
     teamname: string;
     height: number;
 }
+
+type ChartSerie = {
+    id: string;
+    data: { x: number; y: number }[];
+};
+
 
 const TrendChart: React.FC<TrendChartProps> = ({
     results,
@@ -44,7 +50,7 @@ const TrendChart: React.FC<TrendChartProps> = ({
                 100
         ) / 100;
 
-    const data: Serie[] = [
+    const data: ChartSerie[] = [
         {
             id: teamname,
             data:

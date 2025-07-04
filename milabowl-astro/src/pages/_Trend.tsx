@@ -98,10 +98,12 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
                 data={data}
                 xOuterPadding={0.3}
                 theme={{
-                    fontSize: 12,
-                    textColor: isDarkTheme
+                    text:{
+                        fontSize: 12,
+                        fill: isDarkTheme
                         ? colors.slate[300]
                         : colors.slate[700],
+                    },
                     grid: {
                         line: {
                             stroke: `${isDarkTheme ? colors.slate[600] : colors.slate[300]}`,
