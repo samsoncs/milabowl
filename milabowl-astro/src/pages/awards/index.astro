@@ -35,14 +35,14 @@ const winners = [
 ---
 
 <Layout title="Milabowl - Awards - 2023">
-    <div class="mx-auto flex max-w-screen-lg flex-col space-y-4">
-        <div class="flex flex-col items-center">
+    <div className="mx-auto flex max-w-screen-lg flex-col space-y-4">
+        <div className="flex flex-col items-center">
             <div
-                class="mb-8 text-center text-2xl font-bold text-indigo-900 dark:text-dark-text"
+                className="mb-8 text-center text-2xl font-bold text-indigo-900 dark:text-dark-text"
             >
                 MilaAwards - 2023
             </div>
-            <div class="md:grid md:grid-cols-2 md:gap-8">
+            <div className="md:grid md:grid-cols-2 md:gap-8">
                 {
                     winners.map((w) => (
                         <Award

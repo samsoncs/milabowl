@@ -16,7 +16,7 @@ const StandingsTableMobile: React.FC<Props> = ({
 }) => {
     const columns = useMemo(
         () => getStandingsColmns(data, avatars, lastGameWeek),
-        []
+        [data, lastGameWeek, avatars]
     );
 
     return (

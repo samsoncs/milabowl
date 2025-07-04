@@ -38,25 +38,25 @@ const stats = readingTime(post.body);
 ---
 
 <MarkdownLayout title={`Blogpost - ${post.data.title}`}>
-    <div class="flex items-center gap-4">
+    <div className="flex items-center gap-4">
         <AuthorIcon />
-        <div class="grow">
+        <div className="grow">
             <div>
                 {post.data.author}
-                <span class="text-gray-400 dark:text-slate-400"
+                <span className="text-gray-400 dark:text-slate-400"
                     >- {stats.text}</span
                 >
             </div>
         </div>
         <time
-            datetime={format(post.data.date, 'yyyy-MM-dd')}
-            class="text-gray-400 dark:text-slate-400"
+            dateTime={format(post.data.date, 'yyyy-MM-dd')}
+            className="text-gray-400 dark:text-slate-400"
             >{format(post.data.date, 'dd.MM.yyyy')}</time
         >
     </div>
 
     <h1
-        class="mb-8 mt-4 text-4xl font-bold text-indigo-900 dark:text-dark-text"
+        className="mb-8 mt-4 text-4xl font-bold text-indigo-900 dark:text-dark-text"
     >
         {post.data.title}
     </h1>
@@ -67,7 +67,7 @@ const stats = readingTime(post.body);
 
     <Tags tags={post.data.tags} />
 
-    <div slot="post-card" class="my-2 grid grid-cols-2 gap-2">
+    <div slot="post-card" className="my-2 grid grid-cols-2 gap-2">
         {
             prevPost && (
                 <BlogNavigation
