@@ -4,9 +4,9 @@ import Card from '../components/core/Card.astro';
 import Trend from './_components/Trend';
 import game_state from '../../src/game_state/game_state.json';
 import bomb_state from '../../src/game_state/bomb_state.json';
-import fpl_state from '../../src/game_state/fpl_state.json';
 import type { MilaResultsDTO } from '../game_state/gameState';
 import type { BombGameWeekState } from '../game_state/bombState';
+import type { ResultsForTeams } from './_components/types';
 import Link from '../components/core/Link.astro';
 import OverviewTable from './_components/OverviewTable';
 import BombState from './_components/BombState.astro';
@@ -21,19 +21,15 @@ const imgs = Object.values(
   })
 );
 const images = imgs.map((i) => i.default);
-const lastGameWeek = Math.max.apply(
-  Math,
-  fpl_state.results.map((r) => r.gameWeek)
-);
 const resultsByUser = milaResults.resultsByUser;
 
-// Transform data for Trend component - only last 5 gameweeks with minimal data
-const trendData = resultsByUser.map((team) => ({
+const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
   teamName: team.teamName,
   results: team.results.slice(-5).map((result) => ({
     gameWeek: result.gameWeek,
     milaRank: result.milaRank,
     cumulativeAverageMilaPoints: result.cumulativeAverageMilaPoints,
+    totalCumulativeAverageMilaPoints: result.totalCumulativeAverageMilaPoints,
   })),
 }));
 ---
@@ -51,8 +47,7 @@ const trendData = resultsByUser.map((team) => ({
           <OverviewTable
             avatars={images}
             data={milaResults.overallScore}
-            lastGameWeek={lastGameWeek}
-            resultsByUser={resultsByUser}
+            teams={lastFiveWeeksByTeam}
             client:idle
           />
         </Card>
@@ -72,7 +67,7 @@ const trendData = resultsByUser.map((team) => ({
           </div>
           <div class="col-span-12">
             <Card title="Trend">
-              <Trend teams={trendData} client:load />
+              <Trend teams={lastFiveWeeksByTeam} client:load />
             </Card>
           </div>
         </div>

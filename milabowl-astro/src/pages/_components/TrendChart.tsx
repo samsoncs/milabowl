@@ -1,10 +1,10 @@
 import { Line } from '@nivo/line';
 import colors from 'tailwindcss/colors';
-import type { GameWeekResult } from '../../game_state/gameState';
+import type { TeamResultData } from './types';
 
 interface TrendChartProps {
-  results: GameWeekResult[];
-  teamname: string;
+  results: TeamResultData[];
+  teamName: string;
   height: number;
 }
 
@@ -15,7 +15,7 @@ type ChartSerie = {
 
 const TrendChart: React.FC<TrendChartProps> = ({
   results,
-  teamname,
+  teamName,
   height,
 }: TrendChartProps) => {
   const minValue = Math.min.apply(
@@ -49,7 +49,7 @@ const TrendChart: React.FC<TrendChartProps> = ({
 
   const data: ChartSerie[] = [
     {
-      id: teamname,
+      id: teamName,
       data:
         results?.map((rr) => {
           return {

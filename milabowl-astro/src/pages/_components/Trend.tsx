@@ -7,6 +7,7 @@ import {
 } from '@nivo/bump';
 import { useEffect, useState } from 'react';
 import colors from 'tailwindcss/colors';
+import type { ResultsForTeams } from './types';
 
 interface CustomBumpDatum extends BumpDatum {
   points: number;
@@ -145,17 +146,8 @@ const PlayerStandingsChart: React.FC<TrendProps> = ({ teams }) => {
   );
 };
 
-interface TrendTeam {
-  teamName: string;
-  results: {
-    gameWeek: number;
-    milaRank: number;
-    cumulativeAverageMilaPoints: number;
-  }[];
-}
-
 interface TrendProps {
-  teams: TrendTeam[];
+  teams: ResultsForTeams[];
 }
 
 const Trend = ({ teams }: TrendProps) => {
