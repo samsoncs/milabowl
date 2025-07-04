@@ -15,6 +15,11 @@ import type { ImageMetadata } from 'astro';
 const milaResults: MilaResultsDTO = game_state;
 const bombState: BombGameWeekState[] = bomb_state;
 
+const currentGameWeek = Math.max(...milaResults.resultsByWeek.map(r => r.gameWeek));
+const currentGameWeekResults = milaResults.resultsByWeek.find(
+  week => week.gameWeek === currentGameWeek
+)?.results || [];
+
 const imgs = Object.values(
   import.meta.glob<{ default: ImageMetadata }>('../assets/*.webp', {
     eager: true,
@@ -48,6 +53,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
             avatars={images}
             data={milaResults.overallScore}
             teams={lastFiveWeeksByTeam}
+            currentGameWeekResults={currentGameWeekResults}
             client:idle
           />
         </Card>

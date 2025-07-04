@@ -21,40 +21,54 @@ interface OverviewTableProps {
   data: GameWeekResult[];
   teams: ResultsForTeams[];
   avatars: ImageMetadata[];
+  currentGameWeekResults?: GameWeekResult[];
 }
 
 const OverviewTable: React.FC<OverviewTableProps> = ({
   data,
   avatars,
-  teams
+  teams,
+  currentGameWeekResults
 }) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
   const renderSubComponent = ({ row }: { row: { original: GameWeekResult } }) => {
     const teamData = teams?.find(t => t.teamName === row.original.teamName);
     
+    // Find the current game week specific data for this team
+    const currentGwTeamData = currentGameWeekResults?.find(
+      result => result.teamName === row.original.teamName && result.gameWeek === row.original.gameWeek
+    );
+    
     return (
-      <div className="p-4">
-
-        <div className="mb-6 p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-          <h5 className="font-medium text-gray-900 dark:text-gray-100 mb-3">
-            Game Week {row.original.gameWeek} - Rules & Scores
-          </h5>
+      <div className="p-2">
+       
+        
+        <div className="mb-6 p-4 pt-3 bg-white dark:bg-slate-700 rounded-lg">
+            <div className="font-medium text-slate-900 dark:text-slate-100 mb-3">
+            Current GW
+            </div>
           <div className="space-y-2 text-sm">
-
             {
-                // This is using overall rules results, want to change to use from current gw
-                row.original.rules.filter(r => r.points !== 0).map(r => <div key={r.ruleShortName}>
-                    {r.ruleShortName} - {r.points} pts.
-                    </div>)
+              (currentGwTeamData?.rules || row.original.rules)
+                .filter(r => r.points !== 0)
+                .map(r => (
+                  <div key={r.ruleShortName} className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-600">
+                    <span className="text-slate-700 dark:text-slate-300">{r.ruleShortName}</span>
+                    <span className="font-semibold text-slate-900 dark:text-slate-100">{r.points} pts</span>
+                  </div>
+                ))
             }
-
+            <div className="flex justify-between items-center py-1 font-medium text-slate-900 dark:text-slate-100 pt-2">
+              <span>Total</span>
+              <span>{currentGwTeamData?.gwScore || row.original.gwScore}</span>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <h5 className="font-medium text-gray-700 dark:text-gray-300">Performance Trend (Last 10 GWs)</h5>
+            <h5 className="font-medium text-slate-700 dark:text-slate-300">Performance Trend</h5>
             <div className="h-24">
               {teamData && (
                 <TrendChart
@@ -66,8 +80,8 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
             </div>
           </div>
           <div className="space-y-2">
-            <h5 className="font-medium text-gray-700 dark:text-gray-300">Recent History</h5>
-            <div className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
+            <h5 className="font-medium text-slate-700 dark:text-slate-300">Recent History</h5>
+            <div className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
               {teamData?.results.slice(-3).map((result) => (
                 <div key={result.gameWeek} className="flex justify-between">
                   <span>GW {result.gameWeek}:</span>
@@ -179,7 +193,7 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
             <div className="flex justify-end">
               <button
                 onClick={row.getToggleExpandedHandler()}
-                className="flex items-center justify-center p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                className="flex items-center justify-center p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors"
                 aria-label={row.getIsExpanded() ? 'Collapse details' : 'Expand details'}
               >
                 <svg
