@@ -42,7 +42,7 @@ const CustomPoint: React.FC<{
     >
       <animated.circle
         r={animatedProps.radius}
-        className={'fill-white dark:fill-slate-800'}
+        className={'fill-white dark:fill-slate-900'}
         stroke={animatedProps.borderColor}
         strokeWidth={animatedProps.borderWidth}
       />

@@ -35,7 +35,7 @@ const { pathname } = Astro.url;
 
 <>
   <nav
-    class="fixed top-0 z-50 hidden w-full bg-slate-100 dark:bg-slate-900 md:block"
+    class="fixed top-0 z-50 hidden w-full bg-slate-100 dark:bg-slate-950 md:block"
     transition:animate="none"
   >
     <div class="mx-auto max-w-screen-2xl px-4">
@@ -55,7 +55,7 @@ const { pathname } = Astro.url;
                 navLinks.map((m) => {
                   const isSelected = pathname.includes(m.href);
                   const classes = isSelected
-                    ? 'bg-slate-300 dark:bg-slate-800 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold no-underline'
+                    ? 'bg-slate-300 dark:bg-slate-900 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold no-underline'
                     : 'text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:dark:text-dark-text hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold no-underline';
                   return (
                     <a href={m.href} class={classes}>
@@ -70,7 +70,7 @@ const { pathname } = Astro.url;
 
         <button
           id="theme-toggle-1"
-          class="block hidden rounded-md px-3 py-2 text-base font-medium text-indigo-900 hover:bg-slate-200 dark:text-dark-text hover:dark:bg-slate-800 md:block"
+          class="block hidden rounded-md px-3 py-2 text-base font-medium text-indigo-900 hover:bg-slate-200 dark:text-dark-text hover:dark:bg-slate-900 md:block"
         >
           <div class="hidden dark:block">
             <svg

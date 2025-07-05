@@ -75,7 +75,7 @@ const Award: React.FC<AwardProps> = ({
               'items-center',
               'justify-center',
               'rounded-md',
-              'dark:bg-slate-900',
+              'dark:bg-slate-950',
               'bg-slate-100',
               styles.flipCardBack,
             ].join(' ')}

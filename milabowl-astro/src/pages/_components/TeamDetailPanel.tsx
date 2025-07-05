@@ -22,7 +22,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({
 
   return (
     <div className="p-2">
-      <div className="mb-2 rounded-xl bg-slate-200 p-4 text-slate-600 shadow-sm dark:bg-slate-700 dark:text-slate-300">
+      <div className="mb-2 rounded-xl bg-slate-200 p-4 text-slate-600 shadow-sm dark:bg-slate-800 dark:text-slate-300">
         <div className="mb-3">
           <h4 className="font-semibold">Current GW</h4>
         </div>
