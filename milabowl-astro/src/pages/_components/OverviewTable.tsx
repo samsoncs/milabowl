@@ -86,7 +86,7 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
               className="h-10 w-10 rounded-full sm:h-12 sm:w-12"
             />
             <a
-              className={`max-w-[130px] truncate hover:underline transition-all duration-200 sm:max-w-[300px] ${props.row.original.milaRank === 1 ? 'font-bold' : ''}`}
+              className={`max-w-[130px] truncate hover:underline transition-all duration-200 sm:max-w-[300px] ${props.row.original.milaRank < 4 ? 'font-bold' : ''}`}
               href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
             >
               {props.cell.getValue()}
