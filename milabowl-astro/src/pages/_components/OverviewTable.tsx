@@ -6,6 +6,8 @@ import PositionDelta from '../../components/core/PositionDelta';
 import '@tanstack/react-table';
 import TrendChart from './TrendChart';
 import type { ResultsForTeams } from './types';
+import TeamDetailPanel from './TeamDetailPanel';
+import './style.css';
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -32,68 +34,14 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
 }) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
-  const renderSubComponent = ({ row }: { row: { original: GameWeekResult } }) => {
-    const teamData = teams?.find(t => t.teamName === row.original.teamName);
-    
-    // Find the current game week specific data for this team
-    const currentGwTeamData = currentGameWeekResults?.find(
-      result => result.teamName === row.original.teamName && result.gameWeek === row.original.gameWeek
+  const renderSubComponent = ({ row }: { row: { original: GameWeekResult } }) => 
+    (
+      <TeamDetailPanel
+        row={row.original}
+        teams={teams}
+        currentGameWeekResults={currentGameWeekResults}
+      />
     );
-    
-    return (
-      <div className="p-2">
-       
-        
-        <div className="mb-6 p-4 pt-3 bg-white dark:bg-slate-700 rounded-lg">
-            <div className="font-medium text-slate-900 dark:text-slate-100 mb-3">
-            Current GW
-            </div>
-          <div className="space-y-2 text-sm">
-            {
-              (currentGwTeamData?.rules || row.original.rules)
-                .filter(r => r.points !== 0)
-                .map(r => (
-                  <div key={r.ruleShortName} className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-600">
-                    <span className="text-slate-700 dark:text-slate-300">{r.ruleShortName}</span>
-                    <span className="font-semibold text-slate-900 dark:text-slate-100">{r.points} pts</span>
-                  </div>
-                ))
-            }
-            <div className="flex justify-between items-center py-1 font-medium text-slate-900 dark:text-slate-100 pt-2">
-              <span>Total</span>
-              <span>{currentGwTeamData?.gwScore || row.original.gwScore}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="space-y-2">
-            <h5 className="font-medium text-slate-700 dark:text-slate-300">Performance Trend</h5>
-            <div className="h-24">
-              {teamData && (
-                <TrendChart
-                  results={teamData.results.slice(-10)}
-                  teamName={row.original.teamName}
-                  height={96}
-                />
-              )}
-            </div>
-          </div>
-          <div className="space-y-2">
-            <h5 className="font-medium text-slate-700 dark:text-slate-300">Recent History</h5>
-            <div className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
-              {teamData?.results.slice(-3).map((result) => (
-                <div key={result.gameWeek} className="flex justify-between">
-                  <span>GW {result.gameWeek}:</span>
-                  <span className="font-medium">#{result.milaRank} ({result.cumulativeAverageMilaPoints} pts)</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   const lastGameWeek = data[data.length - 1].gameWeek;
   const columns = useMemo(
@@ -122,8 +70,8 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
       columnHelper.accessor('teamName', {
         id: 'teamName',
         header: 'Team',
-        cell: (props) => (
-          <span className="flex items-center gap-2">
+        cell: (props) => 
+            <span className={`flex items-center gap-2 rounded-l-full rank-${props.row.original.milaRank}`}>
             <img
               src={
                 avatars.find((a) =>
@@ -138,13 +86,13 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
               className="h-10 w-10 rounded-full sm:h-12 sm:w-12"
             />
             <a
-              className="max-w-[130px] truncate underline sm:max-w-[300px]"
+              className={`max-w-[130px] truncate hover:underline transition-all duration-200 sm:max-w-[300px] ${props.row.original.milaRank === 1 ? 'font-bold' : ''}`}
               href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
             >
               {props.cell.getValue()}
             </a>
           </span>
-        ),
+        ,
         enableSorting: false,
       }),
       columnHelper.display({
