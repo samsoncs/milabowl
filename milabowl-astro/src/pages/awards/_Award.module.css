@@ -1,80 +1,80 @@
 .flipCard {
-    background-color: transparent;
-    perspective: 1000px;
+  background-color: transparent;
+  perspective: 1000px;
 }
 
 .flipCardInner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s ease;
-    transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
 }
 
 .flipCard.flipped .flipCardInner {
-    transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
 }
 
 .flipCardFront,
 .flipCardBack {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .flipCardBack {
-    transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
 }
 
 .thirdPlace {
-    opacity: 0;
-    transform: translateY(100%);
+  opacity: 0;
+  transform: translateY(100%);
 }
 
 .seccondPlace {
-    opacity: 0;
-    transform: translateY(100%);
+  opacity: 0;
+  transform: translateY(100%);
 }
 
 .runnerUps {
-    opacity: 0;
+  opacity: 0;
 }
 
 .explenation {
-    opacity: 0;
+  opacity: 0;
 }
 
 .explenation.flipped {
-    transition: all 1.25s;
-    -webkit-transition: all 1s;
-    opacity: 1;
+  transition: all 1.25s;
+  -webkit-transition: all 1s;
+  opacity: 1;
 }
 
 .runnerUps.flipped {
-    transition: all 1.25s;
-    -webkit-transition: all 1.25s;
-    -webkit-transition-delay: 0.25s;
-    transition-delay: 0.25s;
-    opacity: 1;
+  transition: all 1.25s;
+  -webkit-transition: all 1.25s;
+  -webkit-transition-delay: 0.25s;
+  transition-delay: 0.25s;
+  opacity: 1;
 }
 
 .thirdPlace.flipped {
-    transition: all 1s;
-    -webkit-transition: all 1s;
-    -webkit-transition-delay: 0.5s;
-    transition-delay: 0.5s;
-    opacity: 1;
-    transform: translateY(0%);
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+  opacity: 1;
+  transform: translateY(0%);
 }
 
 .seccondPlace.flipped {
-    transition: all 1s;
-    -webkit-transition: all 1s;
-    transition-delay: 0.1s;
-    -webkit-transition-delay: 0.1s;
-    opacity: 1;
-    transform: translateY(0%);
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  transition-delay: 0.1s;
+  -webkit-transition-delay: 0.1s;
+  opacity: 1;
+  transform: translateY(0%);
 }

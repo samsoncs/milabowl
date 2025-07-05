@@ -2,12 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import noms from '../../../src/game_state/nominations.json';
 import type { Nomination } from '../../../src/game_state/nominations';
-import Nominations from './_Nominations';
+import Nominations from './_components/Nominations';
 
 const nominations: Nomination[] = noms;
 ---
 
 <Layout title="Milabowl - Nominations">
-    <Nominations nominations={nominations} client:idle />
+  <Nominations nominations={nominations} client:idle />
 </Layout>
 ./_Nominations

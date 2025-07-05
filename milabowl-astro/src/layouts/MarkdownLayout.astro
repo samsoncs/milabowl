@@ -3,19 +3,19 @@ import Card from '../components/core/Card.astro';
 import Layout from './Layout.astro';
 
 export interface Props {
-    title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
 ---
 
 <Layout title={title}>
-    <div class="mx-auto max-w-screen-lg">
-        <Card>
-            <div class="p-0 md:px-4 md:py-2">
-                <slot />
-            </div>
-        </Card>
-        <slot name="post-card" />
-    </div>
+  <div class="mx-auto max-w-screen-lg">
+    <Card>
+      <div class="p-0 md:px-4 md:py-2">
+        <slot />
+      </div>
+    </Card>
+    <slot name="post-card" />
+  </div>
 </Layout>

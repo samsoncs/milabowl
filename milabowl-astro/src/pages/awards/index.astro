@@ -3,60 +3,60 @@ import Layout from '../../layouts/Layout.astro';
 import Award from './_Award';
 
 const winners = [
-    {
-        award: 'Winner of FPL',
-        firstPlace: { name: 'Sam', points: 2574 },
-        seccondPlace: { name: 'Anders', points: 2520 },
-        thirdPlace: { name: 'Martin', points: 2481 },
-        id: 'ts-p-1',
-    },
-    {
-        award: 'Winner of Milabowl',
-        firstPlace: { name: 'Eivind', points: 205.18 },
-        seccondPlace: { name: 'Malte', points: 166.38 },
-        thirdPlace: { name: 'Anders', points: 147.78 },
-        id: 'ts-p-2',
-    },
-    {
-        award: 'Winner of FPL Cup',
-        firstPlace: { name: 'Mikkel', points: 1 },
-        seccondPlace: { name: 'Sam', points: 0 },
-        thirdPlace: { name: 'N/A', points: 0 },
-        id: 'ts-p-3',
-    },
-    {
-        award: 'Winner of FPL H2H',
-        firstPlace: { name: 'Anders', points: 77 },
-        seccondPlace: { name: 'Eivind', points: 69 },
-        thirdPlace: { name: 'Markus', points: 68 },
-        id: 'ts-p-4',
-    },
+  {
+    award: 'Winner of FPL',
+    firstPlace: { name: 'Sam', points: 2574 },
+    seccondPlace: { name: 'Anders', points: 2520 },
+    thirdPlace: { name: 'Martin', points: 2481 },
+    id: 'ts-p-1',
+  },
+  {
+    award: 'Winner of Milabowl',
+    firstPlace: { name: 'Eivind', points: 205.18 },
+    seccondPlace: { name: 'Malte', points: 166.38 },
+    thirdPlace: { name: 'Anders', points: 147.78 },
+    id: 'ts-p-2',
+  },
+  {
+    award: 'Winner of FPL Cup',
+    firstPlace: { name: 'Mikkel', points: 1 },
+    seccondPlace: { name: 'Sam', points: 0 },
+    thirdPlace: { name: 'N/A', points: 0 },
+    id: 'ts-p-3',
+  },
+  {
+    award: 'Winner of FPL H2H',
+    firstPlace: { name: 'Anders', points: 77 },
+    seccondPlace: { name: 'Eivind', points: 69 },
+    thirdPlace: { name: 'Markus', points: 68 },
+    id: 'ts-p-4',
+  },
 ];
 ---
 
 <Layout title="Milabowl - Awards - 2023">
-    <div class="mx-auto flex max-w-screen-lg flex-col space-y-4">
-        <div class="flex flex-col items-center">
-            <div
-                class="mb-8 text-center text-2xl font-bold text-indigo-900 dark:text-dark-text"
-            >
-                MilaAwards - 2023
-            </div>
-            <div class="md:grid md:grid-cols-2 md:gap-8">
-                {
-                    winners.map((w) => (
-                        <Award
-                            title={w.award}
-                            firstPlace={w.firstPlace}
-                            seccondPlace={w.seccondPlace}
-                            thirdPlace={w.thirdPlace}
-                            id={w.id}
-                            client:idle
-                        />
-                    ))
-                }
-            </div>
-        </div>
+  <div className="mx-auto flex max-w-screen-lg flex-col space-y-4">
+    <div className="flex flex-col items-center">
+      <div
+        className="mb-8 text-center text-2xl font-bold text-indigo-900 dark:text-dark-text"
+      >
+        MilaAwards - 2023
+      </div>
+      <div className="md:grid md:grid-cols-2 md:gap-8">
+        {
+          winners.map((w) => (
+            <Award
+              title={w.award}
+              firstPlace={w.firstPlace}
+              seccondPlace={w.seccondPlace}
+              thirdPlace={w.thirdPlace}
+              id={w.id}
+              client:idle
+            />
+          ))
+        }
+      </div>
     </div>
+  </div>
 </Layout>
 ./_Award

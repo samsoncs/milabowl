@@ -10,26 +10,26 @@ import Markdown from '../../components/core/Typography/Markdown.astro';
 import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const posts = (await getCollection('blog')).sort((a, b) =>
-        a.data.date < b.data.date ? 1 : -1
-    );
+  const posts = (await getCollection('blog')).sort((a, b) =>
+    a.data.date < b.data.date ? 1 : -1
+  );
 
-    const paths = posts.map((post, i) => {
-        const prevPost = i + 1 < posts.length ? posts[i + 1] : undefined;
-        const nextPost = i - 1 < posts.length ? posts[i - 1] : undefined;
-        return {
-            params: { slug: post.slug },
-            props: { post, prevPost, nextPost },
-        };
-    });
+  const paths = posts.map((post, i) => {
+    const prevPost = i + 1 < posts.length ? posts[i + 1] : undefined;
+    const nextPost = i - 1 < posts.length ? posts[i - 1] : undefined;
+    return {
+      params: { slug: post.slug },
+      props: { post, prevPost, nextPost },
+    };
+  });
 
-    return paths;
+  return paths;
 };
 
 export interface Props {
-    post: CollectionEntry<'blog'>;
-    prevPost: CollectionEntry<'blog'> | undefined;
-    nextPost: CollectionEntry<'blog'> | undefined;
+  post: CollectionEntry<'blog'>;
+  prevPost: CollectionEntry<'blog'> | undefined;
+  nextPost: CollectionEntry<'blog'> | undefined;
 }
 
 const { post, prevPost, nextPost } = Astro.props;
@@ -38,49 +38,41 @@ const stats = readingTime(post.body);
 ---
 
 <MarkdownLayout title={`Blogpost - ${post.data.title}`}>
-    <div class="flex items-center gap-4">
-        <AuthorIcon />
-        <div class="grow">
-            <div>
-                {post.data.author}
-                <span class="text-gray-400 dark:text-slate-400"
-                    >- {stats.text}</span
-                >
-            </div>
-        </div>
-        <time
-            datetime={format(post.data.date, 'yyyy-MM-dd')}
-            class="text-gray-400 dark:text-slate-400"
-            >{format(post.data.date, 'dd.MM.yyyy')}</time
+  <div className="flex items-center gap-4">
+    <AuthorIcon />
+    <div className="grow">
+      <div>
+        {post.data.author}
+        <span className="text-gray-400 dark:text-slate-400">- {stats.text}</span
         >
+      </div>
     </div>
-
-    <h1
-        class="mb-8 mt-4 text-4xl font-bold text-indigo-900 dark:text-dark-text"
+    <time
+      dateTime={format(post.data.date, 'yyyy-MM-dd')}
+      className="text-gray-400 dark:text-slate-400"
+      >{format(post.data.date, 'dd.MM.yyyy')}</time
     >
-        {post.data.title}
-    </h1>
+  </div>
 
-    <Markdown>
-        <Content />
-    </Markdown>
+  <h1
+    className="mb-8 mt-4 text-4xl font-bold text-indigo-900 dark:text-dark-text"
+  >
+    {post.data.title}
+  </h1>
 
-    <Tags tags={post.data.tags} />
+  <Markdown>
+    <Content />
+  </Markdown>
 
-    <div slot="post-card" class="my-2 grid grid-cols-2 gap-2">
-        {
-            prevPost && (
-                <BlogNavigation
-                    navigationText="Previous Post"
-                    post={prevPost}
-                />
-            )
-        }
-        {!prevPost && <div />}
-        {
-            nextPost && (
-                <BlogNavigation navigationText="Next Post" post={nextPost} />
-            )
-        }
-    </div>
+  <Tags tags={post.data.tags} />
+
+  <div slot="post-card" className="my-2 grid grid-cols-2 gap-2">
+    {
+      prevPost && (
+        <BlogNavigation navigationText="Previous Post" post={prevPost} />
+      )
+    }
+    {!prevPost && <div />}
+    {nextPost && <BlogNavigation navigationText="Next Post" post={nextPost} />}
+  </div>
 </MarkdownLayout>

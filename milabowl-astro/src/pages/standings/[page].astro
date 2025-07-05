@@ -3,67 +3,74 @@ import type { GetStaticPaths, Page } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import game_state from '../../../src/game_state/game_state.json';
 import type {
-    MilaResultsDTO,
-    ResultsByWeek,
+  MilaResultsDTO,
+  ResultsByWeek,
 } from '../../game_state/gameState.ts';
 import Card from '../../components/core/Card.astro';
-import StandingsTable from './_StandingsTable.tsx';
-import StandingsTableMobile from './_StandingsTable_Mobile.tsx';
+import StandingsTable from './_components/StandingsTable.tsx';
+import StandingsTableMobile from './_components/StandingsTable_Mobile.tsx';
 import Link from '../../components/core/Link.astro';
+import type { ImageMetadata } from 'astro';
 
-const imgs = Object.values(import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', { eager: true }));
+const imgs = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', {
+    eager: true,
+  })
+);
 const images = imgs.map((i) => i.default);
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-    const milaResults: MilaResultsDTO = game_state;
-    const milaResultsByWeek = milaResults.resultsByWeek;
-    const lastWeek = milaResultsByWeek[milaResultsByWeek.length - 1].gameWeek;
-    return paginate(milaResultsByWeek, { pageSize: 1, props: { isLive: milaResults.isLive, lastWeek: lastWeek} });
+  const milaResults: MilaResultsDTO = game_state;
+  const milaResultsByWeek = milaResults.resultsByWeek;
+  const lastWeek = milaResultsByWeek[milaResultsByWeek.length - 1].gameWeek;
+  return paginate(milaResultsByWeek, {
+    pageSize: 1,
+    props: { isLive: milaResults.isLive, lastWeek: lastWeek },
+  });
 };
 
 interface Props {
-    page: Page<ResultsByWeek>;
-    isLive: boolean;
-    lastWeek: number;
+  page: Page<ResultsByWeek>;
+  isLive: boolean;
+  lastWeek: number;
 }
 
 const { page, isLive, lastWeek } = Astro.props;
-const standingsTitle = `Standings - GW ${page.data[0].gameWeek}`;   
+const standingsTitle = `Standings - GW ${page.data[0].gameWeek}`;
 ---
 
 <Layout title={standingsTitle} enableViewTransitions>
-    <Card title={standingsTitle}>
-        <div slot="secondary" class="flex flex-row gap-3">
-            <Link href="/standings">Overall Standings</Link>
-            { 
-                lastWeek === page.data[0].gameWeek && isLive && 
-                <div class="font-bold">
-                    🔴 Live
-                </div>
-            }
-        </div>
+  <Card title={standingsTitle}>
+    <div slot="secondary" class="flex flex-row gap-3">
+      <Link href="/standings">Overall Standings</Link>
+      {
+        lastWeek === page.data[0].gameWeek && isLive && (
+          <div class="font-bold">🔴 Live</div>
+        )
+      }
+    </div>
 
-        <div class="overflow-x-auto">
-            <div class="hidden md:block">
-                <StandingsTable
-                    data={page.data[0].results}
-                    lastGameWeek={0}
-                    avatars={images}
-                    client:idle
-                />
-            </div>
-            <div class="block md:hidden">
-                <StandingsTableMobile
-                    data={page.data[0].results}
-                    lastGameWeek={0}
-                    avatars={images}
-                    client:idle
-                />
-            </div>
-        </div>
-        <div class="flex items-center mt-2 gap-2">
-            {page.url.prev ? <Link href={page.url.prev}>Prev GW</Link> : null}
-            {page.url.next ? <Link href={page.url.next}>Next GW</Link> : null}
-        </div>
-    </Card>
+    <div class="overflow-x-auto">
+      <div class="hidden md:block">
+        <StandingsTable
+          data={page.data[0].results}
+          lastGameWeek={0}
+          avatars={images}
+          client:idle
+        />
+      </div>
+      <div class="block md:hidden">
+        <StandingsTableMobile
+          data={page.data[0].results}
+          lastGameWeek={0}
+          avatars={images}
+          client:idle
+        />
+      </div>
+    </div>
+    <div class="mt-2 flex items-center gap-2">
+      {page.url.prev ? <Link href={page.url.prev}>Prev GW</Link> : null}
+      {page.url.next ? <Link href={page.url.next}>Next GW</Link> : null}
+    </div>
+  </Card>
 </Layout>

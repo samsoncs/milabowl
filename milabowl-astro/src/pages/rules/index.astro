@@ -8,24 +8,17 @@ const milaResults: MilaResultsDTO = game_state;
 ---
 
 <Layout title={`Rules of Milabowl`} enableViewTransitions>
-    <div class="mx-auto flex w-screen max-w-screen-lg flex-col space-y-2">
-        <Card>
-            <div class="text-xl font-bold mb-2">
-                Rules
-            </div>
-            {
-            milaResults.rules.map(r => 
-                <div class="py-2">
-                    <div class="font-bold">
-                        {`${r.name} (${r.shortName})`}
-                    </div>
-                    <div>
-                        {r.description}
-                    </div>
-                </div>
-            )
-            }
-        </Card>
-        
-    </div>
+  <div class="mx-auto flex w-screen max-w-screen-lg flex-col space-y-2">
+    <Card>
+      <div class="mb-2 text-xl font-bold">Rules</div>
+      {
+        milaResults.rules.map((r) => (
+          <div class="py-2">
+            <div class="font-bold">{`${r.name} (${r.shortName})`}</div>
+            <div>{r.description}</div>
+          </div>
+        ))
+      }
+    </Card>
+  </div>
 </Layout>

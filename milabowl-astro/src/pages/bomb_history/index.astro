@@ -10,37 +10,37 @@ const bombState: BombGameWeekState[] = bomb_state;
 ---
 
 <Layout title="Bomb History">
-    <div class="flex flex-col gap-4 lg:grid lg:grid-cols-12">
-        <div class="lg:col-span-12">
-            <Card title="Bomb History">
-                <Table
-                    headers={[
-                        'GW',
-                        'Bomb Holder',
-                        'Bomb Thrower',
-                        'Bomb Events',
-                        // 'Active chip',
-                        // 'Points',
-                    ]}
-                >
-                    {
-                        bombState.map((r) => {
-                            return (
-                                <div>
-                                    <tr>
-                                        <td>{'GW ' + r.gameWeek}</td>
-                                        <td>{r.bombHolder.managerName}</td>
-                                        <td>{r.bombThrower?.managerName}</td>
-                                        <td>{r.bombState}</td>
-                                        {/* <td>{activeChips}</td> */}
-                                        {/* <td></td> */}
-                                    </tr>
-                                </div>
-                            );
-                        })
-                    }
-                </Table>
-            </Card>
-        </div>
+  <div className="flex flex-col gap-4 lg:grid lg:grid-cols-12">
+    <div className="lg:col-span-12">
+      <Card title="Bomb History">
+        <Table
+          headers={[
+            'GW',
+            'Bomb Holder',
+            'Bomb Thrower',
+            'Bomb Events',
+            // 'Active chip',
+            // 'Points',
+          ]}
+        >
+          {
+            bombState.map((r) => {
+              return (
+                <div>
+                  <tr>
+                    <td>{'GW ' + r.gameWeek}</td>
+                    <td>{r.bombHolder.managerName}</td>
+                    <td>{r.bombThrower?.managerName}</td>
+                    <td>{r.bombState}</td>
+                    {/* <td>{activeChips}</td> */}
+                    {/* <td></td> */}
+                  </tr>
+                </div>
+              );
+            })
+          }
+        </Table>
+      </Card>
     </div>
+  </div>
 </Layout>

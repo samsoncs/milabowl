@@ -28,9 +28,9 @@ jobs:
         run: ./milabowl-backend/scripts/generate-test-summary.ps1 "TestResults" >> $env:GITHUB_STEP_SUMMARY
         if: steps.tests.outcome == 'success'
 
-  code-quality:
+  code-quality-backend:
     runs-on: ubuntu-latest
-    name: Code Quality Checks
+    name: Backend Code Quality Checks
 
     steps:
       - name: Checkout code
@@ -48,3 +48,30 @@ jobs:
       - name: Check formatting
         working-directory: ./milabowl-backend
         run: dotnet csharpier check . --config-path .editorconfig
+
+  code-quality-frontend:
+    runs-on: ubuntu-latest
+    name: Frontend Code Quality Checks
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: milabowl-astro/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./milabowl-astro
+        run: npm ci
+
+      - name: Check formatting with Prettier
+        working-directory: ./milabowl-astro
+        run: npx prettier --check .
+
+      - name: Check code quality with ESLint
+        working-directory: ./milabowl-astro
+        run: npx eslint .

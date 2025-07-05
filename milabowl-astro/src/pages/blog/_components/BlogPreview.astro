@@ -7,48 +7,48 @@ import AuthorIcon from './AuthorIcon.astro';
 import Tags from './Tags.astro';
 
 export interface Props {
-    post: CollectionEntry<'blog'>;
+  post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
 ---
 
 <Card>
-    <div class="mb-3 flex items-center gap-4">
-        <AuthorIcon />
-        <div class="grow">
-            <div>
-                {post.data.author}
-                <span class="text-gray-400 dark:text-slate-400">
-                    - {readingTime(post.body).text}</span
-                >
-            </div>
-        </div>
-        <time
-            datetime={format(post.data.date, 'yyyy-MM-dd')}
-            class="text-gray-400 dark:text-slate-400"
-            >{format(post.data.date, 'dd.MM.yyyy')}</time
+  <div className="mb-3 flex items-center gap-4">
+    <AuthorIcon />
+    <div className="grow">
+      <div>
+        {post.data.author}
+        <span className="text-gray-400 dark:text-slate-400">
+          - {readingTime(post.body).text}</span
         >
+      </div>
     </div>
-    <a
-        class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:text-indigo-900 dark:prose-headings:text-dark-text"
-        href={`/blog/${post.slug}`}
+    <time
+      dateTime={format(post.data.date, 'yyyy-MM-dd')}
+      className="text-gray-400 dark:text-slate-400"
+      >{format(post.data.date, 'dd.MM.yyyy')}</time
     >
-        <h2>
-            {post.data.title}
-        </h2>
-        <div
-            style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box;"
-            class="max-h-50 mb-3 overflow-hidden text-ellipsis"
-        >
-            {post.body}
-        </div>
-    </a>
-    {
-        (
-            <div class="mt-4">
-                <Tags tags={post.data.tags} />
-            </div>
-        )
-    }
+  </div>
+  <a
+    className="prose prose-slate dark:prose-invert md:prose-lg prose-headings:text-indigo-900 dark:prose-headings:text-dark-text"
+    href={`/blog/${post.slug}`}
+  >
+    <h2>
+      {post.data.title}
+    </h2>
+    <div
+      style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box;"
+      className="max-h-50 mb-3 overflow-hidden text-ellipsis"
+    >
+      {post.body}
+    </div>
+  </a>
+  {
+    (
+      <div className="mt-4">
+        <Tags tags={post.data.tags} />
+      </div>
+    )
+  }
 </Card>

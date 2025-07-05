@@ -1,22 +1,27 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 export interface Props {
-    teamName: string;
+  teamName: string;
 }
 
 const { teamName } = Astro.props;
 
-const imgs = Object.values(import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', { eager: true }));
+const imgs = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>('../../assets/*.webp', {
+    eager: true,
+  })
+);
 const images = imgs.map((i) => i.default);
 ---
 
 <Image
-    style="border-radius: 999px; display:inline"
-    src={images.find((i) =>
-        i.src.includes(
-            teamName.replace('$', 's').toLowerCase().replaceAll(' ', '_')
-        )
-    )!}
-    alt={`Avatar for ${teamName}`}
+  style="border-radius: 999px; display:inline"
+  src={images.find((i) =>
+    i.src.includes(
+      teamName.replace('$', 's').toLowerCase().replaceAll(' ', '_')
+    )
+  )!}
+  alt={`Avatar for ${teamName}`}
 />

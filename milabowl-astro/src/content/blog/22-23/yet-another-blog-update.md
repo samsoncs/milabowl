@@ -23,10 +23,10 @@ kan enkelt lage overskrifter i ulike størrelser:
 
 Lage lister:
 
--   Første punkt
--   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis
-    laoreet turpis vel blandit. Cras quis arcu cursus, ultricies nisi in,
-    rhoncus ligula. Sed tortor risus, sagittis nec ornare nec
+- Første punkt
+- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis
+  laoreet turpis vel blandit. Cras quis arcu cursus, ultricies nisi in,
+  rhoncus ligula. Sed tortor risus, sagittis nec ornare nec
 
 Lage numererte lister:
 
@@ -51,7 +51,7 @@ Man kan også legge til kode blokker i et hvilket som helst kodespråk:
 ```tsx
 // Example of .tsx code block
 const FunctionalClass: React.FC<{}> = () => (
-    <div>Example of a React functional component</div>
+  <div>Example of a React functional component</div>
 );
 ```
 

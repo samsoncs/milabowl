@@ -89,10 +89,10 @@ Get **6.9** points if your team has the same FPL score as last gameweek.
 Recieve points based on your position in the Milabowl FPL league this gameweek.
 The current implementation goes like this:
 
--   Group players by FPL gameweek score
--   Order groupings by ascending points
--   All players in first grouping (last place) receives **0** points
--   For each grouping, the points assigned increases by **0.5** points
+- Group players by FPL gameweek score
+- Order groupings by ascending points
+- All players in first grouping (last place) receives **0** points
+- For each grouping, the points assigned increases by **0.5** points
 
 At the time of writing the league consists of 9 players, leaving a maximum
 potential of **4** points, if no players had the same FPL score.

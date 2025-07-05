@@ -1,17 +1,17 @@
 ---
 export interface Props {
-    tags: string[];
+  tags: string[];
 }
 
 const { tags } = Astro.props;
 ---
 
-<div class="flex gap-2">
-    {
-        tags.map((t) => (
-            <div class="rounded-full bg-slate-300 p-1 px-4 dark:bg-slate-700">
-                {t}
-            </div>
-        ))
-    }
+<div className="flex gap-2">
+  {
+    tags.map((t) => (
+      <div className="rounded-full bg-slate-300 p-1 px-4 dark:bg-slate-700">
+        {t}
+      </div>
+    ))
+  }
 </div>
