@@ -91,7 +91,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
           pointSize={5}
           pointColor={{ theme: 'background' }}
           theme={{
-            text:{
+            text: {
               fill: isDarkTheme ? colors.slate[300] : colors.slate[700],
             },
             grid: {

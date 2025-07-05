@@ -1,4 +1,8 @@
-import { createColumnHelper, type RowData, type ExpandedState } from '@tanstack/react-table';
+import {
+  createColumnHelper,
+  type RowData,
+  type ExpandedState,
+} from '@tanstack/react-table';
 import type { GameWeekResult } from '../../game_state/gameState';
 import SortableTable from '../../components/core/Table/SortableTable';
 import { useMemo, useState } from 'react';
@@ -30,18 +34,21 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
   data,
   avatars,
   teams,
-  currentGameWeekResults
+  currentGameWeekResults,
 }) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
-  const renderSubComponent = ({ row }: { row: { original: GameWeekResult } }) => 
-    (
-      <TeamDetailPanel
-        row={row.original}
-        teams={teams}
-        currentGameWeekResults={currentGameWeekResults}
-      />
-    );
+  const renderSubComponent = ({
+    row,
+  }: {
+    row: { original: GameWeekResult };
+  }) => (
+    <TeamDetailPanel
+      row={row.original}
+      teams={teams}
+      currentGameWeekResults={currentGameWeekResults}
+    />
+  );
 
   const lastGameWeek = data[data.length - 1].gameWeek;
   const columns = useMemo(
@@ -70,8 +77,10 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
       columnHelper.accessor('teamName', {
         id: 'teamName',
         header: 'Team',
-        cell: (props) => 
-            <span className={`flex items-center gap-2 rounded-l-full rank-${props.row.original.milaRank}`}>
+        cell: (props) => (
+          <span
+            className={`flex items-center gap-2 rounded-l-full rank-${props.row.original.milaRank}`}
+          >
             <img
               src={
                 avatars.find((a) =>
@@ -86,13 +95,13 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
               className="h-10 w-10 rounded-full sm:h-12 sm:w-12"
             />
             <a
-              className={`max-w-[130px] truncate hover:underline transition-all duration-200 sm:max-w-[300px] ${props.row.original.milaRank < 4 ? 'font-bold' : ''}`}
+              className={`max-w-[130px] truncate transition-all duration-200 hover:underline sm:max-w-[300px] ${props.row.original.milaRank < 4 ? 'font-bold' : ''}`}
               href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
             >
               {props.cell.getValue()}
             </a>
           </span>
-        ,
+        ),
         enableSorting: false,
       }),
       columnHelper.display({
@@ -141,11 +150,13 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
             <div className="flex justify-end">
               <button
                 onClick={row.getToggleExpandedHandler()}
-                className="flex items-center justify-center p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors"
-                aria-label={row.getIsExpanded() ? 'Collapse details' : 'Expand details'}
+                className="flex items-center justify-center rounded p-1 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                aria-label={
+                  row.getIsExpanded() ? 'Collapse details' : 'Expand details'
+                }
               >
                 <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${
+                  className={`h-4 w-4 transition-transform duration-200 ${
                     row.getIsExpanded() ? 'rotate-180' : ''
                   }`}
                   fill="none"

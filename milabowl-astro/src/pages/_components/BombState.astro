@@ -5,10 +5,13 @@ export interface Props {
   bombState: BombGameWeekState[];
 }
 
-function formatManagerName(managerName: string, maxLength: number = 30): string {
+function formatManagerName(
+  managerName: string,
+  maxLength: number = 30
+): string {
   if (!managerName) return '';
-  return managerName.length > maxLength 
-    ? `${managerName.substring(0, maxLength)}...` 
+  return managerName.length > maxLength
+    ? `${managerName.substring(0, maxLength)}...`
     : managerName;
 }
 
@@ -20,17 +23,21 @@ const BOMB_EMOJIS = {
 
 const { bombState } = Astro.props;
 ---
+
 <>
-  {bombState
-    .slice(-5)
-    .reverse()
-    .map((r) => (
-      <div class="col-span-5">
-        GW {r.gameWeek} -{' '}
-        {r.bombThrower && `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
-        {r.bombState !== 'Exploded' && BOMB_EMOJIS.active}
-        {r.bombState === 'Exploded' && `${BOMB_EMOJIS.exploded} (-3 pts) `}
-        {formatManagerName(r.bombHolder.managerName)}
-      </div>
-    ))}
+  {
+    bombState
+      .slice(-5)
+      .reverse()
+      .map((r) => (
+        <div class="col-span-5">
+          GW {r.gameWeek} -{' '}
+          {r.bombThrower &&
+            `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
+          {r.bombState !== 'Exploded' && BOMB_EMOJIS.active}
+          {r.bombState === 'Exploded' && `${BOMB_EMOJIS.exploded} (-3 pts) `}
+          {formatManagerName(r.bombHolder.managerName)}
+        </div>
+      ))
+  }
 </>

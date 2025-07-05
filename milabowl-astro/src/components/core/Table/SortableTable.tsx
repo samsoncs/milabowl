@@ -209,8 +209,8 @@ const SortableTable = <T,>({
           <>
             <tr
               className={`text-sm ${
-                row.getIsExpanded() 
-                  ? '' 
+                row.getIsExpanded()
+                  ? ''
                   : 'border-b border-slate-200 dark:border-slate-700'
               }`}
               key={row.id}
@@ -232,20 +232,17 @@ const SortableTable = <T,>({
               ))}
             </tr>
             <tr key={`${row.id}-expanded`}>
-              <td 
-                colSpan={row.getVisibleCells().length} 
-                className="p-0 bg-white dark:bg-slate-800"
+              <td
+                colSpan={row.getVisibleCells().length}
+                className="bg-white p-0 dark:bg-slate-800"
               >
-                <div 
+                <div
                   className={`
-                    overflow-hidden transition-all duration-200 ease-in-out border-slate-200 dark:border-slate-700
-                    ${row.getIsExpanded() 
-                      ? 'border-b' 
-                      : 'max-h-0'
-                    }
+                    overflow-hidden border-slate-200 transition-all duration-200 ease-in-out dark:border-slate-700
+                    ${row.getIsExpanded() ? 'border-b' : 'max-h-0'}
                   `}
                   style={{
-                    maxHeight: row.getIsExpanded() ? '1000px' : '0px'
+                    maxHeight: row.getIsExpanded() ? '1000px' : '0px',
                   }}
                 >
                   {renderSubComponent && renderSubComponent({ row })}
