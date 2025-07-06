@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import readingTime from 'reading-time';
 import { format } from 'date-fns';
 import AuthorIcon from './_components/AuthorIcon.astro';
@@ -28,8 +28,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export interface Props {
   post: CollectionEntry<'blog'>;
-  prevPost: CollectionEntry<'blog'> | undefined;
-  nextPost: CollectionEntry<'blog'> | undefined;
+  prevPost?: CollectionEntry<'blog'>;
+  nextPost?: CollectionEntry<'blog'>;
 }
 
 const { post, prevPost, nextPost } = Astro.props;
@@ -38,24 +38,24 @@ const stats = readingTime(post.body);
 ---
 
 <MarkdownLayout title={`Blogpost - ${post.data.title}`}>
-  <div className="flex items-center gap-4">
+  <div class="flex items-center gap-4">
     <AuthorIcon />
-    <div className="grow">
+    <div class="grow">
       <div>
         {post.data.author}
-        <span className="text-gray-400 dark:text-slate-400">- {stats.text}</span
+        <span class="text-gray-400 dark:text-slate-400">- {stats.text}</span
         >
       </div>
     </div>
     <time
-      dateTime={format(post.data.date, 'yyyy-MM-dd')}
-      className="text-gray-400 dark:text-slate-400"
+      date-time={format(post.data.date, 'yyyy-MM-dd')}
+      class="text-gray-400 dark:text-slate-400"
       >{format(post.data.date, 'dd.MM.yyyy')}</time
     >
   </div>
 
   <h1
-    className="mb-8 mt-4 text-4xl font-bold text-indigo-900 dark:text-dark-text"
+    class="mb-8 mt-4 text-4xl font-bold text-indigo-900 dark:text-dark-text"
   >
     {post.data.title}
   </h1>
@@ -66,7 +66,7 @@ const stats = readingTime(post.body);
 
   <Tags tags={post.data.tags} />
 
-  <div slot="post-card" className="my-2 grid grid-cols-2 gap-2">
+  <div slot="post-card" class="my-2 grid grid-cols-2 gap-2">
     {
       prevPost && (
         <BlogNavigation navigationText="Previous Post" post={prevPost} />

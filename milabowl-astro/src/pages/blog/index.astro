@@ -11,11 +11,11 @@ const stortedEntries = firstBlogEntries
 ---
 
 <Layout title="Mila blog" enableViewTransitions>
-  <div className="mx-auto mb-2 max-w-screen-lg space-y-2">
+  <div class="mx-auto mb-2 max-w-screen-lg space-y-2">
     {stortedEntries.map((post) => <BlogPreview post={post} />)}
-    <a className="pl-2 md:pl-0" href="/blog/archive">
+    <a class="pl-2 md:pl-0" href="/blog/archive">
       <button
-        className="mt-4 rounded-md p-4 dark:bg-slate-700 dark:text-dark-text"
+        class="mt-4 rounded-md p-4 dark:bg-slate-700 dark:text-dark-text"
       >
         See Archive
       </button>

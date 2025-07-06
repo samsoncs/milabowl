@@ -27,19 +27,19 @@ const blogsBySlug = groupBy(blogEntries, (b) => b.slug.split('/')[0]);
           </h1>
           <Table>
             <tr slot="header">
-              <th className="w-36">Date</th>
+              <th class="w-36">Date</th>
               <th>Title</th>
             </tr>
             {blogsBySlug[key].map((post) => (
               <tr>
                 <td>
-                  <time dateTime={format(post.data.date, 'yyyy-MM-dd')}>
+                  <time date-time={format(post.data.date, 'yyyy-MM-dd')}>
                     {format(post.data.date, 'dd.MM.yyyy')}
                   </time>
                 </td>
                 <td>
                   <a
-                    className="col-span-2 underline"
+                    class="col-span-2 underline"
                     href={`/blog/${post.slug}`}
                   >
                     {post.data.title}
