@@ -9,6 +9,12 @@ public static class DependencyInjection
 {
     public static IServiceProvider GetServiceProvider()
     {
+        var serviceCollection = GetServices();
+        return serviceCollection.BuildServiceProvider();
+    }
+
+    public static IServiceCollection GetServices()
+    {
         var serviceCollection = new ServiceCollection();
 
         serviceCollection.AddTransient<Processor>();
@@ -23,6 +29,6 @@ public static class DependencyInjection
                 .WithTransientLifetime()
         );
         serviceCollection.AddSingleton<IBombState, BombState>();
-        return serviceCollection.BuildServiceProvider();
+        return serviceCollection;
     }
 }
