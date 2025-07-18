@@ -21,6 +21,12 @@ public partial class SnapshotDelegatingHandler : DelegatingHandler
             return await base.SendAsync(request, cancellationToken);
         }
 
+        var safeFileName = SanitizeFileName(url) + ".json";
+        var filePath = Path.Combine(_snapshotDirectory, safeFileName);
+        if (!Directory.Exists(_snapshotDirectory))
+        {
+            Directory.CreateDirectory(_snapshotDirectory);
+        }
         var response = await base.SendAsync(request, cancellationToken);
         if (response.Content.Headers.ContentType?.MediaType != "application/json")
         {
@@ -28,8 +34,6 @@ public partial class SnapshotDelegatingHandler : DelegatingHandler
         }
 
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
-        var safeFileName = SanitizeFileName(url) + ".json";
-        var filePath = Path.Combine(_snapshotDirectory, safeFileName);
         await File.WriteAllTextAsync(filePath, json, cancellationToken);
         Console.WriteLine($"Snapshot saved: {filePath}");
         return response;

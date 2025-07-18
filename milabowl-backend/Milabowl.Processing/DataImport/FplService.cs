@@ -19,9 +19,9 @@ public class FplService : IFplService
 {
     private readonly HttpClient _httpClient;
 
-    public FplService(IHttpClientFactory httpClientFactory)
+    public FplService(HttpClient httpClient)
     {
-        _httpClient = httpClientFactory.CreateClient();
+        _httpClient = httpClient;
     }
 
     public async Task<BootstrapRootDto> GetBootstrapRoot()
