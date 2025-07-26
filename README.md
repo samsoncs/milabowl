@@ -27,9 +27,19 @@ dotnet run --project ./Milabowl.Processing/Milabowl.Processing.csproj -- ../mila
 
 The backend will:
 
-1. Fetch data from FPL APIs
+1. Fetch data from FPL APIs (or use snapshots in development)
 2. Calculate milapoints for all managers
 3. Output JSON state files to the frontend's `game_state` directory
+
+#### Snapshot Mode for Development
+
+The backend includes a snapshot system for development that eliminates the need for live FPL API calls:
+
+- **Read Mode (Development)**: Uses pre-recorded FPL API responses from the `snapshot` folder, instead of HTTP calls
+- **Write Mode**: Records live FPL API calls to files for future use
+- **None Mode**: Makes live calls to the FPL API (production mode)
+
+This allows for faster development cycles, enables development during down periods for FPL API and consistent test data without hitting FPL rate limits.
 
 ### Running Milalytics (Data Analysis)
 
