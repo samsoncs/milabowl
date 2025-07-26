@@ -1,16 +1,13 @@
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+namespace Milabowl.Processing.Utils.Snapshot;
 
-namespace Milabowl.Snapshot;
-
-public partial class SnapshotDelegatingHandler : DelegatingHandler
+public class SnapshotHandler : DelegatingHandler
 {
-    private readonly string _snapshotDirectory;
+    private readonly string _snapshotPath;
     private readonly HashSet<string> _snapshotdUrls = new();
 
-    public SnapshotDelegatingHandler(string snapshotDirectory)
+    public SnapshotHandler(ISnapshotPathResolver snapshotPathResolver)
     {
-        _snapshotDirectory = snapshotDirectory;
+        _snapshotPath = snapshotPathResolver.GetSnapshotPath();
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -21,11 +18,11 @@ public partial class SnapshotDelegatingHandler : DelegatingHandler
             return await base.SendAsync(request, cancellationToken);
         }
 
-        var safeFileName = SanitizeFileName(url) + ".json";
-        var filePath = Path.Combine(_snapshotDirectory, safeFileName);
-        if (!Directory.Exists(_snapshotDirectory))
+        var safeFileName = SnapshotUrlSanitizer.SanitizeUrl(url) + ".json";
+        var filePath = Path.Combine(_snapshotPath, safeFileName);
+        if (!Directory.Exists(_snapshotPath))
         {
-            Directory.CreateDirectory(_snapshotDirectory);
+            Directory.CreateDirectory(_snapshotPath);
         }
         var response = await base.SendAsync(request, cancellationToken);
         if (response.Content.Headers.ContentType?.MediaType != "application/json")
@@ -38,12 +35,4 @@ public partial class SnapshotDelegatingHandler : DelegatingHandler
         Console.WriteLine($"Snapshot saved: {filePath}");
         return response;
     }
-
-    private static string SanitizeFileName(string url)
-    {
-        return FilePathSanitizer().Replace(url, "_");
-    }
-
-    [GeneratedRegex("[\\/:*?\"<>|]")]
-    private static partial Regex FilePathSanitizer();
 }

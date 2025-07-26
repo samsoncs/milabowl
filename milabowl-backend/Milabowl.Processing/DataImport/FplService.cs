@@ -21,6 +21,7 @@ public class FplService : IFplService
 
     public FplService(HttpClient httpClient)
     {
+        Console.WriteLine("FplService reistered");
         _httpClient = httpClient;
     }
 
