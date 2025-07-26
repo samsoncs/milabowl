@@ -2,6 +2,7 @@
 using Milabowl.Milalytics;
 using Milabowl.Processing;
 using Milabowl.Processing.DataImport;
+using Milabowl.Processing.Utils;
 
 var wasSuccessful = Migrator.Migrate();
 if (!wasSuccessful)
@@ -10,6 +11,8 @@ if (!wasSuccessful)
     return;
 }
 
-var serviceProvider = DependencyInjection.GetServiceProvider();
+var serviceCollection = new ServiceCollection();
+serviceCollection.AddMilabowlServices(SnapshotMode.None);
+var serviceProvider = serviceCollection.BuildServiceProvider();
 var importer = serviceProvider.GetRequiredService<FplImporter>();
 await FplDataImporter.ImportToSql(importer);

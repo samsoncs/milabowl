@@ -1,28 +1,57 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Milabowl.Processing.DataImport;
 using Milabowl.Processing.Processing;
-using Scrutor;
+using Milabowl.Processing.Utils;
+using Milabowl.Processing.Utils.Snapshot;
 
 namespace Milabowl.Processing;
 
 public static class DependencyInjection
 {
-    public static IServiceProvider GetServiceProvider()
+    public static void AddMilabowlServices(
+        this IServiceCollection serviceCollection,
+        SnapshotMode snapshotMode
+    )
     {
-        var serviceCollection = new ServiceCollection();
-
         serviceCollection.AddTransient<Processor>();
         serviceCollection.AddTransient<HistorySummarizer>();
         serviceCollection.AddTransient<IRulesProcessor, RulesProcessor>();
         serviceCollection.AddTransient<FplImporter>();
-        serviceCollection.AddHttpClient<IFplService, FplService>();
+        serviceCollection.AddTransient<ISnapshotPathResolver, SnapshotPathResolver>();
+        serviceCollection.AddFplService(snapshotMode);
+        serviceCollection.AddSingleton<IBombState, BombState>();
+
         serviceCollection.Scan(s =>
             s.FromAssemblyOf<IMilaRule>()
-                .AddClasses()
+                .AddClasses(classes => classes.AssignableTo<IMilaRule>())
                 .AsSelfWithInterfaces()
                 .WithTransientLifetime()
         );
-        serviceCollection.AddSingleton<IBombState, BombState>();
-        return serviceCollection.BuildServiceProvider();
+    }
+
+    private static void AddFplService(this IServiceCollection services, SnapshotMode snapshotMode)
+    {
+        switch (snapshotMode)
+        {
+            case SnapshotMode.Read:
+                Console.WriteLine("Using snapshot instead of live API");
+                services.AddTransient<SnapshotReadHandler>();
+                services
+                    .AddHttpClient<IFplService, FplService>()
+                    .AddHttpMessageHandler<SnapshotReadHandler>();
+                break;
+            case SnapshotMode.Write:
+                Console.WriteLine("Writing FPL snapshots when making requests");
+                services.AddTransient<SnapshotHandler>();
+                services
+                    .AddHttpClient<IFplService, FplService>()
+                    .AddHttpMessageHandler<SnapshotHandler>();
+                break;
+            case SnapshotMode.None:
+            default:
+                Console.WriteLine("Using live FPL API");
+                services.AddHttpClient<IFplService, FplService>();
+                break;
+        }
     }
 }
