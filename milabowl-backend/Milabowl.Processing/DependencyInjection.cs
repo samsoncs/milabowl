@@ -8,7 +8,10 @@ namespace Milabowl.Processing;
 
 public static class DependencyInjection
 {
-    public static void AddMilabowlServices(this IServiceCollection serviceCollection, SnapshotMode snapshotMode)
+    public static void AddMilabowlServices(
+        this IServiceCollection serviceCollection,
+        SnapshotMode snapshotMode
+    )
     {
         serviceCollection.AddTransient<Processor>();
         serviceCollection.AddTransient<HistorySummarizer>();
@@ -33,13 +36,15 @@ public static class DependencyInjection
             case SnapshotMode.Read:
                 Console.WriteLine("Using snapshot instead of live API");
                 services.AddTransient<SnapshotReadHandler>();
-                services.AddHttpClient<IFplService, FplService>()
+                services
+                    .AddHttpClient<IFplService, FplService>()
                     .AddHttpMessageHandler<SnapshotReadHandler>();
                 break;
             case SnapshotMode.Write:
                 Console.WriteLine("Writing FPL snapshots when making requests");
                 services.AddTransient<SnapshotHandler>();
-                services.AddHttpClient<IFplService, FplService>()
+                services
+                    .AddHttpClient<IFplService, FplService>()
                     .AddHttpMessageHandler<SnapshotHandler>();
                 break;
             case SnapshotMode.None:

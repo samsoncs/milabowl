@@ -9,7 +9,10 @@ public class SnapshotReadHandler : DelegatingHandler
         _snapshotPath = snapshotPathResolver.GetSnapshotPath();
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         var url = request.RequestUri?.ToString() ?? "unknown";
         var safeFileName = SnapshotUrlSanitizer.SanitizeUrl(url) + ".json";
@@ -22,7 +25,7 @@ public class SnapshotReadHandler : DelegatingHandler
         var json = await File.ReadAllTextAsync(filePath, cancellationToken);
         var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK)
         {
-            Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json")
+            Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"),
         };
         return response;
     }

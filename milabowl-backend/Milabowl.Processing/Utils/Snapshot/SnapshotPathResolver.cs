@@ -43,4 +43,3 @@ public class SnapshotPathResolver : ISnapshotPathResolver
         return null;
     }
 }
-

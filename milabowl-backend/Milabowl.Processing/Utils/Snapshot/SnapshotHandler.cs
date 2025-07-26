@@ -10,7 +10,10 @@ public class SnapshotHandler : DelegatingHandler
         _snapshotPath = snapshotPathResolver.GetSnapshotPath();
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         var url = request.RequestUri?.ToString() ?? "unknown";
         if (!_snapshotdUrls.Add(url))

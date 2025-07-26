@@ -15,13 +15,15 @@ var host = Host.CreateDefaultBuilder(args)
         logging.AddFilter("System.Net.Http.HttpClient", LogLevel.Warning);
         logging.AddFilter("System.Net.Http.HttpClient.IFplService", LogLevel.Warning);
     })
-    .ConfigureServices((context, services) =>
-    {
-        var fplApiOptionsSection = context.Configuration.GetSection("FplApi");
-        var fplApiOptions = fplApiOptionsSection.Get<FplApiOptions>()!;
-        services.AddMilabowlServices(fplApiOptions.SnapshotMode);
-        services.Configure<FplApiOptions>(fplApiOptionsSection);
-    })
+    .ConfigureServices(
+        (context, services) =>
+        {
+            var fplApiOptionsSection = context.Configuration.GetSection("FplApi");
+            var fplApiOptions = fplApiOptionsSection.Get<FplApiOptions>()!;
+            services.AddMilabowlServices(fplApiOptions.SnapshotMode);
+            services.Configure<FplApiOptions>(fplApiOptionsSection);
+        }
+    )
     .Build();
 
 var processor = host.Services.GetRequiredService<Processor>();

@@ -4,7 +4,7 @@ namespace Milabowl.Processing.Utils
     {
         None,
         Read,
-        Write
+        Write,
     }
 
     public class FplApiOptions
@@ -13,4 +13,3 @@ namespace Milabowl.Processing.Utils
         public required SnapshotMode SnapshotMode { get; init; }
     }
 }
-
