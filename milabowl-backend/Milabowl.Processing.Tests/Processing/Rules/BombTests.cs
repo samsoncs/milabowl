@@ -50,8 +50,7 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_not_be_hit_by_collateral_if_bomb_tier_is_dynamite()
     {
-        var state = new ManagerGameWeekStateBuilder()
-            .Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory
             .GetManagerBombState()
@@ -71,8 +70,7 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_minus_half_if_user_is_collateral_of_exploding_bomb()
     {
-        var state = new ManagerGameWeekStateBuilder()
-            .Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory
             .GetManagerBombState()
@@ -92,8 +90,7 @@ public class BombTests : MilaRuleTest<Bomb>
     [Fact]
     public void Should_return_minus_half_if_user_is_collateral_of_exploding_nuke()
     {
-        var state = new ManagerGameWeekStateBuilder()
-            .Build();
+        var state = new ManagerGameWeekStateBuilder().Build();
         var bombStateMock = Substitute.For<IBombState>();
         var managerBombState = TestStateFactory
             .GetManagerBombState()
