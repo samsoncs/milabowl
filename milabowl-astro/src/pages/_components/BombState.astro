@@ -49,7 +49,7 @@ const { bombState } = Astro.props;
             {r.collateralTargets
               .map((t) => formatManagerName(t.managerName, 20))
               .join(', ')}
-            )
+            {` ${GetBombPoints(r.bombTier) / 2} pts`})
           </>
         )}
       </div>
