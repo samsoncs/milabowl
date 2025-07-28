@@ -1,5 +1,6 @@
 ---
 import type { BombGameWeekState } from '../../game_state/bombState';
+import { BOMB_EMOJIS, GetBombEmoji } from './bombEmoji';
 
 export interface Props {
   bombState: BombGameWeekState[];
@@ -15,29 +16,20 @@ function formatManagerName(
     : managerName;
 }
 
-const BOMB_EMOJIS = {
-  active: '💣',
-  exploded: '💥',
-  handed: '👋',
-};
-
 const { bombState } = Astro.props;
 ---
 
 <>
   {
-    bombState
-      .slice(-5)
-      .reverse()
-      .map((r) => (
-        <div class="col-span-5">
-          GW {r.gameWeek} -{' '}
-          {r.bombThrower &&
-            `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
-          {r.bombState !== 'Exploded' && BOMB_EMOJIS.active}
-          {r.bombState === 'Exploded' && `${BOMB_EMOJIS.exploded} (-3 pts) `}
-          {formatManagerName(r.bombHolder.managerName)}
-        </div>
-      ))
+    bombState.map((r) => (
+      <div class="col-span-5">
+        GW {r.gameWeek} -{' '}
+        {r.bombThrower &&
+          `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
+        {r.bombState !== 'Exploded' && GetBombEmoji(r.bombTier)}
+        {r.bombState === 'Exploded' && `${BOMB_EMOJIS.exploded} (-3 pts) `}
+        {formatManagerName(r.bombHolder.managerName)}
+      </div>
+    ))
   }
 </>
