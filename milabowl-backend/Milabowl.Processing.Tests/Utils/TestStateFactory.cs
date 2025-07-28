@@ -212,9 +212,9 @@ public static class TestStateFactory
         ));
     }
 
-    public static Faker<BombHolder> GetBombHolder()
+    public static Faker<BombManager> GetBombHolder()
     {
-        return new Faker<BombHolder>().CustomInstantiator(f => new BombHolder(
+        return new Faker<BombManager>().CustomInstantiator(f => new BombManager(
             f.Random.Int(1, 100000),
             f.Company.CompanyName(),
             f.Name.FullName()
@@ -226,7 +226,10 @@ public static class TestStateFactory
         return new Faker<ManagerBombState>().CustomInstantiator(f => new ManagerBombState(
             f.PickRandom<BombStateEnum>(),
             GetBombHolder().Generate(),
-            f.Random.Bool() ? GetBombHolder().Generate() : null
+            f.Random.Bool() ? GetBombHolder().Generate() : null,
+            f.PickRandom<BombTier>(),
+            f.Random.Int(0, 10),
+            CollateralTargets: []
         ));
     }
 }

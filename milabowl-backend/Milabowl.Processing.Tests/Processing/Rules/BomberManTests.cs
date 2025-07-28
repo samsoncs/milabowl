@@ -17,7 +17,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombThrower, new BombHolder(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombThrower, new BombManager(state.User.EntryId, "Team", "User"))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new BomberMan(bombStateMock);
@@ -43,7 +43,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
                         BombStateEnum.HandedOver_H2H
                     )
             )
-            .RuleFor(x => x.BombThrower, new BombHolder(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombThrower, new BombManager(state.User.EntryId, "Team", "User"))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new BomberMan(bombStateMock);
@@ -61,7 +61,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombThrower, new BombHolder(state.User.EntryId + 1, "Team", "User"))
+            .RuleFor(x => x.BombThrower, new BombManager(state.User.EntryId + 1, "Team", "User"))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new BomberMan(bombStateMock);
@@ -79,7 +79,7 @@ public class BomberManTests : MilaRuleTest<BomberMan>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombThrower, (BombHolder?)null)
+            .RuleFor(x => x.BombThrower, (BombManager?)null)
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new BomberMan(bombStateMock);
