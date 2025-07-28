@@ -14,6 +14,7 @@ import {
   type OnChangeFn,
 } from '@tanstack/react-table';
 import { useState, type CSSProperties } from 'react';
+import React from 'react';
 
 interface Props<T> {
   data: T[];
@@ -206,14 +207,13 @@ const SortableTable = <T,>({
       </thead>
       <tbody className="w-full">
         {table.getRowModel().rows.map((row) => (
-          <>
+          <React.Fragment key={row.id}>
             <tr
               className={`text-sm ${
                 row.getIsExpanded()
                   ? ''
                   : 'border-b border-slate-200 dark:border-slate-700'
               }`}
-              key={row.id}
             >
               {row.getVisibleCells().map((cell) => (
                 <td
@@ -249,7 +249,7 @@ const SortableTable = <T,>({
                 </div>
               </td>
             </tr>
-          </>
+          </React.Fragment>
         ))}
       </tbody>
     </table>

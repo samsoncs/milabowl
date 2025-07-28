@@ -18,12 +18,42 @@ public class Bomb : MilaRule
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var bombState = _bombState.CalcBombStateForGw(userGameWeek);
-        var bombPoints =
-            bombState.BombState == BombStateEnum.Exploded
-            && bombState.BombHolder.FantasyManagerId == userGameWeek.User.EntryId
-                ? -5m
-                : 0;
+        var bombPointValue = bombState.BombTier switch
+        {
+            BombTier.Dynamite => -2m,
+            BombTier.Bomb => -4m,
+            BombTier.Nuke => -6m,
+            _ => 0m,
+        };
 
-        return new RulePoints(bombPoints, null);
+        var bombPoints = 0m;
+        var reason = "";
+        if (UserHoldsExplodingBomb(bombState, userGameWeek.User.EntryId))
+        {
+            bombPoints = bombPointValue;
+            reason = $"Holding an exploding {bombState.BombTier} bomb, - {bombPoints} pts.";
+        }
+
+        if (UserIsCollateralOfExplodingBomb(bombState, userGameWeek.User.EntryId))
+        {
+            bombPoints = bombPointValue / 2;
+            reason =
+                $"Hit by collateral of an exploding {bombState.BombTier} bomb, - {bombPoints} pts.";
+        }
+
+        return new RulePoints(bombPoints, reason);
+    }
+
+    private bool UserHoldsExplodingBomb(ManagerBombState bombState, int userEntryId)
+    {
+        return bombState.BombState == BombStateEnum.Exploded
+            && bombState.BombHolder.FantasyManagerId == userEntryId;
+    }
+
+    private bool UserIsCollateralOfExplodingBomb(ManagerBombState bombState, int userEntryId)
+    {
+        return bombState
+                is { BombState: BombStateEnum.Exploded, BombTier: BombTier.Bomb or BombTier.Nuke }
+            && bombState.CollateralTargets.Select(b => b.FantasyManagerId).Contains(userEntryId);
     }
 }

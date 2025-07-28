@@ -1,5 +1,6 @@
 ---
 import type { BombGameWeekState } from '../../game_state/bombState';
+import { BOMB_EMOJIS, GetBombEmoji } from './bombEmoji';
 
 export interface Props {
   bombState: BombGameWeekState[];
@@ -15,10 +16,17 @@ function formatManagerName(
     : managerName;
 }
 
-const BOMB_EMOJIS = {
-  active: '💣',
-  exploded: '💥',
-  handed: '👋',
+const GetBombPoints = (bombTier: string): number => {
+  switch (bombTier) {
+    case 'Nuke':
+      return -6; // Points for exploded bomb
+    case 'Bomb':
+      return -4; // No points for held bomb
+    case 'Dynamite':
+      return -2; // Points for thrown bomb
+    default:
+      return 0; // Default case for other states
+  }
 };
 
 const { bombState } = Astro.props;
@@ -26,18 +34,25 @@ const { bombState } = Astro.props;
 
 <>
   {
-    bombState
-      .slice(-5)
-      .reverse()
-      .map((r) => (
-        <div class="col-span-5">
-          GW {r.gameWeek} -{' '}
-          {r.bombThrower &&
-            `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
-          {r.bombState !== 'Exploded' && BOMB_EMOJIS.active}
-          {r.bombState === 'Exploded' && `${BOMB_EMOJIS.exploded} (-3 pts) `}
-          {formatManagerName(r.bombHolder.managerName)}
-        </div>
-      ))
+    bombState.map((r) => (
+      <div class="col-span-5">
+        GW {r.gameWeek} -{' '}
+        {r.bombThrower &&
+          `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
+        {r.bombState !== 'Exploded' && GetBombEmoji(r.bombTier)}
+        {r.bombState === 'Exploded' &&
+          `${BOMB_EMOJIS.exploded} (${GetBombPoints(r.bombTier)} pts) `}
+        {formatManagerName(r.bombHolder.managerName)}
+        {r.collateralTargets.length > 0 && (
+          <>
+            (Collateral:
+            {r.collateralTargets
+              .map((t) => formatManagerName(t.managerName, 20))
+              .join(', ')}
+            {` ${GetBombPoints(r.bombTier) / 2} pts`})
+          </>
+        )}
+      </div>
+    ))
   }
 </>
