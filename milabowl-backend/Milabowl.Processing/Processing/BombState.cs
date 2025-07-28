@@ -24,7 +24,8 @@ public record ManagerBombState(
     BombManager? BombThrower,
     BombTier BombTier,
     int WeeksSinceLastExplosion,
-    IList<BombManager> CollateralTargets
+    IList<BombManager> CollateralTargets,
+    string? CollateralTargetPlayerName
 );
 
 public static class ManagerBombStateExtensions
@@ -87,16 +88,17 @@ public static class ManagerBombStateExtensions
             .ToList();
         var bombHolderManager = allPlayers.First(ap => ap.User.EntryId == bombState.BombHolder.FantasyManagerId);
         var viceCaptain = bombHolderManager.Lineup.First(l => l.IsViceCaptain);
-        var collateralTargets = bombHolderManager
-            .Opponents
+        var collateralTargets = allPlayers
             .Where(o =>
+                o.User.EntryId != bombHolderManager.User.EntryId &&
                 o.Lineup.First(l => l.IsCaptain).FantasyPlayerEventId ==
                 viceCaptain.FantasyPlayerEventId)
             .Select(GetBombHolder)
             .ToList();
 
         return bombState with {
-            CollateralTargets = collateralTargets
+            CollateralTargets = collateralTargets,
+            CollateralTargetPlayerName = viceCaptain.WebName
         };
     }
 
@@ -238,7 +240,8 @@ public class BombState : IBombState
             null,
             BombTier.Dynamite,
             WeeksSinceLastExplosion: 0,
-            CollateralTargets: []
+            CollateralTargets: [],
+            CollateralTargetPlayerName: null
         );
     }
 
@@ -276,7 +279,8 @@ public class BombState : IBombState
                 b.Value.BombThrower,
                 b.Value.BombTier,
                 b.Value.WeeksSinceLastExplosion,
-                b.Value.CollateralTargets
+                b.Value.CollateralTargets,
+                b.Value.CollateralTargetPlayerName
             ))
             .OrderBy(b => b.GameWeek)
             .ToList();
@@ -299,7 +303,8 @@ public record BombGameWeekState(
     BombManager? BombThrower,
     BombTier BombTier,
     int WeeksSinceLastExplosion,
-    IList<BombManager> CollateralTargets
+    IList<BombManager> CollateralTargets,
+    string? CollateralTargetPlayerName
 );
 
 public record BombManager(int FantasyManagerId, string ManagerName, string UserName);

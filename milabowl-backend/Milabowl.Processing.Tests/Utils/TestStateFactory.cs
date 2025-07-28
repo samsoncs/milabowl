@@ -229,7 +229,8 @@ public static class TestStateFactory
             f.Random.Bool() ? GetBombHolder().Generate() : null,
             f.PickRandom<BombTier>(),
             f.Random.Int(0, 10),
-            CollateralTargets: []
+            CollateralTargets: [],
+            CollateralTargetPlayerName: "Player Name"
         ));
     }
 }
