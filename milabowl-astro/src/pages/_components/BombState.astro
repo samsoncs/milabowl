@@ -34,25 +34,27 @@ const { bombState } = Astro.props;
 
 <>
   {
-    bombState.sort((a,b) => b.gameWeek - a.gameWeek).map((r) => (
-      <div class="col-span-5">
-        GW {r.gameWeek} -{' '}
-        {r.bombThrower &&
-          `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
-        {r.bombState !== 'Exploded' && GetBombEmoji(r.bombTier)}
-        {r.bombState === 'Exploded' &&
-          `${BOMB_EMOJIS.exploded} (${GetBombPoints(r.bombTier)} pts) `}
-        {formatManagerName(r.bombHolder.managerName)}
-        {r.collateralTargets.length > 0 && (
-          <>
-            (Collateral:
-            {r.collateralTargets
-              .map((t) => formatManagerName(t.managerName, 20))
-              .join(', ')}
-            {` ${GetBombPoints(r.bombTier) / 2} pts`})
-          </>
-        )}
-      </div>
-    ))
+    bombState
+      .sort((a, b) => b.gameWeek - a.gameWeek)
+      .map((r) => (
+        <div class="col-span-5">
+          GW {r.gameWeek} -{' '}
+          {r.bombThrower &&
+            `${formatManagerName(r.bombThrower.managerName)} ${BOMB_EMOJIS.handed} =>`}
+          {r.bombState !== 'Exploded' && GetBombEmoji(r.bombTier)}
+          {r.bombState === 'Exploded' &&
+            `${BOMB_EMOJIS.exploded} (${GetBombPoints(r.bombTier)} pts) `}
+          {formatManagerName(r.bombHolder.managerName)}
+          {r.collateralTargets.length > 0 && (
+            <>
+              (Collateral:
+              {r.collateralTargets
+                .map((t) => formatManagerName(t.managerName, 20))
+                .join(', ')}
+              {` ${GetBombPoints(r.bombTier) / 2} pts`})
+            </>
+          )}
+        </div>
+      ))
   }
 </>
