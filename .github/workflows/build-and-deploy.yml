@@ -35,7 +35,7 @@ jobs:
 
       - name: Generate game state
         working-directory: ./milabowl-backend/Milabowl.Processing
-        run: dotnet run --no-build --no-launch-profile --configuration Release --environment DOTNET_ENVIRONMENT=Production -- ../../milabowl-astro/src/game_state
+        run: dotnet run --no-build --no-launch-profile --configuration Release --environment DOTNET_ENVIRONMENT=Production
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
