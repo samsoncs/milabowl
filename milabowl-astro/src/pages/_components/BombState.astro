@@ -34,7 +34,7 @@ const { bombState } = Astro.props;
 
 <>
   {
-    bombState.map((r) => (
+    bombState.sort((a,b) => b.gameWeek - a.gameWeek).map((r) => (
       <div class="col-span-5">
         GW {r.gameWeek} -{' '}
         {r.bombThrower &&
