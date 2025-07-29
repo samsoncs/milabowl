@@ -12,6 +12,7 @@ opt/vsts
 
 # Rider
 .idea
+*.DotSettings.user
 
 # User-specific files
 .suo
