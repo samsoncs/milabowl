@@ -30,8 +30,9 @@ public class Processor
         _bombState = bombState;
     }
 
-    public async Task ProcessMilaPoints(string filePath)
+    public async Task ProcessMilaPoints()
     {
+        var filePath = FilePathResolver.ResolveGameStateFilePath();
         Console.WriteLine("Importing FPL data for rules processing");
         var importData = await _importer.ImportFplDataForRulesProcessing();
         Console.WriteLine("Importing FPL data for rules processing - Finished");
@@ -63,5 +64,25 @@ public class Processor
             .Select(m => _rulesProcessor.CalculateForUserGameWeek(m))
             .ToList()
             .AsReadOnly();
+    }
+}
+
+public static class FilePathResolver
+{
+    public static string ResolveGameStateFilePath()
+    {
+        var gitRoot = FindGitRoot(AppContext.BaseDirectory);
+        var gameStatePath = Path.Combine(gitRoot, "milabowl-astro", "src", "game_state");
+        return gameStatePath;
+    }
+
+    private static string FindGitRoot(string startDir)
+    {
+        var dir = new DirectoryInfo(startDir);
+        while (dir != null && !File.Exists(Path.Combine(dir.FullName, ".git", "config")))
+        {
+            dir = dir.Parent;
+        }
+        return dir?.FullName ?? throw new DirectoryNotFoundException("Git root not found.");
     }
 }

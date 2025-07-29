@@ -27,4 +27,4 @@ var host = Host.CreateDefaultBuilder(args)
     .Build();
 
 var processor = host.Services.GetRequiredService<Processor>();
-await processor.ProcessMilaPoints(args[0]);
+await processor.ProcessMilaPoints();

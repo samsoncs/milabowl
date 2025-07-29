@@ -34,7 +34,7 @@ public class SnapshotPathResolver : ISnapshotPathResolver
         var dir = AppContext.BaseDirectory;
         while (!string.IsNullOrEmpty(dir))
         {
-            var candidate = Path.Combine(dir, "milabowl.sln");
+            var candidate = Path.Combine(dir, "Milabowl.sln");
             if (File.Exists(candidate))
                 return candidate;
             var parent = Directory.GetParent(dir);
