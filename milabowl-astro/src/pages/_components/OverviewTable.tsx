@@ -32,7 +32,7 @@ type OptimizedImage = {
   srcSetAvif: string;
   srcSetWebp: string;
   sizes: string;
-}
+};
 
 interface OverviewTableProps {
   data: GameWeekResult[];
@@ -97,35 +97,36 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
                 .replaceAll(' ', '_')
             )
           )!;
-          return(
-          <span
-            className={`flex items-center gap-2 rounded-l-full rank-${props.row.original.milaRank}`}
-          >
-            <picture className="h-10 w-10 sm:h-12 sm:w-12 rounded-full">
-              <source
-                srcSet={optimizedImage.srcSetAvif}
-                sizes={optimizedImage.sizes}
-                type="image/avif"
-              />
-              <source
-                srcSet={optimizedImage.srcSetWebp}
-                sizes={optimizedImage.sizes}
-                type="image/webp"
-              />
-              <img
-                src={optimizedImage.src40Webp}
-                className="rounded-full"
-                alt={`${props.row.original.teamName} avatar`}
-              />
-            </picture>
-            <a
-              className={`max-w-[75px] truncate transition-all duration-200 hover:underline sm:max-w-[250px] ${props.row.original.milaRank < 4 ? 'font-bold' : ''}`}
-              href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
+          return (
+            <span
+              className={`flex items-center gap-2 rounded-l-full rank-${props.row.original.milaRank}`}
             >
-              {props.cell.getValue()}
-            </a>
-          </span>
-        )},
+              <picture className="h-10 w-10 rounded-full sm:h-12 sm:w-12">
+                <source
+                  srcSet={optimizedImage.srcSetAvif}
+                  sizes={optimizedImage.sizes}
+                  type="image/avif"
+                />
+                <source
+                  srcSet={optimizedImage.srcSetWebp}
+                  sizes={optimizedImage.sizes}
+                  type="image/webp"
+                />
+                <img
+                  src={optimizedImage.src40Webp}
+                  className="rounded-full"
+                  alt={`${props.row.original.teamName} avatar`}
+                />
+              </picture>
+              <a
+                className={`max-w-[75px] truncate transition-all duration-200 hover:underline sm:max-w-[250px] ${props.row.original.milaRank < 4 ? 'font-bold' : ''}`}
+                href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
+              >
+                {props.cell.getValue()}
+              </a>
+            </span>
+          );
+        },
         enableSorting: false,
       }),
       columnHelper.display({

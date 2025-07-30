@@ -32,32 +32,32 @@ const imgs = Object.values(
 
 const optimizedImages = await Promise.all(
   imgs.map(async (img) => {
-     const img40Avif = await getImage({ 
-      src: img.default, 
-      width: 40, 
+    const img40Avif = await getImage({
+      src: img.default,
+      width: 40,
       height: 40,
-      format: 'avif'
+      format: 'avif',
     });
-    const img60Avif = await getImage({ 
-      src: img.default, 
-      width: 60, 
+    const img60Avif = await getImage({
+      src: img.default,
+      width: 60,
       height: 60,
-      format: 'avif'
+      format: 'avif',
     });
-    
-    const img40Webp = await getImage({ 
-      src: img.default, 
-      width: 40, 
+
+    const img40Webp = await getImage({
+      src: img.default,
+      width: 40,
       height: 40,
-      format: 'webp'
+      format: 'webp',
     });
-    const img60Webp = await getImage({ 
-      src: img.default, 
-      width: 60, 
+    const img60Webp = await getImage({
+      src: img.default,
+      width: 60,
       height: 60,
-      format: 'webp'
+      format: 'webp',
     });
-    
+
     return {
       src: img.default.src,
       src40Avif: img40Avif.src,
@@ -66,7 +66,7 @@ const optimizedImages = await Promise.all(
       src60Webp: img60Webp.src,
       srcSetAvif: `${img40Avif.src} 40w, ${img60Avif.src} 60w`,
       srcSetWebp: `${img40Webp.src} 40w, ${img60Webp.src} 60w`,
-      sizes: "(max-width: 640px) 40px, 60px"
+      sizes: '(max-width: 640px) 40px, 60px',
     };
   })
 );
