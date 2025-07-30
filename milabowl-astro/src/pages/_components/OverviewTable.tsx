@@ -23,10 +23,21 @@ declare module '@tanstack/react-table' {
 
 const columnHelper = createColumnHelper<GameWeekResult>();
 
+type OptimizedImage = {
+  src: string;
+  src40Avif: string;
+  src60Avif: string;
+  src40Webp: string;
+  src60Webp: string;
+  srcSetAvif: string;
+  srcSetWebp: string;
+  sizes: string;
+};
+
 interface OverviewTableProps {
   data: GameWeekResult[];
   teams: ResultsForTeams[];
-  avatars: ImageMetadata[];
+  avatars: OptimizedImage[];
   currentGameWeekResults?: GameWeekResult[];
 }
 
@@ -77,31 +88,45 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
       columnHelper.accessor('teamName', {
         id: 'teamName',
         header: 'Team',
-        cell: (props) => (
-          <span
-            className={`flex items-center gap-2 rounded-l-full rank-${props.row.original.milaRank}`}
-          >
-            <img
-              src={
-                avatars.find((a) =>
-                  a.src.includes(
-                    props.row.original.teamName
-                      .replace('$', 's')
-                      .toLowerCase()
-                      .replaceAll(' ', '_')
-                  )
-                )?.src
-              }
-              className="h-10 w-10 rounded-full sm:h-12 sm:w-12"
-            />
-            <a
-              className={`max-w-[110px] truncate transition-all duration-200 hover:underline sm:max-w-[300px] ${props.row.original.milaRank < 4 ? 'font-bold' : ''}`}
-              href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
+        cell: (props) => {
+          const optimizedImage = avatars.find((a) =>
+            a.src.includes(
+              props.row.original.teamName
+                .replace('$', 's')
+                .toLowerCase()
+                .replaceAll(' ', '_')
+            )
+          )!;
+          return (
+            <span
+              className={`flex items-center gap-2 rounded-l-full rank-${props.row.original.milaRank}`}
             >
-              {props.cell.getValue()}
-            </a>
-          </span>
-        ),
+              <picture className="h-10 w-10 rounded-full sm:h-12 sm:w-12">
+                <source
+                  srcSet={optimizedImage.srcSetAvif}
+                  sizes={optimizedImage.sizes}
+                  type="image/avif"
+                />
+                <source
+                  srcSet={optimizedImage.srcSetWebp}
+                  sizes={optimizedImage.sizes}
+                  type="image/webp"
+                />
+                <img
+                  src={optimizedImage.src40Webp}
+                  className="rounded-full"
+                  alt={`${props.row.original.teamName} avatar`}
+                />
+              </picture>
+              <a
+                className={`max-w-[75px] truncate transition-all duration-200 hover:underline sm:max-w-[250px] ${props.row.original.milaRank < 4 ? 'font-bold' : ''}`}
+                href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
+              >
+                {props.cell.getValue()}
+              </a>
+            </span>
+          );
+        },
         enableSorting: false,
       }),
       columnHelper.display({

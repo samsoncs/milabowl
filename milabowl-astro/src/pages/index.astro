@@ -12,6 +12,7 @@ import OverviewTable from './_components/OverviewTable';
 import BombState from './_components/BombState.astro';
 import type { ImageMetadata } from 'astro';
 import { GetBombEmoji } from './_components/bombEmoji';
+import { getImage } from 'astro:assets';
 
 const milaResults: MilaResultsDTO = game_state;
 const bombState: BombGameWeekState[] = bomb_state;
@@ -28,7 +29,48 @@ const imgs = Object.values(
     eager: true,
   })
 );
-const images = imgs.map((i) => i.default);
+
+const optimizedImages = await Promise.all(
+  imgs.map(async (img) => {
+    const img40Avif = await getImage({
+      src: img.default,
+      width: 40,
+      height: 40,
+      format: 'avif',
+    });
+    const img60Avif = await getImage({
+      src: img.default,
+      width: 60,
+      height: 60,
+      format: 'avif',
+    });
+
+    const img40Webp = await getImage({
+      src: img.default,
+      width: 40,
+      height: 40,
+      format: 'webp',
+    });
+    const img60Webp = await getImage({
+      src: img.default,
+      width: 60,
+      height: 60,
+      format: 'webp',
+    });
+
+    return {
+      src: img.default.src,
+      src40Avif: img40Avif.src,
+      src60Avif: img60Avif.src,
+      src40Webp: img40Webp.src,
+      src60Webp: img60Webp.src,
+      srcSetAvif: `${img40Avif.src} 40w, ${img60Avif.src} 60w`,
+      srcSetWebp: `${img40Webp.src} 40w, ${img60Webp.src} 60w`,
+      sizes: '(max-width: 640px) 40px, 60px',
+    };
+  })
+);
+
 const resultsByUser = milaResults.resultsByUser;
 
 const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
@@ -53,7 +95,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
           </div>
 
           <OverviewTable
-            avatars={images}
+            avatars={optimizedImages}
             data={milaResults.overallScore}
             teams={lastFiveWeeksByTeam}
             currentGameWeekResults={currentGameWeekResults}
