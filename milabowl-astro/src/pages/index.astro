@@ -12,7 +12,7 @@ import BombState from './_components/BombState.astro';
 import type { ImageMetadata } from 'astro';
 import { GetBombEmoji } from './_components/bombEmoji';
 import { getImage } from 'astro:assets';
-import OverviewTable2 from './_components/OverviewTable2';
+import OverviewTable from './_components/OverviewTable';
 
 const milaResults: MilaResultsDTO = game_state;
 const bombState: BombGameWeekState[] = bomb_state;
@@ -34,35 +34,23 @@ const optimizedImages = await Promise.all(
   imgs.map(async (img) => {
     const img60Avif = await getImage({
       src: img.default,
-      width: 60,
-      height: 60,
-      format: 'avif',
-    });
-    const img90Avif = await getImage({
-      src: img.default,
-      width: 90,
-      height: 90,
+      width: 72,
+      height: 72,
       format: 'avif',
     });
 
     const img60Webp = await getImage({
       src: img.default,
-      width: 60,
-      height: 60,
-      format: 'webp',
-    });
-    const img90Webp = await getImage({
-      src: img.default,
-      width: 90,
-      height: 90,
+      width: 72,
+      height: 72,
       format: 'webp',
     });
 
     return {
       src: img.default.src,
-      avif: [`${img60Avif.src} 60w`, `${img90Avif.src} 90w`],
-      webp: [`${img60Webp.src} 60w`, `${img90Webp.src} 90w`],
-      sizes: '(max-width: 640px) 48px, 60px',
+      avif: [`${img60Avif.src} 72w`],
+      webp: [`${img60Webp.src} 72w`],
+      sizes: '48px',
     };
   })
 );
@@ -90,10 +78,9 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
             {milaResults.isLive && <div class="font-bold">🔴 Live</div>}
           </div>
 
-          <OverviewTable2
+          <OverviewTable
             avatars={optimizedImages}
             data={milaResults.overallScore}
-            teams={lastFiveWeeksByTeam}
             currentGameWeekResults={currentGameWeekResults}
             client:idle
           />
