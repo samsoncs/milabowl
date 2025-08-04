@@ -25,12 +25,8 @@ const columnHelper = createColumnHelper<GameWeekResult>();
 
 type OptimizedImage = {
   src: string;
-  src40Avif: string;
-  src60Avif: string;
-  src40Webp: string;
-  src60Webp: string;
-  srcSetAvif: string;
-  srcSetWebp: string;
+  avif: string[];
+  webp: string[];
   sizes: string;
 };
 
@@ -103,17 +99,17 @@ const OverviewTable: React.FC<OverviewTableProps> = ({
             >
               <picture className="h-10 w-10 rounded-full sm:h-12 sm:w-12">
                 <source
-                  srcSet={optimizedImage.srcSetAvif}
+                  srcSet={optimizedImage.avif.join(', ')}
                   sizes={optimizedImage.sizes}
                   type="image/avif"
                 />
                 <source
-                  srcSet={optimizedImage.srcSetWebp}
+                  srcSet={optimizedImage.webp.join(', ')}
                   sizes={optimizedImage.sizes}
                   type="image/webp"
                 />
                 <img
-                  src={optimizedImage.src40Webp}
+                  src={optimizedImage.src}
                   className="rounded-full"
                   alt={`${props.row.original.teamName} avatar`}
                 />

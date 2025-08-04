@@ -8,11 +8,11 @@ import type { MilaResultsDTO } from '../game_state/gameState';
 import type { BombGameWeekState } from '../game_state/bombState';
 import type { ResultsForTeams } from './_components/types';
 import Link from '../components/core/Link.astro';
-import OverviewTable from './_components/OverviewTable';
 import BombState from './_components/BombState.astro';
 import type { ImageMetadata } from 'astro';
 import { GetBombEmoji } from './_components/bombEmoji';
 import { getImage } from 'astro:assets';
+import OverviewTable2 from './_components/OverviewTable2';
 
 const milaResults: MilaResultsDTO = game_state;
 const bombState: BombGameWeekState[] = bomb_state;
@@ -32,41 +32,37 @@ const imgs = Object.values(
 
 const optimizedImages = await Promise.all(
   imgs.map(async (img) => {
-    const img40Avif = await getImage({
-      src: img.default,
-      width: 40,
-      height: 40,
-      format: 'avif',
-    });
     const img60Avif = await getImage({
       src: img.default,
       width: 60,
       height: 60,
       format: 'avif',
     });
-
-    const img40Webp = await getImage({
+    const img90Avif = await getImage({
       src: img.default,
-      width: 40,
-      height: 40,
-      format: 'webp',
+      width: 90,
+      height: 90,
+      format: 'avif',
     });
+
     const img60Webp = await getImage({
       src: img.default,
       width: 60,
       height: 60,
       format: 'webp',
     });
+    const img90Webp = await getImage({
+      src: img.default,
+      width: 90,
+      height: 90,
+      format: 'webp',
+    });
 
     return {
       src: img.default.src,
-      src40Avif: img40Avif.src,
-      src60Avif: img60Avif.src,
-      src40Webp: img40Webp.src,
-      src60Webp: img60Webp.src,
-      srcSetAvif: `${img40Avif.src} 40w, ${img60Avif.src} 60w`,
-      srcSetWebp: `${img40Webp.src} 40w, ${img60Webp.src} 60w`,
-      sizes: '(max-width: 640px) 40px, 60px',
+      avif: [`${img60Avif.src} 60w`, `${img90Avif.src} 90w`],
+      webp: [`${img60Webp.src} 60w`, `${img90Webp.src} 90w`],
+      sizes: '(max-width: 640px) 48px, 60px',
     };
   })
 );
@@ -94,7 +90,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
             {milaResults.isLive && <div class="font-bold">🔴 Live</div>}
           </div>
 
-          <OverviewTable
+          <OverviewTable2
             avatars={optimizedImages}
             data={milaResults.overallScore}
             teams={lastFiveWeeksByTeam}
