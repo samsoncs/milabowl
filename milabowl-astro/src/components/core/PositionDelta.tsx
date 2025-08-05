@@ -4,7 +4,7 @@ interface Props {
 }
 
 const PositionDelta: React.FC<Props> = ({ delta, pos }) => (
-  <div className="flex flex-col justify-center text-[0.65rem] font-bold">
+  <div className="flex flex-col items-center justify-center gap-1 text-[0.65rem] font-bold">
     <div className="text-sm font-bold">{pos}</div>
     {delta < 0 && (
       <div className="flex flex-row items-center justify-items-center text-red-700 dark:text-red-400">
