@@ -179,7 +179,7 @@ const OverviewTable = ({
         return (
           <div className="flex flex-col" key={result.teamName}>
             <div
-              className={`flex gap-2 overflow-hidden p-[0.4rem] ${!isExpanded ? 'border-b border-slate-200 dark:border-slate-700' : ''}`}
+              className={`flex gap-2 overflow-hidden p-[0.4rem] pr-0 ${!isExpanded ? 'border-b border-slate-200 dark:border-slate-700' : ''}`}
             >
               <div className="w-4">
                 <PositionDelta pos={result.milaRank} delta={deltaPosition} />
@@ -202,7 +202,7 @@ const OverviewTable = ({
                     />
                     <img
                       src={optimizedImage.src}
-                      className="rounded-full"
+                      className={`rounded-full rank-${result.milaRank}-avatar`}
                       alt={`${result.teamName} avatar`}
                     />
                   </picture>
@@ -218,19 +218,19 @@ const OverviewTable = ({
                     </div>
                   </div>
                 </div>
-                <div className="item-center flex w-4">
-                  <button
-                    onClick={() =>
-                      setExpandedTeam(isExpanded ? null : result.teamName)
-                    }
-                    className="flex items-center justify-center rounded p-1 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
-                    aria-label={'Expand details'}
-                  >
-                    <div className={isExpanded ? 'rotate-180' : ''}>
-                      <Chevron />
-                    </div>
-                  </button>
-                </div>
+              </div>
+              <div className="flex items-center justify-end">
+                <button
+                  onClick={() =>
+                    setExpandedTeam(isExpanded ? null : result.teamName)
+                  }
+                  className="flex items-center justify-center rounded transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                  aria-label={'Expand details'}
+                >
+                  <div className={isExpanded ? 'rotate-180' : ''}>
+                    <Chevron />
+                  </div>
+                </button>
               </div>
             </div>
             <div

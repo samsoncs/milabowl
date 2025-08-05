@@ -68,13 +68,17 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
 }));
 ---
 
-<Layout title="Milabowl - Dashboard" enableViewTransitions>
+<Layout
+  title="Milabowl - Dashboard"
+  description="Milabowl is a custom Fantasy Premier League dashboard with unique rules, live standings, and chaotic twists. Track your team's progress and enjoy a fresh take on FPL!"
+  enableViewTransitions
+>
   <main>
     <div class="flex flex-col gap-4 lg:grid lg:grid-cols-12">
       <div class="lg:col-span-5">
         <Card title="Standings">
           <div slot="secondary" class="flex flex-row gap-3">
-            <Link href="/standings">See More</Link>
+            <Link href="/standings">Standings Table</Link>
             {milaResults.isLive && <div class="font-bold">🔴 Live</div>}
           </div>
 
