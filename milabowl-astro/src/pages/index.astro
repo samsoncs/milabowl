@@ -24,6 +24,10 @@ const currentGameWeekResults =
   milaResults.resultsByWeek.find((week) => week.gameWeek === currentGameWeek)
     ?.results || [];
 
+const currentWeekBombState = bombState.find(
+  (state) => state.gameWeek === currentGameWeek
+);
+
 const imgs = Object.values(
   import.meta.glob<{ default: ImageMetadata }>('../assets/*.webp', {
     eager: true,
@@ -78,7 +82,6 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
       <div class="lg:col-span-5">
         <Card title="Standings">
           <div slot="secondary" class="flex flex-row gap-3">
-            <Link href="/standings">Standings Table</Link>
             {milaResults.isLive && <div class="font-bold">🔴 Live</div>}
           </div>
 
@@ -86,6 +89,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
             avatars={optimizedImages}
             data={milaResults.overallScore}
             currentGameWeekResults={currentGameWeekResults}
+            bombState={currentWeekBombState}
             client:idle
           />
         </Card>

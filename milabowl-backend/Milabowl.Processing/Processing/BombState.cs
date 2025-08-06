@@ -7,6 +7,7 @@ public enum BombStateEnum
 {
     Holding,
     Exploded,
+    Diffused,
     HandedOver_H2H,
     HandedOver_Chip,
 }
@@ -25,7 +26,8 @@ public record ManagerBombState(
     BombTier BombTier,
     int WeeksSinceLastExplosion,
     IList<BombManager> CollateralTargets,
-    string? CollateralTargetPlayerName
+    string? CollateralTargetPlayerName,
+    IList<BombManager> BombDiffusalKits
 );
 
 public static class ManagerBombStateExtensions
@@ -44,15 +46,28 @@ public static class ManagerBombStateExtensions
     public static ManagerBombState ProcessBombExplosion(
         this ManagerBombState bombState,
         IList<int> bombRounds,
-        int gameWeek
+        int gameWeek,
+        IList<BombManager> activeBombDiffusalKits
     )
     {
-        if (WillBombExplode(bombRounds, gameWeek))
+        if (!WillBombExplode(bombRounds, gameWeek))
         {
-            return bombState with { BombState = BombStateEnum.Exploded };
+            return bombState;
         }
 
-        return bombState;
+        if (
+            activeBombDiffusalKits.Any(a =>
+                a.FantasyManagerId == bombState.BombHolder.FantasyManagerId
+            )
+        )
+        {
+            return bombState with { BombState = BombStateEnum.Diffused };
+        }
+
+        return bombState with
+        {
+            BombState = BombStateEnum.Exploded,
+        };
     }
 
     public static ManagerBombState WithBombTier(
@@ -107,13 +122,31 @@ public static class ManagerBombStateExtensions
                 && o.Lineup.First(l => l.IsCaptain).FantasyPlayerEventId
                     == viceCaptain.FantasyPlayerEventId
             )
-            .Select(GetBombHolder)
+            .Select(GetBombManager)
             .ToList();
 
         return bombState with
         {
             CollateralTargets = collateralTargets,
             CollateralTargetPlayerName = viceCaptain.WebName,
+        };
+    }
+
+    public static ManagerBombState AwardBombDiffusalKits(
+        this ManagerBombState bombState,
+        ManagerGameWeekState managerGameWeekState
+    )
+    {
+        var playersRewardedDiffusalKits = managerGameWeekState
+            .Opponents.Select(o => o)
+            .Append(managerGameWeekState)
+            .Where(m => m.TotalScore > 99)
+            .Select(GetBombManager)
+            .ToList();
+
+        return bombState with
+        {
+            BombDiffusalKits = playersRewardedDiffusalKits,
         };
     }
 
@@ -142,8 +175,8 @@ public static class ManagerBombStateExtensions
         return bombState with
         {
             BombState = BombStateEnum.HandedOver_H2H,
-            BombThrower = GetBombHolder(roundStartBombHolder),
-            BombHolder = GetBombHolder(h2hOpponent),
+            BombThrower = GetBombManager(roundStartBombHolder),
+            BombHolder = GetBombManager(h2hOpponent),
         };
     }
 
@@ -165,12 +198,12 @@ public static class ManagerBombStateExtensions
         }
 
         var playersAndScores = managerGameWeekState
-            .Opponents.Select(o => new { Player = GetBombHolder(o), Score = o.TotalScore })
+            .Opponents.Select(o => new { Player = GetBombManager(o), Score = o.TotalScore })
             .ToList();
         playersAndScores.Add(
             new
             {
-                Player = GetBombHolder(managerGameWeekState),
+                Player = GetBombManager(managerGameWeekState),
                 Score = managerGameWeekState.TotalScore,
             }
         );
@@ -182,7 +215,7 @@ public static class ManagerBombStateExtensions
         return bombState with
         {
             BombState = BombStateEnum.HandedOver_Chip,
-            BombThrower = GetBombHolder(roundStartBombHolder),
+            BombThrower = GetBombManager(roundStartBombHolder),
             BombHolder = topScoringNonBombHolderPlayerThisRound,
         };
     }
@@ -193,7 +226,7 @@ public static class ManagerBombStateExtensions
             && roundStartBombHolder.ActiveChip != "manager";
     }
 
-    private static BombManager GetBombHolder(ManagerGameWeekState state)
+    private static BombManager GetBombManager(ManagerGameWeekState state)
     {
         return new BombManager(state.User.EntryId, state.User.TeamName, state.User.UserName);
     }
@@ -207,6 +240,7 @@ public interface IBombState
 
 public class BombState : IBombState
 {
+    private IList<BombManager> _activeBombDiffusalKits;
     private IDictionary<int, ManagerBombState> _bombStateByGameWeek;
     private const int INITIAL_BOMB_HOLDER = 2216421;
     private IList<int> _bombRounds;
@@ -214,6 +248,7 @@ public class BombState : IBombState
     public BombState()
     {
         _bombStateByGameWeek = new ConcurrentDictionary<int, ManagerBombState>();
+        _activeBombDiffusalKits = new List<BombManager>();
         var random = new Random(69);
         _bombRounds = new List<int>();
 
@@ -240,11 +275,17 @@ public class BombState : IBombState
 
         var bombState = GetInitialBombState(roundStartBombHolder)
             .ProcessBombThrow(roundStartBombHolder, managerGameWeekState)
-            .ProcessBombExplosion(_bombRounds, managerGameWeekState.Event.GameWeek)
+            .ProcessBombExplosion(
+                _bombRounds,
+                managerGameWeekState.Event.GameWeek,
+                _activeBombDiffusalKits
+            )
             .WithBombTier(managerGameWeekState, _bombStateByGameWeek)
-            .ProcessCollateralTargets(managerGameWeekState);
+            .ProcessCollateralTargets(managerGameWeekState)
+            .AwardBombDiffusalKits(managerGameWeekState);
 
         _bombStateByGameWeek.Add(managerGameWeekState.Event.GameWeek, bombState);
+        _activeBombDiffusalKits = bombState.BombDiffusalKits;
         return bombState;
     }
 
@@ -257,7 +298,8 @@ public class BombState : IBombState
             BombTier.Dynamite,
             WeeksSinceLastExplosion: 0,
             CollateralTargets: [],
-            CollateralTargetPlayerName: null
+            CollateralTargetPlayerName: null,
+            BombDiffusalKits: []
         );
     }
 
@@ -296,7 +338,8 @@ public class BombState : IBombState
                 b.Value.BombTier,
                 b.Value.WeeksSinceLastExplosion,
                 b.Value.CollateralTargets,
-                b.Value.CollateralTargetPlayerName
+                b.Value.CollateralTargetPlayerName,
+                b.Value.BombDiffusalKits
             ))
             .OrderBy(b => b.GameWeek)
             .ToList();
@@ -316,7 +359,8 @@ public record BombGameWeekState(
     BombTier BombTier,
     int WeeksSinceLastExplosion,
     IList<BombManager> CollateralTargets,
-    string? CollateralTargetPlayerName
+    string? CollateralTargetPlayerName,
+    IList<BombManager> BombDiffusalKits
 );
 
 public record BombManager(int FantasyManagerId, string ManagerName, string UserName);

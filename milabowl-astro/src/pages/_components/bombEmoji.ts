@@ -4,6 +4,10 @@ export const BOMB_EMOJIS = {
   nuke: '☢️',
   exploded: '💥',
   handed: '👋',
+  collateral: '💀',
+  thrown: '🤾',
+  diffused: '💨',
+  diffusalKit: '🧰',
 };
 
 export const GetBombEmoji = (bombTier: string): string => {

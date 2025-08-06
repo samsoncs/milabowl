@@ -3,6 +3,8 @@ import type { GameWeekResult } from '../../game_state/gameState';
 import './style.css';
 import { useMemo, useState, type MouseEventHandler } from 'react';
 import TeamDetailPanel from './TeamDetailPanel';
+import type { BombGameWeekState } from '../../game_state/bombState';
+import { BOMB_EMOJIS, GetBombEmoji } from './bombEmoji';
 
 type OptimizedImage = {
   src: string;
@@ -15,6 +17,7 @@ interface OverviewTable2Props {
   data: GameWeekResult[];
   avatars: OptimizedImage[];
   currentGameWeekResults: GameWeekResult[] | undefined;
+  bombState: BombGameWeekState | undefined;
 }
 
 interface SortToggleProps {
@@ -133,6 +136,7 @@ const OverviewTable = ({
   data,
   avatars,
   currentGameWeekResults,
+  bombState,
 }: OverviewTable2Props) => {
   const { sortedData, sortOrder, sortProp, handleSort } =
     useSortedTable<GameWeekResult>(data, 'cumulativeMilaPoints', 'desc');
@@ -140,7 +144,7 @@ const OverviewTable = ({
 
   return (
     <div className="text-sm">
-      <div className="flex gap-3 pb-2 pl-2 font-bold">
+      <div className="flex gap-3 pb-2 pl-2 font-semibold dark:text-slate-300">
         <div className="w-4">#</div>
         <div className="flex-grow">Team</div>
         <div className="flex gap-1">
@@ -208,10 +212,32 @@ const OverviewTable = ({
                   </picture>
                 </div>
                 <div className="flex-grow p-2">
-                  <div className={result.milaRank < 4 ? 'font-bold' : ''}>
+                  <div
+                    className={`${result.milaRank < 4 ? 'font-bold' : 'font-semibold'}`}
+                  >
                     {result.teamName}
                   </div>
-                  <div className="flex justify-end gap-4">
+                  <div className="flex gap-4">
+                    <div className="flex-grow">
+                      {bombState?.bombThrower?.managerName ===
+                        result.teamName && BOMB_EMOJIS.thrown}
+                      {bombState?.bombHolder.managerName === result.teamName &&
+                        GetBombEmoji(bombState.bombTier)}
+                      {bombState?.bombHolder.managerName === result.teamName &&
+                        bombState?.bombState === 'Exploded' &&
+                        BOMB_EMOJIS.exploded}
+                      {bombState?.bombHolder.managerName === result.teamName &&
+                        bombState?.bombState === 'Diffused' &&
+                        BOMB_EMOJIS.diffused}
+                      {bombState?.bombState === 'Exploded' &&
+                        bombState?.collateralTargets.find(
+                          (t) => t.managerName === result.teamName
+                        ) &&
+                        `${BOMB_EMOJIS.collateral} ${BOMB_EMOJIS.exploded}`}
+                      {bombState?.bombDiffusalKits.find(
+                        (t) => t.managerName === result.teamName
+                      ) && BOMB_EMOJIS.diffusalKit}
+                    </div>
                     <div>{result.gwScore}</div>
                     <div className="font-bold text-indigo-900 dark:text-orange-200">
                       {result.cumulativeMilaPoints}
@@ -234,7 +260,7 @@ const OverviewTable = ({
               </div>
             </div>
             <div
-              className={`${isExpanded ? 'max-h-[500px]' : 'max-h-0'} overflow-hidden border-b
+              className={`${isExpanded ? 'max-h-[500px] border-b' : 'max-h-0'} overflow-hidden
       border-slate-200 opacity-100 transition-all duration-200
       ease-in-out [will-change:max-height,opacity] dark:border-slate-700`}
             >
