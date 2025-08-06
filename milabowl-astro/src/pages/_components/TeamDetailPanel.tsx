@@ -42,7 +42,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({
 
                   <div className="flex items-center gap-2">
                     <div
-                      className={`rounded-full px-2 py-1 text-xs font-semibold ${
+                      className={`rounded-full px-2 py-1 font-mono text-xs font-semibold ${
                         isPositive
                           ? 'bg-green-100 text-green-600 dark:bg-green-900/60 dark:text-green-200'
                           : isNegative
@@ -51,7 +51,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({
                       }`}
                     >
                       {isPositive && '+'}
-                      {r.points} pts
+                      {r.points.toFixed(2)} pts
                     </div>
                   </div>
                 </div>
@@ -61,8 +61,8 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({
           <div className="mt-3 border-t border-slate-200 pt-3 dark:border-slate-600">
             <div className="flex items-center justify-between">
               <span className="font-semibold">GW Score</span>
-              <div className="font-bold">
-                {currentGwTeamData?.gwScore || row.gwScore} pts
+              <div className="px-2 font-mono font-bold">
+                {currentGwTeamData?.gwScore?.toFixed(2) || row.gwScore} pts
               </div>
             </div>
           </div>
