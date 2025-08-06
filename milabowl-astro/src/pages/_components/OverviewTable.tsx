@@ -165,7 +165,7 @@ const OverviewTable = ({
         </div>
         <div className="w-4" />
       </div>
-      {sortedData.map((result) => {
+      {sortedData.map((result, i) => {
         const optimizedImage = avatars.find((a) =>
           a.src.includes(
             result.teamName.replace('$', 's').toLowerCase().replaceAll(' ', '_')
@@ -183,7 +183,7 @@ const OverviewTable = ({
         return (
           <div className="flex flex-col" key={result.teamName}>
             <div
-              className={`flex gap-2 overflow-hidden p-[0.4rem] pr-0 ${!isExpanded ? 'border-b border-slate-200 dark:border-slate-700' : ''}`}
+              className={`flex gap-2 overflow-hidden p-[0.4rem] pr-0 ${!isExpanded && i !== sortedData.length - 1 ? 'border-b border-slate-200 dark:border-slate-700' : ''}`}
             >
               <div className="w-4">
                 <PositionDelta pos={result.milaRank} delta={deltaPosition} />

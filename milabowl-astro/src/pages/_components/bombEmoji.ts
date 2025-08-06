@@ -8,6 +8,7 @@ export const BOMB_EMOJIS = {
   thrown: '🤾',
   diffused: '💨',
   diffusalKit: '🧰',
+  holding: '👐',
 };
 
 export const GetBombEmoji = (bombTier: string): string => {
