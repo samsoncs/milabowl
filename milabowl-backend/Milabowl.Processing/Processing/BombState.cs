@@ -47,19 +47,27 @@ public static class ManagerBombStateExtensions
         this ManagerBombState bombState,
         IList<int> bombRounds,
         int gameWeek,
-        IList<BombManager> activeBombDiffusalKits)
+        IList<BombManager> activeBombDiffusalKits
+    )
     {
         if (!WillBombExplode(bombRounds, gameWeek))
         {
             return bombState;
         }
 
-        if (activeBombDiffusalKits.Any(a => a.FantasyManagerId == bombState.BombHolder.FantasyManagerId))
+        if (
+            activeBombDiffusalKits.Any(a =>
+                a.FantasyManagerId == bombState.BombHolder.FantasyManagerId
+            )
+        )
         {
             return bombState with { BombState = BombStateEnum.Diffused };
         }
 
-        return bombState with { BombState = BombStateEnum.Exploded };
+        return bombState with
+        {
+            BombState = BombStateEnum.Exploded,
+        };
     }
 
     public static ManagerBombState WithBombTier(
@@ -125,23 +133,22 @@ public static class ManagerBombStateExtensions
     }
 
     public static ManagerBombState AwardBombDiffusalKits(
-            this ManagerBombState bombState,
-            ManagerGameWeekState managerGameWeekState
-        )
+        this ManagerBombState bombState,
+        ManagerGameWeekState managerGameWeekState
+    )
     {
-            var playersRewardedDiffusalKits = managerGameWeekState
-                .Opponents.Select(o => o)
-                .Append(managerGameWeekState)
-                .Where(m => m.TotalScore > 99)
-                .Select(GetBombManager)
-                .ToList();
+        var playersRewardedDiffusalKits = managerGameWeekState
+            .Opponents.Select(o => o)
+            .Append(managerGameWeekState)
+            .Where(m => m.TotalScore > 99)
+            .Select(GetBombManager)
+            .ToList();
 
-            return bombState with
-            {
-                BombDiffusalKits = playersRewardedDiffusalKits
-            };
-        }
-
+        return bombState with
+        {
+            BombDiffusalKits = playersRewardedDiffusalKits,
+        };
+    }
 
     private static bool WillBombExplode(IList<int> bombRounds, int gameWeek)
     {
@@ -268,7 +275,11 @@ public class BombState : IBombState
 
         var bombState = GetInitialBombState(roundStartBombHolder)
             .ProcessBombThrow(roundStartBombHolder, managerGameWeekState)
-            .ProcessBombExplosion(_bombRounds, managerGameWeekState.Event.GameWeek, _activeBombDiffusalKits)
+            .ProcessBombExplosion(
+                _bombRounds,
+                managerGameWeekState.Event.GameWeek,
+                _activeBombDiffusalKits
+            )
             .WithBombTier(managerGameWeekState, _bombStateByGameWeek)
             .ProcessCollateralTargets(managerGameWeekState)
             .AwardBombDiffusalKits(managerGameWeekState);
