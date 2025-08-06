@@ -226,11 +226,17 @@ const OverviewTable = ({
                       {bombState?.bombHolder.managerName === result.teamName &&
                         bombState?.bombState === 'Exploded' &&
                         BOMB_EMOJIS.exploded}
+                      {bombState?.bombHolder.managerName === result.teamName &&
+                        bombState?.bombState === 'Diffused' &&
+                        BOMB_EMOJIS.diffused}
                       {bombState?.bombState === 'Exploded' &&
                         bombState?.collateralTargets.find(
                           (t) => t.managerName === result.teamName
                         ) &&
                         `${BOMB_EMOJIS.collateral} ${BOMB_EMOJIS.exploded}`}
+                      {bombState?.bombDiffusalKits.find(
+                        (t) => t.managerName === result.teamName
+                      ) && BOMB_EMOJIS.diffusalKit}
                     </div>
                     <div>{result.gwScore}</div>
                     <div className="font-bold text-indigo-900 dark:text-orange-200">

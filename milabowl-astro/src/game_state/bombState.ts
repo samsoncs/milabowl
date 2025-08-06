@@ -7,6 +7,7 @@ export interface BombGameWeekState {
     weeksSinceLastExplosion: number;
     collateralTargets: BombManager[];
     collateralTargetPlayerName?: string | null;
+    bombDiffusalKits: BombManager[];
 }
 
 export interface BombManager {

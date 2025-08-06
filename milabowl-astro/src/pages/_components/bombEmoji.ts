@@ -6,6 +6,8 @@ export const BOMB_EMOJIS = {
   handed: '👋',
   collateral: '💀',
   thrown: '🤾',
+  diffused: '💨',
+  diffusalKit: '🧰',
 };
 
 export const GetBombEmoji = (bombTier: string): string => {
