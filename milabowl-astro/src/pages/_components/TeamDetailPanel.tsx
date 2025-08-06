@@ -32,7 +32,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({
               return (
                 <div
                   key={r.ruleShortName}
-                  className={`flex items-center justify-between py-2 ${
+                  className={`flex items-center justify-between py-1 ${
                     !isLast
                       ? 'border-b border-slate-200 dark:border-slate-600'
                       : ''
@@ -42,11 +42,11 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({
 
                   <div className="flex items-center gap-2">
                     <div
-                      className={`rounded-full px-2 py-1 text-xs font-bold ${
+                      className={`rounded-full px-2 py-1 text-xs font-semibold ${
                         isPositive
-                          ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200'
+                          ? 'bg-green-100 text-green-600 dark:bg-green-900/60 dark:text-green-200'
                           : isNegative
-                            ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200'
+                            ? 'bg-red-100 text-red-600 dark:bg-red-900/60 dark:text-red-200'
                             : 'bg-gray-100 dark:bg-gray-700'
                       }`}
                     >
@@ -60,8 +60,8 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({
 
           <div className="mt-3 border-t border-slate-200 pt-3 dark:border-slate-600">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-bold">Total Score</span>
-              <div className="text-sm font-bold">
+              <span className="font-semibold">GW Score</span>
+              <div className="font-bold">
                 {currentGwTeamData?.gwScore || row.gwScore} pts
               </div>
             </div>
