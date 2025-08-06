@@ -230,7 +230,8 @@ public static class TestStateFactory
             f.PickRandom<BombTier>(),
             f.Random.Int(0, 10),
             CollateralTargets: [],
-            CollateralTargetPlayerName: "Player Name"
+            CollateralTargetPlayerName: "Player Name",
+            BombDiffusalKits: new List<BombManager>()
         ));
     }
 }
