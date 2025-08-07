@@ -104,7 +104,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
               <div slot="secondary">
                 <Link href="/bomb_history">See all</Link>
               </div>
-              <div class="grid grid-cols-5 gap-2">
+              <div>
                 <BombState bombState={bombState.slice(0, 3)} />
               </div>
             </Card>

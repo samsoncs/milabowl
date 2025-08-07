@@ -1,7 +1,25 @@
 ---
+interface Props {
+  status?: 'Negative' | 'Positive' | 'Neutral';
+}
 
+const GetNegativeClasses = (status?: string): string => {
+  return status === 'Negative'
+    ? 'text-red-100 bg-gradient-to-r from-red-900/50 to-red-800/50'
+    : '';
+};
+
+const GetPositiveClasses = (status?: string): string => {
+  return status === 'Positive'
+    ? 'text-green-100 bg-gradient-to-r from-green-900/50 to-green-800/50'
+    : '';
+};
+
+const { status = 'Neutral' } = Astro.props;
 ---
 
-<div class="rounded-md bg-slate-100 p-2 dark:bg-slate-800">
+<div
+  class={`rounded-md bg-slate-100 p-2 dark:bg-slate-800 ${GetNegativeClasses(status)} ${GetPositiveClasses(status)}`}
+>
   <slot />
 </div>
