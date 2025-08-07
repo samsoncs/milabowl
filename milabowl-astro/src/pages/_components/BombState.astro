@@ -2,9 +2,11 @@
 import type { BombGameWeekState } from '../../game_state/bombState';
 import { BOMB_EMOJIS, GetBombEmoji } from './bombEmoji';
 import BombRow from './BombRow.astro';
+import BombTierTracker from './BombTierTracker.astro';
 
 export interface Props {
   bombState: BombGameWeekState[];
+  currentWeekBombState: BombGameWeekState;
 }
 
 function formatManagerName(
@@ -30,59 +32,81 @@ const GetBombPoints = (bombTier: string): number => {
   }
 };
 
-const { bombState } = Astro.props;
+const { bombState, currentWeekBombState } = Astro.props;
 ---
 
 <>
+  <BombTierTracker bombState={currentWeekBombState} />
   {
     bombState
       .sort((a, b) => b.gameWeek - a.gameWeek)
       .map((r, i) => (
-        <div
-          class={`${i !== bombState.length - 1 ? 'border-b border-slate-200 dark:border-slate-700' : ''} col-span-5 grid grid-cols-12 py-2 text-sm`}
-        >
-          <div class="col-span-2 flex flex-col justify-center gap-2 font-bold">
-            GW {r.gameWeek}
-            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800">
-              {GetBombEmoji(r.bombTier)}
+        <div class={`${i !== bombState.length - 1 ? '' : ''} py-2 text-sm`}>
+          <div class="flex flex-col gap-3">
+            <div class="flex flex-col justify-center gap-2 text-xs dark:text-slate-300">
+              GW {r.gameWeek}
             </div>
-          </div>
 
-          <div class="col-span-10 flex flex-col gap-3 px-2">
             {r.bombThrower && (
               <BombRow>
-                {`${BOMB_EMOJIS.thrown} ${formatManagerName(r.bombThrower.managerName)} threw the bomb`}
+                {`${BOMB_EMOJIS.thrown}${GetBombEmoji(r.bombTier)}`}{' '}
+                <span class="font-semibold">
+                  {formatManagerName(r.bombThrower.managerName)}
+                </span>{' '}
+                threw the bomb.
               </BombRow>
             )}
-            <BombRow>
+            <BombRow
+              status={r.bombState === 'Exploded' ? 'Negative' : 'Neutral'}
+            >
+              {`${GetBombEmoji(r.bombTier)}`}
               {r.bombState === 'Exploded' &&
                 `${BOMB_EMOJIS.exploded} Bomb exploded on `}
               {r.bombState === 'Diffused' && `${BOMB_EMOJIS.diffused} `}
               {r.bombState !== 'Diffused' &&
                 r.bombState !== 'Exploded' &&
                 `${BOMB_EMOJIS.holding} `}
-              {formatManagerName(r.bombHolder.managerName)}
+              <span class="font-semibold">
+                {formatManagerName(r.bombHolder.managerName)}
+              </span>
               {r.bombState === 'Diffused' ? ` diffused the bomb` : ''}
-              {r.bombState !== 'Exploded' && r.bombState !== 'Diffused'
-                ? ` is holding the bomb`
+              {r.bombState !== 'Exploded' &&
+              r.bombState !== 'Diffused' &&
+              !r.bombThrower
+                ? ` is holding the bomb.`
                 : ''}
-              {r.bombState === 'Exploded' &&
-                ` (${GetBombPoints(r.bombTier)} pts) `}
+              {r.bombState !== 'Exploded' &&
+              r.bombState !== 'Diffused' &&
+              r.bombThrower
+                ? ` caught the bomb.`
+                : ''}
+              {r.bombState === 'Exploded' && (
+                <span class="font-semibold">{` (${GetBombPoints(r.bombTier)} pts)!`}</span>
+              )}
             </BombRow>
             {r.collateralTargets.length > 0 && (
-              <BombRow>
-                {`${BOMB_EMOJIS.collateral} ${r.collateralTargets
-                  .map((t) => formatManagerName(t.managerName, 20))
-                  .join(
-                    ', '
-                  )} was targeted by VC ${r.collateralTargetPlayerName} and hit by collateral (${GetBombPoints(r.bombTier) / 2} pts)`}
+              <BombRow status="Negative">
+                {`${GetBombEmoji(r.bombTier)}${BOMB_EMOJIS.collateral}`}
+                <span class="font-semibold">
+                  {` ${r.collateralTargets
+                    .map((t) => formatManagerName(t.managerName, 20))
+                    .join(', ')} `}
+                </span>
+                was targeted by VC
+                <span class="font-semibold">{`${r.collateralTargetPlayerName}`}</span>{' '}
+                and hit by collateral
+                <span class="font-semibold">{` (${GetBombPoints(r.bombTier) / 2} pts)!`}</span>
               </BombRow>
             )}
             {r.bombDiffusalKits.length > 0 && (
-              <BombRow>
-                {`${BOMB_EMOJIS.diffusalKit} ${r.bombDiffusalKits
-                  .map((t) => formatManagerName(t.managerName, 20))
-                  .join(', ')} earned a diffusal kit`}
+              <BombRow status="Positive">
+                {BOMB_EMOJIS.diffusalKit}
+                <span class="font-semibold">
+                  {` ${r.bombDiffusalKits
+                    .map((t) => formatManagerName(t.managerName, 20))
+                    .join(', ')}`}
+                </span>
+                earned a diffusal kit!
               </BombRow>
             )}
           </div>
