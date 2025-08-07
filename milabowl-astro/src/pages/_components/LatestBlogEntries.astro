@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import { format } from 'date-fns';
+
+const firstBlogEntries = await getCollection('blog');
+
+const stortedEntries = firstBlogEntries
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+  .slice(0, 5);
+---
+
+<div>
+  {
+    stortedEntries.map((post) => (
+      <div
+        class="flex flex-col gap-1 py-2 text-sm"
+        data-blog-date={post.data.date}
+        data-blog-slug={post.slug}
+      >
+        <div class="text-xs dark:text-slate-300">
+          {format(post.data.date, 'yyyy-MM-dd')}
+        </div>
+        <a href={`/blog/${post.slug}`} class="blog-link">
+          <div class="flex cursor-pointer items-center rounded-md p-2 text-sm dark:bg-slate-800 dark:text-dark-text">
+            <div class="flex-grow pr-2">{post.data.title}</div>
+            <span
+              aria-label="New blog post"
+              class="new-pill mr-1 flex hidden items-center justify-center rounded-full px-2.5 py-1 text-xs dark:bg-blue-900/80 dark:text-blue-100"
+            >
+              New
+            </span>
+            <span class="mr-2 text-xl font-bold dark:text-slate-400">→</span>
+          </div>
+        </a>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  function handleBlogPills() {
+    const lastBlogRead = localStorage.getItem('lastBlogRead');
+    document.querySelectorAll('[data-blog-date]').forEach((entry) => {
+      const blogDate = entry.getAttribute('data-blog-date');
+      const newPill = entry.querySelector('.new-pill')!;
+      if (
+        lastBlogRead &&
+        blogDate &&
+        new Date(blogDate) > new Date(lastBlogRead)
+      ) {
+        newPill.classList.remove('hidden');
+      }
+
+      document.querySelectorAll('.blog-link').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const parent = link.closest('[data-blog-date]')!;
+          const blogDate = parent.getAttribute('data-blog-date')!;
+          const lastBlogRead = localStorage.getItem('lastBlogRead');
+          if (!lastBlogRead || new Date(blogDate) > new Date(lastBlogRead)) {
+            localStorage.setItem('lastBlogRead', blogDate);
+          }
+          window.location.href = link.getAttribute('href')!;
+        });
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', handleBlogPills);
+  document.addEventListener('astro:after-swap', handleBlogPills);
+</script>
