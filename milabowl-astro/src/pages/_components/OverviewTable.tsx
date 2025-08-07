@@ -237,6 +237,7 @@ const OverviewTable = ({
                       {bombState?.bombDiffusalKits.find(
                         (t) => t.managerName === result.teamName
                       ) && BOMB_EMOJIS.diffusalKit}
+                      {result.milaRank === sortedData.length && <>💩</>}
                     </div>
                     <div>{result.gwScore}</div>
                     <div className="font-bold text-indigo-900 dark:text-orange-200">

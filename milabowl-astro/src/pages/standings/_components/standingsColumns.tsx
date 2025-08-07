@@ -1,12 +1,13 @@
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
 import type { GameWeekResult } from '../../../game_state/gameState';
 import PositionDelta from '../../../components/core/PositionDelta';
+import type { OptimizedImage } from './types';
 
 const columnHelper = createColumnHelper<GameWeekResult>();
 
 export function getStandingsColmns(
   data: GameWeekResult[],
-  avatars: ImageMetadata[],
+  avatars: OptimizedImage[],
   lastGameWeek: number
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): ColumnDef<GameWeekResult, any>[] {
@@ -35,29 +36,43 @@ export function getStandingsColmns(
     columnHelper.accessor('teamName', {
       id: 'teamName',
       header: 'Team',
-      cell: (props) => (
-        <span className="flex items-center gap-2">
-          <img
-            src={
-              avatars.find((a) =>
-                a.src.includes(
-                  props.row.original.teamName
-                    .replace('$', 's')
-                    .toLowerCase()
-                    .replaceAll(' ', '_')
-                )
-              )?.src
-            }
-            className="h-9 w-9 rounded-full"
-          />
-          <a
-            className="max-w-[130px] truncate underline sm:max-w-[300px]"
-            href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
-          >
-            {props.cell.getValue()}
-          </a>
-        </span>
-      ),
+      cell: (props) => {
+        const optimizedImage = avatars.find((a) =>
+          a.src.includes(
+            props.row.original.teamName
+              .replace('$', 's')
+              .toLowerCase()
+              .replaceAll(' ', '_')
+          )
+        )!;
+        return (
+          <span className="flex items-center gap-2">
+            <picture className="h-12 w-12 rounded-full sm:h-12 sm:w-12">
+              <source
+                srcSet={optimizedImage.avif.join(', ')}
+                sizes={optimizedImage.sizes}
+                type="image/avif"
+              />
+              <source
+                srcSet={optimizedImage.webp.join(', ')}
+                sizes={optimizedImage.sizes}
+                type="image/webp"
+              />
+              <img
+                src={optimizedImage.src}
+                className={`rounded-full rank-${props.row.original.milaRank}-avatar`}
+                alt={`${props.row.original.teamName} avatar`}
+              />
+            </picture>
+            <a
+              className="max-w-[130px] truncate underline sm:max-w-[300px]"
+              href={`/fpl/players/${props.row.original.teamName.replaceAll(' ', '-')}/gw/${lastGameWeek}`}
+            >
+              {props.cell.getValue()}
+            </a>
+          </span>
+        );
+      },
       enableSorting: false,
       size: 230,
       maxSize: 400,
