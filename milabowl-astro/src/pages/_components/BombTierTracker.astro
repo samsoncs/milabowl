@@ -1,0 +1,103 @@
+---
+import type { BombGameWeekState } from '../../game_state/bombState';
+import { GetBombEmoji } from './bombEmoji';
+
+interface Props {
+  bombState: BombGameWeekState;
+}
+
+const GetTierNumber = (bombTier: string): number => {
+  switch (bombTier) {
+    case 'Nuke':
+      return 3;
+    case 'Bomb':
+      return 2;
+    case 'Dynamite':
+      return 1;
+    default:
+      return 1;
+  }
+};
+
+// Should be added from backend ideally
+const GetWeeksToNextTier = (weeksSinceLastExplosion: number): number => {
+  switch (weeksSinceLastExplosion) {
+    case 0:
+    case 1:
+    case 2:
+      return 3 - weeksSinceLastExplosion;
+    case 3:
+    case 4:
+    case 5:
+      return 6 - weeksSinceLastExplosion;
+    default:
+      return 0;
+  }
+};
+
+const { bombState } = Astro.props;
+const weeksToNextTier = GetWeeksToNextTier(bombState.weeksSinceLastExplosion);
+const w = bombState.weeksSinceLastExplosion;
+let percentageProgress = 0;
+switch (true) {
+  case w < 3:
+    percentageProgress = Math.round((w / 3) * 100);
+    break;
+  case w === 3:
+    percentageProgress = 0;
+    break;
+  case w > 3 && w < 6:
+    percentageProgress = Math.round(((w - 3) / 3) * 100);
+    break;
+  case w >= 6:
+    percentageProgress = 100;
+    break;
+}
+
+const GetColor = (bombTier: string): string => {
+  switch (bombTier) {
+    case 'Nuke':
+      return 'bg-red-300 dark:bg-red-500';
+    case 'Bomb':
+      return 'bg-orange-300 dark:bg-orange-500';
+    case 'Dynamite':
+      return 'bg-amber-300 dark:bg-amber-500';
+    default:
+      return 'bg-amber-300 dark:bg-amber-600';
+  }
+};
+---
+
+<div class="mx-auto w-full px-2 pb-2">
+  <div class="mb-2 flex items-center justify-between">
+    <div class="text-sm dark:text-slate-300">
+      Threat Level: <span class="font-semibold"
+        >{bombState.bombTier}{GetBombEmoji(bombState.bombTier)}</span
+      >
+    </div>
+    <div class="mt-1 text-right text-xs dark:text-slate-300">
+      Tier {GetTierNumber(bombState.bombTier)} of 3
+    </div>
+  </div>
+  <div
+    class="relative h-3 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+  >
+    <div
+      class={`absolute left-0 top-0 h-full ${GetColor(bombState.bombTier)} transition-all duration-300`}
+      style={`width: ${percentageProgress}%`}
+    >
+    </div>
+  </div>
+  {
+    weeksToNextTier > 0 && (
+      <div class="pt-1 text-sm dark:text-slate-300">
+        {weeksToNextTier} weeks to next tier
+      </div>
+    )
+  }
+  {
+    weeksToNextTier === 0 && (
+      <div class="pt-1 dark:text-slate-300">Fully charged</div>
+    )
+  }
+</div>

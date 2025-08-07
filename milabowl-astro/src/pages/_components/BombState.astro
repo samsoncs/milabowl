@@ -2,9 +2,11 @@
 import type { BombGameWeekState } from '../../game_state/bombState';
 import { BOMB_EMOJIS, GetBombEmoji } from './bombEmoji';
 import BombRow from './BombRow.astro';
+import BombTierTracker from './BombTierTracker.astro';
 
 export interface Props {
   bombState: BombGameWeekState[];
+  currentWeekBombState: BombGameWeekState;
 }
 
 function formatManagerName(
@@ -30,10 +32,11 @@ const GetBombPoints = (bombTier: string): number => {
   }
 };
 
-const { bombState } = Astro.props;
+const { bombState, currentWeekBombState } = Astro.props;
 ---
 
 <>
+  <BombTierTracker bombState={currentWeekBombState} />
   {
     bombState
       .sort((a, b) => b.gameWeek - a.gameWeek)

@@ -5,13 +5,13 @@ interface Props {
 
 const GetNegativeClasses = (status?: string): string => {
   return status === 'Negative'
-    ? 'text-red-100 bg-gradient-to-r from-red-900/50 to-red-800/50'
+    ? 'text-red-900 dark:text-red-100 bg-gradient-to-r from-red-300/80 to-red-200 dark:from-red-900/50 dark:to-red-800/50'
     : '';
 };
 
 const GetPositiveClasses = (status?: string): string => {
   return status === 'Positive'
-    ? 'text-green-100 bg-gradient-to-r from-green-900/50 to-green-800/50'
+    ? 'text-green-900 dark:text-green-100 bg-gradient-to-r from-green-300/80 to-green-200 dark:from-green-900/50 dark:to-green-800/50'
     : '';
 };
 
