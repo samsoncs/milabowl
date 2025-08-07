@@ -49,7 +49,7 @@ const { bombState, currentWeekBombState } = Astro.props;
 
             {r.bombThrower && (
               <BombRow>
-                {`${BOMB_EMOJIS.thrown} ${GetBombEmoji(r.bombTier)}`}{' '}
+                {`${BOMB_EMOJIS.thrown}${GetBombEmoji(r.bombTier)}`}{' '}
                 <span class="font-semibold">
                   {formatManagerName(r.bombThrower.managerName)}
                 </span>{' '}
@@ -59,7 +59,7 @@ const { bombState, currentWeekBombState } = Astro.props;
             <BombRow
               status={r.bombState === 'Exploded' ? 'Negative' : 'Neutral'}
             >
-              {`${GetBombEmoji(r.bombTier)}  `}
+              {`${GetBombEmoji(r.bombTier)}`}
               {r.bombState === 'Exploded' &&
                 `${BOMB_EMOJIS.exploded} Bomb exploded on `}
               {r.bombState === 'Diffused' && `${BOMB_EMOJIS.diffused} `}
@@ -86,7 +86,7 @@ const { bombState, currentWeekBombState } = Astro.props;
             </BombRow>
             {r.collateralTargets.length > 0 && (
               <BombRow status="Negative">
-                {`${GetBombEmoji(r.bombTier)} ${BOMB_EMOJIS.collateral}`}
+                {`${GetBombEmoji(r.bombTier)}${BOMB_EMOJIS.collateral}`}
                 <span class="font-semibold">
                   {` ${r.collateralTargets
                     .map((t) => formatManagerName(t.managerName, 20))
