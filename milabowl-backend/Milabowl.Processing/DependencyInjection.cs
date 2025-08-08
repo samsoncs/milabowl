@@ -9,7 +9,7 @@ namespace Milabowl.Processing;
 
 public static class DependencyInjection
 {
-    public static void AddMilabowlServices(
+    public static IServiceCollection AddMilabowlServices(
         this IServiceCollection serviceCollection,
         SnapshotMode snapshotMode
     )
@@ -30,6 +30,8 @@ public static class DependencyInjection
                 .AsSelfWithInterfaces()
                 .WithTransientLifetime()
         );
+
+        return serviceCollection;
     }
 
     private static void AddFplService(this IServiceCollection services, SnapshotMode snapshotMode)
