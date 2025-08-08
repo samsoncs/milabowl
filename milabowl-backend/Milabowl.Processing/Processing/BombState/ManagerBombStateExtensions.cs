@@ -173,6 +173,7 @@ public static class ManagerBombStateExtensions
         var playersAndScores = managerGameWeekState
             .Opponents.Select(o => new { Player = GetBombManager(o), Score = o.TotalScore })
             .ToList();
+        
         playersAndScores.Add(
             new
             {
@@ -180,17 +181,32 @@ public static class ManagerBombStateExtensions
                 Score = managerGameWeekState.TotalScore,
             }
         );
-        var topScoringNonBombHolderPlayerThisRound = playersAndScores
+        var topScoringNonBombHolderPlayersThisRound = playersAndScores
             .Where(p => p.Player.FantasyManagerId != roundStartBombHolder.User.EntryId)
-            .MaxBy(o => o.Score)!
-            .Player;
+            .GroupBy(p => p.Score)
+            .OrderByDescending(p => p.Key)
+            .First()
+            .Select(p => p.Player)
+            .ToList();
+
+        if (IsTiedTopScorer(topScoringNonBombHolderPlayersThisRound))
+        {
+            return bombState;
+        }
 
         return bombState with
         {
             BombState = BombStateEnum.HandedOver_Chip,
             BombThrower = GetBombManager(roundStartBombHolder),
-            BombHolder = topScoringNonBombHolderPlayerThisRound,
+            BombHolder = topScoringNonBombHolderPlayersThisRound.First(),
         };
+    }
+
+    private static bool IsTiedTopScorer(
+        IList<BombManager> topScoringNonBombHolderPlayersThisRound
+    )
+    {
+        return topScoringNonBombHolderPlayersThisRound.Count != 1;
     }
 
     private static bool DidUseChip(ManagerGameWeekState roundStartBombHolder)

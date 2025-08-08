@@ -1,5 +1,7 @@
 using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing;
+using Milabowl.Processing.Processing.BombState;
+using Milabowl.Processing.Processing.BombState.Models;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
 using NSubstitute;

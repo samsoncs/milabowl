@@ -2,6 +2,8 @@ using Bogus;
 using Milabowl.Processing.DataImport.FplDtos;
 using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing;
+using Milabowl.Processing.Processing.BombState;
+using Milabowl.Processing.Processing.BombState.Models;
 
 namespace Milabowl.Processing.Tests.Utils;
 

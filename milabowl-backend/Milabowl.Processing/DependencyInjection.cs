@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Milabowl.Processing.DataImport;
 using Milabowl.Processing.Processing;
+using Milabowl.Processing.Processing.BombState;
 using Milabowl.Processing.Utils;
 using Milabowl.Processing.Utils.Snapshot;
 
@@ -17,6 +18,8 @@ public static class DependencyInjection
         serviceCollection.AddTransient<HistorySummarizer>();
         serviceCollection.AddTransient<IRulesProcessor, RulesProcessor>();
         serviceCollection.AddTransient<FplImporter>();
+        serviceCollection.AddTransient<IFilePathResolver, FilePathResolver>();
+        serviceCollection.AddTransient<IFileSystem, FileSystem>();
         serviceCollection.AddTransient<ISnapshotPathResolver, SnapshotPathResolver>();
         serviceCollection.AddFplService(snapshotMode);
         serviceCollection.AddSingleton<IBombState, BombState>();

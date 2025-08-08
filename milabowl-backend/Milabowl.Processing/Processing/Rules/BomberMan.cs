@@ -1,4 +1,6 @@
 using Milabowl.Processing.DataImport.Models;
+using Milabowl.Processing.Processing.BombState;
+using Milabowl.Processing.Processing.BombState.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
