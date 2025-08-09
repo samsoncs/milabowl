@@ -20,10 +20,6 @@ export interface Rule {
     description: string;
 }
 
-// export interface MilaRules {
-//     rules: MilaRulePoints[];
-// }
-
 export interface MilaRulePoints {
     points: number;
     ruleShortName: string;

@@ -1,5 +1,7 @@
 using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing;
+using Milabowl.Processing.Processing.BombState;
+using Milabowl.Processing.Processing.BombState.Models;
 using Milabowl.Processing.Processing.Rules;
 using Milabowl.Processing.Tests.Utils;
 using NSubstitute;
@@ -168,5 +170,24 @@ public class BombTests : MilaRuleTest<Bomb>
         var result = rule.Calculate(state);
 
         result.Points.ShouldBe(0);
+    }
+
+    [Fact]
+    public void Should_get_6point9_points_for_diffusing_a_bomb()
+    {
+        var state = new ManagerGameWeekStateBuilder().Build();
+        var bombStateMock = Substitute.For<IBombState>();
+        var managerBombState = TestStateFactory
+            .GetManagerBombState()
+            .RuleFor(x => x.BombState, BombStateEnum.Diffused)
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombTier, BombTier.Dynamite)
+            .Generate();
+        bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
+        var rule = new Bomb(bombStateMock);
+
+        var result = rule.Calculate(state);
+
+        result.Points.ShouldBe(6.9m);
     }
 }

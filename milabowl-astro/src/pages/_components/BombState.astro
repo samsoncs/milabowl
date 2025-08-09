@@ -83,6 +83,9 @@ const { bombState, currentWeekBombState } = Astro.props;
               {r.bombState === 'Exploded' && (
                 <span class="font-semibold">{` (${GetBombPoints(r.bombTier)} pts)!`}</span>
               )}
+              {r.bombState === 'Diffused' && (
+                <span class="font-semibold">{` (+6.9 pts)!`}</span>
+              )}
             </BombRow>
             {r.collateralTargets.length > 0 && (
               <BombRow status="Negative">

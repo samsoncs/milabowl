@@ -1,9 +1,21 @@
 using Milabowl.Processing.DataImport.Models;
+using Milabowl.Processing.Processing.BombState;
+using Milabowl.Processing.Processing.BombState.Models;
 
 namespace Milabowl.Processing.Processing.Rules;
 
 public class Bomb : MilaRule
 {
+    public static IDictionary<BombTier, decimal> PointsByBombTier = new Dictionary<
+        BombTier,
+        decimal
+    >
+    {
+        { BombTier.Dynamite, -2m },
+        { BombTier.Bomb, -4m },
+        { BombTier.Nuke, -6m },
+    };
+
     private readonly IBombState _bombState;
 
     public Bomb(IBombState bombState)
@@ -13,25 +25,43 @@ public class Bomb : MilaRule
 
     protected override string ShortName => "Bmb";
     protected override string Description =>
-        "The bomb explodes 7 times during a season. The person holding the bomb upon explosion receives -5 points. To pass the bomb along, you must wither win your H2H match or use a chip. If you win H2H, the bomb is passed to the H2H opponent. If a chip is used the bomb is passed to the top scoring FPL manager this week (that is not holding the bomb).";
+        """
+            Bomb Tiers & Points
+            - 🧨 Dynamite (-2 pts): 0-3 weeks since last explosion
+            - 💣 Bomb (-4 pts): 4-6 weeks since last explosion
+            - ☢️ Nuke (-6 pts): 7+ weeks since last explosion
+
+            Explosion Damage
+            - Bomb holder: Takes full damage when bomb explodes
+            - Collateral damage: Bomb and Nuke tiers deal half damage to collateral targets
+            - Collateral targets: Players whose captain matches the bomb holder's vice-captain
+
+            Bomb Throwing
+            Bomb is thrown when the holder:
+            1. Wins H2H match: Bomb goes to their H2H opponent
+            2. Uses a chip (except "manager"): Bomb goes to highest scorer that round
+               - If tied for highest score, bomb is not thrown
+
+            Bomb Diffusal
+            - Diffusal kits: Awarded to players scoring 100+ points
+            - Diffusing: If bomb holder has a kit when bomb should explode, they diffuse it for +6.9 pts
+            - No damage: Nobody takes damage when bomb is diffused
+
+            Explosion Schedule
+            Bomb explodes on predetermined random gameweeks (7 total across the season)
+            """;
 
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var bombState = _bombState.CalcBombStateForGw(userGameWeek);
-        var bombPointValue = bombState.BombTier switch
-        {
-            BombTier.Dynamite => -2m,
-            BombTier.Bomb => -4m,
-            BombTier.Nuke => -6m,
-            _ => 0m,
-        };
+        var bombPointValue = PointsByBombTier[bombState.BombTier];
 
         var bombPoints = 0m;
         var reason = "";
         if (UserHoldsExplodingBomb(bombState, userGameWeek.User.EntryId))
         {
             bombPoints = bombPointValue;
-            reason = $"Holding an exploding {bombState.BombTier} bomb, - {bombPoints} pts.";
+            reason = $"Holding an exploding {bombState.BombTier}, - {bombPoints} pts.";
         }
 
         if (UserIsCollateralOfExplodingBomb(bombState, userGameWeek.User.EntryId))
@@ -39,6 +69,12 @@ public class Bomb : MilaRule
             bombPoints = bombPointValue / 2;
             reason =
                 $"Hit by collateral of an exploding {bombState.BombTier} bomb, - {bombPoints} pts.";
+        }
+
+        if (UserHoldsDiffusedBomb(bombState, userGameWeek.User.EntryId))
+        {
+            bombPoints = 6.9m;
+            reason = $"Diffused a {bombState.BombTier}, + {bombPoints} pts.";
         }
 
         return new RulePoints(bombPoints, reason);
@@ -55,5 +91,11 @@ public class Bomb : MilaRule
         return bombState
                 is { BombState: BombStateEnum.Exploded, BombTier: BombTier.Bomb or BombTier.Nuke }
             && bombState.CollateralTargets.Select(b => b.FantasyManagerId).Contains(userEntryId);
+    }
+
+    private bool UserHoldsDiffusedBomb(ManagerBombState bombState, int userEntryId)
+    {
+        return bombState.BombState == BombStateEnum.Diffused
+            && bombState.BombHolder.FantasyManagerId == userEntryId;
     }
 }
