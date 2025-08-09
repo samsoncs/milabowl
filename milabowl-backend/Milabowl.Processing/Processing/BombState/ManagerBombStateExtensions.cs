@@ -67,7 +67,7 @@ public static class ManagerBombStateExtensions
         {
             BombTier = bombTier,
             WeeksSinceLastExplosion =
-            bombState.BombState == BombStateEnum.Exploded ? 0 : weeksSinceLastExplosion,
+                bombState.BombState == BombStateEnum.Exploded ? 0 : weeksSinceLastExplosion,
         };
     }
 
@@ -93,7 +93,7 @@ public static class ManagerBombStateExtensions
             .Where(o =>
                 o.User.EntryId != bombHolderManager.User.EntryId
                 && o.Lineup.First(l => l.IsCaptain).FantasyPlayerEventId
-                == viceCaptain.FantasyPlayerEventId
+                    == viceCaptain.FantasyPlayerEventId
             )
             .Select(GetBombManager)
             .ToList();
@@ -156,7 +156,7 @@ public static class ManagerBombStateExtensions
     private static bool DidWinH2H(ManagerGameWeekState roundStartBombHolder)
     {
         return roundStartBombHolder.HeadToHead.CurrentUser.DidWin
-               && roundStartBombHolder.HeadToHead.Opponent.FantasyPlayerId is not null;
+            && roundStartBombHolder.HeadToHead.Opponent.FantasyPlayerId is not null;
     }
 
     private static ManagerBombState AttemptChipBombThrow(
@@ -173,7 +173,7 @@ public static class ManagerBombStateExtensions
         var playersAndScores = managerGameWeekState
             .Opponents.Select(o => new { Player = GetBombManager(o), Score = o.TotalScore })
             .ToList();
-        
+
         playersAndScores.Add(
             new
             {
@@ -202,9 +202,7 @@ public static class ManagerBombStateExtensions
         };
     }
 
-    private static bool IsTiedTopScorer(
-        IList<BombManager> topScoringNonBombHolderPlayersThisRound
-    )
+    private static bool IsTiedTopScorer(IList<BombManager> topScoringNonBombHolderPlayersThisRound)
     {
         return topScoringNonBombHolderPlayersThisRound.Count != 1;
     }
@@ -212,7 +210,7 @@ public static class ManagerBombStateExtensions
     private static bool DidUseChip(ManagerGameWeekState roundStartBombHolder)
     {
         return roundStartBombHolder.ActiveChip is not null
-               && roundStartBombHolder.ActiveChip != "manager";
+            && roundStartBombHolder.ActiveChip != "manager";
     }
 
     private static BombManager GetBombManager(ManagerGameWeekState state)

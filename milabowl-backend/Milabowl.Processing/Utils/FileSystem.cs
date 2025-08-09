@@ -5,7 +5,7 @@ public interface IFileSystem
     Task WriteAllTextAsync(string path, string? contents);
 }
 
-public class FileSystem: IFileSystem
+public class FileSystem : IFileSystem
 {
     public Task WriteAllTextAsync(string path, string? contents)
     {

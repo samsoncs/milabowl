@@ -18,7 +18,8 @@ public class ProcessorDoesNotThrowTest
 
     private class MyFileSystem : IFileSystem
     {
-        private readonly IDictionary<string, string?> _fileContents = new Dictionary<string, string?>();
+        private readonly IDictionary<string, string?> _fileContents =
+            new Dictionary<string, string?>();
 
         public Task WriteAllTextAsync(string path, string? contents)
         {
@@ -33,38 +34,48 @@ public class ProcessorDoesNotThrowTest
                 throw new FileNotFoundException($"File not found: {path}");
             }
 
-            return JsonSerializer.Deserialize<T>(contents, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Converters = { new JsonStringEnumConverter() },
-                PropertyNameCaseInsensitive = true
-            })!;
+            return JsonSerializer.Deserialize<T>(
+                contents,
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    Converters = { new JsonStringEnumConverter() },
+                    PropertyNameCaseInsensitive = true,
+                }
+            )!;
         }
     }
 
     public ProcessorDoesNotThrowTest()
     {
-        _serviceCollection =new ServiceCollection();
+        _serviceCollection = new ServiceCollection();
         _serviceCollection.AddSingleton<IOptions<FplApiOptions>>(_ =>
-            Options.Create(new FplApiOptions
-            {
-                SnapshotPath = "./Snapshots/24-25",
-                SnapshotMode = SnapshotMode.Read
-            }));
+            Options.Create(
+                new FplApiOptions
+                {
+                    SnapshotPath = "./Snapshots/24-25",
+                    SnapshotMode = SnapshotMode.Read,
+                }
+            )
+        );
         _serviceCollection.AddMilabowlServices(SnapshotMode.Read);
         _myFileSystem = new MyFileSystem();
-        _serviceCollection.Replace(new ServiceDescriptor(
-            typeof(IFileSystem),
-            _ => _myFileSystem,
-            ServiceLifetime.Transient
-        ));
+        _serviceCollection.Replace(
+            new ServiceDescriptor(
+                typeof(IFileSystem),
+                _ => _myFileSystem,
+                ServiceLifetime.Transient
+            )
+        );
         var myPathResolver = Substitute.For<IFilePathResolver>();
         myPathResolver.ResolveGameStateFilePath().Returns("");
-        _serviceCollection.Replace(new ServiceDescriptor(
-            typeof(IFilePathResolver),
-            _ => myPathResolver,
-            ServiceLifetime.Transient
-        ));
+        _serviceCollection.Replace(
+            new ServiceDescriptor(
+                typeof(IFilePathResolver),
+                _ => myPathResolver,
+                ServiceLifetime.Transient
+            )
+        );
     }
 
     [Fact(Timeout = 30_000)]

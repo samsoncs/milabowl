@@ -26,7 +26,9 @@ public class Processor
         HistorySummarizer summarizer,
         IRulesProcessor rulesProcessor,
         IBombState bombState,
-        IFileSystem fileSystem, IFilePathResolver filePathResolver)
+        IFileSystem fileSystem,
+        IFilePathResolver filePathResolver
+    )
     {
         _importer = importer;
         _summarizer = summarizer;

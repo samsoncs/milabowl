@@ -5,7 +5,7 @@ public interface IFilePathResolver
     string ResolveGameStateFilePath();
 }
 
-public class FilePathResolver: IFilePathResolver
+public class FilePathResolver : IFilePathResolver
 {
     public string ResolveGameStateFilePath()
     {
