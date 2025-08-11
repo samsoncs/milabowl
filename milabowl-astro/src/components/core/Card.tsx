@@ -5,7 +5,7 @@ export interface Props {
 }
 
 const Card2: React.FC<Props> = ({ children, title, secondary }) => (
-  <div className="bg-surface border-outline space-y-2 rounded-md border-t p-4 shadow-sm dark:shadow-sm-dark">
+  <div className="bg-surface border-1 border-outline/30 h-full space-y-2 rounded-md p-4">
     <div className="flex">
       <div className="text-content-primary mb-3 grow font-bold">{title}</div>
       {secondary}
