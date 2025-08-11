@@ -80,6 +80,7 @@ export function getStandingsColmns(
     ...data[0].rules.map((r, i) =>
       columnHelper.accessor((r) => r.rules[i].points, {
         id: r.ruleShortName,
+        size: 70,
       })
     ),
     columnHelper.accessor('cumulativeMilaPoints', {
