@@ -103,7 +103,7 @@ const SortToggle = ({ sortDirection, onClick }: SortToggleProps) => (
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="text-content-secondary h-5 w-5"
+          className="text-content-primary-muted h-5 w-5"
         >
           <path
             strokeLinecap="round"
@@ -118,7 +118,7 @@ const SortToggle = ({ sortDirection, onClick }: SortToggleProps) => (
 
 const Chevron = () => (
   <svg
-    className={`h-4 w-4 transition-transform duration-200`}
+    className={`text-content-secondary h-4 w-4 transition-transform duration-200`}
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -147,14 +147,14 @@ const OverviewTable = ({
       <div className="flex gap-3 pb-2 pl-2 font-semibold">
         <div className="w-4">#</div>
         <div className="flex-grow">Team</div>
-        <div className="flex gap-1">
+        <div className="text-content-secondary flex gap-1">
           GW
           <SortToggle
             sortDirection={sortProp === 'gwScore' ? sortOrder : undefined}
             onClick={() => handleSort('gwScore')}
           />
         </div>
-        <div className="flex gap-1">
+        <div className="text-content-secondary flex gap-1">
           Total
           <SortToggle
             sortDirection={
@@ -183,7 +183,7 @@ const OverviewTable = ({
         return (
           <div className="flex flex-col" key={result.teamName}>
             <div
-              className={`flex gap-2 overflow-hidden p-[0.4rem] pr-0 ${!isExpanded && i !== sortedData.length - 1 ? 'border-outline border-b' : ''}`}
+              className={`flex gap-2 overflow-hidden p-[0.4rem] pr-0 ${!isExpanded && i !== sortedData.length - 1 ? `${i === 2 || i === 7 ? 'border-slate-400' : 'border-outline'} border-b` : ''}`}
             >
               <div className="w-4">
                 <PositionDelta pos={result.milaRank} delta={deltaPosition} />
@@ -261,7 +261,7 @@ const OverviewTable = ({
               </div>
             </div>
             <div
-              className={`${isExpanded ? 'max-h-[500px] border-b' : 'max-h-0'} border-outline
+              className={`${isExpanded ? 'max-h-[500px] border-b' : 'max-h-0'} ${i === 2 || i === 7 ? 'border-slate-400' : 'border-outline'}
       overflow-hidden opacity-100 transition-all duration-200
       ease-in-out [will-change:max-height,opacity]`}
             >
