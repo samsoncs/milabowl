@@ -14,19 +14,6 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
-      colors: {
-        'dark-text': colors.violet[100],
-
-        app: 'var(--color-app)',
-        surface: 'var(--color-surface)',
-        'surface-2': 'var(--color-surface-2)',
-        'content-primary': 'var(--color-content-primary)',
-        'content-secondary': 'var(--color-content-secondary)',
-        success: 'var(--color-success)',
-        warning: 'var(--color-warning)',
-        danger: 'var(--color-danger)',
-        info: 'var(--color-info)',
-      },
     },
   },
   plugins: [],
