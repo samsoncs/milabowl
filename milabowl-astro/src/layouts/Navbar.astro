@@ -35,7 +35,7 @@ const { pathname } = Astro.url;
 
 <>
   <nav
-    class="bg-surface fixed top-0 z-50 hidden w-full md:block"
+    class="bg-app fixed top-0 z-50 hidden w-full md:block"
     transition:animate="none"
   >
     <div class="mx-auto max-w-screen-2xl px-4">
@@ -52,8 +52,8 @@ const { pathname } = Astro.url;
                 navLinks.map((m) => {
                   const isSelected = pathname.includes(m.href);
                   const classes = isSelected
-                    ? 'bg-surface text-primary px-3 py-2 rounded-md text-sm font-bold no-underline'
-                    : 'text-primary hover:bg-surface hover:text-primary px-3 py-2 rounded-md text-sm font-bold no-underline';
+                    ? 'bg-surface text-content-primary px-3 py-2 rounded-md text-sm font-bold no-underline'
+                    : 'text-content-primary hover:bg-surface hover:text-primary px-3 py-2 rounded-md text-sm font-bold no-underline';
                   return (
                     <a href={m.href} class={classes}>
                       {m.name}
