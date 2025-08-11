@@ -42,16 +42,15 @@ const CustomPoint: React.FC<{
     >
       <animated.circle
         r={animatedProps.radius}
-        className={'fill-white dark:fill-slate-900'}
+        fill="var(--color-app)"
         stroke={animatedProps.borderColor}
         strokeWidth={animatedProps.borderWidth}
-      />
+      />{' '}
       {point.size !== 0 && (
         <animated.text
           textAnchor="middle"
           fontSize="10px"
           fill={animatedProps.borderColor}
-          className={'dark:fill-slate-100'}
           dy=".3em"
         >
           {point.data.points}
@@ -78,8 +77,6 @@ const RankingChart: React.FC<{
       data={data}
       xOuterPadding={0.3}
       theme={{
-        fontSize: 12,
-        textColor: isDarkTheme ? colors.slate[300] : colors.slate[700],
         grid: {
           line: {
             stroke: `${isDarkTheme ? colors.slate[600] : colors.slate[300]}`,

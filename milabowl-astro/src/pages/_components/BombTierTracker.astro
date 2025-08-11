@@ -57,31 +57,29 @@ switch (true) {
 const GetColor = (bombTier: string): string => {
   switch (bombTier) {
     case 'Nuke':
-      return 'bg-red-300 dark:bg-red-500';
+      return 'bg-red';
     case 'Bomb':
-      return 'bg-orange-300 dark:bg-orange-500';
+      return 'bg-orange';
     case 'Dynamite':
-      return 'bg-amber-300 dark:bg-amber-500';
+      return 'bg-amber';
     default:
-      return 'bg-amber-300 dark:bg-amber-600';
+      return 'bg-amber';
   }
 };
 ---
 
 <div class="mx-auto w-full px-2 pb-2">
   <div class="mb-2 flex items-center justify-between">
-    <div class="text-sm dark:text-slate-300">
+    <div class="text-content-secondary text-sm">
       Threat Level: <span class="font-semibold"
         >{bombState.bombTier}{GetBombEmoji(bombState.bombTier)}</span
       >
     </div>
-    <div class="mt-1 text-right text-xs dark:text-slate-300">
+    <div class="text-content-secondary mt-1 text-right text-xs">
       Tier {GetTierNumber(bombState.bombTier)} of 3
     </div>
   </div>
-  <div
-    class="relative h-3 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
-  >
+  <div class="bg-surface-2 relative h-3 overflow-hidden rounded-full">
     <div
       class={`absolute left-0 top-0 h-full ${GetColor(bombState.bombTier)} transition-all duration-300`}
       style={`width: ${percentageProgress}%`}
@@ -90,14 +88,14 @@ const GetColor = (bombTier: string): string => {
   </div>
   {
     weeksToNextTier > 0 && (
-      <div class="pt-1 text-sm dark:text-slate-300">
+      <div class="text-content-secondary pt-1 text-sm">
         {weeksToNextTier} weeks to next tier
       </div>
     )
   }
   {
     weeksToNextTier === 0 && (
-      <div class="pt-1 dark:text-slate-300">Fully charged</div>
+      <div class="text-content-secondary pt-1">Fully charged</div>
     )
   }
 </div>

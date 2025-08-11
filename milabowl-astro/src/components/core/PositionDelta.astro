@@ -9,7 +9,7 @@ const { delta } = Astro.props;
 <div>
   {
     delta < 0 && (
-      <div class="text-small flex flex-row items-center justify-items-center text-red-700 dark:text-red-400 md:text-base">
+      <div class="text-small flex flex-row items-center justify-items-center md:text-base">
         <div class="flex flex-col items-center">
           <div style="font-size: xx-small; font-weight: bold;" class="text-xs">
             {delta * -1}
@@ -35,7 +35,7 @@ const { delta } = Astro.props;
   }
   {
     delta > 0 && (
-      <div class="flex items-center justify-items-center text-green-700 dark:text-green-400">
+      <div class="flex items-center justify-items-center">
         <div class="flex flex-col items-center">
           <div style="margin:-4px">
             <svg

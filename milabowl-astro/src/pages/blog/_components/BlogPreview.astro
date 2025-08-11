@@ -19,19 +19,19 @@ const { post } = Astro.props;
     <div class="grow">
       <div>
         {post.data.author}
-        <span class="text-gray-400 dark:text-slate-400">
+        <span class="text-content-secondary">
           - {readingTime(post.body).text}</span
         >
       </div>
     </div>
     <time
       date-time={format(post.data.date, 'yyyy-MM-dd')}
-      class="text-gray-400 dark:text-slate-400"
+      class="text-content-secondary"
       >{format(post.data.date, 'dd.MM.yyyy')}</time
     >
   </div>
   <a
-    class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:text-indigo-900 dark:prose-headings:text-dark-text"
+    class="prose prose-slate dark:prose-invert md:prose-lg"
     href={`/blog/${post.slug}`}
   >
     <h2>

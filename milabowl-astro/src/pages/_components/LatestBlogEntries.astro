@@ -17,19 +17,21 @@ const stortedEntries = firstBlogEntries
         data-blog-date={post.data.date}
         data-blog-slug={post.slug}
       >
-        <div class="text-xs dark:text-slate-300">
+        <div class="text-content-secondary text-xs">
           {format(post.data.date, 'yyyy-MM-dd')}
         </div>
         <a href={`/blog/${post.slug}`} class="blog-link">
-          <div class="flex cursor-pointer items-center rounded-md p-2 text-sm dark:bg-slate-800 dark:text-dark-text">
+          <div class="bg-surface-2 flex cursor-pointer items-center rounded-md p-2 text-sm">
             <div class="flex-grow pr-2">{post.data.title}</div>
             <span
               aria-label="New blog post"
-              class="new-pill mr-1 flex hidden items-center justify-center rounded-full px-2.5 py-1 text-xs dark:bg-blue-900/80 dark:text-blue-100"
+              class="new-pill bg-info/80 text-on-info mr-1 flex hidden items-center justify-center rounded-full px-2.5 py-1 text-xs"
             >
               New
             </span>
-            <span class="mr-2 text-xl font-bold dark:text-slate-400">→</span>
+            <span class="text-content-primary-muted mr-2 text-xl font-bold">
+              →
+            </span>
           </div>
         </a>
       </div>
