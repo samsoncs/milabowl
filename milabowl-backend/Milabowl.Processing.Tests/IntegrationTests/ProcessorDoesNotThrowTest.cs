@@ -55,6 +55,8 @@ public class ProcessorDoesNotThrowTest
                 {
                     SnapshotPath = "./Snapshots/24-25",
                     SnapshotMode = SnapshotMode.Read,
+                    MainLeagueId = 1650213,
+                    HeadToHeadLeagueId = 1649633
                 }
             )
         );
