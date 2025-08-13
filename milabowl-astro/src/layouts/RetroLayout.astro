@@ -30,6 +30,15 @@ const { title, enableViewTransitions } = Astro.props;
         let keySequence = [];
         let isRetroMode = false;
 
+        // Mobile detection
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                         ('ontouchstart' in window) || 
+                         (navigator.maxTouchPoints > 0);
+
+        // Mobile touch sequence tracking
+        let touchSequence = [];
+        let lastTouchTime = 0;
+
         // Check if retro mode was previously activated (persists across page loads)
         if (sessionStorage.getItem('milabowl-retro-mode') === 'true') {
             isRetroMode = true;
@@ -217,28 +226,43 @@ const { title, enableViewTransitions } = Astro.props;
             const titleDisplay = document.createElement('div');
             titleDisplay.id = 'retro-title';
             titleDisplay.innerHTML = '👑 MILA INVADERS 👑';
+            
+            // Responsive sizing for mobile
+            const isMobileView = window.innerWidth <= 768;
+            const titleFontSize = isMobileView ? '1.2rem' : '1.8rem';
+            const titlePadding = isMobileView ? '0.5rem 1rem' : '0.8rem 1.5rem';
+            const titleTop = isMobileView ? '10px' : '20px';
+            
             titleDisplay.style.cssText = `
                 position: fixed;
-                top: 20px;
+                top: ${titleTop};
                 left: 50%;
                 transform: translateX(-50%);
                 color: #00ffff;
                 font-family: 'Press Start 2P', 'Courier New', monospace;
-                font-size: 1.8rem;
+                font-size: ${titleFontSize};
                 text-shadow: 0 0 20px #00ffff;
                 z-index: 10000;
                 pointer-events: none;
                 font-weight: bold;
                 background: rgba(0, 0, 0, 0.8);
                 border: 3px solid #00ffff;
-                padding: 0.8rem 1.5rem;
+                padding: ${titlePadding};
                 border-radius: 12px;
                 box-shadow: 
                     0 0 30px rgba(0, 255, 255, 0.6),
                     inset 0 0 20px rgba(0, 255, 255, 0.1);
                 animation: retro-glow 2s ease-in-out infinite alternate;
+                max-width: 90vw;
+                box-sizing: border-box;
             `;
             document.body.appendChild(titleDisplay);
+
+            // Calculate score position based on title height
+            const titleHeight = titleDisplay.offsetHeight;
+            const scoreTop = parseInt(titleTop) + titleHeight + (isMobileView ? 10 : 20);
+            const scoreFontSize = isMobileView ? '1.5rem' : '2rem';
+            const scorePadding = isMobileView ? '0.2rem 0.8rem' : '0.3rem 1rem';
 
             // Score display
             const scoreDisplay = document.createElement('div');
@@ -246,21 +270,23 @@ const { title, enableViewTransitions } = Astro.props;
             scoreDisplay.innerHTML = 'SCORE: 0';
             scoreDisplay.style.cssText = `
                 position: fixed;
-                top: 90px;
+                top: ${scoreTop}px;
                 left: 50%;
                 transform: translateX(-50%);
                 color: #00ff00;
                 font-family: 'VT323', 'Courier New', monospace;
-                font-size: 2rem;
+                font-size: ${scoreFontSize};
                 text-shadow: 0 0 15px #00ff00;
                 z-index: 10000;
                 pointer-events: none;
                 font-weight: bold;
                 background: rgba(0, 0, 0, 0.7);
                 border: 2px solid #00ff00;
-                padding: 0.3rem 1rem;
+                padding: ${scorePadding};
                 border-radius: 8px;
                 box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+                max-width: 90vw;
+                box-sizing: border-box;
             `;
             document.body.appendChild(scoreDisplay);
         }
@@ -638,6 +664,222 @@ const { title, enableViewTransitions } = Astro.props;
                 }
             }
         });
+
+        // Mobile-specific triggers
+        if (isMobile) {
+            // Add swipe gesture trigger (up, down, then tap rank 6 and 9 in standings table)
+            let swipeSequence = [];
+            let swipeStartY = 0;
+            let swipeThreshold = 50;
+            let sequenceTimer = null;
+            
+            // Function to reset sequence with timeout
+            function resetSequenceWithTimeout() {
+                // Clear any existing timer
+                if (sequenceTimer) {
+                    clearTimeout(sequenceTimer);
+                }
+                
+                // Set new timer to reset sequence after 5 seconds of inactivity
+                sequenceTimer = setTimeout(() => {
+                    if (swipeSequence.length > 0) {
+                        console.log('🕐 Sequence timeout - resetting swipe sequence');
+                        swipeSequence = [];
+                    }
+                    sequenceTimer = null;
+                }, 5000);
+            }
+            
+            document.addEventListener('touchstart', (e) => {
+                if (isRetroMode) return;
+                swipeStartY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            document.addEventListener('touchend', (e) => {
+                if (isRetroMode) return;
+                
+                const swipeEndY = e.changedTouches[0].clientY;
+                const swipeDistance = swipeStartY - swipeEndY;
+                const touchTarget = e.target;
+                
+                console.log('👆 Touch event:', {
+                    swipeDistance,
+                    target: touchTarget,
+                    targetText: touchTarget.textContent?.trim(),
+                    currentSequence: swipeSequence
+                });
+                
+                // Detect swipe direction
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        // Swipe up
+                        swipeSequence.push('up');
+                        console.log('⬆️ Swipe up detected, sequence:', swipeSequence);
+                    } else {
+                        // Swipe down
+                        swipeSequence.push('down');
+                        console.log('⬇️ Swipe down detected, sequence:', swipeSequence);
+                    }
+                } else {
+                    // Check for taps on row 6 and 9 in standings table
+                    console.log('👆 Tap detected, checking for table row...');
+                    const rowInfo = findTableRowInfo(touchTarget);
+                    if (rowInfo) {
+                        console.log('🎯 Found table row:', rowInfo.rowNumber, 'Element:', rowInfo.element);
+                        if (rowInfo.rowNumber === 6) {
+                            swipeSequence.push('6');
+                            console.log('6️⃣ Added "6" to sequence (row 6):', swipeSequence);
+                        } else if (rowInfo.rowNumber === 9) {
+                            swipeSequence.push('9');
+                            console.log('9️⃣ Added "9" to sequence (row 9):', swipeSequence);
+                        } else {
+                            console.log(`ℹ️ Tapped row ${rowInfo.rowNumber} (need row 6 or 9)`);
+                        }
+                    } else {
+                        console.log('❌ No table row found for tap');
+                        
+                        // Debug: Show us what we're tapping on
+                        console.log('🔍 Debug - element details:');
+                        console.log('- Tag:', touchTarget.tagName);
+                        console.log('- Classes:', touchTarget.className);
+                        console.log('- ID:', touchTarget.id);
+                        console.log('- Text content (first 100 chars):', touchTarget.textContent?.trim().substring(0, 100));
+                        console.log('- Parent element:', touchTarget.parentElement);
+                        console.log('- Parent classes:', touchTarget.parentElement?.className);
+                        
+                        // Try a very permissive approach for any clickable element
+                        let permissiveTarget = touchTarget;
+                        for (let depth = 0; depth < 15; depth++) {
+                            if (!permissiveTarget) break;
+                            console.log(`🔍 Depth ${depth}:`, permissiveTarget.tagName, permissiveTarget.className);
+                            
+                            // Look for any element that might contain standings info
+                            const text = permissiveTarget.textContent?.trim() || '';
+                            const classList = permissiveTarget.className || '';
+                            
+                            if (text.includes('6') || text.includes('9') || 
+                                classList.includes('standing') || classList.includes('rank') || 
+                                classList.includes('row') || classList.includes('table')) {
+                                console.log('🎯 Found potential standings element:', permissiveTarget);
+                                break;
+                            }
+                            
+                            permissiveTarget = permissiveTarget.parentElement;
+                        }
+                    }
+                }
+                
+                // Keep only last 4 gestures (prevents infinite sequence buildup)
+                if (swipeSequence.length > 4) {
+                    swipeSequence.shift();
+                }
+                
+                // Check if sequence matches: up, down, 6, 9
+                if (swipeSequence.length === 4 && 
+                    swipeSequence[0] === 'up' && 
+                    swipeSequence[1] === 'down' && 
+                    swipeSequence[2] === '6' && 
+                    swipeSequence[3] === '9') {
+                    
+                    console.log('🎮 EASTER EGG ACTIVATED! Correct sequence detected:', swipeSequence);
+                    
+                    // Clear the timeout since we're activating
+                    if (sequenceTimer) {
+                        clearTimeout(sequenceTimer);
+                        sequenceTimer = null;
+                    }
+                    
+                    activateRetroMode();
+                    swipeSequence = [];
+                } else {
+                    // Reset timeout for sequence cleanup
+                    resetSequenceWithTimeout();
+                }
+            }, { passive: true });
+            
+            // Helper function to find which table row was tapped
+            function findTableRowInfo(target) {
+                console.log('🔍 Checking tap target for table row:', target);
+                
+                // First check if we can find a rank class directly
+                let current = target;
+                let maxDepth = 15;
+                
+                while (current && maxDepth > 0) {
+                    console.log(`🔍 Checking element at depth ${15-maxDepth}:`, current.tagName, current.className);
+                    
+                    // Check for rank- classes (this flexbox table uses rank-1, rank-2, etc.)
+                    const classList = current.className || '';
+                    const rankMatch = classList.match(/rank-(\d+)/);
+                    if (rankMatch) {
+                        const rowNumber = parseInt(rankMatch[1]);
+                        console.log(`🎯 Found rank class: rank-${rowNumber}`);
+                        return {
+                            element: current,
+                            rowNumber: rowNumber,
+                            totalRows: 9
+                        };
+                    }
+                    
+                    // Also check for the flex column structure specific to this table
+                    if (current.matches('.flex.flex-col')) {
+                        console.log('✅ Found flex-col container, looking for rank number...');
+                        
+                        // Look for the rank number in the first child div
+                        const rankDiv = current.querySelector('.text-sm.font-bold');
+                        if (rankDiv) {
+                            const rankText = rankDiv.textContent?.trim();
+                            const rankNumber = parseInt(rankText);
+                            if (!isNaN(rankNumber)) {
+                                console.log(`🎯 Found rank number from text: ${rankNumber}`);
+                                return {
+                                    element: current,
+                                    rowNumber: rankNumber,
+                                    totalRows: 9
+                                };
+                            }
+                        }
+                    }
+                    
+                    current = current.parentElement;
+                    maxDepth--;
+                }
+                
+                // Fallback: try the original generic approach
+                console.log('🔄 Fallback: trying generic row detection...');
+                current = target;
+                maxDepth = 10;
+                
+                while (current && maxDepth > 0) {
+                    // Look for the main standings container
+                    const standingsContainer = document.querySelector('.text-sm');
+                    if (standingsContainer && standingsContainer.contains(current)) {
+                        // Get all the flex-col divs (these are the actual rows)
+                        const allRows = standingsContainer.querySelectorAll('.flex.flex-col');
+                        console.log('📊 Found', allRows.length, 'flex-col rows in standings');
+                        
+                        // Find which row contains our target
+                        for (let i = 0; i < allRows.length; i++) {
+                            if (allRows[i].contains(current) || allRows[i] === current) {
+                                const rowNumber = i + 1;
+                                console.log(`🎯 Target found in row ${rowNumber}`);
+                                return {
+                                    element: allRows[i],
+                                    rowNumber: rowNumber,
+                                    totalRows: allRows.length
+                                };
+                            }
+                        }
+                    }
+                    
+                    current = current.parentElement;
+                    maxDepth--;
+                }
+                
+                console.log('❌ No table row found');
+                return null;
+            }
+        }
 
         // Reset sequence if user is idle for too long
         let sequenceTimeout;
