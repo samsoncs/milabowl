@@ -1,15 +1,17 @@
 ---
 import Layout from './Layout.astro';
+import retroMilaImg from '../assets/retro_mila.jpg';
 
 export interface Props {
     title: string;
+    description?: string;
     enableViewTransitions?: boolean;
 }
 
-const { title, enableViewTransitions } = Astro.props;
+const { title, description, enableViewTransitions } = Astro.props;
 ---
 
-<Layout title={title} enableViewTransitions={enableViewTransitions}>
+<Layout title={title} description={description} enableViewTransitions={enableViewTransitions}>
     <!-- Easter Egg Overlay -->
     <div id="retro-overlay" class="retro-overlay hidden">
         <div class="retro-message">
@@ -22,8 +24,9 @@ const { title, enableViewTransitions } = Astro.props;
     <slot />
 
     <!-- Easter Egg Script -->
-    <script>
-        import party from 'party-js';
+    <script define:vars={{ retroMilaImgSrc: retroMilaImg.src }}>
+        // Dynamic import for party-js to ensure it works in client-side context
+        let party = null;
         
         // Easter egg key sequence: up, down, 6, 9 (accepts both regular digits and numpad)
         const easterSequence = ['ArrowUp', 'ArrowDown', ['Digit6', 'Numpad6'], ['Digit9', 'Numpad9']];
@@ -69,8 +72,18 @@ const { title, enableViewTransitions } = Astro.props;
         }
 
         // Activate retro mode
-        function activateRetroMode() {
+        async function activateRetroMode() {
             if (isRetroMode) return;
+            
+            // Load party-js dynamically if not already loaded
+            if (!party) {
+                try {
+                    const partyModule = await import('party-js');
+                    party = partyModule.default || partyModule;
+                } catch (error) {
+                    console.warn('Could not load party-js for confetti effects:', error);
+                }
+            }
             
             isRetroMode = true;
             sessionStorage.setItem('milabowl-retro-mode', 'true');
@@ -83,29 +96,31 @@ const { title, enableViewTransitions } = Astro.props;
                 overlay.classList.remove('hidden');
                 sessionStorage.setItem('milabowl-retro-shown', 'true');
                 
-                // Create huge confetti blast using party-js
-                setTimeout(() => {
-                    // Create multiple confetti bursts from different positions
-                    party.confetti(document.body, {
-                        count: party.variation.range(100, 150),
-                        spread: party.variation.range(50, 100),
-                    });
-                    
-                    // Additional bursts with delays for sustained effect
+                // Create huge confetti blast using party-js if available
+                if (party) {
                     setTimeout(() => {
+                        // Create multiple confetti bursts from different positions
                         party.confetti(document.body, {
-                            count: party.variation.range(80, 120),
-                            spread: party.variation.range(40, 80),
+                            count: party.variation.range(100, 150),
+                            spread: party.variation.range(50, 100),
                         });
-                    }, 300);
-                    
-                    setTimeout(() => {
-                        party.confetti(document.body, {
-                            count: party.variation.range(60, 100),
-                            spread: party.variation.range(30, 70),
-                        });
-                    }, 600);
-                }, 100);
+                        
+                        // Additional bursts with delays for sustained effect
+                        setTimeout(() => {
+                            party.confetti(document.body, {
+                                count: party.variation.range(80, 120),
+                                spread: party.variation.range(40, 80),
+                            });
+                        }, 300);
+                        
+                        setTimeout(() => {
+                            party.confetti(document.body, {
+                                count: party.variation.range(60, 100),
+                                spread: party.variation.range(30, 70),
+                            });
+                        }, 600);
+                    }, 100);
+                }
                 
                 // Play activation sound sequence
                 setTimeout(() => playRetroSound(440, 150), 0);
@@ -347,7 +362,7 @@ const { title, enableViewTransitions } = Astro.props;
             
             // Create optimized retro Mila image with natural colors
             const img = document.createElement('img');
-            img.src = '/src/assets/retro_mila.jpg';
+            img.src = retroMilaImgSrc;
             img.alt = 'Retro Mila';
             img.style.cssText = `
                 width: ${size}px;
@@ -572,7 +587,7 @@ const { title, enableViewTransitions } = Astro.props;
                         align-items: center;
                         justify-content: center;
                     ">
-                        <img src="/src/assets/retro_mila.jpg" alt="Retro Mila" style="
+                        <img src="${retroMilaImgSrc}" alt="Retro Mila" style="
                             width: 200px;
                             height: 200px;
                             object-fit: cover;
