@@ -3,252 +3,279 @@ import Layout from './Layout.astro';
 import retroMilaImg from '../assets/retro_mila.jpg';
 
 export interface Props {
-    title: string;
-    description?: string;
-    enableViewTransitions?: boolean;
+  title: string;
+  description?: string;
+  enableViewTransitions?: boolean;
 }
 
 const { title, description, enableViewTransitions } = Astro.props;
 ---
 
-<Layout title={title} description={description} enableViewTransitions={enableViewTransitions}>
-    <!-- Easter Egg Overlay -->
-    <div id="retro-overlay" class="retro-overlay hidden">
-        <div class="retro-message">
-            <div class="retro-text">🎮 MILA INVADERS ACTIVATED 🎮</div>
-            <div class="retro-subtext">Welcome to the retro Milabowl! Game starts in 3s...</div>
-        </div>
+<Layout
+  title={title}
+  description={description}
+  enableViewTransitions={enableViewTransitions}
+>
+  <!-- Easter Egg Overlay -->
+  <div id="retro-overlay" class="retro-overlay hidden">
+    <div class="retro-message">
+      <div class="retro-text">🎮 MILA INVADERS ACTIVATED 🎮</div>
+      <div class="retro-subtext">
+        Welcome to the retro Milabowl! Game starts in 3s...
+      </div>
     </div>
+  </div>
 
-    <!-- Main content slot -->
-    <slot />
+  <!-- Main content slot -->
+  <slot />
 
-    <!-- Easter Egg Script -->
-    <script define:vars={{ retroMilaImgSrc: retroMilaImg.src }}>
-        // Dynamic import for party-js to ensure it works in client-side context
-        let party = null;
-        
-        // Easter egg key sequence: up, down, 6, 9 (accepts both regular digits and numpad)
-        const easterSequence = ['ArrowUp', 'ArrowDown', ['Digit6', 'Numpad6'], ['Digit9', 'Numpad9']];
-        let keySequence = [];
-        let isRetroMode = false;
+  <!-- Easter Egg Script -->
+  <script define:vars={{ retroMilaImgSrc: retroMilaImg.src }}>
+    // Dynamic import for party-js to ensure it works in client-side context
+    let party = null;
 
-        // Mobile detection
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                         ('ontouchstart' in window) || 
-                         (navigator.maxTouchPoints > 0);
+    // Easter egg key sequence: up, down, 6, 9 (accepts both regular digits and numpad)
+    const easterSequence = [
+      'ArrowUp',
+      'ArrowDown',
+      ['Digit6', 'Numpad6'],
+      ['Digit9', 'Numpad9'],
+    ];
+    let keySequence = [];
+    let isRetroMode = false;
 
-        // Mobile touch sequence tracking
-        let touchSequence = [];
-        let lastTouchTime = 0;
+    // Mobile detection
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0;
 
-        // Check if retro mode was previously activated (persists across page loads)
-        if (sessionStorage.getItem('milabowl-retro-mode') === 'true') {
-            isRetroMode = true;
+    // Mobile touch sequence tracking (currently unused but kept for future mobile features)
+    // let touchSequence = [];
+    // let lastTouchTime = 0;    // Check if retro mode was previously activated (persists across page loads)
+    if (sessionStorage.getItem('milabowl-retro-mode') === 'true') {
+      isRetroMode = true;
+    }
+
+    // Retro sound effects (simple beeps using Web Audio API)
+    function playRetroSound(frequency = 440, duration = 100) {
+      try {
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.frequency.setValueAtTime(
+          frequency,
+          audioContext.currentTime
+        );
+        oscillator.type = 'square'; // 8-bit style square wave
+
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(
+          0.01,
+          audioContext.currentTime + duration / 1000
+        );
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration / 1000);
+      } catch {
+        // Fallback for browsers that don't support Web Audio API
+        console.log('🎵 *retro beep*');
+      }
+    }
+
+    // Activate retro mode
+    async function activateRetroMode() {
+      if (isRetroMode) return;
+
+      // Load party-js dynamically if not already loaded
+      if (!party) {
+        try {
+          const partyModule = await import('party-js');
+          party = partyModule.default || partyModule;
+        } catch (error) {
+          console.warn('Could not load party-js for confetti effects:', error);
         }
+      }
 
-        // Retro sound effects (simple beeps using Web Audio API)
-        function playRetroSound(frequency = 440, duration = 100) {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-                oscillator.type = 'square'; // 8-bit style square wave
-                
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + duration / 1000);
-            } catch (e) {
-                // Fallback for browsers that don't support Web Audio API
-                console.log('🎵 *retro beep*');
-            }
-        }
+      isRetroMode = true;
+      sessionStorage.setItem('milabowl-retro-mode', 'true');
+      document.body.classList.add('retro-mode');
 
-        // Activate retro mode
-        async function activateRetroMode() {
-            if (isRetroMode) return;
-            
-            // Load party-js dynamically if not already loaded
-            if (!party) {
-                try {
-                    const partyModule = await import('party-js');
-                    party = partyModule.default || partyModule;
-                } catch (error) {
-                    console.warn('Could not load party-js for confetti effects:', error);
-                }
-            }
-            
-            isRetroMode = true;
-            sessionStorage.setItem('milabowl-retro-mode', 'true');
-            document.body.classList.add('retro-mode');
-            
-            // Show activation message only if not already shown this session
-            const showOverlay = !sessionStorage.getItem('milabowl-retro-shown');
-            if (showOverlay) {
-                const overlay = document.getElementById('retro-overlay');
-                overlay.classList.remove('hidden');
-                sessionStorage.setItem('milabowl-retro-shown', 'true');
-                
-                // Create huge confetti blast using party-js if available
-                if (party) {
-                    setTimeout(() => {
-                        // Create multiple confetti bursts from different positions
-                        party.confetti(document.body, {
-                            count: party.variation.range(100, 150),
-                            spread: party.variation.range(50, 100),
-                        });
-                        
-                        // Additional bursts with delays for sustained effect
-                        setTimeout(() => {
-                            party.confetti(document.body, {
-                                count: party.variation.range(80, 120),
-                                spread: party.variation.range(40, 80),
-                            });
-                        }, 300);
-                        
-                        setTimeout(() => {
-                            party.confetti(document.body, {
-                                count: party.variation.range(60, 100),
-                                spread: party.variation.range(30, 70),
-                            });
-                        }, 600);
-                    }, 100);
-                }
-                
-                // Play activation sound sequence
-                setTimeout(() => playRetroSound(440, 150), 0);
-                setTimeout(() => playRetroSound(554, 150), 200);
-                setTimeout(() => playRetroSound(659, 150), 400);
-                setTimeout(() => playRetroSound(880, 300), 600);
-                
-                // Hide message after 3 seconds
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                }, 3000);
-            }
+      // Show activation message only if not already shown this session
+      const showOverlay = !sessionStorage.getItem('milabowl-retro-shown');
+      if (showOverlay) {
+        const overlay = document.getElementById('retro-overlay');
+        overlay.classList.remove('hidden');
+        sessionStorage.setItem('milabowl-retro-shown', 'true');
 
-            // Transform avatars to 8-bit style
-            applyRetroStyling();
-            
-            // Add retro click sounds to buttons
-            addRetroClickSounds();
-            
-            // Animate bomb emojis
-            animateBombEmojis();
-            
-            // Start the retro minigame
-            startRetroMinigame();
-            
-            console.log('🎮 Mila Invaders activated! Close browser tab to fully exit.');
-        }
-
-        // Apply retro styling (no avatar pixelation)
-        function applyRetroStyling() {
-            console.log('🎮 Applying retro visual effects...');
-            // No avatar modification needed - keep original image quality
-            console.log('✨ Retro styling applied successfully');
-        }
-
-        // Add retro sounds to button clicks
-        function addRetroClickSounds() {
-            // Remove existing listeners first to prevent duplicates
-            document.removeEventListener('click', globalRetroClickHandler);
-            
-            // Add a global click listener instead of individual button listeners
-            document.addEventListener('click', globalRetroClickHandler);
-        }
-
-        // Global click handler for retro sounds and shooting
-        function globalRetroClickHandler(event) {
-            if (isRetroMode) {
-                // If game is active, shoot projectile
-                if (gameActive) {
-                    shootProjectile();
-                } else {
-                    // Otherwise just play click sound
-                    playRetroSound(220, 80);
-                }
-            }
-        }
-
-        // Animate bomb emojis like Pac-Man (more subtle)
-        function animateBombEmojis() {
-            const allElements = document.querySelectorAll('*');
-            allElements.forEach(element => {
-                // Only animate if the element contains ONLY bomb/explosion emojis, not mixed content
-                const textContent = element.textContent?.trim();
-                if (textContent === '💣' || (textContent && textContent.length <= 3 && textContent.includes('💣'))) {
-                    element.style.animation = 'pacman-bounce 2s ease-in-out infinite';
-                }
-                if (textContent === '💥' || (textContent && textContent.length <= 3 && textContent.includes('💥'))) {
-                    element.style.animation = 'explosion-pulse 1.5s ease-in-out infinite';
-                }
+        // Create huge confetti blast using party-js if available
+        if (party) {
+          setTimeout(() => {
+            // Create multiple confetti bursts from different positions
+            party.confetti(document.body, {
+              count: party.variation.range(100, 150),
+              spread: party.variation.range(50, 100),
             });
-        }
 
-        // Retro Minigame Variables
-        let gameActive = false;
-        let gameScore = 0;
-        let gameTimer = 0;
-        let milaHeads = [];
-        let projectiles = [];
-        let gameStartTime = 0;
-
-        // Start the retro minigame
-        function startRetroMinigame() {
-            if (gameActive) return;
-            
-            gameActive = true;
-            gameScore = 0;
-            gameTimer = 0;
-            milaHeads = [];
-            projectiles = [];
-            gameStartTime = Date.now();
-            
-            // Create game UI
-            createGameUI();
-            
-            // Create spaceship
-            createSpaceship();
-            
-            // Start spawning heads
-            const headSpawner = setInterval(() => {
-                if (!gameActive) {
-                    clearInterval(headSpawner);
-                    return;
-                }
-                spawnMilaHead();
-            }, 1000);
-            
-            // Game timer (15 seconds)
+            // Additional bursts with delays for sustained effect
             setTimeout(() => {
-                endGame();
-            }, 15000);
-            
-            // Game loop
-            gameLoop();
+              party.confetti(document.body, {
+                count: party.variation.range(80, 120),
+                spread: party.variation.range(40, 80),
+              });
+            }, 300);
+
+            setTimeout(() => {
+              party.confetti(document.body, {
+                count: party.variation.range(60, 100),
+                spread: party.variation.range(30, 70),
+              });
+            }, 600);
+          }, 100);
         }
 
-        // Create game UI elements
-        function createGameUI() {
-            const titleDisplay = document.createElement('div');
-            titleDisplay.id = 'retro-title';
-            titleDisplay.innerHTML = '👑 MILA INVADERS 👑';
-            
-            // Responsive sizing for mobile
-            const isMobileView = window.innerWidth <= 768;
-            const titleFontSize = isMobileView ? '1.2rem' : '1.8rem';
-            const titlePadding = isMobileView ? '0.5rem 1rem' : '0.8rem 1.5rem';
-            const titleTop = isMobileView ? '10px' : '20px';
-            
-            titleDisplay.style.cssText = `
+        // Play activation sound sequence
+        setTimeout(() => playRetroSound(440, 150), 0);
+        setTimeout(() => playRetroSound(554, 150), 200);
+        setTimeout(() => playRetroSound(659, 150), 400);
+        setTimeout(() => playRetroSound(880, 300), 600);
+
+        // Hide message after 3 seconds
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+        }, 3000);
+      }
+
+      // Transform avatars to 8-bit style
+      applyRetroStyling();
+
+      // Add retro click sounds to buttons
+      addRetroClickSounds();
+
+      // Animate bomb emojis
+      animateBombEmojis();
+
+      // Start the retro minigame
+      startRetroMinigame();
+
+      console.log(
+        '🎮 Mila Invaders activated! Close browser tab to fully exit.'
+      );
+    }
+
+    // Apply retro styling (no avatar pixelation)
+    function applyRetroStyling() {
+      console.log('🎮 Applying retro visual effects...');
+      // No avatar modification needed - keep original image quality
+      console.log('✨ Retro styling applied successfully');
+    }
+
+    // Add retro sounds to button clicks
+    function addRetroClickSounds() {
+      // Remove existing listeners first to prevent duplicates
+      document.removeEventListener('click', globalRetroClickHandler);
+
+      // Add a global click listener instead of individual button listeners
+      document.addEventListener('click', globalRetroClickHandler);
+    }
+
+    // Global click handler for retro sounds and shooting
+    function globalRetroClickHandler() {
+      if (isRetroMode) {
+        // If game is active, shoot projectile
+        if (gameActive) {
+          shootProjectile();
+        } else {
+          // Otherwise just play click sound
+          playRetroSound(220, 80);
+        }
+      }
+    }
+
+    // Animate bomb emojis like Pac-Man (more subtle)
+    function animateBombEmojis() {
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach((element) => {
+        // Only animate if the element contains ONLY bomb/explosion emojis, not mixed content
+        const textContent = element.textContent?.trim();
+        if (
+          textContent === '💣' ||
+          (textContent && textContent.length <= 3 && textContent.includes('💣'))
+        ) {
+          element.style.animation = 'pacman-bounce 2s ease-in-out infinite';
+        }
+        if (
+          textContent === '💥' ||
+          (textContent && textContent.length <= 3 && textContent.includes('💥'))
+        ) {
+          element.style.animation = 'explosion-pulse 1.5s ease-in-out infinite';
+        }
+      });
+    }
+
+    // Retro Minigame Variables
+    let gameActive = false;
+    let gameScore = 0;
+    // let gameTimer = 0; // Reserved for future game timing features
+    let milaHeads = [];
+    let projectiles = [];
+    // let gameStartTime = 0; // Reserved for future game timing features
+
+    // Start the retro minigame
+    function startRetroMinigame() {
+      if (gameActive) return;
+
+      gameActive = true;
+      gameScore = 0;
+      // gameTimer = 0; // Reserved for future game timing features
+      milaHeads = [];
+      projectiles = [];
+      // gameStartTime = Date.now(); // Reserved for future game timing features
+
+      // Create game UI
+      createGameUI();
+
+      // Create spaceship
+      createSpaceship();
+
+      // Start spawning heads
+      const headSpawner = setInterval(() => {
+        if (!gameActive) {
+          clearInterval(headSpawner);
+          return;
+        }
+        spawnMilaHead();
+      }, 1000);
+
+      // Game timer (15 seconds)
+      setTimeout(() => {
+        endGame();
+      }, 15000);
+
+      // Game loop
+      gameLoop();
+    }
+
+    // Create game UI elements
+    function createGameUI() {
+      const titleDisplay = document.createElement('div');
+      titleDisplay.id = 'retro-title';
+      titleDisplay.innerHTML = '👑 MILA INVADERS 👑';
+
+      // Responsive sizing for mobile
+      const isMobileView = window.innerWidth <= 768;
+      const titleFontSize = isMobileView ? '1.2rem' : '1.8rem';
+      const titlePadding = isMobileView ? '0.5rem 1rem' : '0.8rem 1.5rem';
+      const titleTop = isMobileView ? '10px' : '20px';
+
+      titleDisplay.style.cssText = `
                 position: fixed;
                 top: ${titleTop};
                 left: 50%;
@@ -271,19 +298,20 @@ const { title, description, enableViewTransitions } = Astro.props;
                 max-width: 90vw;
                 box-sizing: border-box;
             `;
-            document.body.appendChild(titleDisplay);
+      document.body.appendChild(titleDisplay);
 
-            // Calculate score position based on title height
-            const titleHeight = titleDisplay.offsetHeight;
-            const scoreTop = parseInt(titleTop) + titleHeight + (isMobileView ? 10 : 20);
-            const scoreFontSize = isMobileView ? '1.5rem' : '2rem';
-            const scorePadding = isMobileView ? '0.2rem 0.8rem' : '0.3rem 1rem';
+      // Calculate score position based on title height
+      const titleHeight = titleDisplay.offsetHeight;
+      const scoreTop =
+        parseInt(titleTop) + titleHeight + (isMobileView ? 10 : 20);
+      const scoreFontSize = isMobileView ? '1.5rem' : '2rem';
+      const scorePadding = isMobileView ? '0.2rem 0.8rem' : '0.3rem 1rem';
 
-            // Score display
-            const scoreDisplay = document.createElement('div');
-            scoreDisplay.id = 'retro-score';
-            scoreDisplay.innerHTML = 'SCORE: 0';
-            scoreDisplay.style.cssText = `
+      // Score display
+      const scoreDisplay = document.createElement('div');
+      scoreDisplay.id = 'retro-score';
+      scoreDisplay.innerHTML = 'SCORE: 0';
+      scoreDisplay.style.cssText = `
                 position: fixed;
                 top: ${scoreTop}px;
                 left: 50%;
@@ -303,15 +331,15 @@ const { title, description, enableViewTransitions } = Astro.props;
                 max-width: 90vw;
                 box-sizing: border-box;
             `;
-            document.body.appendChild(scoreDisplay);
-        }
+      document.body.appendChild(scoreDisplay);
+    }
 
-        // Create spaceship at bottom
-        function createSpaceship() {
-            const spaceship = document.createElement('div');
-            spaceship.id = 'retro-spaceship';
-            // Space Invaders style spaceship using SVG
-            spaceship.innerHTML = `
+    // Create spaceship at bottom
+    function createSpaceship() {
+      const spaceship = document.createElement('div');
+      spaceship.id = 'retro-spaceship';
+      // Space Invaders style spaceship using SVG
+      spaceship.innerHTML = `
                 <svg width="40" height="24" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="18" y="0" width="4" height="4" fill="#00ff00"/>
                     <rect x="14" y="4" width="12" height="4" fill="#00ff00"/>
@@ -323,7 +351,7 @@ const { title, description, enableViewTransitions } = Astro.props;
                     <rect x="32" y="20" width="8" height="4" fill="#00ff00"/>
                 </svg>
             `;
-            spaceship.style.cssText = `
+      spaceship.style.cssText = `
                 position: fixed;
                 bottom: 20px;
                 left: 50%;
@@ -332,39 +360,39 @@ const { title, description, enableViewTransitions } = Astro.props;
                 pointer-events: none;
                 filter: drop-shadow(0 0 10px #00ff00);
             `;
-            document.body.appendChild(spaceship);
-            
-            // Add mouse movement listener for spaceship
-            document.addEventListener('mousemove', updateSpaceshipPosition);
-        }
-        
-        // Update spaceship position based on mouse
-        function updateSpaceshipPosition(event) {
-            if (!gameActive) return;
-            
-            const spaceship = document.getElementById('retro-spaceship');
-            if (spaceship) {
-                const x = Math.max(20, Math.min(window.innerWidth - 60, event.clientX));
-                spaceship.style.left = `${x}px`;
-                spaceship.style.transform = 'translateX(-50%)';
-            }
-        }
+      document.body.appendChild(spaceship);
 
-        // Spawn Mila head
-        function spawnMilaHead() {
-            if (milaHeads.length >= 10) return;
-            
-            const head = document.createElement('div');
-            head.className = 'mila-head';
-            
-            // Random size between 30px and 55px
-            const size = 30 + Math.random() * 25;
-            
-            // Create optimized retro Mila image with natural colors
-            const img = document.createElement('img');
-            img.src = retroMilaImgSrc;
-            img.alt = 'Retro Mila';
-            img.style.cssText = `
+      // Add mouse movement listener for spaceship
+      document.addEventListener('mousemove', updateSpaceshipPosition);
+    }
+
+    // Update spaceship position based on mouse
+    function updateSpaceshipPosition(event) {
+      if (!gameActive) return;
+
+      const spaceship = document.getElementById('retro-spaceship');
+      if (spaceship) {
+        const x = Math.max(20, Math.min(window.innerWidth - 60, event.clientX));
+        spaceship.style.left = `${x}px`;
+        spaceship.style.transform = 'translateX(-50%)';
+      }
+    }
+
+    // Spawn Mila head
+    function spawnMilaHead() {
+      if (milaHeads.length >= 10) return;
+
+      const head = document.createElement('div');
+      head.className = 'mila-head';
+
+      // Random size between 30px and 55px
+      const size = 30 + Math.random() * 25;
+
+      // Create optimized retro Mila image with natural colors
+      const img = document.createElement('img');
+      img.src = retroMilaImgSrc;
+      img.alt = 'Retro Mila';
+      img.style.cssText = `
                 width: ${size}px;
                 height: ${size}px;
                 object-fit: cover;
@@ -377,14 +405,14 @@ const { title, description, enableViewTransitions } = Astro.props;
                     inset 0 0 6px rgba(255, 255, 255, 0.1);
                 transition: all 0.2s ease;
             `;
-            head.appendChild(img);
-            
-            const startX = Math.random() * (window.innerWidth - size);
-            const startY = -size;
-            const speed = 1.8 + Math.random() * 2.5; // Increased from 1 + Math.random() * 2
-            const direction = (Math.random() - 0.5) * 2;
-            
-            head.style.cssText = `
+      head.appendChild(img);
+
+      const startX = Math.random() * (window.innerWidth - size);
+      const startY = -size;
+      const speed = 1.8 + Math.random() * 2.5; // Increased from 1 + Math.random() * 2
+      const direction = (Math.random() - 0.5) * 2;
+
+      head.style.cssText = `
                 position: fixed;
                 left: ${startX}px;
                 top: ${startY}px;
@@ -394,33 +422,33 @@ const { title, description, enableViewTransitions } = Astro.props;
                 width: ${size}px;
                 height: ${size}px;
             `;
-            
-            head.dataset.x = startX;
-            head.dataset.y = startY;
-            head.dataset.speed = speed;
-            head.dataset.direction = direction;
-            head.dataset.size = size;
-            
-            document.body.appendChild(head);
-            milaHeads.push(head);
-        }
 
-        // Shoot projectile
-        function shootProjectile() {
-            if (!gameActive) return;
-            
-            const projectile = document.createElement('div');
-            projectile.className = 'retro-projectile';
-            projectile.innerHTML = '🍆';
-            
-            const spaceship = document.getElementById('retro-spaceship');
-            const spaceshipRect = spaceship.getBoundingClientRect();
-            
-            // Calculate the exact center of the spaceship (40px wide SVG)
-            const spaceshipCenterX = spaceshipRect.left + (spaceshipRect.width / 2);
-            const spaceshipTopY = spaceshipRect.top;
-            
-            projectile.style.cssText = `
+      head.dataset.x = startX;
+      head.dataset.y = startY;
+      head.dataset.speed = speed;
+      head.dataset.direction = direction;
+      head.dataset.size = size;
+
+      document.body.appendChild(head);
+      milaHeads.push(head);
+    }
+
+    // Shoot projectile
+    function shootProjectile() {
+      if (!gameActive) return;
+
+      const projectile = document.createElement('div');
+      projectile.className = 'retro-projectile';
+      projectile.innerHTML = '🍆';
+
+      const spaceship = document.getElementById('retro-spaceship');
+      const spaceshipRect = spaceship.getBoundingClientRect();
+
+      // Calculate the exact center of the spaceship (40px wide SVG)
+      const spaceshipCenterX = spaceshipRect.left + spaceshipRect.width / 2;
+      const spaceshipTopY = spaceshipRect.top;
+
+      projectile.style.cssText = `
                 position: fixed;
                 left: ${spaceshipCenterX}px;
                 top: ${spaceshipTopY}px;
@@ -430,75 +458,75 @@ const { title, description, enableViewTransitions } = Astro.props;
                 transition: none;
                 transform: translateX(-50%);
             `;
-            
-            projectile.dataset.x = spaceshipCenterX;
-            projectile.dataset.y = spaceshipTopY;
-            projectile.dataset.speed = 5;
-            
-            document.body.appendChild(projectile);
-            projectiles.push(projectile);
-            
-            // Play shoot sound
-            playRetroSound(880, 100);
-        }
 
-        // Game loop
-        function gameLoop() {
-            if (!gameActive) return;
-            
-            // Move heads
-            milaHeads.forEach((head, index) => {
-                const x = parseFloat(head.dataset.x);
-                const y = parseFloat(head.dataset.y);
-                const speed = parseFloat(head.dataset.speed);
-                const direction = parseFloat(head.dataset.direction);
-                
-                const newX = x + direction;
-                const newY = y + speed;
-                
-                head.dataset.x = newX;
-                head.dataset.y = newY;
-                head.style.left = `${newX}px`;
-                head.style.top = `${newY}px`;
-                
-                // Remove if off screen
-                if (newY > window.innerHeight + 50) {
-                    head.remove();
-                    milaHeads.splice(index, 1);
-                }
-            });
-            
-            // Move projectiles
-            projectiles.forEach((projectile, index) => {
-                const x = parseFloat(projectile.dataset.x);
-                const y = parseFloat(projectile.dataset.y);
-                const speed = parseFloat(projectile.dataset.speed);
-                
-                const newY = y - speed;
-                
-                projectile.dataset.y = newY;
-                projectile.style.top = `${newY}px`;
-                
-                // Remove if off screen
-                if (newY < -50) {
-                    projectile.remove();
-                    projectiles.splice(index, 1);
-                }
-            });
-            
-            // Check collisions
-            checkCollisions();
-            
-            // Continue game loop
-            requestAnimationFrame(gameLoop);
-        }
+      projectile.dataset.x = spaceshipCenterX;
+      projectile.dataset.y = spaceshipTopY;
+      projectile.dataset.speed = 5;
 
-        // Create splash effect
-        function createSplashEffect(x, y) {
-            const splash = document.createElement('div');
-            splash.className = 'water-splash';
-            splash.innerHTML = '💦💧💦💧💦';
-            splash.style.cssText = `
+      document.body.appendChild(projectile);
+      projectiles.push(projectile);
+
+      // Play shoot sound
+      playRetroSound(880, 100);
+    }
+
+    // Game loop
+    function gameLoop() {
+      if (!gameActive) return;
+
+      // Move heads
+      milaHeads.forEach((head, index) => {
+        const x = parseFloat(head.dataset.x);
+        const y = parseFloat(head.dataset.y);
+        const speed = parseFloat(head.dataset.speed);
+        const direction = parseFloat(head.dataset.direction);
+
+        const newX = x + direction;
+        const newY = y + speed;
+
+        head.dataset.x = newX;
+        head.dataset.y = newY;
+        head.style.left = `${newX}px`;
+        head.style.top = `${newY}px`;
+
+        // Remove if off screen
+        if (newY > window.innerHeight + 50) {
+          head.remove();
+          milaHeads.splice(index, 1);
+        }
+      });
+
+      // Move projectiles
+      projectiles.forEach((projectile, index) => {
+        // const x = parseFloat(projectile.dataset.x); // X position doesn't change for projectiles
+        const y = parseFloat(projectile.dataset.y);
+        const speed = parseFloat(projectile.dataset.speed);
+
+        const newY = y - speed;
+
+        projectile.dataset.y = newY;
+        projectile.style.top = `${newY}px`;
+
+        // Remove if off screen
+        if (newY < -50) {
+          projectile.remove();
+          projectiles.splice(index, 1);
+        }
+      });
+
+      // Check collisions
+      checkCollisions();
+
+      // Continue game loop
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Create splash effect
+    function createSplashEffect(x, y) {
+      const splash = document.createElement('div');
+      splash.className = 'water-splash';
+      splash.innerHTML = '💦💧💦💧💦';
+      splash.style.cssText = `
                 position: fixed;
                 left: ${x}px;
                 top: ${y}px;
@@ -508,78 +536,81 @@ const { title, description, enableViewTransitions } = Astro.props;
                 animation: splash-animation 0.6s ease-out forwards;
                 transform: translateX(-50%) translateY(-50%);
             `;
-            
-            document.body.appendChild(splash);
-            
-            // Remove splash after animation
-            setTimeout(() => {
-                if (splash.parentNode) {
-                    splash.remove();
-                }
-            }, 600);
-        }
 
-        // Check collisions
-        function checkCollisions() {
-            projectiles.forEach((projectile, pIndex) => {
-                const pX = parseFloat(projectile.dataset.x);
-                const pY = parseFloat(projectile.dataset.y);
-                
-                milaHeads.forEach((head, hIndex) => {
-                    const hX = parseFloat(head.dataset.x);
-                    const hY = parseFloat(head.dataset.y);
-                    const hSize = parseFloat(head.dataset.size);
-                    
-                    // Collision detection based on head size
-                    const collisionDistance = (hSize / 2) + 15; // Half the head size plus some buffer
-                    if (Math.abs(pX - hX) < collisionDistance && Math.abs(pY - hY) < collisionDistance) {
-                        // Hit! Create splash effect at hit location
-                        createSplashEffect(hX + (hSize / 2), hY + (hSize / 2));
-                        
-                        projectile.remove();
-                        head.remove();
-                        projectiles.splice(pIndex, 1);
-                        milaHeads.splice(hIndex, 1);
-                        
-                        // Increase score
-                        gameScore++;
-                        const scoreDisplay = document.getElementById('retro-score');
-                        if (scoreDisplay) {
-                            scoreDisplay.innerHTML = `SCORE: ${gameScore}`;
-                        }
-                        
-                        // Play hit sound
-                        playRetroSound(660, 150);
-                    }
-                });
-            });
-        }
+      document.body.appendChild(splash);
 
-        // End game
-        function endGame() {
-            gameActive = false;
-            
-            // Remove mouse listener
-            document.removeEventListener('mousemove', updateSpaceshipPosition);
-            
-            // Clean up game elements
-            milaHeads.forEach(head => head.remove());
-            projectiles.forEach(projectile => projectile.remove());
-            milaHeads = [];
-            projectiles = [];
-            
-            // Clean up game UI elements
-            const titleDisplay = document.getElementById('retro-title');
+      // Remove splash after animation
+      setTimeout(() => {
+        if (splash.parentNode) {
+          splash.remove();
+        }
+      }, 600);
+    }
+
+    // Check collisions
+    function checkCollisions() {
+      projectiles.forEach((projectile, pIndex) => {
+        const pX = parseFloat(projectile.dataset.x);
+        const pY = parseFloat(projectile.dataset.y);
+
+        milaHeads.forEach((head, hIndex) => {
+          const hX = parseFloat(head.dataset.x);
+          const hY = parseFloat(head.dataset.y);
+          const hSize = parseFloat(head.dataset.size);
+
+          // Collision detection based on head size
+          const collisionDistance = hSize / 2 + 15; // Half the head size plus some buffer
+          if (
+            Math.abs(pX - hX) < collisionDistance &&
+            Math.abs(pY - hY) < collisionDistance
+          ) {
+            // Hit! Create splash effect at hit location
+            createSplashEffect(hX + hSize / 2, hY + hSize / 2);
+
+            projectile.remove();
+            head.remove();
+            projectiles.splice(pIndex, 1);
+            milaHeads.splice(hIndex, 1);
+
+            // Increase score
+            gameScore++;
             const scoreDisplay = document.getElementById('retro-score');
-            const spaceship = document.getElementById('retro-spaceship');
-            if (titleDisplay) titleDisplay.remove();
-            if (scoreDisplay) scoreDisplay.remove();
-            if (spaceship) spaceship.remove();
-            
-            // Show game over screen
-            const gameOverScreen = document.createElement('div');
-            gameOverScreen.id = 'game-over-screen';
-            gameOverScreen.innerHTML = `
+            if (scoreDisplay) {
+              scoreDisplay.innerHTML = `SCORE: ${gameScore}`;
+            }
+
+            // Play hit sound
+            playRetroSound(660, 150);
+          }
+        });
+      });
+    }
+
+    // End game
+    function endGame() {
+      gameActive = false;
+
+      // Remove mouse listener
+      document.removeEventListener('mousemove', updateSpaceshipPosition);
+
+      // Clean up game elements
+      milaHeads.forEach((head) => head.remove());
+      projectiles.forEach((projectile) => projectile.remove());
+      milaHeads = [];
+      projectiles = [];
+
+      // Clean up game UI elements
+      const titleDisplay = document.getElementById('retro-title');
+      const scoreDisplay = document.getElementById('retro-score');
+      const spaceship = document.getElementById('retro-spaceship');
+      if (titleDisplay) titleDisplay.remove();
+      if (scoreDisplay) scoreDisplay.remove();
+      if (spaceship) spaceship.remove();
+
+      // Show game over screen
+      const gameOverScreen = document.createElement('div');
+      gameOverScreen.id = 'game-over-screen';
+      gameOverScreen.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: center; gap: 3rem; max-width: 90%; height: 80%;">
                     <div style="
                         flex-shrink: 0;
@@ -622,7 +653,7 @@ const { title, description, enableViewTransitions } = Astro.props;
                     </div>
                 </div>
             `;
-            gameOverScreen.style.cssText = `
+      gameOverScreen.style.cssText = `
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -637,542 +668,608 @@ const { title, description, enableViewTransitions } = Astro.props;
                 font-family: 'Courier New', monospace;
                 text-shadow: 0 0 10px #00ff00;
             `;
-            
-            document.body.appendChild(gameOverScreen);
-            
-            // Add click handler
-            const exitBtn = document.getElementById('exit-retro-btn');
-            
-            if (exitBtn) {
-                exitBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    // Exit retro mode completely
-                    sessionStorage.removeItem('milabowl-retro-mode');
-                    sessionStorage.removeItem('milabowl-retro-shown');
-                    location.reload();
-                });
-            }
-        }
 
-        // Listen for key sequence
-        document.addEventListener('keydown', (event) => {
-            keySequence.push(event.code);
-            
-            // Keep only the last 4 keys
-            if (keySequence.length > easterSequence.length) {
-                keySequence.shift();
-            }
-            
-            // Check if sequence matches (handling arrays for numpad alternatives)
-            if (keySequence.length === easterSequence.length) {
-                const matches = keySequence.every((key, index) => {
-                    const expected = easterSequence[index];
-                    if (Array.isArray(expected)) {
-                        return expected.includes(key);
-                    }
-                    return key === expected;
-                });
-                
-                if (matches) {
-                    activateRetroMode();
-                    keySequence = []; // Reset sequence
-                }
-            }
+      document.body.appendChild(gameOverScreen);
+
+      // Add click handler
+      const exitBtn = document.getElementById('exit-retro-btn');
+
+      if (exitBtn) {
+        exitBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Exit retro mode completely
+          sessionStorage.removeItem('milabowl-retro-mode');
+          sessionStorage.removeItem('milabowl-retro-shown');
+          location.reload();
+        });
+      }
+    }
+
+    // Listen for key sequence
+    document.addEventListener('keydown', (event) => {
+      keySequence.push(event.code);
+
+      // Keep only the last 4 keys
+      if (keySequence.length > easterSequence.length) {
+        keySequence.shift();
+      }
+
+      // Check if sequence matches (handling arrays for numpad alternatives)
+      if (keySequence.length === easterSequence.length) {
+        const matches = keySequence.every((key, index) => {
+          const expected = easterSequence[index];
+          if (Array.isArray(expected)) {
+            return expected.includes(key);
+          }
+          return key === expected;
         });
 
-        // Mobile-specific triggers
-        if (isMobile) {
-            // Add swipe gesture trigger (up, down, then tap rank 6 and 9 in standings table)
-            let swipeSequence = [];
-            let swipeStartY = 0;
-            let swipeThreshold = 50;
-            let sequenceTimer = null;
-            
-            // Function to reset sequence with timeout
-            function resetSequenceWithTimeout() {
-                // Clear any existing timer
-                if (sequenceTimer) {
-                    clearTimeout(sequenceTimer);
-                }
-                
-                // Set new timer to reset sequence after 5 seconds of inactivity
-                sequenceTimer = setTimeout(() => {
-                    if (swipeSequence.length > 0) {
-                        console.log('🕐 Sequence timeout - resetting swipe sequence');
-                        swipeSequence = [];
-                    }
-                    sequenceTimer = null;
-                }, 5000);
-            }
-            
-            document.addEventListener('touchstart', (e) => {
-                if (isRetroMode) return;
-                swipeStartY = e.touches[0].clientY;
-            }, { passive: true });
-            
-            document.addEventListener('touchend', (e) => {
-                if (isRetroMode) return;
-                
-                const swipeEndY = e.changedTouches[0].clientY;
-                const swipeDistance = swipeStartY - swipeEndY;
-                const touchTarget = e.target;
-                
-                console.log('👆 Touch event:', {
-                    swipeDistance,
-                    target: touchTarget,
-                    targetText: touchTarget.textContent?.trim(),
-                    currentSequence: swipeSequence
-                });
-                
-                // Detect swipe direction
-                if (Math.abs(swipeDistance) > swipeThreshold) {
-                    if (swipeDistance > 0) {
-                        // Swipe up
-                        swipeSequence.push('up');
-                        console.log('⬆️ Swipe up detected, sequence:', swipeSequence);
-                    } else {
-                        // Swipe down
-                        swipeSequence.push('down');
-                        console.log('⬇️ Swipe down detected, sequence:', swipeSequence);
-                    }
-                } else {
-                    // Check for taps on row 6 and 9 in standings table
-                    console.log('👆 Tap detected, checking for table row...');
-                    const rowInfo = findTableRowInfo(touchTarget);
-                    if (rowInfo) {
-                        console.log('🎯 Found table row:', rowInfo.rowNumber, 'Element:', rowInfo.element);
-                        if (rowInfo.rowNumber === 6) {
-                            swipeSequence.push('6');
-                            console.log('6️⃣ Added "6" to sequence (row 6):', swipeSequence);
-                        } else if (rowInfo.rowNumber === 9) {
-                            swipeSequence.push('9');
-                            console.log('9️⃣ Added "9" to sequence (row 9):', swipeSequence);
-                        } else {
-                            console.log(`ℹ️ Tapped row ${rowInfo.rowNumber} (need row 6 or 9)`);
-                        }
-                    } else {
-                        console.log('❌ No table row found for tap');
-                        
-                        // Debug: Show us what we're tapping on
-                        console.log('🔍 Debug - element details:');
-                        console.log('- Tag:', touchTarget.tagName);
-                        console.log('- Classes:', touchTarget.className);
-                        console.log('- ID:', touchTarget.id);
-                        console.log('- Text content (first 100 chars):', touchTarget.textContent?.trim().substring(0, 100));
-                        console.log('- Parent element:', touchTarget.parentElement);
-                        console.log('- Parent classes:', touchTarget.parentElement?.className);
-                        
-                        // Try a very permissive approach for any clickable element
-                        let permissiveTarget = touchTarget;
-                        for (let depth = 0; depth < 15; depth++) {
-                            if (!permissiveTarget) break;
-                            console.log(`🔍 Depth ${depth}:`, permissiveTarget.tagName, permissiveTarget.className);
-                            
-                            // Look for any element that might contain standings info
-                            const text = permissiveTarget.textContent?.trim() || '';
-                            const classList = permissiveTarget.className || '';
-                            
-                            if (text.includes('6') || text.includes('9') || 
-                                classList.includes('standing') || classList.includes('rank') || 
-                                classList.includes('row') || classList.includes('table')) {
-                                console.log('🎯 Found potential standings element:', permissiveTarget);
-                                break;
-                            }
-                            
-                            permissiveTarget = permissiveTarget.parentElement;
-                        }
-                    }
-                }
-                
-                // Keep only last 4 gestures (prevents infinite sequence buildup)
-                if (swipeSequence.length > 4) {
-                    swipeSequence.shift();
-                }
-                
-                // Check if sequence matches: up, down, 6, 9
-                if (swipeSequence.length === 4 && 
-                    swipeSequence[0] === 'up' && 
-                    swipeSequence[1] === 'down' && 
-                    swipeSequence[2] === '6' && 
-                    swipeSequence[3] === '9') {
-                    
-                    console.log('🎮 EASTER EGG ACTIVATED! Correct sequence detected:', swipeSequence);
-                    
-                    // Clear the timeout since we're activating
-                    if (sequenceTimer) {
-                        clearTimeout(sequenceTimer);
-                        sequenceTimer = null;
-                    }
-                    
-                    activateRetroMode();
-                    swipeSequence = [];
-                } else {
-                    // Reset timeout for sequence cleanup
-                    resetSequenceWithTimeout();
-                }
-            }, { passive: true });
-            
-            // Helper function to find which table row was tapped
-            function findTableRowInfo(target) {
-                console.log('🔍 Checking tap target for table row:', target);
-                
-                // First check if we can find a rank class directly
-                let current = target;
-                let maxDepth = 15;
-                
-                while (current && maxDepth > 0) {
-                    console.log(`🔍 Checking element at depth ${15-maxDepth}:`, current.tagName, current.className);
-                    
-                    // Check for rank- classes (this flexbox table uses rank-1, rank-2, etc.)
-                    const classList = current.className || '';
-                    const rankMatch = classList.match(/rank-(\d+)/);
-                    if (rankMatch) {
-                        const rowNumber = parseInt(rankMatch[1]);
-                        console.log(`🎯 Found rank class: rank-${rowNumber}`);
-                        return {
-                            element: current,
-                            rowNumber: rowNumber,
-                            totalRows: 9
-                        };
-                    }
-                    
-                    // Also check for the flex column structure specific to this table
-                    if (current.matches('.flex.flex-col')) {
-                        console.log('✅ Found flex-col container, looking for rank number...');
-                        
-                        // Look for the rank number in the first child div
-                        const rankDiv = current.querySelector('.text-sm.font-bold');
-                        if (rankDiv) {
-                            const rankText = rankDiv.textContent?.trim();
-                            const rankNumber = parseInt(rankText);
-                            if (!isNaN(rankNumber)) {
-                                console.log(`🎯 Found rank number from text: ${rankNumber}`);
-                                return {
-                                    element: current,
-                                    rowNumber: rankNumber,
-                                    totalRows: 9
-                                };
-                            }
-                        }
-                    }
-                    
-                    current = current.parentElement;
-                    maxDepth--;
-                }
-                
-                // Fallback: try the original generic approach
-                console.log('🔄 Fallback: trying generic row detection...');
-                current = target;
-                maxDepth = 10;
-                
-                while (current && maxDepth > 0) {
-                    // Look for the main standings container
-                    const standingsContainer = document.querySelector('.text-sm');
-                    if (standingsContainer && standingsContainer.contains(current)) {
-                        // Get all the flex-col divs (these are the actual rows)
-                        const allRows = standingsContainer.querySelectorAll('.flex.flex-col');
-                        console.log('📊 Found', allRows.length, 'flex-col rows in standings');
-                        
-                        // Find which row contains our target
-                        for (let i = 0; i < allRows.length; i++) {
-                            if (allRows[i].contains(current) || allRows[i] === current) {
-                                const rowNumber = i + 1;
-                                console.log(`🎯 Target found in row ${rowNumber}`);
-                                return {
-                                    element: allRows[i],
-                                    rowNumber: rowNumber,
-                                    totalRows: allRows.length
-                                };
-                            }
-                        }
-                    }
-                    
-                    current = current.parentElement;
-                    maxDepth--;
-                }
-                
-                console.log('❌ No table row found');
-                return null;
-            }
+        if (matches) {
+          activateRetroMode();
+          keySequence = []; // Reset sequence
+        }
+      }
+    });
+
+    // Mobile-specific triggers
+    if (isMobile) {
+      // Add swipe gesture trigger (up, down, then tap rank 6 and 9 in standings table)
+      let swipeSequence = [];
+      let swipeStartY = 0;
+      const swipeThreshold = 50;
+      let sequenceTimer = null;
+
+      // Function to reset sequence with timeout
+      function resetSequenceWithTimeout() {
+        // Clear any existing timer
+        if (sequenceTimer) {
+          clearTimeout(sequenceTimer);
         }
 
-        // Reset sequence if user is idle for too long
-        let sequenceTimeout;
-        document.addEventListener('keydown', () => {
-            clearTimeout(sequenceTimeout);
-            sequenceTimeout = setTimeout(() => {
-                keySequence = [];
-            }, 3000);
+        // Set new timer to reset sequence after 5 seconds of inactivity
+        sequenceTimer = setTimeout(() => {
+          if (swipeSequence.length > 0) {
+            console.log('🕐 Sequence timeout - resetting swipe sequence');
+            swipeSequence = [];
+          }
+          sequenceTimer = null;
+        }, 5000);
+      }
+
+      document.addEventListener(
+        'touchstart',
+        (e) => {
+          if (isRetroMode) return;
+          swipeStartY = e.touches[0].clientY;
+        },
+        { passive: true }
+      );
+
+      document.addEventListener(
+        'touchend',
+        (e) => {
+          if (isRetroMode) return;
+
+          const swipeEndY = e.changedTouches[0].clientY;
+          const swipeDistance = swipeStartY - swipeEndY;
+          const touchTarget = e.target;
+
+          console.log('👆 Touch event:', {
+            swipeDistance,
+            target: touchTarget,
+            targetText: touchTarget.textContent?.trim(),
+            currentSequence: swipeSequence,
+          });
+
+          // Detect swipe direction
+          if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+              // Swipe up
+              swipeSequence.push('up');
+              console.log('⬆️ Swipe up detected, sequence:', swipeSequence);
+            } else {
+              // Swipe down
+              swipeSequence.push('down');
+              console.log('⬇️ Swipe down detected, sequence:', swipeSequence);
+            }
+          } else {
+            // Check for taps on row 6 and 9 in standings table
+            console.log('👆 Tap detected, checking for table row...');
+            const rowInfo = findTableRowInfo(touchTarget);
+            if (rowInfo) {
+              console.log(
+                '🎯 Found table row:',
+                rowInfo.rowNumber,
+                'Element:',
+                rowInfo.element
+              );
+              if (rowInfo.rowNumber === 6) {
+                swipeSequence.push('6');
+                console.log('6️⃣ Added "6" to sequence (row 6):', swipeSequence);
+              } else if (rowInfo.rowNumber === 9) {
+                swipeSequence.push('9');
+                console.log('9️⃣ Added "9" to sequence (row 9):', swipeSequence);
+              } else {
+                console.log(
+                  `ℹ️ Tapped row ${rowInfo.rowNumber} (need row 6 or 9)`
+                );
+              }
+            } else {
+              console.log('❌ No table row found for tap');
+
+              // Debug: Show us what we're tapping on
+              console.log('🔍 Debug - element details:');
+              console.log('- Tag:', touchTarget.tagName);
+              console.log('- Classes:', touchTarget.className);
+              console.log('- ID:', touchTarget.id);
+              console.log(
+                '- Text content (first 100 chars):',
+                touchTarget.textContent?.trim().substring(0, 100)
+              );
+              console.log('- Parent element:', touchTarget.parentElement);
+              console.log(
+                '- Parent classes:',
+                touchTarget.parentElement?.className
+              );
+
+              // Try a very permissive approach for any clickable element
+              let permissiveTarget = touchTarget;
+              for (let depth = 0; depth < 15; depth++) {
+                if (!permissiveTarget) break;
+                console.log(
+                  `🔍 Depth ${depth}:`,
+                  permissiveTarget.tagName,
+                  permissiveTarget.className
+                );
+
+                // Look for any element that might contain standings info
+                const text = permissiveTarget.textContent?.trim() || '';
+                const classList = permissiveTarget.className || '';
+
+                if (
+                  text.includes('6') ||
+                  text.includes('9') ||
+                  classList.includes('standing') ||
+                  classList.includes('rank') ||
+                  classList.includes('row') ||
+                  classList.includes('table')
+                ) {
+                  console.log(
+                    '🎯 Found potential standings element:',
+                    permissiveTarget
+                  );
+                  break;
+                }
+
+                permissiveTarget = permissiveTarget.parentElement;
+              }
+            }
+          }
+
+          // Keep only last 4 gestures (prevents infinite sequence buildup)
+          if (swipeSequence.length > 4) {
+            swipeSequence.shift();
+          }
+
+          // Check if sequence matches: up, down, 6, 9
+          if (
+            swipeSequence.length === 4 &&
+            swipeSequence[0] === 'up' &&
+            swipeSequence[1] === 'down' &&
+            swipeSequence[2] === '6' &&
+            swipeSequence[3] === '9'
+          ) {
+            console.log(
+              '🎮 EASTER EGG ACTIVATED! Correct sequence detected:',
+              swipeSequence
+            );
+
+            // Clear the timeout since we're activating
+            if (sequenceTimer) {
+              clearTimeout(sequenceTimer);
+              sequenceTimer = null;
+            }
+
+            activateRetroMode();
+            swipeSequence = [];
+          } else {
+            // Reset timeout for sequence cleanup
+            resetSequenceWithTimeout();
+          }
+        },
+        { passive: true }
+      );
+
+      // Helper function to find which table row was tapped
+      function findTableRowInfo(target) {
+        console.log('🔍 Checking tap target for table row:', target);
+
+        // First check if we can find a rank class directly
+        let current = target;
+        let maxDepth = 15;
+
+        while (current && maxDepth > 0) {
+          console.log(
+            `🔍 Checking element at depth ${15 - maxDepth}:`,
+            current.tagName,
+            current.className
+          );
+
+          // Check for rank- classes (this flexbox table uses rank-1, rank-2, etc.)
+          const classList = current.className || '';
+          const rankMatch = classList.match(/rank-(\d+)/);
+          if (rankMatch) {
+            const rowNumber = parseInt(rankMatch[1]);
+            console.log(`🎯 Found rank class: rank-${rowNumber}`);
+            return {
+              element: current,
+              rowNumber: rowNumber,
+              totalRows: 9,
+            };
+          }
+
+          // Also check for the flex column structure specific to this table
+          if (current.matches('.flex.flex-col')) {
+            console.log(
+              '✅ Found flex-col container, looking for rank number...'
+            );
+
+            // Look for the rank number in the first child div
+            const rankDiv = current.querySelector('.text-sm.font-bold');
+            if (rankDiv) {
+              const rankText = rankDiv.textContent?.trim();
+              const rankNumber = parseInt(rankText);
+              if (!isNaN(rankNumber)) {
+                console.log(`🎯 Found rank number from text: ${rankNumber}`);
+                return {
+                  element: current,
+                  rowNumber: rankNumber,
+                  totalRows: 9,
+                };
+              }
+            }
+          }
+
+          current = current.parentElement;
+          maxDepth--;
+        }
+
+        // Fallback: try the original generic approach
+        console.log('🔄 Fallback: trying generic row detection...');
+        current = target;
+        maxDepth = 10;
+
+        while (current && maxDepth > 0) {
+          // Look for the main standings container
+          const standingsContainer = document.querySelector('.text-sm');
+          if (standingsContainer && standingsContainer.contains(current)) {
+            // Get all the flex-col divs (these are the actual rows)
+            const allRows =
+              standingsContainer.querySelectorAll('.flex.flex-col');
+            console.log(
+              '📊 Found',
+              allRows.length,
+              'flex-col rows in standings'
+            );
+
+            // Find which row contains our target
+            for (let i = 0; i < allRows.length; i++) {
+              if (allRows[i].contains(current) || allRows[i] === current) {
+                const rowNumber = i + 1;
+                console.log(`🎯 Target found in row ${rowNumber}`);
+                return {
+                  element: allRows[i],
+                  rowNumber: rowNumber,
+                  totalRows: allRows.length,
+                };
+              }
+            }
+          }
+
+          current = current.parentElement;
+          maxDepth--;
+        }
+
+        console.log('❌ No table row found');
+        return null;
+      }
+    }
+
+    // Reset sequence if user is idle for too long
+    let sequenceTimeout;
+    document.addEventListener('keydown', () => {
+      clearTimeout(sequenceTimeout);
+      sequenceTimeout = setTimeout(() => {
+        keySequence = [];
+      }, 3000);
+    });
+
+    // Initialize on page load
+    function initializeRetroMode() {
+      console.log('🚀 Initializing retro mode, isRetroMode:', isRetroMode);
+
+      // If retro mode was previously activated, restore it
+      if (isRetroMode) {
+        document.body.classList.add('retro-mode');
+        console.log('🎮 Retro mode class added to body');
+
+        // Apply retro effects immediately and multiple times
+        applyRetroStyling();
+        addRetroClickSounds();
+        animateBombEmojis();
+
+        // Apply after delays to catch lazy-loaded content
+        setTimeout(() => {
+          console.log('🔄 Re-applying retro effects after 100ms');
+          applyRetroStyling();
+        }, 100);
+
+        setTimeout(() => {
+          console.log('🔄 Re-applying retro effects after 500ms');
+          applyRetroStyling();
+        }, 500);
+
+        setTimeout(() => {
+          console.log('🔄 Re-applying retro effects after 1000ms');
+          applyRetroStyling();
+        }, 1000);
+
+        // Apply retro effects whenever new content is added
+        const observer = new MutationObserver((mutations) => {
+          let shouldReapply = false;
+          mutations.forEach((mutation) => {
+            if (
+              mutation.type === 'childList' &&
+              mutation.addedNodes.length > 0
+            ) {
+              mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === 1) {
+                  // Element node
+                  const hasImages =
+                    node.tagName === 'IMG' ||
+                    (node.querySelector && node.querySelector('img'));
+                  if (hasImages) {
+                    shouldReapply = true;
+                  }
+                }
+              });
+            }
+          });
+
+          if (shouldReapply && isRetroMode) {
+            console.log('🔄 New images detected, re-applying retro effects');
+            setTimeout(() => applyRetroStyling(), 50);
+          }
         });
 
-        // Initialize on page load
-        function initializeRetroMode() {
-            console.log('🚀 Initializing retro mode, isRetroMode:', isRetroMode);
-            
-            // If retro mode was previously activated, restore it
-            if (isRetroMode) {
-                document.body.classList.add('retro-mode');
-                console.log('🎮 Retro mode class added to body');
-                
-                // Apply retro effects immediately and multiple times
-                applyRetroStyling();
-                addRetroClickSounds();
-                animateBombEmojis();
-                
-                // Apply after delays to catch lazy-loaded content
-                setTimeout(() => {
-                    console.log('🔄 Re-applying retro effects after 100ms');
-                    applyRetroStyling();
-                }, 100);
-                
-                setTimeout(() => {
-                    console.log('🔄 Re-applying retro effects after 500ms');
-                    applyRetroStyling();
-                }, 500);
-                
-                setTimeout(() => {
-                    console.log('🔄 Re-applying retro effects after 1000ms');
-                    applyRetroStyling();
-                }, 1000);
-                
-                // Apply retro effects whenever new content is added
-                const observer = new MutationObserver((mutations) => {
-                    let shouldReapply = false;
-                    mutations.forEach(mutation => {
-                        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                            mutation.addedNodes.forEach(node => {
-                                if (node.nodeType === 1) { // Element node
-                                    const hasImages = node.tagName === 'IMG' || 
-                                                    (node.querySelector && node.querySelector('img'));
-                                    if (hasImages) {
-                                        shouldReapply = true;
-                                    }
-                                }
-                            });
-                        }
-                    });
-                    
-                    if (shouldReapply && isRetroMode) {
-                        console.log('🔄 New images detected, re-applying retro effects');
-                        setTimeout(() => applyRetroStyling(), 50);
-                    }
-                });
-                
-                observer.observe(document.body, {
-                    childList: true,
-                    subtree: true
-                });
-                
-                console.log('🎯 Retro mode initialization complete');
-            }
-        }
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
 
-        // Clear retro mode on page reload (unless intentionally preserved)
-        function handlePageReload() {
-            // Check if this is a manual reload or navigation
-            const navigationEntries = performance.getEntriesByType('navigation');
-            if (navigationEntries.length > 0) {
-                const navigationType = navigationEntries[0].type;
-                
-                // If it's a reload, clear retro mode
-                if (navigationType === 'reload') {
-                    sessionStorage.removeItem('milabowl-retro-mode');
-                    sessionStorage.removeItem('milabowl-retro-shown');
-                    isRetroMode = false;
-                }
-            }
-        }
+        console.log('🎯 Retro mode initialization complete');
+      }
+    }
 
-        // Handle page reload check
-        handlePageReload();
+    // Clear retro mode on page reload (unless intentionally preserved)
+    function handlePageReload() {
+      // Check if this is a manual reload or navigation
+      const navigationEntries = performance.getEntriesByType('navigation');
+      if (navigationEntries.length > 0) {
+        const navigationType = navigationEntries[0].type;
 
-        // Initialize immediately and on navigation
-        document.addEventListener('DOMContentLoaded', initializeRetroMode);
-        document.addEventListener('astro:page-load', initializeRetroMode);
-        
-        // Also initialize right away in case DOM is already loaded
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeRetroMode);
-        } else {
-            initializeRetroMode();
+        // If it's a reload, clear retro mode
+        if (navigationType === 'reload') {
+          sessionStorage.removeItem('milabowl-retro-mode');
+          sessionStorage.removeItem('milabowl-retro-shown');
+          isRetroMode = false;
         }
-    </script>
+      }
+    }
 
-    <!-- Easter Egg Styles -->
-    <style>
-        .retro-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: retro-fade-in 0.5s ease-out;
-        }
+    // Handle page reload check
+    handlePageReload();
 
-        .retro-message {
-            text-align: center;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 10px #00ff00;
-        }
+    // Initialize immediately and on navigation
+    document.addEventListener('DOMContentLoaded', initializeRetroMode);
+    document.addEventListener('astro:page-load', initializeRetroMode);
 
-        .retro-text {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            animation: retro-glow 1s ease-in-out infinite alternate;
-        }
+    // Also initialize right away in case DOM is already loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeRetroMode);
+    } else {
+      initializeRetroMode();
+    }
+  </script>
 
-        .retro-subtext {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
+  <!-- Easter Egg Styles -->
+  <style>
+    .retro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: retro-fade-in 0.5s ease-out;
+    }
 
-        @keyframes retro-fade-in {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+    .retro-message {
+      text-align: center;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 0 10px #00ff00;
+    }
 
-        @keyframes retro-glow {
-            from {
-                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
-            }
-            to {
-                text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
-            }
-        }
+    .retro-text {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      animation: retro-glow 1s ease-in-out infinite alternate;
+    }
 
-        @keyframes pacman-bounce {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-2px);
-            }
-        }
+    .retro-subtext {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
 
-        @keyframes explosion-pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
+    @keyframes retro-fade-in {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-        @keyframes splash-animation {
-            0% {
-                transform: translateX(-50%) translateY(-50%) scale(0.3);
-                opacity: 1;
-            }
-            30% {
-                transform: translateX(-50%) translateY(-50%) scale(1.2);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-50%) translateY(-60%) scale(1.5);
-                opacity: 0;
-            }
-        }
+    @keyframes retro-glow {
+      from {
+        text-shadow:
+          0 0 10px #00ff00,
+          0 0 20px #00ff00;
+      }
+      to {
+        text-shadow:
+          0 0 20px #00ff00,
+          0 0 30px #00ff00,
+          0 0 40px #00ff00;
+      }
+    }
 
-        /* Retro mode transformations */
-        .retro-mode {
-            background: linear-gradient(45deg, #001122, #003344) !important;
-            transition: background 1s ease;
-        }
+    @keyframes pacman-bounce {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-2px);
+      }
+    }
 
-        .retro-mode * {
-            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-        }
+    @keyframes explosion-pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
 
-        .retro-mode .bg-slate-100 {
-            background: #001122 !important;
-        }
+    @keyframes splash-animation {
+      0% {
+        transform: translateX(-50%) translateY(-50%) scale(0.3);
+        opacity: 1;
+      }
+      30% {
+        transform: translateX(-50%) translateY(-50%) scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) translateY(-60%) scale(1.5);
+        opacity: 0;
+      }
+    }
 
-        .retro-mode .dark\\:bg-slate-900 {
-            background: #001122 !important;
-        }
+    /* Retro mode transformations */
+    .retro-mode {
+      background: linear-gradient(45deg, #001122, #003344) !important;
+      transition: background 1s ease;
+    }
 
-        .retro-mode .bg-slate-200 {
-            background: #002244 !important;
-        }
+    .retro-mode * {
+      transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+    }
 
-        .retro-mode .text-indigo-900 {
-            color: #00ff00 !important;
-            text-shadow: 0 0 5px #00ff00;
-        }
+    .retro-mode .bg-slate-100 {
+      background: #001122 !important;
+    }
 
-        .retro-mode h1, .retro-mode h2, .retro-mode h3 {
-            font-family: 'Courier New', monospace !important;
-            color: #00ff00 !important;
-            text-shadow: 0 0 5px #00ff00;
-        }
+    .retro-mode .dark\\:bg-slate-900 {
+      background: #001122 !important;
+    }
 
-        .retro-mode button {
-            font-family: 'Courier New', monospace !important;
-            border: 2px solid #00ff00 !important;
-            background: #001122 !important;
-            color: #00ff00 !important;
-            transition: all 0.2s ease;
-        }
+    .retro-mode .bg-slate-200 {
+      background: #002244 !important;
+    }
 
-        .retro-mode button:hover {
-            background: #00ff00 !important;
-            color: #001122 !important;
-            box-shadow: 0 0 10px #00ff00;
-        }
+    .retro-mode .text-indigo-900 {
+      color: #00ff00 !important;
+      text-shadow: 0 0 5px #00ff00;
+    }
 
-        .retro-mode .card, .retro-mode .bg-white {
-            background: #001122 !important;
-            border: 1px solid #00ff00 !important;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
-        }
+    .retro-mode h1,
+    .retro-mode h2,
+    .retro-mode h3 {
+      font-family: 'Courier New', monospace !important;
+      color: #00ff00 !important;
+      text-shadow: 0 0 5px #00ff00;
+    }
 
-        /* Pixelated avatar styles - prevent layout shifts */
-        .retro-mode img {
-            image-rendering: pixelated !important;
-            image-rendering: -moz-crisp-edges !important;
-            image-rendering: crisp-edges !important;
-            image-rendering: -webkit-optimize-contrast !important;
-            image-rendering: -o-crisp-edges !important;
-            transition: filter 0.5s ease;
-            filter: contrast(1.2) saturate(1.4) hue-rotate(10deg) brightness(1.05) !important;
-        }
-        
-        /* Force pixelation on all images in retro mode */
-        .retro-mode img,
-        .retro-mode picture img,
-        .retro-mode [src*=".jpg"],
-        .retro-mode [src*=".jpeg"],
-        .retro-mode [src*=".png"],
-        .retro-mode [src*=".webp"],
-        .retro-mode [src*=".gif"] {
-            image-rendering: pixelated !important;
-            image-rendering: -moz-crisp-edges !important;
-            image-rendering: crisp-edges !important;
-            -ms-interpolation-mode: nearest-neighbor !important;
-        }
+    .retro-mode button {
+      font-family: 'Courier New', monospace !important;
+      border: 2px solid #00ff00 !important;
+      background: #001122 !important;
+      color: #00ff00 !important;
+      transition: all 0.2s ease;
+    }
 
-        /* Prevent animations from affecting layout */
-        .retro-mode [style*="animation"] {
-            will-change: transform;
-            backface-visibility: hidden;
-        }
+    .retro-mode button:hover {
+      background: #00ff00 !important;
+      color: #001122 !important;
+      box-shadow: 0 0 10px #00ff00;
+    }
 
-        /* Hide class for overlay */
-        .hidden {
-            display: none !important;
-        }
-    </style>
+    .retro-mode .card,
+    .retro-mode .bg-white {
+      background: #001122 !important;
+      border: 1px solid #00ff00 !important;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
+    }
+
+    /* Pixelated avatar styles - prevent layout shifts */
+    .retro-mode img {
+      image-rendering: pixelated !important;
+      image-rendering: -moz-crisp-edges !important;
+      image-rendering: crisp-edges !important;
+      image-rendering: -webkit-optimize-contrast !important;
+      image-rendering: -o-crisp-edges !important;
+      transition: filter 0.5s ease;
+      filter: contrast(1.2) saturate(1.4) hue-rotate(10deg) brightness(1.05) !important;
+    }
+
+    /* Force pixelation on all images in retro mode */
+    .retro-mode img,
+    .retro-mode picture img,
+    .retro-mode [src*='.jpg'],
+    .retro-mode [src*='.jpeg'],
+    .retro-mode [src*='.png'],
+    .retro-mode [src*='.webp'],
+    .retro-mode [src*='.gif'] {
+      image-rendering: pixelated !important;
+      image-rendering: -moz-crisp-edges !important;
+      image-rendering: crisp-edges !important;
+      -ms-interpolation-mode: nearest-neighbor !important;
+    }
+
+    /* Prevent animations from affecting layout */
+    .retro-mode [style*='animation'] {
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    /* Hide class for overlay */
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </Layout>

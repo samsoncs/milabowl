@@ -18,7 +18,7 @@ The best secrets aren't handed to you on a silver platter. They require curiosit
 
 ## The Power of Sequence
 
-In programming, as in music, sequence matters. A few well-placed keystrokes can unlock worlds of possibility. Sometimes it's about knowing the right combination, the right pattern, the right... *stroke* of genius that reveals what's been hiding in plain sight all along.
+In programming, as in music, sequence matters. A few well-placed keystrokes can unlock worlds of possibility. Sometimes it's about knowing the right combination, the right pattern, the right... _stroke_ of genius that reveals what's been hiding in plain sight all along.
 
 The most elegant secrets are those that feel natural once discovered, almost like they were meant to be found by those patient enough to seek them out. They don't announce themselves with flashy banners or obvious hints - they simply exist, waiting for the right moment, the right person, the right sequence of actions.
 
@@ -36,4 +36,4 @@ Happy hunting! The answer lies within this blog post, going head on from the sta
 
 ---
 
-*P.S. - The ancient art of the Konami Code lives on in spirit, though modern secrets require their own unique signatures...*
+_P.S. - The ancient art of the Konami Code lives on in spirit, though modern secrets require their own unique signatures..._
