@@ -1,0 +1,73 @@
+---
+import type { FplResults } from '../../game_state/fplState';
+import Layout from '../../layouts/Layout.astro';
+import fplState from '../../../src/game_state/fpl_state.json';
+import Card from '../../components/core/Card.astro';
+
+const fplResults: FplResults = fplState;
+const template = fplResults.results
+  .sort((a, b) => b.gameWeek - a.gameWeek)
+  .find(
+    (res) =>
+      res.teamName === 'Sels Sarr Salaht' || res.teamName === 'Valg må tas'
+  )!;
+---
+
+<Layout title="Template Team">
+  <Card title="Template of the week">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <div class="text-content-secondary font-bold">GK</div>
+        {
+          template.lineup
+            .filter((f) => f.position === 'GK')
+            .map((d) => (
+              <div class="bg-surface-2 rounded-md p-2">
+                {d.webName} {d.isCap ? '(C)' : ''} {d.isViceCap ? '(VC)' : ''}{' '}
+                {d.isBench ? '(Bench)' : ''}
+              </div>
+            ))
+        }
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="text-content-secondary font-bold">Def</div>
+        {
+          template.lineup
+            .filter((f) => f.position === 'DEF')
+            .map((d) => (
+              <div class="bg-surface-2 rounded-md p-2">
+                {d.webName} {d.isCap ? '(C)' : ''} {d.isViceCap ? '(VC)' : ''}{' '}
+                {d.isBench ? '(Bench)' : ''}
+              </div>
+            ))
+        }
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="text-content-secondary font-bold">Mid</div>
+        {
+          template.lineup
+            .filter((f) => f.position === 'MID')
+            .map((d) => (
+              <div class="bg-surface-2 rounded-md p-2">
+                {d.webName} {d.isCap ? '(C)' : ''} {d.isViceCap ? '(VC)' : ''}{' '}
+                {d.isBench ? '(Bench)' : ''}
+              </div>
+            ))
+        }
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="text-content-secondary font-bold">Fwd</div>
+        {
+          template.lineup
+            .filter((f) => f.position === 'FWD')
+            .map((d) => (
+              <div class="bg-surface-2 rounded-md p-2">
+                {d.webName} {d.isCap ? '(C)' : ''} {d.isViceCap ? '(VC)' : ''}{' '}
+                {d.isBench ? '(Bench)' : ''}
+              </div>
+            ))
+        }
+      </div>
+    </div>
+  </Card>
+</Layout>

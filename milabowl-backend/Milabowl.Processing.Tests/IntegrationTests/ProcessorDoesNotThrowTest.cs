@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Milabowl.Processing.Processing;
+using Milabowl.Processing.Processing.BombState;
 using Milabowl.Processing.Processing.BombState.Models;
 using Milabowl.Processing.Utils;
 using NSubstitute;
@@ -55,8 +56,13 @@ public class ProcessorDoesNotThrowTest
                 {
                     SnapshotPath = "./Snapshots/24-25",
                     SnapshotMode = SnapshotMode.Read,
+                    MainLeagueId = 1650213,
+                    HeadToHeadLeagueId = 1649633,
                 }
             )
+        );
+        _serviceCollection.AddSingleton<IOptions<BombSettings>>(_ =>
+            Options.Create(new BombSettings { InitialBombHolder = 2216421, RandomSeed = 69 })
         );
         _serviceCollection.AddMilabowlServices(SnapshotMode.Read);
         _myFileSystem = new MyFileSystem();

@@ -6,9 +6,7 @@ export interface LinkProps {
 
 const Link: React.FC<LinkProps> = ({ href, disableUnderline, children }) => (
   <a
-    className={['text-indigo-900', disableUnderline ? '' : 'underline'].join(
-      ' '
-    )}
+    className={['text-primary', disableUnderline ? '' : 'underline'].join(' ')}
     href={href}
   >
     {children}

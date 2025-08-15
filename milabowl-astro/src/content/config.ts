@@ -24,13 +24,6 @@ const blogCollection = defineCollection({
   }),
 });
 
-const rulesCollection = defineCollection({
-  schema: z.object({
-    title: z.string().max(60),
-    date: z.date(),
-  }),
-});
-
 const memesCollection = defineCollection({
   schema: z.object({
     title: z.string().max(60),
@@ -40,6 +33,5 @@ const memesCollection = defineCollection({
 
 export const collections = {
   blog: blogCollection,
-  rules: rulesCollection,
   memes: memesCollection,
 };

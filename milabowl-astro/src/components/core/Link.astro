@@ -7,10 +7,7 @@ const { href, disableUnderline } = Astro.props;
 ---
 
 <a
-  class:list={[
-    'text-indigo-900 dark:text-dark-text',
-    { underline: !disableUnderline },
-  ]}
+  class:list={['text-content-primary', { underline: !disableUnderline }]}
   href={href}
 >
   <slot />

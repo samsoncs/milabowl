@@ -1,5 +1,7 @@
 ﻿using System.Text.Json;
+using Microsoft.Extensions.Options;
 using Milabowl.Processing.DataImport.FplDtos;
+using Milabowl.Processing.Utils;
 
 namespace Milabowl.Processing.DataImport;
 
@@ -18,11 +20,12 @@ public interface IFplService
 public class FplService : IFplService
 {
     private readonly HttpClient _httpClient;
+    private readonly FplApiOptions _fplApiOptions;
 
-    public FplService(HttpClient httpClient)
+    public FplService(HttpClient httpClient, IOptions<FplApiOptions> fplApiOptions)
     {
-        Console.WriteLine("FplService reistered");
         _httpClient = httpClient;
+        _fplApiOptions = fplApiOptions.Value;
     }
 
     public async Task<BootstrapRootDto> GetBootstrapRoot()
@@ -35,7 +38,7 @@ public class FplService : IFplService
     public async Task<LeagueRootDto> GetLeagueRoot()
     {
         return await _httpClient.GetDeserializedAsync<LeagueRootDto>(
-            "https://fantasy.premierleague.com/api/leagues-classic/1650213/standings/?page_new_entries=1&page_standings=1&phase=1"
+            $"https://fantasy.premierleague.com/api/leagues-classic/{_fplApiOptions.MainLeagueId}/standings/?page_new_entries=1&page_standings=1&phase=1"
         );
     }
 
@@ -81,7 +84,7 @@ public class FplService : IFplService
         }
 
         headToHeadEventRoot = await _httpClient.GetDeserializedAsync<HeadToHeadEventRootDto>(
-            $"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/1649633/?page=1&event={eventId}"
+            $"https://fantasy.premierleague.com/api/leagues-h2h-matches/league/{_fplApiOptions.HeadToHeadLeagueId}/?page=1&event={eventId}"
         );
         _headToHeadEventCache.Add(eventId, headToHeadEventRoot);
         return headToHeadEventRoot;

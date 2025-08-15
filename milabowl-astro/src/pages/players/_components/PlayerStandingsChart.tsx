@@ -49,7 +49,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
 
   return (
     <div className="h-full">
-      <div className="text-sm text-slate-400">
+      <div className="text-content-secondary text-sm">
         Line shows your performance vs avg. Above the line means above average.
       </div>
       <div className="h-72 lg:h-1/2">
@@ -123,7 +123,7 @@ const PlayerStandingsChart: React.FC<PlayerStandingsChartProps> = ({
             </g>
           )}
           pointBorderWidth={3}
-          pointBorderColor={{ from: 'serieColor' }}
+          pointBorderColor={colors.indigo[500]}
           pointLabelYOffset={-12}
           useMesh={true}
         />

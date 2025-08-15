@@ -42,7 +42,7 @@ const CustomPoint: React.FC<{
     >
       <animated.circle
         r={animatedProps.radius}
-        className={'fill-white dark:fill-slate-900'}
+        fill="var(--color-surface)"
         stroke={animatedProps.borderColor}
         strokeWidth={animatedProps.borderWidth}
       />
@@ -50,8 +50,7 @@ const CustomPoint: React.FC<{
         <animated.text
           textAnchor="middle"
           fontSize="10px"
-          fill={animatedProps.borderColor}
-          className={'dark:fill-slate-100'}
+          fill="var(--color-content-primary)"
           dy=".3em"
         >
           {point.data.points}
@@ -89,6 +88,7 @@ const PlayerStandingsChart: React.FC<TrendProps> = ({ teams }) => {
           text: {
             fontSize: 12,
             fill: isDarkTheme ? colors.slate[300] : colors.slate[700],
+            color: isDarkTheme ? colors.slate[100] : colors.slate[700],
           },
           grid: {
             line: {

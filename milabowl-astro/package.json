@@ -1,7 +1,7 @@
 {
-  "name": "@example/basics",
+  "name": "milabowl",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -27,7 +27,6 @@
     "astro": "^5.9.4",
     "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
-    "party-js": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-spring": "^9.6.1",

@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Microsoft.Extensions.Options;
 using Milabowl.Processing.DataImport.Models;
 using Milabowl.Processing.Processing.BombState.Models;
 
@@ -13,15 +14,17 @@ public interface IBombState
 public class BombState : IBombState
 {
     private IList<BombManager> _activeBombDiffusalKits;
-    private IDictionary<int, ManagerBombState> _bombStateByGameWeek;
-    private const int INITIAL_BOMB_HOLDER = 2216421;
-    private IList<int> _bombRounds;
+    private readonly IDictionary<int, ManagerBombState> _bombStateByGameWeek;
+    private int InitialBombHolder => _bombSettings.InitialBombHolder;
+    private readonly IList<int> _bombRounds;
+    private readonly BombSettings _bombSettings;
 
-    public BombState()
+    public BombState(IOptions<BombSettings> bombSettings)
     {
+        _bombSettings = bombSettings.Value;
         _bombStateByGameWeek = new ConcurrentDictionary<int, ManagerBombState>();
         _activeBombDiffusalKits = new List<BombManager>();
-        var random = new Random(69);
+        var random = new Random(_bombSettings.RandomSeed);
         _bombRounds = new List<int>();
 
         while (_bombRounds.Count < 7)
@@ -81,7 +84,7 @@ public class BombState : IBombState
     {
         var bombHolderId =
             managerGameWeekState.Event.GameWeek == 1
-                ? INITIAL_BOMB_HOLDER
+                ? InitialBombHolder
                 : _bombStateByGameWeek[managerGameWeekState.Event.GameWeek - 1]
                     .BombHolder
                     .FantasyManagerId;

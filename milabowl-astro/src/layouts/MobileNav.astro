@@ -48,7 +48,7 @@ const lastGameWeek = Math.max.apply(
 <div class="md:hidden">
   <div
     id="mobile-nav"
-    class="expanded mobile-nav fixed bottom-0 z-50 flex h-[4rem] w-full justify-around bg-slate-100 dark:bg-slate-950"
+    class="expanded mobile-nav bg-app fixed bottom-0 z-50 flex h-[4rem] w-full justify-around"
     transition:animate="none"
     transition:name="mobile-nav"
   >
@@ -80,22 +80,22 @@ const lastGameWeek = Math.max.apply(
       <BookSolid slot="active-icon" />
       <BookOutline slot="inactive-icon" />
     </BottomNavButton>
-    <BottomNavButton buttonId="menu-hamburger" name="More">
+    <BottomNavButton buttonId="menu-hamburger" name="More" active={false}>
       <VerticalDots slot="active-icon" />
       <VerticalDots slot="inactive-icon" />
     </BottomNavButton>
   </div>
   <div
     id="mobile-menu"
-    class="fixed bottom-0 right-0 top-0 z-50 bg-slate-200 dark:bg-slate-900 sm:px-3"
+    class="bg-surface fixed bottom-0 right-0 top-0 z-50 sm:px-3"
   >
     <div class="flex flex-col gap-2 p-4">
       {
         navLinks.map((m) => {
           const isSelected = currentPath.includes(m.href);
           const classes = isSelected
-            ? 'bg-slate-300 dark:bg-slate-600 text-indigo-900 dark:text-dark-text px-3 py-2 rounded-md text-sm font-bold no-underline'
-            : 'text-indigo-900 dark:text-dark-text hover:bg-slate-200 hover:dark:bg-slate-700 hover:text-indigo-900 px-3 py-2 rounded-md text-sm font-bold no-underline';
+            ? 'bg-surface-2 px-3 py-2 rounded-md text-sm font-bold no-underline'
+            : 'hover:bg-surface-2 hover:bg-surface-2 hover:text-primary px-3 py-2 rounded-md text-sm font-bold no-underline';
           return (
             <a href={m.href} class={classes}>
               {m.name}
@@ -106,7 +106,7 @@ const lastGameWeek = Math.max.apply(
       <button
         id="theme-toggle-2"
         aria-label="Toggle Dark Mode"
-        class="block rounded-md px-3 py-2 text-base font-medium text-indigo-900 hover:bg-slate-200 dark:text-dark-text hover:dark:bg-slate-900"
+        class="hover:bg-surface text-primary block rounded-md px-3 py-2 text-base font-medium"
       >
         <div class="hidden dark:block">
           <svg
@@ -140,10 +140,7 @@ const lastGameWeek = Math.max.apply(
       </button>
     </div>
   </div>
-  <div
-    id="mobile-backdrop"
-    class="fixed bottom-0 left-0 top-0 z-50 bg-slate-950"
-  >
+  <div id="mobile-backdrop" class="bg-surface fixed bottom-0 left-0 top-0 z-50">
   </div>
 </div>
 

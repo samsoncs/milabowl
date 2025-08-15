@@ -101,7 +101,7 @@ const SortableTable = <T,>({
                       }
                     : undefined
                 }
-                className={`bg-white p-2 p-3 text-sm dark:bg-slate-900 ${header.column.columnDef.meta?.classNames} ${header.column.getIsFirstColumn() ? 'pl-0' : ''} ${header.column.getIsLastColumn() ? 'pr-0' : ''} ${header.column.columnDef.meta?.align === 'right' ? 'text-right' : 'text-left'}`}
+                className={`bg-surface p-2 p-3 text-sm ${header.column.columnDef.meta?.classNames} ${header.column.getIsFirstColumn() ? 'pl-0' : ''} ${header.column.getIsLastColumn() ? 'pr-0' : ''} ${header.column.columnDef.meta?.align === 'right' ? 'text-right' : 'text-left'}`}
                 key={header.id}
               >
                 <div
@@ -154,7 +154,7 @@ const SortableTable = <T,>({
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="h-5 w-5 text-slate-400 dark:text-slate-500"
+                        className="text-content-secondary h-5 w-5"
                       >
                         <path
                           strokeLinecap="round"
@@ -171,7 +171,7 @@ const SortableTable = <T,>({
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="h-5 w-5 text-slate-400 dark:text-slate-500"
+                        className="text-content-secondary h-5 w-5"
                       >
                         <path
                           strokeLinecap="round"
@@ -189,7 +189,7 @@ const SortableTable = <T,>({
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="h-5 w-5 text-slate-400 dark:text-slate-500"
+                        className="text-content-secondary h-5 w-5"
                       >
                         <path
                           strokeLinecap="round"
@@ -210,9 +210,7 @@ const SortableTable = <T,>({
           <React.Fragment key={row.id}>
             <tr
               className={`text-sm ${
-                row.getIsExpanded()
-                  ? ''
-                  : 'border-b border-slate-200 dark:border-slate-700'
+                row.getIsExpanded() ? '' : 'border-outline border-b'
               }`}
             >
               {row.getVisibleCells().map((cell) => (
@@ -224,7 +222,7 @@ const SortableTable = <T,>({
                         }
                       : undefined
                   }
-                  className={`bg-white p-2 text-center align-middle dark:bg-slate-900 ${cell.column.columnDef.meta?.classNames ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
+                  className={`bg-surface p-2 text-center align-middle ${cell.column.columnDef.meta?.classNames ?? ''} ${cell.column.getIsFirstColumn() ? 'pl-0' : ''} ${cell.column.getIsLastColumn() ? 'pr-0' : ''} ${cell.column.columnDef.meta?.align === 'right' ? 'text-right' : ''}`}
                   key={cell.id}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -234,11 +232,11 @@ const SortableTable = <T,>({
             <tr key={`${row.id}-expanded`}>
               <td
                 colSpan={row.getVisibleCells().length}
-                className="bg-white p-0 dark:bg-slate-900"
+                className="bg-surface p-0"
               >
                 <div
                   className={`
-                    overflow-hidden border-slate-200 transition-all duration-200 ease-in-out dark:border-slate-700
+                    border-outline overflow-hidden transition-all duration-200 ease-in-out
                     ${row.getIsExpanded() ? 'border-b' : 'max-h-0'}
                   `}
                   style={{

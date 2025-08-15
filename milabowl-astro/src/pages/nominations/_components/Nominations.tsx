@@ -77,9 +77,7 @@ const Nominations: React.FC<NominationsProps> = ({ nominations }) => {
   return (
     <div className="mx-auto flex w-screen max-w-screen-lg flex-col space-y-2">
       <div className="flex items-center space-x-2">
-        <div className="px-2 font-bold dark:text-dark-text lg:px-0">
-          Filter:
-        </div>
+        <div className="px-2 font-bold lg:px-0">Filter:</div>
         <div className="flex cursor-pointer items-center space-x-2">
           <NominationChip
             category="SKILL"
@@ -116,9 +114,7 @@ const Nominations: React.FC<NominationsProps> = ({ nominations }) => {
                   title={`${GetIcon(n.category)}${n.category}`}
                   color={GetChipColor(n.category)}
                 />
-                <div className="text-sm text-neutral-500 dark:text-slate-400">
-                  {n.date}
-                </div>
+                <div className="text-content-secondary text-sm">{n.date}</div>
               </div>
             }
           >

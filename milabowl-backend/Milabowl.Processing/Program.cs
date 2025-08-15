@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Milabowl.Processing;
 using Milabowl.Processing.Processing;
+using Milabowl.Processing.Processing.BombState;
 using Milabowl.Processing.Utils;
 
 var host = Host.CreateDefaultBuilder(args)
@@ -22,6 +23,7 @@ var host = Host.CreateDefaultBuilder(args)
             var fplApiOptions = fplApiOptionsSection.Get<FplApiOptions>()!;
             services.AddMilabowlServices(fplApiOptions.SnapshotMode);
             services.Configure<FplApiOptions>(fplApiOptionsSection);
+            services.Configure<BombSettings>(context.Configuration.GetSection("BombSettings"));
         }
     )
     .Build();

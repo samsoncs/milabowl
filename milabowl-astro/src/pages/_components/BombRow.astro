@@ -5,13 +5,13 @@ interface Props {
 
 const GetNegativeClasses = (status?: string): string => {
   return status === 'Negative'
-    ? 'text-red-900 dark:text-red-100 bg-gradient-to-r from-red-300/80 to-red-200 dark:from-red-900/50 dark:to-red-800/50'
+    ? 'bg-gradient-to-r from-danger-muted/80 to-danger-muted/75 text-on-danger'
     : '';
 };
 
 const GetPositiveClasses = (status?: string): string => {
   return status === 'Positive'
-    ? 'text-green-900 dark:text-green-100 bg-gradient-to-r from-green-300/80 to-green-200 dark:from-green-900/50 dark:to-green-800/50'
+    ? 'bg-gradient-to-r from-success-muted/80 to-success-muted/75 text-on-success'
     : '';
 };
 
@@ -19,7 +19,7 @@ const { status = 'Neutral' } = Astro.props;
 ---
 
 <div
-  class={`rounded-md bg-slate-100 p-2 dark:bg-slate-800 ${GetNegativeClasses(status)} ${GetPositiveClasses(status)}`}
+  class={`rounded-md bg-surface-2 p-2 ${GetNegativeClasses(status)} ${GetPositiveClasses(status)}`}
 >
   <slot />
 </div>
