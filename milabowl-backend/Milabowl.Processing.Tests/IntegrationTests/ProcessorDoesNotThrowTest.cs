@@ -62,13 +62,7 @@ public class ProcessorDoesNotThrowTest
             )
         );
         _serviceCollection.AddSingleton<IOptions<BombSettings>>(_ =>
-            Options.Create(
-                new BombSettings
-                {
-                    InitialBombHolder = 2216421,
-                    RandomSeed = 69
-                }
-            )
+            Options.Create(new BombSettings { InitialBombHolder = 2216421, RandomSeed = 69 })
         );
         _serviceCollection.AddMilabowlServices(SnapshotMode.Read);
         _myFileSystem = new MyFileSystem();
