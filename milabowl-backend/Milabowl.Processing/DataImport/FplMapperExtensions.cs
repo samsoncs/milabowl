@@ -71,6 +71,11 @@ public static class FplMapperExtensions
         );
     }
 
+    public static User ToUser(this NewEntriesResultDto user)
+    {
+        return new User(user.Entry, user.Entry, user.EntryName, user.EntryName, -1, -1, 0);
+    }
+
     public static IList<PlayerEvent> ToLineup(
         this PicksRootDto picksRootDto,
         EventRootDto eventRootDto,

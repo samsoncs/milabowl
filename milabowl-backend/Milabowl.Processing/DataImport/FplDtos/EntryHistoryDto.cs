@@ -20,16 +20,16 @@ public record EntryHistoryDto
     public required int Value { get; init; }
 
     [JsonPropertyName("percentile_rank")]
-    public required int PercentileRank { get; init; }
+    public int? PercentileRank { get; init; }
 
     [JsonPropertyName("overall_rank")]
-    public required int OverallRank { get; init; }
+    public int? OverallRank { get; init; }
 
     [JsonPropertyName("rank_sort")]
-    public required int RankSort { get; init; }
+    public int? RankSort { get; init; }
 
     [JsonPropertyName("rank")]
-    public required int Rank { get; init; }
+    public int? Rank { get; init; }
 
     [JsonPropertyName("total_points")]
     public required int TotalPoints { get; init; }
