@@ -32,7 +32,7 @@ const { userResults, lastGw } = Astro.props;
 <Layout title={`${userResults.teamName}`} enableViewTransitions>
   <PlayerLayout view="fpl" teamName={userResults.teamName} />
   <div
-    class="flex flex-col items-center gap-2 bg-slate-200 pb-2 pt-[4.5rem] dark:bg-slate-900 md:pt-[13rem]"
+    class="bg-surface flex flex-col items-center gap-2 pb-2 pt-[4.5rem] md:pt-[13rem]"
   >
     <div class="flex w-full justify-between p-2 md:p-4">
       {
@@ -93,7 +93,7 @@ const { userResults, lastGw } = Astro.props;
     </div>
   </div>
 
-  <div class="flex justify-center bg-slate-200 dark:bg-slate-900">
+  <div class="bg-surface flex justify-center">
     <FplPitch fplUserGameweekResults={userResults} />
   </div>
 </Layout>

@@ -43,7 +43,7 @@ const { bombState, currentWeekBombState } = Astro.props;
       .map((r, i) => (
         <div class={`${i !== bombState.length - 1 ? '' : ''} py-2 text-sm`}>
           <div class="flex flex-col gap-3">
-            <div class="flex flex-col justify-center gap-2 text-xs dark:text-slate-300">
+            <div class="text-content-secondary flex flex-col justify-center gap-2 text-xs">
               GW {r.gameWeek}
             </div>
 

@@ -14,7 +14,7 @@ const { name, active, href, buttonId } = Astro.props;
     <button
       id={buttonId}
       type="button"
-      class="flex grow flex-col items-center justify-center gap-1 text-xs font-bold text-slate-500 dark:text-slate-400"
+      class="text-content-primary-muted flex grow flex-col items-center justify-center gap-1 text-xs font-bold"
       aria-controls="mobile-menu"
       aria-expanded="false"
     >
@@ -28,7 +28,7 @@ const { name, active, href, buttonId } = Astro.props;
   !buttonId && (
     <a
       href={href}
-      class={`flex grow flex-col items-center justify-center gap-1 text-[0.7rem] font-bold ${active ? 'dark:text-dark-text' : 'text-slate-700 dark:text-slate-400'}`}
+      class={`flex grow flex-col items-center justify-center gap-1 text-[0.7rem] font-bold ${active ? '' : 'text-content-primary-muted'}`}
       transition:animate="none"
     >
       {active && <slot name="active-icon" />}

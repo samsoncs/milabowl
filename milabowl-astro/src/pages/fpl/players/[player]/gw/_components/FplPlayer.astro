@@ -69,14 +69,14 @@ const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? 'grey';
     />
     {
       isCap && (
-        <span class="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-900 text-xs">
+        <span class="bg-surface absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full text-xs">
           C
         </span>
       )
     }
     {
       isViceCap && (
-        <span class="absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-slate-900 text-xs">
+        <span class="bg-surface absolute -right-1 bottom-0 flex h-4 w-4 items-center justify-center rounded-full text-xs">
           V
         </span>
       )
@@ -85,7 +85,7 @@ const jerseyColor = jerseyColors[`${jerseyColorPos}${team}`] ?? 'grey';
 
   <div class="-my-1">
     <div
-      class="block w-16 truncate rounded-t-sm bg-indigo-800 text-center text-xs font-bold"
+      class="text-content-primary bg-surface-2 block w-16 truncate rounded-t-sm text-center text-xs font-bold"
     >
       {name}
     </div>

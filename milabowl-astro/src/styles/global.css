@@ -1,7 +1,63 @@
 @import 'tailwindcss';
 
+/* Enables the dark: variant and/or a .dark toggle */
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  --color-dark-text: var(--color-violet-100);
+/* TOP-LEVEL THEME (light defaults) */
+@theme {
+  /* Surfaces */
+  --color-app: var(--color-slate-100);
+  --color-surface: var(--color-slate-50);
+  --color-surface-2: var(--color-slate-200);
+
+  /* Content (standalone text roles) */
+  --color-content-primary: var(--color-slate-900);
+  --color-content-primary-muted: var(--color-slate-500);
+  --color-content-secondary: var(--color-slate-700);
+
+  /* Status */
+  --color-success: var(--color-green-600);
+  --color-success-muted: var(--color-green-800);
+  --color-on-success: var(--color-green-100);
+  --color-danger: var(--color-red-600);
+  --color-danger-muted: var(--color-red-800);
+  --color-on-danger: var(--color-red-100);
+  --color-info: var(--color-blue-500);
+  --color-on-info: var(--color-blue-50);
+
+  /* Brand & strokes */
+  --color-primary: var(--color-indigo-900);
+  --color-outline: var(--color-slate-300);
+
+  /* Extra hues */
+  --color-amber: var(--color-amber-300);
+  --color-orange: var(--color-orange-300);
+  --color-red: var(--color-red-300);
+}
+
+/* DARK MODE: override the *variables*, not @theme */
+.dark {
+  --color-app: var(--color-slate-950);
+  --color-surface: var(--color-slate-900);
+  --color-surface-2: var(--color-slate-800);
+
+  --color-content-primary: var(--color-slate-100);
+  --color-content-primary-muted: var(--color-slate-400);
+  --color-content-secondary: var(--color-slate-300);
+
+  --color-success: var(--color-green-500);
+  --color-success-muted: var(--color-green-900);
+  --color-on-success: var(--color-green-100);
+  --color-danger: var(--color-red-500);
+  --color-danger-muted: var(--color-red-900);
+  --color-on-danger: var(--color-red-100);
+  --color-info: var(--color-blue-500);
+  --color-on-info: var(--color-blue-50);
+
+  --color-primary: var(--color-orange-200);
+  --color-outline: var(--color-slate-700);
+
+  --color-amber: var(--color-amber-600);
+  --color-orange: var(--color-orange-500);
+  --color-red: var(--color-red-500);
 }
