@@ -85,25 +85,29 @@ public class FplImporter
         var players = bootstrapRoot.Players;
         var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
-        var users = leagueRoot.Standings.Results;
-
+        var users = leagueRoot.Standings.Results.Select(r => r.ToUser()).ToList();
+        if (users.Count == 0)
+        {
+            // This is a dirty hack because leagueRoot.Standings.Results is empty before first round is complete
+            users = leagueRoot.NewEntries.Results.Select(r => r.ToUser()).ToList();
+        }
         var fplUserGameWeekResult = new List<FplUserGameWeekResult>();
 
-        foreach (var finishedEvent in events.Where(e => e is { Finished: true, DataChecked: true }))
+        foreach (var finishedEvent in events.Where(e => e.DeadlineTime < DateTime.UtcNow))
         {
             var eventRootDto = await _fplService.GetEventRoot(finishedEvent.Id);
 
             foreach (var user in users)
             {
-                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.Entry);
+                var picksRoot = await _fplService.GetPicksRoot(finishedEvent.Id, user.EntryId);
 
                 var lineup = picksRoot.ToLineup(eventRootDto, players, teams);
 
                 fplUserGameWeekResult.Add(
                     new FplUserGameWeekResult(
                         finishedEvent.Id,
-                        user.EntryName,
-                        user.Total,
+                        user.TeamName,
+                        user.EventTotal,
                         lineup
                             .Select(l => new FplPlayerEventResult(
                                 l.WebName,
