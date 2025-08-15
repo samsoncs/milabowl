@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import RetroLayout from '../layouts/RetroLayout.astro';
 import Card from '../components/core/Card.astro';
 import Trend from './_components/Trend';
 import game_state from '../../src/game_state/game_state.json';
@@ -72,7 +72,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
 }));
 ---
 
-<Layout
+<RetroLayout
   title="Milabowl - Dashboard"
   description="Milabowl is a custom Fantasy Premier League dashboard with unique rules, live standings, and chaotic twists. Track your team's progress and enjoy a fresh take on FPL!"
   enableViewTransitions
@@ -129,4 +129,4 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
       </div>
     </div>
   </main>
-</Layout>
+</RetroLayout>
