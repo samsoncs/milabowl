@@ -19,7 +19,13 @@ public class FplImporter
         var players = bootstrapRoot.Players;
         var teams = bootstrapRoot.Teams;
         var leagueRoot = await _fplService.GetLeagueRoot();
-        var users = leagueRoot.Standings.Results;
+        var users = leagueRoot.Standings.Results.Select(r => r.ToUser()).ToList();
+        if (users.Count == 0)
+        {
+            // This is a dirty hack because leagueRoot.Standings.Results is empty before first round is complete
+            users = leagueRoot.NewEntries.Results.Select(r => r.ToUser()).ToList();
+        }
+
         List<ManagerGameWeekState> userStates = [];
         foreach (var @event in events.Where(e => e.DeadlineTime < DateTime.UtcNow))
         {
@@ -27,15 +33,15 @@ public class FplImporter
             var headToHeadEventRootDto = await _fplService.GetHead2HeadEventRoot(@event.Id);
             foreach (var user in users)
             {
-                var picksRoot = await _fplService.GetPicksRoot(@event.Id, user.Entry);
+                var picksRoot = await _fplService.GetPicksRoot(@event.Id, user.EntryId);
                 var historicGameWeeks = new List<ManagerGameWeekState>(
                     userStates.Where(u => u.Event.GameWeek < @event.Id)
                 );
 
                 var userGameWeek = StateFactory.CreateUserState(
                     @event.ToEvent(),
-                    headToHeadEventRootDto.ToHeadToHeadEvent(user.Entry),
-                    user.ToUser(),
+                    headToHeadEventRootDto.ToHeadToHeadEvent(user.EntryId),
+                    user,
                     picksRoot.ToLineup(eventRootDto, players, teams),
                     picksRoot.ToAutoSubs(eventRootDto, players),
                     picksRoot.ActiveChip,
