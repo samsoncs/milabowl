@@ -4,8 +4,7 @@
             "commandName": "Project",
             "environmentVariables": {
                 "DOTNET_ENVIRONMENT": "Development"
-            },
-            "commandLineArgs": "../../../../../milabowl-astro/src/game_state"
+            }
         }
     }
 }
