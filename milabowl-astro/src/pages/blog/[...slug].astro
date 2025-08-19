@@ -73,3 +73,18 @@ const stats = readingTime(post.body);
     {nextPost && <BlogNavigation navigationText="Next Post" post={nextPost} />}
   </div>
 </MarkdownLayout>
+
+<script define:vars={{ postDateISO: post.data.date.toISOString() }}>
+  (function () {
+    try {
+      const currentPostDate = new Date(postDateISO);
+      const last = localStorage.getItem('lastBlogRead');
+
+      if (!last || new Date(last) < currentPostDate) {
+        localStorage.setItem('lastBlogRead', postDateISO);
+      }
+    } catch (e) {
+      console.warn('Failed to update lastBlogRead', e);
+    }
+  })();
+</script>
