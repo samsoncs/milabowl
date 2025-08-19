@@ -1,9 +1,9 @@
 ---
-import AvatarProvider from '../components/core/AvatarProvider.astro';
 import fpl_state from '../../src/game_state/fpl_state.json';
 
 interface Props {
   teamName: string;
+  playerName: string;
   view: string;
 }
 
@@ -20,7 +20,7 @@ const { teamName, view } = Astro.props;
     <div class="flex items-center gap-2 px-2 py-2 md:p-4">
       <div transition:name={`avatar ${teamName}`}>
         <div class="h-16 w-16 md:h-36 md:w-36">
-          <AvatarProvider teamName={teamName} />
+          <!-- <AvatarProvider teamName={teamName} /> -->
         </div>
       </div>
       <div transition:name={`name ${teamName}`} class="pt-2 text-xl font-bold">
