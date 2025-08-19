@@ -39,10 +39,7 @@ export function getStandingsColmns(
       cell: (props) => {
         const optimizedImage = avatars.find((a) =>
           a.src.includes(
-            props.row.original.teamName
-              .replace('$', 's')
-              .toLowerCase()
-              .replaceAll(' ', '_')
+            props.row.original.userName.toLowerCase().replaceAll(' ', '_')
           )
         )!;
         return (

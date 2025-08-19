@@ -167,9 +167,7 @@ const OverviewTable = ({
       </div>
       {sortedData.map((result, i) => {
         const optimizedImage = avatars.find((a) =>
-          a.src.includes(
-            result.teamName.replace('$', 's').toLowerCase().replaceAll(' ', '_')
-          )
+          a.src.includes(result.userName.toLowerCase().replaceAll(' ', '_'))
         )!;
 
         const deltaPosition =
