@@ -52,19 +52,6 @@ const stortedEntries = firstBlogEntries
       ) {
         newPill.classList.remove('hidden');
       }
-
-      document.querySelectorAll('.blog-link').forEach((link) => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const parent = link.closest('[data-blog-date]')!;
-          const blogDate = parent.getAttribute('data-blog-date')!;
-          const lastBlogRead = localStorage.getItem('lastBlogRead');
-          if (!lastBlogRead || new Date(blogDate) > new Date(lastBlogRead)) {
-            localStorage.setItem('lastBlogRead', blogDate);
-          }
-          window.location.href = link.getAttribute('href')!;
-        });
-      });
     });
   }
   document.addEventListener('DOMContentLoaded', handleBlogPills);

@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+
+const blogEntries = await getCollection('blog');
+
+const latestBlogEntry = blogEntries.sort((a, b) =>
+  a.data.date < b.data.date ? 1 : -1
+)[0];
+---
+
+<div
+  id="new-blog-entry"
+  class="bg-info/70 text-on-info m-2 hidden max-w-lg rounded-md"
+  data-latest-date={latestBlogEntry.data.date.toISOString()}
+  data-latest-slug={`/blog/${latestBlogEntry.slug}`}
+>
+  <a
+    id="new-blog-link"
+    href={`/blog/${latestBlogEntry.slug}`}
+    class="flex items-center justify-between p-2 text-sm font-medium"
+  >
+    <div>
+      New blog post: {latestBlogEntry.data.title}
+    </div>
+    <div class="px-1">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+      </svg>
+    </div>
+  </a>
+</div>
+
+<script>
+  function updateNewBlogBanner() {
+    const container = document.getElementById('new-blog-entry');
+    if (!container) return;
+
+    const latestDate = container.getAttribute('data-latest-date');
+    const lastBlogRead = localStorage.getItem('lastBlogRead');
+    const hasUnread = !!(
+      latestDate &&
+      lastBlogRead &&
+      new Date(latestDate) > new Date(lastBlogRead)
+    );
+
+    container.classList.toggle('hidden', !hasUnread);
+  }
+
+  document.addEventListener('DOMContentLoaded', updateNewBlogBanner);
+  document.addEventListener('astro:after-swap', updateNewBlogBanner);
+</script>

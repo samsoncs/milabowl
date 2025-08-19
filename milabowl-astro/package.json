@@ -13,6 +13,7 @@
     "lint:fix": "prettier --write . && eslint . --fix"
   },
   "dependencies": {
+    "@astrojs/mdx": "4.3.4",
     "@astrojs/react": "^4.3.0",
     "@fontsource/inter": "^4.5.15",
     "@nivo/bar": "^0.99.0",
