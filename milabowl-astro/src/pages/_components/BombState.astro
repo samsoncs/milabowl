@@ -87,20 +87,22 @@ const { bombState, currentWeekBombState } = Astro.props;
                 <span class="font-semibold">{` (+6.9 pts)!`}</span>
               )}
             </BombRow>
-            {r.collateralTargets.length > 0 && (
-              <BombRow status="Negative">
-                {`${GetBombEmoji(r.bombTier)}${BOMB_EMOJIS.collateral}`}
-                <span class="font-semibold">
-                  {` ${r.collateralTargets
-                    .map((t) => formatManagerName(t.managerName, 20))
-                    .join(', ')} `}
-                </span>
-                was targeted by VC
-                <span class="font-semibold">{`${r.collateralTargetPlayerName}`}</span>{' '}
-                and hit by collateral
-                <span class="font-semibold">{` (${GetBombPoints(r.bombTier) / 2} pts)!`}</span>
-              </BombRow>
-            )}
+            {r.bombState === 'Exploded' &&
+              r.bombTier !== 'Dynamite' &&
+              r.collateralTargets.length > 0 && (
+                <BombRow status="Negative">
+                  {`${GetBombEmoji(r.bombTier)}${BOMB_EMOJIS.collateral}`}
+                  <span class="font-semibold">
+                    {` ${r.collateralTargets
+                      .map((t) => formatManagerName(t.managerName, 20))
+                      .join(', ')} `}
+                  </span>
+                  was targeted by VC
+                  <span class="font-semibold">{`${r.collateralTargetPlayerName}`}</span>{' '}
+                  and hit by collateral
+                  <span class="font-semibold">{` (${GetBombPoints(r.bombTier) / 2} pts)!`}</span>
+                </BombRow>
+              )}
             {r.bombDiffusalKits.length > 0 && (
               <BombRow status="Positive">
                 {BOMB_EMOJIS.diffusalKit}
