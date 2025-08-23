@@ -228,6 +228,7 @@ const OverviewTable = ({
                         bombState?.bombState === 'Diffused' &&
                         BOMB_EMOJIS.diffused}
                       {bombState?.bombState === 'Exploded' &&
+                        bombState?.bombTier !== 'Dynamite' &&
                         bombState?.collateralTargets.find(
                           (t) => t.managerName === result.teamName
                         ) &&
