@@ -5,7 +5,7 @@ import Trend from './_components/Trend';
 import game_state from '../../src/game_state/game_state.json';
 import bomb_state from '../../src/game_state/bomb_state.json';
 import type { MilaResultsDTO } from '../game_state/gameState';
-import type { BombGameWeekState } from '../game_state/bombState';
+import type { BombHistoryState } from '../game_state/bombState';
 import type { ResultsForTeams } from './_components/types';
 import Link from '../components/core/Link.astro';
 import BombState from './_components/BombState.astro';
@@ -16,9 +16,7 @@ import LatestBlogEntries from './_components/LatestBlogEntries.astro';
 import NewBlogEntry from './_components/NewBlogEntry.astro';
 
 const milaResults: MilaResultsDTO = game_state;
-const bombStates: BombGameWeekState[] = bomb_state.sort(
-  (a, b) => b.gameWeek - a.gameWeek
-);
+const bombState: BombHistoryState = bomb_state;
 
 const currentGameWeek = Math.max(
   ...milaResults.resultsByWeek.map((r) => r.gameWeek)
@@ -27,7 +25,17 @@ const currentGameWeekResults =
   milaResults.resultsByWeek.find((week) => week.gameWeek === currentGameWeek)
     ?.results || [];
 
-const currentWeekBombState = bombStates[0];
+const latestThreeBombWeeks = Object.entries(bombState.bombHistoryByGameWeek)
+  .map(([gw, events]) => ({ gameWeek: Number(gw), events }))
+  .sort((a, b) => b.gameWeek - a.gameWeek)
+  .slice(0, 3);
+const lastThree: BombHistoryState = {
+  bombHistoryByGameWeek: Object.fromEntries(
+    latestThreeBombWeeks.map((w) => [w.gameWeek, w.events])
+  ),
+  currentRoundEmojis: bombState.currentRoundEmojis,
+  currentState: bombState.currentState,
+};
 
 const imgs = Object.values(
   import.meta.glob<{ default: ImageMetadata }>('../assets/*.webp', {
@@ -91,7 +99,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
             avatars={optimizedImages}
             data={milaResults.overallScore}
             currentGameWeekResults={currentGameWeekResults}
-            bombState={currentWeekBombState}
+            bombState={bombState.currentRoundEmojis}
             client:idle
           />
         </Card>
@@ -105,10 +113,7 @@ const lastFiveWeeksByTeam: ResultsForTeams[] = resultsByUser.map((team) => ({
                 <Link href="/bomb_history">View history</Link>
               </div>
               <div>
-                <BombState
-                  currentWeekBombState={currentWeekBombState}
-                  bombState={bombStates.slice(0, 3)}
-                />
+                <BombState bombState={lastThree} />
               </div>
             </Card>
           </div>

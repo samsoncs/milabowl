@@ -1,25 +1,28 @@
 ---
 interface Props {
-  status?: 'Negative' | 'Positive' | 'Neutral';
+  severity: string;
+  description: string;
+  emoji: string;
 }
 
-const GetNegativeClasses = (status?: string): string => {
-  return status === 'Negative'
-    ? 'bg-gradient-to-r from-danger-muted/80 to-danger-muted/75 text-on-danger'
-    : '';
-};
-
-const GetPositiveClasses = (status?: string): string => {
-  return status === 'Positive'
+const GetClasses = (severity: string): string => {
+  if (severity === 'Danger') {
+    return 'bg-gradient-to-r from-danger-muted/80 to-danger-muted/75 text-on-danger';
+  }
+  return severity === 'Success'
     ? 'bg-gradient-to-r from-success-muted/80 to-success-muted/75 text-on-success'
     : '';
 };
 
-const { status = 'Neutral' } = Astro.props;
+const { severity = 'none', description, emoji } = Astro.props;
+const descriptionParts = description.split(/\*\*/);
 ---
 
-<div
-  class={`rounded-md bg-surface-2 p-2 ${GetNegativeClasses(status)} ${GetPositiveClasses(status)}`}
->
-  <slot />
+<div class={`rounded-md bg-surface-2 p-2 ${GetClasses(severity)}`}>
+  {emoji}
+  {
+    descriptionParts.map((part, i) =>
+      i % 2 === 1 ? <span class="font-semibold">{part}</span> : part
+    )
+  }
 </div>

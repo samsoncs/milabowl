@@ -3,8 +3,7 @@ import type { GameWeekResult } from '../../game_state/gameState';
 import './style.css';
 import { useMemo, useState, type MouseEventHandler } from 'react';
 import TeamDetailPanel from './TeamDetailPanel';
-import type { BombGameWeekState } from '../../game_state/bombState';
-import { BOMB_EMOJIS, GetBombEmoji } from './bombEmoji';
+import type { BombEmojiAndManager } from '../../game_state/bombState';
 
 type OptimizedImage = {
   src: string;
@@ -13,11 +12,11 @@ type OptimizedImage = {
   sizes: string;
 };
 
-interface OverviewTable2Props {
+interface OverviewTableProps {
   data: GameWeekResult[];
   avatars: OptimizedImage[];
   currentGameWeekResults: GameWeekResult[] | undefined;
-  bombState: BombGameWeekState | undefined;
+  bombState: BombEmojiAndManager[];
 }
 
 interface SortToggleProps {
@@ -137,7 +136,7 @@ const OverviewTable = ({
   avatars,
   currentGameWeekResults,
   bombState,
-}: OverviewTable2Props) => {
+}: OverviewTableProps) => {
   const { sortedData, sortOrder, sortProp, handleSort } =
     useSortedTable<GameWeekResult>(data, 'cumulativeMilaPoints', 'desc');
   const [expandedTeam, setExpandedTeam] = useState<string | null>(null);
@@ -217,25 +216,9 @@ const OverviewTable = ({
                   </div>
                   <div className="flex gap-4">
                     <div className="flex-grow">
-                      {bombState?.bombThrower?.managerName ===
-                        result.teamName && BOMB_EMOJIS.thrown}
-                      {bombState?.bombHolder.managerName === result.teamName &&
-                        GetBombEmoji(bombState.bombTier)}
-                      {bombState?.bombHolder.managerName === result.teamName &&
-                        bombState?.bombState === 'Exploded' &&
-                        BOMB_EMOJIS.exploded}
-                      {bombState?.bombHolder.managerName === result.teamName &&
-                        bombState?.bombState === 'Diffused' &&
-                        BOMB_EMOJIS.diffused}
-                      {bombState?.bombState === 'Exploded' &&
-                        bombState?.bombTier !== 'Dynamite' &&
-                        bombState?.collateralTargets.find(
-                          (t) => t.managerName === result.teamName
-                        ) &&
-                        `${BOMB_EMOJIS.collateral} ${BOMB_EMOJIS.exploded}`}
-                      {bombState?.bombDiffusalKits.find(
-                        (t) => t.managerName === result.teamName
-                      ) && BOMB_EMOJIS.diffusalKit}
+                      {bombState
+                        .filter((b) => b.fantasyManagerId === result.userId)
+                        .map((b) => b.emoji)}
                       {result.milaRank === sortedData.length && <>💩</>}
                     </div>
                     <div>{result.gwScore}</div>

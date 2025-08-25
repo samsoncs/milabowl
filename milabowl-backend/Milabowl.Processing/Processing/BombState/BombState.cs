@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Options;
 using Milabowl.Processing.DataImport.Models;
+using Milabowl.Processing.Processing.BombState.BombEventGenerators;
 using Milabowl.Processing.Processing.BombState.Models;
 
 namespace Milabowl.Processing.Processing.BombState;
@@ -8,7 +9,7 @@ namespace Milabowl.Processing.Processing.BombState;
 public interface IBombState
 {
     ManagerBombState CalcBombStateForGw(ManagerGameWeekState managerGameWeekState);
-    IList<BombGameWeekState> GetBombState();
+    BombHistoryDisplayValues GetBombState();
 }
 
 public class BombState : IBombState
@@ -102,22 +103,39 @@ public class BombState : IBombState
         return _bombStateByGameWeek.ContainsKey(gameWeek);
     }
 
-    public IList<BombGameWeekState> GetBombState()
+    public BombHistoryDisplayValues GetBombState()
     {
-        return _bombStateByGameWeek
-            .Select(b => new BombGameWeekState(
-                b.Key,
-                b.Value.BombState,
-                b.Value.BombHolder,
-                b.Value.BombThrower,
-                b.Value.BombTier,
-                b.Value.WeeksSinceLastExplosion,
-                b.Value.CollateralTargets,
-                b.Value.CollateralTargetPlayerName,
-                b.Value.BombDiffusalKits
-            ))
-            .OrderBy(b => b.GameWeek)
-            .ToList();
+        var generators = new List<IBombEventGenerator>
+        {
+            new BombThrown(),
+            new BombHeld(),
+            new BombExploded(),
+            new BombCollateralHit(),
+            new BombDiffused(),
+            new BombDiffusalEarned(),
+        };
+
+        var currentBombState = _bombStateByGameWeek[_bombStateByGameWeek.Count - 1];
+
+        return new BombHistoryDisplayValues(
+            _bombStateByGameWeek.ToDictionary(
+                key => key.Key,
+                value =>
+                    generators
+                        .Where(g => g.CanGenerate(value.Value))
+                        .Select(g => g.Generate(value.Value))
+                        .ToList()
+            ),
+            generators
+                .Where(g => g.CanGenerate(currentBombState))
+                .SelectMany(g => g.GenerateDisplayEmojis(currentBombState))
+                .ToList(),
+            new CurrentStateValues(
+                currentBombState.WeeksSinceLastExplosion,
+                currentBombState.BombTier,
+                BombHelper.GetBombEmoji(currentBombState.BombTier)
+            )
+        );
     }
 
     private static BombManager GetBombHolder(ManagerGameWeekState state)

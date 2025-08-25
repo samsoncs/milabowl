@@ -1,24 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import bomb_state from '../../../src/game_state/bomb_state.json';
-import type { BombGameWeekState } from '../../../src/game_state/bombState';
+import type { BombHistoryState } from '../../../src/game_state/bombState';
 import BombState from '../_components/BombState.astro';
 import Card from '../../components/core/Card';
 
-const bombStates: BombGameWeekState[] = bomb_state;
-const currentWeekBombState = bombStates.sort(
-  (a, b) => b.gameWeek - a.gameWeek
-)[0];
+const bombState: BombHistoryState = bomb_state;
 ---
 
 <Layout title="Bomb History">
   <div class="flex flex-col gap-4 lg:grid lg:grid-cols-12">
     <div class="lg:col-span-12">
       <Card title="Bomb History">
-        <BombState
-          bombState={bombStates}
-          currentWeekBombState={currentWeekBombState}
-        />
+        <BombState bombState={bombState} />
       </Card>
     </div>
   </div>
