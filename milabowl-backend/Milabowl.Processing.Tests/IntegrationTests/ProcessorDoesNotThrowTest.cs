@@ -109,7 +109,7 @@ public class ProcessorDoesNotThrowTest
         );
         var bombHistoryRows = bombHistoryDisplayValues.BombHistoryByGameWeek;
         bombHistoryRows.Count.ShouldBeGreaterThan(1);
-        bombHistoryRows[0][0].Description.ShouldNotBeNull();
-        bombHistoryRows[0][0].Emoji.ShouldNotBeNull();
+        bombHistoryRows[1][0].Description.ShouldNotBeNull();
+        bombHistoryRows[1][0].Emoji.ShouldNotBeNull();
     }
 }
