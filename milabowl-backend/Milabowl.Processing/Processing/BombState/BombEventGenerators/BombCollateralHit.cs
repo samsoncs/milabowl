@@ -6,7 +6,9 @@ public class BombCollateralHit : IBombEventGenerator
 {
     public bool CanGenerate(ManagerBombState bombState)
     {
-        return bombState.BombState == BombStateEnum.Exploded && bombState.CollateralTargets.Any();
+        return bombState.BombState == BombStateEnum.Exploded
+            && bombState.BombTier != BombTier.Dynamite
+            && bombState.CollateralTargets.Any();
     }
 
     public BombHistoryRow Generate(ManagerBombState bombState)
