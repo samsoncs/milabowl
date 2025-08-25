@@ -1,17 +1,22 @@
-export interface BombGameWeekState {
-    gameWeek: number;
-    bombState: string;
-    bombHolder: BombManager;
-    bombThrower?: BombManager | null;
-    bombTier: string;
-    weeksSinceLastExplosion: number;
-    collateralTargets: BombManager[];
-    collateralTargetPlayerName?: string | null;
-    bombDiffusalKits: BombManager[];
+export type BombHistoryState = {
+    bombHistoryByGameWeek: Record<number, BombEvent[]>;
+    currentRoundEmojis: BombEmojiAndManager[];
+    currentState: CurrentBombState;
 }
 
-export interface BombManager {
+export type BombEvent = {
+    description: string;
+    emoji: string;
+    severity: string;
+}
+
+export type BombEmojiAndManager = {
     fantasyManagerId: number;
-    managerName: string;
-    userName: string;
+    emoji: string;
+}
+
+export type CurrentBombState = {
+    weeksSinceLastExplosion: number;
+    bombTier: string;
+    bombEmoji: string;
 }

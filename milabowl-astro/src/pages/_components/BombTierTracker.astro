@@ -1,9 +1,8 @@
 ---
-import type { BombGameWeekState } from '../../game_state/bombState';
-import { GetBombEmoji } from './bombEmoji';
+import type { BombHistoryState } from '../../game_state/bombState';
 
 interface Props {
-  bombState: BombGameWeekState;
+  bombState: BombHistoryState;
 }
 
 const GetTierNumber = (bombTier: string): number => {
@@ -36,8 +35,10 @@ const GetWeeksToNextTier = (weeksSinceLastExplosion: number): number => {
 };
 
 const { bombState } = Astro.props;
-const weeksToNextTier = GetWeeksToNextTier(bombState.weeksSinceLastExplosion);
-const w = bombState.weeksSinceLastExplosion;
+const weeksToNextTier = GetWeeksToNextTier(
+  bombState.currentState.weeksSinceLastExplosion
+);
+const w = bombState.currentState.weeksSinceLastExplosion;
 let percentageProgress = 0;
 switch (true) {
   case w < 3:
@@ -72,16 +73,18 @@ const GetColor = (bombTier: string): string => {
   <div class="mb-2 flex items-center justify-between">
     <div class="text-content-secondary text-sm">
       Threat Level: <span class="font-semibold"
-        >{bombState.bombTier}{GetBombEmoji(bombState.bombTier)}</span
+        >{bombState.currentState.bombTier}{
+          bombState.currentState.bombEmoji
+        }</span
       >
     </div>
     <div class="text-content-secondary mt-1 text-right text-xs">
-      Tier {GetTierNumber(bombState.bombTier)} of 3
+      Tier {GetTierNumber(bombState.currentState.bombTier)} of 3
     </div>
   </div>
   <div class="bg-surface-2 relative h-3 overflow-hidden rounded-full">
     <div
-      class={`absolute left-0 top-0 h-full ${GetColor(bombState.bombTier)} transition-all duration-300`}
+      class={`absolute left-0 top-0 h-full ${GetColor(bombState.currentState.bombTier)} transition-all duration-300`}
       style={`width: ${percentageProgress}%`}
     >
     </div>

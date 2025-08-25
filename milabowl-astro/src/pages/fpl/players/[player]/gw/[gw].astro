@@ -30,7 +30,11 @@ const { userResults, lastGw } = Astro.props;
 ---
 
 <Layout title={`${userResults.teamName}`} enableViewTransitions>
-  <PlayerLayout view="fpl" teamName={userResults.teamName} />
+  <PlayerLayout
+    view="fpl"
+    teamName={userResults.teamName}
+    playerName={userResults.teamName}
+  />
   <div
     class="bg-surface flex flex-col items-center gap-2 pb-2 pt-[4.5rem] md:pt-[13rem]"
   >
