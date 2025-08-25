@@ -11,7 +11,7 @@ public static class BombHelper
             BombTier.Dynamite => "dynamite",
             BombTier.Bomb => "bomb",
             BombTier.Nuke => "nuke",
-            _ => "dynamite"
+            _ => "dynamite",
         };
     }
 
@@ -22,18 +22,18 @@ public static class BombHelper
             BombTier.Dynamite => "Dynamite",
             BombTier.Bomb => "Bomb",
             BombTier.Nuke => "Nuke",
-            _ => "Dynamite"
+            _ => "Dynamite",
         };
     }
 
-    public static int GetBombPoints(BombTier bombTier)
+    public static decimal GetBombPoints(BombTier bombTier)
     {
         return bombTier switch
         {
-            BombTier.Dynamite => -2,
-            BombTier.Bomb => -4,
-            BombTier.Nuke => -6,
-            _ => -2
+            BombTier.Dynamite => -2m,
+            BombTier.Bomb => -4m,
+            BombTier.Nuke => -6m,
+            _ => -2m,
         };
     }
 
@@ -54,7 +54,17 @@ public static class BombHelper
             BombTier.Dynamite => Dynamite,
             BombTier.Bomb => Bomb,
             BombTier.Nuke => Nuke,
-            _ => Dynamite
+            _ => Dynamite,
         };
     }
 }
+
+public enum BombEventRowSeverity
+{
+    Info,
+    Danger,
+    Success,
+    None,
+}
+
+public record BombHistoryRow(string Description, string Emoji, BombEventRowSeverity Severity);

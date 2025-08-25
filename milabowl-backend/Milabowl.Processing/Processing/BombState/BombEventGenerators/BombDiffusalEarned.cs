@@ -2,20 +2,29 @@ using Milabowl.Processing.Processing.BombState.Models;
 
 namespace Milabowl.Processing.Processing.BombState.BombEventGenerators;
 
-public class BombDiffusalEarnedEventGenerator : IBombEventGenerator
+public class BombDiffusalEarned : IBombEventGenerator
 {
-    public bool IsApplicable(ManagerBombState bombState)
+    public bool CanGenerate(ManagerBombState bombState)
     {
-        return bombState.BombState != BombStateEnum.Diffused
-               && bombState.BombState != BombStateEnum.Exploded;
+        return bombState.BombDiffusalKits.Any();
     }
 
-    public BombHistoryRow GetRow(ManagerBombState bombState)
+    public BombHistoryRow Generate(ManagerBombState bombState)
     {
         return new BombHistoryRow(
-            $"**{string.Join(", ", bombState.BombDiffusalKits.Select(c => c.ManagerName))}** eaned a diffusal kit!",
-            $"{BombEmoji.DiffusalKit}",
-            BombEventRowSeverity.Info
+            $"**{string.Join(", ", bombState.BombDiffusalKits.Select(c => c.ManagerName))}** earned a diffusal kit!",
+            $"{BombHelper.DiffusalKit}",
+            BombEventRowSeverity.Success
         );
+    }
+
+    public IList<BombStateDisplayEmoji> GenerateDisplayEmojis(ManagerBombState bombState)
+    {
+        return bombState
+            .BombDiffusalKits.Select(target => new BombStateDisplayEmoji(
+                target.FantasyManagerId,
+                $"{BombHelper.DiffusalKit}"
+            ))
+            .ToList();
     }
 }

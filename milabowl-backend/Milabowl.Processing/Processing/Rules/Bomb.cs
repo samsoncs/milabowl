@@ -6,16 +6,6 @@ namespace Milabowl.Processing.Processing.Rules;
 
 public class Bomb : MilaRule
 {
-    public static IDictionary<BombTier, decimal> PointsByBombTier = new Dictionary<
-        BombTier,
-        decimal
-    >
-    {
-        { BombTier.Dynamite, -2m },
-        { BombTier.Bomb, -4m },
-        { BombTier.Nuke, -6m },
-    };
-
     private readonly IBombState _bombState;
 
     public Bomb(IBombState bombState)
@@ -25,11 +15,17 @@ public class Bomb : MilaRule
 
     protected override string ShortName => "Bmb";
     protected override string Description =>
-        """
+        $"""
             Bomb Tiers & Points
-            - 🧨 Dynamite (-2 pts): 0-3 weeks since last explosion
-            - 💣 Bomb (-4 pts): 4-6 weeks since last explosion
-            - ☢️ Nuke (-6 pts): 7+ weeks since last explosion
+            - 🧨 Dynamite ({BombHelper.GetBombPoints(
+                BombTier.Dynamite
+            )} pts): 0-3 weeks since last explosion
+            - 💣 Bomb ({BombHelper.GetBombPoints(
+                BombTier.Dynamite
+            )} pts): 4-6 weeks since last explosion
+            - ☢️ Nuke ({BombHelper.GetBombPoints(
+                BombTier.Dynamite
+            )} pts): 7+ weeks since last explosion
 
             Explosion Damage
             - Bomb holder: Takes full damage when bomb explodes
@@ -54,27 +50,27 @@ public class Bomb : MilaRule
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
         var bombState = _bombState.CalcBombStateForGw(userGameWeek);
-        var bombPointValue = PointsByBombTier[bombState.BombTier];
+        var bombPointValue = BombHelper.GetBombPoints(bombState.BombTier);
 
         var bombPoints = 0m;
         var reason = "";
         if (UserHoldsExplodingBomb(bombState, userGameWeek.User.EntryId))
         {
             bombPoints = bombPointValue;
-            reason = $"Holding an exploding {bombState.BombTier}, - {bombPoints} pts.";
+            reason = $"Holding an exploding {bombState.BombTier}, {bombPoints} pts.";
         }
 
         if (UserIsCollateralOfExplodingBomb(bombState, userGameWeek.User.EntryId))
         {
             bombPoints = bombPointValue / 2;
             reason =
-                $"Hit by collateral of an exploding {bombState.BombTier} bomb, - {bombPoints} pts.";
+                $"Hit by collateral of an exploding {bombState.BombTier} bomb, {bombPoints} pts.";
         }
 
         if (UserHoldsDiffusedBomb(bombState, userGameWeek.User.EntryId))
         {
             bombPoints = 6.9m;
-            reason = $"Diffused a {bombState.BombTier}, + {bombPoints} pts.";
+            reason = $"Diffused a {bombState.BombTier}, +{bombPoints} pts.";
         }
 
         return new RulePoints(bombPoints, reason);

@@ -104,12 +104,12 @@ public class ProcessorDoesNotThrowTest
         user.Results.Count.ShouldBeGreaterThan(1);
         user.Results[0].Rules.Count.ShouldBeGreaterThan(10);
 
-        var bombStates = _myFileSystem
-            .ReadFile<IList<BombGameWeekState>>("/bomb_state.json")
-            .ToList();
-        bombStates.Count.ShouldBeGreaterThan(1);
-        bombStates[0].BombHolder.ShouldNotBeNull();
-        bombStates[0].BombTier.ShouldBe(BombTier.Dynamite);
-        bombStates[0].GameWeek.ShouldBe(1);
+        var bombHistoryDisplayValues = _myFileSystem.ReadFile<BombHistoryDisplayValues>(
+            "/bomb_state.json"
+        );
+        var bombHistoryRows = bombHistoryDisplayValues.BombHistoryByGameWeek;
+        bombHistoryRows.Count.ShouldBeGreaterThan(1);
+        bombHistoryRows[0][0].Description.ShouldNotBeNull();
+        bombHistoryRows[0][0].Emoji.ShouldNotBeNull();
     }
 }
