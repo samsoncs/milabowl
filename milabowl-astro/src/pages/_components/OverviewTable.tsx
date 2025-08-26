@@ -217,7 +217,7 @@ const OverviewTable = ({
                   <div className="flex gap-4">
                     <div className="flex-grow">
                       {bombState
-                        .filter((b) => b.fantasyManagerId === result.userId)
+                        .filter((b) => b.userId === result.userId)
                         .map((b) => b.emoji)}
                       {result.milaRank === sortedData.length && <>💩</>}
                     </div>

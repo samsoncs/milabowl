@@ -12,6 +12,7 @@ export type BombEvent = {
 
 export type BombEmojiAndManager = {
     fantasyManagerId: number;
+    userId: number;
     emoji: string;
 }
 

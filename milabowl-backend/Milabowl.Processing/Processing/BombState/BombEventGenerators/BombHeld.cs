@@ -26,6 +26,7 @@ public class BombHeld : IBombEventGenerator
         [
             new BombStateDisplayEmoji(
                 bombState.BombHolder.FantasyManagerId,
+                bombState.BombHolder.UserId,
                 $"{BombHelper.GetBombEmoji(bombState.BombTier)}"
             ),
         ];

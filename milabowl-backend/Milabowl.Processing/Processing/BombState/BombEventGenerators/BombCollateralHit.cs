@@ -25,6 +25,7 @@ public class BombCollateralHit : IBombEventGenerator
         return bombState
             .CollateralTargets.Select(target => new BombStateDisplayEmoji(
                 target.FantasyManagerId,
+                target.UserId,
                 $"{BombHelper.Collateral}{BombHelper.Exploded}"
             ))
             .ToList();
