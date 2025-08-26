@@ -23,6 +23,7 @@ public class BombDiffusalEarned : IBombEventGenerator
         return bombState
             .BombDiffusalKits.Select(target => new BombStateDisplayEmoji(
                 target.FantasyManagerId,
+                target.UserId,
                 $"{BombHelper.DiffusalKit}"
             ))
             .ToList();

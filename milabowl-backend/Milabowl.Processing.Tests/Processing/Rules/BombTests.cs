@@ -19,7 +19,7 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User", 1))
             .RuleFor(x => x.BombTier, BombTier.Dynamite)
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
@@ -38,7 +38,7 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User", 1))
             .RuleFor(x => x.BombTier, BombTier.Bomb)
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
@@ -57,9 +57,9 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User", 1))
             .RuleFor(x => x.BombTier, BombTier.Dynamite)
-            .RuleFor(x => x.CollateralTargets, [new BombManager(state.User.EntryId, "", "")])
+            .RuleFor(x => x.CollateralTargets, [new BombManager(state.User.EntryId, "", "", 1)])
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new Bomb(bombStateMock);
@@ -77,9 +77,9 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User", 1))
             .RuleFor(x => x.BombTier, BombTier.Bomb)
-            .RuleFor(x => x.CollateralTargets, [new BombManager(state.User.EntryId, "", "")])
+            .RuleFor(x => x.CollateralTargets, [new BombManager(state.User.EntryId, "", "", 1)])
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new Bomb(bombStateMock);
@@ -97,9 +97,9 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User", 1))
             .RuleFor(x => x.BombTier, BombTier.Nuke)
-            .RuleFor(x => x.CollateralTargets, [new BombManager(state.User.EntryId, "", "")])
+            .RuleFor(x => x.CollateralTargets, [new BombManager(state.User.EntryId, "", "", 1)])
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new Bomb(bombStateMock);
@@ -117,7 +117,7 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User", 1))
             .RuleFor(x => x.BombTier, BombTier.Nuke)
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
@@ -144,7 +144,7 @@ public class BombTests : MilaRuleTest<Bomb>
                         BombStateEnum.Holding
                     )
             )
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User", 1))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new Bomb(bombStateMock);
@@ -162,7 +162,7 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Exploded)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId + 1, "Team", "User", 1))
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);
         var rule = new Bomb(bombStateMock);
@@ -180,7 +180,7 @@ public class BombTests : MilaRuleTest<Bomb>
         var managerBombState = TestStateFactory
             .GetManagerBombState()
             .RuleFor(x => x.BombState, BombStateEnum.Diffused)
-            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User"))
+            .RuleFor(x => x.BombHolder, new BombManager(state.User.EntryId, "Team", "User", 1))
             .RuleFor(x => x.BombTier, BombTier.Dynamite)
             .Generate();
         bombStateMock.CalcBombStateForGw(Arg.Any<ManagerGameWeekState>()).Returns(managerBombState);

@@ -22,7 +22,11 @@ public class BombExploded : IBombEventGenerator
     {
         return
         [
-            new BombStateDisplayEmoji(bombState.BombHolder.FantasyManagerId, BombHelper.Exploded),
+            new BombStateDisplayEmoji(
+                bombState.BombHolder.FantasyManagerId,
+                bombState.BombHolder.UserId,
+                BombHelper.Exploded
+            ),
         ];
     }
 }

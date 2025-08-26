@@ -219,7 +219,8 @@ public static class TestStateFactory
         return new Faker<BombManager>().CustomInstantiator(f => new BombManager(
             f.Random.Int(1, 100000),
             f.Company.CompanyName(),
-            f.Name.FullName()
+            f.Name.FullName(),
+            f.Random.Int(1, 100000)
         ));
     }
 

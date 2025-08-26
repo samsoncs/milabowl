@@ -215,6 +215,11 @@ public static class ManagerBombStateExtensions
 
     private static BombManager GetBombManager(ManagerGameWeekState state)
     {
-        return new BombManager(state.User.EntryId, state.User.TeamName, state.User.UserName);
+        return new BombManager(
+            state.User.EntryId,
+            state.User.TeamName,
+            state.User.UserName,
+            state.User.Id
+        );
     }
 }
