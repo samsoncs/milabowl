@@ -25,7 +25,7 @@ public class BombDiffused : IBombEventGenerator
             new BombStateDisplayEmoji(
                 bombState.BombHolder.FantasyManagerId,
                 bombState.BombHolder.UserId,
-                BombHelper.Diffused
+                $"{BombHelper.GetBombEmoji(bombState.BombTier)}{BombHelper.Diffused}"
             ),
         ];
     }
