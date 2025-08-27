@@ -115,7 +115,7 @@ public class BombState : IBombState
             new BombDiffusalEarned(),
         };
 
-        var currentBombState = _bombStateByGameWeek[_bombStateByGameWeek.Count - 1];
+        var currentBombState = _bombStateByGameWeek.MaxBy(g => g.Key).Value;
 
         return new BombHistoryDisplayValues(
             _bombStateByGameWeek.ToDictionary(
