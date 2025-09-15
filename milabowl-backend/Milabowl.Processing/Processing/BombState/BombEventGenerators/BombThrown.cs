@@ -12,7 +12,7 @@ public class BombThrown : IBombEventGenerator
     public BombHistoryRow Generate(ManagerBombState bombState)
     {
         return new BombHistoryRow(
-            $"**{bombState.BombHolder.ManagerName}** threw the {BombHelper.GetTierName(bombState.BombTier)}.",
+            $"**{bombState.BombThrower.ManagerName}** threw the {BombHelper.GetTierName(bombState.BombTier)}.",
             $"{BombHelper.Thrown}{BombHelper.GetBombEmoji(bombState.BombTier)}",
             BombEventRowSeverity.None
         );
