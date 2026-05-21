@@ -74,62 +74,62 @@ const RankingChart: React.FC<{
 
   return (
     <div style={{ height: '55vh', width: '100%' }}>
-    <ResponsiveBump
-      data={data}
-      xOuterPadding={0.3}
-      theme={{
-        grid: {
-          line: {
-            stroke: `${isDarkTheme ? colors.slate[600] : colors.slate[300]}`,
-            strokeWidth: 1.5,
+      <ResponsiveBump
+        data={data}
+        xOuterPadding={0.3}
+        theme={{
+          grid: {
+            line: {
+              stroke: `${isDarkTheme ? colors.slate[600] : colors.slate[300]}`,
+              strokeWidth: 1.5,
+            },
           },
-        },
-        tooltip: {
-          container: {
-            background: isDarkTheme ? colors.slate[700] : colors.white,
+          tooltip: {
+            container: {
+              background: isDarkTheme ? colors.slate[700] : colors.white,
+            },
           },
-        },
-      }}
-      colors={{ scheme: 'category10' }}
-      lineWidth={5}
-      activeLineWidth={7}
-      inactiveLineWidth={5}
-      inactiveOpacity={0.15}
-      startLabel={false}
-      pointSize={28}
-      activePointSize={31}
-      inactivePointSize={0}
-      pointColor={{ theme: 'background' }}
-      pointBorderWidth={4}
-      activePointBorderWidth={4}
-      pointBorderColor={{ from: 'serie.color' }}
-      pointComponent={CustomPoint}
-      enableGridY={false}
-      axisTop={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: '',
-        legendPosition: 'middle',
-        legendOffset: -36,
-      }}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: '',
-        legendPosition: 'middle',
-        legendOffset: 32,
-      }}
-      axisLeft={null}
-      margin={{
-        top: 40,
-        right: 150, // 90 for SM,
-        bottom: 40,
-        left: 10,
-      }}
-      axisRight={null}
-    />
+        }}
+        colors={{ scheme: 'category10' }}
+        lineWidth={5}
+        activeLineWidth={7}
+        inactiveLineWidth={5}
+        inactiveOpacity={0.15}
+        startLabel={false}
+        pointSize={28}
+        activePointSize={31}
+        inactivePointSize={0}
+        pointColor={{ theme: 'background' }}
+        pointBorderWidth={4}
+        activePointBorderWidth={4}
+        pointBorderColor={{ from: 'serie.color' }}
+        pointComponent={CustomPoint}
+        enableGridY={false}
+        axisTop={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: '',
+          legendPosition: 'middle',
+          legendOffset: -36,
+        }}
+        axisBottom={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: '',
+          legendPosition: 'middle',
+          legendOffset: 32,
+        }}
+        axisLeft={null}
+        margin={{
+          top: 40,
+          right: 150, // 90 for SM,
+          bottom: 40,
+          left: 10,
+        }}
+        axisRight={null}
+      />
     </div>
   );
 };

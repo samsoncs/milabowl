@@ -62,8 +62,9 @@ const { title, description, enableViewTransitions } = Astro.props;
     // Retro sound effects (simple beeps using Web Audio API)
     function playRetroSound(frequency = 440, duration = 100) {
       try {
-        const audioContext = new (window.AudioContext ||
-          window.webkitAudioContext)();
+        const audioContext = new (
+          window.AudioContext || window.webkitAudioContext
+        )();
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
 
