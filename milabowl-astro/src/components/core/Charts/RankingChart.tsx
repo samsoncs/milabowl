@@ -73,6 +73,7 @@ const RankingChart: React.FC<{
   }, []);
 
   return (
+    <div style={{ height: '55vh', width: '100%' }}>
     <ResponsiveBump
       data={data}
       xOuterPadding={0.3}
@@ -129,6 +130,7 @@ const RankingChart: React.FC<{
       }}
       axisRight={null}
     />
+    </div>
   );
 };
 

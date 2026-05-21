@@ -534,17 +534,19 @@ const historicResultsByPlayer: PlayerResults[] = [
 
 const fplData = historicResultsByPlayer.map((r) => ({
   id: r.name,
-  data: r.seasons.map((rr) => ({
-    x: rr.name,
-    y: rr.fplPos,
-    points: rr.fplPoints,
-  })),
+  data: r.seasons
+    .filter((rr) => rr.fplPos !== null)
+    .map((rr) => ({
+      x: rr.name,
+      y: rr.fplPos!,
+      points: rr.fplPoints,
+    })),
 }));
 
 const milaData = historicResultsByPlayer.map((r) => ({
   id: r.name,
   data: r.seasons
-    .filter((rr) => rr.milaPoints !== undefined)
+    .filter((rr) => rr.milaPoints != null && rr.milaPos != null)
     .map((rr) => ({
       x: rr.name,
       y: rr.milaPos!,
@@ -557,16 +559,12 @@ const milaData = historicResultsByPlayer.map((r) => ({
   <div class="flex flex-col gap-4 lg:grid lg:grid-cols-12">
     <div class="lg:col-span-12">
       <Card title="Historic FPL Results">
-        <div style={{ height: '55vh' }}>
-          <RankingChart client:idle data={fplData} />
-        </div>
+        <RankingChart client:only="react" data={fplData} />
       </Card>
     </div>
     <div class="lg:col-span-12">
       <Card title="Historic Milabowl Results">
-        <div style={{ height: '55vh' }}>
-          <RankingChart client:idle data={milaData} />
-        </div>
+        <RankingChart client:only="react" data={milaData} />
       </Card>
     </div>
   </div>
