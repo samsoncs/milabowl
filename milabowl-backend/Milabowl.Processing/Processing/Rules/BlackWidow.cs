@@ -10,6 +10,10 @@ public class BlackWidow : MilaRule
 
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
+        // GW1-5 use the old logic, GW6 onwards use the new logic.
+        if (userGameWeek.Event.GameWeek < 6)
+            return CalculatePointsOld(userGameWeek);
+
         var hits = Math.Clamp(GetHits(userGameWeek.TransferCost), 0, 10);
         if (hits == 0)
             return new RulePoints(0, null);
@@ -22,6 +26,25 @@ public class BlackWidow : MilaRule
         var isPositive = evenWins ? opponentsWithHits % 2 == 0 : opponentsWithHits % 2 != 0;
 
         return new RulePoints(hits * (isPositive ? 0.42m : -0.42m), null);
+    }
+
+    private RulePoints CalculatePointsOld(ManagerGameWeekState userGameWeek)
+    {
+        var hits = Math.Clamp(GetHits(userGameWeek.TransferCost), 0, 2);
+        var opponentsWithHits = userGameWeek.Opponents.Sum(o =>
+            GetHits(o.TransferCost) > 0 ? 1 : 0
+        );
+
+        if (hits > 0 && opponentsWithHits % 2 == 0)
+        {
+            return new RulePoints(hits * 0.42m, null);
+        }
+        if (hits > 0)
+        {
+            return new RulePoints(hits * -0.42m, null);
+        }
+
+        return new RulePoints(0, null);
     }
 
     private int GetHits(int transferCost)
