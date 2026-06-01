@@ -10,8 +10,14 @@
         <PackageReference Include="dbup-core" />
         <PackageReference Include="dbup-sqlserver" />
         <PackageReference Include="Microsoft.Data.SqlClient" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Include="scripts/**/*.sql" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>
