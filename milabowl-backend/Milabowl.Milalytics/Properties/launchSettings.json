@@ -1,0 +1,10 @@
+{
+    "profiles": {
+        "Milabowl.Milalytics": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        }
+    }
+}
