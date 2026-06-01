@@ -6,25 +6,22 @@ public class BlackWidow : MilaRule
 {
     protected override string ShortName => "BW";
     protected override string Description =>
-        "Win or loose points based on hits taken. If there are an even number of opponents with hits multiply number of hits by 0.42, otherwise multiply by -0.42. If no hits, no points.";
+        "Win or loose points based on hits taken. Each gameweek a 50/50 roll determines whether even or odd number of opponents with hits gives positive points. Multiply number of hits by 0.42 (or -0.42). If no hits, no points.";
 
     protected override RulePoints CalculatePoints(ManagerGameWeekState userGameWeek)
     {
-        var hits = Math.Clamp(GetHits(userGameWeek.TransferCost), 0, 2);
+        var hits = Math.Clamp(GetHits(userGameWeek.TransferCost), 0, 10);
+        if (hits == 0)
+            return new RulePoints(0, null);
+
         var opponentsWithHits = userGameWeek.Opponents.Sum(o =>
             GetHits(o.TransferCost) > 0 ? 1 : 0
         );
 
-        if (hits > 0 && opponentsWithHits % 2 == 0)
-        {
-            return new RulePoints(hits * 0.42m, null);
-        }
-        if (hits > 0)
-        {
-            return new RulePoints(hits * -0.42m, null);
-        }
+        var evenWins = new Random(userGameWeek.Event.GameWeek).Next(2) == 0;
+        var isPositive = evenWins ? opponentsWithHits % 2 == 0 : opponentsWithHits % 2 != 0;
 
-        return new RulePoints(0, null);
+        return new RulePoints(hits * (isPositive ? 0.42m : -0.42m), null);
     }
 
     private int GetHits(int transferCost)
