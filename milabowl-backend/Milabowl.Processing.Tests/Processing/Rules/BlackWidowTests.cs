@@ -8,7 +8,9 @@ namespace Milabowl.Processing.Tests.Processing.Rules;
 public class BlackWidowTests : MilaRuleTest<BlackWidow>
 {
     private static bool EvenWins(int gameWeek) => new Random(gameWeek).Next(2) == 0;
+
     private static int GwWhereEvenWins() => Enumerable.Range(1, 38).First(EvenWins);
+
     private static int GwWhereOddWins() => Enumerable.Range(1, 38).First(g => !EvenWins(g));
 
     [Fact]
