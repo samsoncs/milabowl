@@ -37,11 +37,11 @@ public class BlackWidow : MilaRule
 
         if (hits > 0 && opponentsWithHits % 2 == 0)
         {
-            return new RulePoints(hits * 0.42m, null);
+            return new RulePoints(hits * 4.2m, null);
         }
         if (hits > 0)
         {
-            return new RulePoints(hits * -0.42m, null);
+            return new RulePoints(hits * -4.2m, null);
         }
 
         return new RulePoints(0, null);

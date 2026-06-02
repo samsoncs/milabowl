@@ -158,7 +158,7 @@ public class BlackWidowTests : MilaRuleTest<BlackWidow>
 
         var points = Rule.Calculate(userGameWeek);
 
-        points.Points.ShouldBe(0.42m);
+        points.Points.ShouldBe(4.2m);
     }
 
     [Theory]
@@ -178,7 +178,7 @@ public class BlackWidowTests : MilaRuleTest<BlackWidow>
 
         var points = Rule.Calculate(userGameWeek);
 
-        points.Points.ShouldBe(-0.42m);
+        points.Points.ShouldBe(-4.2m);
     }
 
     [Fact]
@@ -194,6 +194,6 @@ public class BlackWidowTests : MilaRuleTest<BlackWidow>
 
         var points = Rule.Calculate(userGameWeek);
 
-        points.Points.ShouldBe(0.84m);
+        points.Points.ShouldBe(8.4m);
     }
 }
