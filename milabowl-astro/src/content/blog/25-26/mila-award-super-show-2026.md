@@ -40,17 +40,17 @@ I selve FPL-ligaen var det CensoredCocoaCompany (Eivind) som knuste all motstand
 
 Supercupen kombinerer resultatene fra FPL og Milabowl for å kåre den ultimate vinneren. Her ser vi den totale tabellen:
 
-| Spiller | FPL Plass | Milabowl Plass | Total plassering |
-| :--- | :---: | :---: | :---: |
-| CensoredCocoaCompany (Eivind) | 1 | 3 | **1** |
-| Agil Krakk Rotasjon (Malte) | 3 | 2 | **2** |
-| PeptroleumGuardiolja (Anders) | 7 | 1 | **3** |
-| Sels Sarr Salaht (Martin) | 2 | 8 | **4** |
-| No Krakk, No Cry (Simen) | 4 | 7 | **5** |
-| Milas krakk (Markus) | 6 | 5 | **5** |
-| LastMinToiletTrader (Sam) | 5 | 6 | **5** |
-| Krakk Under Pressure (Mikkel) | 8 | 4 | **8** |
-| Free Pass & Chill (Henrik) | 9 | 9 | **9** |
+| Spiller                       | FPL Plass | Milabowl Plass | Total plassering |
+| :---------------------------- | :-------: | :------------: | :--------------: |
+| CensoredCocoaCompany (Eivind) |     1     |       3        |      **1**       |
+| Agil Krakk Rotasjon (Malte)   |     3     |       2        |      **2**       |
+| PeptroleumGuardiolja (Anders) |     7     |       1        |      **3**       |
+| Sels Sarr Salaht (Martin)     |     2     |       8        |      **4**       |
+| No Krakk, No Cry (Simen)      |     4     |       7        |      **5**       |
+| Milas krakk (Markus)          |     6     |       5        |      **5**       |
+| LastMinToiletTrader (Sam)     |     5     |       6        |      **5**       |
+| Krakk Under Pressure (Mikkel) |     8     |       4        |      **8**       |
+| Free Pass & Chill (Henrik)    |     9     |       9        |      **9**       |
 
 Gratulerer til **CensoredCocoaCompany (Eivind)** som vinner av Supercupen 2026! Merk at det var tredelt 5. plass mellom No Krakk, No Cry (Simen), Milas krakk (Markus) og LastMinToiletTrader (Sam).
 
@@ -58,23 +58,23 @@ Gratulerer til **CensoredCocoaCompany (Eivind)** som vinner av Supercupen 2026! 
 
 Det ble også avholdt genfors med flere viktige vedtak for fremtiden:
 
-*   **Ny flertallsregel:** Fra nå av kreves det 6 av 9 stemmer for å endre en regel midt i sesongen. På selve genfors gjelder fortsatt vanlig flertall.
-*   **Ikrafttredelse:** Endringer trer i kraft så snart regel-avstemningen er lukket og avklart.
-*   **Vertskap 2027:** LastMinToiletTrader (Sam) skal hoste Mila Awards 2027!
-*   **Tie-breakers:** 
-    *   Hvis en avstemning ender likt, skal det skje en ny tie-breaker avstemning.
-    *   Hvis supercupen ender likt for noen, er det Milabowl-plasseringen som avgjør.
-*   **Trofê-endring:** "Årets derp"-pokal omgjøres til "Årets meme"-pokal.
+- **Ny flertallsregel:** Fra nå av kreves det 6 av 9 stemmer for å endre en regel midt i sesongen. På selve genfors gjelder fortsatt vanlig flertall.
+- **Ikrafttredelse:** Endringer trer i kraft så snart regel-avstemningen er lukket og avklart.
+- **Vertskap 2027:** LastMinToiletTrader (Sam) skal hoste Mila Awards 2027!
+- **Tie-breakers:**
+  - Hvis en avstemning ender likt, skal det skje en ny tie-breaker avstemning.
+  - Hvis supercupen ender likt for noen, er det Milabowl-plasseringen som avgjør.
+- **Trofê-endring:** "Årets derp"-pokal omgjøres til "Årets meme"-pokal.
 
 ### Straffer fra Supercupen
 
 De som havnet nederst i Supercupen (eller av andre grunner fikk tildelt oppgaver) må utføre følgende:
 
-*   **Milas krakk (Markus):** Fasiliteter lagnavn-avstemning på kickoff.
-*   **LastMinToiletTrader (Sam):** Kjøper taperkostyme og tar med til kickoff.
-*   **No Krakk, No Cry (Simen):** Kjøper batteridrevet graveringspenn.
-*   **Free Pass & Chill (Henrik):** Tar "meme championship" på award show 2027.
-*   **Krakk Under Pressure (Mikkel):** Må følge med på alle regelforslag hele året og under award show 2027.
+- **Milas krakk (Markus):** Fasiliteter lagnavn-avstemning på kickoff.
+- **LastMinToiletTrader (Sam):** Kjøper taperkostyme og tar med til kickoff.
+- **No Krakk, No Cry (Simen):** Kjøper batteridrevet graveringspenn.
+- **Free Pass & Chill (Henrik):** Tar "meme championship" på award show 2027.
+- **Krakk Under Pressure (Mikkel):** Må følge med på alle regelforslag hele året og under award show 2027.
 
 ### Nye regler og endringer
 
@@ -84,15 +84,15 @@ De som havnet nederst i Supercupen (eller av andre grunner fikk tildelt oppgaver
 
 I tillegg til de vedtatte endringene, ble følgende forslag diskutert:
 
-*   **Tightest butthole (*):** Forslag om å doble antall poeng (fra dagens nivå).
-*   **GW PS:** Forslag om å endre beregningen for å skape større differanse mellom spillere, men potensielt færre poeng totalt.
-*   **Hardest Thrust (HT):** Forslag om å fjerne regelen da den gir lite poeng.
-*   **Head 2 Head meta:** Forslag om å doble antall poeng.
-*   **Bomben:** Forslag om å doble (?) antall poeng.
-*   **Minus is Plus (MiP):** Forslag om å doble eller triple poengene.
-*   **Missed penalties (MP):** Forslag om å enten fjerne regelen eller øke poengsummen betraktelig.
-*   **Yellow Card (YC):** Forslag om å endre regelen slik at den belønner de med flest kort mer markant (f.eks. poeng kun til topp 3).
-*   **Black Widow (BW):** Forslag om å øke poengene for å gjøre "gamblingen" mer attraktiv.
-*   **Ny regel – 6.9 Multiplier:** En tilfeldig regel får en 6.9x multiplikator hver GW. Regelen kan være hemmelig eller kjent på forhånd.
+- **Tightest butthole (\*):** Forslag om å doble antall poeng (fra dagens nivå).
+- **GW PS:** Forslag om å endre beregningen for å skape større differanse mellom spillere, men potensielt færre poeng totalt.
+- **Hardest Thrust (HT):** Forslag om å fjerne regelen da den gir lite poeng.
+- **Head 2 Head meta:** Forslag om å doble antall poeng.
+- **Bomben:** Forslag om å doble (?) antall poeng.
+- **Minus is Plus (MiP):** Forslag om å doble eller triple poengene.
+- **Missed penalties (MP):** Forslag om å enten fjerne regelen eller øke poengsummen betraktelig.
+- **Yellow Card (YC):** Forslag om å endre regelen slik at den belønner de med flest kort mer markant (f.eks. poeng kun til topp 3).
+- **Black Widow (BW):** Forslag om å øke poengene for å gjøre "gamblingen" mer attraktiv.
+- **Ny regel – 6.9 Multiplier:** En tilfeldig regel får en 6.9x multiplikator hver GW. Regelen kan være hemmelig eller kjent på forhånd.
 
 Vi gleder oss allerede til neste sesong!
