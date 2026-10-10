@@ -35,7 +35,7 @@ public class TeamDto
     public required string ShortName { get; set; }
 
     [JsonPropertyName("strength")]
-    public int Strength { get; set; }
+    public int? Strength { get; set; }
 
     [JsonPropertyName("team_division")]
     public required object TeamDivision { get; set; }
