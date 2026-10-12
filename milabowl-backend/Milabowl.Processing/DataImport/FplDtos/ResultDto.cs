@@ -5,7 +5,7 @@ namespace Milabowl.Processing.DataImport.FplDtos;
 public record ResultDto
 {
     [JsonPropertyName("id")]
-    public required int Id { get; set; }
+    public int Id { get; set; }
 
     [JsonPropertyName("event_total")]
     public required int EventTotal { get; set; }
