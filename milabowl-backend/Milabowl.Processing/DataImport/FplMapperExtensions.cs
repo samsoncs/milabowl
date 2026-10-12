@@ -61,7 +61,7 @@ public static class FplMapperExtensions
     public static User ToUser(this ResultDto user)
     {
         return new User(
-            user.Id,
+            user.Entry,
             user.Entry,
             user.PlayerName,
             user.EntryName,
